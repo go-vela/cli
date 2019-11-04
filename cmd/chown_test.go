@@ -10,8 +10,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-vela/mock/server"
 	"github.com/gin-gonic/gin"
+	"github.com/go-vela/mock/server"
 	"github.com/urfave/cli"
 )
 

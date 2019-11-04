@@ -10,7 +10,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/go-vela/go-vela/vela"
+	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 

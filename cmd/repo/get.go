@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-vela/go-vela/vela"
+	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 
 	"github.com/gosuri/uitable"

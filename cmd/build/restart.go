@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/util"
-	"github.com/go-vela/go-vela/vela"
+	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/urfave/cli"
 )

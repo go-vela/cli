@@ -23,3 +23,17 @@ jobs:
         go fmt ./... && git diff --exit-code; code=$?; git checkout -- .; (exit $code)
     - name: test
       run: go test -cover ./...
+      
+    - name: Generate
+      uses: skx/github-action-build@master
+      with:
+        builder: ./build.sh  
+        
+    # Release binaries
+    - name: Upload the artifacts
+      uses: skx/github-action-publish-binaries@master
+      with:
+          args: 'release/*'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        

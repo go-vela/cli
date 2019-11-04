@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 
 	"github.com/go-vela/cli/util"
-	"github.com/go-vela/go-vela/vela"
+	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 	"github.com/urfave/cli"
 	"gopkg.in/yaml.v2"

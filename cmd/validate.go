@@ -10,7 +10,7 @@ import (
 
 	yaml "gopkg.in/yaml.v2"
 
-	"github.com/go-vela/lexi/compiler/native"
+	"github.com/go-vela/compiler/compiler/native"
 	yLib "github.com/go-vela/types/yaml"
 
 	"github.com/urfave/cli"

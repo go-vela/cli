@@ -1,0 +1,192 @@
+// Copyright (c) 2019 Target Brands, Inc. All rights reserved.
+//
+// Use of this source code is governed by the LICENSE file in this repository.
+
+package secret
+
+import (
+	"encoding/json"
+	"fmt"
+	"strings"
+
+	"github.com/go-vela/go-vela/vela"
+	"github.com/go-vela/types/constants"
+	"github.com/go-vela/types/library"
+
+	"github.com/gosuri/uitable"
+
+	"github.com/urfave/cli"
+	yaml "gopkg.in/yaml.v2"
+)
+
+// GetCmd defines the command for retriving secrets from a repository.
+var GetCmd = cli.Command{
+	Name:        "secret",
+	Aliases:     []string{"secrets"},
+	Description: "Use this command to get a list of secrets.",
+	Usage:       "Display a list of secrets",
+	Action:      get,
+	Before:      loadGlobal,
+	Flags: []cli.Flag{
+
+		// required flags to be supplied to a command
+		cli.StringFlag{
+			Name:   "engine",
+			Usage:  "Provide the engine for where the secret to be stored",
+			EnvVar: "VELA_SECRET_ENGINE,SECRET_ENGINE",
+			Value:  constants.DriverNative,
+		},
+		cli.StringFlag{
+			Name:   "type",
+			Usage:  "Provide the kind of secret to be stored",
+			EnvVar: "SECRET_TYPE",
+			Value:  constants.SecretRepo,
+		},
+		cli.StringFlag{
+			Name:   "org",
+			Usage:  "Provide the organization for the repository",
+			EnvVar: "SECRET_ORG",
+		},
+		cli.StringFlag{
+			Name:   "repo",
+			Usage:  "Provide the repository contained with the organization",
+			EnvVar: "SECRET_REPO",
+		},
+		cli.StringFlag{
+			Name:   "team",
+			Usage:  "Provide the team contained with the organization",
+			EnvVar: "SECRET_TEAM",
+		},
+
+		// optional flags that can be supplied to a command
+		cli.StringFlag{
+			Name:  "output,o",
+			Usage: "Print the output in a yaml or json format",
+		},
+	},
+	CustomHelpTemplate: fmt.Sprintf(`%s
+EXAMPLES:
+ 1. Get repository secrets.
+    $ {{.HelpName}} --engine native --type repo --org github --repo octocat
+ 2. Get organization secrets.
+    $ {{.HelpName}} --engine native --type org --org github --repo '*'
+ 3. Get shared secrets.
+    $ {{.HelpName}} --engine native --type shared --org github --team octokitties
+ 4. Get secrets for a repository with wide view output.
+    $ {{.HelpName}} --output wide --engine native --type repo --org github --repo octocat
+ 5. Get secrets for a repository with yaml output.
+    $ {{.HelpName}} --output yaml --engine native --type repo --org github --repo octocat
+ 6. Get secrets for a repository with json output.
+    $ {{.HelpName}} --output json --engine native --type repo --org github --repo octocat
+ 7. Get repository secrets with default native engine or when engine and type environment variables are set.
+    $ {{.HelpName}} --org github --repo octocat
+`, cli.CommandHelpTemplate),
+}
+
+// helper function to execute vela get secrets cli command
+func get(c *cli.Context) error {
+
+	// ensures engine, type, and org are set
+	err := validateCmd(c)
+	if err != nil {
+		return err
+	}
+
+	tName, err := getTypeName(c.String("repo"), c.String("name"), c.String("type"))
+	if err != nil {
+		return err
+	}
+
+	engine := c.String("engine")
+	sType := c.String("type")
+	org := c.String("org")
+
+	// create a carval client
+	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	if err != nil {
+		return err
+	}
+
+	// set token from global config
+	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+
+	secrets, _, err := client.Secret.GetAll(engine, sType, org, tName)
+	if err != nil {
+		return err
+	}
+
+	switch c.String("output") {
+	case "json":
+		output, err := json.MarshalIndent(secrets, "", "    ")
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(string(output))
+
+	case "yaml":
+		output, err := yaml.Marshal(secrets)
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(string(output))
+
+	case "wide":
+		table := uitable.New()
+		table.MaxColWidth = 200
+		table.Wrap = true
+		table.AddRow("NAME", "ORG", "TYPE", "KEY", "EVENTS", "IMAGES")
+
+		for _, s := range *secrets {
+
+			key, err := getKey(&s)
+			if err != nil {
+				return fmt.Errorf("Invalid key in secret %s: %v", s.GetName(), err)
+			}
+
+			if s.Images == nil {
+				table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), key, strings.Join(s.GetEvents(), ","), strings.Join(s.GetImages(), ","))
+			} else {
+				table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), key, strings.Join(s.GetEvents(), ","), strings.Join(s.GetImages(), ","))
+			}
+		}
+
+		fmt.Println(table)
+
+	default:
+		table := uitable.New()
+		table.MaxColWidth = 200
+		table.Wrap = true // wrap columns
+		table.AddRow("NAME", "ORG", "TYPE", "KEY")
+
+		for _, s := range *secrets {
+
+			key, err := getKey(&s)
+			if err != nil {
+				return fmt.Errorf("Invalid key in secret %s: %v", s.GetName(), err)
+			}
+			table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), key)
+		}
+
+		fmt.Println(table)
+	}
+
+	return nil
+}
+
+// helper function to create a key field from a secret
+func getKey(s *library.Secret) (string, error) {
+
+	switch s.GetType() {
+
+	case constants.SecretShared:
+		return fmt.Sprintf("%s/%s", s.GetTeam(), s.GetName()), nil
+	case constants.SecretOrg:
+		return fmt.Sprintf("%s/%s", s.GetOrg(), s.GetName()), nil
+	case constants.SecretRepo:
+		return fmt.Sprintf("%s/%s/%s", s.GetOrg(), s.GetRepo(), s.GetName()), nil
+	}
+
+	return "", fmt.Errorf("Invalid secret type")
+}

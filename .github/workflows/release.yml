@@ -1,0 +1,27 @@
+name: release
+on:
+  release:
+    types: [created]
+      
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    container:
+      image: golang:latest
+    steps:
+    - name: clone
+      uses: actions/checkout@v1
+
+    - name: Generate
+      uses: skx/github-action-build@master
+      with:
+        builder: ./build.sh  
+        
+    - name: Upload the artifacts
+      if: github.event_name == 'release'
+      uses: skx/github-action-publish-binaries@master
+      with:
+          args: 'release/*'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    

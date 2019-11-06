@@ -1,11 +1,10 @@
 name: release
 on:
   release:
-    types: [created]
-      
+    types: [ created ]
+
 jobs:
   release:
-    name: release
     runs-on: ubuntu-latest
     container:
       image: golang:latest
@@ -13,15 +12,14 @@ jobs:
     - name: clone
       uses: actions/checkout@v1
 
-    - name: Generate
+    - name: build
       uses: skx/github-action-build@master
       with:
-        builder: ./build.sh  
-        
-    - name: Upload the artifacts
-      if: github.event_name == 'release'
+        builder: ./build.sh
+
+    - name: upload
       uses: skx/github-action-publish-binaries@master
-      with:
-          args: 'release/*'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          args: 'release/vela*'

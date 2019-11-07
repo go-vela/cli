@@ -1,5 +1,8 @@
 # cli
 
+[![GoDoc](https://godoc.org/github.com/go-vela/cli?status.svg)](https://godoc.org/github.com/go-vela/cli)
+[![Go Report Card](https://goreportcard.com/badge/go-vela/cli)](https://goreportcard.com/report/go-vela/cli)
+
 Vela is a Pipeline Automation (CI/CD) framework built on [Linux container](https://linuxcontainers.org/) technology written in [Golang](https://golang.org/).
 
 Vela uses a syntax similar to [Docker Compose](https://docs.docker.com/compose/) to define its configuration. This structure for repeated use, within the application, is called a pipeline and a single execution of a pipeline is referenced as a build.

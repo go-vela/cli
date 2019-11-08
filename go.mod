@@ -8,10 +8,10 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
-	github.com/go-vela/compiler v0.1.1
-	github.com/go-vela/mock v0.1.0
-	github.com/go-vela/sdk-go v0.1.0
-	github.com/go-vela/types v0.1.0
+	github.com/go-vela/compiler v0.1.2
+	github.com/go-vela/mock v0.1.1
+	github.com/go-vela/sdk-go v0.1.1
+	github.com/go-vela/types v0.1.1
 	github.com/gosuri/uitable v0.0.3
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-runewidth v0.0.6 // indirect

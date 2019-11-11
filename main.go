@@ -32,7 +32,7 @@ func main() {
 	app.Version = version.Version.String()
 	app.Copyright = "Copyright (c) 2019 Target Brands, Inc. All rights reserved."
 	app.Authors = []cli.Author{
-		cli.Author{
+		{
 			Name:  "Vela Admins",
 			Email: "vela@target.com",
 		},

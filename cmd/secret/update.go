@@ -14,7 +14,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 	"github.com/urfave/cli"
-	"gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v2"
 )
 
 // UpdateCmd defines the command to update a secret.
@@ -168,6 +168,9 @@ func procUpdateFlag(c *cli.Context, client *vela.Client) error {
 	}
 
 	secret.Value, err = setValue(c.String("value"))
+	if err != nil {
+		return err
+	}
 
 	if len(c.StringSlice("image")) > 0 {
 		images := append(secret.GetImages(), c.StringSlice("image")...)

@@ -77,7 +77,7 @@ func view(c *cli.Context) error {
 
 	// print logs for all steps
 	for _, log := range *logs {
-		fmt.Printf("%s \n", log.Data)
+		fmt.Printf("%s \n", log.GetData())
 	}
 
 	return nil

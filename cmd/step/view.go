@@ -42,7 +42,7 @@ var ViewCmd = cli.Command{
 		},
 		cli.IntFlag{
 			Name:   "step-number,step,s",
-			Usage:  "Provide the build number",
+			Usage:  "Provide the step number",
 			EnvVar: "STEP_NUMBER",
 		},
 

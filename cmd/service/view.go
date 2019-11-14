@@ -42,7 +42,7 @@ var ViewCmd = cli.Command{
 		},
 		cli.IntFlag{
 			Name:   "service-number,service,s",
-			Usage:  "Provide the build number",
+			Usage:  "Provide the service number",
 			EnvVar: "SERVICE_NUMBER",
 		},
 

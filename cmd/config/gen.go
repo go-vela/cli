@@ -137,5 +137,7 @@ func gen(c *cli.Context) error {
 		return fmt.Errorf("Unable to create yaml config file @ %s: %v", file, err)
 	}
 
+	fmt.Printf("Yaml config file created @ %s\n", file)
+
 	return nil
 }

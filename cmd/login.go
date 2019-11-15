@@ -7,6 +7,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"net/http"
 
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
@@ -94,13 +95,13 @@ func authenticate(c *cli.Context) error {
 	if 401 < resp.StatusCode {
 		return fmt.Errorf("unable to process request")
 	}
-	if resp.StatusCode != 401 && err != nil {
+	if resp.StatusCode != http.StatusUnauthorized && err != nil {
 		return err
 	}
 
 	// retry authentication in case user requires an OTP code
 	switch resp.StatusCode {
-	case 401:
+	case http.StatusUnauthorized:
 		// get otp from user input
 		otp, err := getOTP()
 		if err != nil {

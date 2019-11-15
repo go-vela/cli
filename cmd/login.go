@@ -7,6 +7,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"net/http"
 
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
@@ -87,12 +88,20 @@ func authenticate(c *cli.Context) error {
 	}
 
 	auth, resp, err := client.Authorization.Login(&req)
-	if resp.StatusCode != 401 && err != nil {
+
+	// If user hits an endpoint other than the
+	// Vela server that can't process request
+	// bomb out and throw error
+	if http.StatusUnauthorized < resp.StatusCode {
+		return fmt.Errorf("unable to process request")
+	}
+	if resp.StatusCode != http.StatusUnauthorized && err != nil {
 		return err
 	}
 
+	// retry authentication in case user requires an OTP code
 	switch resp.StatusCode {
-	case 401:
+	case http.StatusUnauthorized:
 		// get otp from user input
 		otp, err := getOTP()
 		if err != nil {
@@ -111,13 +120,13 @@ func authenticate(c *cli.Context) error {
 		}
 
 		// craft response to user
-		message = fmt.Sprintf("Generated token: %s", *auth.Token)
-		token = *auth.Token
+		message = fmt.Sprintf("Generated token: %s", auth.GetToken())
+		token = auth.GetToken()
 	default:
 
 		// craft response to user
-		message = fmt.Sprintf("Generated token: %s", *auth.Token)
-		token = *auth.Token
+		message = fmt.Sprintf("Generated token: %s", auth.GetToken())
+		token = auth.GetToken()
 	}
 
 	if token != "" {

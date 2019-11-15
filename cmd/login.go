@@ -87,10 +87,18 @@ func authenticate(c *cli.Context) error {
 	}
 
 	auth, resp, err := client.Authorization.Login(&req)
+
+	// If user hits an endpoint other than the
+	// Vela server that can't process request
+	// bomb out and throw error
+	if 401 < resp.StatusCode {
+		return fmt.Errorf("unable to process request")
+	}
 	if resp.StatusCode != 401 && err != nil {
 		return err
 	}
 
+	// retry authentication in case user requires an OTP code
 	switch resp.StatusCode {
 	case 401:
 		// get otp from user input
@@ -111,13 +119,13 @@ func authenticate(c *cli.Context) error {
 		}
 
 		// craft response to user
-		message = fmt.Sprintf("Generated token: %s", *auth.Token)
-		token = *auth.Token
+		message = fmt.Sprintf("Generated token: %s", auth.GetToken())
+		token = auth.GetToken()
 	default:
 
 		// craft response to user
-		message = fmt.Sprintf("Generated token: %s", *auth.Token)
-		token = *auth.Token
+		message = fmt.Sprintf("Generated token: %s", auth.GetToken())
+		token = auth.GetToken()
 	}
 
 	if token != "" {

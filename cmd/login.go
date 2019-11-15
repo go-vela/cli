@@ -99,8 +99,6 @@ func authenticate(c *cli.Context) error {
 		return err
 	}
 
-	status := http.Status
-
 	// retry authentication in case user requires an OTP code
 	switch resp.StatusCode {
 	case http.StatusUnauthorized:

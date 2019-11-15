@@ -92,7 +92,7 @@ func authenticate(c *cli.Context) error {
 	// If user hits an endpoint other than the
 	// Vela server that can't process request
 	// bomb out and throw error
-	if resp.StatusCode < resp.StatusCode {
+	if http.StatusUnauthorized < resp.StatusCode {
 		return fmt.Errorf("unable to process request")
 	}
 	if resp.StatusCode != http.StatusUnauthorized && err != nil {

@@ -10,12 +10,11 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	"gopkg.in/yaml.v2"
-
 	"github.com/go-vela/cli/util"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+	yaml "gopkg.in/yaml.v2"
 
 	"github.com/urfave/cli"
 )
@@ -82,13 +81,16 @@ var AddCmd = cli.Command{
 			Name:   "image",
 			Usage:  "Secret limited to these images",
 			EnvVar: "SECRET_IMAGES",
-			Value:  &cli.StringSlice{},
 		},
 		cli.StringSliceFlag{
 			Name:   "event",
 			Usage:  "Secret limited to these events",
 			EnvVar: "SECRET_EVENTS",
-			Value:  &cli.StringSlice{constants.EventPush},
+			Value: &cli.StringSlice{
+				constants.EventPush,
+				constants.EventTag,
+				constants.EventDeploy,
+			},
 		},
 		cli.StringFlag{
 			Name:  "filename,f",

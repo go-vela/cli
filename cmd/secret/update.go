@@ -68,13 +68,11 @@ var UpdateCmd = cli.Command{
 			Name:   "image",
 			Usage:  "Secret limited to these images",
 			EnvVar: "SECRET_IMAGES",
-			Value:  &cli.StringSlice{},
 		},
 		cli.StringSliceFlag{
 			Name:   "event",
 			Usage:  "Secret limited to these events",
 			EnvVar: "SECRET_EVENTS",
-			Value:  &cli.StringSlice{},
 		},
 		cli.StringFlag{
 			Name:  "filename,f",
@@ -173,13 +171,11 @@ func procUpdateFlag(c *cli.Context, client *vela.Client) error {
 	}
 
 	if len(c.StringSlice("image")) > 0 {
-		images := append(secret.GetImages(), c.StringSlice("image")...)
-		secret.Images = &images
+		secret.SetImages(c.StringSlice("image"))
 	}
 
 	if len(c.StringSlice("event")) > 0 {
-		events := append(secret.GetEvents(), c.StringSlice("event")...)
-		secret.Events = &events
+		secret.SetEvents(c.StringSlice("event"))
 	}
 
 	secret, _, err = client.Secret.Update(engine, sType, org, tName, secret)

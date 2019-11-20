@@ -56,7 +56,7 @@ func validate(c *cli.Context) error {
 	}
 
 	if err == nil {
-		fmt.Println("Config is valid.")
+		fmt.Println(`".vela.yml" is valid`)
 	}
 
 	return nil

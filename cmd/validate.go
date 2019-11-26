@@ -8,10 +8,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	yaml "gopkg.in/yaml.v2"
-
 	"github.com/go-vela/compiler/compiler/native"
-	yLib "github.com/go-vela/types/yaml"
 
 	"github.com/urfave/cli"
 )
@@ -43,14 +40,13 @@ func validate(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	var b yLib.Build
 
-	err = yaml.Unmarshal(data, &b)
+	b, err := client.Parse(data)
 	if err != nil {
 		return err
 	}
 
-	err = client.Validate(&b)
+	err = client.Validate(b)
 	if err != nil {
 		return err
 	}

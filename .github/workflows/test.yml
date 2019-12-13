@@ -1,18 +1,32 @@
+# name of the action
 name: test
+
+# trigger on pull_request or push events
 on:
   pull_request:
   push:
-      
+
+# pipeline to execute
 jobs:
-  validate:
-    name: test
+  test:
     runs-on: ubuntu-latest
     container:
       image: golang:latest
     steps:
     - name: clone
       uses: actions/checkout@v1
-      
+
+    - name: install
+      run: |
+        go get github.com/mattn/goveralls
+
     - name: test
       run: |
-        go test ./...
+        go test -race -covermode=atomic -coverprofile=coverage.out ./...
+
+    - name: coveralls
+      env:
+        COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # https://github.com/mattn/goveralls#goveralls
+        $(go env GOPATH)/bin/goveralls -service=github -coverprofile=coverage.out

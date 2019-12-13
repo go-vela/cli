@@ -1,0 +1,36 @@
+name: prerelease
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:latest
+    steps:
+    - name: clone
+      uses: actions/checkout@v1
+
+    - name: build
+      uses: skx/github-action-build@master
+      with:
+        builder: ./build.sh
+
+    - name: upload
+      uses: skx/github-action-publish-binaries@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          args: 'release/vela*'
+
+    - name: release
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: target/vela-cli
+        cache: true
+        tag_names: true
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}

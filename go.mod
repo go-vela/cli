@@ -21,6 +21,7 @@ require (
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
+	github.com/nicksnyder/go-i18n v1.10.1 // indirect
 	github.com/sirupsen/logrus v1.4.2
 	github.com/urfave/cli v1.22.2
 	golang.org/x/sys v0.0.0-20191210023423-ac6580df4449 // indirect

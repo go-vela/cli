@@ -1,18 +1,21 @@
+# name of the action
 name: validate
+
+# trigger on pull_request or push events
 on:
   pull_request:
   push:
-      
+
+# pipeline to execute
 jobs:
   validate:
-    name: validate
     runs-on: ubuntu-latest
     container:
       image: golang:latest
     steps:
     - name: clone
       uses: actions/checkout@v1
-      
+
     - name: validate
       run: |
         # Check that go vet ./... produces a zero diff; clean up any changes afterwards.

@@ -1,8 +1,15 @@
+# name of the action
 name: release
-on:
-  release:
-    types: [ created ]
 
+# trigger on push events with `v*` in tag
+# ignore push events with `v*-rc*` in tag
+on:
+  push:
+    tags:
+      - 'v*'
+      - '!v*-rc*'
+
+# pipeline to execute
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -12,23 +19,35 @@ jobs:
     - name: clone
       uses: actions/checkout@v1
 
-    - name: build
-      uses: skx/github-action-build@master
-      with:
-        builder: ./build.sh
+    - name: tags
+      run: |
+        git fetch --tags
 
-    - name: upload
-      uses: skx/github-action-publish-binaries@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          args: 'release/vela*'
+    - name: version
+      id: version
+      run: |
+        echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
+    - name: install
+      run: |
+        go get github.com/git-chglog/git-chglog/cmd/git-chglog
+        go get github.com/itchio/gothub
+
+    - name: changelog
+      run: |
+        # https://github.com/git-chglog/git-chglog#git-chglog
+        $(go env GOPATH)/bin/git-chglog \
+          -o $GITHUB_WORKSPACE/CHANGELOG.md \
+          ${{ steps.version.outputs.VERSION }}
 
     - name: release
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: target/vela-cli
-        cache: true
-        tag_names: true
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # https://github.com/itchio/gothub#gothub
+        $(go env GOPATH)/bin/gothub edit \
+          --user go-vela \
+          --repo cli \
+          --tag ${{ steps.version.outputs.VERSION }} \
+          --name ${{ steps.version.outputs.VERSION }} \
+          --description "$(cat $GITHUB_WORKSPACE/CHANGELOG.md)"

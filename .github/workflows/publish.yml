@@ -1,10 +1,14 @@
+# name of the action
 name: publish
+
+# trigger on push events with branch master
 on:
   push:
     branches: [ master ]
 
+# pipeline to execute
 jobs:
-  release:
+  publish:
     runs-on: ubuntu-latest
     container:
       image: golang:latest

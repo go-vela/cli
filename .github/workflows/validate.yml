@@ -18,6 +18,8 @@ jobs:
 
     - name: validate
       run: |
+        # Check that go mod tidy produces a zero diff; clean up any changes afterwards.
+        go mod tidy && git diff --exit-code; code=$?; git checkout -- .; (exit $code)
         # Check that go vet ./... produces a zero diff; clean up any changes afterwards.
         go vet ./... && git diff --exit-code; code=$?; git checkout -- .; (exit $code)
         # Check that go fmt ./... produces a zero diff; clean up any changes afterwards.

@@ -2,10 +2,16 @@
 name: prerelease
 
 # trigger on push events with `v*` in tag
+# TODO: find an action that is compatible based off the tag event
+# on:
+#   push:
+#     tags:
+#       - 'v*'
+
+# trigger on release events
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [ created ]
 
 # pipeline to execute
 jobs:

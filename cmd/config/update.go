@@ -82,24 +82,31 @@ func update(c *cli.Context) error {
 	if len(c.String("addr")) > 0 {
 		conf.Addr = c.String("addr")
 	}
+
 	if len(c.String("token")) > 0 {
 		conf.Token = c.String("token")
 	}
+
 	if len(c.String("api-version")) > 0 {
 		conf.Version = c.String("api-version")
 	}
+
 	if len(c.String("log-level")) > 0 {
 		conf.LogLevel = c.String("log-level")
 	}
+
 	if len(c.String("org")) > 0 {
 		conf.Org = c.String("org")
 	}
+
 	if len(c.String("repo")) > 0 {
 		conf.Repo = c.String("repo")
 	}
+
 	if len(c.String("secret-engine")) > 0 {
 		conf.SecretEngine = c.String("secret-engine")
 	}
+
 	if len(c.String("secret-type")) > 0 {
 		conf.SecretType = c.String("secret-type")
 	}

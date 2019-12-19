@@ -75,6 +75,7 @@ func remove(c *cli.Context) error {
 		if !os.IsNotExist(err) {
 			return fmt.Errorf("unable to search for config file @ %s: %v", file, err)
 		}
+
 		return fmt.Errorf("unable to find config file @ %s", file)
 	}
 
@@ -95,30 +96,37 @@ func remove(c *cli.Context) error {
 		conf.Addr = ""
 		isFlag = true
 	}
+
 	if c.Bool("token") {
 		conf.Token = ""
 		isFlag = true
 	}
+
 	if c.Bool("api-version") {
 		conf.Version = ""
 		isFlag = true
 	}
+
 	if c.Bool("log-level") {
 		conf.LogLevel = ""
 		isFlag = true
 	}
+
 	if c.Bool("org") {
 		conf.Org = ""
 		isFlag = true
 	}
+
 	if c.Bool("repo") {
 		conf.Repo = ""
 		isFlag = true
 	}
+
 	if c.Bool("secret-engine") {
 		conf.SecretEngine = ""
 		isFlag = true
 	}
+
 	if c.Bool("secret-type") {
 		conf.SecretType = ""
 		isFlag = true

@@ -73,9 +73,10 @@ func remove(c *cli.Context) error {
 	_, err := os.Stat(file)
 	if err != nil {
 		if !os.IsNotExist(err) {
-			return fmt.Errorf("Unable to search for config file @ %s: %v", file, err)
+			return fmt.Errorf("unable to search for config file @ %s: %v", file, err)
 		}
-		return fmt.Errorf("Unable to find config file @ %s", file)
+
+		return fmt.Errorf("unable to find config file @ %s", file)
 	}
 
 	isFlag := false
@@ -95,30 +96,37 @@ func remove(c *cli.Context) error {
 		conf.Addr = ""
 		isFlag = true
 	}
+
 	if c.Bool("token") {
 		conf.Token = ""
 		isFlag = true
 	}
+
 	if c.Bool("api-version") {
 		conf.Version = ""
 		isFlag = true
 	}
+
 	if c.Bool("log-level") {
 		conf.LogLevel = ""
 		isFlag = true
 	}
+
 	if c.Bool("org") {
 		conf.Org = ""
 		isFlag = true
 	}
+
 	if c.Bool("repo") {
 		conf.Repo = ""
 		isFlag = true
 	}
+
 	if c.Bool("secret-engine") {
 		conf.SecretEngine = ""
 		isFlag = true
 	}
+
 	if c.Bool("secret-type") {
 		conf.SecretType = ""
 		isFlag = true
@@ -127,7 +135,7 @@ func remove(c *cli.Context) error {
 	if !isFlag {
 		err = os.Remove(file)
 		if err != nil {
-			return fmt.Errorf("Unable to remove config file @ %s", file)
+			return fmt.Errorf("unable to remove config file @ %s", file)
 		}
 
 		return nil
@@ -135,12 +143,12 @@ func remove(c *cli.Context) error {
 
 	data, err := yaml.Marshal(&conf)
 	if err != nil {
-		return fmt.Errorf("Unable to update config content: %v", err)
+		return fmt.Errorf("unable to update config content: %v", err)
 	}
 
 	err = ioutil.WriteFile(file, data, 0600)
 	if err != nil {
-		return fmt.Errorf("Unable to create yaml config file @ %s: %v", file, err)
+		return fmt.Errorf("unable to create yaml config file @ %s: %v", file, err)
 	}
 
 	return nil

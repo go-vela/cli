@@ -121,7 +121,7 @@ func gen(c *cli.Context) error {
 
 	data, err := yaml.Marshal(&conf)
 	if err != nil {
-		return fmt.Errorf("Unable to create config content: %v", err)
+		return fmt.Errorf("unable to create config content: %v", err)
 	}
 
 	file := c.GlobalString("config")
@@ -129,12 +129,12 @@ func gen(c *cli.Context) error {
 
 	err = os.MkdirAll(directory, 0777)
 	if err != nil {
-		return fmt.Errorf("Unable to create directory path to config @ %s: %v", directory, err)
+		return fmt.Errorf("unable to create directory path to config @ %s: %v", directory, err)
 	}
 
 	err = ioutil.WriteFile(file, data, 0600)
 	if err != nil {
-		return fmt.Errorf("Unable to create yaml config file @ %s: %v", file, err)
+		return fmt.Errorf("unable to create yaml config file @ %s: %v", file, err)
 	}
 
 	fmt.Printf("Yaml config file created @ %s\n", file)

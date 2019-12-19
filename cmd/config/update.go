@@ -106,14 +106,14 @@ func update(c *cli.Context) error {
 
 	data, err := yaml.Marshal(&conf)
 	if err != nil {
-		return fmt.Errorf("Unable to update config content: %v", err)
+		return fmt.Errorf("unable to update config content: %v", err)
 	}
 
 	file := c.GlobalString("config")
 
 	err = ioutil.WriteFile(file, data, 0600)
 	if err != nil {
-		return fmt.Errorf("Unable to update yaml config file @ %s: %v", file, err)
+		return fmt.Errorf("unable to update yaml config file @ %s: %v", file, err)
 	}
 
 	fmt.Printf("Yaml config file updated @ %s\n", file)

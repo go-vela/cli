@@ -28,7 +28,7 @@ EXAMPLES:
 func view(c *cli.Context) error {
 	data, err := ioutil.ReadFile(c.GlobalString("config"))
 	if err != nil {
-		return fmt.Errorf("Unable to read yaml config file: %v", err)
+		return fmt.Errorf("unable to read yaml config file: %v", err)
 	}
 
 	fmt.Println(string(data))

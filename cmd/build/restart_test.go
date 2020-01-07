@@ -44,6 +44,7 @@ func TestBuild_Restart_Success(t *testing.T) {
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types
@@ -75,6 +76,7 @@ func TestBuild_Restart_Failure(t *testing.T) {
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types

@@ -67,7 +67,6 @@ EXAMPLES:
 
 // helper function to execute vela get builds cli command
 func get(c *cli.Context) error {
-
 	// get org and repo information from cmd flags
 	org, repo := c.String("org"), c.String("repo")
 
@@ -109,7 +108,6 @@ func get(c *cli.Context) error {
 		table.AddRow("NUMBER", "STATUS", "EVENT", "BRANCH", "COMMIT", "DURATION", "CREATED", "FINISHED", "AUTHOR")
 
 		for _, b := range reverse(*builds) {
-
 			modifyBuild(&b)
 
 			if b.GetStatus() == constants.StatusPending || b.GetStatus() == constants.StatusRunning {
@@ -129,7 +127,6 @@ func get(c *cli.Context) error {
 		table.AddRow("NUMBER", "STATUS", "EVENT", "BRANCH", "DURATION")
 
 		for _, b := range reverse(*builds) {
-
 			modifyBuild(&b)
 
 			if b.GetStatus() == constants.StatusPending || b.GetStatus() == constants.StatusRunning {

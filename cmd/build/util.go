@@ -5,6 +5,8 @@
 package build
 
 import (
+	"fmt"
+
 	"github.com/go-vela/cli/util"
 	"github.com/urfave/cli"
 )
@@ -15,16 +17,24 @@ func validate(c *cli.Context) error {
 
 	// load configuration
 	if len(c.String("org")) == 0 {
-		c.Set("org", c.GlobalString("org"))
+		err := c.Set("org", c.GlobalString("org"))
+		if err != nil {
+			return fmt.Errorf("unable to set context: %w", err)
+		}
 	}
+
 	if len(c.String("repo")) == 0 {
-		c.Set("repo", c.GlobalString("repo"))
+		err := c.Set("repo", c.GlobalString("repo"))
+		if err != nil {
+			return fmt.Errorf("unable to set context: %w", err)
+		}
 	}
 
 	// validate the user input in the command
 	if len(c.String("org")) == 0 {
 		return util.InvalidCommand("org")
 	}
+
 	if len(c.String("repo")) == 0 {
 		return util.InvalidCommand("repo")
 	}

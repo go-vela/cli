@@ -92,7 +92,7 @@ func view(c *cli.Context) error {
 		return util.InvalidCommand("name")
 	}
 
-	tName, err := getTypeName(c.String("repo"), c.String("name"), c.String("type"))
+	tName, err := getTypeName(c.String("repo"), c.String("team"), c.String("type"))
 	if err != nil {
 		return err
 	}

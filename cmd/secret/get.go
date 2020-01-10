@@ -92,7 +92,7 @@ func get(c *cli.Context) error {
 		return err
 	}
 
-	tName, err := getTypeName(c.String("repo"), c.String("name"), c.String("type"))
+	tName, err := getTypeName(c.String("repo"), c.String("team"), c.String("type"))
 	if err != nil {
 		return err
 	}
@@ -181,7 +181,7 @@ func getKey(s *library.Secret) (string, error) {
 	switch s.GetType() {
 
 	case constants.SecretShared:
-		return fmt.Sprintf("%s/%s", s.GetTeam(), s.GetName()), nil
+		return fmt.Sprintf("%s/%s/%s", s.GetOrg(), s.GetTeam(), s.GetName()), nil
 	case constants.SecretOrg:
 		return fmt.Sprintf("%s/%s", s.GetOrg(), s.GetName()), nil
 	case constants.SecretRepo:

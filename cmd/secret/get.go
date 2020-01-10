@@ -161,6 +161,7 @@ func get(c *cli.Context) error {
 		table.AddRow("NAME", "ORG", "TYPE", "KEY")
 
 		for _, s := range *secrets {
+
 			key, err := getKey(&s)
 			if err != nil {
 				return fmt.Errorf("Invalid key in secret %s: %v", s.GetName(), err)

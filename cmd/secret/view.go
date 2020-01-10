@@ -92,7 +92,7 @@ func view(c *cli.Context) error {
 		return util.InvalidCommand("name")
 	}
 
-	tName, err := getTypeName(c.String("repo"), c.String("name"), c.String("type"))
+	tName, err := getTypeName(c.String("repo"), c.String("team"), c.String("type"))
 	if err != nil {
 		return err
 	}
@@ -110,12 +110,10 @@ func view(c *cli.Context) error {
 
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
-
 	secret, _, err := client.Secret.Get(engine, sType, org, tName, name)
 	if err != nil {
 		return err
 	}
-
 	switch c.String("output") {
 	case "json":
 		output, err := json.MarshalIndent(secret, "", "    ")

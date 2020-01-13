@@ -61,7 +61,7 @@ var RemoveCmd = cli.Command{
 EXAMPLES:
  1. Remove a secret for a repository.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo
- 2. Remove a secret for a org.
+ 2. Remove a secret for an org.
     $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo
  3. Remove a shared secret for the platform.
     $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo

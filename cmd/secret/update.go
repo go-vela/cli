@@ -86,7 +86,7 @@ EXAMPLES:
  2. Update a secret value for an org.
     $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo --value bar
  3. Update a shared secret value for the platform.
-    $ {{.HelpName}} --engine native --type shared --team octokitties --name foo --value bar
+    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
  4. Update a secret for a repository with all event types enabled.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --event push --event pull_request --event tag --event deployment
  5. Update a secret from a file.

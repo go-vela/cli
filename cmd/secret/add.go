@@ -103,7 +103,7 @@ EXAMPLES:
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar
  2. Add a secret for an org with push events.
     $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo --value bar
- 3. Add a shared secret for the platform
+ 3. Add a shared secret for the platform.
     $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
  4. Add a secret for a repository with all event types enabled.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --event push --event pull_request --event tag --event deployment

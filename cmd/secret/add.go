@@ -101,7 +101,7 @@ var AddCmd = cli.Command{
 EXAMPLES:
  1. Add a secret for a repository with push events.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar
- 2. Add a secret for a org with push events.
+ 2. Add a secret for an org with push events.
     $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo --value bar
  3. Add a shared secret for the platform
     $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar

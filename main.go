@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2020 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -30,7 +30,7 @@ func main() {
 	app.Usage = "CLI for managing Vela resources"
 	app.Compiled = time.Now()
 	app.Version = version.Version.String()
-	app.Copyright = "Copyright (c) 2019 Target Brands, Inc. All rights reserved."
+	app.Copyright = "Copyright (c) 2020 Target Brands, Inc. All rights reserved."
 	app.Authors = []cli.Author{
 		{
 			Name:  "Vela Admins",

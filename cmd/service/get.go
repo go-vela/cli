@@ -49,6 +49,16 @@ var GetCmd = cli.Command{
 		},
 
 		// optional flags that can be supplied to a command
+		cli.IntFlag{
+			Name:  "page,p",
+			Usage: "Print the out the builds a specific page",
+			Value: 1,
+		},
+		cli.IntFlag{
+			Name:  "per-page,pp",
+			Usage: "Expand the number of items contained within page",
+			Value: 10,
+		},
 		cli.StringFlag{
 			Name:  "output,o",
 			Usage: "Print the output in wide, yaml or json format",
@@ -71,7 +81,6 @@ EXAMPLES:
 
 // helper function to execute vela get services cli command
 func get(c *cli.Context) error {
-
 	// get org, repo and number information from cmd flags
 	org, repo, number := c.String("org"), c.String("repo"), c.Int("build-number")
 
@@ -83,7 +92,13 @@ func get(c *cli.Context) error {
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
-	svcs, _, err := client.Svc.GetAll(org, repo, number)
+	// set the page options based on user input
+	opts := &vela.ListOptions{
+		Page:    c.Int("page"),
+		PerPage: c.Int("per-page"),
+	}
+
+	svcs, _, err := client.Svc.GetAll(org, repo, number, opts)
 	if err != nil {
 		return err
 	}
@@ -113,7 +128,6 @@ func get(c *cli.Context) error {
 		table.AddRow("NUMBER", "NAME", "STATUS", "CREATED", "FINISHED", "DURATION")
 
 		for _, s := range reverse(*svcs) {
-
 			if s.GetStatus() == constants.StatusRunning {
 				table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), humanize.Time(time.Unix(s.GetCreated(), 0)), humanize.Time(time.Unix(s.GetFinished(), 0)), "...")
 			} else {
@@ -131,7 +145,6 @@ func get(c *cli.Context) error {
 		table.AddRow("NUMBER", "NAME", "STATUS", "DURATION")
 
 		for _, s := range reverse(*svcs) {
-
 			if s.GetStatus() == constants.StatusRunning {
 				table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), "...")
 			} else {
@@ -147,7 +160,6 @@ func get(c *cli.Context) error {
 
 // calcDuration gets build duration
 func calcDuration(b *library.Service) string {
-
 	dur := (b.GetFinished() - b.GetStarted())
 
 	if dur < 60 {
@@ -159,7 +171,6 @@ func calcDuration(b *library.Service) string {
 
 // helper function to reverse the build list output
 func reverse(s []library.Service) []library.Service {
-
 	sort.SliceStable(s, func(i, j int) bool {
 		return s[i].GetNumber() < s[j].GetNumber()
 	})

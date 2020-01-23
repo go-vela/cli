@@ -72,7 +72,6 @@ EXAMPLES:
 
 // helper function to execute a remove repo cli command
 func remove(c *cli.Context) error {
-
 	// ensures engine, type, and org are set
 	err := validateCmd(c)
 	if err != nil {

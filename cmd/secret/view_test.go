@@ -50,6 +50,7 @@ func TestSecret_View_Success(t *testing.T) {
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types
@@ -135,6 +136,7 @@ func TestSecret_View_Failure(t *testing.T) {
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types

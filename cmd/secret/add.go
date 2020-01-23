@@ -120,7 +120,6 @@ EXAMPLES:
 
 // helper function to execute a add repo cli command
 func add(c *cli.Context) error {
-
 	// create a carval client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
@@ -131,9 +130,7 @@ func add(c *cli.Context) error {
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
 	switch {
-
 	case len(c.String("filename")) != 0:
-
 		err := procCreateFile(c, client)
 		if err != nil {
 			return err
@@ -151,7 +148,6 @@ func add(c *cli.Context) error {
 
 // helper function to process user input from CLI flags
 func procCreateFlag(c *cli.Context, client *vela.Client) error {
-
 	// use global variables if flags aren't provided
 	err := loadGlobal(c)
 	if err != nil {
@@ -211,15 +207,14 @@ func procCreateFlag(c *cli.Context, client *vela.Client) error {
 
 // helper function to process user input from yaml file
 func procCreateFile(c *cli.Context, client *vela.Client) error {
-
 	filename, err := filepath.Abs(c.String("filename"))
 	if err != nil {
-		return fmt.Errorf("Error getting file %s: %v", c.String("filename"), err)
+		return fmt.Errorf("unable to get file %s: %v", c.String("filename"), err)
 	}
 
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return fmt.Errorf("Error reading file  %s: %v", c.String("filename"), err)
+		return fmt.Errorf("unable to read file  %s: %v", c.String("filename"), err)
 	}
 
 	// decode yaml file
@@ -229,7 +224,6 @@ func procCreateFile(c *cli.Context, client *vela.Client) error {
 	var docs document
 	for dec.Decode(&docs) == nil {
 		for _, s := range docs.Secrets {
-
 			tName, err := getTypeName(s.GetRepo(), s.GetTeam(), s.GetType())
 			if err != nil {
 				return err

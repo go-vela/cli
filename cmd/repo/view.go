@@ -54,7 +54,6 @@ EXAMPLES:
 
 // helper function to execute logs cli command
 func view(c *cli.Context) error {
-
 	// get org and repo information from cmd flags
 	org, repo := c.String("org"), c.String("repo")
 

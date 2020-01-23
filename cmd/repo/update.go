@@ -89,7 +89,6 @@ EXAMPLES:
 
 // helper function to execute a update repo cli command
 func update(c *cli.Context) error {
-
 	// get org and repo information from cmd flags
 	org, repo := c.String("org"), c.String("repo")
 

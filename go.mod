@@ -10,7 +10,7 @@ require (
 	github.com/gin-gonic/gin v1.5.0
 	github.com/go-vela/compiler v0.2.0
 	github.com/go-vela/mock v0.2.0
-	github.com/go-vela/sdk-go v0.2.0
+	github.com/go-vela/sdk-go v0.2.1-0.20200120175809-c03b1cd9ce61
 	github.com/go-vela/types v0.2.0
 	github.com/gosuri/uitable v0.0.3
 	github.com/manifoldco/promptui v0.3.2

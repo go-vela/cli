@@ -39,7 +39,6 @@ func init() {
 }
 
 func TestBuild_Get_Success(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testBuildAppGet, set, nil)
 
@@ -76,6 +75,18 @@ func TestBuild_Get_Success(t *testing.T) {
 			"", "--addr", s.URL, "--token", "foobar",
 			"get", "build",
 			"--org", "github", "--repo", "octocat", "--o", "wide"}, want: nil},
+
+		// page default output
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"get", "build",
+			"--org", "github", "--repo", "octocat", "--p", "2"}, want: nil},
+
+		// per page default output
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"get", "build",
+			"--org", "github", "--repo", "octocat", "--pp", "20"}, want: nil},
 	}
 
 	// run test
@@ -89,7 +100,6 @@ func TestBuild_Get_Success(t *testing.T) {
 }
 
 func TestBuild_Get_Failure(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testBuildAppGet, set, nil)
 

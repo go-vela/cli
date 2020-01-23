@@ -19,7 +19,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-// GetCmd defines the command for retriving secrets from a repository.
+// GetCmd defines the command for retrieving secrets from a repository.
 var GetCmd = cli.Command{
 	Name:        "secret",
 	Aliases:     []string{"secrets"},
@@ -59,6 +59,16 @@ var GetCmd = cli.Command{
 		},
 
 		// optional flags that can be supplied to a command
+		cli.IntFlag{
+			Name:  "page,p",
+			Usage: "Print the out the builds a specific page",
+			Value: 1,
+		},
+		cli.IntFlag{
+			Name:  "per-page,pp",
+			Usage: "Expand the number of items contained within page",
+			Value: 10,
+		},
 		cli.StringFlag{
 			Name:  "output,o",
 			Usage: "Print the output in a yaml or json format",
@@ -85,7 +95,6 @@ EXAMPLES:
 
 // helper function to execute vela get secrets cli command
 func get(c *cli.Context) error {
-
 	// ensures engine, type, and org are set
 	err := validateCmd(c)
 	if err != nil {
@@ -110,7 +119,13 @@ func get(c *cli.Context) error {
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
-	secrets, _, err := client.Secret.GetAll(engine, sType, org, tName)
+	// set the page options based on user input
+	opts := &vela.ListOptions{
+		Page:    c.Int("page"),
+		PerPage: c.Int("per-page"),
+	}
+
+	secrets, _, err := client.Secret.GetAll(engine, sType, org, tName, opts)
 	if err != nil {
 		return err
 	}
@@ -139,10 +154,9 @@ func get(c *cli.Context) error {
 		table.AddRow("NAME", "ORG", "TYPE", "KEY", "EVENTS", "IMAGES")
 
 		for _, s := range *secrets {
-
 			key, err := getKey(&s)
 			if err != nil {
-				return fmt.Errorf("Invalid key in secret %s: %v", s.GetName(), err)
+				return fmt.Errorf("invalid key in secret %s: %v", s.GetName(), err)
 			}
 
 			if s.Images == nil {
@@ -161,11 +175,11 @@ func get(c *cli.Context) error {
 		table.AddRow("NAME", "ORG", "TYPE", "KEY")
 
 		for _, s := range *secrets {
-
 			key, err := getKey(&s)
 			if err != nil {
-				return fmt.Errorf("Invalid key in secret %s: %v", s.GetName(), err)
+				return fmt.Errorf("invalid key in secret %s: %v", s.GetName(), err)
 			}
+
 			table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), key)
 		}
 
@@ -177,9 +191,7 @@ func get(c *cli.Context) error {
 
 // helper function to create a key field from a secret
 func getKey(s *library.Secret) (string, error) {
-
 	switch s.GetType() {
-
 	case constants.SecretShared:
 		return fmt.Sprintf("%s/%s/%s", s.GetOrg(), s.GetTeam(), s.GetName()), nil
 	case constants.SecretOrg:
@@ -188,5 +200,5 @@ func getKey(s *library.Secret) (string, error) {
 		return fmt.Sprintf("%s/%s/%s", s.GetOrg(), s.GetRepo(), s.GetName()), nil
 	}
 
-	return "", fmt.Errorf("Invalid secret type")
+	return "", fmt.Errorf("invalid secret type")
 }

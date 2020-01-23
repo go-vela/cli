@@ -81,7 +81,6 @@ EXAMPLES:
 
 // helper function to execute logs cli command
 func view(c *cli.Context) error {
-
 	// ensures engine, type, and org are set
 	err := validateCmd(c)
 	if err != nil {

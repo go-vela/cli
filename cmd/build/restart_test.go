@@ -38,7 +38,6 @@ func init() {
 }
 
 func TestBuild_Restart_Success(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testBuildAppRestart, set, nil)
 
@@ -70,7 +69,6 @@ func TestBuild_Restart_Success(t *testing.T) {
 }
 
 func TestBuild_Restart_Failure(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testBuildAppRestart, set, nil)
 

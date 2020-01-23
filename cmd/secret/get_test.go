@@ -38,12 +38,12 @@ func init() {
 }
 
 func TestSecret_Get_Success(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testSecretAppGet, set, nil)
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types
@@ -78,6 +78,20 @@ func TestSecret_Get_Success(t *testing.T) {
 			"get", "secret",
 			"--engine", "native", "--type", "repository",
 			"--org", "github", "--repo", "octocat", "--o", "wide"}, want: nil},
+
+		// page default output
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"get", "secret",
+			"--engine", "native", "--type", "repository",
+			"--org", "github", "--repo", "octocat", "--p", "2"}, want: nil},
+
+		// per page default output
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"get", "secret",
+			"--engine", "native", "--type", "repository",
+			"--org", "github", "--repo", "octocat", "--pp", "20"}, want: nil},
 	}
 
 	// run test
@@ -91,12 +105,12 @@ func TestSecret_Get_Success(t *testing.T) {
 }
 
 func TestSecret_Get_Failure(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testSecretAppGet, set, nil)
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types

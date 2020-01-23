@@ -45,6 +45,16 @@ var GetCmd = cli.Command{
 		},
 
 		// optional flags that can be supplied to a command
+		cli.IntFlag{
+			Name:  "page,p",
+			Usage: "Print a specific page of builds",
+			Value: 1,
+		},
+		cli.IntFlag{
+			Name:  "per-page,pp",
+			Usage: "Expand the number of items contained within page",
+			Value: 10,
+		},
 		cli.StringFlag{
 			Name:  "output,o",
 			Usage: "Print the output in wide, yaml or json format",
@@ -78,7 +88,13 @@ func get(c *cli.Context) error {
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
-	builds, _, err := client.Build.GetAll(org, repo)
+	// set the page options based on user input
+	opts := &vela.ListOptions{
+		Page:    c.Int("page"),
+		PerPage: c.Int("per-page"),
+	}
+
+	builds, _, err := client.Build.GetAll(org, repo, opts)
 	if err != nil {
 		return err
 	}
@@ -144,7 +160,6 @@ func get(c *cli.Context) error {
 
 // calcDuration gets build duration
 func calcDuration(b *library.Build) string {
-
 	dur := (b.GetFinished() - b.GetStarted())
 
 	if dur < 60 {
@@ -157,7 +172,6 @@ func calcDuration(b *library.Build) string {
 // modifybuild changes the event data within the struct
 // to reflect to custom output when we are not outputing yaml or json
 func modifyBuild(b *library.Build) {
-
 	switch d := strings.Split(b.GetRef(), "/")[1]; d {
 	case "tags":
 		*b.Ref = "tag"
@@ -172,7 +186,6 @@ func modifyBuild(b *library.Build) {
 
 // helper function to reverse the build list output
 func reverse(b []library.Build) []library.Build {
-
 	sort.SliceStable(b, func(i, j int) bool {
 		return b[i].GetNumber() < b[j].GetNumber()
 	})

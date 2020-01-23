@@ -38,12 +38,12 @@ func init() {
 }
 
 func TestStep_Get_Success(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testStepAppGet, set, nil)
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types
@@ -87,12 +87,12 @@ func TestStep_Get_Success(t *testing.T) {
 }
 
 func TestStep_Get_Failure(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testStepAppGet, set, nil)
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types

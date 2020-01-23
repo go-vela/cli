@@ -60,7 +60,6 @@ EXAMPLES:
 
 // helper function to execute vela info build cli command
 func view(c *cli.Context) error {
-
 	if c.Int("build-number") == 0 {
 		return util.InvalidCommand("build-number")
 	}

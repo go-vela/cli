@@ -44,12 +44,12 @@ func init() {
 }
 
 func TestSecret_Update_Success(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testSecretAppUpdate, set, nil)
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types
@@ -110,12 +110,12 @@ func TestSecret_Update_Success(t *testing.T) {
 }
 
 func TestSecret_Update_Failure(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testSecretAppUpdate, set, nil)
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types

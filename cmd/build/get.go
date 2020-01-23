@@ -47,7 +47,7 @@ var GetCmd = cli.Command{
 		// optional flags that can be supplied to a command
 		cli.IntFlag{
 			Name:  "page,p",
-			Usage: "Print the out the builds a specific page",
+			Usage: "Print a specific page of builds",
 			Value: 1,
 		},
 		cli.IntFlag{

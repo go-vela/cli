@@ -44,6 +44,7 @@ func TestRepo_Get_Success(t *testing.T) {
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types
@@ -70,6 +71,16 @@ func TestRepo_Get_Success(t *testing.T) {
 		{data: []string{
 			"", "--addr", s.URL, "--token", "foobar",
 			"get", "repo", "--o", "wide"}, want: nil},
+
+		// page default output
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"get", "repo", "--p", "2"}, want: nil},
+
+		// per page output
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"get", "repo", "--pp", "20"}, want: nil},
 	}
 
 	// run test
@@ -89,6 +100,7 @@ func TestRepo_Get_Failure(t *testing.T) {
 
 	// setup server
 	gin.SetMode(gin.TestMode)
+
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup types

@@ -89,7 +89,6 @@ EXAMPLES:
 
 // helper function to execute a add repo cli command
 func add(c *cli.Context) error {
-
 	// get org and repo information from cmd flags
 	org, repo := c.String("org"), c.String("repo")
 
@@ -98,6 +97,7 @@ func add(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
 	// resource to create on server
@@ -115,12 +115,15 @@ func add(c *cli.Context) error {
 		if event == constants.EventPush {
 			request.AllowPush = vela.Bool(true)
 		}
+
 		if event == constants.EventPull {
 			request.AllowPull = vela.Bool(true)
 		}
+
 		if event == constants.EventTag {
 			request.AllowTag = vela.Bool(true)
 		}
+
 		if event == constants.EventDeploy {
 			request.AllowDeploy = vela.Bool(true)
 		}

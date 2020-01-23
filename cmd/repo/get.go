@@ -28,6 +28,16 @@ var GetCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// optional flags that can be supplied to a command
+		cli.IntFlag{
+			Name:  "page,p",
+			Usage: "Print the out the builds a specific page",
+			Value: 1,
+		},
+		cli.IntFlag{
+			Name:  "per-page,pp",
+			Usage: "Expand the number of items contained within page",
+			Value: 10,
+		},
 		cli.StringFlag{
 			Name:  "output,o",
 			Usage: "Print the output in wide, yaml or json format",
@@ -57,7 +67,13 @@ func get(c *cli.Context) error {
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
-	repositories, _, err := client.Repo.GetAll()
+	// set the page options based on user input
+	opts := &vela.ListOptions{
+		Page:    c.Int("page"),
+		PerPage: c.Int("per-page"),
+	}
+
+	repositories, _, err := client.Repo.GetAll(opts)
 	if err != nil {
 		return err
 	}

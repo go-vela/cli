@@ -38,7 +38,6 @@ func init() {
 }
 
 func TestBuild_View_Success(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testBuildAppView, set, nil)
 
@@ -76,7 +75,6 @@ func TestBuild_View_Success(t *testing.T) {
 }
 
 func TestBuild_View_Failure(t *testing.T) {
-
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testBuildAppView, set, nil)
 

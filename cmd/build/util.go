@@ -14,7 +14,6 @@ import (
 // helper function to load global configuration if set
 // via config or environment and validate the user input in the command
 func validate(c *cli.Context) error {
-
 	// load configuration
 	if len(c.String("org")) == 0 {
 		err := c.Set("org", c.GlobalString("org"))

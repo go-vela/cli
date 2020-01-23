@@ -50,7 +50,6 @@ EXAMPLES:
 
 // helper function to execute vela restart build cli command
 func restart(c *cli.Context) error {
-
 	if c.Int("build-number") == 0 {
 		return util.InvalidCommand("build-number")
 	}

@@ -88,15 +88,15 @@ func authenticate(c *cli.Context) error {
 	}
 
 	auth, resp, err := client.Authorization.Login(&req)
+	if err != nil {
+		return err
+	}
 
 	// If user hits an endpoint other than the
 	// Vela server that can't process request
 	// bomb out and throw error
 	if http.StatusUnauthorized < resp.StatusCode {
 		return fmt.Errorf("unable to process request")
-	}
-	if resp.StatusCode != http.StatusUnauthorized && err != nil {
-		return err
 	}
 
 	// retry authentication in case user requires an OTP code
@@ -123,7 +123,6 @@ func authenticate(c *cli.Context) error {
 		message = fmt.Sprintf("Generated token: %s", auth.GetToken())
 		token = auth.GetToken()
 	default:
-
 		// craft response to user
 		message = fmt.Sprintf("Generated token: %s", auth.GetToken())
 		token = auth.GetToken()
@@ -147,6 +146,7 @@ func getUsername(c *cli.Context) (string, error) {
 		if len(input) < 0 {
 			return errors.New("Username must not be blank")
 		}
+
 		return nil
 	}
 

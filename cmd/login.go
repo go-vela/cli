@@ -89,7 +89,10 @@ func authenticate(c *cli.Context) error {
 
 	auth, resp, err := client.Authorization.Login(&req)
 	if err != nil {
-		return err
+		//TODO: clean this workflow up
+		if resp.StatusCode != http.StatusUnauthorized {
+			return err
+		}
 	}
 
 	// If user hits an endpoint other than the

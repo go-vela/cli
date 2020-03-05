@@ -95,22 +95,7 @@ EXAMPLES:
 
 // helper function to execute vela get secrets cli command
 func get(c *cli.Context) error {
-	// ensures engine, type, and org are set
-	err := validateCmd(c)
-	if err != nil {
-		return err
-	}
-
-	tName, err := getTypeName(c.String("repo"), c.String("team"), c.String("type"))
-	if err != nil {
-		return err
-	}
-
-	engine := c.String("engine")
-	sType := c.String("type")
-	org := c.String("org")
-
-	// create a carval client
+	// create a vela client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
 		return err
@@ -118,6 +103,31 @@ func get(c *cli.Context) error {
 
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+
+	// ensures engine, type, and org are set
+	err = validateCmd(c)
+	if err != nil {
+		return err
+	}
+
+	engine := c.String("engine")
+	sType := c.String("type")
+	org := c.String("org")
+	repo := c.String("repo")
+
+	// check if the secret provided is an org type
+	if sType == constants.SecretOrg {
+		// check if the repo was provided
+		if len(repo) == 0 {
+			// set a default for the repo
+			repo = "*"
+		}
+	}
+
+	tName, err := getTypeName(repo, c.String("team"), sType)
+	if err != nil {
+		return err
+	}
 
 	// set the page options based on user input
 	opts := &vela.ListOptions{

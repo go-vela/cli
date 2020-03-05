@@ -72,8 +72,17 @@ EXAMPLES:
 
 // helper function to execute a remove repo cli command
 func remove(c *cli.Context) error {
+	// create a vela client
+	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	if err != nil {
+		return err
+	}
+
+	// set token from global config
+	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+
 	// ensures engine, type, and org are set
-	err := validateCmd(c)
+	err = validateCmd(c)
 	if err != nil {
 		return err
 	}
@@ -82,24 +91,25 @@ func remove(c *cli.Context) error {
 		return util.InvalidCommand("name")
 	}
 
-	tName, err := getTypeName(c.String("repo"), c.String("name"), c.String("type"))
-	if err != nil {
-		return err
-	}
-
 	engine := c.String("engine")
 	sType := c.String("type")
 	org := c.String("org")
+	repo := c.String("repo")
 	name := c.String("name")
 
-	// create a carval client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	// check if the secret provided is an org type
+	if sType == constants.SecretOrg {
+		// check if the repo was provided
+		if len(repo) == 0 {
+			// set a default for the repo
+			repo = "*"
+		}
+	}
+
+	tName, err := getTypeName(repo, name, sType)
 	if err != nil {
 		return err
 	}
-
-	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
 	_, _, err = client.Secret.Remove(engine, sType, org, tName, name)
 	if err != nil {

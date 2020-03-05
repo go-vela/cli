@@ -81,26 +81,6 @@ EXAMPLES:
 
 // helper function to execute logs cli command
 func view(c *cli.Context) error {
-	// ensures engine, type, and org are set
-	err := validateCmd(c)
-	if err != nil {
-		return err
-	}
-
-	if len(c.String("name")) == 0 {
-		return util.InvalidCommand("name")
-	}
-
-	tName, err := getTypeName(c.String("repo"), c.String("team"), c.String("type"))
-	if err != nil {
-		return err
-	}
-
-	engine := c.String("engine")
-	sType := c.String("type")
-	org := c.String("org")
-	name := c.String("name")
-
 	// create a vela client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
@@ -109,6 +89,36 @@ func view(c *cli.Context) error {
 
 	// set token from global config
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+
+	// ensures engine, type, and org are set
+	err = validateCmd(c)
+	if err != nil {
+		return err
+	}
+
+	if len(c.String("name")) == 0 {
+		return util.InvalidCommand("name")
+	}
+
+	engine := c.String("engine")
+	sType := c.String("type")
+	org := c.String("org")
+	repo := c.String("repo")
+	name := c.String("name")
+
+	// check if the secret provided is an org type
+	if sType == constants.SecretOrg {
+		// check if the repo was provided
+		if len(repo) == 0 {
+			// set a default for the repo
+			repo = "*"
+		}
+	}
+
+	tName, err := getTypeName(repo, c.String("team"), sType)
+	if err != nil {
+		return err
+	}
 
 	secret, _, err := client.Secret.Get(engine, sType, org, tName, name)
 	if err != nil {

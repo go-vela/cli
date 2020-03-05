@@ -120,7 +120,7 @@ EXAMPLES:
 
 // helper function to execute a add repo cli command
 func add(c *cli.Context) error {
-	// create a carval client
+	// create a vela client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
 		return err
@@ -130,7 +130,7 @@ func add(c *cli.Context) error {
 	client.Authentication.SetTokenAuth(c.GlobalString("token"))
 
 	switch {
-	case len(c.String("filename")) != 0:
+	case len(c.String("filename")) > 0:
 		err := procCreateFile(c, client)
 		if err != nil {
 			return err
@@ -171,17 +171,27 @@ func procCreateFlag(c *cli.Context, client *vela.Client) error {
 	engine := c.String("engine")
 	sType := c.String("type")
 	org := c.String("org")
+	repo := c.String("repo")
+
+	// check if the secret provided is an org type
+	if sType == constants.SecretOrg {
+		// check if the repo was provided
+		if len(repo) == 0 {
+			// set a default for the repo
+			repo = "*"
+		}
+	}
 
 	// resource to create on server
 	images, events := c.StringSlice("image"), c.StringSlice("event")
 	req := library.Secret{
-		Org:    vela.String(c.String("org")),
-		Repo:   vela.String(c.String("repo")),
+		Org:    vela.String(org),
+		Repo:   vela.String(repo),
 		Team:   vela.String(c.String("team")),
 		Name:   vela.String(c.String("name")),
 		Images: &images,
 		Events: &events,
-		Type:   &sType,
+		Type:   vela.String(sType),
 	}
 
 	tName, err := getTypeName(req.GetRepo(), req.GetTeam(), sType)

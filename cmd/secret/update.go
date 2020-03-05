@@ -149,9 +149,19 @@ func procUpdateFlag(c *cli.Context, client *vela.Client) error {
 	engine := c.String("engine")
 	sType := c.String("type")
 	org := c.String("org")
+	repo := c.String("repo")
 	name := c.String("name")
 
-	tName, err := getTypeName(c.String("repo"), c.String("team"), c.String("type"))
+	// check if the secret provided is an org type
+	if sType == constants.SecretOrg {
+		// check if the repo was provided
+		if len(repo) == 0 {
+			// set a default for the repo
+			repo = "*"
+		}
+	}
+
+	tName, err := getTypeName(repo, c.String("team"), sType)
 	if err != nil {
 		return err
 	}

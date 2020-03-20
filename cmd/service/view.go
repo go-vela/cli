@@ -73,7 +73,7 @@ func view(c *cli.Context) error {
 	org, repo := c.String("org"), c.String("repo")
 	bNum, sNum := c.Int("build-number"), c.Int("service-number")
 
-	// create a carval client
+	// create a vela client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
 		return err

@@ -102,7 +102,7 @@ EXAMPLES:
 
 // helper function to execute a update repo cli command
 func update(c *cli.Context) error {
-	// create a carval client
+	// create a vela client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
 		return err

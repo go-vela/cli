@@ -63,7 +63,7 @@ func authenticate(c *cli.Context) error {
 		url = c.GlobalString("addr")
 	}
 
-	// create a carval client
+	// create a vela client
 	client, err := vela.NewClient(url, nil)
 	if err != nil {
 		return err

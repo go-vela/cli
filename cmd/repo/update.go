@@ -92,7 +92,7 @@ func update(c *cli.Context) error {
 	// get org and repo information from cmd flags
 	org, repo := c.String("org"), c.String("repo")
 
-	// update a carval client
+	// update a vela client
 	client, err := vela.NewClient(c.GlobalString("addr"), nil)
 	if err != nil {
 		return err

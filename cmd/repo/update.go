@@ -118,15 +118,19 @@ func update(c *cli.Context) error {
 		if event == constants.EventPush {
 			request.AllowPush = vela.Bool(true)
 		}
+
 		if event == constants.EventPull {
 			request.AllowPull = vela.Bool(true)
 		}
+
 		if event == constants.EventTag {
 			request.AllowTag = vela.Bool(true)
 		}
+
 		if event == constants.EventDeploy {
 			request.AllowDeploy = vela.Bool(true)
 		}
+
 		if event == constants.EventComment {
 			request.AllowComment = vela.Bool(true)
 		}

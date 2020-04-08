@@ -90,6 +90,7 @@ var AddCmd = cli.Command{
 				constants.EventPush,
 				constants.EventTag,
 				constants.EventDeploy,
+				constants.EventComment,
 			},
 		},
 		cli.StringFlag{
@@ -106,7 +107,7 @@ EXAMPLES:
  3. Add a shared secret for the platform.
     $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
  4. Add a secret for a repository with all event types enabled.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --event push --event pull_request --event tag --event deployment
+    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --event push --event pull_request --event tag --event deployment --event comment
  5. Add a secret from a file.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value @/path/to/file
  6. Add a native repo secret with an image whitelist.

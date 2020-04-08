@@ -62,7 +62,7 @@ func TestRepo_Update_Success(t *testing.T) {
 			"", "--addr", s.URL, "--token", "foobar",
 			"update", "repo", "--org", "github", "--repo", "octocat",
 			"--event", "push", "--event", "pull_request",
-			"--event", "tag", "--event", "deployment"}, want: nil},
+			"--event", "tag", "--event", "deployment", "--event", "comment"}, want: nil},
 
 		// Update a repository with a longer build timeout
 		{data: []string{

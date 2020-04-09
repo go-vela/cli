@@ -88,9 +88,6 @@ var AddCmd = cli.Command{
 			EnvVar: "SECRET_EVENTS",
 			Value: &cli.StringSlice{
 				constants.EventPush,
-				constants.EventTag,
-				constants.EventDeploy,
-				constants.EventComment,
 			},
 		},
 		cli.StringFlag{

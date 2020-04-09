@@ -120,6 +120,10 @@ func get(c *cli.Context) error {
 				events += fmt.Sprintf("%s,", constants.EventDeploy)
 			}
 
+			if r.GetAllowComment() {
+				events += fmt.Sprintf("%s,", constants.EventComment)
+			}
+
 			table.AddRow(r.GetFullName(), r.GetActive(), strings.TrimSuffix(events, ","), r.GetVisibility(), r.GetBranch(), r.GetLink())
 		}
 
@@ -149,6 +153,10 @@ func get(c *cli.Context) error {
 
 			if r.GetAllowDeploy() {
 				events += fmt.Sprintf("%s,", constants.EventDeploy)
+			}
+
+			if r.GetAllowComment() {
+				events += fmt.Sprintf("%s,", constants.EventComment)
 			}
 
 			table.AddRow(r.GetFullName(), r.GetActive(), strings.TrimSuffix(events, ","), r.GetVisibility(), r.GetBranch())

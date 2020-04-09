@@ -79,7 +79,7 @@ EXAMPLES:
  1. Update a repository.
     $ {{.HelpName}} --org github --repo octocat
  2. Update a repository with all event types enabled.
-    $ {{.HelpName}} --org github --repo octocat --event push --event pull_request --event tag --event deployment
+    $ {{.HelpName}} --org github --repo octocat --event push --event pull_request --event tag --event deployment --event comment
  3. Update a repository with a longer build timeout.
     $ {{.HelpName}} --org github --repo octocat --timeout 90
  4. Update a repository when org and repo config or environment variables are set.
@@ -118,14 +118,21 @@ func update(c *cli.Context) error {
 		if event == constants.EventPush {
 			request.AllowPush = vela.Bool(true)
 		}
+
 		if event == constants.EventPull {
 			request.AllowPull = vela.Bool(true)
 		}
+
 		if event == constants.EventTag {
 			request.AllowTag = vela.Bool(true)
 		}
+
 		if event == constants.EventDeploy {
 			request.AllowDeploy = vela.Bool(true)
+		}
+
+		if event == constants.EventComment {
+			request.AllowComment = vela.Bool(true)
 		}
 	}
 

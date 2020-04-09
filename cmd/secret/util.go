@@ -12,20 +12,20 @@ import (
 
 	"github.com/go-vela/cli/util"
 	"github.com/go-vela/types/constants"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // helper function to load global configuration if set via config or environment
 func loadGlobal(c *cli.Context) error {
 	if len(c.String("engine")) == 0 {
-		err := c.Set("engine", c.GlobalString("secret-engine"))
+		err := c.Set("engine", c.String("secret-engine"))
 		if err != nil {
 			return fmt.Errorf("unable to set context: %w", err)
 		}
 	}
 
 	if len(c.String("type")) == 0 {
-		err := c.Set("type", c.GlobalString("secret-type"))
+		err := c.Set("type", c.String("secret-type"))
 		if err != nil {
 			return fmt.Errorf("unable to set context: %w", err)
 		}

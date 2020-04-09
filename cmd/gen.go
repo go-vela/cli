@@ -8,7 +8,7 @@ import (
 	"github.com/go-vela/cli/cmd/config"
 	"github.com/go-vela/cli/cmd/pipe"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // genCmds defines the commands for adding resources.
@@ -18,8 +18,8 @@ var genCmds = cli.Command{
 	Aliases:     []string{"gen"},
 	Description: "Use this command to generate local files",
 	Usage:       "Generate resources for Vela via subcommands",
-	Subcommands: []cli.Command{
-		config.GenCmd,
-		pipe.GenCmd,
+	Subcommands: []*cli.Command{
+		&config.GenCmd,
+		&pipe.GenCmd,
 	},
 }

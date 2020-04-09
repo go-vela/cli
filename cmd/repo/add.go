@@ -11,7 +11,7 @@ import (
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // AddCmd defines the command for adding a repository.
@@ -24,54 +24,54 @@ var AddCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "REPO_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"REPO_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained with the organization",
-			EnvVar: "REPO_NAME",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained with the organization",
+			EnvVars: []string{"REPO_NAME"},
 		},
 
 		// optional flags that can be supplied to a command
-		cli.StringFlag{
-			Name:   "link",
-			Usage:  "Link to repository in source control",
-			EnvVar: "REPO_LINK",
+		&cli.StringFlag{
+			Name:    "link",
+			Usage:   "Link to repository in source control",
+			EnvVars: []string{"REPO_LINK"},
 		},
-		cli.StringFlag{
-			Name:   "clone",
-			Usage:  "Clone link to repository in source control",
-			EnvVar: "REPO_CLONE",
+		&cli.StringFlag{
+			Name:    "clone",
+			Usage:   "Clone link to repository in source control",
+			EnvVars: []string{"REPO_CLONE"},
 		},
-		cli.Int64Flag{
-			Name:   "timeout",
-			Usage:  "Allow management of timeouts",
-			EnvVar: "REPO_TIMEOUT",
-			Value:  60,
+		&cli.Int64Flag{
+			Name:    "timeout",
+			Usage:   "Allow management of timeouts",
+			EnvVars: []string{"REPO_TIMEOUT"},
+			Value:   60,
 		},
-		cli.BoolFlag{
-			Name:   "private",
-			Usage:  "Allow management of private repositories",
-			EnvVar: "REPO_PRIVATE",
+		&cli.BoolFlag{
+			Name:    "private",
+			Usage:   "Allow management of private repositories",
+			EnvVars: []string{"REPO_PRIVATE"},
 		},
-		cli.BoolFlag{
-			Name:   "trusted",
-			Usage:  "Allow management of trusted repositories",
-			EnvVar: "REPO_TRUSTED",
+		&cli.BoolFlag{
+			Name:    "trusted",
+			Usage:   "Allow management of trusted repositories",
+			EnvVars: []string{"REPO_TRUSTED"},
 		},
-		cli.BoolTFlag{
-			Name:   "active",
-			Usage:  "Allow management of activity on repositories",
-			EnvVar: "REPO_ACTIVE",
+		&cli.BoolFlag{
+			Name:    "active",
+			Usage:   "Allow management of activity on repositories",
+			EnvVars: []string{"REPO_ACTIVE"},
 		},
-		cli.StringSliceFlag{
-			Name:   "event",
-			Usage:  "Allow management of the repository trigger events",
-			EnvVar: "REPO_EVENT",
-			Value:  &cli.StringSlice{},
+		&cli.StringSliceFlag{
+			Name:    "event",
+			Usage:   "Allow management of the repository trigger events",
+			EnvVars: []string{"REPO_EVENT"},
+			Value:   &cli.StringSlice{},
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -93,12 +93,12 @@ func add(c *cli.Context) error {
 	org, repo := c.String("org"), c.String("repo")
 
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// resource to create on server
 	request := &library.Repo{

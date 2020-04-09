@@ -12,26 +12,26 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/mock/server"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var testBuildAppRestart = cli.NewApp()
 
 // setup the command for tests
 func init() {
-	testBuildAppRestart.Commands = []cli.Command{
+	testBuildAppRestart.Commands = []*cli.Command{
 		{
 			Name: "restart",
-			Subcommands: []cli.Command{
-				RestartCmd,
+			Subcommands: []*cli.Command{
+				&RestartCmd,
 			},
 		},
 	}
 	testBuildAppRestart.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "addr",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "token",
 		},
 	}

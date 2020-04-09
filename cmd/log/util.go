@@ -6,7 +6,7 @@ package log
 
 import (
 	"github.com/go-vela/cli/util"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // helper function to load global configuration if set
@@ -15,10 +15,10 @@ func validate(c *cli.Context) error {
 
 	// load configuration
 	if len(c.String("org")) == 0 {
-		c.Set("org", c.GlobalString("org"))
+		c.Set("org", c.String("org"))
 	}
 	if len(c.String("repo")) == 0 {
-		c.Set("repo", c.GlobalString("repo"))
+		c.Set("repo", c.String("repo"))
 	}
 
 	// validate the user input in the command

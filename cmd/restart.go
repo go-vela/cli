@@ -7,7 +7,7 @@ package cmd
 import (
 	"github.com/go-vela/cli/cmd/build"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // restartCmds defines the command for restarting resources.
@@ -17,7 +17,7 @@ var restartCmds = cli.Command{
 	Aliases:     []string{"r"},
 	Description: "Use this command to restart resources for Vela.",
 	Usage:       "Restart build for a vela pipeline",
-	Subcommands: []cli.Command{
-		build.RestartCmd,
+	Subcommands: []*cli.Command{
+		&build.RestartCmd,
 	},
 }

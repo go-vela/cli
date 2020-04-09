@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-vela/sdk-go/vela"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // RemoveCmd defines the command for deleting a repository.
@@ -22,15 +22,15 @@ var RemoveCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "REPO_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"REPO_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained with the organization",
-			EnvVar: "REPO_NAME",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained with the organization",
+			EnvVars: []string{"REPO_NAME"},
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -48,13 +48,13 @@ func remove(c *cli.Context) error {
 	org, repo := c.String("org"), c.String("repo")
 
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
 	// set token from context
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	_, _, err = client.Repo.Remove(org, repo)
 	if err != nil {

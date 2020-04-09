@@ -14,7 +14,7 @@ import (
 
 	"github.com/gosuri/uitable"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -28,19 +28,22 @@ var GetCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// optional flags that can be supplied to a command
-		cli.IntFlag{
-			Name:  "page,p",
-			Usage: "Print a specific page of repos",
-			Value: 1,
+		&cli.IntFlag{
+			Name:    "page",
+			Aliases: []string{"p"},
+			Usage:   "Print a specific page of repos",
+			Value:   1,
 		},
-		cli.IntFlag{
-			Name:  "per-page,pp",
-			Usage: "Expand the number of items contained within page",
-			Value: 10,
+		&cli.IntFlag{
+			Name:    "per-page",
+			Aliases: []string{"pp"},
+			Usage:   "Expand the number of items contained within page",
+			Value:   10,
 		},
-		cli.StringFlag{
-			Name:  "output,o",
-			Usage: "Print the output in wide, yaml or json format",
+		&cli.StringFlag{
+			Name:    "output",
+			Aliases: []string{"o"},
+			Usage:   "Print the output in wide, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -59,13 +62,13 @@ EXAMPLES:
 // helper function to execute logs cli command
 func get(c *cli.Context) error {
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
 	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// set the page options based on user input
 	opts := &vela.ListOptions{

@@ -10,7 +10,7 @@ import (
 	"github.com/go-vela/cli/util"
 	"github.com/go-vela/sdk-go/vela"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // RestartCmd defines the command for restarting a specific build.
@@ -23,20 +23,21 @@ var RestartCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "BUILD_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"BUILD_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained within the organization",
-			EnvVar: "BUILD_REPO",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained within the organization",
+			EnvVars: []string{"BUILD_REPO"},
 		},
-		cli.IntFlag{
-			Name:   "build-number,build,b",
-			Usage:  "Provide the build number",
-			EnvVar: "BUILD_NUMBER",
+		&cli.IntFlag{
+			Name:    "build-number",
+			Aliases: []string{"build", "b"},
+			Usage:   "Provide the build number",
+			EnvVars: []string{"BUILD_NUMBER"},
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -58,13 +59,13 @@ func restart(c *cli.Context) error {
 	org, repo, number := c.String("org"), c.String("repo"), c.Int("build-number")
 
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
 	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	build, _, err := client.Build.Restart(org, repo, number)
 	if err != nil {

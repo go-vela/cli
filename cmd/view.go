@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/cli/cmd/service"
 	"github.com/go-vela/cli/cmd/step"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // viewCmds defines the commands for viewing resources.
@@ -23,13 +23,13 @@ var viewCmds = cli.Command{
 	Aliases:     []string{"v"},
 	Description: "Use this command to view resources for Vela.",
 	Usage:       "View resources for Vela via subcommands",
-	Subcommands: []cli.Command{
-		build.ViewCmd,
-		config.ViewCmd,
-		log.ViewCmd,
-		repo.ViewCmd,
-		secret.ViewCmd,
-		service.ViewCmd,
-		step.ViewCmd,
+	Subcommands: []*cli.Command{
+		&build.ViewCmd,
+		&config.ViewCmd,
+		&log.ViewCmd,
+		&repo.ViewCmd,
+		&secret.ViewCmd,
+		&service.ViewCmd,
+		&step.ViewCmd,
 	},
 }

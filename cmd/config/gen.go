@@ -10,7 +10,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -34,35 +34,35 @@ var GenCmd = cli.Command{
 	Usage:       "Generate a config yaml in a directory",
 	Action:      gen,
 	Flags: []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "addr",
 			Usage: "location of vela server",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "token",
 			Usage: "User token for Vela server",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "api-version",
 			Usage: "api version to use for Vela server",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "log-level",
 			Usage: "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "org",
 			Usage: "Provide the organization for the repository",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "repo",
 			Usage: "Provide the repository contained within the organization",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "secret-engine",
 			Usage: "Provide the engine for where the secret to be stored",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "secret-type",
 			Usage: "Provide the kind of secret to be stored",
 		},
@@ -95,35 +95,35 @@ func gen(c *cli.Context) error {
 
 	// use global variables if flags aren't provided
 	if len(conf.Addr) == 0 {
-		conf.Addr = c.GlobalString("addr")
+		conf.Addr = c.String("addr")
 	}
 
 	if len(conf.Token) == 0 {
-		conf.Token = c.GlobalString("token")
+		conf.Token = c.String("token")
 	}
 
 	if len(conf.Version) == 0 {
-		conf.Version = c.GlobalString("api-version")
+		conf.Version = c.String("api-version")
 	}
 
 	if len(conf.LogLevel) == 0 {
-		conf.LogLevel = c.GlobalString("log-level")
+		conf.LogLevel = c.String("log-level")
 	}
 
 	if len(conf.Org) == 0 {
-		conf.Org = c.GlobalString("org")
+		conf.Org = c.String("org")
 	}
 
 	if len(conf.Repo) == 0 {
-		conf.Repo = c.GlobalString("repo")
+		conf.Repo = c.String("repo")
 	}
 
 	if len(conf.SecretEngine) == 0 {
-		conf.SecretEngine = c.GlobalString("secret-engine")
+		conf.SecretEngine = c.String("secret-engine")
 	}
 
 	if len(conf.SecretType) == 0 {
-		conf.SecretType = c.GlobalString("secret-type")
+		conf.SecretType = c.String("secret-type")
 	}
 
 	data, err := yaml.Marshal(&conf)
@@ -131,7 +131,7 @@ func gen(c *cli.Context) error {
 		return fmt.Errorf("unable to create config content: %v", err)
 	}
 
-	file := c.GlobalString("config")
+	file := c.String("config")
 	directory := filepath.Dir(file)
 
 	err = os.MkdirAll(directory, 0777)

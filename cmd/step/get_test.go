@@ -12,26 +12,26 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/mock/server"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var testStepAppGet = cli.NewApp()
 
 // setup the command for tests
 func init() {
-	testStepAppGet.Commands = []cli.Command{
+	testStepAppGet.Commands = []*cli.Command{
 		{
 			Name: "get",
-			Subcommands: []cli.Command{
-				GetCmd,
+			Subcommands: []*cli.Command{
+				&GetCmd,
 			},
 		},
 	}
 	testStepAppGet.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "addr",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "token",
 		},
 	}

@@ -9,7 +9,7 @@ import (
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // removeCmds defines the commands for deleting resources.
@@ -19,9 +19,9 @@ var removeCmds = cli.Command{
 	Aliases:     []string{"rm"},
 	Description: "Use this command to remove resources for Vela.",
 	Usage:       "Remove resources for Vela via subcommands",
-	Subcommands: []cli.Command{
-		config.RemoveCmd,
-		repo.RemoveCmd,
-		secret.RemoveCmd,
+	Subcommands: []*cli.Command{
+		&config.RemoveCmd,
+		&repo.RemoveCmd,
+		&secret.RemoveCmd,
 	},
 }

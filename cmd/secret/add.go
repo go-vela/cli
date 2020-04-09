@@ -16,7 +16,7 @@ import (
 	"github.com/go-vela/types/library"
 	yaml "gopkg.in/yaml.v2"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // document is a struct that does a secret yaml document used when
@@ -38,63 +38,64 @@ var AddCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "engine",
-			Usage:  "Provide the engine for where the secret to be stored",
-			EnvVar: "SECRET_ENGINE",
-			Value:  constants.DriverNative,
+		&cli.StringFlag{
+			Name:    "engine",
+			Usage:   "Provide the engine for where the secret to be stored",
+			EnvVars: []string{"SECRET_ENGINE"},
+			Value:   constants.DriverNative,
 		},
-		cli.StringFlag{
-			Name:   "type",
-			Usage:  "Provide the kind of secret to be stored",
-			EnvVar: "SECRET_TYPE",
-			Value:  constants.SecretRepo,
+		&cli.StringFlag{
+			Name:    "type",
+			Usage:   "Provide the kind of secret to be stored",
+			EnvVars: []string{"SECRET_TYPE"},
+			Value:   constants.SecretRepo,
 		},
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "SECRET_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"SECRET_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained with the organization",
-			EnvVar: "SECRET_REPO",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained with the organization",
+			EnvVars: []string{"SECRET_REPO"},
 		},
-		cli.StringFlag{
-			Name:   "team",
-			Usage:  "Provide the team contained with the organization",
-			EnvVar: "SECRET_TEAM",
+		&cli.StringFlag{
+			Name:    "team",
+			Usage:   "Provide the team contained with the organization",
+			EnvVars: []string{"SECRET_TEAM"},
 		},
-		cli.StringFlag{
-			Name:   "name",
-			Usage:  "Provide the name of the secret",
-			EnvVar: "SECRET_NAME",
+		&cli.StringFlag{
+			Name:    "name",
+			Usage:   "Provide the name of the secret",
+			EnvVars: []string{"SECRET_NAME"},
 		},
-		cli.StringFlag{
-			Name:   "value",
-			Usage:  "Provide the value of the secret",
-			EnvVar: "SECRET_VALUE",
+		&cli.StringFlag{
+			Name:    "value",
+			Usage:   "Provide the value of the secret",
+			EnvVars: []string{"SECRET_VALUE"},
 		},
 
 		// optional flags that can be supplied to a command
-		cli.StringSliceFlag{
-			Name:   "image",
-			Usage:  "Secret limited to these images",
-			EnvVar: "SECRET_IMAGES",
+		&cli.StringSliceFlag{
+			Name:    "image",
+			Usage:   "Secret limited to these images",
+			EnvVars: []string{"SECRET_IMAGES"},
 		},
-		cli.StringSliceFlag{
-			Name:   "event",
-			Usage:  "Secret limited to these events",
-			EnvVar: "SECRET_EVENTS",
-			Value: &cli.StringSlice{
+		&cli.StringSliceFlag{
+			Name:    "event",
+			Usage:   "Secret limited to these events",
+			EnvVars: []string{"SECRET_EVENTS"},
+			Value: cli.NewStringSlice(
 				constants.EventPush,
 				constants.EventTag,
 				constants.EventDeploy,
-			},
+			),
 		},
-		cli.StringFlag{
-			Name:  "filename,f",
-			Usage: "Filename to use to add the secret or secrets",
+		&cli.StringFlag{
+			Name:    "filename",
+			Aliases: []string{"f"},
+			Usage:   "Filename to use to add the secret or secrets",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -121,13 +122,13 @@ EXAMPLES:
 // helper function to execute a add repo cli command
 func add(c *cli.Context) error {
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
 	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	switch {
 	case len(c.String("filename")) > 0:

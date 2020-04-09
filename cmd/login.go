@@ -14,7 +14,7 @@ import (
 
 	"github.com/manifoldco/promptui"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // loginCmd defines the command for authenticating and logging in to Vela.
@@ -28,19 +28,21 @@ var loginCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "addr",
 			Usage: "location of vela server",
 		},
 
 		// optional flags that can be supplied to a command
-		cli.StringFlag{
-			Name:  "username,u",
-			Usage: "Override username prompt",
+		&cli.StringFlag{
+			Name:    "username",
+			Aliases: []string{"u"},
+			Usage:   "Override username prompt",
 		},
-		cli.StringFlag{
-			Name:  "password,p",
-			Usage: "Override username prompt",
+		&cli.StringFlag{
+			Name:    "password",
+			Aliases: []string{""},
+			Usage:   "Override username prompt",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -60,7 +62,7 @@ func authenticate(c *cli.Context) error {
 
 	url := c.String("addr")
 	if len(url) == 0 { // use global variable if flags isn't provided
-		url = c.GlobalString("addr")
+		url = c.String("addr")
 	}
 
 	// create a vela client

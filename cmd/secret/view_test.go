@@ -12,32 +12,32 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/mock/server"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var testSecretAppView = cli.NewApp()
 
 // setup the command for tests
 func init() {
-	testSecretAppView.Commands = []cli.Command{
+	testSecretAppView.Commands = []*cli.Command{
 		{
 			Name: "view",
-			Subcommands: []cli.Command{
-				ViewCmd,
+			Subcommands: []*cli.Command{
+				&ViewCmd,
 			},
 		},
 	}
 	testSecretAppView.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "addr",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "token",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "engine",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "type",
 		},
 	}

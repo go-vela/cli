@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -20,35 +20,35 @@ var RemoveCmd = cli.Command{
 	Usage:       "Remove a field or all fields in the config file.",
 	Action:      remove,
 	Flags: []cli.Flag{
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "addr",
 			Usage: "removes the addr field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "token",
 			Usage: "removes the token field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "api-version",
 			Usage: "removes the api-version field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "log-level",
 			Usage: "removes the log-level field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "org",
 			Usage: "removes the org field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "repo",
 			Usage: "removes the repo field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "secret-engine",
 			Usage: "removes the secret-engine field from the config",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:  "secret-type",
 			Usage: "removes the secret-type field from the config",
 		},
@@ -68,7 +68,7 @@ EXAMPLES:
 
 // helper function to execute a remove repo cli command
 func remove(c *cli.Context) error {
-	file := c.GlobalString("config")
+	file := c.String("config")
 
 	_, err := os.Stat(file)
 	if err != nil {
@@ -81,14 +81,14 @@ func remove(c *cli.Context) error {
 
 	isFlag := false
 	conf := &config{
-		Addr:         c.GlobalString("addr"),
-		Token:        c.GlobalString("token"),
-		Version:      c.GlobalString("api-version"),
-		LogLevel:     c.GlobalString("log-level"),
-		Org:          c.GlobalString("org"),
-		Repo:         c.GlobalString("repo"),
-		SecretEngine: c.GlobalString("secret-engine"),
-		SecretType:   c.GlobalString("secret-type"),
+		Addr:         c.String("addr"),
+		Token:        c.String("token"),
+		Version:      c.String("api-version"),
+		LogLevel:     c.String("log-level"),
+		Org:          c.String("org"),
+		Repo:         c.String("repo"),
+		SecretEngine: c.String("secret-engine"),
+		SecretType:   c.String("secret-type"),
 	}
 
 	// only remove global variables if flags are provided

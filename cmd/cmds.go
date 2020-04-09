@@ -5,21 +5,21 @@
 package cmd
 
 import (
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // Vela holds all of the top level commands in the CLI
-var Vela = []cli.Command{
+var Vela = []*cli.Command{
 
-	addCmds,
-	updateCmds,
-	removeCmds,
-	restartCmds,
-	getCmds,
-	loginCmd,
-	viewCmds,
-	genCmds,
-	validateCmd,
-	repairCmd,
-	chownCmd,
+	&addCmds,
+	&updateCmds,
+	&removeCmds,
+	&restartCmds,
+	&getCmds,
+	&loginCmd,
+	&viewCmds,
+	&genCmds,
+	&validateCmd,
+	&repairCmd,
+	&chownCmd,
 }

@@ -89,7 +89,7 @@ EXAMPLES:
  3. Update a shared secret value for the platform.
     $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
  4. Update a secret for a repository with all event types enabled.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --event push --event pull_request --event tag --event deployment
+    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --event push --event pull_request --event tag --event deployment --event comment
  5. Update a secret from a file.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value @/path/to/file
  6. Update a secret for a repository with an image whitelist.

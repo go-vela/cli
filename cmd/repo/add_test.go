@@ -64,7 +64,7 @@ func TestRepo_Add_Success(t *testing.T) {
 			"", "--addr", s.URL, "--token", "foobar",
 			"add", "repo", "--org", "github", "--repo", "octocat",
 			"--event", "push", "--event", "pull_request",
-			"--event", "tag", "--event", "deployment"}, want: nil},
+			"--event", "tag", "--event", "deployment", "--event", "comment"}, want: nil},
 
 		// Add a repository with a longer build timeout
 		{data: []string{

@@ -1,5 +1,6 @@
 # cli
 
+[![license](https://img.shields.io/crates/l/gl.svg)](../LICENSE)
 [![GoDoc](https://godoc.org/github.com/go-vela/cli?status.svg)](https://godoc.org/github.com/go-vela/cli)
 [![Go Report Card](https://goreportcard.com/badge/go-vela/cli)](https://goreportcard.com/report/go-vela/cli)
 [![codecov](https://codecov.io/gh/go-vela/cli/branch/master/graph/badge.svg)](https://codecov.io/gh/go-vela/cli)
@@ -34,4 +35,4 @@ Please see our [support](SUPPORT.md) documentation for further instructions.
 Copyright (c) 2020 Target Brands, Inc.
 ```
 
-[![license](https://img.shields.io/crates/l/gl.svg)](LICENSE)
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)

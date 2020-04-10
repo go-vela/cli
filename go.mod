@@ -8,19 +8,17 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/gin-gonic/gin v1.5.0
-	github.com/go-vela/compiler v0.3.1
-	github.com/go-vela/mock v0.3.0
-	github.com/go-vela/sdk-go v0.3.0
-	github.com/go-vela/types v0.3.1-0.20200409183315-80de769c682b
+	github.com/go-vela/compiler v0.4.0-rc1
+	github.com/go-vela/mock v0.4.0-rc1
+	github.com/go-vela/sdk-go v0.4.0-rc1
+	github.com/go-vela/types v0.4.0-rc1
 	github.com/gosuri/uitable v0.0.3
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
 	github.com/nicksnyder/go-i18n v1.10.1 // indirect
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.5.0
 	github.com/urfave/cli/v2 v2.2.0
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/yaml.v2 v2.2.7
 )
-
-replace github.com/go-vela/compiler => github.com/GregoryDosh/compiler v0.3.1

@@ -90,7 +90,6 @@ var AddCmd = cli.Command{
 				constants.EventPush,
 				constants.EventTag,
 				constants.EventDeploy,
-				constants.EventComment,
 			),
 		},
 		&cli.StringFlag{

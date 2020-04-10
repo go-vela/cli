@@ -11,7 +11,7 @@ require (
 	github.com/go-vela/compiler v0.3.1
 	github.com/go-vela/mock v0.3.0
 	github.com/go-vela/sdk-go v0.3.0
-	github.com/go-vela/types v0.3.1-0.20200407182900-32a3adaddcc9
+	github.com/go-vela/types v0.3.1-0.20200409183315-80de769c682b
 	github.com/gosuri/uitable v0.0.3
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-isatty v0.0.11 // indirect

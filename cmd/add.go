@@ -8,7 +8,7 @@ import (
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // addCmds defines the commands for adding resources.
@@ -18,8 +18,8 @@ var addCmds = cli.Command{
 	Aliases:     []string{"a"},
 	Description: "Use this command to add resources for Vela.",
 	Usage:       "Add resources for Vela via subcommands",
-	Subcommands: []cli.Command{
-		repo.AddCmd,
-		secret.AddCmd,
+	Subcommands: []*cli.Command{
+		&repo.AddCmd,
+		&secret.AddCmd,
 	},
 }

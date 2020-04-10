@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-vela/sdk-go/vela"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -24,21 +24,22 @@ var ViewCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "REPO_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"REPO_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained with the organization",
-			EnvVar: "REPO_NAME",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained with the organization",
+			EnvVars: []string{"REPO_NAME"},
 		},
 
 		// optional flags that can be supplied to a command
-		cli.StringFlag{
-			Name:  "output,o",
-			Usage: "Print the output in json format",
+		&cli.StringFlag{
+			Name:    "output",
+			Aliases: []string{"o"},
+			Usage:   "Print the output in json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -58,13 +59,13 @@ func view(c *cli.Context) error {
 	org, repo := c.String("org"), c.String("repo")
 
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
 	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	repository, _, err := client.Repo.Get(org, repo)
 	if err != nil {

@@ -12,26 +12,26 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/mock/server"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var testBuildAppView = cli.NewApp()
 
 // setup the command for tests
 func init() {
-	testBuildAppView.Commands = []cli.Command{
+	testBuildAppView.Commands = []*cli.Command{
 		{
 			Name: "view",
-			Subcommands: []cli.Command{
-				ViewCmd,
+			Subcommands: []*cli.Command{
+				&ViewCmd,
 			},
 		},
 	}
 	testBuildAppView.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "addr",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "token",
 		},
 	}

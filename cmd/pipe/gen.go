@@ -14,7 +14,7 @@ import (
 	"github.com/go-vela/types/pipeline"
 	"github.com/go-vela/types/raw"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // GenCmd defines the command for generating a pipeline.
@@ -26,17 +26,20 @@ var GenCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// optional flags that can be supplied to a command
-		cli.StringFlag{
-			Name:  "type,t",
-			Usage: "Type of generic pipeline to be generated. (go|node|java)",
+		&cli.StringFlag{
+			Name:    "type",
+			Aliases: []string{"t"},
+			Usage:   "Type of generic pipeline to be generated. (go|node|java)",
 		},
-		cli.StringFlag{
-			Name:  "path,p",
-			Usage: "Filename to use to create the secret or secrets",
+		&cli.StringFlag{
+			Name:    "path",
+			Aliases: []string{"p"},
+			Usage:   "Filename to use to create the secret or secrets",
 		},
-		cli.BoolFlag{
-			Name:  "stages,s",
-			Usage: "Define if the pipeline should be generated with stages",
+		&cli.BoolFlag{
+			Name:    "stages",
+			Aliases: []string{"s"},
+			Usage:   "Define if the pipeline should be generated with stages",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -48,11 +51,11 @@ EXAMPLES:
  3. Generate a node vela pipeline in current directory."
 		$ {{.HelpName}} -type node
  4. Generate a java vela pipeline in current directory."
-		$ {{.HelpName}} -type java	
+		$ {{.HelpName}} -type java
  5. Generate a go vela pipeline in a current directory."
 		$ {{.HelpName}} -type go
  6. Generate a vela pipeline with stages in current directory."
-		$ {{.HelpName}} -stages				
+		$ {{.HelpName}} -stages
 `, cli.CommandHelpTemplate),
 }
 

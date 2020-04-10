@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // ViewCmd defines the command for viewing a configuration file.
@@ -26,7 +26,7 @@ EXAMPLES:
 
 // helper function to execute a generate repo cli command
 func view(c *cli.Context) error {
-	data, err := ioutil.ReadFile(c.GlobalString("config"))
+	data, err := ioutil.ReadFile(c.String("config"))
 	if err != nil {
 		return fmt.Errorf("unable to read yaml config file: %v", err)
 	}

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -19,35 +19,35 @@ var UpdateCmd = cli.Command{
 	Usage:       "Update a config file",
 	Action:      update,
 	Flags: []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "addr",
 			Usage: "location of vela server",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "token",
 			Usage: "User token for Vela server",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "api-version",
 			Usage: "api version to use for Vela server",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "log-level",
 			Usage: "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "org",
 			Usage: "Provide the organization for the repository",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "repo",
 			Usage: "Provide the repository contained within the organization",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "secret-engine",
 			Usage: "Provide the engine for where the secret to be stored",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "secret-type",
 			Usage: "Provide the kind of secret to be stored",
 		},
@@ -68,14 +68,14 @@ EXAMPLES:
 // helper function to create a configuration file
 func update(c *cli.Context) error {
 	conf := &config{
-		Addr:         c.GlobalString("addr"),
-		Token:        c.GlobalString("token"),
-		Version:      c.GlobalString("api-version"),
-		LogLevel:     c.GlobalString("log-level"),
-		Org:          c.GlobalString("org"),
-		Repo:         c.GlobalString("repo"),
-		SecretEngine: c.GlobalString("secret-engine"),
-		SecretType:   c.GlobalString("secret-type"),
+		Addr:         c.String("addr"),
+		Token:        c.String("token"),
+		Version:      c.String("api-version"),
+		LogLevel:     c.String("log-level"),
+		Org:          c.String("org"),
+		Repo:         c.String("repo"),
+		SecretEngine: c.String("secret-engine"),
+		SecretType:   c.String("secret-type"),
 	}
 
 	// only update global variables if flags are provided
@@ -116,7 +116,7 @@ func update(c *cli.Context) error {
 		return fmt.Errorf("unable to update config content: %v", err)
 	}
 
-	file := c.GlobalString("config")
+	file := c.String("config")
 
 	err = ioutil.WriteFile(file, data, 0600)
 	if err != nil {

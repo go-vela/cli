@@ -14,14 +14,15 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/urfave/cli"
-	"github.com/urfave/cli/altsrc"
+	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2/altsrc"
 )
 
 func main() {
-	cli.VersionFlag = cli.BoolFlag{
-		Name:  "version,v,V",
-		Usage: "print the CLI version information",
+	cli.VersionFlag = &cli.BoolFlag{
+		Name:    "version",
+		Aliases: []string{"v", "V"},
+		Usage:   "print the CLI version information",
 	}
 
 	app := cli.NewApp()
@@ -31,7 +32,7 @@ func main() {
 	app.Compiled = time.Now()
 	app.Version = version.Version.String()
 	app.Copyright = "Copyright (c) 2020 Target Brands, Inc. All rights reserved."
-	app.Authors = []cli.Author{
+	app.Authors = []*cli.Author{
 		{
 			Name:  "Vela Admins",
 			Email: "vela@target.com",
@@ -40,53 +41,53 @@ func main() {
 
 	app.Commands = cmd.Vela
 	app.Flags = []cli.Flag{
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_ADDR",
-			Name:   "addr",
-			Usage:  "location of vela server",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_ADDR"},
+			Name:    "addr",
+			Usage:   "location of vela server",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_TOKEN",
-			Name:   "token",
-			Usage:  "User token for Vela server",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_TOKEN"},
+			Name:    "token",
+			Usage:   "User token for Vela server",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_API_VERSION",
-			Name:   "api-version",
-			Usage:  "api version to use for Vela server",
-			Value:  "v1",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_API_VERSION"},
+			Name:    "api-version",
+			Usage:   "api version to use for Vela server",
+			Value:   "v1",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_LOG_LEVEL",
-			Name:   "log-level",
-			Usage:  "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
-			Value:  "info",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_LOG_LEVEL"},
+			Name:    "log-level",
+			Usage:   "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
+			Value:   "info",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_BUILD_ORG",
-			Name:   "org",
-			Usage:  "Provide the organization owner for the repository",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_BUILD_ORG"},
+			Name:    "org",
+			Usage:   "Provide the organization owner for the repository",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_BUILD_REPO",
-			Name:   "repo",
-			Usage:  "Provide the repository contained within the organization",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_BUILD_REPO"},
+			Name:    "repo",
+			Usage:   "Provide the repository contained within the organization",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_SECRET_ENGINE",
-			Name:   "secret-engine",
-			Usage:  "Provide the engine for where the secret to be stored",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_SECRET_ENGINE"},
+			Name:    "secret-engine",
+			Usage:   "Provide the engine for where the secret to be stored",
 		}),
-		altsrc.NewStringFlag(cli.StringFlag{
-			EnvVar: "VELA_SECRET_TYPE",
-			Name:   "secret-type",
-			Usage:  "Provide the kind of secret to be stored",
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_SECRET_TYPE"},
+			Name:    "secret-type",
+			Usage:   "Provide the kind of secret to be stored",
 		}),
-		cli.StringFlag{
-			EnvVar: "VELA_CONFIG",
-			Name:   "config",
-			Usage:  "path to Vela configuration file",
-			Value:  fmt.Sprintf("%s/.vela/config.yml", os.Getenv("HOME")),
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_CONFIG"},
+			Name:    "config",
+			Usage:   "path to Vela configuration file",
+			Value:   fmt.Sprintf("%s/.vela/config.yml", os.Getenv("HOME")),
 		},
 	}
 	app.Before = load
@@ -98,7 +99,7 @@ func main() {
 
 // load is a helper function that loads the necessary configuration for the CLI.
 func load(c *cli.Context) error {
-	config := c.GlobalString("config")
+	config := c.String("config")
 
 	_, err := os.Stat(config)
 	if err == nil {
@@ -122,7 +123,7 @@ func load(c *cli.Context) error {
 		return err
 	}
 
-	switch c.GlobalString("log-level") {
+	switch c.String("log-level") {
 	case "t", "trace", "Trace", "TRACE":
 		logrus.SetLevel(logrus.TraceLevel)
 	case "d", "debug", "Debug", "DEBUG":
@@ -145,8 +146,9 @@ func load(c *cli.Context) error {
 // validate is a helper function that ensures the necessary configuration is set for the CLI.
 func validate(c *cli.Context) error {
 	args := c.Args()
+
 	// DO NOT validate if help argument is provided
-	for _, arg := range args {
+	for _, arg := range args.Slice() {
 		if arg == "--help" || arg == "-h" {
 			return nil
 		}
@@ -162,11 +164,11 @@ func validate(c *cli.Context) error {
 		return nil
 	}
 
-	if len(c.GlobalString("addr")) == 0 {
+	if len(c.String("addr")) == 0 {
 		return fmt.Errorf("No vela address provided")
 	}
 
-	if len(c.GlobalString("token")) == 0 {
+	if len(c.String("token")) == 0 {
 		return fmt.Errorf("No vela token provided")
 	}
 

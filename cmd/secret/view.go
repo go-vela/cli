@@ -11,7 +11,7 @@ import (
 	"github.com/go-vela/cli/util"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -25,43 +25,44 @@ var ViewCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "engine",
-			Usage:  "Provide the engine for where the secret to be stored",
-			EnvVar: "VELA_SECRET_ENGINE,SECRET_ENGINE",
-			Value:  constants.DriverNative,
+		&cli.StringFlag{
+			Name:    "engine",
+			Usage:   "Provide the engine for where the secret to be stored",
+			EnvVars: []string{"VELA_SECRET_ENGIN", "SECRET_ENGINE"},
+			Value:   constants.DriverNative,
 		},
-		cli.StringFlag{
-			Name:   "type",
-			Usage:  "Provide the kind of secret to be stored",
-			EnvVar: "SECRET_TYPE",
-			Value:  constants.SecretRepo,
+		&cli.StringFlag{
+			Name:    "type",
+			Usage:   "Provide the kind of secret to be stored",
+			EnvVars: []string{"SECRET_TYPE"},
+			Value:   constants.SecretRepo,
 		},
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "SECRET_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"SECRET_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained with the organization",
-			EnvVar: "SECRET_REPO",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained with the organization",
+			EnvVars: []string{"SECRET_REPO"},
 		},
-		cli.StringFlag{
-			Name:   "team",
-			Usage:  "Provide the team contained with the organization",
-			EnvVar: "SECRET_TEAM",
+		&cli.StringFlag{
+			Name:    "team",
+			Usage:   "Provide the team contained with the organization",
+			EnvVars: []string{"SECRET_TEAM"},
 		},
-		cli.StringFlag{
-			Name:   "name",
-			Usage:  "Provide the name of the secret",
-			EnvVar: "SECRET_NAME",
+		&cli.StringFlag{
+			Name:    "name",
+			Usage:   "Provide the name of the secret",
+			EnvVars: []string{"SECRET_NAME"},
 		},
 
 		// optional flags that can be supplied to a command
-		cli.StringFlag{
-			Name:  "output,o",
-			Usage: "Print the output in json format",
+		&cli.StringFlag{
+			Name:    "output",
+			Aliases: []string{"o"},
+			Usage:   "Print the output in json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -82,13 +83,13 @@ EXAMPLES:
 // helper function to execute logs cli command
 func view(c *cli.Context) error {
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 
 	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// ensures engine, type, and org are set
 	err = validateCmd(c)

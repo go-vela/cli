@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-vela/compiler/compiler/native"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // validateCmd defines the command that ensures you have a runnable pipeline

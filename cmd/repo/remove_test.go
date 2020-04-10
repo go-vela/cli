@@ -12,26 +12,26 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/mock/server"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var testRepoAppRemove = cli.NewApp()
 
 // setup the command for tests
 func init() {
-	testRepoAppRemove.Commands = []cli.Command{
+	testRepoAppRemove.Commands = []*cli.Command{
 		{
 			Name: "remove",
-			Subcommands: []cli.Command{
-				RemoveCmd,
+			Subcommands: []*cli.Command{
+				&RemoveCmd,
 			},
 		},
 	}
 	testRepoAppRemove.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "addr",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "token",
 		},
 	}

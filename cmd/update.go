@@ -9,7 +9,7 @@ import (
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // updateCmds defines the command for updating resources.
@@ -19,9 +19,9 @@ var updateCmds = cli.Command{
 	Aliases:     []string{"u"},
 	Description: "Use this command to update resources for Vela.",
 	Usage:       "Update resources for Vela via subcommands",
-	Subcommands: []cli.Command{
-		config.UpdateCmd,
-		repo.UpdateCmd,
-		secret.UpdateCmd,
+	Subcommands: []*cli.Command{
+		&config.UpdateCmd,
+		&repo.UpdateCmd,
+		&secret.UpdateCmd,
 	},
 }

@@ -13,22 +13,22 @@ import (
 	"github.com/go-vela/mock/server"
 
 	"github.com/gin-gonic/gin"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var testAppRepair = cli.NewApp()
 
 // setup the command for tests
 func init() {
-	testAppRepair.Commands = []cli.Command{
-		repairCmd,
+	testAppRepair.Commands = []*cli.Command{
+		&repairCmd,
 	}
 
 	testAppRepair.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "addr",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name: "token",
 		},
 	}

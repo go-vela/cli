@@ -11,7 +11,7 @@ import (
 	"github.com/go-vela/cli/cmd/service"
 	"github.com/go-vela/cli/cmd/step"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // getCmds defines the commands for listing resources.
@@ -21,11 +21,11 @@ var getCmds = cli.Command{
 	Aliases:     []string{"g"},
 	Description: "Use this command to list resources for Vela.",
 	Usage:       "List resources for Vela via subcommands",
-	Subcommands: []cli.Command{
-		build.GetCmd,
-		repo.GetCmd,
-		secret.GetCmd,
-		service.GetCmd,
-		step.GetCmd,
+	Subcommands: []*cli.Command{
+		&build.GetCmd,
+		&repo.GetCmd,
+		&secret.GetCmd,
+		&service.GetCmd,
+		&step.GetCmd,
 	},
 }

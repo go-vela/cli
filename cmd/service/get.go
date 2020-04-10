@@ -17,7 +17,7 @@ import (
 	"github.com/dustin/go-humanize"
 	"github.com/gosuri/uitable"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -32,36 +32,40 @@ var GetCmd = cli.Command{
 	Flags: []cli.Flag{
 
 		// required flags to be supplied to a command
-		cli.StringFlag{
-			Name:   "org",
-			Usage:  "Provide the organization for the repository",
-			EnvVar: "BUILD_ORG",
+		&cli.StringFlag{
+			Name:    "org",
+			Usage:   "Provide the organization for the repository",
+			EnvVars: []string{"BUILD_ORG"},
 		},
-		cli.StringFlag{
-			Name:   "repo",
-			Usage:  "Provide the repository contained with the organization",
-			EnvVar: "BUILD_REPO",
+		&cli.StringFlag{
+			Name:    "repo",
+			Usage:   "Provide the repository contained with the organization",
+			EnvVars: []string{"BUILD_REPO"},
 		},
-		cli.IntFlag{
-			Name:   "build-number,build,b",
-			Usage:  "Provide the build number",
-			EnvVar: "BUILD_NUMBER",
+		&cli.IntFlag{
+			Name:    "build-number",
+			Aliases: []string{"build", "b"},
+			Usage:   "Provide the build number",
+			EnvVars: []string{"BUILD_NUMBER"},
 		},
 
 		// optional flags that can be supplied to a command
-		cli.IntFlag{
-			Name:  "page,p",
-			Usage: "Print a specific page of services",
-			Value: 1,
+		&cli.IntFlag{
+			Name:    "page",
+			Aliases: []string{"p"},
+			Usage:   "Print a specific page of services",
+			Value:   1,
 		},
-		cli.IntFlag{
-			Name:  "per-page,pp",
-			Usage: "Expand the number of items contained within page",
-			Value: 10,
+		&cli.IntFlag{
+			Name:    "per-page",
+			Aliases: []string{"pp"},
+			Usage:   "Expand the number of items contained within page",
+			Value:   10,
 		},
-		cli.StringFlag{
-			Name:  "output,o",
-			Usage: "Print the output in wide, yaml or json format",
+		&cli.StringFlag{
+			Name:    "output",
+			Aliases: []string{"o"},
+			Usage:   "Print the output in wide, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -85,12 +89,12 @@ func get(c *cli.Context) error {
 	org, repo, number := c.String("org"), c.String("repo"), c.Int("build-number")
 
 	// create a vela client
-	client, err := vela.NewClient(c.GlobalString("addr"), nil)
+	client, err := vela.NewClient(c.String("addr"), nil)
 	if err != nil {
 		return err
 	}
 	// set token from global config
-	client.Authentication.SetTokenAuth(c.GlobalString("token"))
+	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// set the page options based on user input
 	opts := &vela.ListOptions{

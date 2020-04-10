@@ -66,6 +66,7 @@ var AddCmd = cli.Command{
 			Name:    "active",
 			Usage:   "Allow management of activity on repositories",
 			EnvVars: []string{"REPO_ACTIVE"},
+			Value:   true,
 		},
 		&cli.StringSliceFlag{
 			Name:    "event",

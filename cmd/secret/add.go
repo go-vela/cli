@@ -84,13 +84,8 @@ var AddCmd = cli.Command{
 		},
 		&cli.StringSliceFlag{
 			Name:    "event",
-			Usage:   "Secret limited to these events",
+			Usage:   "Secret limited to these events (by default push, tag, and deploy are enabled)",
 			EnvVars: []string{"SECRET_EVENTS"},
-			Value: cli.NewStringSlice(
-				constants.EventPush,
-				constants.EventTag,
-				constants.EventDeploy,
-			),
 		},
 		&cli.StringFlag{
 			Name:    "filename",
@@ -100,9 +95,9 @@ var AddCmd = cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Add a secret for a repository with push events.
+ 1. Add a secret for a repository.
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar
- 2. Add a secret for an org with push events.
+ 2. Add a secret for an org.
     $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo --value bar
  3. Add a shared secret for the platform.
     $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar

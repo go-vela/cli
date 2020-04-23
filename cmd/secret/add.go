@@ -84,7 +84,7 @@ var AddCmd = cli.Command{
 		},
 		&cli.StringSliceFlag{
 			Name:    "event",
-			Usage:   "Secret limited to these events (by default push, tag, and deploy are enabled)",
+			Usage:   "Secret limited to these events (by default push, tag, and deployment are enabled)",
 			EnvVars: []string{"SECRET_EVENTS"},
 		},
 		&cli.StringFlag{

@@ -6,6 +6,7 @@ package cmd
 
 import (
 	"github.com/go-vela/cli/cmd/build"
+	"github.com/go-vela/cli/cmd/deployment"
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
 	"github.com/go-vela/cli/cmd/service"
@@ -23,6 +24,7 @@ var getCmds = cli.Command{
 	Usage:       "List resources for Vela via subcommands",
 	Subcommands: []*cli.Command{
 		&build.GetCmd,
+		&deployment.GetCmd,
 		&repo.GetCmd,
 		&secret.GetCmd,
 		&service.GetCmd,

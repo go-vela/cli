@@ -5,6 +5,7 @@
 package cmd
 
 import (
+	"github.com/go-vela/cli/cmd/deployment"
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
 
@@ -19,6 +20,7 @@ var addCmds = cli.Command{
 	Description: "Use this command to add resources for Vela.",
 	Usage:       "Add resources for Vela via subcommands",
 	Subcommands: []*cli.Command{
+		&deployment.AddCmd,
 		&repo.AddCmd,
 		&secret.AddCmd,
 	},

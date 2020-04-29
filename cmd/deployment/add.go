@@ -53,6 +53,11 @@ var AddCmd = cli.Command{
 			Usage:   "Provide the description for the deployment",
 			EnvVars: []string{"VELA_DESCRIPTION"},
 		},
+		&cli.StringFlag{
+			Name:    "task",
+			Usage:   "Provide the task for the deployment",
+			EnvVars: []string{"VELA_TARGET"},
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -95,6 +100,7 @@ func add(c *cli.Context) error {
 		Description: vela.String(c.String("description")),
 		Ref:         vela.String(ref),
 		Target:      vela.String(target),
+		Task:        vela.String(c.String("task")),
 	}
 
 	deployment, _, err := client.Deployment.Add(org, repo, request)

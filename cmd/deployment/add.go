@@ -56,7 +56,7 @@ var AddCmd = cli.Command{
 		&cli.StringFlag{
 			Name:    "task",
 			Usage:   "Provide the task for the deployment",
-			EnvVars: []string{"VELA_TARGET"},
+			EnvVars: []string{"VELA_TASK"},
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

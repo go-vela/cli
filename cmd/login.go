@@ -92,6 +92,7 @@ func authenticate(c *cli.Context) error {
 	auth, resp, err := client.Authorization.Login(&req)
 	if err != nil {
 		//TODO: clean this workflow up
+		fmt.Println("ERROR: ", err)
 		if resp.StatusCode != http.StatusUnauthorized {
 			return err
 		}

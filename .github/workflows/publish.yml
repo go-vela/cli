@@ -19,7 +19,7 @@ jobs:
     - name: build
       uses: skx/github-action-build@master
       with:
-        builder: ./build.sh
+        builder: ./release.sh
 
     - name: publish
       uses: elgohr/Publish-Docker-Github-Action@master

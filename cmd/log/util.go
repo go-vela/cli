@@ -32,5 +32,11 @@ func validate(c *cli.Context) error {
 		return util.InvalidCommand("build-number")
 	}
 
+	if len(c.String("type")) == 0 {
+		return util.InvalidCommand("type")
+	} else if c.String("type") != "step" && c.String("type") != "service" {
+		return util.InvalidFlag("type")
+	}
+
 	return nil
 }

@@ -36,16 +36,25 @@ var ViewCmd = cli.Command{
 		&cli.IntFlag{
 			Name:    "build-number",
 			Aliases: []string{"build", "b"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Usage:   "Provide the build number",
 			EnvVars: []string{"BUILD_NUMBER"},
+		},
+		&cli.StringFlag{
+			Name:    "type",
+			Aliases: []string{"t"},
+			Usage:   "Print the service/steps output in wide, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. View build logs for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1
- 2. View build logs for a repository when org and repo config or environment variables are set.
-    $ {{.HelpName}} --build-number 1
+ 1. View steps logs of a build for a repository.
+    $ {{.HelpName}} --org github --repo octocat --build-number 1 --type step
+ 2. View steps logs of a build for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --build-number 1 --type step
+ 3. View services logs of a build for a repository.
+    $ {{.HelpName}} --org github --repo octocat --build-number 1 --type service
+ 4. View services logs of a build for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --build-number 1 --type service
 `, cli.CommandHelpTemplate),
 }
 
@@ -53,7 +62,7 @@ EXAMPLES:
 func view(c *cli.Context) error {
 
 	// get org, repo and number information from cmd flags
-	org, repo, number := c.String("org"), c.String("repo"), c.Int("build-number")
+	org, repo, number, logType := c.String("org"), c.String("repo"), c.Int("build-number"), c.String("type")
 
 	// create a vela client
 	client, err := vela.NewClient(c.String("addr"), nil)
@@ -70,15 +79,57 @@ func view(c *cli.Context) error {
 		return err
 	}
 
-	// Get the build you just created
-	logs, _, err := client.Build.GetLogs(org, repo, build.GetNumber())
+	switch logType {
+	case "service":
+		err = PrintServicesLogs(client, org, repo, build.Number)
+		if err != nil {
+			return err
+		}
+	case "step":
+		err = PrintStepsLogs(client, org, repo, build.Number)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func PrintServicesLogs(client *vela.Client, org string, repo string, buildNumber *int) error {
+
+	// Get all services for the build
+	services, _, err := client.Svc.GetAll(org, repo, *buildNumber, nil)
 	if err != nil {
 		return err
 	}
 
-	// print logs for all steps
-	for _, log := range *logs {
-		fmt.Printf("%s \n", log.GetData())
+	// Print logs for each service
+	for _, service := range *services {
+		serviceLog, _, err := client.Log.GetService(org, repo, *buildNumber, *service.Number)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("%s \n", serviceLog.GetData())
+	}
+
+	return nil
+}
+
+func PrintStepsLogs(client *vela.Client, org string, repo string, buildNumber *int) error {
+
+	// Get all steps for the build
+	steps, _, err := client.Step.GetAll(org, repo, *buildNumber, nil)
+	if err != nil {
+		return err
+	}
+
+	// Print logs for each steps
+	for _, step := range *steps {
+		stepLog, _, err := client.Log.GetStep(org, repo, *buildNumber, *step.Number)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("%s \n", stepLog.GetData())
 	}
 
 	return nil

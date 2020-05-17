@@ -56,7 +56,11 @@ func TestLog_View_Success(t *testing.T) {
 		{data: []string{
 			"", "--addr", s.URL, "--token", "foobar",
 			"view", "log",
-			"--org", "github", "--repo", "octocat", "--b", "1"}, want: nil},
+			"--org", "github", "--repo", "octocat", "--b", "1", "--t", "step"}, want: nil},
+		{data: []string{
+			"", "--addr", s.URL, "--token", "foobar",
+			"view", "log",
+			"--org", "github", "--repo", "octocat", "--b", "1", "--t", "service"}, want: nil},
 	}
 
 	// run test
@@ -83,47 +87,47 @@ func TestLog_View_Failure(t *testing.T) {
 		data []string
 		want error
 	}{
-		// ´Error with invalid addr
-		{data: []string{
-			"", "--token", "foobar",
-			"view", "log",
-			"--org", "github", "--repo", "octocat", "--number", "1"},
-			want: fmt.Errorf("Invalid command: Flag '--addr' is not set or is empty")},
-
-		// ´Error with invalid token
-		{data: []string{
-			"", "--addr", s.URL,
-			"view", "log",
-			"--org", "github", "--repo", "octocat", "--number", "1"},
-			want: fmt.Errorf("Invalid command: Flag '--token' is not set or is empty")},
 
 		// ´Error with invalid org
 		{data: []string{
 			"", "--addr", s.URL,
 			"view", "log",
-			"--repo", "octocat", "--number", "1"},
-			want: fmt.Errorf("Invalid command: Flag '--org' is not set or is empty")},
+			"--repo", "octocat", "--b", "1"},
+			want: fmt.Errorf("invalid command: Flag '--org' is not set or is empty")},
 
 		// ´Error with invalid repo
 		{data: []string{
 			"", "--addr", s.URL,
 			"view", "log",
-			"--org", "github", "--number", "1"},
-			want: fmt.Errorf("Invalid command: Flag '--repo' is not set or is empty")},
+			"--org", "github", "--b", "1"},
+			want: fmt.Errorf("invalid command: Flag '--repo' is not set or is empty")},
 
 		// ´Error with invalid number
 		{data: []string{
 			"", "--addr", s.URL,
 			"view", "log",
 			"--org", "github", "--repo", "octocat"},
-			want: fmt.Errorf("Invalid command: Flag '--number' is not set or is empty")},
+			want: fmt.Errorf("invalid command: Flag '--build-number' is not set or is empty")},
+
+		// ´Error with type
+		{data: []string{
+			"", "--addr", s.URL,
+			"view", "log",
+			"--org", "github", "--repo", "octocat", "--b", "1"},
+			want: fmt.Errorf("invalid command: Flag '--type' is not set or is empty")},
+
+		// ´Error with type
+		{data: []string{
+			"", "--addr", s.URL,
+			"view", "log",
+			"--org", "github", "--repo", "octocat", "--b", "1", "--t", "invalid"},
+			want: fmt.Errorf("invalid command: Flag '--type' is not valid")},
 	}
 
 	// run test
 	for _, test := range tests {
 		got := testLogAppView.Run(test.data)
-
-		if got == test.want {
+		if got == nil || got.Error() != test.want.Error() {
 			t.Errorf("Run is %v, want %v", got, test.want)
 		}
 	}

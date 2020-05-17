@@ -139,7 +139,7 @@ func (b *Build) Validate() error {
 
 	// check if build repo is set
 	if len(b.Repo) == 0 {
-		return fmt.Errorf("no build org provided")
+		return fmt.Errorf("no build repo provided")
 	}
 
 	// check if build action is restart or view

@@ -2,21 +2,25 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package build
+package action
 
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/action/build"
+
+	"github.com/go-vela/sdk-go/vela"
+
 	"github.com/urfave/cli/v2"
 )
 
-// Get defines the command for capturing a list of builds.
-var Get = &cli.Command{
+// BuildGet defines the command for capturing a list of builds.
+var BuildGet = &cli.Command{
 	Name:        "build",
 	Aliases:     []string{"builds"},
 	Description: "Use this command to get a list of builds.",
 	Usage:       "Display a list of builds",
-	Action:      get,
+	Action:      buildGet,
 	Flags: []cli.Flag{
 
 		// Repo Flags
@@ -71,4 +75,37 @@ EXAMPLES:
  5. Get builds for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),
+}
+
+// helper function to capture the provided
+// input and create the object used to
+// capture a list of builds.
+func buildGet(c *cli.Context) error {
+	// create a vela client
+	client, err := vela.NewClient(c.String("addr"), nil)
+	if err != nil {
+		return err
+	}
+
+	// set token from global config
+	client.Authentication.SetTokenAuth(c.String("token"))
+
+	// create the build configuration
+	b := &build.Build{
+		Action:  getAction,
+		Org:     c.String("org"),
+		Repo:    c.String("repo"),
+		Page:    c.Int("page"),
+		PerPage: c.Int("per.page"),
+		Output:  c.String("output"),
+	}
+
+	// validate build configuration
+	err = b.Validate()
+	if err != nil {
+		return err
+	}
+
+	// execute the get call for the build configuration
+	return b.Get(client)
 }

@@ -21,19 +21,19 @@ func TestOutput_YAML(t *testing.T) {
 		},
 		{ // map
 			failure: false,
-			input: map[string]string{"hello": "world"},
+			input:   map[string]string{"hello": "world"},
 		},
 		{ // slice
 			failure: false,
-			input: []interface{}{1, 2, 3},
+			input:   []interface{}{1, 2, 3},
 		},
 		{ // slice complex
 			failure: false,
-			input: []interface{}{struct{ Foo string }{Foo: "bar"}},
+			input:   []interface{}{struct{ Foo string }{Foo: "bar"}},
 		},
 		{ // complex
 			failure: false,
-			input: []struct{ Foo string }{{"bar"}, {"baz"}},
+			input:   []struct{ Foo string }{{"bar"}, {"baz"}},
 		},
 		{
 			failure: true,

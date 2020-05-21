@@ -120,8 +120,8 @@ func TestLog_View_Failure(t *testing.T) {
 		{data: []string{
 			"", "--addr", s.URL,
 			"view", "log",
-			"--org", "github", "--repo", "octocat", "--b", "1", "--t", "invalid"},
-			want: fmt.Errorf("invalid command: Flag '--type' is not valid")},
+			"--org", "github", "--repo", "octocat", "--b", "1", "--t", "foo"},
+			want: fmt.Errorf("invalid value 'foo' for flag '--type'")},
 	}
 
 	// run test

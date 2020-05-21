@@ -9,6 +9,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+var logTypes = [...]string{"step", "service"}
+
 // helper function to load global configuration if set
 // via config or environment and validate the user input in the command
 func validate(c *cli.Context) error {
@@ -32,11 +34,21 @@ func validate(c *cli.Context) error {
 		return util.InvalidCommand("build-number")
 	}
 
-	if len(c.String("type")) == 0 {
+	logType := c.String("type")
+	if len(logType) == 0 {
 		return util.InvalidCommand("type")
-	} else if c.String("type") != "step" && c.String("type") != "service" {
-		return util.InvalidFlag("type")
+	} else if !IsValidType(logType) {
+		return util.InvalidFlagValue(logType, "type")
 	}
 
 	return nil
+}
+
+func IsValidType(givenType string) bool {
+	for _, validType := range logTypes {
+		if validType == givenType {
+			return true
+		}
+	}
+	return false
 }

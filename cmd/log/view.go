@@ -42,19 +42,20 @@ var ViewCmd = cli.Command{
 		&cli.StringFlag{
 			Name:    "type",
 			Aliases: []string{"t"},
-			Usage:   "Print the service/steps output in wide, yaml or json format",
+			Usage:   "Provide the log type service/step",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. View steps logs of a build for a repository.
     $ {{.HelpName}} --org github --repo octocat --build-number 1 --type step
- 2. View steps logs of a build for a repository when org and repo config or environment variables are set.
-    $ {{.HelpName}} --build-number 1 --type step
- 3. View services logs of a build for a repository.
+      OR
+    $ {{.HelpName}} --build-number 1 --type step      (when org and repo config environment variables are set).
+
+ 2. View services logs of a build for a repository.
     $ {{.HelpName}} --org github --repo octocat --build-number 1 --type service
- 4. View services logs of a build for a repository when org and repo config or environment variables are set.
-    $ {{.HelpName}} --build-number 1 --type service
+      OR
+    $ {{.HelpName}} --build-number 1 --type service   (when org and repo config environment variables are set).
 `, cli.CommandHelpTemplate),
 }
 

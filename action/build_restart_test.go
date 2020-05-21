@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package build
+package action
 
 import (
 	"flag"
@@ -14,7 +14,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestBuild_view(t *testing.T) {
+func TestAction_BuildRestart(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -52,18 +52,18 @@ func TestBuild_view(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := view(cli.NewContext(nil, test.set, nil))
+		err := buildRestart(cli.NewContext(nil, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("view should have returned err")
+				t.Errorf("buildRestart should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("view returned err: %v", err)
+			t.Errorf("buildRestart returned err: %v", err)
 		}
 	}
 }

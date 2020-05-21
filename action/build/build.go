@@ -143,7 +143,7 @@ func (b *Build) Validate() error {
 	}
 
 	// check if build action is restart or view
-	if b.Action == restartAction || b.Action == viewAction {
+	if b.Action == "restart" || b.Action == "view" {
 		// check if build number is set
 		if b.Number <= 0 {
 			return fmt.Errorf("no build number provided")

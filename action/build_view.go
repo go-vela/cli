@@ -2,20 +2,24 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package build
+package action
 
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/action/build"
+
+	"github.com/go-vela/sdk-go/vela"
+
 	"github.com/urfave/cli/v2"
 )
 
-// View defines the command for inspecting a build.
-var View = &cli.Command{
+// BuildView defines the command for inspecting a build.
+var BuildView = &cli.Command{
 	Name:        "build",
 	Description: "Use this command to view a build.",
 	Usage:       "View details of the provided build",
-	Action:      view,
+	Action:      buildView,
 	Flags: []cli.Flag{
 
 		// Repo Flags
@@ -58,4 +62,36 @@ EXAMPLES:
  3. View build details for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build-number 1
 `, cli.CommandHelpTemplate),
+}
+
+// helper function to capture the provided
+// input and create the object used to
+// inspect a build.
+func buildView(c *cli.Context) error {
+	// create a vela client
+	client, err := vela.NewClient(c.String("addr"), nil)
+	if err != nil {
+		return err
+	}
+
+	// set token from global config
+	client.Authentication.SetTokenAuth(c.String("token"))
+
+	// create the build configuration
+	b := &build.Build{
+		Action: viewAction,
+		Org:    c.String("org"),
+		Repo:   c.String("repo"),
+		Number: c.Int("build"),
+		Output: c.String("output"),
+	}
+
+	// validate build configuration
+	err = b.Validate()
+	if err != nil {
+		return err
+	}
+
+	// execute the view call for the build configuration
+	return b.View(client)
 }

@@ -2,20 +2,24 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package build
+package action
 
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/action/build"
+
+	"github.com/go-vela/sdk-go/vela"
+
 	"github.com/urfave/cli/v2"
 )
 
-// Restart defines the command for restarting a build.
-var Restart = &cli.Command{
+// BuildRestart defines the command for restarting a build.
+var BuildRestart = &cli.Command{
 	Name:        "build",
 	Description: "Use this command to restart a build.",
 	Usage:       "Re-run the provided build",
-	Action:      restart,
+	Action:      buildRestart,
 	Flags: []cli.Flag{
 
 		// Repo Flags
@@ -47,4 +51,36 @@ EXAMPLES:
  2. Restart existing build for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build-number 1
 `, cli.CommandHelpTemplate),
+}
+
+// helper function to capture the provided
+// input and create the object used to
+// restart a build.
+func buildRestart(c *cli.Context) error {
+	// create a vela client
+	client, err := vela.NewClient(c.String("addr"), nil)
+	if err != nil {
+		return err
+	}
+
+	// set token from global config
+	client.Authentication.SetTokenAuth(c.String("token"))
+
+	// create the build configuration
+	b := &build.Build{
+		Action: restartAction,
+		Org:    c.String("org"),
+		Repo:   c.String("repo"),
+		Number: c.Int("build"),
+		Output: c.String("output"),
+	}
+
+	// validate build configuration
+	err = b.Validate()
+	if err != nil {
+		return err
+	}
+
+	// execute the restart call for the build configuration
+	return b.Restart(client)
 }

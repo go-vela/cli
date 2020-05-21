@@ -31,7 +31,7 @@ func TestBuild_Build_Get(t *testing.T) {
 		{
 			failure: false,
 			build: &Build{
-				Action:  getAction,
+				Action:  "get",
 				Org:     "github",
 				Repo:    "octocat",
 				Number:  1,
@@ -78,7 +78,7 @@ func TestBuild_Build_Restart(t *testing.T) {
 		{
 			failure: false,
 			build: &Build{
-				Action: restartAction,
+				Action: "restart",
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -113,7 +113,7 @@ func TestBuild_Build_Validate(t *testing.T) {
 		{
 			failure: false,
 			build: &Build{
-				Action:  getAction,
+				Action:  "get",
 				Org:     "github",
 				Repo:    "octocat",
 				Page:    1,
@@ -124,7 +124,7 @@ func TestBuild_Build_Validate(t *testing.T) {
 		{
 			failure: false,
 			build: &Build{
-				Action: restartAction,
+				Action: "restart",
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -134,7 +134,7 @@ func TestBuild_Build_Validate(t *testing.T) {
 		{
 			failure: false,
 			build: &Build{
-				Action: viewAction,
+				Action: "view",
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -144,7 +144,7 @@ func TestBuild_Build_Validate(t *testing.T) {
 		{
 			failure: true,
 			build: &Build{
-				Action: viewAction,
+				Action: "view",
 				Org:    "",
 				Repo:   "octocat",
 				Number: 1,
@@ -154,7 +154,7 @@ func TestBuild_Build_Validate(t *testing.T) {
 		{
 			failure: true,
 			build: &Build{
-				Action: viewAction,
+				Action: "view",
 				Org:    "github",
 				Repo:   "",
 				Number: 1,
@@ -164,7 +164,7 @@ func TestBuild_Build_Validate(t *testing.T) {
 		{
 			failure: true,
 			build: &Build{
-				Action: viewAction,
+				Action: "view",
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 0,
@@ -209,7 +209,7 @@ func TestBuild_Build_View(t *testing.T) {
 		{
 			failure: false,
 			build: &Build{
-				Action: viewAction,
+				Action: "view",
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,

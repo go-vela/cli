@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package build
+package action
 
 import (
 	"flag"
@@ -14,7 +14,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestBuild_get(t *testing.T) {
+func TestAction_BuildView(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -29,8 +29,6 @@ func TestBuild_get(t *testing.T) {
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.Int("build", 1, "doc")
-	fullSet.Int("page", 1, "doc")
-	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests
@@ -54,18 +52,18 @@ func TestBuild_get(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := get(cli.NewContext(nil, test.set, nil))
+		err := buildView(cli.NewContext(nil, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("get should have returned err")
+				t.Errorf("buildView should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("get returned err: %v", err)
+			t.Errorf("buildView returned err: %v", err)
 		}
 	}
 }

@@ -91,7 +91,7 @@ func buildGet(c *cli.Context) error {
 	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// create the build configuration
-	b := &build.Build{
+	b := &build.Config{
 		Action:  getAction,
 		Org:     c.String("org"),
 		Repo:    c.String("repo"),

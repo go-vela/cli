@@ -67,7 +67,7 @@ func buildRestart(c *cli.Context) error {
 	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// create the build configuration
-	b := &build.Build{
+	b := &build.Config{
 		Action: restartAction,
 		Org:    c.String("org"),
 		Repo:   c.String("repo"),

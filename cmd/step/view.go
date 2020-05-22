@@ -43,7 +43,7 @@ var ViewCmd = cli.Command{
 		},
 		&cli.IntFlag{
 			Name:    "step-number",
-			Aliases: []string{"service", "s"},
+			Aliases: []string{"step", "s"},
 			Usage:   "Provide the step number",
 			EnvVars: []string{"STEP_NUMBER"},
 		},

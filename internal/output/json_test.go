@@ -39,6 +39,14 @@ func TestOutput_JSON(t *testing.T) {
 			failure: true,
 			input:   new(failMarshaler),
 		},
+		{
+			failure: true,
+			input:   nil,
+		},
+		{
+			failure: true,
+			input:   "",
+		},
 	}
 
 	// run tests
@@ -72,6 +80,14 @@ func TestOutput_RawJSON(t *testing.T) {
 		{
 			failure: true,
 			input:   new(failMarshaler),
+		},
+		{
+			failure: true,
+			input:   nil,
+		},
+		{
+			failure: true,
+			input:   "",
 		},
 	}
 

@@ -34,6 +34,14 @@ func TestOutput_Default(t *testing.T) {
 			failure: false,
 			input:   []struct{ Foo string }{{"bar"}, {"baz"}},
 		},
+		{
+			failure: true,
+			input:   nil,
+		},
+		{
+			failure: true,
+			input:   "",
+		},
 	}
 
 	// run tests

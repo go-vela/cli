@@ -6,14 +6,31 @@ package output
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
+	"reflect"
 )
 
 // JSON parses the provided input and
 // renders the parsed input in pretty
 // JSON before outputting it to stdout.
 func JSON(_input interface{}) error {
+	// check if the input provided is nil
+	if _input == nil {
+		return errors.New("empty value provided for JSON output")
+	}
+
+	// check if the value of input provided is nil
+	//
+	// We are using reflect here due to the nature
+	// of how interfaces work in Go. It is possible
+	// for _input to be a non-nil interface but the
+	// underlying value to be empty or nil.
+	if reflect.ValueOf(_input).IsZero() {
+		return errors.New("empty value provided for JSON output")
+	}
+
 	// marshal the input into pretty JSON
 	output, err := json.MarshalIndent(_input, "", "    ")
 	if err != nil {
@@ -30,6 +47,21 @@ func JSON(_input interface{}) error {
 // renders the parsed input in raw JSON
 // before outputting it to stdout.
 func RawJSON(_input interface{}) error {
+	// check if the input provided is nil
+	if _input == nil {
+		return errors.New("empty value provided for RawJSON output")
+	}
+
+	// check if the value of input provided is nil
+	//
+	// We are using reflect here due to the nature
+	// of how interfaces work in Go. It is possible
+	// for _input to be a non-nil interface but the
+	// underlying value to be empty or nil.
+	if reflect.ValueOf(_input).IsZero() {
+		return errors.New("empty value provided for RawJSON output")
+	}
+
 	// marshal the input into raw JSON
 	output, err := json.Marshal(_input)
 	if err != nil {

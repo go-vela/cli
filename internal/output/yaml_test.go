@@ -39,6 +39,14 @@ func TestOutput_YAML(t *testing.T) {
 			failure: true,
 			input:   new(failMarshaler),
 		},
+		{
+			failure: true,
+			input:   nil,
+		},
+		{
+			failure: true,
+			input:   "",
+		},
 	}
 
 	// run tests

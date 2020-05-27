@@ -5,8 +5,7 @@
 package build
 
 import (
-	"encoding/json"
-	"fmt"
+	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
 )
@@ -25,48 +24,33 @@ func (c *Config) Get(client *vela.Client) error {
 		return err
 	}
 
+	// handle the output based off the provided configuration
 	switch c.Output {
 	case "json":
-		// TODO: create output package
-		//
-		// err := output.JSON(builds)
-		// if err != nil {
-		// 	return err
-		// }
-
-		fallthrough
+		// output the build in JSON format
+		err := output.JSON(builds)
+		if err != nil {
+			return err
+		}
 	case "wide":
-		// TODO: create output package
+		// TODO: create output.Wide function
 		//
 		// err := output.Wide(builds)
 		// if err != nil {
 		// 	return err
 		// }
-
-		fallthrough
 	case "yaml":
-		// TODO: create output package
-		//
-		// err := output.YAML(builds)
-		// if err != nil {
-		// 	return err
-		// }
-
-		fallthrough
-	default:
-		// TODO: create output package
-		//
-		// err := output.Default(builds)
-		// if err != nil {
-		// 	return err
-		// }
-
-		output, err := json.MarshalIndent(builds, "", "    ")
+		// output the build in YAML format
+		err := output.YAML(builds)
 		if err != nil {
 			return err
 		}
-
-		fmt.Println(string(output))
+	default:
+		// output the build in default format
+		err := output.Default(builds)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

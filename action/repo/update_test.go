@@ -5,70 +5,29 @@
 package repo
 
 import (
+	"net/http/httptest"
 	"testing"
+
+	"github.com/go-vela/mock/server"
+
+	"github.com/go-vela/sdk-go/vela"
 )
 
-func TestRepo_Config_Validate(t *testing.T) {
+func TestRepo_Config_Update(t *testing.T) {
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
+
+	// create a vela client
+	client, err := vela.NewClient(s.URL, nil)
+	if err != nil {
+		t.Errorf("unable to create client: %v", err)
+	}
+
 	// setup tests
 	tests := []struct {
 		failure bool
 		config  *Config
 	}{
-		{
-			failure: false,
-			config: &Config{
-				Action:     "add",
-				Org:        "github",
-				Name:       "octocat",
-				Link:       "https://github.com/github/octocat",
-				Clone:      "https://github.com/github/octocat.git",
-				Branch:     "master",
-				Timeout:    60,
-				Visibility: "public",
-				Private:    false,
-				Trusted:    false,
-				Active:     true,
-				Events:     []string{"push", "pull_request", "comment", "deployment", "tag"},
-				Output:     "default",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "chown",
-				Org:    "github",
-				Name:   "octocat",
-				Output: "default",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action:  "get",
-				Org:     "github",
-				Page:    1,
-				PerPage: 10,
-				Output:  "default",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "remove",
-				Org:    "github",
-				Name:   "octocat",
-				Output: "default",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "repair",
-				Org:    "github",
-				Name:   "octocat",
-				Output: "default",
-			},
-		},
 		{
 			failure: false,
 			config: &Config{
@@ -90,46 +49,73 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
-				Org:    "github",
-				Name:   "octocat",
-				Output: "default",
+				Action:     "update",
+				Org:        "github",
+				Name:       "octocat",
+				Link:       "https://github.com/github/octocat",
+				Clone:      "https://github.com/github/octocat.git",
+				Branch:     "master",
+				Timeout:    60,
+				Visibility: "public",
+				Private:    false,
+				Trusted:    false,
+				Active:     true,
+				Events:     []string{"push", "pull_request", "comment", "deployment", "tag"},
+				Output:     "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:     "update",
+				Org:        "github",
+				Name:       "octocat",
+				Link:       "https://github.com/github/octocat",
+				Clone:      "https://github.com/github/octocat.git",
+				Branch:     "master",
+				Timeout:    60,
+				Visibility: "public",
+				Private:    false,
+				Trusted:    false,
+				Active:     true,
+				Events:     []string{"push", "pull_request", "comment", "deployment", "tag"},
+				Output:     "yaml",
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
-				Org:    "",
-				Name:   "octocat",
-				Output: "default",
-			},
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "view",
-				Org:    "github",
-				Name:   "",
-				Output: "default",
+				Action:     "update",
+				Org:        "github",
+				Name:       "not-found",
+				Link:       "https://github.com/github/octocat",
+				Clone:      "https://github.com/github/octocat.git",
+				Branch:     "master",
+				Timeout:    60,
+				Visibility: "public",
+				Private:    false,
+				Trusted:    false,
+				Active:     true,
+				Events:     []string{"push", "pull_request", "comment", "deployment", "tag"},
+				Output:     "default",
 			},
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Validate()
+		err := test.config.Update(client)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("Validate should have returned err")
+				t.Errorf("Update should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("Validate returned err: %v", err)
+			t.Errorf("Update returned err: %v", err)
 		}
 	}
 }

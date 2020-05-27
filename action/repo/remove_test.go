@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 )
 
-func TestRepo_Config_View(t *testing.T) {
+func TestRepo_Config_Remove(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -31,7 +31,7 @@ func TestRepo_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: "remove",
 				Org:    "github",
 				Name:   "octocat",
 				Output: "default",
@@ -40,7 +40,7 @@ func TestRepo_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: "remove",
 				Org:    "github",
 				Name:   "octocat",
 				Output: "json",
@@ -49,7 +49,7 @@ func TestRepo_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: "remove",
 				Org:    "github",
 				Name:   "octocat",
 				Output: "yaml",
@@ -58,7 +58,7 @@ func TestRepo_Config_View(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: "remove",
 				Org:    "github",
 				Name:   "not-found",
 				Output: "default",
@@ -68,18 +68,18 @@ func TestRepo_Config_View(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.View(client)
+		err := test.config.Remove(client)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("View should have returned err")
+				t.Errorf("Remove should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("View returned err: %v", err)
+			t.Errorf("Remove returned err: %v", err)
 		}
 	}
 }

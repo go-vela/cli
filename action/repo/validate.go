@@ -15,8 +15,8 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("no repo org provided")
 	}
 
-	// check if repository action is add or view
-	if c.Action == "add" || c.Action == "view" {
+	// check if repository action is not get
+	if c.Action != "get" {
 		// check if repository name is set
 		if len(c.Name) == 0 {
 			return fmt.Errorf("no repo name provided")

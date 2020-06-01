@@ -10,7 +10,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 )
 
-// View inspects a service based off the provided configuration.
+// View inspects a service based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a service
 	service, _, err := client.Svc.Get(c.Org, c.Repo, c.Build, c.Number)

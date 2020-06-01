@@ -10,7 +10,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 )
 
-// Get captures a list of services based off the provided configuration.
+// Get captures a list of services based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of services
 	opts := &vela.ListOptions{

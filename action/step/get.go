@@ -10,7 +10,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 )
 
-// Get captures a list of steps based off the provided configuration.
+// Get captures a list of steps based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of steps
 	opts := &vela.ListOptions{

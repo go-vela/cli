@@ -6,6 +6,9 @@ package action
 
 // list of defined actions
 const (
+	// addAction defines the action for creating a resource.
+	addAction = "get"
+
 	// getAction defines the action for getting a list of resources.
 	getAction = "get"
 

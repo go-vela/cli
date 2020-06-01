@@ -8,6 +8,7 @@ import (
 	"github.com/go-vela/cli/cmd/build"
 	"github.com/go-vela/cli/cmd/config"
 	"github.com/go-vela/cli/cmd/deployment"
+	"github.com/go-vela/cli/cmd/hook"
 	"github.com/go-vela/cli/cmd/log"
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
@@ -33,5 +34,6 @@ var viewCmds = cli.Command{
 		&secret.ViewCmd,
 		&service.ViewCmd,
 		&step.ViewCmd,
+		&hook.ViewCmd,
 	},
 }

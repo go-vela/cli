@@ -14,7 +14,7 @@ import (
 	"github.com/go-vela/types/constants"
 )
 
-// Remove deletes a secret based off the provided configuration.
+// Remove deletes a secret based on the provided configuration.
 func (c *Config) Remove(client *vela.Client) error {
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {

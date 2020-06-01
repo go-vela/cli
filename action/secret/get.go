@@ -14,7 +14,7 @@ import (
 	"github.com/go-vela/types/constants"
 )
 
-// Get captures a list of secrets based off the provided configuration.
+// Get captures a list of secrets based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {

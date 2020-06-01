@@ -14,7 +14,7 @@ import (
 	"github.com/go-vela/types/constants"
 )
 
-// View inspects a secret based off the provided configuration.
+// View inspects a secret based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {

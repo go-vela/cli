@@ -15,7 +15,7 @@ import (
 	"github.com/go-vela/types/library"
 )
 
-// Add creates a secret based off the provided configuration.
+// Add creates a secret based on the provided configuration.
 func (c *Config) Add(client *vela.Client) error {
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {

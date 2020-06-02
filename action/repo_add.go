@@ -52,11 +52,11 @@ var RepoAdd = &cli.Command{
 			Name:    "clone",
 			Usage:   "full clone URL to repository in source control",
 		},
-		&cli.IntFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_VISIBILITY"},
-			Name:    "timeout",
-			Usage:   "fine tune the access level required to view the repo",
-			Value:   30,
+			Name:    "visibility",
+			Usage:   "access level required to view the repository",
+			Value:   "public",
 		},
 		&cli.Int64Flag{
 			EnvVars: []string{"VELA_TIMEOUT"},
@@ -66,18 +66,18 @@ var RepoAdd = &cli.Command{
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_PRIVATE"},
-			Name:    "timeout",
-			Usage:   "max time allowed per build in repository",
+			Name:    "private",
+			Usage:   "disable public access to the repository",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_PRIVATE"},
-			Name:    "timeout",
-			Usage:   "max time allowed per build in repository",
+			EnvVars: []string{"VELA_TRUSTED"},
+			Name:    "trusted",
+			Usage:   "elevated permissions for builds executed for repo",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_PRIVATE"},
-			Name:    "timeout",
-			Usage:   "max time allowed per build in repository",
+			EnvVars: []string{"VELA_ACTIVE"},
+			Name:    "active",
+			Usage:   "current status of the repository",
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_EVENT"},

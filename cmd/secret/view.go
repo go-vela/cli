@@ -68,15 +68,15 @@ var ViewCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. View repository secret details.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo
  2. View organization secret details.
-    $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo
+    $ {{.HelpName}} --engine native --type org --org MyOrg --repo '*' --name foo
  3. View shared secret details.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo
  4. View secret details for a repository with json output.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --output json
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --output json
  5. View secret details with default native engine or when engine and type environment variables are set.
-    $ {{.HelpName}} --org github --repo octocat --name foo
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --name foo
 `, cli.CommandHelpTemplate),
 }
 

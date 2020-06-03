@@ -71,13 +71,13 @@ var GetCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Get steps for a build.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1
  2. Get steps for a build with wide view output.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --output wide
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --output wide
  3. Get steps for a build with yaml output.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --output yaml
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --output yaml
  4. Get steps for a build with json output.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --output json
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --output json
  5. Get steps for a build when org and repo config or environment variables are set.
     $ {{.HelpName}} --number 1
 `, cli.CommandHelpTemplate),

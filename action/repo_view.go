@@ -49,7 +49,7 @@ EXAMPLES:
  1. View details of a repository.
     $ {{.HelpName}} --org github --repo octocat
  2. View details of a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat--output json
+    $ {{.HelpName}} --org github --repo octocat --output json
  3. View details of a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),

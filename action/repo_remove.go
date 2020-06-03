@@ -49,7 +49,7 @@ EXAMPLES:
  1. Remove a repository.
     $ {{.HelpName}} --org github --repo octocat
  2. Remove a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat--output json
+    $ {{.HelpName}} --org github --repo octocat --output json
  3. Remove a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),

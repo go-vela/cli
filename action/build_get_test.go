@@ -28,7 +28,6 @@ func TestAction_BuildGet(t *testing.T) {
 	fullSet.String("token", "superSecretToken", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
-	fullSet.Int("build", 1, "doc")
 	fullSet.Int("page", 1, "doc")
 	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")

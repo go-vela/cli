@@ -32,7 +32,7 @@ func init() {
 	}
 }
 
-func TestBuild_Get_Success(t *testing.T) {
+func TestHook_Get_Success(t *testing.T) {
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testHookAppGet, set, nil)
 
@@ -81,7 +81,7 @@ func TestBuild_Get_Success(t *testing.T) {
 	}
 }
 
-func TestLog_Get_Failure(t *testing.T) {
+func TestHook_Get_Failure(t *testing.T) {
 
 	set := flag.NewFlagSet("test", 0)
 	_ = cli.NewContext(testHookAppGet, set, nil)

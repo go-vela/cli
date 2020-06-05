@@ -60,13 +60,13 @@ var RemoveCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Remove a secret for a repository.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo
  2. Remove a secret for an org.
-    $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo
+    $ {{.HelpName}} --engine native --type org --org MyOrg --repo '*' --name foo
  3. Remove a shared secret for the platform.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo
  4. Remove a repo secret with default native engine or when engine and type environment variables are set.
-    $ {{.HelpName}} --org github --repo octocat --name foo
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --name foo
 `, cli.CommandHelpTemplate),
 }
 

@@ -36,7 +36,7 @@ var RemoveCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Remove a repository.
-    $ {{.HelpName}} --org github --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld
  2. Remove a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),

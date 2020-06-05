@@ -96,19 +96,19 @@ var AddCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Add a secret for a repository.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --value bar
  2. Add a secret for an org.
-    $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo --value bar
+    $ {{.HelpName}} --engine native --type org --org MyOrg --repo '*' --name foo --value bar
  3. Add a shared secret for the platform.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo --value bar
  4. Add a secret for a repository with all event types enabled.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --value bar --event push --event pull_request --event tag --event deployment --event comment
  5. Add a secret from a file.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value @/path/to/file
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --value @/path/to/file
  6. Add a native repo secret with an image whitelist.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --image alpine --image golang
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --value bar --image alpine --image golang
  7. Add a repo secret with default native engine or when engine and type environment variables are set.
-	$ {{.HelpName}} --org github --repo octocat --name foo --value bar
+	$ {{.HelpName}} --org MyOrg --repo HelloWorld --name foo --value bar
  8. Add a secret or secrets from a file
     $ {{.HelpName}} -f secret.yml
 `, cli.CommandHelpTemplate),

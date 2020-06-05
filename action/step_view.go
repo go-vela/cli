@@ -47,7 +47,7 @@ var StepView = &cli.Command{
 		// Step Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_SERVICE"},
+			EnvVars: []string{"VELA_STEP"},
 			Name:    "step",
 			Aliases: []string{"s"},
 			Usage:   "Provide the step number",

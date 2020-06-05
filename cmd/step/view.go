@@ -58,9 +58,9 @@ var ViewCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Get step details for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --step-number 1
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --step-number 1
  2. Get step details for a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --step-number 1 --output json
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --step-number 1 --output json
  3. Get step details for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build-number 1 --step-number 1
 `, cli.CommandHelpTemplate),

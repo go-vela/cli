@@ -78,11 +78,11 @@ var UpdateCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Update a repository.
-    $ {{.HelpName}} --org github --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld
  2. Update a repository with all event types enabled.
-    $ {{.HelpName}} --org github --repo octocat --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --event push --event pull_request --event tag --event deployment --event comment
  3. Update a repository with a longer build timeout.
-    $ {{.HelpName}} --org github --repo octocat --timeout 90
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --timeout 90
  4. Update a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),

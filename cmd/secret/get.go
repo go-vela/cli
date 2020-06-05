@@ -80,19 +80,19 @@ var GetCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Get repository secrets.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld
  2. Get organization secrets.
-    $ {{.HelpName}} --engine native --type org --org github --repo '*'
+    $ {{.HelpName}} --engine native --type org --org MyOrg --repo '*'
  3. Get shared secrets.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties
  4. Get secrets for a repository with wide view output.
-    $ {{.HelpName}} --output wide --engine native --type repo --org github --repo octocat
+    $ {{.HelpName}} --output wide --engine native --type repo --org MyOrg --repo HelloWorld
  5. Get secrets for a repository with yaml output.
-    $ {{.HelpName}} --output yaml --engine native --type repo --org github --repo octocat
+    $ {{.HelpName}} --output yaml --engine native --type repo --org MyOrg --repo HelloWorld
  6. Get secrets for a repository with json output.
-    $ {{.HelpName}} --output json --engine native --type repo --org github --repo octocat
+    $ {{.HelpName}} --output json --engine native --type repo --org MyOrg --repo HelloWorld
  7. Get repository secrets with default native engine or when engine and type environment variables are set.
-    $ {{.HelpName}} --org github --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld
 `, cli.CommandHelpTemplate),
 }
 

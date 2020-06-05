@@ -112,3 +112,86 @@ func TestSecret_Config_Update(t *testing.T) {
 		}
 	}
 }
+
+func TestSecret_Config_UpdateFromFile(t *testing.T) {
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
+
+	// create a vela client
+	client, err := vela.NewClient(s.URL, nil)
+	if err != nil {
+		t.Errorf("unable to create client: %v", err)
+	}
+
+	// setup tests
+	tests := []struct {
+		failure bool
+		config  *Config
+	}{
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/repo.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/org.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/shared.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/multiple.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/repo.yml",
+				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/repo.yml",
+				Output: "yaml",
+			},
+		},
+	}
+
+	// run tests
+	for _, test := range tests {
+		err := test.config.UpdateFromFile(client)
+
+		if test.failure {
+			if err == nil {
+				t.Errorf("UpdateFromFile should have returned err")
+			}
+
+			continue
+		}
+
+		if err != nil {
+			t.Errorf("UpdateFromFile returned err: %v", err)
+		}
+	}
+}

@@ -45,9 +45,9 @@ var ViewCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. View repository details.
-    $ {{.HelpName}} --org github --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld
  2. View repository details with json output.
-    $ {{.HelpName}} --org github --repo octocat --output json
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --output json
  3. View repository details when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),

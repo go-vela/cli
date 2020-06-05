@@ -43,7 +43,7 @@ var RestartCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Restart existing build for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1
  2. Restart existing build for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build-number 1
 `, cli.CommandHelpTemplate),

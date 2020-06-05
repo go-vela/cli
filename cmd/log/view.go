@@ -48,12 +48,12 @@ var ViewCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. View steps logs of a build for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --type step
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --type step
       OR
     $ {{.HelpName}} --build-number 1 --type step      (when org and repo config environment variables are set).
 
  2. View services logs of a build for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1 --type service
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build-number 1 --type service
       OR
     $ {{.HelpName}} --build-number 1 --type service   (when org and repo config environment variables are set).
 `, cli.CommandHelpTemplate),

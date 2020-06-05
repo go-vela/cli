@@ -83,19 +83,19 @@ var UpdateCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Update a secret value for a repository.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --value bar
  2. Update a secret value for an org.
-    $ {{.HelpName}} --engine native --type org --org github --repo '*' --name foo --value bar
+    $ {{.HelpName}} --engine native --type org --org MyOrg --repo '*' --name foo --value bar
  3. Update a shared secret value for the platform.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo --value bar
  4. Update a secret for a repository with all event types enabled.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --event push --event pull_request --event tag --event deployment --event comment
  5. Update a secret from a file.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value @/path/to/file
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --value @/path/to/file
  6. Update a secret for a repository with an image whitelist.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --image alpine --image golang
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo HelloWorld --name foo --image alpine --image golang
  7. Update a repo secret value with default native engine or when engine and type environment variables are set.
-	$ {{.HelpName}} --org github --repo octocat --name foo --value bars'
+	$ {{.HelpName}} --org MyOrg --repo HelloWorld --name foo --value bars'
  8. Update with data from a secret file.
 	$ {{.HelpName}} -f secret.yml
 `, cli.CommandHelpTemplate),

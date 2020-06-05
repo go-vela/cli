@@ -7,6 +7,7 @@ package cmd
 import (
 	"github.com/go-vela/cli/cmd/build"
 	"github.com/go-vela/cli/cmd/deployment"
+	"github.com/go-vela/cli/cmd/hook"
 	"github.com/go-vela/cli/cmd/repo"
 	"github.com/go-vela/cli/cmd/secret"
 	"github.com/go-vela/cli/cmd/service"
@@ -29,5 +30,6 @@ var getCmds = cli.Command{
 		&secret.GetCmd,
 		&service.GetCmd,
 		&step.GetCmd,
+		&hook.GetCmd,
 	},
 }

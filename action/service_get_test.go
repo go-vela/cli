@@ -14,7 +14,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestAction_BuildGet(t *testing.T) {
+func TestAction_ServiceGet(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -28,6 +28,7 @@ func TestAction_BuildGet(t *testing.T) {
 	fullSet.String("token", "superSecretToken", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
+	fullSet.Int("build", 1, "doc")
 	fullSet.Int("page", 1, "doc")
 	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
@@ -53,18 +54,18 @@ func TestAction_BuildGet(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := buildGet(cli.NewContext(nil, test.set, nil))
+		err := serviceGet(cli.NewContext(nil, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("buildGet should have returned err")
+				t.Errorf("serviceGet should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("buildGet returned err: %v", err)
+			t.Errorf("serviceGet returned err: %v", err)
 		}
 	}
 }

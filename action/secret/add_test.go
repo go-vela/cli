@@ -48,7 +48,6 @@ func TestSecret_Config_Add(t *testing.T) {
 				Engine: "native",
 				Type:   "org",
 				Org:    "github",
-				Repo:   "*",
 				Name:   "foo",
 				Value:  "bar",
 				Output: "default",
@@ -109,6 +108,89 @@ func TestSecret_Config_Add(t *testing.T) {
 
 		if err != nil {
 			t.Errorf("Add returned err: %v", err)
+		}
+	}
+}
+
+func TestSecret_Config_AddFromFile(t *testing.T) {
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
+
+	// create a vela client
+	client, err := vela.NewClient(s.URL, nil)
+	if err != nil {
+		t.Errorf("unable to create client: %v", err)
+	}
+
+	// setup tests
+	tests := []struct {
+		failure bool
+		config  *Config
+	}{
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/repo.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/org.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/shared.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/multiple.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/repo.yml",
+				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/repo.yml",
+				Output: "yaml",
+			},
+		},
+	}
+
+	// run tests
+	for _, test := range tests {
+		err := test.config.AddFromFile(client)
+
+		if test.failure {
+			if err == nil {
+				t.Errorf("AddFromFile should have returned err")
+			}
+
+			continue
+		}
+
+		if err != nil {
+			t.Errorf("AddFromFile returned err: %v", err)
 		}
 	}
 }

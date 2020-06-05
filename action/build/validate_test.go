@@ -18,8 +18,8 @@ func TestBuild_Config_Validate(t *testing.T) {
 			failure: false,
 			config: &Config{
 				Action:  "get",
-				Org:     "github",
-				Repo:    "octocat",
+				Org:     "MyOrg",
+				Repo:    "HelloWorld",
 				Page:    1,
 				PerPage: 10,
 				Output:  "json",
@@ -29,8 +29,8 @@ func TestBuild_Config_Validate(t *testing.T) {
 			failure: false,
 			config: &Config{
 				Action: "restart",
-				Org:    "github",
-				Repo:   "octocat",
+				Org:    "MyOrg",
+				Repo:   "HelloWorld",
 				Number: 1,
 				Output: "json",
 			},
@@ -39,8 +39,8 @@ func TestBuild_Config_Validate(t *testing.T) {
 			failure: false,
 			config: &Config{
 				Action: "view",
-				Org:    "github",
-				Repo:   "octocat",
+				Org:    "MyOrg",
+				Repo:   "HelloWorld",
 				Number: 1,
 				Output: "json",
 			},
@@ -50,7 +50,7 @@ func TestBuild_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "view",
 				Org:    "",
-				Repo:   "octocat",
+				Repo:   "HelloWorld",
 				Number: 1,
 				Output: "json",
 			},
@@ -59,7 +59,7 @@ func TestBuild_Config_Validate(t *testing.T) {
 			failure: true,
 			config: &Config{
 				Action: "view",
-				Org:    "github",
+				Org:    "MyOrg",
 				Repo:   "",
 				Number: 1,
 				Output: "json",
@@ -69,8 +69,8 @@ func TestBuild_Config_Validate(t *testing.T) {
 			failure: true,
 			config: &Config{
 				Action: "view",
-				Org:    "github",
-				Repo:   "octocat",
+				Org:    "MyOrg",
+				Repo:   "HelloWorld",
 				Number: 0,
 				Output: "json",
 			},

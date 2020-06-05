@@ -63,7 +63,6 @@ var GetCmd = cli.Command{
 			Usage:   "Print the output in wide, yaml or json format",
 		},
 	},
-	//vela get builds --org jenmart --repo tlpfun
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
  1. Get builds for a repository.

@@ -51,13 +51,13 @@ var RepoGet = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Get a list of repositories.
+  1. Get a list of repositories.
     $ {{.HelpName}}
- 2. Get a list of repositories with wide view output.
+  2. Get a list of repositories with wide view output.
     $ {{.HelpName}} --output wide
- 3. Get a list of repositories with yaml output.
+  3. Get a list of repositories with yaml output.
     $ {{.HelpName}} --output yaml
- 4. Get a list of repositories with json output.
+  4. Get a list of repositories with json output.
     $ {{.HelpName}} --output json
 `, cli.CommandHelpTemplate),
 }

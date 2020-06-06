@@ -78,16 +78,16 @@ var DeploymentAdd = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-1. Add a deployment for a repository.
-   $ {{.HelpName}} --org github --repo octocat
-2. Add a deployment with a specific target environment.
-   $ {{.HelpName}} --org github --repo octocat --target stage
-3. Add a deployment with a specific branch reference.
-   $ {{.HelpName}} --org github --repo octocat --ref dev
-4. Add a deployment with a specific commit reference.
-   $ {{.HelpName}} --org github --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
-4. Add a deployment with a specific description.
-   $ {{.HelpName}} --org github --repo octocat --description 'my custom message'
+  1. Add a deployment for a repository.
+    $ {{.HelpName}} --org github --repo octocat
+  2. Add a deployment with a specific target environment.
+    $ {{.HelpName}} --org github --repo octocat --target stage
+  3. Add a deployment with a specific branch reference.
+    $ {{.HelpName}} --org github --repo octocat --ref dev
+  4. Add a deployment with a specific commit reference.
+    $ {{.HelpName}} --org github --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
+  5. Add a deployment with a specific description.
+    $ {{.HelpName}} --org github --repo octocat --description 'my custom message'
 `, cli.CommandHelpTemplate),
 }
 

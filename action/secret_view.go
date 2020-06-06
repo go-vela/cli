@@ -30,13 +30,13 @@ var SecretView = &cli.Command{
 			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
 			Name:    "org",
 			Aliases: []string{"o"},
-			Usage:   "Provide the organization for the secret",
+			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
 			Name:    "repo",
 			Aliases: []string{"r"},
-			Usage:   "Provide the repository for the secret",
+			Usage:   "provide the repository for the secret",
 		},
 
 		// Secret Flags
@@ -45,27 +45,27 @@ var SecretView = &cli.Command{
 			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
 			Name:    "engine",
 			Aliases: []string{"e"},
-			Usage:   "Provide the engine that stores the secret",
+			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
 			Name:    "type",
 			Aliases: []string{"ty"},
-			Usage:   "Provide the type of secret being stored",
+			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TEAM", "SECRET_TEAM"},
 			Name:    "team",
 			Aliases: []string{"t"},
-			Usage:   "Provide the team for the secret",
+			Usage:   "provide the team for the secret",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_NAME", "SECRET_NAME"},
 			Name:    "name",
 			Aliases: []string{"n"},
-			Usage:   "Provide the name of the secret",
+			Usage:   "provide the name of the secret",
 		},
 
 		// Output Flags
@@ -74,7 +74,7 @@ var SecretView = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "Print the output in default, yaml or json format",
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -89,6 +89,10 @@ EXAMPLES:
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --output json
   5. View secret details when engine and type config or environment variables are set.
     $ {{.HelpName}} --org github --repo octocat --name foo
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/secret/view/
 `, cli.CommandHelpTemplate),
 }
 

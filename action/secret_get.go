@@ -30,13 +30,13 @@ var SecretGet = &cli.Command{
 			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
 			Name:    "org",
 			Aliases: []string{"o"},
-			Usage:   "Provide the organization for the secret",
+			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
 			Name:    "repo",
 			Aliases: []string{"r"},
-			Usage:   "Provide the repository for the secret",
+			Usage:   "provide the repository for the secret",
 		},
 
 		// Secret Flags
@@ -45,21 +45,21 @@ var SecretGet = &cli.Command{
 			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
 			Name:    "engine",
 			Aliases: []string{"e"},
-			Usage:   "Provide the engine that stores the secret",
+			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
 			Name:    "type",
 			Aliases: []string{"ty"},
-			Usage:   "Provide the type of secret being stored",
+			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TEAM", "SECRET_TEAM"},
 			Name:    "team",
 			Aliases: []string{"t"},
-			Usage:   "Provide the team for the secret",
+			Usage:   "provide the team for the secret",
 		},
 
 		// Output Flags
@@ -68,23 +68,23 @@ var SecretGet = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "Print the output in default, wide, yaml or json format",
+			Usage:   "print the output in default, wide, yaml or json format",
 		},
 
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE"},
+			EnvVars: []string{"VELA_PAGE", "SECRET_PAGE"},
 			Name:    "page",
 			Aliases: []string{"p"},
-			Usage:   "Print a specific page of secrets",
+			Usage:   "print a specific page of secrets",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE"},
+			EnvVars: []string{"VELA_PER_PAGE", "SECRET_PER_PAGE"},
 			Name:    "per.page",
 			Aliases: []string{"pp"},
-			Usage:   "Expand the number of items contained within page",
+			Usage:   "number of secrets to print per page",
 			Value:   10,
 		},
 	},
@@ -100,6 +100,10 @@ EXAMPLES:
     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --output json
   5. Get secret details when engine and type config or environment variables are set.
     $ {{.HelpName}} --org github --repo octocat
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/secret/get/
 `, cli.CommandHelpTemplate),
 }
 

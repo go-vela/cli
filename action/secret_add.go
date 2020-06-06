@@ -91,10 +91,10 @@ var SecretAdd = &cli.Command{
 			),
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_ALLOW_COMMAND", "SECRET_ALLOW_COMMAND"},
-			Name:    "allow-command",
-			Aliases: []string{"ac"},
-			Usage:   "Allow a secret to be used for a step with commands",
+			EnvVars: []string{"VELA_COMMAND", "SECRET_COMMAND"},
+			Name:    "commands",
+			Aliases: []string{"c"},
+			Usage:   "Enable a secret to be used for a step with commands",
 			Value:   true,
 		},
 		&cli.StringFlag{
@@ -159,7 +159,7 @@ func secretAdd(c *cli.Context) error {
 		Team:         c.String("team"),
 		Name:         c.String("name"),
 		Value:        c.String("value"),
-		AllowCommand: c.Bool("allow-command"),
+		AllowCommand: c.Bool("commands"),
 		Images:       c.StringSlice("image"),
 		Events:       c.StringSlice("event"),
 		File:         c.String("file"),

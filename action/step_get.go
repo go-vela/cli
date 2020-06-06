@@ -85,6 +85,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --build 1 --output json
   5. Get steps for a build when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/step/get/
 `, cli.CommandHelpTemplate),
 }
 

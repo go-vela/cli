@@ -63,6 +63,10 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo HelloWorld --build 1 --output json
   3. View build details for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/build/view/
 `, cli.CommandHelpTemplate),
 }
 

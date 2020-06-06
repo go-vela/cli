@@ -119,6 +119,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --timeout 90
   4. Add a repository with push and pull request enabled when org and repo config or environment variables are set.
     $ {{.HelpName}} --event push --event pull_request
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/repo/add/
 `, cli.CommandHelpTemplate),
 }
 

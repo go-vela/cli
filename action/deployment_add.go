@@ -88,6 +88,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
   5. Add a deployment with a specific description.
     $ {{.HelpName}} --org github --repo octocat --description 'my custom message'
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/deployment/add/
 `, cli.CommandHelpTemplate),
 }
 

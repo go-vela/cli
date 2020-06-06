@@ -54,6 +54,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --output json
   3. Remove a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/repo/remove/
 `, cli.CommandHelpTemplate),
 }
 

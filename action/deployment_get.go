@@ -76,6 +76,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --output json
   5. Get deployments for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/deployment/get/
 `, cli.CommandHelpTemplate),
 }
 

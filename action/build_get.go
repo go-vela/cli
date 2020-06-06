@@ -76,6 +76,10 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo HelloWorld --output json
   5. Get builds for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/build/get/
 `, cli.CommandHelpTemplate),
 }
 

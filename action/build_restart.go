@@ -61,6 +61,10 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo HelloWorld --build 1
   2. Restart existing build for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/build/restart/
 `, cli.CommandHelpTemplate),
 }
 

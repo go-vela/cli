@@ -59,6 +59,10 @@ EXAMPLES:
     $ {{.HelpName}} --output yaml
   4. Get a list of repositories with json output.
     $ {{.HelpName}} --output json
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/repo/get/
 `, cli.CommandHelpTemplate),
 }
 

@@ -63,6 +63,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --deployment 1 --output json
   3. View deployment details for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --deployment 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/deployment/view/
 `, cli.CommandHelpTemplate),
 }
 

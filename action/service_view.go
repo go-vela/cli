@@ -72,6 +72,10 @@ EXAMPLES:
     $ {{.HelpName}} --org github --repo octocat --build 1 --service 1 --output json
   3. View service details for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1 --service 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/service/view/
 `, cli.CommandHelpTemplate),
 }
 

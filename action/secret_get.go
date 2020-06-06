@@ -70,6 +70,23 @@ var SecretGet = &cli.Command{
 			Aliases: []string{"op"},
 			Usage:   "Print the output in default, wide, yaml or json format",
 		},
+
+		// Pagination Flags
+
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_PAGE"},
+			Name:    "page",
+			Aliases: []string{"p"},
+			Usage:   "Print a specific page of secrets",
+			Value:   1,
+		},
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_PER_PAGE"},
+			Name:    "per.page",
+			Aliases: []string{"pp"},
+			Usage:   "Expand the number of items contained within page",
+			Value:   10,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -101,13 +118,15 @@ func secretGet(c *cli.Context) error {
 
 	// create the secret configuration
 	s := &secret.Config{
-		Action: getAction,
-		Engine: c.String("engine"),
-		Type:   c.String("type"),
-		Org:    c.String("org"),
-		Repo:   c.String("repo"),
-		Team:   c.String("team"),
-		Output: c.String("output"),
+		Action:  getAction,
+		Engine:  c.String("engine"),
+		Type:    c.String("type"),
+		Org:     c.String("org"),
+		Repo:    c.String("repo"),
+		Team:    c.String("team"),
+		Page:    c.Int("page"),
+		PerPage: c.Int("per.page"),
+		Output:  c.String("output"),
 	}
 
 	// validate secret configuration

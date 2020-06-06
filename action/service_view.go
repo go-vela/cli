@@ -25,41 +25,43 @@ var ServiceView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "SERVICE_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the service",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the service",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "SERVICE_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the service",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the service",
 		},
 
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD"},
+			EnvVars: []string{"VELA_BUILD", "SERVICE_BUILD"},
 			Name:    "build",
 			Aliases: []string{"b"},
-			Usage:   "Provide the build number for the service",
+			Usage:   "provide the build for the service",
 		},
 
 		// Service Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_SERVICE"},
+			EnvVars: []string{"VELA_SERVICE", "SERVICE_NUMBER"},
 			Name:    "service",
 			Aliases: []string{"s"},
-			Usage:   "Provide the service number",
+			Usage:   "provide the number for the service",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

@@ -26,53 +26,55 @@ var BuildGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the build",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the build",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the build",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "BUILD_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, wide, yaml or json format",
 		},
 
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE"},
+			EnvVars: []string{"VELA_PAGE", "BUILD_PAGE"},
 			Name:    "page",
 			Aliases: []string{"p"},
-			Usage:   "Print a specific page of builds",
+			Usage:   "print a specific page of builds",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE"},
+			EnvVars: []string{"VELA_PER_PAGE", "BUILD_PER_PAGE"},
 			Name:    "per.page",
 			Aliases: []string{"pp"},
-			Usage:   "Expand the number of items contained within page",
+			Usage:   "number of builds to print per page",
 			Value:   10,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Get builds for a repository.
+  1. Get builds for a repository.
     $ {{.HelpName}} --org MyOrg --repo HelloWorld
- 2. Get builds for a repository with wide view output.
+  2. Get builds for a repository with wide view output.
     $ {{.HelpName}} --org MyOrg --repo HelloWorld --output wide
- 3. Get builds for a repository with yaml output.
+  3. Get builds for a repository with yaml output.
     $ {{.HelpName}} --org MyOrg --repo HelloWorld --output yaml
- 4. Get builds for a repository with json output.
+  4. Get builds for a repository with json output.
     $ {{.HelpName}} --org MyOrg --repo HelloWorld --output json
- 5. Get builds for a repository when org and repo config or environment variables are set.
+  5. Get builds for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
 `, cli.CommandHelpTemplate),
 }

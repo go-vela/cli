@@ -26,39 +26,41 @@ var DeploymentGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "DEPLOYMENT_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the deployments",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the deployment",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "DEPLOYMENT_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the deployments",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the deployment",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, wide, yaml or json format",
 		},
 
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE"},
+			EnvVars: []string{"VELA_PAGE", "DEPLOYMENT_PAGE"},
 			Name:    "page",
 			Aliases: []string{"p"},
-			Usage:   "Print a specific page of deployments",
+			Usage:   "print a specific page of deployments",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE"},
+			EnvVars: []string{"VELA_PER_PAGE", "DEPLOYMENT_PER_PAGE"},
 			Name:    "per.page",
 			Aliases: []string{"pp"},
-			Usage:   "Expand the number of items contained within page",
+			Usage:   "number of deployments to print per page",
 			Value:   10,
 		},
 	},

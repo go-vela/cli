@@ -27,62 +27,73 @@ var RepoAdd = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the repository",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the repository",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
 			Name:    "repo",
-			Usage:   "Provide the name for the repository",
+			Aliases: []string{"r"},
+			Usage:   "provide the name for the repository",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_BRANCH"},
+			EnvVars: []string{"VELA_BRANCH", "REPO_BRANCH"},
 			Name:    "branch",
+			Aliases: []string{"b"},
 			Usage:   "default branch for the repository",
 			Value:   "master",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_LINK"},
+			EnvVars: []string{"VELA_LINK", "REPO_LINK"},
 			Name:    "link",
+			Aliases: []string{"l"},
 			Usage:   "full URL to repository in source control",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_CLONE"},
+			EnvVars: []string{"VELA_CLONE", "REPO_CLONE"},
 			Name:    "clone",
+			Aliases: []string{"c"},
 			Usage:   "full clone URL to repository in source control",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_VISIBILITY"},
+			EnvVars: []string{"VELA_VISIBILITY", "REPO_VISIBILITY"},
 			Name:    "visibility",
+			Aliases: []string{"v"},
 			Usage:   "access level required to view the repository",
 			Value:   "public",
 		},
 		&cli.Int64Flag{
-			EnvVars: []string{"VELA_TIMEOUT"},
+			EnvVars: []string{"VELA_TIMEOUT", "REPO_TIMEOUT"},
 			Name:    "timeout",
+			Aliases: []string{"t"},
 			Usage:   "max time allowed per build in repository",
 			Value:   30,
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_PRIVATE"},
+			EnvVars: []string{"VELA_PRIVATE", "REPO_PRIVATE"},
 			Name:    "private",
+			Aliases: []string{"p"},
 			Usage:   "disable public access to the repository",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_TRUSTED"},
+			EnvVars: []string{"VELA_TRUSTED", "REPO_TRUSTED"},
 			Name:    "trusted",
+			Aliases: []string{"tr"},
 			Usage:   "elevated permissions for builds executed for repo",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_ACTIVE"},
+			EnvVars: []string{"VELA_ACTIVE", "REPO_ACTIVE"},
 			Name:    "active",
+			Aliases: []string{"a"},
 			Usage:   "current status of the repository",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_EVENT"},
+			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS"},
 			Name:    "event",
-			Usage:   "webhook events repository responds to",
+			Aliases: []string{"e"},
+			Usage:   "webhook event(s) repository responds to",
 			Value: cli.NewStringSlice(
 				constants.EventPush,
 				constants.EventPull,
@@ -92,10 +103,10 @@ var RepoAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in default, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

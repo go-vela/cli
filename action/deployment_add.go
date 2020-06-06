@@ -19,45 +19,50 @@ var DeploymentAdd = &cli.Command{
 	Name:        "deployment",
 	Description: "Use this command to add a deployment.",
 	Usage:       "Add a new deployment from the provided configuration",
-	Action:      deploymentView,
+	Action:      deploymentAdd,
 	Flags: []cli.Flag{
 
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "DEPLOYMENT_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the deployment",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the deployment",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "DEPLOYMENT_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the deployment",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the deployment",
 		},
 
 		// Deployment Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REF"},
+			EnvVars: []string{"VELA_REF", "DEPLOYMENT_REF"},
 			Name:    "ref",
-			Usage:   "Provide the reference to deploy - this can be a branch, commit (SHA) or tag",
+			Usage:   "provide the reference to deploy - this can be a branch, commit (SHA) or tag",
 			Value:   "refs/heads/master",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TARGET"},
+			EnvVars: []string{"VELA_TARGET", "DEPLOYMENT_TARGET"},
 			Name:    "target",
-			Usage:   "Provide the name for the target deployment environment",
+			Aliases: []string{"t"},
+			Usage:   "provide the name for the target deployment environment",
 			Value:   "production",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_DESCRIPTION"},
+			EnvVars: []string{"VELA_DESCRIPTION", "DEPLOYMENT_DESCRIPTION"},
 			Name:    "description",
-			Usage:   "Provide the description for the deployment",
+			Aliases: []string{"d"},
+			Usage:   "provide the description for the deployment",
 			Value:   "Deployment request from Vela",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TASK"},
+			EnvVars: []string{"VELA_TASK", "DEPLOYMENT_TASK"},
 			Name:    "task",
+			Aliases: []string{"tk"},
 			Usage:   "Provide the task for the deployment",
 			Value:   "deploy:vela",
 		},
@@ -65,10 +70,10 @@ var DeploymentAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in default, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

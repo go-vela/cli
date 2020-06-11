@@ -26,39 +26,43 @@ var RepoGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, wide, yaml or json format",
 		},
 
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE"},
+			EnvVars: []string{"VELA_PAGE", "REPO_PAGE"},
 			Name:    "page",
 			Aliases: []string{"p"},
-			Usage:   "Print a specific page of repos",
+			Usage:   "print a specific page of repositories",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE"},
+			EnvVars: []string{"VELA_PER_PAGE", "REPO_PER_PAGE"},
 			Name:    "per.page",
 			Aliases: []string{"pp"},
-			Usage:   "Expand the number of items contained within page",
+			Usage:   "number of repositories to print per page",
 			Value:   10,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Get a list of repositories.
+  1. Get a list of repositories.
     $ {{.HelpName}}
- 2. Get a list of repositories with wide view output.
+  2. Get a list of repositories with wide view output.
     $ {{.HelpName}} --output wide
- 3. Get a list of repositories with yaml output.
+  3. Get a list of repositories with yaml output.
     $ {{.HelpName}} --output yaml
- 4. Get a list of repositories with json output.
+  4. Get a list of repositories with json output.
     $ {{.HelpName}} --output json
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/repo/get/
 `, cli.CommandHelpTemplate),
 }
 

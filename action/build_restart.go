@@ -18,38 +18,53 @@ import (
 var BuildRestart = &cli.Command{
 	Name:        "build",
 	Description: "Use this command to restart a build.",
-	Usage:       "Re-run the provided build",
+	Usage:       "Restart the provided build",
 	Action:      buildRestart,
 	Flags: []cli.Flag{
 
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the build",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the build",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the build",
 		},
 
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD"},
+			EnvVars: []string{"VELA_BUILD", "BUILD_NUMBER"},
 			Name:    "build",
 			Aliases: []string{"b"},
-			Usage:   "Provide the build number",
+			Usage:   "provide the number for the build",
+		},
+
+		// Output Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_OUTPUT", "BUILD_OUTPUT"},
+			Name:    "output",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Restart existing build for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build-number 1
- 2. Restart existing build for a repository when org and repo config or environment variables are set.
-    $ {{.HelpName}} --build-number 1
+  1. Restart existing build for a repository.
+    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build 1
+  2. Restart existing build for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --build 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/build/restart/
 `, cli.CommandHelpTemplate),
 }
 

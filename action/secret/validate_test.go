@@ -30,6 +30,14 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
+				Action: "add",
+				File:   "testdata/repo.yml",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
 				Action:  "get",
 				Engine:  "native",
 				Type:    "repo",
@@ -62,6 +70,14 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Value:  "bar",
+				Output: "default",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/repo.yml",
 				Output: "default",
 			},
 		},

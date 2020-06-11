@@ -26,63 +26,69 @@ var ServiceGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "SERVICE_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the service",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "SERVICE_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the service",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the build",
 		},
 
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD"},
+			EnvVars: []string{"VELA_BUILD", "SERVICE_BUILD"},
 			Name:    "build",
 			Aliases: []string{"b"},
-			Usage:   "Provide the build number for the service",
+			Usage:   "provide the build for the service",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, wide, yaml or json format",
 		},
 
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE"},
+			EnvVars: []string{"VELA_PAGE", "SERVICE_PAGE"},
 			Name:    "page",
 			Aliases: []string{"p"},
-			Usage:   "Print a specific page of services",
+			Usage:   "print a specific page of services",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE"},
+			EnvVars: []string{"VELA_PER_PAGE", "SERVICE_PER_PAGE"},
 			Name:    "per.page",
 			Aliases: []string{"pp"},
-			Usage:   "Expand the number of items contained within page",
+			Usage:   "number of services to print per page",
 			Value:   10,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Get services for a repository.
+  1. Get services for a repository.
     $ {{.HelpName}} --org github --repo octocat --build 1
- 2. Get services for a repository with wide view output.
+  2. Get services for a repository with wide view output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --output wide
- 3. Get services for a repository with yaml output.
+  3. Get services for a repository with yaml output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --output yaml
- 4. Get services for a repository with json output.
+  4. Get services for a repository with json output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --output json
- 5. Get services for a build when org and repo config or environment variables are set.
+  5. Get services for a build when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/service/get/
 `, cli.CommandHelpTemplate),
 }
 

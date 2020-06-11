@@ -26,32 +26,34 @@ var StepGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "STEP_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the step",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the step",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "STEP_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the step",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the step",
 		},
 
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD"},
+			EnvVars: []string{"VELA_BUILD", "STEP_BUILD"},
 			Name:    "build",
 			Aliases: []string{"b"},
-			Usage:   "Provide the build number for the step",
+			Usage:   "provide the build for the step",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, wide, yaml or json format",
 		},
 
 		// Pagination Flags
@@ -60,29 +62,33 @@ var StepGet = &cli.Command{
 			EnvVars: []string{"VELA_PAGE"},
 			Name:    "page",
 			Aliases: []string{"p"},
-			Usage:   "Print a specific page of steps",
+			Usage:   "print a specific page of steps",
 			Value:   1,
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PER_PAGE"},
 			Name:    "per.page",
 			Aliases: []string{"pp"},
-			Usage:   "Expand the number of items contained within page",
+			Usage:   "number of steps to print per page",
 			Value:   10,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. Get steps for a repository.
+  1. Get steps for a repository.
     $ {{.HelpName}} --org github --repo octocat --build 1
- 2. Get steps for a repository with wide view output.
+  2. Get steps for a repository with wide view output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --output wide
- 3. Get steps for a repository with yaml output.
+  3. Get steps for a repository with yaml output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --output yaml
- 4. Get steps for a repository with json output.
+  4. Get steps for a repository with json output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --output json
- 5. Get steps for a build when org and repo config or environment variables are set.
+  5. Get steps for a build when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/step/get/
 `, cli.CommandHelpTemplate),
 }
 

@@ -25,51 +25,57 @@ var StepView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "STEP_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the step",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the step",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "STEP_REPO"},
 			Name:    "repo",
-			Usage:   "Provide the repository for the step",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the step",
 		},
 
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD"},
+			EnvVars: []string{"VELA_BUILD", "STEP_BUILD"},
 			Name:    "build",
 			Aliases: []string{"b"},
-			Usage:   "Provide the build number for the step",
+			Usage:   "provide the build for the step",
 		},
 
 		// Step Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_STEP"},
+			EnvVars: []string{"VELA_STEP", "STEP_NUMBER"},
 			Name:    "step",
 			Aliases: []string{"s"},
-			Usage:   "Provide the step number",
+			Usage:   "provide the number for the step",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. View step details for a repository.
+  1. View step details for a repository.
     $ {{.HelpName}} --org github --repo octocat --build 1 --step 1
- 2. View step details for a repository with json output.
+  2. View step details for a repository with json output.
     $ {{.HelpName}} --org github --repo octocat --build 1 --step 1 --output json
- 3. View step details for a repository when org and repo config or environment variables are set.
+  3. View step details for a repository when org and repo config or environment variables are set.
     $ {{.HelpName}} --build 1 --step 1
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/step/view/
 `, cli.CommandHelpTemplate),
 }
 

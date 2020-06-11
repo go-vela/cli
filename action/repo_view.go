@@ -25,33 +25,39 @@ var RepoView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG"},
+			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
 			Name:    "org",
-			Usage:   "Provide the organization for the repository",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the repository",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO"},
+			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
 			Name:    "repo",
-			Usage:   "Provide the name for the repository",
+			Aliases: []string{"r"},
+			Usage:   "provide the name for the repository",
 		},
 
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
 			Name:    "output",
-			Aliases: []string{"o"},
-			Usage:   "Print the output in wide, yaml or json format",
+			Aliases: []string{"op"},
+			Usage:   "print the output in default, yaml or json format",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
- 1. View details of a repository.
+  1. View details of a repository.
     $ {{.HelpName}} --org github --repo octocat
- 2. View details of a repository with json output.
+  2. View details of a repository with json output.
     $ {{.HelpName}} --org github --repo octocat --output json
- 3. View details of a repository when org and repo config or environment variables are set.
+  3. View details of a repository when org and repo config or environment variables are set.
     $ {{.HelpName}}
+
+DOCUMENTATION:
+
+  https://go-vela.github.io/docs/cli/repo/view/
 `, cli.CommandHelpTemplate),
 }
 

@@ -13,6 +13,12 @@ import (
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	// check if secret file is set
+	if len(c.File) > 0 {
+		// skip checking all other configuration
+		return nil
+	}
+
 	// check if secret engine is set
 	if len(c.Engine) == 0 {
 		return fmt.Errorf("no secret engine provided")

@@ -25,13 +25,5 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("no log build provided")
 	}
 
-	// check if log action is view
-	if c.Action == "view" {
-		// check if service or step is set
-		if c.Service <= 0 && c.Step <= 0 {
-			return fmt.Errorf("no log service or step number provided")
-		}
-	}
-
 	return nil
 }

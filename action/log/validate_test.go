@@ -79,16 +79,6 @@ func TestService_Config_Validate(t *testing.T) {
 				Output: "default",
 			},
 		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "view",
-				Org:    "github",
-				Repo:   "octocat",
-				Build:  1,
-				Output: "default",
-			},
-		},
 	}
 
 	// run tests

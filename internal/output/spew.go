@@ -5,20 +5,20 @@
 package output
 
 import (
-	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 	"reflect"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
-// JSON parses the provided input and
-// renders the parsed input in pretty
-// JSON before outputting it to stdout.
-func JSON(_input interface{}) error {
+// Spew outputs the provided input to stdout
+// using github.com/davecgh/go-spew/spew to
+// verbosely print the input.
+func Spew(_input interface{}) error {
 	// check if the input provided is nil
 	if _input == nil {
-		return errors.New("empty value provided for JSON output")
+		return errors.New("empty value provided for spew output")
 	}
 
 	// check if the value of input provided is nil
@@ -28,17 +28,11 @@ func JSON(_input interface{}) error {
 	// for _input to be a non-nil interface but the
 	// underlying value to be empty or nil.
 	if reflect.ValueOf(_input).IsZero() {
-		return errors.New("empty value provided for JSON output")
-	}
-
-	// marshal the input into pretty JSON
-	output, err := json.MarshalIndent(_input, "", "    ")
-	if err != nil {
-		return err
+		return errors.New("empty value provided for spew output")
 	}
 
 	// ensure we output to stdout
-	fmt.Fprintln(os.Stdout, string(output))
+	spew.Fprintf(os.Stdout, "%#+v\n", _input)
 
 	return nil
 }

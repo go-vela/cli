@@ -2,16 +2,16 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package log
+package hook
 
 // Config represents the configuration necessary
-// to perform log related requests with Vela.
+// to perform hook related requests with Vela.
 type Config struct {
 	Action  string
 	Org     string
 	Repo    string
-	Build   int
-	Service int
-	Step    int
+	Number  int
+	Page    int
+	PerPage int
 	Output  string
 }

@@ -5,11 +5,10 @@
 package output
 
 import (
-	"errors"
 	"testing"
 )
 
-func TestOutput_JSON(t *testing.T) {
+func TestOutput_Dump(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -37,10 +36,6 @@ func TestOutput_JSON(t *testing.T) {
 		},
 		{
 			failure: true,
-			input:   new(failMarshaler),
-		},
-		{
-			failure: true,
 			input:   nil,
 		},
 		{
@@ -51,28 +46,18 @@ func TestOutput_JSON(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := JSON(test.input)
+		err := Dump(test.input)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("JSON should have returned err")
+				t.Errorf("Dump should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("JSON returned err: %v", err)
+			t.Errorf("Dump returned err: %v", err)
 		}
 	}
-}
-
-type failMarshaler struct{}
-
-func (f *failMarshaler) MarshalJSON() ([]byte, error) {
-	return nil, errors.New("this is a marshaler that fails when you try to marshal")
-}
-
-func (f *failMarshaler) UnmarshalJSON([]byte) error {
-	return errors.New("this is a marshaler that fails when you try to unmarshal")
 }

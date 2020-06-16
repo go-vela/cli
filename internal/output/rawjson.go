@@ -12,13 +12,13 @@ import (
 	"reflect"
 )
 
-// JSON parses the provided input and
-// renders the parsed input in pretty
-// JSON before outputting it to stdout.
-func JSON(_input interface{}) error {
+// RawJSON parses the provided input and
+// renders the parsed input in raw JSON
+// before outputting it to stdout.
+func RawJSON(_input interface{}) error {
 	// check if the input provided is nil
 	if _input == nil {
-		return errors.New("empty value provided for JSON output")
+		return errors.New("empty value provided for RawJSON output")
 	}
 
 	// check if the value of input provided is nil
@@ -28,11 +28,11 @@ func JSON(_input interface{}) error {
 	// for _input to be a non-nil interface but the
 	// underlying value to be empty or nil.
 	if reflect.ValueOf(_input).IsZero() {
-		return errors.New("empty value provided for JSON output")
+		return errors.New("empty value provided for RawJSON output")
 	}
 
-	// marshal the input into pretty JSON
-	output, err := json.MarshalIndent(_input, "", "    ")
+	// marshal the input into raw JSON
+	output, err := json.Marshal(_input)
 	if err != nil {
 		return err
 	}

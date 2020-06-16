@@ -5,10 +5,8 @@
 package output
 
 import (
-	"errors"
 	"fmt"
 	"os"
-	"reflect"
 
 	"gopkg.in/yaml.v2"
 
@@ -21,19 +19,10 @@ import (
 func YAML(_input interface{}) error {
 	logrus.Debugf("creating output with %s driver", DriverYAML)
 
-	// check if the input provided is nil
-	if _input == nil {
-		return errors.New("empty value provided for YAML output")
-	}
-
-	// check if the value of input provided is nil
-	//
-	// We are using reflect here due to the nature
-	// of how interfaces work in Go. It is possible
-	// for _input to be a non-nil interface but the
-	// underlying value to be empty or nil.
-	if reflect.ValueOf(_input).IsZero() {
-		return errors.New("empty value provided for YAML output")
+	// validate the input provided
+	err := validate(DriverYAML, _input)
+	if err != nil {
+		return err
 	}
 
 	// marshal the input into YAML

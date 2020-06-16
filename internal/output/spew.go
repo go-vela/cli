@@ -5,9 +5,7 @@
 package output
 
 import (
-	"errors"
 	"os"
-	"reflect"
 
 	"github.com/davecgh/go-spew/spew"
 
@@ -20,19 +18,10 @@ import (
 func Spew(_input interface{}) error {
 	logrus.Debugf("creating output with %s driver", DriverSpew)
 
-	// check if the input provided is nil
-	if _input == nil {
-		return errors.New("empty value provided for spew output")
-	}
-
-	// check if the value of input provided is nil
-	//
-	// We are using reflect here due to the nature
-	// of how interfaces work in Go. It is possible
-	// for _input to be a non-nil interface but the
-	// underlying value to be empty or nil.
-	if reflect.ValueOf(_input).IsZero() {
-		return errors.New("empty value provided for spew output")
+	// validate the input provided
+	err := validate(DriverSpew, _input)
+	if err != nil {
+		return err
 	}
 
 	logrus.Tracef("sending output to stdout with %s driver", DriverSpew)

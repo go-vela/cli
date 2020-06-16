@@ -5,10 +5,8 @@
 package output
 
 import (
-	"errors"
 	"fmt"
 	"os"
-	"reflect"
 
 	"github.com/sirupsen/logrus"
 )
@@ -17,19 +15,10 @@ import (
 func Default(_input interface{}) error {
 	logrus.Debugf("creating output with %s driver", DriverDefault)
 
-	// check if the input provided is nil
-	if _input == nil {
-		return errors.New("empty value provided for default output")
-	}
-
-	// check if the value of input provided is nil
-	//
-	// We are using reflect here due to the nature
-	// of how interfaces work in Go. It is possible
-	// for _input to be a non-nil interface but the
-	// underlying value to be empty or nil.
-	if reflect.ValueOf(_input).IsZero() {
-		return errors.New("empty value provided for default output")
+	// validate the input provided
+	err := validate(DriverDefault, _input)
+	if err != nil {
+		return err
 	}
 
 	logrus.Tracef("sending output to stdout with %s driver", DriverDefault)

@@ -6,15 +6,12 @@ package output
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"reflect"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
-// Default outputs the provided input
-// to stdout using the go-spew/spew
-// package to pretty print the input.
+// Default outputs the provided input to stdout.
 func Default(_input interface{}) error {
 	// check if the input provided is nil
 	if _input == nil {
@@ -32,7 +29,7 @@ func Default(_input interface{}) error {
 	}
 
 	// ensure we output to stdout
-	spew.Fprintf(os.Stdout, "%v\n", _input)
+	fmt.Fprintln(os.Stdout, _input)
 
 	return nil
 }

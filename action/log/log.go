@@ -5,7 +5,7 @@
 package log
 
 // Config represents the configuration necessary
-// to perform log related quests with Vela.
+// to perform log related requests with Vela.
 type Config struct {
 	Action  string
 	Org     string

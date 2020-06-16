@@ -5,7 +5,7 @@
 package hook
 
 // Config represents the configuration necessary
-// to perform hook related quests with Vela.
+// to perform hook related requests with Vela.
 type Config struct {
 	Action  string
 	Org     string

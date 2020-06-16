@@ -5,7 +5,7 @@
 package repo
 
 // Config represents the configuration necessary
-// to perform repository related quests with Vela.
+// to perform repository related requests with Vela.
 type Config struct {
 	Action     string
 	Org        string

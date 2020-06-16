@@ -5,7 +5,7 @@
 package service
 
 // Config represents the configuration necessary
-// to perform service related quests with Vela.
+// to perform service related requests with Vela.
 type Config struct {
 	Action  string
 	Org     string

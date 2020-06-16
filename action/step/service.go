@@ -5,7 +5,7 @@
 package step
 
 // Config represents the configuration necessary
-// to perform step related quests with Vela.
+// to perform step related requests with Vela.
 type Config struct {
 	Action  string
 	Org     string

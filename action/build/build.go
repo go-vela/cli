@@ -5,7 +5,7 @@
 package build
 
 // Config represents the configuration necessary
-// to perform build related quests with Vela.
+// to perform build related requests with Vela.
 type Config struct {
 	Action  string
 	Org     string

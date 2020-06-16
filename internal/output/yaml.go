@@ -11,12 +11,16 @@ import (
 	"reflect"
 
 	"gopkg.in/yaml.v2"
+
+	"github.com/sirupsen/logrus"
 )
 
 // YAML parses the provided input and
 // renders the parsed input in YAML
 // before outputting it to stdout.
 func YAML(_input interface{}) error {
+	logrus.Debugf("creating output with %s driver", DriverYAML)
+
 	// check if the input provided is nil
 	if _input == nil {
 		return errors.New("empty value provided for YAML output")
@@ -37,6 +41,8 @@ func YAML(_input interface{}) error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("sending output to stdout with %s driver", DriverYAML)
 
 	// ensure we output to stdout
 	fmt.Fprintln(os.Stdout, string(output))

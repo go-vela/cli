@@ -9,10 +9,14 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Default outputs the provided input to stdout.
 func Default(_input interface{}) error {
+	logrus.Debugf("creating output with %s driver", DriverDefault)
+
 	// check if the input provided is nil
 	if _input == nil {
 		return errors.New("empty value provided for default output")
@@ -27,6 +31,8 @@ func Default(_input interface{}) error {
 	if reflect.ValueOf(_input).IsZero() {
 		return errors.New("empty value provided for default output")
 	}
+
+	logrus.Tracef("sending output to stdout with %s driver", DriverDefault)
 
 	// ensure we output to stdout
 	fmt.Fprintln(os.Stdout, _input)

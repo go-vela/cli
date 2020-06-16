@@ -10,12 +10,16 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+
+	"github.com/sirupsen/logrus"
 )
 
 // JSON parses the provided input and
 // renders the parsed input in pretty
 // JSON before outputting it to stdout.
 func JSON(_input interface{}) error {
+	logrus.Debugf("creating output with %s driver", DriverJSON)
+
 	// check if the input provided is nil
 	if _input == nil {
 		return errors.New("empty value provided for JSON output")
@@ -36,6 +40,8 @@ func JSON(_input interface{}) error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("sending output to stdout with %s driver", DriverJSON)
 
 	// ensure we output to stdout
 	fmt.Fprintln(os.Stdout, string(output))

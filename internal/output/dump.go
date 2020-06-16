@@ -10,6 +10,8 @@ import (
 	"reflect"
 
 	"github.com/davecgh/go-spew/spew"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Dump outputs the provided input to stdout
@@ -41,6 +43,8 @@ import (
 //   offsets, byte values in hex, and ASCII
 //   output
 func Dump(_input interface{}) error {
+	logrus.Debugf("creating output with %s driver", DriverDump)
+
 	// check if the input provided is nil
 	if _input == nil {
 		return errors.New("empty value provided for dump output")
@@ -55,6 +59,8 @@ func Dump(_input interface{}) error {
 	if reflect.ValueOf(_input).IsZero() {
 		return errors.New("empty value provided for dump output")
 	}
+
+	logrus.Tracef("sending output to stdout with %s driver", DriverDump)
 
 	// ensure we output to stdout
 	spew.Fdump(os.Stdout, _input)

@@ -5,7 +5,7 @@
 package secret
 
 // Config represents the configuration necessary
-// to perform secret related quests with Vela.
+// to perform secret related requests with Vela.
 type Config struct {
 	Action       string
 	Engine       string

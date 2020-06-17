@@ -27,27 +27,26 @@ func (c *Config) Get(client *vela.Client) error {
 	// handle the output based off the provided configuration
 	switch c.Output {
 	case "json":
-		// output the service in JSON format
+		// output the services in JSON format
 		err := output.JSON(services)
 		if err != nil {
 			return err
 		}
 	case "wide":
-		// TODO: create output.Wide function
-		//
-		// err := output.Wide(services)
-		// if err != nil {
-		// 	return err
-		// }
+		// output the services in wide table format
+		err := wideTable(services)
+		if err != nil {
+			return err
+		}
 	case "yaml":
-		// output the service in YAML format
+		// output the services in YAML format
 		err := output.YAML(services)
 		if err != nil {
 			return err
 		}
 	default:
-		// output the service in default format
-		err := output.Default(services)
+		// output the services in table format
+		err := table(services)
 		if err != nil {
 			return err
 		}

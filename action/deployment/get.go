@@ -33,12 +33,11 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	case "wide":
-		// TODO: create output.Wide function
-		//
-		// err := output.Wide(deployments)
-		// if err != nil {
-		// 	return err
-		// }
+		// output the deployments in wide table format
+		err := wideTable(deployments)
+		if err != nil {
+			return err
+		}
 	case "yaml":
 		// output the deployments in YAML format
 		err := output.YAML(deployments)
@@ -46,8 +45,8 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the deployments in default format
-		err := output.Default(deployments)
+		// output the deployments in table format
+		err := table(deployments)
 		if err != nil {
 			return err
 		}

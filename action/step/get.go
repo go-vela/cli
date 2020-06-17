@@ -27,27 +27,26 @@ func (c *Config) Get(client *vela.Client) error {
 	// handle the output based off the provided configuration
 	switch c.Output {
 	case "json":
-		// output the step in JSON format
+		// output the steps in JSON format
 		err := output.JSON(steps)
 		if err != nil {
 			return err
 		}
 	case "wide":
-		// TODO: create output.Wide function
-		//
-		// err := output.Wide(steps)
-		// if err != nil {
-		// 	return err
-		// }
+		// output the steps in wide table format
+		err := wideTable(steps)
+		if err != nil {
+			return err
+		}
 	case "yaml":
-		// output the step in YAML format
+		// output the steps in YAML format
 		err := output.YAML(steps)
 		if err != nil {
 			return err
 		}
 	default:
-		// output the step in default format
-		err := output.Default(steps)
+		// output the steps in table format
+		err := table(steps)
 		if err != nil {
 			return err
 		}

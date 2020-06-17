@@ -36,7 +36,18 @@ func TestDeployment_Config_Get(t *testing.T) {
 				Repo:    "octocat",
 				Page:    1,
 				PerPage: 10,
-				Output:  "default",
+				Output:  "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Repo:    "octocat",
+				Page:    1,
+				PerPage: 10,
+				Output:  "dump",
 			},
 		},
 		{
@@ -48,6 +59,17 @@ func TestDeployment_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Repo:    "octocat",
+				Page:    1,
+				PerPage: 10,
+				Output:  "spew",
 			},
 		},
 		{

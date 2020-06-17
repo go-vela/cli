@@ -38,7 +38,20 @@ func TestDeployment_Config_Add(t *testing.T) {
 				Ref:         "refs/heads/master",
 				Target:      "production",
 				Task:        "deploy:vela",
-				Output:      "default",
+				Output:      "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:      "add",
+				Org:         "github",
+				Repo:        "octocat",
+				Description: "Deployment request from Vela",
+				Ref:         "refs/heads/master",
+				Target:      "production",
+				Task:        "deploy:vela",
+				Output:      "dump",
 			},
 		},
 		{
@@ -52,6 +65,19 @@ func TestDeployment_Config_Add(t *testing.T) {
 				Target:      "production",
 				Task:        "deploy:vela",
 				Output:      "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:      "add",
+				Org:         "github",
+				Repo:        "octocat",
+				Description: "Deployment request from Vela",
+				Ref:         "refs/heads/master",
+				Target:      "production",
+				Task:        "deploy:vela",
+				Output:      "spew",
 			},
 		},
 		{

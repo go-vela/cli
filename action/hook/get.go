@@ -32,6 +32,12 @@ func (c *Config) Get(client *vela.Client) error {
 		if err != nil {
 			return err
 		}
+	case "wide":
+		// output the hooks in wide table format
+		err := wideTable(hooks)
+		if err != nil {
+			return err
+		}
 	case "yaml":
 		// output the hooks in YAML format
 		err := output.YAML(hooks)
@@ -39,8 +45,8 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the hooks in default format
-		err := output.Default(hooks)
+		// output the hooks in table format
+		err := table(hooks)
 		if err != nil {
 			return err
 		}

@@ -21,8 +21,8 @@ func TestHook_Config_Validate(t *testing.T) {
 				Org:     "github",
 				Repo:    "octocat",
 				Page:    1,
-				PerPage: 1,
-				Output:  "default",
+				PerPage: 10,
+				Output:  "",
 			},
 		},
 		{
@@ -32,7 +32,7 @@ func TestHook_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -42,7 +42,7 @@ func TestHook_Config_Validate(t *testing.T) {
 				Org:    "",
 				Repo:   "octocat",
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -52,7 +52,7 @@ func TestHook_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "",
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -61,7 +61,7 @@ func TestHook_Config_Validate(t *testing.T) {
 				Action: "view",
 				Org:    "github",
 				Repo:   "octocat",
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

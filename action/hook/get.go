@@ -26,21 +26,39 @@ func (c *Config) Get(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the hooks in dump format
+		err := output.Dump(hooks)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the hooks in JSON format
 		err := output.JSON(hooks)
 		if err != nil {
 			return err
 		}
-	case "yaml":
+	case output.DriverSpew:
+		// output the hooks in spew format
+		err := output.Spew(hooks)
+		if err != nil {
+			return err
+		}
+	case "wide":
+		// output the hooks in wide table format
+		err := wideTable(hooks)
+		if err != nil {
+			return err
+		}
+	case output.DriverYAML:
 		// output the hooks in YAML format
 		err := output.YAML(hooks)
 		if err != nil {
 			return err
 		}
 	default:
-		// output the hooks in default format
-		err := output.Default(hooks)
+		// output the hooks in table format
+		err := table(hooks)
 		if err != nil {
 			return err
 		}

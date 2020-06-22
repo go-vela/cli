@@ -20,13 +20,25 @@ func (c *Config) ViewService(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the service log in dump format
+		err := output.Dump(log)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the service log in JSON format
 		err := output.JSON(log)
 		if err != nil {
 			return err
 		}
-	case "yaml":
+	case output.DriverSpew:
+		// output the service log in spew format
+		err := output.Spew(log)
+		if err != nil {
+			return err
+		}
+	case output.DriverYAML:
 		// output the service log in YAML format
 		err := output.YAML(log)
 		if err != nil {
@@ -53,13 +65,25 @@ func (c *Config) ViewStep(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the step log in dump format
+		err := output.Dump(log)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the step log in JSON format
 		err := output.JSON(log)
 		if err != nil {
 			return err
 		}
-	case "yaml":
+	case output.DriverSpew:
+		// output the step log in spew format
+		err := output.Spew(log)
+		if err != nil {
+			return err
+		}
+	case output.DriverYAML:
 		// output the step log in YAML format
 		err := output.YAML(log)
 		if err != nil {

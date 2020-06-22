@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 )
 
-func TestService_Config_Get(t *testing.T) {
+func TestLog_Config_Get(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -35,7 +35,17 @@ func TestService_Config_Get(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "get",
+				Org:    "github",
+				Repo:   "octocat",
+				Build:  1,
+				Output: "dump",
 			},
 		},
 		{
@@ -46,6 +56,16 @@ func TestService_Config_Get(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "get",
+				Org:    "github",
+				Repo:   "octocat",
+				Build:  1,
+				Output: "spew",
 			},
 		},
 		{

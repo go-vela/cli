@@ -33,12 +33,11 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	case "wide":
-		// TODO: create output.Wide function
-		//
-		// err := output.Wide(repositories)
-		// if err != nil {
-		// 	return err
-		// }
+		// output the repos in wide table format
+		err := wideTable(repos)
+		if err != nil {
+			return err
+		}
 	case "yaml":
 		// output the repositories in YAML format
 		err := output.YAML(repos)
@@ -46,8 +45,8 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the repositories in default format
-		err := output.Default(repos)
+		// output the repos in table format
+		err := table(repos)
 		if err != nil {
 			return err
 		}

@@ -37,7 +37,19 @@ func TestStep_Config_Get(t *testing.T) {
 				Build:   1,
 				Page:    1,
 				PerPage: 10,
-				Output:  "default",
+				Output:  "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Repo:    "octocat",
+				Build:   1,
+				Page:    1,
+				PerPage: 10,
+				Output:  "dump",
 			},
 		},
 		{
@@ -50,6 +62,18 @@ func TestStep_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Repo:    "octocat",
+				Build:   1,
+				Page:    1,
+				PerPage: 10,
+				Output:  "spew",
 			},
 		},
 		{

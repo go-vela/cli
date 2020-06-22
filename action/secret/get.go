@@ -52,12 +52,11 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	case "wide":
-		// TODO: create output.Wide function
-		//
-		// err := output.Wide(secrets)
-		// if err != nil {
-		// 	return err
-		// }
+		// output the secrets in wide table format
+		err := wideTable(secrets)
+		if err != nil {
+			return err
+		}
 	case "yaml":
 		// output the secrets in YAML format
 		err := output.YAML(secrets)
@@ -65,8 +64,8 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the secrets in default format
-		err := output.Default(secrets)
+		// output the secrets in table format
+		err := table(secrets)
 		if err != nil {
 			return err
 		}

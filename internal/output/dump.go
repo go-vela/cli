@@ -5,11 +5,11 @@
 package output
 
 import (
-	"errors"
 	"os"
-	"reflect"
 
 	"github.com/davecgh/go-spew/spew"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Dump outputs the provided input to stdout
@@ -41,20 +41,15 @@ import (
 //   offsets, byte values in hex, and ASCII
 //   output
 func Dump(_input interface{}) error {
-	// check if the input provided is nil
-	if _input == nil {
-		return errors.New("empty value provided for dump output")
+	logrus.Debugf("creating output with %s driver", DriverDump)
+
+	// validate the input provided
+	err := validate(DriverDump, _input)
+	if err != nil {
+		return err
 	}
 
-	// check if the value of input provided is nil
-	//
-	// We are using reflect here due to the nature
-	// of how interfaces work in Go. It is possible
-	// for _input to be a non-nil interface but the
-	// underlying value to be empty or nil.
-	if reflect.ValueOf(_input).IsZero() {
-		return errors.New("empty value provided for dump output")
-	}
+	logrus.Tracef("sending output to stdout with %s driver", DriverDump)
 
 	// ensure we output to stdout
 	spew.Fdump(os.Stdout, _input)

@@ -26,28 +26,39 @@ func (c *Config) Get(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the repositories in dump format
+		err := output.Dump(repos)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the repositories in JSON format
 		err := output.JSON(repos)
 		if err != nil {
 			return err
 		}
+	case output.DriverSpew:
+		// output the repositories in spew format
+		err := output.Spew(repos)
+		if err != nil {
+			return err
+		}
 	case "wide":
-		// TODO: create output.Wide function
-		//
-		// err := output.Wide(repositories)
-		// if err != nil {
-		// 	return err
-		// }
-	case "yaml":
+		// output the repos in wide table format
+		err := wideTable(repos)
+		if err != nil {
+			return err
+		}
+	case output.DriverYAML:
 		// output the repositories in YAML format
 		err := output.YAML(repos)
 		if err != nil {
 			return err
 		}
 	default:
-		// output the repositories in default format
-		err := output.Default(repos)
+		// output the repos in table format
+		err := table(repos)
 		if err != nil {
 			return err
 		}

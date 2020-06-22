@@ -34,7 +34,16 @@ func TestRepo_Config_Remove(t *testing.T) {
 				Action: "remove",
 				Org:    "github",
 				Name:   "octocat",
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "remove",
+				Org:    "github",
+				Name:   "octocat",
+				Output: "dump",
 			},
 		},
 		{
@@ -52,6 +61,15 @@ func TestRepo_Config_Remove(t *testing.T) {
 				Action: "remove",
 				Org:    "github",
 				Name:   "octocat",
+				Output: "spew",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "remove",
+				Org:    "github",
+				Name:   "octocat",
 				Output: "yaml",
 			},
 		},
@@ -61,7 +79,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 				Action: "remove",
 				Org:    "github",
 				Name:   "not-found",
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

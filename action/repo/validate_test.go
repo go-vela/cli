@@ -29,7 +29,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Trusted:    false,
 				Active:     true,
 				Events:     []string{"push", "pull_request", "comment", "deployment", "tag"},
-				Output:     "default",
+				Output:     "",
 			},
 		},
 		{
@@ -38,7 +38,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Action: "chown",
 				Org:    "github",
 				Name:   "octocat",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -48,7 +48,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Org:     "github",
 				Page:    1,
 				PerPage: 10,
-				Output:  "default",
+				Output:  "",
 			},
 		},
 		{
@@ -57,7 +57,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Action: "remove",
 				Org:    "github",
 				Name:   "octocat",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -66,7 +66,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Action: "repair",
 				Org:    "github",
 				Name:   "octocat",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -84,7 +84,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Trusted:    false,
 				Active:     true,
 				Events:     []string{"push", "pull_request", "comment", "deployment", "tag"},
-				Output:     "default",
+				Output:     "",
 			},
 		},
 		{
@@ -93,7 +93,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Action: "view",
 				Org:    "github",
 				Name:   "octocat",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -102,7 +102,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Action: "view",
 				Org:    "",
 				Name:   "octocat",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -111,7 +111,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 				Action: "view",
 				Org:    "github",
 				Name:   "",
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

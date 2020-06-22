@@ -26,6 +26,7 @@ func main() {
 	}
 
 	app := cli.NewApp()
+	app.EnableBashCompletion = true
 	app.Name = "vela"
 	app.HelpName = "vela"
 	app.Usage = "CLI for managing Vela resources"

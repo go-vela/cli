@@ -35,7 +35,17 @@ func TestRepo_Config_Get(t *testing.T) {
 				Org:     "github",
 				Page:    1,
 				PerPage: 10,
-				Output:  "default",
+				Output:  "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Page:    1,
+				PerPage: 10,
+				Output:  "dump",
 			},
 		},
 		{
@@ -46,6 +56,16 @@ func TestRepo_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Page:    1,
+				PerPage: 10,
+				Output:  "spew",
 			},
 		},
 		{

@@ -45,9 +45,21 @@ func (c *Config) Get(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the secrets in dump format
+		err := output.Dump(secrets)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the secrets in JSON format
 		err := output.JSON(secrets)
+		if err != nil {
+			return err
+		}
+	case output.DriverSpew:
+		// output the secrets in spew format
+		err := output.Spew(secrets)
 		if err != nil {
 			return err
 		}
@@ -57,7 +69,7 @@ func (c *Config) Get(client *vela.Client) error {
 		if err != nil {
 			return err
 		}
-	case "yaml":
+	case output.DriverYAML:
 		// output the secrets in YAML format
 		err := output.YAML(secrets)
 		if err != nil {

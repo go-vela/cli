@@ -39,13 +39,25 @@ func (c *Config) Remove(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the message in dump format
+		err := output.Dump(msg)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the message in JSON format
 		err := output.JSON(msg)
 		if err != nil {
 			return err
 		}
-	case "yaml":
+	case output.DriverSpew:
+		// output the message in spew format
+		err := output.Spew(msg)
+		if err != nil {
+			return err
+		}
+	case output.DriverYAML:
 		// output the message in YAML format
 		err := output.YAML(msg)
 		if err != nil {

@@ -38,7 +38,7 @@ func TestSecret_Config_Add(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -50,7 +50,7 @@ func TestSecret_Config_Add(t *testing.T) {
 				Org:    "github",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -63,7 +63,20 @@ func TestSecret_Config_Add(t *testing.T) {
 				Team:   "octokitties",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Value:  "bar",
+				Output: "dump",
 			},
 		},
 		{
@@ -77,6 +90,19 @@ func TestSecret_Config_Add(t *testing.T) {
 				Name:   "foo",
 				Value:  "bar",
 				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Value:  "bar",
+				Output: "spew",
 			},
 		},
 		{
@@ -132,7 +158,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 			config: &Config{
 				Action: "add",
 				File:   "testdata/repo.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -140,7 +166,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 			config: &Config{
 				Action: "add",
 				File:   "testdata/org.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -148,7 +174,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 			config: &Config{
 				Action: "add",
 				File:   "testdata/shared.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -156,7 +182,15 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 			config: &Config{
 				Action: "add",
 				File:   "testdata/multiple.yml",
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/repo.yml",
+				Output: "dump",
 			},
 		},
 		{
@@ -165,6 +199,14 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 				Action: "add",
 				File:   "testdata/repo.yml",
 				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				File:   "testdata/repo.yml",
+				Output: "spew",
 			},
 		},
 		{

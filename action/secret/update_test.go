@@ -38,7 +38,7 @@ func TestSecret_Config_Update(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -51,7 +51,7 @@ func TestSecret_Config_Update(t *testing.T) {
 				Repo:   "*",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -64,7 +64,20 @@ func TestSecret_Config_Update(t *testing.T) {
 				Team:   "octokitties",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Value:  "bar",
+				Output: "dump",
 			},
 		},
 		{
@@ -78,6 +91,19 @@ func TestSecret_Config_Update(t *testing.T) {
 				Name:   "foo",
 				Value:  "bar",
 				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Value:  "bar",
+				Output: "spew",
 			},
 		},
 		{
@@ -133,7 +159,7 @@ func TestSecret_Config_UpdateFromFile(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				File:   "testdata/repo.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -141,7 +167,7 @@ func TestSecret_Config_UpdateFromFile(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				File:   "testdata/org.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -149,7 +175,7 @@ func TestSecret_Config_UpdateFromFile(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				File:   "testdata/shared.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -157,7 +183,15 @@ func TestSecret_Config_UpdateFromFile(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				File:   "testdata/multiple.yml",
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/repo.yml",
+				Output: "dump",
 			},
 		},
 		{
@@ -166,6 +200,14 @@ func TestSecret_Config_UpdateFromFile(t *testing.T) {
 				Action: "update",
 				File:   "testdata/repo.yml",
 				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				File:   "testdata/repo.yml",
+				Output: "spew",
 			},
 		},
 		{

@@ -37,7 +37,7 @@ func TestSecret_Config_View(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -49,7 +49,7 @@ func TestSecret_Config_View(t *testing.T) {
 				Org:    "github",
 				Repo:   "*",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -61,7 +61,19 @@ func TestSecret_Config_View(t *testing.T) {
 				Org:    "github",
 				Team:   "octokitties",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "view",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Output: "dump",
 			},
 		},
 		{
@@ -74,6 +86,18 @@ func TestSecret_Config_View(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "view",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Output: "spew",
 			},
 		},
 		{

@@ -24,7 +24,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -32,7 +32,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "add",
 				File:   "testdata/repo.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -45,7 +45,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Repo:    "octocat",
 				Page:    1,
 				PerPage: 10,
-				Output:  "default",
+				Output:  "",
 			},
 		},
 		{
@@ -57,7 +57,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -70,7 +70,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Value:  "bar",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -78,7 +78,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				File:   "testdata/repo.yml",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -90,7 +90,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -103,7 +103,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Name:   "foo",
 				Value:  "",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -115,7 +115,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -127,7 +127,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -139,7 +139,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "",
 				Repo:   "octocat",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -151,7 +151,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -163,7 +163,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Team:   "",
 				Name:   "foo",
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -175,7 +175,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Name:   "",
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

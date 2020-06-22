@@ -20,13 +20,25 @@ func (c *Config) View(client *vela.Client) error {
 
 	// handle the output based off the provided configuration
 	switch c.Output {
-	case "json":
+	case output.DriverDump:
+		// output the service in dump format
+		err := output.Dump(service)
+		if err != nil {
+			return err
+		}
+	case output.DriverJSON:
 		// output the service in JSON format
 		err := output.JSON(service)
 		if err != nil {
 			return err
 		}
-	case "yaml":
+	case output.DriverSpew:
+		// output the service in spew format
+		err := output.Spew(service)
+		if err != nil {
+			return err
+		}
+	case output.DriverYAML:
 		// output the service in YAML format
 		err := output.YAML(service)
 		if err != nil {

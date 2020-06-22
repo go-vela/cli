@@ -36,7 +36,18 @@ func TestService_Config_View(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Number: 1,
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "view",
+				Org:    "github",
+				Repo:   "octocat",
+				Build:  1,
+				Number: 1,
+				Output: "dump",
 			},
 		},
 		{
@@ -58,6 +69,17 @@ func TestService_Config_View(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Number: 1,
+				Output: "spew",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "view",
+				Org:    "github",
+				Repo:   "octocat",
+				Build:  1,
+				Number: 1,
 				Output: "yaml",
 			},
 		},
@@ -69,7 +91,7 @@ func TestService_Config_View(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Number: 0,
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

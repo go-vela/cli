@@ -35,7 +35,17 @@ func TestBuild_Config_Restart(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
-				Output: "default",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "restart",
+				Org:    "github",
+				Repo:   "octocat",
+				Number: 1,
+				Output: "dump",
 			},
 		},
 		{
@@ -55,6 +65,16 @@ func TestBuild_Config_Restart(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
+				Output: "spew",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "restart",
+				Org:    "github",
+				Repo:   "octocat",
+				Number: 1,
 				Output: "yaml",
 			},
 		},
@@ -65,7 +85,7 @@ func TestBuild_Config_Restart(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 0,
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

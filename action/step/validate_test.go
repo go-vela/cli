@@ -23,7 +23,7 @@ func TestStep_Config_Validate(t *testing.T) {
 				Build:   1,
 				Page:    1,
 				PerPage: 10,
-				Output:  "default",
+				Output:  "",
 			},
 		},
 		{
@@ -34,7 +34,7 @@ func TestStep_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -45,7 +45,7 @@ func TestStep_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -56,7 +56,7 @@ func TestStep_Config_Validate(t *testing.T) {
 				Repo:   "",
 				Build:  1,
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -67,7 +67,7 @@ func TestStep_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  0,
 				Number: 1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -78,7 +78,7 @@ func TestStep_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Number: 0,
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

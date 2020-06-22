@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestService_Config_Validate(t *testing.T) {
+func TestLog_Config_Validate(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -21,7 +21,7 @@ func TestService_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -32,7 +32,7 @@ func TestService_Config_Validate(t *testing.T) {
 				Repo:    "octocat",
 				Build:   1,
 				Service: 1,
-				Output:  "default",
+				Output:  "",
 			},
 		},
 		{
@@ -43,7 +43,7 @@ func TestService_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Step:   1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -54,7 +54,7 @@ func TestService_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  1,
 				Step:   1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -65,7 +65,7 @@ func TestService_Config_Validate(t *testing.T) {
 				Repo:   "",
 				Build:  1,
 				Step:   1,
-				Output: "default",
+				Output: "",
 			},
 		},
 		{
@@ -76,7 +76,7 @@ func TestService_Config_Validate(t *testing.T) {
 				Repo:   "octocat",
 				Build:  0,
 				Step:   1,
-				Output: "default",
+				Output: "",
 			},
 		},
 	}

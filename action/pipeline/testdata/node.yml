@@ -1,0 +1,8 @@
+version: "1"
+
+steps:
+  - name: version
+    image: node:latest
+    pull: true
+    commands:
+      - node --version

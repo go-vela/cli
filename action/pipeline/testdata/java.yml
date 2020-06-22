@@ -1,0 +1,8 @@
+version: "1"
+
+steps:
+  - name: version
+    image: openjdk:latest
+    pull: true
+    commands:
+      - java --version

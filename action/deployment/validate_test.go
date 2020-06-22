@@ -24,7 +24,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Ref:         "refs/heads/master",
 				Target:      "production",
 				Task:        "deploy:vela",
-				Output:      "json",
+				Output:      "",
 			},
 		},
 		{
@@ -33,10 +33,9 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Action:  "get",
 				Org:     "github",
 				Repo:    "octocat",
-				Number:  1,
 				Page:    1,
 				PerPage: 10,
-				Output:  "json",
+				Output:  "",
 			},
 		},
 		{
@@ -46,7 +45,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
-				Output: "json",
+				Output: "",
 			},
 		},
 		{
@@ -58,7 +57,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Description: "Deployment request from Vela",
 				Target:      "production",
 				Task:        "deploy:vela",
-				Output:      "json",
+				Output:      "",
 			},
 		},
 		{
@@ -70,7 +69,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Description: "Deployment request from Vela",
 				Ref:         "refs/heads/master",
 				Task:        "deploy:vela",
-				Output:      "json",
+				Output:      "",
 			},
 		},
 		{
@@ -80,7 +79,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Org:    "",
 				Repo:   "octocat",
 				Number: 1,
-				Output: "json",
+				Output: "",
 			},
 		},
 		{
@@ -90,7 +89,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "",
 				Number: 1,
-				Output: "json",
+				Output: "",
 			},
 		},
 		{
@@ -100,7 +99,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 0,
-				Output: "json",
+				Output: "",
 			},
 		},
 	}

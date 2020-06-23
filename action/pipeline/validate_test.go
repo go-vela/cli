@@ -28,6 +28,15 @@ func TestPipeline_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "default.yml",
+				Path:   "testdata",
+				Type:   "",
+			},
+		},
+		{
 			failure: true,
 			config: &Config{
 				Action: "generate",

@@ -14,11 +14,9 @@ import (
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
-	// check if pipeline action is generate
-	if c.Action == "generate" {
-		if len(c.File) == 0 {
-			return fmt.Errorf("no pipeline file provided")
-		}
+	// check if pipeline file is set
+	if len(c.File) == 0 {
+		return fmt.Errorf("no pipeline file provided")
 	}
 
 	return nil

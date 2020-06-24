@@ -1,0 +1,10 @@
+version: "1"
+
+stages:
+  version:
+    steps:
+      - name: version
+        image: alpine:latest
+        pull: true
+        commands:
+          - echo hello

@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
+	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3
 	github.com/coreos/go-semver v0.3.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
@@ -19,6 +20,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.6 // indirect
 	github.com/nicksnyder/go-i18n v1.10.1 // indirect
 	github.com/sirupsen/logrus v1.5.0
+	github.com/spf13/afero v1.3.0
 	github.com/urfave/cli/v2 v2.2.0
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/yaml.v2 v2.3.0

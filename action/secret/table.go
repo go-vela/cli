@@ -41,8 +41,8 @@ func table(secrets *[]library.Secret) error {
 		table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), k)
 	}
 
-	// output the table in default format
-	err := output.Default(table)
+	// output the table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}
@@ -81,8 +81,8 @@ func wideTable(secrets *[]library.Secret) error {
 		table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), k, e, i)
 	}
 
-	// output the wide table in default format
-	err := output.Default(table)
+	// output the wide table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}

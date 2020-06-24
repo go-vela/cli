@@ -36,8 +36,8 @@ func table(deployments *[]library.Deployment) error {
 		table.AddRow(d.GetID(), d.GetTask(), d.GetUser(), d.GetRef(), d.GetTarget())
 	}
 
-	// output the table in default format
-	err := output.Default(table)
+	// output the table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}
@@ -67,8 +67,8 @@ func wideTable(deployments *[]library.Deployment) error {
 		table.AddRow(d.GetID(), d.GetTask(), d.GetUser(), d.GetRef(), d.GetTarget(), d.GetCommit(), d.GetDescription())
 	}
 
-	// output the wide table in default format
-	err := output.Default(table)
+	// output the wide table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}

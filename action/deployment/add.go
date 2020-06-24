@@ -55,8 +55,8 @@ func (c *Config) Add(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the deployment in default format
-		err := output.Default(deployment)
+		// output the deployment in stdout format
+		err := output.Stdout(deployment)
 		if err != nil {
 			return err
 		}

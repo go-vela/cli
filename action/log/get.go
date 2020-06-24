@@ -45,8 +45,8 @@ func (c *Config) Get(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the build logs in default format
-		err := output.Default(logs)
+		// output the build logs in stdout format
+		err := output.Stdout(logs)
 		if err != nil {
 			return err
 		}

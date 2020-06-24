@@ -43,8 +43,8 @@ func table(steps *[]library.Step) error {
 		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), d)
 	}
 
-	// output the table in default format
-	err := output.Default(table)
+	// output the table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}
@@ -83,8 +83,8 @@ func wideTable(steps *[]library.Step) error {
 		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), d, c, f)
 	}
 
-	// output the wide table in default format
-	err := output.Default(table)
+	// output the wide table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}

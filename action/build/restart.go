@@ -45,8 +45,8 @@ func (c *Config) Restart(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the build in default format
-		err := output.Default(build)
+		// output the build in stdout format
+		err := output.Stdout(build)
 		if err != nil {
 			return err
 		}

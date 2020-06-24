@@ -17,37 +17,37 @@ func TestOutput_validate(t *testing.T) {
 	}{
 		{
 			failure: false,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   "hello",
 		},
 		{ // map
 			failure: false,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   map[string]string{"hello": "world"},
 		},
 		{ // slice
 			failure: false,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   []interface{}{1, 2, 3},
 		},
 		{ // slice complex
 			failure: false,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   []interface{}{struct{ Foo string }{Foo: "bar"}},
 		},
 		{ // complex
 			failure: false,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   []struct{ Foo string }{{"bar"}, {"baz"}},
 		},
 		{
 			failure: true,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   nil,
 		},
 		{
 			failure: true,
-			driver:  DriverDefault,
+			driver:  DriverStdout,
 			input:   "",
 		},
 		{

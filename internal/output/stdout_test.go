@@ -46,18 +46,18 @@ func TestOutput_Default(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := Default(test.input)
+		err := Stdout(test.input)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("Default should have returned err")
+				t.Errorf("Stdout should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("Default returned err: %v", err)
+			t.Errorf("Stdout returned err: %v", err)
 		}
 	}
 }

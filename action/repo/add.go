@@ -86,8 +86,8 @@ func (c *Config) Add(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the repository in default format
-		err := output.Default(repo)
+		// output the repository in stdout format
+		err := output.Stdout(repo)
 		if err != nil {
 			return err
 		}

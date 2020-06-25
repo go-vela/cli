@@ -45,8 +45,8 @@ func (c *Config) View(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the service in default format
-		err := output.Default(service)
+		// output the service in stdout format
+		err := output.Stdout(service)
 		if err != nil {
 			return err
 		}

@@ -45,8 +45,8 @@ func (c *Config) ViewService(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the service log in default format
-		err := output.Default(log)
+		// output the service log in stdout format
+		err := output.Stdout(log)
 		if err != nil {
 			return err
 		}
@@ -90,8 +90,8 @@ func (c *Config) ViewStep(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the step log in default format
-		err := output.Default(log)
+		// output the step log in stdout format
+		err := output.Stdout(log)
 		if err != nil {
 			return err
 		}

@@ -64,8 +64,8 @@ func (c *Config) Remove(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the message in default format
-		err := output.Default(msg)
+		// output the message in stdout format
+		err := output.Stdout(msg)
 		if err != nil {
 			return err
 		}

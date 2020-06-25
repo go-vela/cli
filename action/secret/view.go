@@ -64,8 +64,8 @@ func (c *Config) View(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the secret in default format
-		err := output.Default(secret)
+		// output the secret in stdout format
+		err := output.Stdout(secret)
 		if err != nil {
 			return err
 		}

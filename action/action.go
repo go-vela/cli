@@ -12,6 +12,9 @@ const (
 	// chownAction defines the action for changing ownership of a resource.
 	chownAction = "chown"
 
+	// generateAction defines the action for producing a resource.
+	generateAction = "generate"
+
 	// getAction defines the action for getting a list of resources.
 	getAction = "get"
 
@@ -26,6 +29,9 @@ const (
 
 	// updateAction defines the action for modifying a resource.
 	updateAction = "update"
+
+	// validateAction defines the action for validating a resource.
+	validateAction = "validate"
 
 	// viewAction defines the action for inspecting a resource.
 	viewAction = "view"

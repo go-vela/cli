@@ -8,8 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/deployment"
-
-	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
 )
@@ -74,14 +73,11 @@ DOCUMENTATION:
 // input and create the object used to
 // inspect a deployment.
 func deploymentView(c *cli.Context) error {
-	// create a vela client
-	client, err := vela.NewClient(c.String("addr"), nil)
+	// parse the Vela client from the context
+	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
-
-	// set token from global config
-	client.Authentication.SetTokenAuth(c.String("token"))
 
 	// create the deployment configuration
 	d := &deployment.Config{

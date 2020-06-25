@@ -1,0 +1,17 @@
+api:
+  addr: https://vela-server.localhost
+  token: superSecretToken
+  version: 1
+
+log:
+  level: info
+
+org: github
+
+repo: octocat
+
+output: json
+
+secret:
+  engine: native
+  type: repo

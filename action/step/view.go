@@ -45,8 +45,8 @@ func (c *Config) View(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the step in default format
-		err := output.Default(step)
+		// output the step in stdout format
+		err := output.Stdout(step)
 		if err != nil {
 			return err
 		}

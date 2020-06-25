@@ -6,9 +6,9 @@ package output
 
 // output drivers
 const (
-	// DriverDefault defines the driver type
-	// when outputting in default format.
-	DriverDefault = "default"
+	// DriverStdout defines the driver type
+	// when outputting in stdout format.
+	DriverStdout = "stdout"
 
 	// DriverDump defines the driver type
 	// when outputting in dump format.

@@ -39,8 +39,8 @@ func table(repos *[]library.Repo) error {
 		table.AddRow(r.GetFullName(), r.GetActive(), e, r.GetVisibility(), r.GetBranch())
 	}
 
-	// output the table in default format
-	err := output.Default(table)
+	// output the table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}
@@ -72,8 +72,8 @@ func wideTable(repos *[]library.Repo) error {
 		table.AddRow(r.GetFullName(), r.GetActive(), e, r.GetVisibility(), r.GetBranch(), r.GetLink())
 	}
 
-	// output the wide table in default format
-	err := output.Default(table)
+	// output the wide table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}

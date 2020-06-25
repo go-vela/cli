@@ -43,8 +43,8 @@ func table(builds *[]library.Build) error {
 		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), d)
 	}
 
-	// output the table in default format
-	err := output.Default(table)
+	// output the table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}
@@ -83,8 +83,8 @@ func wideTable(builds *[]library.Build) error {
 		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), b.GetCommit(), d, c, f, b.GetAuthor())
 	}
 
-	// output the wide table in default format
-	err := output.Default(table)
+	// output the wide table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}

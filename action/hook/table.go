@@ -41,8 +41,8 @@ func table(hooks *[]library.Hook) error {
 		table.AddRow(h.GetNumber(), h.GetStatus(), h.GetEvent(), h.GetBranch(), c)
 	}
 
-	// output the table in default format
-	err := output.Default(table)
+	// output the table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}
@@ -75,8 +75,8 @@ func wideTable(hooks *[]library.Hook) error {
 		table.AddRow(h.GetNumber(), h.GetSourceID(), h.GetStatus(), h.GetHost(), h.GetEvent(), h.GetBranch(), c)
 	}
 
-	// output the wide table in default format
-	err := output.Default(table)
+	// output the wide table in stdout format
+	err := output.Stdout(table)
 	if err != nil {
 		return err
 	}

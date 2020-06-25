@@ -45,8 +45,8 @@ func (c *Config) View(client *vela.Client) error {
 			return err
 		}
 	default:
-		// output the hook in default format
-		err := output.Default(hook)
+		// output the hook in stdout format
+		err := output.Stdout(hook)
 		if err != nil {
 			return err
 		}

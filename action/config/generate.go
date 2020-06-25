@@ -31,8 +31,8 @@ func (c *Config) Generate() error {
 			Engine: c.Engine,
 			Type:   c.Type,
 		},
-		Org:  c.Org,
-		Repo: c.Repo,
+		Org:    c.Org,
+		Repo:   c.Repo,
 		Output: c.Output,
 	}
 

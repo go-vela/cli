@@ -3,8 +3,9 @@ package completion
 import (
 	"bytes"
 	"fmt"
-	"github.com/urfave/cli/v2"
 	"os"
+
+	"github.com/urfave/cli/v2"
 )
 
 var ZSHCmd = cli.Command{
@@ -23,9 +24,7 @@ func executeZSH(_ *cli.Context) error {
 	buf := new(bytes.Buffer)
 
 	// urfave cli zsh auto completion script tailor made for vela
-	buf.WriteString(fmt.Sprintf(
-		`#comdef vela
-    	
+	buf.WriteString(`#comdef vela
 		_cli_zsh_autocomplete() {
   			local -a opts
   			local cur
@@ -45,12 +44,12 @@ func executeZSH(_ *cli.Context) error {
 		}
 		export _CLI_ZSH_AUTOCOMPLETE_HACK=1
 		compdef _cli_zsh_autocomplete vela`,
-	),
 	)
 
 	_, err := os.Stdout.Write(buf.Bytes())
 	if err != nil {
 		return err
 	}
+
 	return nil
 }

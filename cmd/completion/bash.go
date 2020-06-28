@@ -3,8 +3,9 @@ package completion
 import (
 	"bytes"
 	"fmt"
-	"github.com/urfave/cli/v2"
 	"os"
+
+	"github.com/urfave/cli/v2"
 )
 
 var BashCmd = cli.Command{
@@ -23,8 +24,7 @@ func executeBash(_ *cli.Context) error {
 	buf := new(bytes.Buffer)
 
 	// urfave cli bash auto completion script tailor made for vela
-	buf.WriteString(fmt.Sprintf(`
-	#! /bin/bash
+	buf.WriteString(`#! /bin/bash
 		_cli_bash_autocomplete() {
   			if [[ "${COMP_WORDS[0]}" != "source" ]]; then
     			local cur opts base
@@ -41,8 +41,7 @@ func executeBash(_ *cli.Context) error {
     			return 0
   			fi
 		}
-		complete -o bashdefault -o default -o nospace -F _cli_bash_autocomplete vela
-`),
+		complete -o bashdefault -o default -o nospace -F _cli_bash_autocomplete vela`,
 	)
 
 	_, err := os.Stdout.Write(buf.Bytes())
@@ -50,5 +49,6 @@ func executeBash(_ *cli.Context) error {
 	if err != nil {
 		return err
 	}
+
 	return nil
 }

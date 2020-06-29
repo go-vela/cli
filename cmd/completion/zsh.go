@@ -16,10 +16,11 @@ var ZSHCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 1.  To enable auto completion for current zsh session:
     source <(vela completion zsh)
-2.  To permanently enable zsh auto completion for vela, visit https://github.com/go-vela/docs
+2.  To permanently enable zsh auto completion for vela, visit https://go-vela.github.io/docs/cli/autocompletion/zsh/
 `, cli.CommandHelpTemplate),
 }
 
+// To generate zsh completion script which can be sourced to enable vela auto completion in zsh shell
 func executeZSH(_ *cli.Context) error {
 	buf := new(bytes.Buffer)
 

@@ -16,10 +16,11 @@ var BashCmd = cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 1.  To enable auto completion for current bash session. Make sure bash version is 4+:
     source <(vela completion bash)
-2.  To permanently enable bash auto completion for vela, visit https://github.com/go-vela/docs
+2.  To permanently enable bash auto completion for vela, visit https://go-vela.github.io/docs/cli/autocompletion/bash/
 `, cli.CommandHelpTemplate),
 }
 
+// To generate bash completion script which can be sourced to enable vela auto completion in bash shell
 func executeBash(_ *cli.Context) error {
 	buf := new(bytes.Buffer)
 

@@ -22,4 +22,5 @@ var Vela = []*cli.Command{
 	&validateCmd,
 	&repairCmd,
 	&chownCmd,
+	&completionCmd,
 }

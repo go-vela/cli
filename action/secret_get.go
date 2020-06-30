@@ -8,8 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/secret"
-
-	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/cli/internal/client"
 
 	"github.com/go-vela/types/constants"
 
@@ -111,8 +110,8 @@ DOCUMENTATION:
 // input and create the object used to
 // capture a list of secrets.
 func secretGet(c *cli.Context) error {
-	// create a vela client
-	client, err := vela.NewClient(c.String("addr"), nil)
+	// parse the Vela client from the context
+	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}

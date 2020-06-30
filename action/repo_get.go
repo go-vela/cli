@@ -70,12 +70,16 @@ DOCUMENTATION:
 // capture a list of repos.
 func repoGet(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action:  getAction,
 		Page:    c.Int("page"),
@@ -84,11 +88,15 @@ func repoGet(c *cli.Context) error {
 	}
 
 	// validate repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Validate
 	err = r.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the get call for the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Get
 	return r.Get(client)
 }

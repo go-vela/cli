@@ -144,12 +144,16 @@ DOCUMENTATION:
 // modify a secret.
 func secretUpdate(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action:       addAction,
 		Engine:       c.String("engine"),
@@ -167,6 +171,8 @@ func secretUpdate(c *cli.Context) error {
 	}
 
 	// validate secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Validate
 	err = s.Validate()
 	if err != nil {
 		return err
@@ -175,9 +181,13 @@ func secretUpdate(c *cli.Context) error {
 	// check if secret file is provided
 	if len(s.File) > 0 {
 		// execute the update from file call for the secret configuration
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.UpdateFromFile
 		return s.UpdateFromFile(client)
 	}
 
 	// execute the update call for the secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Update
 	return s.Update(client)
 }

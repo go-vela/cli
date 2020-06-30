@@ -83,12 +83,16 @@ DOCUMENTATION:
 // inspect a service.
 func serviceView(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the service configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config
 	s := &service.Config{
 		Action: viewAction,
 		Org:    c.String("org"),
@@ -99,11 +103,15 @@ func serviceView(c *cli.Context) error {
 	}
 
 	// validate service configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config.Validate
 	err = s.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the view call for the service configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config.View
 	return s.View(client)
 }

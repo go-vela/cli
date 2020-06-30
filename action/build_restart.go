@@ -72,12 +72,16 @@ DOCUMENTATION:
 // restart a build.
 func buildRestart(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config
 	b := &build.Config{
 		Action: restartAction,
 		Org:    c.String("org"),
@@ -87,11 +91,15 @@ func buildRestart(c *cli.Context) error {
 	}
 
 	// validate build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Validate
 	err = b.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the restart call for the build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Restart
 	return b.Restart(client)
 }

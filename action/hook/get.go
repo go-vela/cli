@@ -13,12 +13,16 @@ import (
 // Get captures a list of build hooks based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of hooks
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
 	opts := &vela.ListOptions{
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
 
 	// send API call to capture a list of hooks
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#HookService.GetAll
 	hooks, _, err := client.Hook.GetAll(c.Org, c.Repo, opts)
 	if err != nil {
 		return err
@@ -28,41 +32,29 @@ func (c *Config) Get(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the hooks in dump format
-		err := output.Dump(hooks)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(hooks)
 	case output.DriverJSON:
 		// output the hooks in JSON format
-		err := output.JSON(hooks)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(hooks)
 	case output.DriverSpew:
 		// output the hooks in spew format
-		err := output.Spew(hooks)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(hooks)
 	case "wide":
 		// output the hooks in wide table format
-		err := wideTable(hooks)
-		if err != nil {
-			return err
-		}
+		return wideTable(hooks)
 	case output.DriverYAML:
 		// output the hooks in YAML format
-		err := output.YAML(hooks)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(hooks)
 	default:
 		// output the hooks in table format
-		err := table(hooks)
-		if err != nil {
-			return err
-		}
+		return table(hooks)
 	}
-
-	return nil
 }

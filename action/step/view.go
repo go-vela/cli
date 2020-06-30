@@ -13,6 +13,8 @@ import (
 // View inspects a step based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a step
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#StepService.Get
 	step, _, err := client.Step.Get(c.Org, c.Repo, c.Build, c.Number)
 	if err != nil {
 		return err
@@ -22,35 +24,28 @@ func (c *Config) View(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the step in dump format
-		err := output.Dump(step)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(step)
 	case output.DriverJSON:
 		// output the step in JSON format
-		err := output.JSON(step)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(step)
 	case output.DriverSpew:
 		// output the step in spew format
-		err := output.Spew(step)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(step)
 	case output.DriverYAML:
 		// output the step in YAML format
-		err := output.YAML(step)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(step)
 	default:
 		// output the step in stdout format
-		err := output.Stdout(step)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(step)
 	}
-
-	return nil
 }

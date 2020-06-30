@@ -13,21 +13,22 @@ import (
 // View inspects the config file based off the provided configuration.
 func (c *Config) View() error {
 	// use custom filesystem which enables us to test
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
 	a := &afero.Afero{
 		Fs: appFS,
 	}
 
 	// send Filesystem call to read config file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.ReadFile
 	config, err := a.ReadFile(c.File)
 	if err != nil {
 		return err
 	}
 
 	// output the config in stdout format
-	err = output.Stdout(config)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(config)
 }

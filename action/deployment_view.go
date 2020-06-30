@@ -74,12 +74,16 @@ DOCUMENTATION:
 // inspect a deployment.
 func deploymentView(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the deployment configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config
 	d := &deployment.Config{
 		Action: viewAction,
 		Org:    c.String("org"),
@@ -89,11 +93,15 @@ func deploymentView(c *cli.Context) error {
 	}
 
 	// validate deployment configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.Validate
 	err = d.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the view call for the deployment configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.View
 	return d.View(client)
 }

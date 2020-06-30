@@ -20,34 +20,43 @@ import (
 // provided hooks in a table format with
 // a specific set of fields displayed.
 func table(hooks *[]library.Hook) error {
-	// create new table
+	// create a new table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
 	table := uitable.New()
 
 	// set column width for table to 50
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.MaxColWidth = 50
 
 	// ensure the table is always wrapped
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
 	// set of hook fields we display in a table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 	table.AddRow("NUMBER", "STATUS", "EVENT", "BRANCH", "CREATED")
 
 	// iterate through all hooks in the list
 	for _, h := range reverse(*hooks) {
 		// calculate created timestamp in human readable form
+		//
+		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
 		c := humanize.Time(time.Unix(h.GetCreated(), 0))
 
 		// add a row to the table with the specified values
+		//
+		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 		table.AddRow(h.GetNumber(), h.GetStatus(), h.GetEvent(), h.GetBranch(), c)
 	}
 
 	// output the table in stdout format
-	err := output.Stdout(table)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(table)
 }
 
 // wideTable is a helper function to output the
@@ -55,39 +64,49 @@ func table(hooks *[]library.Hook) error {
 // a specific set of fields displayed.
 func wideTable(hooks *[]library.Hook) error {
 	// create new wide table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
 	table := uitable.New()
 
 	// set column width for wide table to 200
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.MaxColWidth = 200
 
 	// ensure the wide table is always wrapped
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
-	// set of hook fields we display in a table
+	// set of hook fields we display in a wide table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 	table.AddRow("NUMBER", "SOURCE", "STATUS", "HOST", "EVENT", "BRANCH", "CREATED")
 
 	// iterate through all hooks in the list
 	for _, h := range reverse(*hooks) {
 		// calculate created timestamp in human readable form
+		//
+		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
 		c := humanize.Time(time.Unix(h.GetCreated(), 0))
 
 		// add a row to the table with the specified values
+		//
+		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 		table.AddRow(h.GetNumber(), h.GetSourceID(), h.GetStatus(), h.GetHost(), h.GetEvent(), h.GetBranch(), c)
 	}
 
 	// output the wide table in stdout format
-	err := output.Stdout(table)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(table)
 }
 
 // reverse is a helper function to sort the hooks
 // based off the hook number and then flip the
 // order they get displayed in.
 func reverse(h []library.Hook) []library.Hook {
+	// sort the list of hooks based off the hook number
 	sort.SliceStable(h, func(i, j int) bool {
 		return h[i].GetNumber() < h[j].GetNumber()
 	})

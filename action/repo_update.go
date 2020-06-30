@@ -130,12 +130,16 @@ DOCUMENTATION:
 // modify a repository.
 func repoUpdate(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action:     updateAction,
 		Org:        c.String("org"),
@@ -153,11 +157,15 @@ func repoUpdate(c *cli.Context) error {
 	}
 
 	// validate repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Validate
 	err = r.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the update call for the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Update
 	return r.Update(client)
 }

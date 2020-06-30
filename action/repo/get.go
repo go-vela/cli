@@ -13,12 +13,16 @@ import (
 // Get captures a list of deployments based off the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of repositories
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
 	opts := &vela.ListOptions{
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
 
 	// send API call to capture a list of repositories
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.GetAll
 	repos, _, err := client.Repo.GetAll(opts)
 	if err != nil {
 		return err
@@ -28,41 +32,29 @@ func (c *Config) Get(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the repositories in dump format
-		err := output.Dump(repos)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(repos)
 	case output.DriverJSON:
 		// output the repositories in JSON format
-		err := output.JSON(repos)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(repos)
 	case output.DriverSpew:
 		// output the repositories in spew format
-		err := output.Spew(repos)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(repos)
 	case "wide":
-		// output the repos in wide table format
-		err := wideTable(repos)
-		if err != nil {
-			return err
-		}
+		// output the repositories in wide table format
+		return wideTable(repos)
 	case output.DriverYAML:
 		// output the repositories in YAML format
-		err := output.YAML(repos)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(repos)
 	default:
-		// output the repos in table format
-		err := table(repos)
-		if err != nil {
-			return err
-		}
+		// output the repositories in table format
+		return table(repos)
 	}
-
-	return nil
 }

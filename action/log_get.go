@@ -77,13 +77,17 @@ DOCUMENTATION:
 // capture a list of build logs.
 func logGet(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the log configuration
-	s := &log.Config{
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config
+	l := &log.Config{
 		Action: getAction,
 		Org:    c.String("org"),
 		Repo:   c.String("repo"),
@@ -92,11 +96,15 @@ func logGet(c *cli.Context) error {
 	}
 
 	// validate log configuration
-	err = s.Validate()
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.Validate
+	err = l.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the get call for the log configuration
-	return s.Get(client)
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.Get
+	return l.Get(client)
 }

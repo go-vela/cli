@@ -130,12 +130,16 @@ DOCUMENTATION:
 // create a repo.
 func repoAdd(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action:     addAction,
 		Org:        c.String("org"),
@@ -153,11 +157,15 @@ func repoAdd(c *cli.Context) error {
 	}
 
 	// validate repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Validate
 	err = r.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the add call for the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Add
 	return r.Add(client)
 }

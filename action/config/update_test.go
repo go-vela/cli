@@ -31,8 +31,8 @@ func TestConfig_Config_Update(t *testing.T) {
 				UpdateFlags: map[string]string{
 					"addr":    "https://vela-server.localhost",
 					"token":   "superSecretToken",
-					"version": "1",
-					"level":   "info",
+					"api.version": "1",
+					"log.level":   "info",
 					"engine":  "native",
 					"type":    "repo",
 					"org":     "github",

@@ -51,13 +51,13 @@ func (c *Config) Update() error {
 		}
 
 		// check if API version flag should be modified
-		if strings.EqualFold(key, "version") {
+		if strings.EqualFold(key, "api.version") {
 			// set the API version field to value provided
 			config.API.Version = value
 		}
 
 		// check if log level flag should be modified
-		if strings.EqualFold(key, "level") {
+		if strings.EqualFold(key, "log.level") {
 			// set the log level field to value provided
 			config.Log.Level = value
 		}

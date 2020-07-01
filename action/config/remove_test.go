@@ -31,8 +31,8 @@ func TestConfig_Config_Remove(t *testing.T) {
 				RemoveFlags: []string{
 					"addr",
 					"token",
-					"version",
-					"level",
+					"api.version",
+					"log.level",
 					"engine",
 					"type",
 					"org",

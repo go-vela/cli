@@ -57,13 +57,13 @@ func (c *Config) Remove() error {
 		}
 
 		// check if API version flag should be removed
-		if strings.EqualFold(flag, "version") {
+		if strings.EqualFold(flag, "api.version") {
 			// set the API version field to empty in config
 			config.API.Version = ""
 		}
 
 		// check if log level flag should be removed
-		if strings.EqualFold(flag, "level") {
+		if strings.EqualFold(flag, "log.level") {
 			// set the log level field to empty in config
 			config.Log.Level = ""
 		}

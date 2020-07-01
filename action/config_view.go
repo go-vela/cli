@@ -37,8 +37,8 @@ func configView(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
-		Action:   viewAction,
-		File:     c.String("file"),
+		Action: viewAction,
+		File:   c.String("file"),
 	}
 
 	// validate config file configuration

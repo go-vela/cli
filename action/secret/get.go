@@ -32,12 +32,16 @@ func (c *Config) Get(client *vela.Client) error {
 	}
 
 	// set the pagination options for list of secrets
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
 	opts := &vela.ListOptions{
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
 
 	// send API call to capture a list of secrets
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.GetAll
 	secrets, _, err := client.Secret.GetAll(c.Engine, c.Type, c.Org, name, opts)
 	if err != nil {
 		return err
@@ -47,41 +51,29 @@ func (c *Config) Get(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the secrets in dump format
-		err := output.Dump(secrets)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(secrets)
 	case output.DriverJSON:
 		// output the secrets in JSON format
-		err := output.JSON(secrets)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(secrets)
 	case output.DriverSpew:
 		// output the secrets in spew format
-		err := output.Spew(secrets)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(secrets)
 	case "wide":
 		// output the secrets in wide table format
-		err := wideTable(secrets)
-		if err != nil {
-			return err
-		}
+		return wideTable(secrets)
 	case output.DriverYAML:
 		// output the secrets in YAML format
-		err := output.YAML(secrets)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(secrets)
 	default:
 		// output the secrets in table format
-		err := table(secrets)
-		if err != nil {
-			return err
-		}
+		return table(secrets)
 	}
-
-	return nil
 }

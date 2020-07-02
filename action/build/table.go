@@ -22,16 +22,24 @@ import (
 // provided builds in a table format with
 // a specific set of fields displayed.
 func table(builds *[]library.Build) error {
-	// create new table
+	// create a new table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
 	table := uitable.New()
 
 	// set column width for table to 50
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.MaxColWidth = 50
 
 	// ensure the table is always wrapped
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
 	// set of build fields we display in a table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 	table.AddRow("NUMBER", "STATUS", "EVENT", "BRANCH", "DURATION")
 
 	// iterate through all builds in the list
@@ -40,16 +48,15 @@ func table(builds *[]library.Build) error {
 		d := duration(&b)
 
 		// add a row to the table with the specified values
+		//
+		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), d)
 	}
 
 	// output the table in stdout format
-	err := output.Stdout(table)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(table)
 }
 
 // wideTable is a helper function to output the
@@ -57,15 +64,23 @@ func table(builds *[]library.Build) error {
 // a specific set of fields displayed.
 func wideTable(builds *[]library.Build) error {
 	// create new wide table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
 	table := uitable.New()
 
 	// set column width for wide table to 200
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.MaxColWidth = 200
 
 	// ensure the wide table is always wrapped
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
 	// set of build fields we display in a wide table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 	table.AddRow("NUMBER", "STATUS", "EVENT", "BRANCH", "COMMIT", "DURATION", "CREATED", "FINISHED", "AUTHOR")
 
 	// iterate through all builds in the list
@@ -74,22 +89,25 @@ func wideTable(builds *[]library.Build) error {
 		d := duration(&b)
 
 		// calculate created timestamp in human readable form
+		//
+		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
 		c := humanize.Time(time.Unix(b.GetCreated(), 0))
 
 		// calculate finished timestamp in human readable form
+		//
+		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
 		f := humanize.Time(time.Unix(b.GetFinished(), 0))
 
 		// add a row to the table with the specified values
+		//
+		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), b.GetCommit(), d, c, f, b.GetAuthor())
 	}
 
 	// output the wide table in stdout format
-	err := output.Stdout(table)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(table)
 }
 
 // duration is a helper function to calculate
@@ -121,6 +139,7 @@ func duration(b *library.Build) string {
 // based off the build number and then flip the
 // order they get displayed in.
 func reverse(b []library.Build) []library.Build {
+	// sort the list of builds based off the build number
 	sort.SliceStable(b, func(i, j int) bool {
 		return b[i].GetNumber() < b[j].GetNumber()
 	})

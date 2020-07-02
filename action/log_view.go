@@ -96,12 +96,16 @@ DOCUMENTATION:
 // inspect a log.
 func logView(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the log configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config
 	l := &log.Config{
 		Action:  viewAction,
 		Org:     c.String("org"),
@@ -113,6 +117,8 @@ func logView(c *cli.Context) error {
 	}
 
 	// validate log configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.Validate
 	err = l.Validate()
 	if err != nil {
 		return err
@@ -121,15 +127,21 @@ func logView(c *cli.Context) error {
 	// check if log service is provided
 	if l.Service > 0 {
 		// execute the view service call for the log configuration
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.ViewService
 		return l.ViewService(client)
 	}
 
 	// check if log step is provided
 	if l.Step > 0 {
 		// execute the view step call for the log configuration
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.ViewStep
 		return l.ViewStep(client)
 	}
 
 	// execute the get call for the log configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.Get
 	return l.Get(client)
 }

@@ -22,16 +22,24 @@ import (
 // provided services in a table format with
 // a specific set of fields displayed.
 func table(services *[]library.Service) error {
-	// create new table
+	// create a new table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
 	table := uitable.New()
 
 	// set column width for table to 50
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.MaxColWidth = 50
 
 	// ensure the table is always wrapped
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
 	// set of service fields we display in a table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 	table.AddRow("NUMBER", "NAME", "STATUS", "DURATION")
 
 	// iterate through all services in the list
@@ -40,16 +48,15 @@ func table(services *[]library.Service) error {
 		d := duration(&s)
 
 		// add a row to the table with the specified values
+		//
+		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), d)
 	}
 
 	// output the table in stdout format
-	err := output.Stdout(table)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(table)
 }
 
 // wideTable is a helper function to output the
@@ -57,15 +64,23 @@ func table(services *[]library.Service) error {
 // a specific set of fields displayed.
 func wideTable(services *[]library.Service) error {
 	// create new wide table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
 	table := uitable.New()
 
 	// set column width for wide table to 200
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.MaxColWidth = 200
 
 	// ensure the wide table is always wrapped
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
 	// set of service fields we display in a wide table
+	//
+	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 	table.AddRow("NUMBER", "NAME", "STATUS", "DURATION", "CREATED", "FINISHED")
 
 	// iterate through all services in the list
@@ -74,22 +89,25 @@ func wideTable(services *[]library.Service) error {
 		d := duration(&s)
 
 		// calculate created timestamp in human readable form
+		//
+		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
 		c := humanize.Time(time.Unix(s.GetCreated(), 0))
 
 		// calculate finished timestamp in human readable form
+		//
+		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
 		f := humanize.Time(time.Unix(s.GetFinished(), 0))
 
 		// add a row to the table with the specified values
+		//
+		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
 		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), d, c, f)
 	}
 
 	// output the wide table in stdout format
-	err := output.Stdout(table)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(table)
 }
 
 // duration is a helper function to calculate
@@ -121,6 +139,7 @@ func duration(s *library.Service) string {
 // based off the service number and then flip the
 // order they get displayed in.
 func reverse(s []library.Service) []library.Service {
+	// sort the list of services based off the service number
 	sort.SliceStable(s, func(i, j int) bool {
 		return s[i].GetNumber() < s[j].GetNumber()
 	})

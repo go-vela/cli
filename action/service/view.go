@@ -13,6 +13,8 @@ import (
 // View inspects a service based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a service
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SvcService.Get
 	service, _, err := client.Svc.Get(c.Org, c.Repo, c.Build, c.Number)
 	if err != nil {
 		return err
@@ -22,35 +24,28 @@ func (c *Config) View(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the service in dump format
-		err := output.Dump(service)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(service)
 	case output.DriverJSON:
 		// output the service in JSON format
-		err := output.JSON(service)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(service)
 	case output.DriverSpew:
 		// output the service in spew format
-		err := output.Spew(service)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(service)
 	case output.DriverYAML:
 		// output the service in YAML format
-		err := output.YAML(service)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(service)
 	default:
 		// output the service in stdout format
-		err := output.Stdout(service)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(service)
 	}
-
-	return nil
 }

@@ -13,6 +13,8 @@ import (
 // View inspects a build based off the provided configuration.
 func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a build
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Get
 	build, _, err := client.Build.Get(c.Org, c.Repo, c.Number)
 	if err != nil {
 		return err
@@ -22,35 +24,28 @@ func (c *Config) View(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the build in dump format
-		err := output.Dump(build)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(build)
 	case output.DriverJSON:
 		// output the build in JSON format
-		err := output.JSON(build)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(build)
 	case output.DriverSpew:
 		// output the build in spew format
-		err := output.Spew(build)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(build)
 	case output.DriverYAML:
 		// output the build in YAML format
-		err := output.YAML(build)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(build)
 	default:
 		// output the build in stdout format
-		err := output.Stdout(build)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(build)
 	}
-
-	return nil
 }

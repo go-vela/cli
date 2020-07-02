@@ -13,12 +13,16 @@ import (
 // Get captures a list of steps based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of steps
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
 	opts := &vela.ListOptions{
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
 
 	// send API call to capture a list of steps
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#StepService.GetAll
 	steps, _, err := client.Step.GetAll(c.Org, c.Repo, c.Build, opts)
 	if err != nil {
 		return err
@@ -28,41 +32,29 @@ func (c *Config) Get(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the steps in dump format
-		err := output.Dump(steps)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(steps)
 	case output.DriverJSON:
 		// output the steps in JSON format
-		err := output.JSON(steps)
-		if err != nil {
-			return err
-		}
-	case "wide":
-		// output the steps in wide table format
-		err := wideTable(steps)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(steps)
 	case output.DriverSpew:
 		// output the steps in spew format
-		err := output.Spew(steps)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(steps)
+	case "wide":
+		// output the steps in wide table format
+		return wideTable(steps)
 	case output.DriverYAML:
 		// output the steps in YAML format
-		err := output.YAML(steps)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(steps)
 	default:
 		// output the steps in table format
-		err := table(steps)
-		if err != nil {
-			return err
-		}
+		return table(steps)
 	}
-
-	return nil
 }

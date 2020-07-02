@@ -32,6 +32,8 @@ func (c *Config) View(client *vela.Client) error {
 	}
 
 	// send API call to capture a secret
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.Get
 	secret, _, err := client.Secret.Get(c.Engine, c.Type, c.Org, name, c.Name)
 	if err != nil {
 		return err
@@ -41,35 +43,28 @@ func (c *Config) View(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the secret in dump format
-		err := output.Dump(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(secret)
 	case output.DriverJSON:
 		// output the secret in JSON format
-		err := output.JSON(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(secret)
 	case output.DriverSpew:
 		// output the secret in spew format
-		err := output.Spew(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(secret)
 	case output.DriverYAML:
 		// output the secret in YAML format
-		err := output.YAML(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(secret)
 	default:
 		// output the secret in stdout format
-		err := output.Stdout(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(secret)
 	}
-
-	return nil
 }

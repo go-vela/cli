@@ -22,35 +22,28 @@ func (c *Config) Repair(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the message in dump format
-		err := output.JSON(msg)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(msg)
 	case output.DriverJSON:
 		// output the message in JSON format
-		err := output.JSON(msg)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(msg)
 	case output.DriverSpew:
 		// output the message in spew format
-		err := output.Spew(msg)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(msg)
 	case output.DriverYAML:
 		// output the message in YAML format
-		err := output.YAML(msg)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(msg)
 	default:
 		// output the message in stdout format
-		err := output.Stdout(msg)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(msg)
 	}
-
-	return nil
 }

@@ -87,12 +87,16 @@ DOCUMENTATION:
 // capture a list of hooks.
 func hookGet(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the hook configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/hook?tab=doc#Config
 	h := &hook.Config{
 		Action:  getAction,
 		Org:     c.String("org"),
@@ -103,11 +107,15 @@ func hookGet(c *cli.Context) error {
 	}
 
 	// validate hook configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/hook?tab=doc#Config.Validate
 	err = h.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the get call for the hook configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/hook?tab=doc#Config.Get
 	return h.Get(client)
 }

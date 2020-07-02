@@ -58,12 +58,16 @@ DOCUMENTATION:
 // verify a pipeline.
 func pipelineValidate(c *cli.Context) error {
 	// create a compiler client
+	//
+	// https://godoc.org/github.com/go-vela/compiler/compiler/native#New
 	client, err := native.New(c)
 	if err != nil {
 		return err
 	}
 
 	// create the pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
 		Action: validateAction,
 		File:   c.String("file"),
@@ -71,11 +75,15 @@ func pipelineValidate(c *cli.Context) error {
 	}
 
 	// validate pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Validate
 	err = p.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the validate file call for the pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateFile
 	return p.ValidateFile(client)
 }

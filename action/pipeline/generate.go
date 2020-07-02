@@ -14,6 +14,8 @@ import (
 )
 
 // create filesystem based on the operating system
+//
+// https://godoc.org/github.com/spf13/afero#NewOsFs
 var appFS = afero.NewOsFs()
 
 // Generate produces a pipeline based off the provided configuration.
@@ -27,12 +29,16 @@ func (c *Config) Generate() error {
 	}
 
 	// create output for pipeline file
+	//
+	// https://pkg.go.dev/github.com/buildkite/yaml?tab=doc#Marshal
 	out, err := yaml.Marshal(pipeline)
 	if err != nil {
 		return err
 	}
 
 	// use custom filesystem which enables us to test
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
 	a := &afero.Afero{
 		Fs: appFS,
 	}
@@ -53,11 +59,15 @@ func (c *Config) Generate() error {
 	}
 
 	// send Filesystem call to create directory path for pipeline file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#OsFs.MkdirAll
 	err = a.Fs.MkdirAll(filepath.Dir(path), 0777)
 	if err != nil {
 		return err
 	}
 
 	// send Filesystem call to create pipeline file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
 	return a.WriteFile(path, []byte(out), 0644)
 }

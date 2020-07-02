@@ -111,15 +111,16 @@ DOCUMENTATION:
 // capture a list of secrets.
 func secretGet(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
-	// set token from global config
-	client.Authentication.SetTokenAuth(c.String("token"))
-
 	// create the secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action:  getAction,
 		Engine:  c.String("engine"),
@@ -133,11 +134,15 @@ func secretGet(c *cli.Context) error {
 	}
 
 	// validate secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Validate
 	err = s.Validate()
 	if err != nil {
 		return err
 	}
 
-	// execute the view call for the secret configuration
+	// execute the get call for the secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Get
 	return s.Get(client)
 }

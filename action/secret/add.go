@@ -38,6 +38,8 @@ func (c *Config) Add(client *vela.Client) error {
 	}
 
 	// create the secret object
+	//
+	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Secret
 	s := &library.Secret{
 		Type:         &c.Type,
 		Org:          &c.Org,
@@ -51,6 +53,8 @@ func (c *Config) Add(client *vela.Client) error {
 	}
 
 	// send API call to add a secret
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.Add
 	secret, _, err := client.Secret.Add(c.Engine, c.Type, c.Org, name, s)
 	if err != nil {
 		return err
@@ -60,37 +64,30 @@ func (c *Config) Add(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the secret in dump format
-		err := output.Dump(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(secret)
 	case output.DriverJSON:
 		// output the secret in JSON format
-		err := output.JSON(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(secret)
 	case output.DriverSpew:
 		// output the secret in spew format
-		err := output.Spew(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(secret)
 	case output.DriverYAML:
 		// output the secret in YAML format
-		err := output.YAML(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(secret)
 	default:
 		// output the secret in stdout format
-		err := output.Stdout(secret)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(secret)
 	}
-
-	return nil
 }
 
 // AddFromFile creates a secret from a file based on the provided configuration.
@@ -108,16 +105,24 @@ func (c *Config) AddFromFile(client *vela.Client) error {
 	}
 
 	// create a new decoder from the secret file contents
+	//
+	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#NewDecoder
 	input := yaml.NewDecoder(bytes.NewReader(contents))
 
 	// create object to store secret file configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#ConfigFile
 	f := new(ConfigFile)
 
 	// iterate through all secret file configurations
+	//
+	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Decoder.Decode
 	for input.Decode(f) == nil {
 		// iterate through all secrets from the file configuration
 		for _, s := range f.Secrets {
 			// create the secret configuration
+			//
+			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 			s := &Config{
 				Action:       "add",
 				Engine:       f.Metadata.Engine,
@@ -134,12 +139,16 @@ func (c *Config) AddFromFile(client *vela.Client) error {
 			}
 
 			// validate secret configuration
+			//
+			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Validate
 			err = s.Validate()
 			if err != nil {
 				return err
 			}
 
 			// execute the add call for the secret configuration
+			//
+			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Add
 			err = s.Add(client)
 			if err != nil {
 				return err

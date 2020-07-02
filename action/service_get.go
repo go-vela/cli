@@ -96,12 +96,16 @@ DOCUMENTATION:
 // capture a list of services.
 func serviceGet(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the service configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config
 	s := &service.Config{
 		Action:  getAction,
 		Org:     c.String("org"),
@@ -113,11 +117,15 @@ func serviceGet(c *cli.Context) error {
 	}
 
 	// validate service configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config.Validate
 	err = s.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the get call for the service configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config.Get
 	return s.Get(client)
 }

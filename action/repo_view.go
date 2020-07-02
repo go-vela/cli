@@ -65,12 +65,16 @@ DOCUMENTATION:
 // inspect a repository.
 func repoView(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action: viewAction,
 		Org:    c.String("org"),
@@ -79,11 +83,15 @@ func repoView(c *cli.Context) error {
 	}
 
 	// validate repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Validate
 	err = r.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the view call for the repo configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.View
 	return r.View(client)
 }

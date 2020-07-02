@@ -17,6 +17,8 @@ import (
 // Remove deletes one or more fields from the config file based off the provided configuration.
 func (c *Config) Remove() error {
 	// use custom filesystem which enables us to test
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
 	a := &afero.Afero{
 		Fs: appFS,
 	}
@@ -24,19 +26,27 @@ func (c *Config) Remove() error {
 	// check if remove flags are empty
 	if len(c.RemoveFlags) == 0 {
 		// send Filesystem call to delete config file
+		//
+		// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.Remove
 		return a.Remove(c.File)
 	}
 
 	// send Filesystem call to read config file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.ReadFile
 	data, err := a.ReadFile(c.File)
 	if err != nil {
 		return err
 	}
 
 	// create the config object
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#ConfigFile
 	config := new(ConfigFile)
 
 	// update the config object with the current content
+	//
+	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Unmarshal
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
 		return err
@@ -100,11 +110,15 @@ func (c *Config) Remove() error {
 	}
 
 	// create output for config file
+	//
+	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Marshal
 	out, err := yaml.Marshal(config)
 	if err != nil {
 		return err
 	}
 
 	// send Filesystem call to create config file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
 	return a.WriteFile(c.File, []byte(out), 0600)
 }

@@ -13,6 +13,8 @@ import (
 // Get captures a list of build logs based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of build logs
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.GetLogs
 	logs, _, err := client.Build.GetLogs(c.Org, c.Repo, c.Build)
 	if err != nil {
 		return err
@@ -21,36 +23,29 @@ func (c *Config) Get(client *vela.Client) error {
 	// handle the output based off the provided configuration
 	switch c.Output {
 	case output.DriverDump:
-		// output the build logs in dump format
-		err := output.Dump(logs)
-		if err != nil {
-			return err
-		}
+		// output the logs in dump format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(logs)
 	case output.DriverJSON:
-		// output the build logs in JSON format
-		err := output.JSON(logs)
-		if err != nil {
-			return err
-		}
+		// output the logs in JSON format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(logs)
 	case output.DriverSpew:
-		// output the build logs in spew format
-		err := output.Spew(logs)
-		if err != nil {
-			return err
-		}
+		// output the logs in spew format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(logs)
 	case output.DriverYAML:
-		// output the build logs in YAML format
-		err := output.YAML(logs)
-		if err != nil {
-			return err
-		}
+		// output the logs in YAML format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(logs)
 	default:
-		// output the build logs in stdout format
-		err := output.Stdout(logs)
-		if err != nil {
-			return err
-		}
+		// output the logs in stdout format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(logs)
 	}
-
-	return nil
 }

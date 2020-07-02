@@ -13,12 +13,16 @@ import (
 // Get captures a list of builds based off the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of builds
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
 	opts := &vela.ListOptions{
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
 
 	// send API call to capture a list of builds
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.GetAll
 	builds, _, err := client.Build.GetAll(c.Org, c.Repo, opts)
 	if err != nil {
 		return err
@@ -28,41 +32,29 @@ func (c *Config) Get(client *vela.Client) error {
 	switch c.Output {
 	case output.DriverDump:
 		// output the builds in dump format
-		err := output.Dump(builds)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(builds)
 	case output.DriverJSON:
 		// output the builds in JSON format
-		err := output.JSON(builds)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(builds)
 	case output.DriverSpew:
 		// output the builds in spew format
-		err := output.Spew(builds)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(builds)
 	case "wide":
 		// output the builds in wide table format
-		err := wideTable(builds)
-		if err != nil {
-			return err
-		}
+		return wideTable(builds)
 	case output.DriverYAML:
 		// output the builds in YAML format
-		err := output.YAML(builds)
-		if err != nil {
-			return err
-		}
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(builds)
 	default:
 		// output the builds in table format
-		err := table(builds)
-		if err != nil {
-			return err
-		}
+		return table(builds)
 	}
-
-	return nil
 }

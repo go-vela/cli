@@ -100,12 +100,16 @@ DOCUMENTATION:
 // remove a secret.
 func secretRemove(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action: removeAction,
 		Engine: c.String("engine"),
@@ -118,11 +122,15 @@ func secretRemove(c *cli.Context) error {
 	}
 
 	// validate secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Validate
 	err = s.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the remove call for the secret configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Remove
 	return s.Remove(client)
 }

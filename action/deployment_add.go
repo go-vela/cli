@@ -99,12 +99,16 @@ DOCUMENTATION:
 // create a deployment.
 func deploymentAdd(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the deployment configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config
 	d := &deployment.Config{
 		Action:      addAction,
 		Org:         c.String("org"),
@@ -117,11 +121,15 @@ func deploymentAdd(c *cli.Context) error {
 	}
 
 	// validate deployment configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.Validate
 	err = d.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the add call for the deployment configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.Add
 	return d.Add(client)
 }

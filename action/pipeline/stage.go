@@ -35,6 +35,8 @@ func stages(pipelineType string) *yaml.Build {
 	}
 
 	// return a stages pipeline based off the type
+	//
+	// https://pkg.go.dev/github.com/go-vela/types/yaml?tab=doc#Build
 	return &yaml.Build{
 		Version: "1",
 		Stages: yaml.StageSlice{

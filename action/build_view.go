@@ -74,12 +74,16 @@ DOCUMENTATION:
 // inspect a build.
 func buildView(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config
 	b := &build.Config{
 		Action: viewAction,
 		Org:    c.String("org"),
@@ -89,11 +93,15 @@ func buildView(c *cli.Context) error {
 	}
 
 	// validate build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Validate
 	err = b.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the view call for the build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.View
 	return b.View(client)
 }

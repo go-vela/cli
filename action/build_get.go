@@ -87,12 +87,16 @@ DOCUMENTATION:
 // capture a list of builds.
 func buildGet(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config
 	b := &build.Config{
 		Action:  getAction,
 		Org:     c.String("org"),
@@ -103,11 +107,15 @@ func buildGet(c *cli.Context) error {
 	}
 
 	// validate build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Validate
 	err = b.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the get call for the build configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Get
 	return b.Get(client)
 }

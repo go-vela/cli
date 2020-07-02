@@ -76,6 +76,8 @@ DOCUMENTATION:
 // produce a pipeline.
 func pipelineGenerate(c *cli.Context) error {
 	// create the pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
 		Action: generateAction,
 		File:   c.String("file"),
@@ -85,11 +87,15 @@ func pipelineGenerate(c *cli.Context) error {
 	}
 
 	// validate pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Validate
 	err := p.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the generate call for the pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Generate
 	return p.Generate()
 }

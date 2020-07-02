@@ -83,12 +83,16 @@ DOCUMENTATION:
 // inspect a step.
 func stepView(c *cli.Context) error {
 	// parse the Vela client from the context
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
 	client, err := client.Parse(c)
 	if err != nil {
 		return err
 	}
 
 	// create the step configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/step?tab=doc#Config
 	s := &step.Config{
 		Action: viewAction,
 		Org:    c.String("org"),
@@ -99,11 +103,15 @@ func stepView(c *cli.Context) error {
 	}
 
 	// validate step configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/step?tab=doc#Config.Validate
 	err = s.Validate()
 	if err != nil {
 		return err
 	}
 
 	// execute the view call for the step configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/step?tab=doc#Config.View
 	return s.View(client)
 }

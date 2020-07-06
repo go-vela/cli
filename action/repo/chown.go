@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Chown changes ownership of a repository based off the provided configuration.
 func (c *Config) Chown(client *vela.Client) error {
+	logrus.Debug("executing chown for repo configuration")
+
+	logrus.Tracef("chowning repo %s/%s", c.Org, c.Name)
+
 	// send API call to chown a repository
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.Chown

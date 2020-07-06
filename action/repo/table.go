@@ -13,12 +13,16 @@ import (
 	"github.com/go-vela/types/library"
 
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided repos in a table format with
 // a specific set of fields displayed.
 func table(repos *[]library.Repo) error {
+	logrus.Debug("creating table for list of repos")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -34,6 +38,8 @@ func table(repos *[]library.Repo) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to repo table")
+
 	// set of repository fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -41,6 +47,8 @@ func table(repos *[]library.Repo) error {
 
 	// iterate through all repos in the list
 	for _, r := range *repos {
+		logrus.Tracef("adding repo %s to repo table", r.GetFullName())
+
 		e := strings.Join(events(&r), ",")
 
 		// add a row to the table with the specified values
@@ -59,6 +67,8 @@ func table(repos *[]library.Repo) error {
 // provided repos in a wide table format with
 // a specific set of fields displayed.
 func wideTable(repos *[]library.Repo) error {
+	logrus.Debug("creating wide table for list of repos")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -74,6 +84,8 @@ func wideTable(repos *[]library.Repo) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide repo table")
+
 	// set of repository fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -81,6 +93,8 @@ func wideTable(repos *[]library.Repo) error {
 
 	// iterate through all repos in the list
 	for _, r := range *repos {
+		logrus.Tracef("adding repo %s to wide repo table", r.GetFullName())
+
 		e := strings.Join(events(&r), ",")
 
 		// add a row to the table with the specified values

@@ -6,10 +6,14 @@ package repo
 
 import (
 	"fmt"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating repo configuration")
+
 	// check if repository action is not get
 	if c.Action != "get" {
 		// check if repository org is set

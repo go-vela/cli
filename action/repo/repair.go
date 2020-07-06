@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Repair recreates a repository webhook based off the provided configuration.
 func (c *Config) Repair(client *vela.Client) error {
+	logrus.Debug("executing repair for repo configuration")
+
+	logrus.Tracef("repairing repo %s/%s", c.Org, c.Name)
+
 	// send API call to repair a repository
 	msg, _, err := client.Repo.Repair(c.Org, c.Name)
 	if err != nil {

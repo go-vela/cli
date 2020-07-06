@@ -12,10 +12,14 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/go-vela/types/constants"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Remove deletes a secret based on the provided configuration.
 func (c *Config) Remove(client *vela.Client) error {
+	logrus.Debug("executing remove for secret configuration")
+
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {
 		// set default for the secret repo
@@ -30,6 +34,8 @@ func (c *Config) Remove(client *vela.Client) error {
 		// provide the team name for the secret
 		name = c.Team
 	}
+
+	logrus.Tracef("removing secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)
 
 	// send API call to remove a secret
 	//

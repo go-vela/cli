@@ -12,10 +12,14 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/go-vela/types/constants"
+
+	"github.com/sirupsen/logrus"
 )
 
 // View inspects a secret based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
+	logrus.Debug("executing view for secret configuration")
+
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {
 		// set default for the secret repo
@@ -30,6 +34,8 @@ func (c *Config) View(client *vela.Client) error {
 		// provide the team name for the secret
 		name = c.Team
 	}
+
+	logrus.Tracef("inspecting secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)
 
 	// send API call to capture a secret
 	//

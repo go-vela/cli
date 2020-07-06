@@ -6,10 +6,14 @@ package service
 
 import (
 	"fmt"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating service configuration")
+
 	// check if service org is set
 	if len(c.Org) == 0 {
 		return fmt.Errorf("no service org provided")

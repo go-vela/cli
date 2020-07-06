@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // View inspects a step based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
+	logrus.Debug("executing view for step configuration")
+
+	logrus.Tracef("inspecting step %s/%s/%d/%d", c.Org, c.Repo, c.Build, c.Number)
+
 	// send API call to capture a step
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#StepService.Get

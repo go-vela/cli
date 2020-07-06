@@ -16,12 +16,16 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided steps in a table format with
 // a specific set of fields displayed.
 func table(steps *[]library.Step) error {
+	logrus.Debug("creating table for list of steps")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -37,6 +41,8 @@ func table(steps *[]library.Step) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to step table")
+
 	// set of step fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -44,6 +50,8 @@ func table(steps *[]library.Step) error {
 
 	// iterate through all steps in the list
 	for _, s := range reverse(*steps) {
+		logrus.Tracef("adding step %d to step table", s.GetNumber())
+
 		// calculate duration based off the step timestamps
 		d := duration(&s)
 
@@ -63,6 +71,8 @@ func table(steps *[]library.Step) error {
 // provided steps in a wide table format with
 // a specific set of fields displayed.
 func wideTable(steps *[]library.Step) error {
+	logrus.Debug("creating wide table for list of steps")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -78,6 +88,8 @@ func wideTable(steps *[]library.Step) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide step table")
+
 	// set of step fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -85,6 +97,8 @@ func wideTable(steps *[]library.Step) error {
 
 	// iterate through all steps in the list
 	for _, s := range reverse(*steps) {
+		logrus.Tracef("adding step %d to wide step table", s.GetNumber())
+
 		// calculate duration based off the step timestamps
 		d := duration(&s)
 

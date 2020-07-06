@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/afero"
 
 	yaml "gopkg.in/yaml.v2"
+
+	"github.com/sirupsen/logrus"
 )
 
 // create filesystem based on the operating system
@@ -19,6 +21,8 @@ var appFS = afero.NewOsFs()
 
 // Generate produces a pipeline based off the provided configuration.
 func (c *Config) Generate() error {
+	logrus.Debug("executing generate for config file configuration")
+
 	// create the config file content
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#ConfigFile
@@ -40,6 +44,8 @@ func (c *Config) Generate() error {
 		Output: c.Output,
 	}
 
+	logrus.Trace("creating file content for config file")
+
 	// create output for config file
 	//
 	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Marshal
@@ -55,6 +61,8 @@ func (c *Config) Generate() error {
 		Fs: appFS,
 	}
 
+	logrus.Tracef("creating directory structure to %s", c.File)
+
 	// send Filesystem call to create directory path for config file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#OsFs.MkdirAll
@@ -62,6 +70,8 @@ func (c *Config) Generate() error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("writing file content to %s", c.File)
 
 	// send Filesystem call to create config file
 	//

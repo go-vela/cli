@@ -3,6 +3,7 @@
 #
 # Use of this source code is governed by the LICENSE file in this repository.
 
+.PHONY: clean
 clean:
 	#################################
 	######      Go clean       ######
@@ -14,6 +15,7 @@ clean:
 	@go test ./...
 	@echo "I'm kind of the only name in clean energy right now"
 
+.PHONY: build
 build:
 	#################################
 	###### Build Golang Binary ######

@@ -11,6 +11,8 @@ import (
 	"github.com/spf13/afero"
 
 	"github.com/buildkite/yaml"
+
+	"github.com/sirupsen/logrus"
 )
 
 // create filesystem based on the operating system
@@ -20,6 +22,8 @@ var appFS = afero.NewOsFs()
 
 // Generate produces a pipeline based off the provided configuration.
 func (c *Config) Generate() error {
+	logrus.Debug("executing generate for pipeline configuration")
+
 	// create the pipeline file content
 	pipeline := steps(c.Type)
 
@@ -27,6 +31,8 @@ func (c *Config) Generate() error {
 	if c.Stages {
 		pipeline = stages(c.Type)
 	}
+
+	logrus.Trace("creating file content from pipeline")
 
 	// create output for pipeline file
 	//
@@ -58,6 +64,8 @@ func (c *Config) Generate() error {
 		path = filepath.Join(c.Path, c.File)
 	}
 
+	logrus.Tracef("creating directory structure to %s", path)
+
 	// send Filesystem call to create directory path for pipeline file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#OsFs.MkdirAll
@@ -65,6 +73,8 @@ func (c *Config) Generate() error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("writing file content to %s", path)
 
 	// send Filesystem call to create pipeline file
 	//

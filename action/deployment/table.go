@@ -12,12 +12,16 @@ import (
 	"github.com/go-vela/types/library"
 
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided deployments in a table format with
 // a specific set of fields displayed.
 func table(deployments *[]library.Deployment) error {
+	logrus.Debug("creating table for list of deployments")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -33,6 +37,8 @@ func table(deployments *[]library.Deployment) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to deployment table")
+
 	// set of deployment fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -40,6 +46,8 @@ func table(deployments *[]library.Deployment) error {
 
 	// iterate through all deployments in the list
 	for _, d := range reverse(*deployments) {
+		logrus.Tracef("adding deployment %d to deployment table", d.GetID())
+
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -56,6 +64,8 @@ func table(deployments *[]library.Deployment) error {
 // provided deployments in a wide table format with
 // a specific set of fields displayed.
 func wideTable(deployments *[]library.Deployment) error {
+	logrus.Debug("creating wide table for list of deployments")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -71,6 +81,8 @@ func wideTable(deployments *[]library.Deployment) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide deployment table")
+
 	// set of deployment fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -78,6 +90,8 @@ func wideTable(deployments *[]library.Deployment) error {
 
 	// iterate through all deployments in the list
 	for _, d := range reverse(*deployments) {
+		logrus.Tracef("adding deployment %d to wide deployment table", d.GetID())
+
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow

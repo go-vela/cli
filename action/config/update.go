@@ -12,16 +12,22 @@ import (
 	"github.com/spf13/afero"
 
 	yaml "gopkg.in/yaml.v2"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Update modifies one or more fields from the config file based off the provided configuration.
 func (c *Config) Update() error {
+	logrus.Debug("executing update for config file configuration")
+
 	// use custom filesystem which enables us to test
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
 	a := &afero.Afero{
 		Fs: appFS,
 	}
+
+	logrus.Tracef("reading content from %s", c.File)
 
 	// send Filesystem call to read config file
 	//
@@ -46,6 +52,8 @@ func (c *Config) Update() error {
 
 	// iterate through all flags to be modified
 	for key, value := range c.UpdateFlags {
+		logrus.Tracef("updating key %s with value %s", key, value)
+
 		// check if API addr flag should be modified
 		if strings.EqualFold(key, client.KeyAddress) {
 			// set the API addr field to value provided
@@ -101,6 +109,8 @@ func (c *Config) Update() error {
 		}
 	}
 
+	logrus.Trace("creating file content for config file")
+
 	// create output for config file
 	//
 	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Marshal
@@ -108,6 +118,8 @@ func (c *Config) Update() error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("writing file content to %s", c.File)
 
 	// send Filesystem call to create config file
 	//

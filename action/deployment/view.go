@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // View inspects a deployment based off the provided configuration.
 func (c *Config) View(client *vela.Client) error {
+	logrus.Debug("executing view for deployment configuration")
+
+	logrus.Tracef("inspecting deployment %s/%s/%d", c.Org, c.Repo, c.Number)
+
 	// send API call to capture a deployment
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#DeploymentService.Get

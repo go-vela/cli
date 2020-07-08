@@ -9,11 +9,17 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/go-vela/cli/internal/output"
+
 	"github.com/go-vela/compiler/compiler"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating pipeline configuration")
+
 	// check if pipeline file is set
 	if len(c.File) == 0 {
 		return fmt.Errorf("no pipeline file provided")
@@ -24,6 +30,8 @@ func (c *Config) Validate() error {
 
 // ValidateFile verifies a pipeline based off the provided configuration.
 func (c *Config) ValidateFile(client compiler.Engine) error {
+	logrus.Debug("executing validate for pipeline configuration")
+
 	// send Filesystem call to capture base directory path
 	base, err := os.Getwd()
 	if err != nil {
@@ -39,11 +47,15 @@ func (c *Config) ValidateFile(client compiler.Engine) error {
 		path = filepath.Join(c.Path, c.File)
 	}
 
+	logrus.Tracef("parsing pipeline %s", path)
+
 	// parse the object into a pipeline
 	pipeline, err := client.Parse(path)
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("validating pipeline %s", path)
 
 	// validate the pipeline
 	err = client.Validate(pipeline)
@@ -51,7 +63,8 @@ func (c *Config) ValidateFile(client compiler.Engine) error {
 		return err
 	}
 
-	fmt.Printf("%s is valid\n", path)
-
-	return nil
+	// output the message in stdout format
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.Stdout(fmt.Sprintf("%s is valid", path))
 }

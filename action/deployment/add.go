@@ -10,10 +10,14 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/go-vela/types/library"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Add creates a deployment based off the provided configuration.
 func (c *Config) Add(client *vela.Client) error {
+	logrus.Debug("executing add for deployment configuration")
+
 	// create the deployment object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Deployment
@@ -23,6 +27,8 @@ func (c *Config) Add(client *vela.Client) error {
 		Target:      &c.Target,
 		Description: &c.Description,
 	}
+
+	logrus.Tracef("adding deployment for repo %s/%s", c.Org, c.Repo)
 
 	// send API call to add a deployment
 	//

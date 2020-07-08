@@ -16,12 +16,16 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided services in a table format with
 // a specific set of fields displayed.
 func table(services *[]library.Service) error {
+	logrus.Debug("creating table for list of services")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -37,6 +41,8 @@ func table(services *[]library.Service) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to service table")
+
 	// set of service fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -44,6 +50,8 @@ func table(services *[]library.Service) error {
 
 	// iterate through all services in the list
 	for _, s := range reverse(*services) {
+		logrus.Tracef("adding service %d to service table", s.GetNumber())
+
 		// calculate duration based off the service timestamps
 		d := duration(&s)
 
@@ -63,6 +71,8 @@ func table(services *[]library.Service) error {
 // provided services in a wide table format with
 // a specific set of fields displayed.
 func wideTable(services *[]library.Service) error {
+	logrus.Debug("creating wide table for list of services")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -78,6 +88,8 @@ func wideTable(services *[]library.Service) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide service table")
+
 	// set of service fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -85,6 +97,8 @@ func wideTable(services *[]library.Service) error {
 
 	// iterate through all services in the list
 	for _, s := range reverse(*services) {
+		logrus.Tracef("adding service %d to wide service table", s.GetNumber())
+
 		// calculate duration based off the service timestamps
 		d := duration(&s)
 

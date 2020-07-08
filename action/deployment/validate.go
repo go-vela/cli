@@ -6,10 +6,14 @@ package deployment
 
 import (
 	"fmt"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating deployment configuration")
+
 	// check if deployment org is set
 	if len(c.Org) == 0 {
 		return fmt.Errorf("no deployment org provided")

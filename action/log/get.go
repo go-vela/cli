@@ -8,10 +8,14 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Get captures a list of build logs based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
+	logrus.Debug("executing get for log configuration")
+
 	// send API call to capture a list of build logs
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.GetLogs
@@ -19,6 +23,8 @@ func (c *Config) Get(client *vela.Client) error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("capturing logs for build %s/%s/%d", c.Org, c.Repo, c.Build)
 
 	// handle the output based off the provided configuration
 	switch c.Output {

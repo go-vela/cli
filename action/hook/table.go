@@ -14,12 +14,16 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided hooks in a table format with
 // a specific set of fields displayed.
 func table(hooks *[]library.Hook) error {
+	logrus.Debug("creating table for list of hooks")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -35,6 +39,8 @@ func table(hooks *[]library.Hook) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to hook table")
+
 	// set of hook fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -42,6 +48,8 @@ func table(hooks *[]library.Hook) error {
 
 	// iterate through all hooks in the list
 	for _, h := range reverse(*hooks) {
+		logrus.Tracef("adding hook %d to hook table", h.GetNumber())
+
 		// calculate created timestamp in human readable form
 		//
 		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
@@ -63,6 +71,8 @@ func table(hooks *[]library.Hook) error {
 // provided hooks in a wide table format with
 // a specific set of fields displayed.
 func wideTable(hooks *[]library.Hook) error {
+	logrus.Debug("creating wide table for list of hooks")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -78,6 +88,8 @@ func wideTable(hooks *[]library.Hook) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide hook table")
+
 	// set of hook fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -85,6 +97,8 @@ func wideTable(hooks *[]library.Hook) error {
 
 	// iterate through all hooks in the list
 	for _, h := range reverse(*hooks) {
+		logrus.Tracef("adding hook %d to wide hook table", h.GetNumber())
+
 		// calculate created timestamp in human readable form
 		//
 		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time

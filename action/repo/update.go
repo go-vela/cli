@@ -12,10 +12,14 @@ import (
 
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Update modifies a repository based off the provided configuration.
 func (c *Config) Update(client *vela.Client) error {
+	logrus.Debug("executing update for repo configuration")
+
 	// create the repository object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Repo
@@ -60,6 +64,8 @@ func (c *Config) Update(client *vela.Client) error {
 			r.AllowComment = vela.Bool(true)
 		}
 	}
+
+	logrus.Tracef("updating repo %s/%s", c.Org, c.Name)
 
 	// send API call to modify a repository
 	//

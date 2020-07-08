@@ -9,10 +9,14 @@ import (
 	"strings"
 
 	"github.com/go-vela/types/constants"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating secret configuration")
+
 	// check if secret file is set
 	if len(c.File) > 0 {
 		// skip checking all other configuration

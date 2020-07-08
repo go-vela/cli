@@ -12,10 +12,14 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/go-vela/types/constants"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Get captures a list of secrets based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
+	logrus.Debug("executing get for secret configuration")
+
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {
 		// set default for the secret repo
@@ -38,6 +42,8 @@ func (c *Config) Get(client *vela.Client) error {
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
+
+	logrus.Tracef("capturing secrets for %s/%s/%s/%s", c.Engine, c.Type, c.Org, name)
 
 	// send API call to capture a list of secrets
 	//

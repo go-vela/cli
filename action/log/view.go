@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // ViewService inspects a service log based on the provided configuration.
 func (c *Config) ViewService(client *vela.Client) error {
+	logrus.Debug("executing view service for log configuration")
+
+	logrus.Tracef("capturing logs for service %s/%s/%d", c.Org, c.Repo, c.Service)
+
 	// send API call to capture a service log
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#LogService.GetService
@@ -52,6 +58,10 @@ func (c *Config) ViewService(client *vela.Client) error {
 
 // ViewStep inspects a service log based on the provided configuration.
 func (c *Config) ViewStep(client *vela.Client) error {
+	logrus.Debug("executing view step for log configuration")
+
+	logrus.Tracef("capturing logs for step %s/%s/%d", c.Org, c.Repo, c.Step)
+
 	// send API call to capture a step log
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#LogService.GetStep

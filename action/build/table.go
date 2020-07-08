@@ -16,12 +16,16 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided builds in a table format with
 // a specific set of fields displayed.
 func table(builds *[]library.Build) error {
+	logrus.Debug("creating table for list of builds")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -37,6 +41,8 @@ func table(builds *[]library.Build) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to build table")
+
 	// set of build fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -44,6 +50,8 @@ func table(builds *[]library.Build) error {
 
 	// iterate through all builds in the list
 	for _, b := range reverse(*builds) {
+		logrus.Tracef("adding build %d to build table", b.GetNumber())
+
 		// calculate duration based off the build timestamps
 		d := duration(&b)
 
@@ -63,6 +71,8 @@ func table(builds *[]library.Build) error {
 // provided builds in a wide table format with
 // a specific set of fields displayed.
 func wideTable(builds *[]library.Build) error {
+	logrus.Debug("creating wide table for list of builds")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -78,6 +88,8 @@ func wideTable(builds *[]library.Build) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide build table")
+
 	// set of build fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -85,6 +97,8 @@ func wideTable(builds *[]library.Build) error {
 
 	// iterate through all builds in the list
 	for _, b := range reverse(*builds) {
+		logrus.Tracef("adding build %d to wide build table", b.GetNumber())
+
 		// calculate duration based off the build timestamps
 		d := duration(&b)
 

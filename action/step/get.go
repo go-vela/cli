@@ -8,10 +8,14 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Get captures a list of steps based on the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
+	logrus.Debug("executing get for step configuration")
+
 	// set the pagination options for list of steps
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
@@ -19,6 +23,8 @@ func (c *Config) Get(client *vela.Client) error {
 		Page:    c.Page,
 		PerPage: c.PerPage,
 	}
+
+	logrus.Tracef("capturing steps for build %s/%s/%d", c.Org, c.Repo, c.Build)
 
 	// send API call to capture a list of steps
 	//

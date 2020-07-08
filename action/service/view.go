@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // View inspects a service based on the provided configuration.
 func (c *Config) View(client *vela.Client) error {
+	logrus.Debug("executing view for service configuration")
+
+	logrus.Tracef("inspecting service %s/%s/%d/%d", c.Org, c.Repo, c.Build, c.Number)
+
 	// send API call to capture a service
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SvcService.Get

@@ -14,12 +14,16 @@ import (
 	"github.com/go-vela/types/library"
 
 	"github.com/gosuri/uitable"
+
+	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the
 // provided secrets in a table format with
 // a specific set of fields displayed.
 func table(secrets *[]library.Secret) error {
+	logrus.Debug("creating table for list of secrets")
+
 	// create a new table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -35,6 +39,8 @@ func table(secrets *[]library.Secret) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to secret table")
+
 	// set of secret fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -42,6 +48,8 @@ func table(secrets *[]library.Secret) error {
 
 	// iterate through all secrets in the list
 	for _, s := range *secrets {
+		logrus.Tracef("adding secret %s to secret table", s.GetName())
+
 		// calculate the key for the secret
 		k := key(&s)
 
@@ -61,6 +69,8 @@ func table(secrets *[]library.Secret) error {
 // provided secrets in a wide table format with
 // a specific set of fields displayed.
 func wideTable(secrets *[]library.Secret) error {
+	logrus.Debug("creating wide table for list of secrets")
+
 	// create new wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#New
@@ -76,6 +86,8 @@ func wideTable(secrets *[]library.Secret) error {
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table
 	table.Wrap = true
 
+	logrus.Trace("adding headers to wide secret table")
+
 	// set of secret fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
@@ -83,6 +95,8 @@ func wideTable(secrets *[]library.Secret) error {
 
 	// iterate through all secrets in the list
 	for _, s := range *secrets {
+		logrus.Tracef("adding secret %s to wide secret table", s.GetName())
+
 		// capture list of events for secret
 		e := strings.Join(s.GetEvents(), ",")
 

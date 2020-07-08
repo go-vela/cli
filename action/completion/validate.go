@@ -6,10 +6,14 @@ package completion
 
 import (
 	"fmt"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating completion configuration")
+
 	// check if multiple shells are set
 	if c.Bash && c.Zsh {
 		return fmt.Errorf("multiple shells provided for completion")

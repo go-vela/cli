@@ -6,9 +6,13 @@ package pipeline
 
 import (
 	"github.com/go-vela/types/yaml"
+
+	"github.com/sirupsen/logrus"
 )
 
 func steps(pipelineType string) *yaml.Build {
+	logrus.Debugf("creating %s steps pipeline", pipelineType)
+
 	// create default image for steps pipeline
 	image := "alpine:latest"
 

@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // View inspects a build based off the provided configuration.
 func (c *Config) View(client *vela.Client) error {
+	logrus.Debug("executing view for build configuration")
+
+	logrus.Tracef("inspecting build %s/%s/%d", c.Org, c.Repo, c.Number)
+
 	// send API call to capture a build
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Get

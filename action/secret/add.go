@@ -17,11 +17,15 @@ import (
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 
+	"github.com/sirupsen/logrus"
+
 	yaml "gopkg.in/yaml.v2"
 )
 
 // Add creates a secret based on the provided configuration.
 func (c *Config) Add(client *vela.Client) error {
+	logrus.Debug("executing add for secret configuration")
+
 	// check if the secret type is org
 	if strings.EqualFold(c.Type, constants.SecretOrg) {
 		// set default for the secret repo
@@ -51,6 +55,8 @@ func (c *Config) Add(client *vela.Client) error {
 		Events:       &c.Events,
 		AllowCommand: &c.AllowCommand,
 	}
+
+	logrus.Tracef("adding secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)
 
 	// send API call to add a secret
 	//
@@ -92,11 +98,15 @@ func (c *Config) Add(client *vela.Client) error {
 
 // AddFromFile creates a secret from a file based on the provided configuration.
 func (c *Config) AddFromFile(client *vela.Client) error {
+	logrus.Debug("executing add from file for secret configuration")
+
 	// capture absolute path to secret file
 	path, err := filepath.Abs(c.File)
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("reading secret contents from %s", path)
 
 	// read contents of secret file
 	contents, err := ioutil.ReadFile(path)

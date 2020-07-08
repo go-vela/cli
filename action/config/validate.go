@@ -7,10 +7,14 @@ package config
 import (
 	"fmt"
 	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
+	logrus.Debug("validating config file configuration")
+
 	// check if config file is set
 	if len(c.File) == 0 {
 		return fmt.Errorf("no config file provided")

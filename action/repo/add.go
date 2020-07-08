@@ -12,10 +12,14 @@ import (
 
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Add creates a repository based off the provided configuration.
 func (c *Config) Add(client *vela.Client) error {
+	logrus.Debug("executing add for repo configuration")
+
 	// create the repository object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Repo
@@ -60,6 +64,8 @@ func (c *Config) Add(client *vela.Client) error {
 			r.AllowComment = vela.Bool(true)
 		}
 	}
+
+	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)
 
 	// send API call to add a repository
 	//

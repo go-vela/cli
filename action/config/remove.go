@@ -12,10 +12,14 @@ import (
 	"github.com/spf13/afero"
 
 	yaml "gopkg.in/yaml.v2"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Remove deletes one or more fields from the config file based off the provided configuration.
 func (c *Config) Remove() error {
+	logrus.Debug("executing remove for config file configuration")
+
 	// use custom filesystem which enables us to test
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
@@ -25,11 +29,15 @@ func (c *Config) Remove() error {
 
 	// check if remove flags are empty
 	if len(c.RemoveFlags) == 0 {
+		logrus.Tracef("removing config file %s", c.File)
+
 		// send Filesystem call to delete config file
 		//
 		// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.Remove
 		return a.Remove(c.File)
 	}
+
+	logrus.Tracef("reading content from %s", c.File)
 
 	// send Filesystem call to read config file
 	//
@@ -54,6 +62,8 @@ func (c *Config) Remove() error {
 
 	// iterate through all flags to be removed
 	for _, flag := range c.RemoveFlags {
+		logrus.Tracef("removing key %s", flag)
+
 		// check if API addr flag should be removed
 		if strings.EqualFold(flag, client.KeyAddress) {
 			// set the API addr field to empty in config
@@ -109,6 +119,8 @@ func (c *Config) Remove() error {
 		}
 	}
 
+	logrus.Trace("creating file content for config file")
+
 	// create output for config file
 	//
 	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Marshal
@@ -116,6 +128,8 @@ func (c *Config) Remove() error {
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("writing file content to %s", c.File)
 
 	// send Filesystem call to create config file
 	//

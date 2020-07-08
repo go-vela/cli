@@ -8,10 +8,16 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Remove deletes a repository based off the provided configuration.
 func (c *Config) Remove(client *vela.Client) error {
+	logrus.Debug("executing remove for repo configuration")
+
+	logrus.Tracef("removing repo %s/%s", c.Org, c.Name)
+
 	// send API call to remove a repository
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.Remove

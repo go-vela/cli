@@ -36,5 +36,5 @@ func (c *Config) View() error {
 	// output the config in stdout format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-	return output.Stdout(config)
+	return output.Stdout(string(config))
 }

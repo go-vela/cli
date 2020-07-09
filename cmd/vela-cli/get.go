@@ -12,11 +12,12 @@ import (
 
 // getCmds defines the commands for getting a list of resources.
 var getCmds = &cli.Command{
-	Name:        "get",
-	Category:    "Resource Management",
-	Aliases:     []string{"g"},
-	Description: "Use this command to get a list of resources for Vela.",
-	Usage:       "Get a list of resources for Vela via subcommands",
+	Name:                   "get",
+	Category:               "Resource Management",
+	Aliases:                []string{"g"},
+	Description:            "Use this command to get a list of resources for Vela.",
+	Usage:                  "Get a list of resources for Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for getting a list of builds
 		//

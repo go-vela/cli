@@ -12,11 +12,12 @@ import (
 
 // repairCmds defines the commands for repairing resources.
 var repairCmds = &cli.Command{
-	Name:        "repair",
-	Category:    "Resource Management",
-	Aliases:     []string{"rp"},
-	Description: "Use this command to repair a resource for Vela.",
-	Usage:       "Repair a resource for Vela via subcommands",
+	Name:                   "repair",
+	Category:               "Repository Management",
+	Aliases:                []string{"rp"},
+	Description:            "Use this command to repair a resource for Vela.",
+	Usage:                  "Repair a resource for Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for repairing a repository
 		//

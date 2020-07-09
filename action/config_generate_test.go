@@ -14,7 +14,7 @@ import (
 func TestAction_ConfigGenerate(t *testing.T) {
 	// setup flags
 	set := flag.NewFlagSet("test", 0)
-	set.String("file", "config/testdata/generate.yml", "doc")
+	set.String("config", "config/testdata/generate.yml", "doc")
 	set.String("addr", "https://vela-server.localhost", "doc")
 	set.String("token", "superSecretToken", "doc")
 	set.String("api.version", "1", "doc")

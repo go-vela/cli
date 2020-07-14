@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-vela/cli/cmd"
+	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/version"
 
 	"github.com/sirupsen/logrus"
@@ -19,19 +19,13 @@ import (
 )
 
 func main() {
-	cli.VersionFlag = &cli.BoolFlag{
-		Name:    "version",
-		Aliases: []string{"v", "V"},
-		Usage:   "print the CLI version information",
-	}
-
 	app := cli.NewApp()
-	app.EnableBashCompletion = true
+
+	// CLI Information
+
 	app.Name = "vela"
 	app.HelpName = "vela"
-	app.Usage = "CLI for managing Vela resources"
-	app.Compiled = time.Now()
-	app.Version = version.Version.String()
+	app.Usage = "CLI for interacting with Vela and managing resources"
 	app.Copyright = "Copyright (c) 2020 Target Brands, Inc. All rights reserved."
 	app.Authors = []*cli.Author{
 		{
@@ -40,60 +34,119 @@ func main() {
 		},
 	}
 
-	app.Commands = cmd.Vela
+	// CLI Metadata
+
+	app.Before = load
+	app.Compiled = time.Now()
+	app.EnableBashCompletion = true
+	app.UseShortOptionHandling = true
+	app.Version = version.Version.String()
+
+	// CLI Commands
+
+	app.Commands = []*cli.Command{
+		addCmds,
+		chownCmds,
+		generateCmds,
+		getCmds,
+		removeCmds,
+		repairCmds,
+		restartCmds,
+		updateCmds,
+		validateCmds,
+		viewCmds,
+	}
+
+	// CLI Flags
+
 	app.Flags = []cli.Flag{
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_ADDR"},
-			Name:    "addr",
-			Usage:   "location of vela server",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_TOKEN"},
-			Name:    "token",
-			Usage:   "User token for Vela server",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_API_VERSION"},
-			Name:    "api-version",
-			Usage:   "api version to use for Vela server",
-			Value:   "v1",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_LOG_LEVEL"},
-			Name:    "log-level",
-			Usage:   "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
-			Value:   "info",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_BUILD_ORG"},
-			Name:    "org",
-			Usage:   "Provide the organization owner for the repository",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_BUILD_REPO"},
-			Name:    "repo",
-			Usage:   "Provide the repository contained within the organization",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_SECRET_ENGINE"},
-			Name:    "secret-engine",
-			Usage:   "Provide the engine for where the secret to be stored",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			EnvVars: []string{"VELA_SECRET_TYPE"},
-			Name:    "secret-type",
-			Usage:   "Provide the kind of secret to be stored",
-		}),
+
+		// Config Flags
+
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_CONFIG"},
+			EnvVars: []string{"VELA_CONFIG", "CONFIG_FILE"},
 			Name:    "config",
+			Aliases: []string{"c"},
 			Usage:   "path to Vela configuration file",
 			Value:   fmt.Sprintf("%s/.vela/config.yml", os.Getenv("HOME")),
 		},
-	}
-	app.Before = load
 
-	if err := app.Run(os.Args); err != nil {
+		// API Flags
+
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_ADDR", "VELA_SERVER", "CONFIG_ADDR", "SERVER_ADDR"},
+			Name:    client.KeyAddress,
+			Aliases: []string{"a"},
+			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
+		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN", "SERVER_TOKEN"},
+			Name:    client.KeyToken,
+			Aliases: []string{"t"},
+			Usage:   "token used for communication with the Vela server",
+		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION", "API_VERSION"},
+			Name:    "api.version",
+			Aliases: []string{"av"},
+			Usage:   "API version for communication with the Vela server",
+			Value:   "v1",
+		}),
+
+		// Log Flags
+
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL", "LOG_LEVEL"},
+			Name:    "log.level",
+			Aliases: []string{"l"},
+			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
+			Value:   "info",
+		}),
+
+		// Output Flags
+
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
+			Name:    "output",
+			Aliases: []string{"op"},
+			Usage:   "set the type of output - options: (json|spew|yaml)",
+		}),
+
+		// Repo Flags
+
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
+			Name:    "org",
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the CLI",
+		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
+			Name:    "repo",
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the CLI",
+		}),
+
+		// Secret Flags
+
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE", "SECRET_ENGINE"},
+			Name:    "secret.engine",
+			Aliases: []string{"e"},
+			Usage:   "provide the secret engine for the CLI",
+		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE", "SECRET_TYPE"},
+			Name:    "secret.type",
+			Aliases: []string{"ty"},
+			Usage:   "provide the secret type for the CLI",
+		}),
+	}
+
+	// CLI Start
+
+	err := app.Run(os.Args)
+	if err != nil {
 		logrus.Fatal(err)
 	}
 }
@@ -119,18 +172,12 @@ func load(c *cli.Context) error {
 		logrus.Warningf("Unable to find config file @ %s", config)
 	}
 
-	err = validate(c)
-	if err != nil {
-		return err
-	}
-
-	switch c.String("log-level") {
+	// set log level for the CLI
+	switch c.String("log.level") {
 	case "t", "trace", "Trace", "TRACE":
 		logrus.SetLevel(logrus.TraceLevel)
 	case "d", "debug", "Debug", "DEBUG":
 		logrus.SetLevel(logrus.DebugLevel)
-	case "i", "info", "Info", "INFO":
-		logrus.SetLevel(logrus.InfoLevel)
 	case "w", "warn", "Warn", "WARN":
 		logrus.SetLevel(logrus.WarnLevel)
 	case "e", "error", "Error", "ERROR":
@@ -139,38 +186,10 @@ func load(c *cli.Context) error {
 		logrus.SetLevel(logrus.FatalLevel)
 	case "p", "panic", "Panic", "PANIC":
 		logrus.SetLevel(logrus.PanicLevel)
-	}
-
-	return nil
-}
-
-// validate is a helper function that ensures the necessary configuration is set for the CLI.
-func validate(c *cli.Context) error {
-	args := c.Args()
-
-	// DO NOT validate if help argument is provided
-	for _, arg := range args.Slice() {
-		if arg == "--help" || arg == "-h" {
-			return nil
-		}
-	}
-
-	// DO NOT validate if config argument is provided
-	if args.Get(1) == "config" || args.Get(1) == "c" {
-		return nil
-	}
-
-	// DO NOT validate if login argument is provided
-	if args.Get(0) == "login" || args.Get(0) == "l" {
-		return nil
-	}
-
-	if len(c.String("addr")) == 0 {
-		return fmt.Errorf("No vela address provided")
-	}
-
-	if len(c.String("token")) == 0 {
-		return fmt.Errorf("No vela token provided")
+	case "i", "info", "Info", "INFO":
+		fallthrough
+	default:
+		logrus.SetLevel(logrus.InfoLevel)
 	}
 
 	return nil

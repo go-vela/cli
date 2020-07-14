@@ -12,11 +12,12 @@ import (
 
 // addCmds defines the commands for creating resources.
 var addCmds = &cli.Command{
-	Name:        "add",
-	Category:    "Resource Management",
-	Aliases:     []string{"a"},
-	Description: "Use this command to add resources to Vela.",
-	Usage:       "Add resources to Vela via subcommands",
+	Name:                   "add",
+	Category:               "Resource Management",
+	Aliases:                []string{"a"},
+	Description:            "Use this command to add resources to Vela.",
+	Usage:                  "Add resources to Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for creating a deployment
 		//

@@ -12,11 +12,12 @@ import (
 
 // validateCmds defines the commands for validating resources.
 var validateCmds = &cli.Command{
-	Name:        "validate",
-	Category:    "Resource Management",
-	Aliases:     []string{"vd"},
-	Description: "Use this command to validate a resource for Vela.",
-	Usage:       "Validate a resource for Vela via subcommands",
+	Name:                   "validate",
+	Category:               "Pipeline Management",
+	Aliases:                []string{"vd"},
+	Description:            "Use this command to validate a resource for Vela.",
+	Usage:                  "Validate a resource for Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for validating a pipeline
 		//

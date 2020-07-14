@@ -12,11 +12,12 @@ import (
 
 // updateCmds defines the commands for modifying resources.
 var updateCmds = &cli.Command{
-	Name:        "update",
-	Category:    "Resource Management",
-	Aliases:     []string{"u"},
-	Description: "Use this command to update a resource for Vela.",
-	Usage:       "Update a resource for Vela via subcommands",
+	Name:                   "update",
+	Category:               "Resource Management",
+	Aliases:                []string{"u"},
+	Description:            "Use this command to update a resource for Vela.",
+	Usage:                  "Update a resource for Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for modifying a config file
 		//

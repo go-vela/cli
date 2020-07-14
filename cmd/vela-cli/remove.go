@@ -12,11 +12,12 @@ import (
 
 // removeCmds defines the commands for deleting resources.
 var removeCmds = &cli.Command{
-	Name:        "remove",
-	Category:    "Resource Management",
-	Aliases:     []string{"r"},
-	Description: "Use this command to remove a resource for Vela.",
-	Usage:       "Remove a resource for Vela via subcommands",
+	Name:                   "remove",
+	Category:               "Resource Management",
+	Aliases:                []string{"r"},
+	Description:            "Use this command to remove a resource for Vela.",
+	Usage:                  "Remove a resource for Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for remove a config file
 		//

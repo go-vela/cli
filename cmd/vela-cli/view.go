@@ -12,11 +12,12 @@ import (
 
 // viewCmds defines the commands for inspecting resources.
 var viewCmds = &cli.Command{
-	Name:        "view",
-	Category:    "Resource Management",
-	Aliases:     []string{"v"},
-	Description: "Use this command to view a resource for Vela.",
-	Usage:       "View details for a resource for Vela via subcommands",
+	Name:                   "view",
+	Category:               "Resource Management",
+	Aliases:                []string{"v"},
+	Description:            "Use this command to view a resource for Vela.",
+	Usage:                  "View details for a resource for Vela via subcommands",
+	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
 		// add the sub command for inspecting a build
 		//

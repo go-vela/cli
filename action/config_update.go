@@ -118,7 +118,7 @@ func configUpdate(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action:      updateAction,
-		File:        c.String("file"),
+		File:        c.String("config"),
 		UpdateFlags: make(map[string]string),
 	}
 

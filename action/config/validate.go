@@ -20,15 +20,18 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("no config file provided")
 	}
 
-	// check if config file exists
-	_, err := os.Stat(c.File)
-	if err != nil {
-		// check if a not exist err was returned
-		if os.IsNotExist(err) {
-			return fmt.Errorf("no config file found @ %s", c.File)
-		}
+	// check if config action is generate
+	if c.Action != "generate" {
+		// check if config file exists
+		_, err := os.Stat(c.File)
+		if err != nil {
+			// check if a not exist err was returned
+			if os.IsNotExist(err) {
+				return fmt.Errorf("no config file found @ %s", c.File)
+			}
 
-		return err
+			return err
+		}
 	}
 
 	return nil

@@ -14,7 +14,7 @@ import (
 func TestAction_ConfigRemove(t *testing.T) {
 	// setup flags
 	set := flag.NewFlagSet("test", 0)
-	set.String("file", "config/testdata/remove.yml", "doc")
+	set.String("config", "config/testdata/remove.yml", "doc")
 	set.Bool("addr", true, "doc")
 	set.Bool("token", true, "doc")
 	set.Bool("api.version", true, "doc")

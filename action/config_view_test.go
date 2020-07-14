@@ -14,7 +14,7 @@ import (
 func TestAction_ConfigView(t *testing.T) {
 	// setup flags
 	set := flag.NewFlagSet("test", 0)
-	set.String("file", "config/testdata/config.yml", "doc")
+	set.String("config", "config/testdata/config.yml", "doc")
 
 	// setup tests
 	tests := []struct {

@@ -48,7 +48,7 @@ var ConfigGenerate = &cli.Command{
 			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"},
 			Name:    "log.level",
 			Aliases: []string{"l"},
-			Usage:   "set the level of logging for the CLI",
+			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
 		},
 
 		// Output Flags
@@ -57,7 +57,7 @@ var ConfigGenerate = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "set the type of output for the CLI",
+			Usage:   "format the output in json, spew, or yaml format",
 		},
 
 		// Repo Flags
@@ -118,7 +118,7 @@ func configGenerate(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action:   generateAction,
-		File:     c.String("file"),
+		File:     c.String("config"),
 		Addr:     c.String(client.KeyAddress),
 		Token:    c.String(client.KeyToken),
 		Version:  c.String("api.version"),

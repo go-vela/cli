@@ -119,7 +119,7 @@ func configRemove(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action: removeAction,
-		File:   c.String("file"),
+		File:   c.String("config"),
 	}
 
 	// check if the API addr flag should be removed

@@ -9,13 +9,13 @@ import (
 	"os"
 	"time"
 
+	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/version"
 
 	"github.com/sirupsen/logrus"
 
 	"github.com/urfave/cli/v2"
-	"github.com/urfave/cli/v2/altsrc"
 )
 
 func main() {
@@ -73,74 +73,74 @@ func main() {
 
 		// API Flags
 
-		altsrc.NewStringFlag(&cli.StringFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ADDR", "VELA_SERVER", "CONFIG_ADDR", "SERVER_ADDR"},
 			Name:    client.KeyAddress,
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN", "SERVER_TOKEN"},
 			Name:    client.KeyToken,
 			Aliases: []string{"t"},
 			Usage:   "token used for communication with the Vela server",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION", "API_VERSION"},
 			Name:    "api.version",
 			Aliases: []string{"av"},
 			Usage:   "API version for communication with the Vela server",
 			Value:   "v1",
-		}),
+		},
 
 		// Log Flags
 
-		altsrc.NewStringFlag(&cli.StringFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL", "LOG_LEVEL"},
 			Name:    "log.level",
 			Aliases: []string{"l"},
 			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
 			Value:   "info",
-		}),
+		},
 
 		// Output Flags
 
-		altsrc.NewStringFlag(&cli.StringFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
 			Usage:   "set the type of output - options: (json|spew|yaml)",
-		}),
+		},
 
 		// Repo Flags
 
-		altsrc.NewStringFlag(&cli.StringFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
 			Name:    "org",
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the CLI",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    "repo",
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the CLI",
-		}),
+		},
 
 		// Secret Flags
 
-		altsrc.NewStringFlag(&cli.StringFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE", "SECRET_ENGINE"},
 			Name:    "secret.engine",
 			Aliases: []string{"e"},
 			Usage:   "provide the secret engine for the CLI",
-		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE", "SECRET_TYPE"},
 			Name:    "secret.type",
 			Aliases: []string{"ty"},
 			Usage:   "provide the secret type for the CLI",
-		}),
+		},
 	}
 
 	// CLI Start
@@ -153,23 +153,26 @@ func main() {
 
 // load is a helper function that loads the necessary configuration for the CLI.
 func load(c *cli.Context) error {
-	config := c.String("config")
-
-	_, err := os.Stat(config)
-	if err == nil {
-		err = altsrc.InitInputSourceWithContext(c.App.Flags, func(context *cli.Context) (altsrc.InputSourceContext, error) {
-			yaml, err := altsrc.NewYamlSourceFromFile(config)
-			return yaml, err
-		})(c)
-		if err != nil {
-			return fmt.Errorf("Unable to load config file @ %s: %v", config, err)
-		}
+	// create the config file configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
+	conf := &config.Config{
+		Action: "load",
+		File:   c.String("config"),
 	}
-	if err != nil {
-		if !os.IsNotExist(err) {
-			return fmt.Errorf("Unable to search for config file @ %s: %v", config, err)
+
+	// validate config file configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Validate
+	err := conf.Validate()
+	if err == nil {
+		// execute the load call for the config file configuration
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Load
+		err = conf.Load(c)
+		if err != nil {
+			return err
 		}
-		logrus.Warningf("Unable to find config file @ %s", config)
 	}
 
 	// set log level for the CLI

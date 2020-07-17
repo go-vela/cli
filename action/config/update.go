@@ -54,9 +54,9 @@ func (c *Config) Update() error {
 	for key, value := range c.UpdateFlags {
 		logrus.Tracef("updating key %s with value %s", key, value)
 
-		// check if API addr flag should be modified
+		// check if API address flag should be modified
 		if strings.EqualFold(key, client.KeyAddress) {
-			// set the API addr field to value provided
+			// set the API address field to value provided
 			config.API.Address = value
 		}
 

@@ -64,9 +64,9 @@ func (c *Config) Remove() error {
 	for _, flag := range c.RemoveFlags {
 		logrus.Tracef("removing key %s", flag)
 
-		// check if API addr flag should be removed
+		// check if API address flag should be removed
 		if strings.EqualFold(flag, client.KeyAddress) {
-			// set the API addr field to empty in config
+			// set the API address field to empty in config
 			config.API.Address = ""
 		}
 

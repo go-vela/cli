@@ -16,7 +16,7 @@ func TestAction_ConfigUpdate(t *testing.T) {
 	set := flag.NewFlagSet("test", 0)
 	set.String("config", "config/testdata/generate.yml", "doc")
 	set.String("api.addr", "https://vela-server.localhost", "doc")
-	set.String("token", "superSecretToken", "doc")
+	set.String("api.token", "superSecretToken", "doc")
 	set.String("api.version", "1", "doc")
 	set.String("log.level", "info", "doc")
 	set.String("output", "json", "doc")

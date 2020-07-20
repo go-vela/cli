@@ -21,11 +21,11 @@ func TestAction_Login(t *testing.T) {
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
 	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("token", "superSecretToken", "doc")
+	authSet.String("api.token", "superSecretToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("token", "superSecretToken", "doc")
+	fullSet.String("api.token", "superSecretToken", "doc")
 	fullSet.String("username", "octocat", "doc")
 	fullSet.String("password", "superSecretPassword", "doc")
 	fullSet.String("otp", "123456", "doc")

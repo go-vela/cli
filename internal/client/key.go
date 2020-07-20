@@ -12,5 +12,5 @@ const (
 
 	// KeyToken defines the client key
 	// when parsing the client token.
-	KeyToken = "token"
+	KeyToken = "api.token"
 )

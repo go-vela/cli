@@ -21,11 +21,11 @@ func TestAction_BuildGet(t *testing.T) {
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
 	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("token", "superSecretToken", "doc")
+	authSet.String("api.token", "superSecretToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("token", "superSecretToken", "doc")
+	fullSet.String("api.token", "superSecretToken", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.Int("page", 1, "doc")

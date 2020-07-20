@@ -17,7 +17,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	// setup flags
 	set := flag.NewFlagSet("test", 0)
 	set.String("api.addr", "https://vela-server.localhost", "doc")
-	set.String("token", "superSecretToken", "doc")
+	set.String("api.token", "superSecretToken", "doc")
 	set.String("api.version", "1", "doc")
 	set.String("log.level", "info", "doc")
 	set.String("output", "json", "doc")
@@ -27,7 +27,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	set.String("type", "repo", "doc")
 
 	addrSet := flag.NewFlagSet("test", 0)
-	addrSet.String("token", "superSecretToken", "doc")
+	addrSet.String("api.token", "superSecretToken", "doc")
 	addrSet.String("api.version", "1", "doc")
 	addrSet.String("log.level", "info", "doc")
 	addrSet.String("output", "json", "doc")
@@ -48,7 +48,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	versionSet := flag.NewFlagSet("test", 0)
 	versionSet.String("api.addr", "https://vela-server.localhost", "doc")
-	versionSet.String("token", "superSecretToken", "doc")
+	versionSet.String("api.token", "superSecretToken", "doc")
 	versionSet.String("log.level", "info", "doc")
 	versionSet.String("output", "json", "doc")
 	versionSet.String("org", "github", "doc")
@@ -58,7 +58,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	logSet := flag.NewFlagSet("test", 0)
 	logSet.String("api.addr", "https://vela-server.localhost", "doc")
-	logSet.String("token", "superSecretToken", "doc")
+	logSet.String("api.token", "superSecretToken", "doc")
 	logSet.String("api.version", "1", "doc")
 	logSet.String("output", "json", "doc")
 	logSet.String("org", "github", "doc")
@@ -68,7 +68,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	outputSet := flag.NewFlagSet("test", 0)
 	outputSet.String("api.addr", "https://vela-server.localhost", "doc")
-	outputSet.String("token", "superSecretToken", "doc")
+	outputSet.String("api.token", "superSecretToken", "doc")
 	outputSet.String("api.version", "1", "doc")
 	outputSet.String("log.level", "info", "doc")
 	outputSet.String("org", "github", "doc")
@@ -78,7 +78,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	orgSet := flag.NewFlagSet("test", 0)
 	orgSet.String("api.addr", "https://vela-server.localhost", "doc")
-	orgSet.String("token", "superSecretToken", "doc")
+	orgSet.String("api.token", "superSecretToken", "doc")
 	orgSet.String("api.version", "1", "doc")
 	orgSet.String("log.level", "info", "doc")
 	orgSet.String("output", "json", "doc")
@@ -88,7 +88,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	repoSet := flag.NewFlagSet("test", 0)
 	repoSet.String("api.addr", "https://vela-server.localhost", "doc")
-	repoSet.String("token", "superSecretToken", "doc")
+	repoSet.String("api.token", "superSecretToken", "doc")
 	repoSet.String("api.version", "1", "doc")
 	repoSet.String("log.level", "info", "doc")
 	repoSet.String("output", "json", "doc")
@@ -98,7 +98,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	engineSet := flag.NewFlagSet("test", 0)
 	engineSet.String("api.addr", "https://vela-server.localhost", "doc")
-	engineSet.String("token", "superSecretToken", "doc")
+	engineSet.String("api.token", "superSecretToken", "doc")
 	engineSet.String("api.version", "1", "doc")
 	engineSet.String("log.level", "info", "doc")
 	engineSet.String("output", "json", "doc")
@@ -108,7 +108,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	typeSet := flag.NewFlagSet("test", 0)
 	typeSet.String("api.addr", "https://vela-server.localhost", "doc")
-	typeSet.String("token", "superSecretToken", "doc")
+	typeSet.String("api.token", "superSecretToken", "doc")
 	typeSet.String("api.version", "1", "doc")
 	typeSet.String("log.level", "info", "doc")
 	typeSet.String("output", "json", "doc")

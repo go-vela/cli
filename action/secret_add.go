@@ -115,23 +115,23 @@ var SecretAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a repository secret.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --value bar
   2. Add an organization secret.
-    $ {{.HelpName}} --engine native --type org --org github --name foo --value bar
+    $ {{.HelpName}} --engine native --type org --org MyOrg --name foo --value bar
   3. Add a shared secret.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo --value bar
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo --value bar
   4. Add a repository secret with all event types enabled.
-     $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag
+     $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag
   5. Add a repository secret with an image whitelist.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --image alpine --image golang:* --image postgres:latest
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --value bar --image alpine --image golang:* --image postgres:latest
   6. Add a secret with value from a file.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value @secret.txt
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --value @secret.txt
   7. Add a repository secret with json output.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --value bar --output json
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --value bar --output json
   8. Add a secret or secrets from a file.
     $ {{.HelpName}} --file secret.yml
-  9. Add a secret when engine and type config or environment variables are set.
-    $ {{.HelpName}} --org github --repo octocat --name foo --value bar
+  9. Add a secret when config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --name foo --value bar
 
 DOCUMENTATION:
 

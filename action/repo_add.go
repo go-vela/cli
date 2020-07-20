@@ -111,12 +111,12 @@ var RepoAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a repository with push and pull request enabled.
-    $ {{.HelpName}} --org github --repo octocat --event push --event pull_request
+    $ {{.HelpName}} --org MyOrg --repo octocat --event push --event pull_request
   2. Add a repository with all event types enabled.
-    $ {{.HelpName}} --org github --repo octocat --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.HelpName}} --org MyOrg --repo octocat --event push --event pull_request --event tag --event deployment --event comment
   3. Add a repository with a longer build timeout.
-    $ {{.HelpName}} --org github --repo octocat --timeout 90
-  4. Add a repository with push and pull request enabled when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --timeout 90
+  4. Add a repository when config or environment variables are set.
     $ {{.HelpName}} --event push --event pull_request
 
 DOCUMENTATION:

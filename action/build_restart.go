@@ -57,8 +57,8 @@ var BuildRestart = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Restart existing build for a repository.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build 1
-  2. Restart existing build for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
+  2. Restart existing build for a repository when config or environment variables are set.
     $ {{.HelpName}} --build 1
 
 DOCUMENTATION:

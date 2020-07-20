@@ -58,12 +58,12 @@ var LogGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get logs for a build.
-    $ {{.HelpName}} --org github --repo octocat --build 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1
   2. Get logs for a build with yaml output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output yaml
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output yaml
   3. Get logs for a build with json output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output json
-  4. Get logs for a build when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output json
+  4. Get logs for a build when config or environment variables are set.
     $ {{.HelpName}} --build 1
 
 DOCUMENTATION:

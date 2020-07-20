@@ -58,6 +58,8 @@ EXAMPLES:
     $ {{.HelpName}} --output yaml
   4. Get a list of repositories with json output.
     $ {{.HelpName}} --output json
+  5. Get a list of repositories when config or environment variables are set.
+    $ {{.HelpName}}
 
 DOCUMENTATION:
 

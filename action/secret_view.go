@@ -79,15 +79,15 @@ var SecretView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View repository secret details.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo
   2. View organization secret details.
-    $ {{.HelpName}} --engine native --type org --org github --name foo
+    $ {{.HelpName}} --engine native --type org --org MyOrg --name foo
   3. View shared secret details.
-    $ {{.HelpName}} --engine native --type shared --org github --team octokitties --name foo
+    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo
   4. View repository secret details with json output.
-    $ {{.HelpName}} --engine native --type repo --org github --repo octocat --name foo --output json
-  5. View secret details when engine and type config or environment variables are set.
-    $ {{.HelpName}} --org github --repo octocat --name foo
+    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --output json
+  5. View secret details when config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --name foo
 
 DOCUMENTATION:
 

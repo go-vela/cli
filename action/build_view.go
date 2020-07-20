@@ -57,10 +57,10 @@ var BuildView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View build details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build 1
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
   2. View build details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld --build 1 --output json
-  3. View build details for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output json
+  3. View build details for a repository when config or environment variables are set.
     $ {{.HelpName}} --build 1
 
 DOCUMENTATION:

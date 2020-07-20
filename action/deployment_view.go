@@ -57,10 +57,10 @@ var DeploymentView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View deployment details for a repository.
-    $ {{.HelpName}} --org github --repo octocat --deployment 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --deployment 1
   2. View deployment details for a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat --deployment 1 --output json
-  3. View deployment details for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --deployment 1 --output json
+  3. View deployment details for a repository config or environment variables are set.
     $ {{.HelpName}} --deployment 1
 
 DOCUMENTATION:

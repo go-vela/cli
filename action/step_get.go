@@ -75,14 +75,14 @@ var StepGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get steps for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1
   2. Get steps for a repository with wide view output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output wide
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output wide
   3. Get steps for a repository with yaml output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output yaml
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output yaml
   4. Get steps for a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output json
-  5. Get steps for a build when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output json
+  5. Get steps for a build when config or environment variables are set.
     $ {{.HelpName}} --build 1
 
 DOCUMENTATION:

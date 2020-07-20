@@ -66,14 +66,14 @@ var BuildGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get builds for a repository.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Get builds for a repository with wide view output.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld --output wide
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output wide
   3. Get builds for a repository with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld --output yaml
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output yaml
   4. Get builds for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo HelloWorld --output json
-  5. Get builds for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
+  5. Get builds for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
 DOCUMENTATION:

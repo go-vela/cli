@@ -20,11 +20,11 @@ func TestAction_SecretUpdate(t *testing.T) {
 
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("addr", s.URL, "doc")
+	authSet.String("api.addr", s.URL, "doc")
 	authSet.String("token", "superSecretToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("addr", s.URL, "doc")
+	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("token", "superSecretToken", "doc")
 	fullSet.String("engine", "native", "doc")
 	fullSet.String("type", "repo", "doc")
@@ -35,7 +35,7 @@ func TestAction_SecretUpdate(t *testing.T) {
 	fullSet.String("output", "json", "doc")
 
 	fileSet := flag.NewFlagSet("test", 0)
-	fileSet.String("addr", s.URL, "doc")
+	fileSet.String("api.addr", s.URL, "doc")
 	fileSet.String("token", "superSecretToken", "doc")
 	fileSet.String("file", "secret/testdata/repo.yml", "doc")
 	fileSet.String("output", "json", "doc")

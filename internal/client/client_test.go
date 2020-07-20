@@ -20,13 +20,13 @@ func TestClient_Parse(t *testing.T) {
 
 	// setup flags
 	serverSet := flag.NewFlagSet("test", 0)
-	serverSet.String("addr", s.URL, "doc")
+	serverSet.String("api.addr", s.URL, "doc")
 
 	tokenSet := flag.NewFlagSet("test", 0)
 	tokenSet.String("token", "superSecretToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("addr", s.URL, "doc")
+	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("token", "superSecretToken", "doc")
 
 	// setup tests

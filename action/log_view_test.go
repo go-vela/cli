@@ -20,11 +20,11 @@ func TestAction_LogView(t *testing.T) {
 
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("addr", s.URL, "doc")
+	authSet.String("api.addr", s.URL, "doc")
 	authSet.String("token", "superSecretToken", "doc")
 
 	serviceSet := flag.NewFlagSet("test", 0)
-	serviceSet.String("addr", s.URL, "doc")
+	serviceSet.String("api.addr", s.URL, "doc")
 	serviceSet.String("token", "superSecretToken", "doc")
 	serviceSet.String("org", "github", "doc")
 	serviceSet.String("repo", "octocat", "doc")
@@ -33,7 +33,7 @@ func TestAction_LogView(t *testing.T) {
 	serviceSet.String("output", "json", "doc")
 
 	stepSet := flag.NewFlagSet("test", 0)
-	stepSet.String("addr", s.URL, "doc")
+	stepSet.String("api.addr", s.URL, "doc")
 	stepSet.String("token", "superSecretToken", "doc")
 	stepSet.String("org", "github", "doc")
 	stepSet.String("repo", "octocat", "doc")
@@ -42,7 +42,7 @@ func TestAction_LogView(t *testing.T) {
 	stepSet.String("output", "json", "doc")
 
 	buildSet := flag.NewFlagSet("test", 0)
-	buildSet.String("addr", s.URL, "doc")
+	buildSet.String("api.addr", s.URL, "doc")
 	buildSet.String("token", "superSecretToken", "doc")
 	buildSet.String("org", "github", "doc")
 	buildSet.String("repo", "octocat", "doc")

@@ -29,7 +29,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 				Action: "remove",
 				File:   "testdata/config.yml",
 				RemoveFlags: []string{
-					"addr",
+					"api.addr",
 					"token",
 					"api.version",
 					"log.level",

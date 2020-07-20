@@ -52,7 +52,7 @@ var StepGet = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, wide, yaml or json format",
+			Usage:   "format the output in json, spew, wide or yaml",
 		},
 
 		// Pagination Flags

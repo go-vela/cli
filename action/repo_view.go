@@ -42,7 +42,7 @@ var RepoView = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, yaml or json format",
+			Usage:   "format the output in json, spew or yaml",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

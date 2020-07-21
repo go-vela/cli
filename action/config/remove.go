@@ -89,7 +89,7 @@ func (c *Config) Remove() error {
 		}
 
 		// check if secret engine flag should be removed
-		if strings.EqualFold(flag, "engine") {
+		if strings.EqualFold(flag, "secret.engine") {
 			// set the secret engine field to empty in config
 			config.Secret.Engine = ""
 		}

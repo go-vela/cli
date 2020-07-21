@@ -33,7 +33,7 @@ func TestConfig_Config_Update(t *testing.T) {
 					"api.token":   "superSecretToken",
 					"api.version": "1",
 					"log.level":   "info",
-					"engine":      "native",
+					"secret.engine":      "native",
 					"type":        "repo",
 					"org":         "github",
 					"repo":        "octocat",

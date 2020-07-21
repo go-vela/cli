@@ -26,7 +26,7 @@ func TestAction_SecretRemove(t *testing.T) {
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token", "superSecretToken", "doc")
-	fullSet.String("engine", "native", "doc")
+	fullSet.String("secret.engine", "native", "doc")
 	fullSet.String("type", "repo", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")

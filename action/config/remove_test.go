@@ -33,7 +33,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 					"api.token",
 					"api.version",
 					"log.level",
-					"engine",
+					"secret.engine",
 					"type",
 					"org",
 					"repo",

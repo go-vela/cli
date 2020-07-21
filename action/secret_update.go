@@ -42,7 +42,7 @@ var SecretUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
-			Name:    "engine",
+			Name:    "secret.engine",
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
@@ -156,7 +156,7 @@ func secretUpdate(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action:       addAction,
-		Engine:       c.String("engine"),
+		Engine:       c.String("secret.engine"),
 		Type:         c.String("type"),
 		Org:          c.String("org"),
 		Repo:         c.String("repo"),

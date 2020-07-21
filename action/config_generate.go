@@ -79,7 +79,7 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
-			Name:    "engine",
+			Name:    "secret.engine",
 			Aliases: []string{"e"},
 			Usage:   "provide the secret engine for the CLI",
 		},
@@ -126,7 +126,7 @@ func configGenerate(c *cli.Context) error {
 		Output:   c.String("output"),
 		Org:      c.String("org"),
 		Repo:     c.String("repo"),
-		Engine:   c.String("engine"),
+		Engine:   c.String("secret.engine"),
 		Type:     c.String("type"),
 	}
 

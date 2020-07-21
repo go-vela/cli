@@ -28,7 +28,7 @@ var RepoGet = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, wide, yaml or json format",
+			Usage:   "format the output in json, spew, wide or yaml",
 		},
 
 		// Pagination Flags
@@ -58,6 +58,8 @@ EXAMPLES:
     $ {{.HelpName}} --output yaml
   4. Get a list of repositories with json output.
     $ {{.HelpName}} --output json
+  5. Get a list of repositories when config or environment variables are set.
+    $ {{.HelpName}}
 
 DOCUMENTATION:
 

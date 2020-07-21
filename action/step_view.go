@@ -60,16 +60,16 @@ var StepView = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, yaml or json format",
+			Usage:   "format the output in json, spew or yaml",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View step details for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --step 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --step 1
   2. View step details for a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --step 1 --output json
-  3. View step details for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --step 1 --output json
+  3. View step details for a repository config or environment variables are set.
     $ {{.HelpName}} --build 1 --step 1
 
 DOCUMENTATION:

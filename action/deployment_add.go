@@ -72,21 +72,23 @@ var DeploymentAdd = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, yaml or json format",
+			Usage:   "format the output in json, spew or yaml",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a deployment for a repository.
-    $ {{.HelpName}} --org github --repo octocat
-  2. Add a deployment with a specific target environment.
-    $ {{.HelpName}} --org github --repo octocat --target stage
-  3. Add a deployment with a specific branch reference.
-    $ {{.HelpName}} --org github --repo octocat --ref dev
-  4. Add a deployment with a specific commit reference.
-    $ {{.HelpName}} --org github --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
-  5. Add a deployment with a specific description.
-    $ {{.HelpName}} --org github --repo octocat --description 'my custom message'
+    $ {{.HelpName}} --org MyOrg --repo octocat
+  2. Add a deployment for a repository with a specific target environment.
+    $ {{.HelpName}} --org MyOrg --repo octocat --target stage
+  3. Add a deployment for a repository with a specific branch reference.
+    $ {{.HelpName}} --org MyOrg --repo octocat --ref dev
+  4. Add a deployment for a repository with a specific commit reference.
+    $ {{.HelpName}} --org MyOrg --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
+  5. Add a deployment for a repository with a specific description.
+    $ {{.HelpName}} --org MyOrg --repo octocat --description 'my custom message'
+  6. Add a deployment for a repository when config or environment variables are set.
+    $ {{.HelpName}}
 
 DOCUMENTATION:
 

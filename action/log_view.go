@@ -67,22 +67,22 @@ var LogView = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "LOG_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, yaml or json format",
+			Usage:   "format the output in json, spew or yaml",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View logs for a build.
-    $ {{.HelpName}} --org github --repo octocat --build 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1
   2. View logs for a service.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --service 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --service 1
   3. View logs for a step.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --step 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --step 1
   4. View logs for a build with yaml output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output yaml
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output yaml
   5. View logs for a build with json output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output json
-  6. View logs for a build when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output json
+  6. View logs for a build when config or environment variables are set.
     $ {{.HelpName}} --build 1
 
 DOCUMENTATION:

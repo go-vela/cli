@@ -43,7 +43,7 @@ var DeploymentGet = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, wide, yaml or json format",
+			Usage:   "format the output in json, spew, wide or yaml",
 		},
 
 		// Pagination Flags
@@ -66,14 +66,14 @@ var DeploymentGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get deployments for a repository.
-    $ {{.HelpName}} --org github --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo octocat
   2. Get deployments for a repository with wide view output.
-    $ {{.HelpName}} --org github --repo octocat --output wide
+    $ {{.HelpName}} --org MyOrg --repo octocat --output wide
   3. Get deployments for a repository with yaml output.
-    $ {{.HelpName}} --org github --repo octocat --output yaml
+    $ {{.HelpName}} --org MyOrg --repo octocat --output yaml
   4. Get deployments for a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat --output json
-  5. Get deployments for a repository when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --output json
+  5. Get deployments for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
 DOCUMENTATION:

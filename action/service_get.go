@@ -52,7 +52,7 @@ var ServiceGet = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
 			Name:    "output",
 			Aliases: []string{"op"},
-			Usage:   "print the output in default, wide, yaml or json format",
+			Usage:   "format the output in json, spew, wide or yaml",
 		},
 
 		// Pagination Flags
@@ -75,14 +75,14 @@ var ServiceGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get services for a repository.
-    $ {{.HelpName}} --org github --repo octocat --build 1
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1
   2. Get services for a repository with wide view output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output wide
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output wide
   3. Get services for a repository with yaml output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output yaml
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output yaml
   4. Get services for a repository with json output.
-    $ {{.HelpName}} --org github --repo octocat --build 1 --output json
-  5. Get services for a build when org and repo config or environment variables are set.
+    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output json
+  5. Get services for a build when config or environment variables are set.
     $ {{.HelpName}} --build 1
 
 DOCUMENTATION:

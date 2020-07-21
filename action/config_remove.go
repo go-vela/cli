@@ -85,7 +85,7 @@ var ConfigRemove = &cli.Command{
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
-			Name:    "type",
+			Name:    "secret.type",
 			Aliases: []string{"ty"},
 			Usage:   "removes the secret type from the config file",
 		},
@@ -163,8 +163,8 @@ func configRemove(c *cli.Context) error {
 	}
 
 	// check if the type flag should be removed
-	if c.Bool("type") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "type")
+	if c.Bool("secret.type") {
+		conf.RemoveFlags = append(conf.RemoveFlags, "secret.type")
 	}
 
 	// validate config file configuration

@@ -27,7 +27,7 @@ func TestAction_SecretGet(t *testing.T) {
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token", "superSecretToken", "doc")
 	fullSet.String("secret.engine", "native", "doc")
-	fullSet.String("type", "repo", "doc")
+	fullSet.String("secret.type", "repo", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("output", "json", "doc")

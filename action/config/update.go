@@ -85,7 +85,7 @@ func (c *Config) Update() error {
 		}
 
 		// check if secret type flag should be modified
-		if strings.EqualFold(key, "type") {
+		if strings.EqualFold(key, "secret.type") {
 			// set the secret type field to value provided
 			config.Secret.Type = value
 		}

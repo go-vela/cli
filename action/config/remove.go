@@ -95,7 +95,7 @@ func (c *Config) Remove() error {
 		}
 
 		// check if secret type flag should be removed
-		if strings.EqualFold(flag, "type") {
+		if strings.EqualFold(flag, "secret.type") {
 			// set the secret type field to empty in config
 			config.Secret.Type = ""
 		}

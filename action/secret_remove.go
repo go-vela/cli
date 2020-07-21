@@ -49,7 +49,7 @@ var SecretRemove = &cli.Command{
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
-			Name:    "type",
+			Name:    "secret.type",
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
@@ -113,7 +113,7 @@ func secretRemove(c *cli.Context) error {
 	s := &secret.Config{
 		Action: removeAction,
 		Engine: c.String("secret.engine"),
-		Type:   c.String("type"),
+		Type:   c.String("secret.type"),
 		Org:    c.String("org"),
 		Repo:   c.String("repo"),
 		Team:   c.String("team"),

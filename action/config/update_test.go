@@ -34,7 +34,7 @@ func TestConfig_Config_Update(t *testing.T) {
 					"api.version": "1",
 					"log.level":   "info",
 					"secret.engine":      "native",
-					"type":        "repo",
+					"secret.type":        "repo",
 					"org":         "github",
 					"repo":        "octocat",
 					"output":      "json",

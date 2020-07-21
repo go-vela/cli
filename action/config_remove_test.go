@@ -23,7 +23,7 @@ func TestAction_ConfigRemove(t *testing.T) {
 	set.Bool("org", true, "doc")
 	set.Bool("repo", true, "doc")
 	set.Bool("secret.engine", true, "doc")
-	set.Bool("type", true, "doc")
+	set.Bool("secret.type", true, "doc")
 
 	// setup tests
 	tests := []struct {

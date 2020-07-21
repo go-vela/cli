@@ -71,8 +71,8 @@ DOCUMENTATION:
 func runLogin(c *cli.Context) error {
 	// parse the Vela client from the context
 	//
-	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
-	client, err := client.Parse(c)
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#ParseEmptyToken
+	client, err := client.ParseEmptyToken(c)
 	if err != nil {
 		return err
 	}

@@ -50,6 +50,6 @@ func (c *Config) Repair(client *vela.Client) error {
 		// output the message in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(msg)
+		return output.Stdout(*msg)
 	}
 }

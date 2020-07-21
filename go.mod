@@ -8,7 +8,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.7.0 // indirect
-	github.com/gin-gonic/gin v1.5.0
 	github.com/go-vela/compiler v0.4.3
 	github.com/go-vela/mock v0.4.3
 	github.com/go-vela/sdk-go v0.4.3

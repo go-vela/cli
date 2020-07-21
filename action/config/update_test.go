@@ -29,8 +29,8 @@ func TestConfig_Config_Update(t *testing.T) {
 				Action: "remove",
 				File:   "testdata/config.yml",
 				UpdateFlags: map[string]string{
-					"addr":        "https://vela-server.localhost",
-					"token":       "superSecretToken",
+					"api.addr":    "https://vela-server.localhost",
+					"api.token":   "superSecretToken",
 					"api.version": "1",
 					"log.level":   "info",
 					"engine":      "native",

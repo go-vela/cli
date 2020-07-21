@@ -20,8 +20,8 @@ func TestAction_RepoGet(t *testing.T) {
 
 	// setup flags
 	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("addr", s.URL, "doc")
-	fullSet.String("token", "superSecretToken", "doc")
+	fullSet.String("api.addr", s.URL, "doc")
+	fullSet.String("api.token", "superSecretToken", "doc")
 	fullSet.Int("page", 1, "doc")
 	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")

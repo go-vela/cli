@@ -8,9 +8,9 @@ package client
 const (
 	// KeyAddress defines the flag key
 	// when parsing the client address.
-	KeyAddress = "addr"
+	KeyAddress = "api.addr"
 
 	// KeyToken defines the client key
 	// when parsing the client token.
-	KeyToken = "token"
+	KeyToken = "api.token"
 )

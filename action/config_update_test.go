@@ -22,8 +22,8 @@ func TestAction_ConfigUpdate(t *testing.T) {
 	set.String("output", "json", "doc")
 	set.String("org", "github", "doc")
 	set.String("repo", "octocat", "doc")
-	set.String("engine", "native", "doc")
-	set.String("type", "repo", "doc")
+	set.String("secret.engine", "native", "doc")
+	set.String("secret.type", "repo", "doc")
 
 	// setup tests
 	tests := []struct {

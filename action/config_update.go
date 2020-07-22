@@ -79,13 +79,13 @@ var ConfigUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
-			Name:    "engine",
+			Name:    "secret.engine",
 			Aliases: []string{"e"},
 			Usage:   "update the secret engine in the config file",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
-			Name:    "type",
+			Name:    "secret.type",
 			Aliases: []string{"ty"},
 			Usage:   "update the secret type in the config file",
 		},
@@ -130,8 +130,8 @@ func configUpdate(c *cli.Context) error {
 	output := c.String("output")
 	org := c.String("org")
 	repo := c.String("repo")
-	engine := c.String("engine")
-	typee := c.String("type")
+	engine := c.String("secret.engine")
+	typee := c.String("secret.type")
 
 	// check if the API addr flag should be modified
 	if len(addr) > 0 {
@@ -170,12 +170,12 @@ func configUpdate(c *cli.Context) error {
 
 	// check if the secret engine flag should be modified
 	if len(engine) > 0 {
-		conf.UpdateFlags["engine"] = engine
+		conf.UpdateFlags["secret.engine"] = engine
 	}
 
 	// check if the secret type flag should be modified
 	if len(typee) > 0 {
-		conf.UpdateFlags["type"] = typee
+		conf.UpdateFlags["secret.type"] = typee
 	}
 
 	// validate config file configuration

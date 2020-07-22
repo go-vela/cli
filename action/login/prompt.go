@@ -54,6 +54,7 @@ func (c *Config) PromptPassword(in io.ReadCloser) error {
 	// create the prompt for a password
 	p := promptui.Prompt{
 		Label: "Please enter a password: ",
+		Mask:  '*',
 		Stdin: in,
 	}
 

@@ -42,14 +42,14 @@ var SecretView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
-			Name:    "engine",
+			Name:    "secret.engine",
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
-			Name:    "type",
+			Name:    "secret.type",
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
@@ -112,8 +112,8 @@ func secretView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action: viewAction,
-		Engine: c.String("engine"),
-		Type:   c.String("type"),
+		Engine: c.String("secret.engine"),
+		Type:   c.String("secret.type"),
 		Org:    c.String("org"),
 		Repo:   c.String("repo"),
 		Team:   c.String("team"),

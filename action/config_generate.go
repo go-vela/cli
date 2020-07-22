@@ -79,13 +79,13 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
-			Name:    "engine",
+			Name:    "secret.engine",
 			Aliases: []string{"e"},
 			Usage:   "provide the secret engine for the CLI",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
-			Name:    "type",
+			Name:    "secret.type",
 			Aliases: []string{"ty"},
 			Usage:   "provide the secret type for the CLI",
 		},
@@ -126,8 +126,8 @@ func configGenerate(c *cli.Context) error {
 		Output:   c.String("output"),
 		Org:      c.String("org"),
 		Repo:     c.String("repo"),
-		Engine:   c.String("engine"),
-		Type:     c.String("type"),
+		Engine:   c.String("secret.engine"),
+		Type:     c.String("secret.type"),
 	}
 
 	// validate config file configuration

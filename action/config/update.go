@@ -79,13 +79,13 @@ func (c *Config) Update() error {
 		}
 
 		// check if secret engine flag should be modified
-		if strings.EqualFold(key, "engine") {
+		if strings.EqualFold(key, "secret.engine") {
 			// set the secret engine field to value provided
 			config.Secret.Engine = value
 		}
 
 		// check if secret type flag should be modified
-		if strings.EqualFold(key, "type") {
+		if strings.EqualFold(key, "secret.type") {
 			// set the secret type field to value provided
 			config.Secret.Type = value
 		}

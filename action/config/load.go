@@ -48,8 +48,15 @@ func (c *Config) Load(ctx *cli.Context) error {
 		return err
 	}
 
+	// check if the config file is empty
+	if config.Empty() {
+		logrus.Debugf("empty config loaded from %s", c.File)
+
+		return nil
+	}
+
 	// check if the API address is set in the context
-	if !ctx.IsSet(client.KeyAddress) {
+	if !ctx.IsSet(client.KeyAddress) && len(config.API.Address) > 0 {
 		// set the API address field to value from config
 		err = ctx.Set(client.KeyAddress, config.API.Address)
 		if err != nil {
@@ -58,7 +65,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the API token is set in the context
-	if !ctx.IsSet(client.KeyToken) {
+	if !ctx.IsSet(client.KeyToken) && len(config.API.Token) > 0 {
 		// set the API token field to value from config
 		err = ctx.Set(client.KeyToken, config.API.Token)
 		if err != nil {
@@ -67,7 +74,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the API version is set in the context
-	if !ctx.IsSet("api.version") {
+	if !ctx.IsSet("api.version") && len(config.API.Version) > 0 {
 		// set the API version field to value from config
 		err = ctx.Set("api.version", config.API.Version)
 		if err != nil {
@@ -76,7 +83,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the log level is set in the context
-	if !ctx.IsSet("log.level") {
+	if !ctx.IsSet("log.level") && len(config.Log.Level) > 0 {
 		// set the log level field to value from config
 		err = ctx.Set("log.level", config.Log.Level)
 		if err != nil {
@@ -85,7 +92,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the output is set in the context
-	if !ctx.IsSet("output") {
+	if !ctx.IsSet("output") && len(config.Output) > 0 {
 		// set the output field to value from config
 		err = ctx.Set("output", config.Output)
 		if err != nil {
@@ -94,7 +101,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the org is set in the context
-	if !ctx.IsSet("org") {
+	if !ctx.IsSet("org") && len(config.Org) > 0 {
 		// set the org field to value from config
 		err = ctx.Set("org", config.Org)
 		if err != nil {
@@ -103,7 +110,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the repo is set in the context
-	if !ctx.IsSet("repo") {
+	if !ctx.IsSet("repo") && len(config.Repo) > 0 {
 		// set the repo field to value from config
 		err = ctx.Set("repo", config.Repo)
 		if err != nil {
@@ -112,7 +119,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the secret engine is set in the context
-	if !ctx.IsSet("secret.engine") {
+	if !ctx.IsSet("secret.engine") && len(config.Secret.Engine) > 0 {
 		// set the secret engine field to value from config
 		err = ctx.Set("secret.engine", config.Secret.Engine)
 		if err != nil {
@@ -121,7 +128,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the secret type is set in the context
-	if !ctx.IsSet("secret.type") {
+	if !ctx.IsSet("secret.type") && len(config.Secret.Type) > 0 {
 		// set the secret type field to value from config
 		err = ctx.Set("secret.type", config.Secret.Type)
 		if err != nil {
@@ -129,5 +136,5 @@ func (c *Config) Load(ctx *cli.Context) error {
 		}
 	}
 
-	return err
+	return nil
 }

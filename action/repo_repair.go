@@ -15,7 +15,7 @@ import (
 
 // RepoRepair defines the command for repairing settings of a repository.
 var RepoRepair = &cli.Command{
-	Name:        "chown",
+	Name:        "repo",
 	Description: "Use this command to repair a damaged repository.",
 	Usage:       "Repair settings of the provided repository",
 	Action:      repoRepair,

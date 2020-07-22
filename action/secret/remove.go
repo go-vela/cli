@@ -71,6 +71,6 @@ func (c *Config) Remove(client *vela.Client) error {
 		// output the msg in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(msg)
+		return output.Stdout(*msg)
 	}
 }

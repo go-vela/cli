@@ -15,7 +15,7 @@ import (
 
 // RepoChown defines the command for changing ownership of a repository.
 var RepoChown = &cli.Command{
-	Name:        "chown",
+	Name:        "repo",
 	Description: "Use this command to change the repository owner.",
 	Usage:       "Change ownership of the provided repository",
 	Action:      repoChown,

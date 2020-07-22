@@ -43,7 +43,7 @@ var PipelineGenerate = &cli.Command{
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "PIPELINE_TYPE"},
-			Name:    "type",
+			Name:    "secret.type",
 			Aliases: []string{"t"},
 			Usage:   "provide the type of pipeline being generated",
 		},
@@ -83,7 +83,7 @@ func pipelineGenerate(c *cli.Context) error {
 		File:   c.String("file"),
 		Path:   c.String("path"),
 		Stages: c.Bool("stages"),
-		Type:   c.String("type"),
+		Type:   c.String("secret.type"),
 	}
 
 	// validate pipeline configuration

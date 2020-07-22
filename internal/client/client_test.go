@@ -65,3 +65,44 @@ func TestClient_Parse(t *testing.T) {
 		}
 	}
 }
+
+func TestClient_ParseEmptyToken(t *testing.T) {
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
+
+	// setup flags
+	fullSet := flag.NewFlagSet("test", 0)
+	fullSet.String("api.addr", s.URL, "doc")
+
+	// setup tests
+	tests := []struct {
+		failure bool
+		set     *flag.FlagSet
+	}{
+		{
+			failure: false,
+			set:     fullSet,
+		},
+		{
+			failure: true,
+			set:     flag.NewFlagSet("test", 0),
+		},
+	}
+
+	// run tests
+	for _, test := range tests {
+		_, err := ParseEmptyToken(cli.NewContext(nil, test.set, nil))
+
+		if test.failure {
+			if err == nil {
+				t.Errorf("ParseEmptyToken should have returned err")
+			}
+
+			continue
+		}
+
+		if err != nil {
+			t.Errorf("ParseEmptyToken returned err: %v", err)
+		}
+	}
+}

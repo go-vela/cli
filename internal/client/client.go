@@ -5,6 +5,8 @@
 package client
 
 import (
+	"fmt"
+
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/sirupsen/logrus"
@@ -44,4 +46,24 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 	client.Authentication.SetTokenAuth(token)
 
 	return client, nil
+}
+
+// ParseEmptyToken digests the provided urfave/cli context
+// and parses the provided configuration to produce a
+// valid Vela client without token authentication.
+func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
+	logrus.Debug("parsing tokenless Vela client from provided configuration")
+
+	// capture the address from the context
+	address := c.String(KeyAddress)
+
+	// check if client address is set
+	if len(address) == 0 {
+		return nil, fmt.Errorf("no client address provided")
+	}
+
+	logrus.Tracef("creating Vela client for %s", address)
+
+	// create a vela client from the provided address
+	return vela.NewClient(address, nil)
 }

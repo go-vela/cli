@@ -112,18 +112,18 @@ func (c *Config) Load(ctx *cli.Context) error {
 	}
 
 	// check if the secret engine is set in the context
-	if !ctx.IsSet("engine") {
+	if !ctx.IsSet("secret.engine") {
 		// set the secret engine field to value from config
-		err = ctx.Set("engine", config.Secret.Engine)
+		err = ctx.Set("secret.engine", config.Secret.Engine)
 		if err != nil {
 			return err
 		}
 	}
 
 	// check if the secret type is set in the context
-	if !ctx.IsSet("type") {
+	if !ctx.IsSet("secret.type") {
 		// set the secret type field to value from config
-		err = ctx.Set("type", config.Secret.Type)
+		err = ctx.Set("secret.type", config.Secret.Type)
 		if err != nil {
 			return err
 		}

@@ -23,8 +23,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	set.String("output", "json", "doc")
 	set.String("org", "github", "doc")
 	set.String("repo", "octocat", "doc")
-	set.String("engine", "native", "doc")
-	set.String("type", "repo", "doc")
+	set.String("secret.engine", "native", "doc")
+	set.String("secret.type", "repo", "doc")
 
 	addrSet := flag.NewFlagSet("test", 0)
 	addrSet.String("api.token", "superSecretToken", "doc")
@@ -33,8 +33,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	addrSet.String("output", "json", "doc")
 	addrSet.String("org", "github", "doc")
 	addrSet.String("repo", "octocat", "doc")
-	addrSet.String("engine", "native", "doc")
-	addrSet.String("type", "repo", "doc")
+	addrSet.String("secret.engine", "native", "doc")
+	addrSet.String("secret.type", "repo", "doc")
 
 	tokenSet := flag.NewFlagSet("test", 0)
 	tokenSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -43,8 +43,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	tokenSet.String("output", "json", "doc")
 	tokenSet.String("org", "github", "doc")
 	tokenSet.String("repo", "octocat", "doc")
-	tokenSet.String("engine", "native", "doc")
-	tokenSet.String("type", "repo", "doc")
+	tokenSet.String("secret.engine", "native", "doc")
+	tokenSet.String("secret.type", "repo", "doc")
 
 	versionSet := flag.NewFlagSet("test", 0)
 	versionSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -53,8 +53,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	versionSet.String("output", "json", "doc")
 	versionSet.String("org", "github", "doc")
 	versionSet.String("repo", "octocat", "doc")
-	versionSet.String("engine", "native", "doc")
-	versionSet.String("type", "repo", "doc")
+	versionSet.String("secret.engine", "native", "doc")
+	versionSet.String("secret.type", "repo", "doc")
 
 	logSet := flag.NewFlagSet("test", 0)
 	logSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -63,8 +63,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	logSet.String("output", "json", "doc")
 	logSet.String("org", "github", "doc")
 	logSet.String("repo", "octocat", "doc")
-	logSet.String("engine", "native", "doc")
-	logSet.String("type", "repo", "doc")
+	logSet.String("secret.engine", "native", "doc")
+	logSet.String("secret.type", "repo", "doc")
 
 	outputSet := flag.NewFlagSet("test", 0)
 	outputSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -73,8 +73,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	outputSet.String("log.level", "info", "doc")
 	outputSet.String("org", "github", "doc")
 	outputSet.String("repo", "octocat", "doc")
-	outputSet.String("engine", "native", "doc")
-	outputSet.String("type", "repo", "doc")
+	outputSet.String("secret.engine", "native", "doc")
+	outputSet.String("secret.type", "repo", "doc")
 
 	orgSet := flag.NewFlagSet("test", 0)
 	orgSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -83,8 +83,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	orgSet.String("log.level", "info", "doc")
 	orgSet.String("output", "json", "doc")
 	orgSet.String("repo", "octocat", "doc")
-	orgSet.String("engine", "native", "doc")
-	orgSet.String("type", "repo", "doc")
+	orgSet.String("secret.engine", "native", "doc")
+	orgSet.String("secret.type", "repo", "doc")
 
 	repoSet := flag.NewFlagSet("test", 0)
 	repoSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -93,8 +93,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	repoSet.String("log.level", "info", "doc")
 	repoSet.String("output", "json", "doc")
 	repoSet.String("org", "github", "doc")
-	repoSet.String("engine", "native", "doc")
-	repoSet.String("type", "repo", "doc")
+	repoSet.String("secret.engine", "native", "doc")
+	repoSet.String("secret.type", "repo", "doc")
 
 	engineSet := flag.NewFlagSet("test", 0)
 	engineSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -104,7 +104,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	engineSet.String("output", "json", "doc")
 	engineSet.String("org", "github", "doc")
 	engineSet.String("repo", "octocat", "doc")
-	engineSet.String("type", "repo", "doc")
+	engineSet.String("secret.type", "repo", "doc")
 
 	typeSet := flag.NewFlagSet("test", 0)
 	typeSet.String("api.addr", "https://vela-server.localhost", "doc")
@@ -114,7 +114,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	typeSet.String("output", "json", "doc")
 	typeSet.String("org", "github", "doc")
 	typeSet.String("repo", "octocat", "doc")
-	typeSet.String("engine", "native", "doc")
+	typeSet.String("secret.engine", "native", "doc")
 
 	// setup tests
 	tests := []struct {

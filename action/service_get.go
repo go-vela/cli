@@ -75,13 +75,13 @@ var ServiceGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get services for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
   2. Get services for a repository with wide view output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output wide
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output wide
   3. Get services for a repository with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output yaml
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output yaml
   4. Get services for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output json
   5. Get services for a build when config or environment variables are set.
     $ {{.HelpName}} --build 1
 

@@ -48,9 +48,9 @@ var RepoRepair = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Repair a damaged repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Repair a damaged repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   3. Repair a damaged repository when config or environment variables are set.
     $ {{.HelpName}}
 

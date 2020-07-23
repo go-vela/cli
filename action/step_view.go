@@ -66,9 +66,9 @@ var StepView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View step details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --step 1
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --step 1
   2. View step details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --step 1 --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --step 1 --output json
   3. View step details for a repository config or environment variables are set.
     $ {{.HelpName}} --build 1 --step 1
 

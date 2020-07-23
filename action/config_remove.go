@@ -95,11 +95,11 @@ EXAMPLES:
   1. Remove the config file.
     $ {{.HelpName}}
   2. Remove the addr field from the config file.
-    $ {{.HelpName}} --addr
+    $ {{.HelpName}} --api.addr
   3. Remove the token field from the config file.
-    $ {{.HelpName}} --token
+    $ {{.HelpName}} --api.token
   4. Remove the secret engine and type fields from the config file.
-    $ {{.HelpName}} --engine --type
+    $ {{.HelpName}} --secret.engine --secret.type
   5. Remove the log level field from the config file.
     $ {{.HelpName}} --log.level
 

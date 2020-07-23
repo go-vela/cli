@@ -78,15 +78,15 @@ var DeploymentAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a deployment for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Add a deployment for a repository with a specific target environment.
-    $ {{.HelpName}} --org MyOrg --repo octocat --target stage
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --target stage
   3. Add a deployment for a repository with a specific branch reference.
-    $ {{.HelpName}} --org MyOrg --repo octocat --ref dev
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref dev
   4. Add a deployment for a repository with a specific commit reference.
-    $ {{.HelpName}} --org MyOrg --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref 48afb5bdc41ad69bf22588491333f7cf71135163
   5. Add a deployment for a repository with a specific description.
-    $ {{.HelpName}} --org MyOrg --repo octocat --description 'my custom message'
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
   6. Add a deployment for a repository when config or environment variables are set.
     $ {{.HelpName}}
 

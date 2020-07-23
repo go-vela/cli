@@ -93,11 +93,11 @@ var ConfigUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update the addr field in the config file.
-    $ {{.HelpName}} --addr https://vela.example.com
+    $ {{.HelpName}} --api.addr https://vela.example.com
   2. Update the token field in the config file.
-    $ {{.HelpName}} --token fakeToken
+    $ {{.HelpName}} --api.token fakeToken
   3. Update the secret engine and type fields in the config file.
-    $ {{.HelpName}} --engine native --type org
+    $ {{.HelpName}} --secret.engine native --secret.type org
   4. Update the log level field in the config file.
     $ {{.HelpName}} --log.level trace
   5. Update the config file when environment variables are set.

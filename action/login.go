@@ -55,7 +55,7 @@ var Login = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela with terminal prompts.
-    $ {{.HelpName}} --addr https://vela.example.com
+    $ {{.HelpName}} --api.addr https://vela.example.com
   2. Login to Vela with no prompts for username and password
     $ {{.HelpName}} --username foo --password bar
 

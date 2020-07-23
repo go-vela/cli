@@ -48,9 +48,9 @@ var RepoChown = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Change ownership of a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Change ownership of a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   3. Change ownership of a repository when config or environment variables are set.
     $ {{.HelpName}}
 

@@ -48,9 +48,9 @@ var RepoRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Remove a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   3. Remove a repository when config or environment variables are set.
     $ {{.HelpName}}
 

@@ -111,11 +111,11 @@ var RepoUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo octocat --event push --event pull_request
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
   2. Update a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo octocat --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
   3. Update a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo octocat --timeout 90
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
   4. Update a repository when config or environment variables are set.
     $ {{.HelpName}}
 

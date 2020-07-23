@@ -59,11 +59,11 @@ EXAMPLES:
   4. Generate a Vela pipeline with stages.
     $ {{.HelpName}} --stages
   5. Generate a go Vela pipeline.
-    $ {{.HelpName}} --type go
+    $ {{.HelpName}} --secret.type go
   6. Generate a java Vela pipeline.
-    $ {{.HelpName}} --type java
+    $ {{.HelpName}} --secret.type java
   7. Generate a node Vela pipeline.
-    $ {{.HelpName}} --type node
+    $ {{.HelpName}} --secret.type node
 
 DOCUMENTATION:
 

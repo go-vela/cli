@@ -66,13 +66,13 @@ var DeploymentGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get deployments for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Get deployments for a repository with wide view output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output wide
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output wide
   3. Get deployments for a repository with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output yaml
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output yaml
   4. Get deployments for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   5. Get deployments for a repository when config or environment variables are set.
     $ {{.HelpName}}
 

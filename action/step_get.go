@@ -60,14 +60,14 @@ var StepGet = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PAGE"},
-			Name:    "page",
+			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of steps",
 			Value:   1,
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PER_PAGE"},
-			Name:    "per.page",
+			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of steps to print per page",
 			Value:   10,
@@ -112,8 +112,8 @@ func stepGet(c *cli.Context) error {
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
 		Build:   c.Int(internal.FlagBuild),
-		Page:    c.Int("page"),
-		PerPage: c.Int("per.page"),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
 	}
 

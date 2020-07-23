@@ -51,14 +51,14 @@ var HookGet = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PAGE", "HOOK_PAGE"},
-			Name:    "page",
+			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of hooks",
 			Value:   1,
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PER_PAGE", "HOOK_PER_PAGE"},
-			Name:    "per.page",
+			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of hooks to print per page",
 			Value:   10,
@@ -102,8 +102,8 @@ func hookGet(c *cli.Context) error {
 		Action:  getAction,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
-		Page:    c.Int("page"),
-		PerPage: c.Int("per.page"),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
 	}
 

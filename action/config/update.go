@@ -7,7 +7,7 @@ package config
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/spf13/afero"
 
@@ -55,55 +55,55 @@ func (c *Config) Update() error {
 		logrus.Tracef("updating key %s with value %s", key, value)
 
 		// check if API address flag should be modified
-		if strings.EqualFold(key, client.KeyAddress) {
+		if strings.EqualFold(key, internal.FlagAPIAddress) {
 			// set the API address field to value provided
 			config.API.Address = value
 		}
 
 		// check if API token flag should be modified
-		if strings.EqualFold(key, client.KeyToken) {
+		if strings.EqualFold(key, internal.FlagAPIToken) {
 			// set the API token field to value provided
 			config.API.Token = value
 		}
 
 		// check if API version flag should be modified
-		if strings.EqualFold(key, "api.version") {
+		if strings.EqualFold(key, internal.FlagAPIVersion) {
 			// set the API version field to value provided
 			config.API.Version = value
 		}
 
 		// check if log level flag should be modified
-		if strings.EqualFold(key, "log.level") {
+		if strings.EqualFold(key, internal.FlagLogLevel) {
 			// set the log level field to value provided
 			config.Log.Level = value
 		}
 
 		// check if secret engine flag should be modified
-		if strings.EqualFold(key, "secret.engine") {
+		if strings.EqualFold(key, internal.FlagSecretEngine) {
 			// set the secret engine field to value provided
 			config.Secret.Engine = value
 		}
 
 		// check if secret type flag should be modified
-		if strings.EqualFold(key, "secret.type") {
+		if strings.EqualFold(key, internal.FlagSecretType) {
 			// set the secret type field to value provided
 			config.Secret.Type = value
 		}
 
 		// check if org flag should be modified
-		if strings.EqualFold(key, "org") {
+		if strings.EqualFold(key, internal.FlagOrg) {
 			// set the org field to value provided
 			config.Org = value
 		}
 
 		// check if repo flag should be modified
-		if strings.EqualFold(key, "repo") {
+		if strings.EqualFold(key, internal.FlagRepo) {
 			// set the repo field to value provided
 			config.Repo = value
 		}
 
 		// check if output flag should be modified
-		if strings.EqualFold(key, "output") {
+		if strings.EqualFold(key, internal.FlagOutput) {
 			// set the output field to value provided
 			config.Output = value
 		}

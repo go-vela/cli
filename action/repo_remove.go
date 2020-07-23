@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/repo"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -25,13 +26,13 @@ var RepoRemove = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the repository",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the name for the repository",
 		},
@@ -40,7 +41,7 @@ var RepoRemove = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -77,9 +78,9 @@ func repoRemove(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action: removeAction,
-		Org:    c.String("org"),
-		Name:   c.String("repo"),
-		Output: c.String("output"),
+		Org:    c.String(internal.FlagOrg),
+		Name:   c.String(internal.FlagRepo),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate repo configuration

@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/step"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -15,7 +16,7 @@ import (
 
 // StepView defines the command for inspecting a step.
 var StepView = &cli.Command{
-	Name:        "step",
+	Name:        internal.FlagStep,
 	Description: "Use this command to view a step.",
 	Usage:       "View details of the provided step",
 	Action:      stepView,
@@ -25,13 +26,13 @@ var StepView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "STEP_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the step",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "STEP_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the step",
 		},
@@ -40,7 +41,7 @@ var StepView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "STEP_BUILD"},
-			Name:    "build",
+			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the step",
 		},
@@ -49,7 +50,7 @@ var StepView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_STEP", "STEP_NUMBER"},
-			Name:    "step",
+			Name:    internal.FlagStep,
 			Aliases: []string{"s"},
 			Usage:   "provide the number for the step",
 		},
@@ -58,7 +59,7 @@ var StepView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -95,11 +96,11 @@ func stepView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/step?tab=doc#Config
 	s := &step.Config{
 		Action: viewAction,
-		Org:    c.String("org"),
-		Repo:   c.String("repo"),
-		Build:  c.Int("build"),
-		Number: c.Int("step"),
-		Output: c.String("output"),
+		Org:    c.String(internal.FlagOrg),
+		Repo:   c.String(internal.FlagRepo),
+		Build:  c.Int(internal.FlagBuild),
+		Number: c.Int(internal.FlagStep),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate step configuration

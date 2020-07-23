@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/config"
-	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
@@ -25,19 +25,19 @@ var ConfigUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ADDR", "CONFIG_ADDR"},
-			Name:    client.KeyAddress,
+			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "update the API addr in the config file",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
-			Name:    client.KeyToken,
+			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "update the API token in the config file",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION"},
-			Name:    "api.version",
+			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "update the API version in the config file",
 		},
@@ -46,7 +46,7 @@ var ConfigUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"},
-			Name:    "log.level",
+			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "update the log level in the config file",
 		},
@@ -55,7 +55,7 @@ var ConfigUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "update the output in the config file",
 		},
@@ -64,13 +64,13 @@ var ConfigUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "update the org in the config file",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "update the repo in the config file",
 		},
@@ -79,13 +79,13 @@ var ConfigUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
-			Name:    "secret.engine",
+			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "update the secret engine in the config file",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
-			Name:    "secret.type",
+			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "update the secret type in the config file",
 		},
@@ -118,64 +118,64 @@ func configUpdate(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action:      updateAction,
-		File:        c.String("config"),
+		File:        c.String(internal.FlagConfig),
 		UpdateFlags: make(map[string]string),
 	}
 
 	// create variables from flags provided
-	addr := c.String(client.KeyAddress)
-	token := c.String(client.KeyToken)
-	version := c.String("api.version")
-	level := c.String("log.level")
-	output := c.String("output")
-	org := c.String("org")
-	repo := c.String("repo")
-	engine := c.String("secret.engine")
-	typee := c.String("secret.type")
+	addr := c.String(internal.FlagAPIAddress)
+	token := c.String(internal.FlagAPIToken)
+	version := c.String(internal.FlagAPIVersion)
+	level := c.String(internal.FlagLogLevel)
+	output := c.String(internal.FlagOutput)
+	org := c.String(internal.FlagOrg)
+	repo := c.String(internal.FlagRepo)
+	engine := c.String(internal.FlagSecretEngine)
+	typee := c.String(internal.FlagSecretType)
 
 	// check if the API addr flag should be modified
 	if len(addr) > 0 {
-		conf.UpdateFlags[client.KeyAddress] = addr
+		conf.UpdateFlags[internal.FlagAPIAddress] = addr
 	}
 
 	// check if the API token flag should be modified
 	if len(token) > 0 {
-		conf.UpdateFlags[client.KeyToken] = token
+		conf.UpdateFlags[internal.FlagAPIToken] = token
 	}
 
 	// check if the API version flag should be modified
 	if len(version) > 0 {
-		conf.UpdateFlags["api.version"] = version
+		conf.UpdateFlags[internal.FlagAPIVersion] = version
 	}
 
 	// check if the log level flag should be modified
 	if len(level) > 0 {
-		conf.UpdateFlags["log.level"] = level
+		conf.UpdateFlags[internal.FlagLogLevel] = level
 	}
 
 	// check if the output flag should be modified
 	if len(output) > 0 {
-		conf.UpdateFlags["output"] = output
+		conf.UpdateFlags[internal.FlagOutput] = output
 	}
 
 	// check if the org flag should be modified
 	if len(org) > 0 {
-		conf.UpdateFlags["org"] = org
+		conf.UpdateFlags[internal.FlagOrg] = org
 	}
 
 	// check if the repo flag should be modified
 	if len(repo) > 0 {
-		conf.UpdateFlags["repo"] = repo
+		conf.UpdateFlags[internal.FlagRepo] = repo
 	}
 
 	// check if the secret engine flag should be modified
 	if len(engine) > 0 {
-		conf.UpdateFlags["secret.engine"] = engine
+		conf.UpdateFlags[internal.FlagSecretEngine] = engine
 	}
 
 	// check if the secret type flag should be modified
 	if len(typee) > 0 {
-		conf.UpdateFlags["secret.type"] = typee
+		conf.UpdateFlags[internal.FlagSecretType] = typee
 	}
 
 	// validate config file configuration

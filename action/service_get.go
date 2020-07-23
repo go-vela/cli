@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/service"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -15,7 +16,7 @@ import (
 
 // ServiceGet defines the command for capturing a list of services.
 var ServiceGet = &cli.Command{
-	Name:        "service",
+	Name:        internal.FlagService,
 	Aliases:     []string{"services"},
 	Description: "Use this command to get a list of services.",
 	Usage:       "Display a list of services",
@@ -26,13 +27,13 @@ var ServiceGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "SERVICE_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SERVICE_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
 		},
@@ -41,7 +42,7 @@ var ServiceGet = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "SERVICE_BUILD"},
-			Name:    "build",
+			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the service",
 		},
@@ -50,7 +51,7 @@ var ServiceGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
@@ -108,12 +109,12 @@ func serviceGet(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config
 	s := &service.Config{
 		Action:  getAction,
-		Org:     c.String("org"),
-		Repo:    c.String("repo"),
-		Build:   c.Int("build"),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
+		Build:   c.Int(internal.FlagBuild),
 		Page:    c.Int("page"),
 		PerPage: c.Int("per.page"),
-		Output:  c.String("output"),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate service configuration

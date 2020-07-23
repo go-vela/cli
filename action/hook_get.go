@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/hook"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -26,13 +27,13 @@ var HookGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "HOOK_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the hook",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "HOOK_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the hook",
 		},
@@ -41,7 +42,7 @@ var HookGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "HOOK_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
@@ -99,11 +100,11 @@ func hookGet(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/hook?tab=doc#Config
 	h := &hook.Config{
 		Action:  getAction,
-		Org:     c.String("org"),
-		Repo:    c.String("repo"),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
 		Page:    c.Int("page"),
 		PerPage: c.Int("per.page"),
-		Output:  c.String("output"),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate hook configuration

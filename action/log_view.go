@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/log"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -25,13 +26,13 @@ var LogView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "LOG_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the log",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "LOG_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the log",
 		},
@@ -40,7 +41,7 @@ var LogView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "LOG_BUILD"},
-			Name:    "build",
+			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the log",
 		},
@@ -49,7 +50,7 @@ var LogView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_SERVICE", "LOG_SERVICE"},
-			Name:    "service",
+			Name:    internal.FlagService,
 			Usage:   "provide the service for the log",
 		},
 
@@ -57,7 +58,7 @@ var LogView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_STEP", "LOG_STEP"},
-			Name:    "step",
+			Name:    internal.FlagStep,
 			Usage:   "provide the step for the log",
 		},
 
@@ -65,7 +66,7 @@ var LogView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "LOG_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -108,12 +109,12 @@ func logView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config
 	l := &log.Config{
 		Action:  viewAction,
-		Org:     c.String("org"),
-		Repo:    c.String("repo"),
-		Build:   c.Int("build"),
-		Service: c.Int("service"),
-		Step:    c.Int("step"),
-		Output:  c.String("output"),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
+		Build:   c.Int(internal.FlagBuild),
+		Service: c.Int(internal.FlagService),
+		Step:    c.Int(internal.FlagStep),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate log configuration

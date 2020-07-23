@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/build"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -15,7 +16,7 @@ import (
 
 // BuildView defines the command for inspecting a build.
 var BuildView = &cli.Command{
-	Name:        "build",
+	Name:        internal.FlagBuild,
 	Description: "Use this command to view a build.",
 	Usage:       "View details of the provided build",
 	Action:      buildView,
@@ -25,13 +26,13 @@ var BuildView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
 		},
@@ -40,7 +41,7 @@ var BuildView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "BUILD_NUMBER"},
-			Name:    "build",
+			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the number for the build",
 		},
@@ -49,7 +50,7 @@ var BuildView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "BUILD_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -86,10 +87,10 @@ func buildView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config
 	b := &build.Config{
 		Action: viewAction,
-		Org:    c.String("org"),
-		Repo:   c.String("repo"),
-		Number: c.Int("build"),
-		Output: c.String("output"),
+		Org:    c.String(internal.FlagOrg),
+		Repo:   c.String(internal.FlagRepo),
+		Number: c.Int(internal.FlagBuild),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate build configuration

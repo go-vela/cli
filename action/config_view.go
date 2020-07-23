@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/config"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
@@ -38,7 +39,7 @@ func configView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action: viewAction,
-		File:   c.String("config"),
+		File:   c.String(internal.FlagConfig),
 	}
 
 	// validate config file configuration

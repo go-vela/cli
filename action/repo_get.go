@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/repo"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -26,7 +27,7 @@ var RepoGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
@@ -86,7 +87,7 @@ func repoGet(c *cli.Context) error {
 		Action:  getAction,
 		Page:    c.Int("page"),
 		PerPage: c.Int("per.page"),
-		Output:  c.String("output"),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate repo configuration

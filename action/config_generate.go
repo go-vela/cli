@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/config"
-	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
@@ -25,19 +25,19 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ADDR", "CONFIG_ADDR"},
-			Name:    client.KeyAddress,
+			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
-			Name:    client.KeyToken,
+			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION"},
-			Name:    "api.version",
+			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "API version for communication with the Vela server",
 		},
@@ -46,7 +46,7 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"},
-			Name:    "log.level",
+			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
 		},
@@ -55,7 +55,7 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, or yaml format",
 		},
@@ -64,13 +64,13 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the CLI",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the CLI",
 		},
@@ -79,13 +79,13 @@ var ConfigGenerate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
-			Name:    "secret.engine",
+			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the secret engine for the CLI",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
-			Name:    "secret.type",
+			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the secret type for the CLI",
 		},
@@ -118,16 +118,16 @@ func configGenerate(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action:   generateAction,
-		File:     c.String("config"),
-		Addr:     c.String(client.KeyAddress),
-		Token:    c.String(client.KeyToken),
-		Version:  c.String("api.version"),
-		LogLevel: c.String("log.level"),
-		Output:   c.String("output"),
-		Org:      c.String("org"),
-		Repo:     c.String("repo"),
-		Engine:   c.String("secret.engine"),
-		Type:     c.String("secret.type"),
+		File:     c.String(internal.FlagConfig),
+		Addr:     c.String(internal.FlagAPIAddress),
+		Token:    c.String(internal.FlagAPIToken),
+		Version:  c.String(internal.FlagAPIVersion),
+		LogLevel: c.String(internal.FlagLogLevel),
+		Output:   c.String(internal.FlagOutput),
+		Org:      c.String(internal.FlagOrg),
+		Repo:     c.String(internal.FlagRepo),
+		Engine:   c.String(internal.FlagSecretEngine),
+		Type:     c.String(internal.FlagSecretType),
 	}
 
 	// validate config file configuration

@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/step"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -15,7 +16,7 @@ import (
 
 // StepGet defines the command for capturing a list of steps.
 var StepGet = &cli.Command{
-	Name:        "step",
+	Name:        internal.FlagStep,
 	Aliases:     []string{"steps"},
 	Description: "Use this command to get a list of steps.",
 	Usage:       "Display a list of steps",
@@ -26,13 +27,13 @@ var StepGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "STEP_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the step",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "STEP_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the step",
 		},
@@ -41,7 +42,7 @@ var StepGet = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "STEP_BUILD"},
-			Name:    "build",
+			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the step",
 		},
@@ -50,7 +51,7 @@ var StepGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
@@ -108,12 +109,12 @@ func stepGet(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/step?tab=doc#Config
 	s := &step.Config{
 		Action:  getAction,
-		Org:     c.String("org"),
-		Repo:    c.String("repo"),
-		Build:   c.Int("build"),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
+		Build:   c.Int(internal.FlagBuild),
 		Page:    c.Int("page"),
 		PerPage: c.Int("per.page"),
-		Output:  c.String("output"),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate step configuration

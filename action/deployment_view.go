@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/deployment"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -25,13 +26,13 @@ var DeploymentView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "DEPLOYMENT_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the deployment",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "DEPLOYMENT_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the deployment",
 		},
@@ -49,7 +50,7 @@ var DeploymentView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -57,9 +58,9 @@ var DeploymentView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View deployment details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat --deployment 1
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --deployment 1
   2. View deployment details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --deployment 1 --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --deployment 1 --output json
   3. View deployment details for a repository config or environment variables are set.
     $ {{.HelpName}} --deployment 1
 
@@ -86,10 +87,10 @@ func deploymentView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config
 	d := &deployment.Config{
 		Action: viewAction,
-		Org:    c.String("org"),
-		Repo:   c.String("repo"),
+		Org:    c.String(internal.FlagOrg),
+		Repo:   c.String(internal.FlagRepo),
 		Number: c.Int("deployment"),
-		Output: c.String("output"),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate deployment configuration

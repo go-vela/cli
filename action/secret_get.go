@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/secret"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/go-vela/types/constants"
@@ -27,13 +28,13 @@ var SecretGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
 		},
@@ -42,14 +43,14 @@ var SecretGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
-			Name:    "secret.engine",
+			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
-			Name:    "secret.type",
+			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
@@ -65,7 +66,7 @@ var SecretGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
@@ -74,14 +75,14 @@ var SecretGet = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PAGE", "SECRET_PAGE"},
-			Name:    "page",
+			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of secrets",
 			Value:   1,
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PER_PAGE", "SECRET_PER_PAGE"},
-			Name:    "per.page",
+			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of secrets to print per page",
 			Value:   10,
@@ -90,15 +91,15 @@ var SecretGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get repository secret details.
-    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat
+    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo
   2. Get organization secret details.
-    $ {{.HelpName}} --engine native --type org --org MyOrg
+    $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg
   3. Get shared secret details.
-    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties
+    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties
   4. Get repository secret details with json output.
-    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --output json
+    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --output json
   5. Get secret details when config or environment variables are set.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
 
 DOCUMENTATION:
 
@@ -123,14 +124,14 @@ func secretGet(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action:  getAction,
-		Engine:  c.String("secret.engine"),
-		Type:    c.String("secret.type"),
-		Org:     c.String("org"),
-		Repo:    c.String("repo"),
+		Engine:  c.String(internal.FlagSecretEngine),
+		Type:    c.String(internal.FlagSecretType),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
 		Team:    c.String("team"),
-		Page:    c.Int("page"),
-		PerPage: c.Int("per.page"),
-		Output:  c.String("output"),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate secret configuration

@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/config"
-	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
@@ -25,19 +25,19 @@ var ConfigRemove = &cli.Command{
 
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_ADDR", "CONFIG_ADDR"},
-			Name:    client.KeyAddress,
+			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "removes the API addr from the config file",
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
-			Name:    client.KeyToken,
+			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "removes the API token from the config file",
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION"},
-			Name:    "api.version",
+			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "removes the API version from the config file",
 		},
@@ -46,7 +46,7 @@ var ConfigRemove = &cli.Command{
 
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"},
-			Name:    "log.level",
+			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "removes the log level from the config file",
 		},
@@ -55,7 +55,7 @@ var ConfigRemove = &cli.Command{
 
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "removes the output from the config file",
 		},
@@ -64,13 +64,13 @@ var ConfigRemove = &cli.Command{
 
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "removes the org from the config file",
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "removes the repo from the config file",
 		},
@@ -79,13 +79,13 @@ var ConfigRemove = &cli.Command{
 
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
-			Name:    "secret.engine",
+			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "removes the secret engine from the config file",
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
-			Name:    "secret.type",
+			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "removes the secret type from the config file",
 		},
@@ -95,11 +95,11 @@ EXAMPLES:
   1. Remove the config file.
     $ {{.HelpName}}
   2. Remove the addr field from the config file.
-    $ {{.HelpName}} --addr
+    $ {{.HelpName}} --api.addr
   3. Remove the token field from the config file.
-    $ {{.HelpName}} --token
+    $ {{.HelpName}} --api.token
   4. Remove the secret engine and type fields from the config file.
-    $ {{.HelpName}} --engine --type
+    $ {{.HelpName}} --secret.engine --secret.type
   5. Remove the log level field from the config file.
     $ {{.HelpName}} --log.level
 
@@ -119,52 +119,52 @@ func configRemove(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action: removeAction,
-		File:   c.String("config"),
+		File:   c.String(internal.FlagConfig),
 	}
 
 	// check if the API addr flag should be removed
-	if c.Bool(client.KeyAddress) {
-		conf.RemoveFlags = append(conf.RemoveFlags, client.KeyAddress)
+	if c.Bool(internal.FlagAPIAddress) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIAddress)
 	}
 
 	// check if the API token flag should be removed
-	if c.Bool(client.KeyToken) {
-		conf.RemoveFlags = append(conf.RemoveFlags, client.KeyToken)
+	if c.Bool(internal.FlagAPIToken) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIToken)
 	}
 
 	// check if the API version flag should be removed
-	if c.Bool("api.version") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "api.version")
+	if c.Bool(internal.FlagAPIVersion) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIVersion)
 	}
 
 	// check if the log level flag should be removed
-	if c.Bool("log.level") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "log.level")
+	if c.Bool(internal.FlagLogLevel) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagLogLevel)
 	}
 
 	// check if the output flag should be removed
-	if c.Bool("output") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "output")
+	if c.Bool(internal.FlagOutput) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagOutput)
 	}
 
 	// check if the org flag should be removed
-	if c.Bool("org") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "org")
+	if c.Bool(internal.FlagOrg) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagOrg)
 	}
 
 	// check if the repo flag should be removed
-	if c.Bool("repo") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "repo")
+	if c.Bool(internal.FlagRepo) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagRepo)
 	}
 
 	// check if the engine flag should be removed
-	if c.Bool("secret.engine") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "secret.engine")
+	if c.Bool(internal.FlagSecretEngine) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagSecretEngine)
 	}
 
 	// check if the type flag should be removed
-	if c.Bool("secret.type") {
-		conf.RemoveFlags = append(conf.RemoveFlags, "secret.type")
+	if c.Bool(internal.FlagSecretType) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagSecretType)
 	}
 
 	// validate config file configuration

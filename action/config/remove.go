@@ -7,7 +7,7 @@ package config
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/spf13/afero"
 
@@ -65,55 +65,55 @@ func (c *Config) Remove() error {
 		logrus.Tracef("removing key %s", flag)
 
 		// check if API address flag should be removed
-		if strings.EqualFold(flag, client.KeyAddress) {
+		if strings.EqualFold(flag, internal.FlagAPIAddress) {
 			// set the API address field to empty in config
 			config.API.Address = ""
 		}
 
 		// check if API token flag should be removed
-		if strings.EqualFold(flag, client.KeyToken) {
+		if strings.EqualFold(flag, internal.FlagAPIToken) {
 			// set the API token field to empty in config
 			config.API.Token = ""
 		}
 
 		// check if API version flag should be removed
-		if strings.EqualFold(flag, "api.version") {
+		if strings.EqualFold(flag, internal.FlagAPIVersion) {
 			// set the API version field to empty in config
 			config.API.Version = ""
 		}
 
 		// check if log level flag should be removed
-		if strings.EqualFold(flag, "log.level") {
+		if strings.EqualFold(flag, internal.FlagLogLevel) {
 			// set the log level field to empty in config
 			config.Log.Level = ""
 		}
 
 		// check if secret engine flag should be removed
-		if strings.EqualFold(flag, "secret.engine") {
+		if strings.EqualFold(flag, internal.FlagSecretEngine) {
 			// set the secret engine field to empty in config
 			config.Secret.Engine = ""
 		}
 
 		// check if secret type flag should be removed
-		if strings.EqualFold(flag, "secret.type") {
+		if strings.EqualFold(flag, internal.FlagSecretType) {
 			// set the secret type field to empty in config
 			config.Secret.Type = ""
 		}
 
 		// check if org flag should be removed
-		if strings.EqualFold(flag, "org") {
+		if strings.EqualFold(flag, internal.FlagOrg) {
 			// set the org field to empty in config
 			config.Org = ""
 		}
 
 		// check if repo flag should be removed
-		if strings.EqualFold(flag, "repo") {
+		if strings.EqualFold(flag, internal.FlagRepo) {
 			// set the repo field to empty in config
 			config.Repo = ""
 		}
 
 		// check if output flag should be removed
-		if strings.EqualFold(flag, "output") {
+		if strings.EqualFold(flag, internal.FlagOutput) {
 			// set the output field to empty in config
 			config.Output = ""
 		}

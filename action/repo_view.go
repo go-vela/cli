@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/repo"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -25,13 +26,13 @@ var RepoView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the repository",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the name for the repository",
 		},
@@ -40,7 +41,7 @@ var RepoView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -48,9 +49,9 @@ var RepoView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. View details of a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   3. View details of a repository when config or environment variables are set.
     $ {{.HelpName}}
 
@@ -77,9 +78,9 @@ func repoView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action: viewAction,
-		Org:    c.String("org"),
-		Name:   c.String("repo"),
-		Output: c.String("output"),
+		Org:    c.String(internal.FlagOrg),
+		Name:   c.String(internal.FlagRepo),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate repo configuration

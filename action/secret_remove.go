@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/secret"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/go-vela/types/constants"
@@ -27,13 +28,13 @@ var SecretRemove = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
 		},
@@ -42,14 +43,14 @@ var SecretRemove = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
-			Name:    "secret.engine",
+			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
-			Name:    "secret.type",
+			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
@@ -71,7 +72,7 @@ var SecretRemove = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -79,15 +80,15 @@ var SecretRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove repository secret details.
-    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo
+    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo
   2. Remove organization secret details.
-    $ {{.HelpName}} --engine native --type org --org MyOrg --name foo
+    $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo
   3. Remove shared secret details.
-    $ {{.HelpName}} --engine native --type shared --org MyOrg --team octokitties --name foo
+    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo
   4. Remove repository secret details with json output.
-    $ {{.HelpName}} --engine native --type repo --org MyOrg --repo octocat --name foo --output json
+    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --output json
   5. Remove secret details when config or environment variables are set.
-    $ {{.HelpName}} --org MyOrg --repo octocat --name foo
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo
 
 DOCUMENTATION:
 
@@ -112,13 +113,13 @@ func secretRemove(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
 		Action: removeAction,
-		Engine: c.String("secret.engine"),
-		Type:   c.String("secret.type"),
-		Org:    c.String("org"),
-		Repo:   c.String("repo"),
+		Engine: c.String(internal.FlagSecretEngine),
+		Type:   c.String(internal.FlagSecretType),
+		Org:    c.String(internal.FlagOrg),
+		Repo:   c.String(internal.FlagRepo),
 		Team:   c.String("team"),
 		Name:   c.String("name"),
-		Output: c.String("output"),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate secret configuration

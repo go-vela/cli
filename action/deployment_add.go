@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/deployment"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -25,13 +26,13 @@ var DeploymentAdd = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "DEPLOYMENT_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the deployment",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "DEPLOYMENT_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the deployment",
 		},
@@ -70,7 +71,7 @@ var DeploymentAdd = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -78,15 +79,15 @@ var DeploymentAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a deployment for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Add a deployment for a repository with a specific target environment.
-    $ {{.HelpName}} --org MyOrg --repo octocat --target stage
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --target stage
   3. Add a deployment for a repository with a specific branch reference.
-    $ {{.HelpName}} --org MyOrg --repo octocat --ref dev
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref dev
   4. Add a deployment for a repository with a specific commit reference.
-    $ {{.HelpName}} --org MyOrg --repo octocat --ref 48afb5bdc41ad69bf22588491333f7cf71135163
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref 48afb5bdc41ad69bf22588491333f7cf71135163
   5. Add a deployment for a repository with a specific description.
-    $ {{.HelpName}} --org MyOrg --repo octocat --description 'my custom message'
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
   6. Add a deployment for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
@@ -113,13 +114,13 @@ func deploymentAdd(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config
 	d := &deployment.Config{
 		Action:      addAction,
-		Org:         c.String("org"),
-		Repo:        c.String("repo"),
+		Org:         c.String(internal.FlagOrg),
+		Repo:        c.String(internal.FlagRepo),
 		Description: c.String("description"),
 		Ref:         c.String("ref"),
 		Target:      c.String("target"),
 		Task:        c.String("task"),
-		Output:      c.String("output"),
+		Output:      c.String(internal.FlagOutput),
 	}
 
 	// validate deployment configuration

@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/go-vela/cli/action/login"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -26,7 +27,7 @@ var Login = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ADDR", "LOGIN_ADDR"},
-			Name:    client.KeyAddress,
+			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
 		},
@@ -55,7 +56,7 @@ var Login = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela with terminal prompts.
-    $ {{.HelpName}} --addr https://vela.example.com
+    $ {{.HelpName}} --api.addr https://vela.example.com
   2. Login to Vela with no prompts for username and password
     $ {{.HelpName}} --username foo --password bar
 

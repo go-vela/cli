@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/service"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -15,7 +16,7 @@ import (
 
 // ServiceView defines the command for inspecting a service.
 var ServiceView = &cli.Command{
-	Name:        "service",
+	Name:        internal.FlagService,
 	Description: "Use this command to view a service.",
 	Usage:       "View details of the provided service",
 	Action:      serviceView,
@@ -25,13 +26,13 @@ var ServiceView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "SERVICE_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the service",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SERVICE_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the service",
 		},
@@ -40,7 +41,7 @@ var ServiceView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "SERVICE_BUILD"},
-			Name:    "build",
+			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the service",
 		},
@@ -49,7 +50,7 @@ var ServiceView = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_SERVICE", "SERVICE_NUMBER"},
-			Name:    "service",
+			Name:    internal.FlagService,
 			Aliases: []string{"s"},
 			Usage:   "provide the number for the service",
 		},
@@ -58,7 +59,7 @@ var ServiceView = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
@@ -66,9 +67,9 @@ var ServiceView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View service details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --service 1
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --service 1
   2. View service details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo octocat --build 1 --service 1 --output json
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --service 1 --output json
   3. View service details for a repository when config or environment variables are set.
     $ {{.HelpName}} --build 1 --service 1
 
@@ -95,11 +96,11 @@ func serviceView(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/service?tab=doc#Config
 	s := &service.Config{
 		Action: viewAction,
-		Org:    c.String("org"),
-		Repo:   c.String("repo"),
-		Build:  c.Int("build"),
-		Number: c.Int("service"),
-		Output: c.String("output"),
+		Org:    c.String(internal.FlagOrg),
+		Repo:   c.String(internal.FlagRepo),
+		Build:  c.Int(internal.FlagBuild),
+		Number: c.Int(internal.FlagService),
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate service configuration

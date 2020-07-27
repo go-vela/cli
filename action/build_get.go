@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/build"
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
@@ -15,7 +16,7 @@ import (
 
 // BuildGet defines the command for capturing a list of builds.
 var BuildGet = &cli.Command{
-	Name:        "build",
+	Name:        internal.FlagBuild,
 	Aliases:     []string{"builds"},
 	Description: "Use this command to get a list of builds.",
 	Usage:       "Display a list of builds",
@@ -26,13 +27,13 @@ var BuildGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
-			Name:    "org",
+			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
-			Name:    "repo",
+			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
 		},
@@ -41,7 +42,7 @@ var BuildGet = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "BUILD_OUTPUT"},
-			Name:    "output",
+			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
@@ -50,14 +51,14 @@ var BuildGet = &cli.Command{
 
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PAGE", "BUILD_PAGE"},
-			Name:    "page",
+			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of builds",
 			Value:   1,
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_PER_PAGE", "BUILD_PER_PAGE"},
-			Name:    "per.page",
+			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of builds to print per page",
 			Value:   10,
@@ -99,11 +100,11 @@ func buildGet(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config
 	b := &build.Config{
 		Action:  getAction,
-		Org:     c.String("org"),
-		Repo:    c.String("repo"),
-		Page:    c.Int("page"),
-		PerPage: c.Int("per.page"),
-		Output:  c.String("output"),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate build configuration

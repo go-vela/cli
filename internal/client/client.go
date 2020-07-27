@@ -7,6 +7,8 @@ package client
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/internal"
+
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/sirupsen/logrus"
@@ -21,10 +23,10 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 	logrus.Debug("parsing Vela client from provided configuration")
 
 	// capture the address from the context
-	address := c.String(KeyAddress)
+	address := c.String(internal.FlagAPIAddress)
 
 	// capture the token from the context
-	token := c.String(KeyToken)
+	token := c.String(internal.FlagAPIToken)
 
 	// validate the provided configuration
 	err := validate(address, token)
@@ -55,7 +57,7 @@ func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
 	logrus.Debug("parsing tokenless Vela client from provided configuration")
 
 	// capture the address from the context
-	address := c.String(KeyAddress)
+	address := c.String(internal.FlagAPIAddress)
 
 	// check if client address is set
 	if len(address) == 0 {

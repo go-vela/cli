@@ -65,6 +65,12 @@ DOCUMENTATION:
 // input and create the object used to
 // inspect a repository.
 func repoView(c *cli.Context) error {
+	// load variables from the config file
+	err := load(c)
+	if err != nil {
+		return err
+	}
+
 	// parse the Vela client from the context
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse

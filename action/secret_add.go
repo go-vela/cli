@@ -144,6 +144,12 @@ DOCUMENTATION:
 // input and create the object used to
 // create a secret.
 func secretAdd(c *cli.Context) error {
+	// load variables from the config file
+	err := load(c)
+	if err != nil {
+		return err
+	}
+
 	// parse the Vela client from the context
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse

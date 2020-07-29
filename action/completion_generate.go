@@ -56,6 +56,12 @@ DOCUMENTATION:
 // input and create the object used to
 // produce the config file.
 func completionGenerate(c *cli.Context) error {
+	// load variables from the config file
+	err := load(c)
+	if err != nil {
+		return err
+	}
+
 	// create the completion configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/completion?tab=doc#Config
@@ -68,7 +74,7 @@ func completionGenerate(c *cli.Context) error {
 	// validate completion configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/completion?tab=doc#Config.Validate
-	err := comp.Validate()
+	err = comp.Validate()
 	if err != nil {
 		return err
 	}

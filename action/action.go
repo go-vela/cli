@@ -18,6 +18,9 @@ const (
 	// getAction defines the action for getting a list of resources.
 	getAction = "get"
 
+	// loadAction defines the action for loading a resource.
+	loadAction = "load"
+
 	// loginAction defines the action for logging in to Vela.
 	loginAction = "login"
 

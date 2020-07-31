@@ -10,9 +10,9 @@ var (
 	// VersionMajor is for an API incompatible changes
 	VersionMajor int64
 	// VersionMinor is for functionality in a backwards-compatible manner
-	VersionMinor int64 = 4
+	VersionMinor int64 = 5
 	// VersionPatch is for backwards-compatible bug fixes
-	VersionPatch int64 = 1
+	VersionPatch int64
 )
 
 // Version is the specification version that the package types support.

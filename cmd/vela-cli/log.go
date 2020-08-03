@@ -5,6 +5,8 @@
 package main
 
 import (
+	"github.com/go-vela/cli/internal"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/urfave/cli/v2"
@@ -13,7 +15,7 @@ import (
 // setLogging is a helper function that sets up logging for the CLI.
 func setLogging(c *cli.Context) error {
 	// set log level for the CLI
-	switch c.String("log.level") {
+	switch c.String(internal.FlagLogLevel) {
 	case "t", "trace", "Trace", "TRACE":
 		logrus.SetLevel(logrus.TraceLevel)
 	case "d", "debug", "Debug", "DEBUG":

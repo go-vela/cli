@@ -6,6 +6,7 @@ package action
 
 import (
 	"github.com/go-vela/cli/action/config"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/sirupsen/logrus"
 
@@ -19,7 +20,7 @@ func load(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action: loadAction,
-		File:   c.String("config"),
+		File:   c.String(internal.FlagConfig),
 	}
 
 	// validate config file configuration
@@ -37,7 +38,7 @@ func load(c *cli.Context) error {
 	}
 
 	// set log level for the CLI
-	switch c.String("log.level") {
+	switch c.String(internal.FlagLogLevel) {
 	case "t", "trace", "Trace", "TRACE":
 		logrus.SetLevel(logrus.TraceLevel)
 	case "d", "debug", "Debug", "DEBUG":

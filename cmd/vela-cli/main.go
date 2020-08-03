@@ -103,45 +103,6 @@ func main() {
 			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
 			Value:   "info",
 		},
-
-		// Output Flags
-
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
-			Name:    internal.FlagOutput,
-			Aliases: []string{"op"},
-			Usage:   "set the type of output - options: (json|spew|yaml)",
-		},
-
-		// Repo Flags
-
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
-			Name:    internal.FlagOrg,
-			Aliases: []string{"o"},
-			Usage:   "provide the organization for the CLI",
-		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
-			Name:    internal.FlagRepo,
-			Aliases: []string{"r"},
-			Usage:   "provide the repository for the CLI",
-		},
-
-		// Secret Flags
-
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE", "SECRET_ENGINE"},
-			Name:    internal.FlagSecretEngine,
-			Aliases: []string{"e"},
-			Usage:   "provide the secret engine for the CLI",
-		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE", "SECRET_TYPE"},
-			Name:    internal.FlagSecretType,
-			Aliases: []string{"ty"},
-			Usage:   "provide the secret type for the CLI",
-		},
 	}
 
 	// CLI Start

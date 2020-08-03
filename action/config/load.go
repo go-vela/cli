@@ -51,8 +51,9 @@ func (c *Config) Load(ctx *cli.Context) error {
 	// check if the config file is empty
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#ConfigFile.Empty
+	// nolint:lll // log message is too long
 	if config.Empty() {
-		logrus.Debugf("empty config loaded from %s", c.File)
+		logrus.Warningf("empty/unsupported config loaded from %s - fix this with `vela generate config`", c.File)
 
 		return nil
 	}

@@ -14,7 +14,7 @@ RUN apk add --update --no-cache ca-certificates
 #  docker build -t target/vela-cli:latest .     #
 #################################################
 
-FROM scratch
+FROM alpine:3
 
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 

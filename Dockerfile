@@ -10,8 +10,6 @@ FROM alpine:3
 
 RUN apk add --update --no-cache ca-certificates
 
-COPY /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-
 COPY release/linux/amd64/vela /bin/vela
 
 CMD ["/bin/vela"]

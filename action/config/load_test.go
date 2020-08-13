@@ -14,7 +14,25 @@ import (
 )
 
 func TestConfig_Config_Load(t *testing.T) {
+	// setup app
+	app := cli.NewApp()
+	app.Flags = []cli.Flag{
+		&cli.StringFlag{Name: "config"},
+		&cli.StringFlag{Name: "api.addr"},
+		&cli.StringFlag{Name: "api.token"},
+		&cli.StringFlag{Name: "api.version"},
+		&cli.StringFlag{Name: "log.level"},
+		&cli.StringFlag{Name: "output"},
+		&cli.StringFlag{Name: "org"},
+		&cli.StringFlag{Name: "repo"},
+		&cli.StringFlag{Name: "secret.engine"},
+		&cli.StringFlag{Name: "secret.type"},
+	}
+
 	// setup flags
+	configSet := flag.NewFlagSet("test", 0)
+	configSet.Parse([]string{"view", "config"})
+
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", "https://vela-server.localhost", "doc")
 	fullSet.String("api.token", "superSecretToken", "doc")
@@ -38,6 +56,14 @@ func TestConfig_Config_Load(t *testing.T) {
 				Action: "load",
 				File:   "testdata/config.yml",
 			},
+			set: configSet,
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "load",
+				File:   "testdata/config.yml",
+			},
 			set: fullSet,
 		},
 		{
@@ -53,7 +79,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	// run tests
 	for _, test := range tests {
 		// setup context
-		ctx := cli.NewContext(nil, test.set, nil)
+		ctx := cli.NewContext(app, test.set, nil)
 
 		// setup filesystem
 		appFS = afero.NewMemMapFs()

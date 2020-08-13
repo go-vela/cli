@@ -5,13 +5,18 @@
 package secret
 
 import (
+	"fmt"
+	"os"
 	"strings"
 
 	"github.com/go-vela/cli/internal/output"
+	yaml "gopkg.in/yaml.v2"
 
 	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/go-vela/types/constants"
+	"github.com/go-vela/types/library"
+	pyaml "github.com/go-vela/types/yaml"
 
 	"github.com/sirupsen/logrus"
 )
@@ -68,9 +73,54 @@ func (c *Config) View(client *vela.Client) error {
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
 		return output.YAML(secret)
 	default:
-		// output the secret in stdout format
-		//
-		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(secret)
+		return outputDefault(c.Engine, secret)
 	}
+}
+
+// outputDefault is a helper function to output the
+// provided secrets with a copy pipeline secret and
+// library details formatted with yaml.
+func outputDefault(engine string, s *library.Secret) error {
+	// create yaml secret
+	secret := &pyaml.Secret{
+		Name:   s.GetName(),
+		Key:    key(s),
+		Engine: engine,
+		Type:   s.GetType(),
+	}
+
+	// anonymous struct for yaml secret
+	_secret := struct {
+		Secret []*pyaml.Secret `yaml:"secret"`
+	}{
+		[]*pyaml.Secret{secret},
+	}
+
+	// anonymous struct for library secret
+	_s := struct {
+		Details *library.Secret `yaml:"details"`
+	}{
+		s,
+	}
+
+	// marshal the input into YAML
+	output, err := yaml.Marshal(_secret)
+	if err != nil {
+		return err
+	}
+
+	// marshal the input into YAML
+	tmp, err := yaml.Marshal(_s)
+	if err != nil {
+		return err
+	}
+
+	// add a new line between the pipeline and details output
+	output = append(output, "\n"...)
+	output = append(output, tmp...)
+
+	// ensure we output to stdout
+	fmt.Fprintln(os.Stdout, string(output))
+
+	return nil
 }

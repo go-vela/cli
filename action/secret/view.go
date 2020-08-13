@@ -89,14 +89,14 @@ func outputDefault(engine string, s *library.Secret) error {
 		Type:   s.GetType(),
 	}
 
-	// Anonymous struct for output
+	// anonymous struct for yaml secret
 	_secret := struct {
 		Secret []*pyaml.Secret `yaml:"secret"`
 	}{
 		[]*pyaml.Secret{secret},
 	}
 
-	// Anonymous struct for output
+	// anonymous struct for library secret
 	_s := struct {
 		Details *library.Secret `yaml:"details"`
 	}{

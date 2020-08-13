@@ -5,6 +5,7 @@
 package main
 
 import (
+	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
 
 	"github.com/sirupsen/logrus"
@@ -12,8 +13,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// setLogging is a helper function that sets up logging for the CLI.
-func setLogging(c *cli.Context) error {
+// load is a helper function that loads the necessary configuration for the CLI.
+func load(c *cli.Context) error {
 	// set log level for the CLI
 	switch c.String(internal.FlagLogLevel) {
 	case "t", "trace", "Trace", "TRACE":
@@ -32,6 +33,28 @@ func setLogging(c *cli.Context) error {
 		fallthrough
 	default:
 		logrus.SetLevel(logrus.InfoLevel)
+	}
+
+	// create the config file configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
+	conf := &config.Config{
+		Action: "load",
+		File:   c.String(internal.FlagConfig),
+	}
+
+	// validate config file configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Validate
+	err := conf.Validate()
+	if err == nil {
+		// execute the load call for the config file configuration
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Load
+		err = conf.Load(c)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -5,6 +5,8 @@
 package config
 
 import (
+	"strings"
+
 	"github.com/go-vela/cli/internal"
 
 	"github.com/sirupsen/logrus"
@@ -19,6 +21,18 @@ import (
 // Load reads the config file and sets the values based off the provided configuration.
 func (c *Config) Load(ctx *cli.Context) error {
 	logrus.Debug("executing load for config file configuration")
+
+	// check if we're operating on the config resource
+	for _, arg := range ctx.Args().Slice() {
+		// check if we're operating on the config resource
+		//
+		// nolint:lll // log message is too long
+		if strings.Contains(arg, "config") {
+			logrus.Debugf("config arg provided in %v - skipping load for config file %s", ctx.Args().Slice(), c.File)
+
+			return nil
+		}
+	}
 
 	// use custom filesystem which enables us to test
 	//

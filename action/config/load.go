@@ -72,84 +72,146 @@ func (c *Config) Load(ctx *cli.Context) error {
 		return nil
 	}
 
-	// check if the API address is set in the context
-	if !ctx.IsSet(internal.FlagAPIAddress) && len(config.API.Address) > 0 {
-		// set the API address field to value from config
-		err = ctx.Set(internal.FlagAPIAddress, config.API.Address)
-		if err != nil {
-			return err
-		}
+	// capture a list of all available flags to set in the current context
+	flags := []cli.Flag{}
+	// check if the app is provided in the context
+	if ctx.App != nil {
+		// append the flags from the app provided
+		flags = append(flags, ctx.App.VisibleFlags()...)
+	}
+	// check if the command is provided in the context
+	if ctx.Command != nil {
+		// append the flags from the context provided
+		flags = append(flags, ctx.Command.VisibleFlags()...)
 	}
 
-	// check if the API token is set in the context
-	if !ctx.IsSet(internal.FlagAPIToken) && len(config.API.Token) > 0 {
-		// set the API token field to value from config
-		err = ctx.Set(internal.FlagAPIToken, config.API.Token)
-		if err != nil {
-			return err
-		}
-	}
+	// iterate thro ugh all available flags in the current context
+	for _, flag := range flags {
+		// capture string value for flag
+		f := strings.Join(flag.Names(), " ")
 
-	// check if the API version is set in the context
-	if !ctx.IsSet(internal.FlagAPIVersion) && len(config.API.Version) > 0 {
-		// set the API version field to value from config
-		err = ctx.Set(internal.FlagAPIVersion, config.API.Version)
-		if err != nil {
-			return err
-		}
-	}
+		// check if the API address flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagAPIAddress) &&
+			!ctx.IsSet(internal.FlagAPIAddress) &&
+			len(config.API.Address) > 0 {
+			// set the API address field to value from config
+			err = ctx.Set(internal.FlagAPIAddress, config.API.Address)
+			if err != nil {
+				return err
+			}
 
-	// check if the log level is set in the context
-	if !ctx.IsSet(internal.FlagLogLevel) && len(config.Log.Level) > 0 {
-		// set the log level field to value from config
-		err = ctx.Set(internal.FlagLogLevel, config.Log.Level)
-		if err != nil {
-			return err
+			continue
 		}
-	}
 
-	// check if the output is set in the context
-	if !ctx.IsSet(internal.FlagOutput) && len(config.Output) > 0 {
-		// set the output field to value from config
-		err = ctx.Set(internal.FlagOutput, config.Output)
-		if err != nil {
-			return err
+		// check if the API token flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagAPIToken) &&
+			!ctx.IsSet(internal.FlagAPIToken) &&
+			len(config.API.Token) > 0 {
+			// set the API token field to value from config
+			err = ctx.Set(internal.FlagAPIToken, config.API.Token)
+			if err != nil {
+				return err
+			}
+
+			continue
 		}
-	}
 
-	// check if the org is set in the context
-	if !ctx.IsSet(internal.FlagOrg) && len(config.Org) > 0 {
-		// set the org field to value from config
-		err = ctx.Set(internal.FlagOrg, config.Org)
-		if err != nil {
-			return err
+		// check if the API version flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagAPIVersion) &&
+			!ctx.IsSet(internal.FlagAPIVersion) &&
+			len(config.API.Version) > 0 {
+			// set the API version field to value from config
+			err = ctx.Set(internal.FlagAPIVersion, config.API.Version)
+			if err != nil {
+				return err
+			}
+
+			continue
 		}
-	}
 
-	// check if the repo is set in the context
-	if !ctx.IsSet(internal.FlagRepo) && len(config.Repo) > 0 {
-		// set the repo field to value from config
-		err = ctx.Set(internal.FlagRepo, config.Repo)
-		if err != nil {
-			return err
+		// check if the log level flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagLogLevel) &&
+			!ctx.IsSet(internal.FlagLogLevel) &&
+			len(config.Log.Level) > 0 {
+			// set the log level field to value from config
+			err = ctx.Set(internal.FlagLogLevel, config.Log.Level)
+			if err != nil {
+				return err
+			}
 		}
-	}
 
-	// check if the secret engine is set in the context
-	if !ctx.IsSet(internal.FlagSecretEngine) && len(config.Secret.Engine) > 0 {
-		// set the secret engine field to value from config
-		err = ctx.Set(internal.FlagSecretEngine, config.Secret.Engine)
-		if err != nil {
-			return err
+		// check if the output flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagOutput) &&
+			!ctx.IsSet(internal.FlagOutput) &&
+			len(config.Output) > 0 {
+			// set the output field to value from config
+			err = ctx.Set(internal.FlagOutput, config.Output)
+			if err != nil {
+				return err
+			}
+
+			continue
 		}
-	}
 
-	// check if the secret type is set in the context
-	if !ctx.IsSet(internal.FlagSecretType) && len(config.Secret.Type) > 0 {
-		// set the secret type field to value from config
-		err = ctx.Set(internal.FlagSecretType, config.Secret.Type)
-		if err != nil {
-			return err
+		// check if the org flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagOrg) &&
+			!ctx.IsSet(internal.FlagOrg) &&
+			len(config.Org) > 0 {
+			// set the org field to value from config
+			err = ctx.Set(internal.FlagOrg, config.Org)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the repo flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagRepo) &&
+			!ctx.IsSet(internal.FlagRepo) &&
+			len(config.Repo) > 0 {
+			// set the repo field to value from config
+			err = ctx.Set(internal.FlagRepo, config.Repo)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the secret engine flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagSecretEngine) &&
+			!ctx.IsSet(internal.FlagSecretEngine) &&
+			len(config.Secret.Engine) > 0 {
+			// set the secret engine field to value from config
+			err = ctx.Set(internal.FlagSecretEngine, config.Secret.Engine)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the secret type flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagSecretType) &&
+			!ctx.IsSet(internal.FlagSecretType) &&
+			len(config.Secret.Type) > 0 {
+			// set the secret type field to value from config
+			err = ctx.Set(internal.FlagSecretType, config.Secret.Type)
+			if err != nil {
+				return err
+			}
+
+			continue
 		}
 	}
 

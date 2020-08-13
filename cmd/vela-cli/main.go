@@ -36,7 +36,7 @@ func main() {
 
 	// CLI Metadata
 
-	app.Before = setLogging
+	app.Before = load
 	app.Compiled = time.Now()
 	app.EnableBashCompletion = true
 	app.UseShortOptionHandling = true

@@ -19,6 +19,7 @@ import (
 // SecretGet defines the command for inspecting a secret.
 var SecretGet = &cli.Command{
 	Name:        "secret",
+	Aliases:     []string{"secrets"},
 	Description: "Use this command to get a list of secrets.",
 	Usage:       "Display a list of secrets",
 	Action:      secretGet,

@@ -16,6 +16,8 @@ import (
 func (c *Config) Get(client *vela.Client) error {
 	logrus.Debug("executing get for log configuration")
 
+	logrus.Tracef("capturing logs for build %s/%s/%d", c.Org, c.Repo, c.Build)
+
 	// send API call to capture a list of build logs
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.GetLogs
@@ -24,7 +26,17 @@ func (c *Config) Get(client *vela.Client) error {
 		return err
 	}
 
-	logrus.Tracef("capturing logs for build %s/%s/%d", c.Org, c.Repo, c.Build)
+	// create variable for storing all build logs
+	data := []byte{}
+
+	// iterate through all build logs
+	for _, log := range *logs {
+		// add the logs for the step from the build
+		data = append(data, log.GetData()...)
+
+		// add a new line to separate the logs
+		data = append(data, []byte("\n")...)
+	}
 
 	// handle the output based off the provided configuration
 	switch c.Output {
@@ -52,6 +64,6 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the logs in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(logs)
+		return output.Stdout(string(data))
 	}
 }

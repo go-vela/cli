@@ -62,6 +62,7 @@ var ServiceView = &cli.Command{
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
+			Value:   "yaml",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

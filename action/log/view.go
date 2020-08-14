@@ -52,7 +52,7 @@ func (c *Config) ViewService(client *vela.Client) error {
 		// output the service log in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(log)
+		return output.Stdout(string(log.GetData()))
 	}
 }
 
@@ -96,6 +96,6 @@ func (c *Config) ViewStep(client *vela.Client) error {
 		// output the step log in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(log)
+		return output.Stdout(string(log.GetData()))
 	}
 }

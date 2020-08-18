@@ -41,6 +41,12 @@ func (c *Config) Add(client *vela.Client) error {
 		name = c.Team
 	}
 
+	// set the proper value for the secret
+	err := c.setValue()
+	if err != nil {
+		return err
+	}
+
 	// create the secret object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Secret

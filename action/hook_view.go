@@ -42,7 +42,6 @@ var HookView = &cli.Command{
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_HOOK", "HOOK_NUMBER"},
 			Name:    "hook",
-			Aliases: []string{"h"},
 			Usage:   "provide the number for the hook",
 		},
 

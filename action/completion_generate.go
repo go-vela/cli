@@ -22,13 +22,13 @@ var CompletionGenerate = &cli.Command{
 
 		// Shell Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_BASH", "COMPLETION_BASH"},
 			Name:    "bash",
 			Aliases: []string{"b"},
 			Usage:   "generate a bash auto completion script",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ZSH", "COMPLETION_ZSH"},
 			Name:    "zsh",
 			Aliases: []string{"z"},

@@ -35,7 +35,7 @@ var PipelineGenerate = &cli.Command{
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_STAGES", "PIPELINE_STAGES"},
 			Name:    "stages",
 			Aliases: []string{"s"},

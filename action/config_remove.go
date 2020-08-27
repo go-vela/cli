@@ -28,18 +28,21 @@ var ConfigRemove = &cli.Command{
 			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "removes the API addr from the config file",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "removes the API token from the config file",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION"},
 			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "removes the API version from the config file",
+			Value:   "false",
 		},
 
 		// Log Flags
@@ -49,6 +52,7 @@ var ConfigRemove = &cli.Command{
 			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "removes the log level from the config file",
+			Value:   "false",
 		},
 
 		// Output Flags
@@ -58,6 +62,7 @@ var ConfigRemove = &cli.Command{
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "removes the output from the config file",
+			Value:   "false",
 		},
 
 		// Repo Flags
@@ -67,12 +72,14 @@ var ConfigRemove = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "removes the org from the config file",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "removes the repo from the config file",
+			Value:   "false",
 		},
 
 		// Secret Flags
@@ -82,12 +89,14 @@ var ConfigRemove = &cli.Command{
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "removes the secret engine from the config file",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "removes the secret type from the config file",
+			Value:   "false",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

@@ -27,12 +27,14 @@ var CompletionGenerate = &cli.Command{
 			Name:    "bash",
 			Aliases: []string{"b"},
 			Usage:   "generate a bash auto completion script",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ZSH", "COMPLETION_ZSH"},
 			Name:    "zsh",
 			Aliases: []string{"z"},
 			Usage:   "generate a zsh auto completion script",
+			Value:   "false",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

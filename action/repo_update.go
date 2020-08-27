@@ -76,18 +76,21 @@ var RepoUpdate = &cli.Command{
 			Name:    "private",
 			Aliases: []string{"p"},
 			Usage:   "disable public access to the repository",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TRUSTED", "REPO_TRUSTED"},
 			Name:    "trusted",
 			Aliases: []string{"tr"},
 			Usage:   "elevated permissions for builds executed for repo",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ACTIVE", "REPO_ACTIVE"},
 			Name:    "active",
 			Aliases: []string{"a"},
 			Usage:   "current status of the repository",
+			Value:   "false",
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS"},

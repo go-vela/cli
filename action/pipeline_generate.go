@@ -40,6 +40,7 @@ var PipelineGenerate = &cli.Command{
 			Name:    "stages",
 			Aliases: []string{"s"},
 			Usage:   "enable generating the pipeline with stages",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "PIPELINE_TYPE"},

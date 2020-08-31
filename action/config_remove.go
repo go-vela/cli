@@ -104,13 +104,13 @@ EXAMPLES:
   1. Remove the config file.
     $ {{.HelpName}}
   2. Remove the addr field from the config file.
-    $ {{.HelpName}} --api.addr
+    $ {{.HelpName}} --api.addr true
   3. Remove the token field from the config file.
-    $ {{.HelpName}} --api.token
+    $ {{.HelpName}} --api.token true
   4. Remove the secret engine and type fields from the config file.
-    $ {{.HelpName}} --secret.engine --secret.type
+    $ {{.HelpName}} --secret.engine true --secret.type true
   5. Remove the log level field from the config file.
-    $ {{.HelpName}} --log.level
+    $ {{.HelpName}} --log.level true
 
 DOCUMENTATION:
 

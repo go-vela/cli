@@ -58,7 +58,7 @@ EXAMPLES:
   3. Generate a Vela pipeline in a specific directory.
     $ {{.HelpName}} --path /absolute/full/path/to/dir
   4. Generate a Vela pipeline with stages.
-    $ {{.HelpName}} --stages
+    $ {{.HelpName}} --stages true
   5. Generate a go Vela pipeline.
     $ {{.HelpName}} --secret.type go
   6. Generate a java Vela pipeline.

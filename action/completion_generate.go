@@ -40,9 +40,9 @@ var CompletionGenerate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Enable auto completion for the current bash session.
-    $ source <({{.HelpName}} --bash)
+    $ source <({{.HelpName}} --bash true)
   2. Enable auto completion for the current zsh session.
-    $ source <({{.HelpName}} --zsh)
+    $ source <({{.HelpName}} --zsh true)
   3. Enable auto completion for bash permanently.
     visit https://go-vela.github.io/docs/cli/completion/generate/#bash
   4. Enable auto completion for zsh permanently.

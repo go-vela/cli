@@ -90,7 +90,7 @@ var RepoUpdate = &cli.Command{
 			Name:    "active",
 			Aliases: []string{"a"},
 			Usage:   "current status of the repository",
-			Value:   "false",
+			Value:   "true",
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS"},

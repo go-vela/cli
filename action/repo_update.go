@@ -71,23 +71,26 @@ var RepoUpdate = &cli.Command{
 			Usage:   "max time allowed per build in repository",
 			Value:   30,
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_PRIVATE", "REPO_PRIVATE"},
 			Name:    "private",
 			Aliases: []string{"p"},
 			Usage:   "disable public access to the repository",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TRUSTED", "REPO_TRUSTED"},
 			Name:    "trusted",
 			Aliases: []string{"tr"},
 			Usage:   "elevated permissions for builds executed for repo",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ACTIVE", "REPO_ACTIVE"},
 			Name:    "active",
 			Aliases: []string{"a"},
 			Usage:   "current status of the repository",
+			Value:   "false",
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS"},

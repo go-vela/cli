@@ -23,71 +23,80 @@ var ConfigRemove = &cli.Command{
 
 		// API Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ADDR", "CONFIG_ADDR"},
 			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "removes the API addr from the config file",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "removes the API token from the config file",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION"},
 			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "removes the API version from the config file",
+			Value:   "false",
 		},
 
 		// Log Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"},
 			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "removes the log level from the config file",
+			Value:   "false",
 		},
 
 		// Output Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "removes the output from the config file",
+			Value:   "false",
 		},
 
 		// Repo Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "removes the org from the config file",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "removes the repo from the config file",
+			Value:   "false",
 		},
 
 		// Secret Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "removes the secret engine from the config file",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "removes the secret type from the config file",
+			Value:   "false",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -95,13 +104,13 @@ EXAMPLES:
   1. Remove the config file.
     $ {{.HelpName}}
   2. Remove the addr field from the config file.
-    $ {{.HelpName}} --api.addr
+    $ {{.HelpName}} --api.addr true
   3. Remove the token field from the config file.
-    $ {{.HelpName}} --api.token
+    $ {{.HelpName}} --api.token true
   4. Remove the secret engine and type fields from the config file.
-    $ {{.HelpName}} --secret.engine --secret.type
+    $ {{.HelpName}} --secret.engine true --secret.type true
   5. Remove the log level field from the config file.
-    $ {{.HelpName}} --log.level
+    $ {{.HelpName}} --log.level true
 
 DOCUMENTATION:
 

@@ -90,12 +90,12 @@ var SecretAdd = &cli.Command{
 				constants.EventTag,
 			),
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_COMMAND", "SECRET_COMMAND"},
 			Name:    "commands",
 			Aliases: []string{"c"},
 			Usage:   "enable a secret to be used for a step with commands",
-			Value:   true,
+			Value:   "true",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_FILE", "SECRET_FILE"},

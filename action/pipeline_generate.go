@@ -35,11 +35,12 @@ var PipelineGenerate = &cli.Command{
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_STAGES", "PIPELINE_STAGES"},
 			Name:    "stages",
 			Aliases: []string{"s"},
 			Usage:   "enable generating the pipeline with stages",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TYPE", "PIPELINE_TYPE"},
@@ -57,7 +58,7 @@ EXAMPLES:
   3. Generate a Vela pipeline in a specific directory.
     $ {{.HelpName}} --path /absolute/full/path/to/dir
   4. Generate a Vela pipeline with stages.
-    $ {{.HelpName}} --stages
+    $ {{.HelpName}} --stages true
   5. Generate a go Vela pipeline.
     $ {{.HelpName}} --secret.type go
   6. Generate a java Vela pipeline.

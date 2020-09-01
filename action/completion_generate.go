@@ -22,25 +22,27 @@ var CompletionGenerate = &cli.Command{
 
 		// Shell Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_BASH", "COMPLETION_BASH"},
 			Name:    "bash",
 			Aliases: []string{"b"},
 			Usage:   "generate a bash auto completion script",
+			Value:   "false",
 		},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_ZSH", "COMPLETION_ZSH"},
 			Name:    "zsh",
 			Aliases: []string{"z"},
 			Usage:   "generate a zsh auto completion script",
+			Value:   "false",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Enable auto completion for the current bash session.
-    $ source <({{.HelpName}} --bash)
+    $ source <({{.HelpName}} --bash true)
   2. Enable auto completion for the current zsh session.
-    $ source <({{.HelpName}} --zsh)
+    $ source <({{.HelpName}} --zsh true)
   3. Enable auto completion for bash permanently.
     visit https://go-vela.github.io/docs/cli/completion/generate/#bash
   4. Enable auto completion for zsh permanently.

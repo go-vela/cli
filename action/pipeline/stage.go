@@ -51,6 +51,7 @@ func stages(pipelineType string) *yaml.Build {
 						Commands: commands,
 						Image:    image,
 						Name:     "version",
+						Pull:     "always",
 					},
 				},
 			},

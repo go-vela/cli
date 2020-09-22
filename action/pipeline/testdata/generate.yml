@@ -4,4 +4,4 @@ steps:
   - echo hello
   image: alpine:latest
   name: version
-  pull: true
+  pull: always

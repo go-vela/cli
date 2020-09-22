@@ -48,7 +48,7 @@ func steps(pipelineType string) *yaml.Build {
 				Commands: commands,
 				Image:    image,
 				Name:     "version",
-				Pull:     true,
+				Pull:     "always",
 			},
 		},
 	}

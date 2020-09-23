@@ -27,7 +27,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 		// check if we're operating on the config resource
 		//
 		// nolint:lll // log message is too long
-		if strings.Contains(arg, "config") {
+		if strings.EqualFold(arg, "config") {
 			logrus.Debugf("config arg provided in %v - skipping load for config file %s", ctx.Args().Slice(), c.File)
 
 			return nil

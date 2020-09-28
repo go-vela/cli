@@ -8,10 +8,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.7.0 // indirect
-	github.com/go-vela/compiler v0.6.0-rc1
-	github.com/go-vela/mock v0.6.0-rc1
-	github.com/go-vela/sdk-go v0.6.0-rc1
-	github.com/go-vela/types v0.6.0-rc1
+	github.com/go-vela/compiler v0.6.0-rc2
+	github.com/go-vela/mock v0.6.0-rc2
+	github.com/go-vela/sdk-go v0.6.0-rc2
+	github.com/go-vela/types v0.6.0-rc2
 	github.com/gosuri/uitable v0.0.3
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/lunixbochs/vtclean v1.0.0 // indirect

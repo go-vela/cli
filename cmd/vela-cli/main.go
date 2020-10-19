@@ -40,12 +40,13 @@ func main() {
 	app.Compiled = time.Now()
 	app.EnableBashCompletion = true
 	app.UseShortOptionHandling = true
-	app.Version = version.Version.String()
+	app.Version = version.New().Semantic()
 
 	// CLI Commands
 
 	app.Commands = []*cli.Command{
 		action.Login,
+		action.Version,
 		addCmds,
 		chownCmds,
 		generateCmds,

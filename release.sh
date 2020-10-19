@@ -7,15 +7,8 @@
 set -e
 set -x
 
-# capture tag version from reference
-tag=$(echo ${GITHUB_REF} | cut -d / -f 3)
-
 # compile for all architectures
-GOOS=linux   CGO_ENABLED=0 GOARCH=amd64 go build -ldflags "-X main.version=${tag}" -o release/linux/amd64/vela   github.com/go-vela/cli/cmd/vela-cli
-GOOS=linux   CGO_ENABLED=0 GOARCH=arm64 go build -ldflags "-X main.version=${tag}" -o release/linux/arm64/vela   github.com/go-vela/cli/cmd/vela-cli
-GOOS=linux   CGO_ENABLED=0 GOARCH=arm   go build -ldflags "-X main.version=${tag}" -o release/linux/arm/vela     github.com/go-vela/cli/cmd/vela-cli
-GOOS=windows CGO_ENABLED=0 GOARCH=amd64 go build -ldflags "-X main.version=${tag}" -o release/windows/amd64/vela github.com/go-vela/cli/cmd/vela-cli
-GOOS=darwin  CGO_ENABLED=0 GOARCH=amd64 go build -ldflags "-X main.version=${tag}" -o release/darwin/amd64/vela  github.com/go-vela/cli/cmd/vela-cli
+make build
 
 # tar binary files prior to upload
 tar -cvzf release/vela_linux_amd64.tar.gz   -C release/linux/amd64   vela

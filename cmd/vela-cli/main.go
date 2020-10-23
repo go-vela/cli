@@ -49,6 +49,8 @@ func main() {
 		action.Version,
 		addCmds,
 		chownCmds,
+		compileCmds,
+		expandCmds,
 		generateCmds,
 		getCmds,
 		removeCmds,

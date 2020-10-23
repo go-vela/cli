@@ -20,9 +20,24 @@ import (
 func (c *Config) Validate() error {
 	logrus.Debug("validating pipeline configuration")
 
-	// check if pipeline file is set
-	if len(c.File) == 0 {
-		return fmt.Errorf("no pipeline file provided")
+	// check if pipeline action is not view
+	if c.Action != "view" {
+		// check if pipeline file is set
+		if len(c.File) == 0 {
+			return fmt.Errorf("no pipeline file provided")
+		}
+
+		return nil
+	}
+
+	// check if pipeline org is set
+	if len(c.Org) == 0 {
+		return fmt.Errorf("no pipeline org provided")
+	}
+
+	// check if pipeline name is set
+	if len(c.Repo) == 0 {
+		return fmt.Errorf("no pipeline name provided")
 	}
 
 	return nil

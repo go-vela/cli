@@ -61,7 +61,7 @@ EXAMPLES:
   1. Expand a pipeline for a repository.
     $ {{.HelpName}} --org MyOrg --repo MyRepo
   2. Expand a pipeline for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   3. Expand a pipeline for a repository when config or environment variables are set.
     $ {{.HelpName}}
 

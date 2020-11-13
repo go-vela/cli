@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 
 	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/go-vela/compiler/compiler"
 
@@ -20,32 +21,39 @@ import (
 func (c *Config) Validate() error {
 	logrus.Debug("validating pipeline configuration")
 
-	// check if pipeline action is not view
-	if c.Action != "view" {
-		// check if pipeline file is set
-		if len(c.File) == 0 {
-			return fmt.Errorf("no pipeline file provided")
+	// handle the action based off the provided configuration
+	switch c.Action {
+	case "compile":
+		fallthrough
+	case "expand":
+		fallthrough
+	case "view":
+		// check if pipeline org is set
+		if len(c.Org) == 0 {
+			return fmt.Errorf("no pipeline org provided")
 		}
 
-		return nil
-	}
-
-	// check if pipeline org is set
-	if len(c.Org) == 0 {
-		return fmt.Errorf("no pipeline org provided")
-	}
-
-	// check if pipeline name is set
-	if len(c.Repo) == 0 {
-		return fmt.Errorf("no pipeline name provided")
+		// check if pipeline repo is set
+		if len(c.Repo) == 0 {
+			return fmt.Errorf("no pipeline name provided")
+		}
+	case "generate":
+		fallthrough
+	case "validate":
+		if len(c.Org) == 0 || len(c.Repo) == 0 {
+			// check if pipeline file is set
+			if len(c.File) == 0 {
+				return fmt.Errorf("no pipeline file provided")
+			}
+		}
 	}
 
 	return nil
 }
 
-// ValidateFile verifies a pipeline based off the provided configuration.
-func (c *Config) ValidateFile(client compiler.Engine) error {
-	logrus.Debug("executing validate for pipeline configuration")
+// ValidateLocal verifies a local pipeline based off the provided configuration.
+func (c *Config) ValidateLocal(client compiler.Engine) error {
+	logrus.Debug("executing validate for local pipeline configuration")
 
 	// send Filesystem call to capture base directory path
 	base, err := os.Getwd()
@@ -82,4 +90,48 @@ func (c *Config) ValidateFile(client compiler.Engine) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
 	return output.Stdout(fmt.Sprintf("%s is valid", path))
+}
+
+// ValidateRemote validates a remote pipeline based off the provided configuration.
+func (c *Config) ValidateRemote(client *vela.Client) error {
+	logrus.Debug("executing validate for remote pipeline configuration")
+
+	logrus.Tracef("compiling pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
+
+	// send API call to validate a pipeline
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Validate
+	pipeline, _, err := client.Pipeline.Validate(c.Org, c.Repo)
+	if err != nil {
+		return err
+	}
+
+	// handle the output based off the provided configuration
+	switch c.Output {
+	case output.DriverDump:
+		// output the pipeline in dump format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
+		return output.Dump(pipeline)
+	case output.DriverJSON:
+		// output the pipeline in JSON format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
+		return output.JSON(pipeline)
+	case output.DriverSpew:
+		// output the pipeline in spew format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
+		return output.Spew(pipeline)
+	case output.DriverYAML:
+		// output the pipeline in YAML format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
+		return output.YAML(pipeline)
+	default:
+		// output the pipeline in stdout format
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+		return output.Stdout(pipeline)
+	}
 }

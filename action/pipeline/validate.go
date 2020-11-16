@@ -96,7 +96,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 func (c *Config) ValidateRemote(client *vela.Client) error {
 	logrus.Debug("executing validate for remote pipeline configuration")
 
-	logrus.Tracef("compiling pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
+	logrus.Tracef("validating pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
 
 	// set the pipeline options for the call
 	//

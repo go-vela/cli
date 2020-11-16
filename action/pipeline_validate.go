@@ -60,6 +60,12 @@ var PipelineValidate = &cli.Command{
 			Usage:   "provide the repository reference for the pipeline",
 			Value:   "master",
 		},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_TEMPLATE", "PIPELINE_TEMPLATE"},
+			Name:    "template",
+			Usage:   "enables validating a pipeline with templates",
+			Value:   true,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -93,12 +99,13 @@ func pipelineValidate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action: validateAction,
-		Org:    c.String(internal.FlagOrg),
-		Repo:   c.String(internal.FlagRepo),
-		File:   c.String("file"),
-		Path:   c.String("path"),
-		Ref:    c.String("ref"),
+		Action:   validateAction,
+		Org:      c.String(internal.FlagOrg),
+		Repo:     c.String(internal.FlagRepo),
+		File:     c.String("file"),
+		Path:     c.String("path"),
+		Ref:      c.String("ref"),
+		Template: c.Bool("template"),
 	}
 
 	// validate pipeline configuration

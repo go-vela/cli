@@ -1,6 +1,6 @@
 module github.com/go-vela/cli
 
-replace github.com/go-vela/types => /Users/jordansussman/git/github/go-vela/types
+replace github.com/go-vela/types => github.com/JordanSussman/types v0.1.2-0.20201202154222-3231298c44c8
 
 go 1.13
 

@@ -6,9 +6,12 @@ package pipeline
 
 import (
 	"flag"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/go-vela/compiler/compiler/native"
+	"github.com/go-vela/mock/server"
+	"github.com/go-vela/sdk-go/vela"
 
 	"github.com/urfave/cli/v2"
 )
@@ -19,6 +22,24 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		failure bool
 		config  *Config
 	}{
+		{
+			failure: false,
+			config: &Config{
+				Action: "compile",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "expand",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "",
+			},
+		},
 		{
 			failure: false,
 			config: &Config{
@@ -37,11 +58,38 @@ func TestPipeline_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: false,
+			config: &Config{
+				Action: "view",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "",
+			},
+		},
+		{
 			failure: true,
 			config: &Config{
 				Action: "generate",
 				File:   "",
 				Type:   "",
+			},
+		},
+		{
+			failure: true,
+			config: &Config{
+				Action: "view",
+				Org:    "",
+				Repo:   "octocat",
+				Output: "",
+			},
+		},
+		{
+			failure: true,
+			config: &Config{
+				Action: "view",
+				Org:    "github",
+				Repo:   "",
+				Output: "",
 			},
 		},
 	}
@@ -64,7 +112,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 	}
 }
 
-func TestPipeline_Config_ValidateFile(t *testing.T) {
+func TestPipeline_Config_ValidateLocal(t *testing.T) {
 	// setup types
 	c := cli.NewContext(nil, flag.NewFlagSet("test", 0), nil)
 
@@ -119,18 +167,107 @@ func TestPipeline_Config_ValidateFile(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.ValidateFile(client)
+		err := test.config.ValidateLocal(client)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("ValidateFile should have returned err")
+				t.Errorf("ValidateLocal should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("ValidateFile returned err: %v", err)
+			t.Errorf("ValidateLocal returned err: %v", err)
+		}
+	}
+}
+
+func TestPipeline_Config_ValidateRemote(t *testing.T) {
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
+
+	// create a vela client
+	client, err := vela.NewClient(s.URL, nil)
+	if err != nil {
+		t.Errorf("unable to create client: %v", err)
+	}
+
+	// setup tests
+	tests := []struct {
+		failure bool
+		config  *Config
+	}{
+		{
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "dump",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "json",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "spew",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				Org:    "github",
+				Repo:   "octocat",
+				Output: "yaml",
+			},
+		},
+		{
+			failure: true,
+			config: &Config{
+				Action: "validate",
+				Org:    "github",
+				Repo:   "not-found",
+				Output: "",
+			},
+		},
+	}
+
+	// run tests
+	for _, test := range tests {
+		err := test.config.ValidateRemote(client)
+
+		if test.failure {
+			if err == nil {
+				t.Errorf("ValidateRemote should have returned err")
+			}
+
+			continue
+		}
+
+		if err != nil {
+			t.Errorf("ValidateRemote returned err: %v", err)
 		}
 	}
 }

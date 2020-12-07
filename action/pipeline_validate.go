@@ -84,6 +84,6 @@ func pipelineValidate(c *cli.Context) error {
 
 	// execute the validate file call for the pipeline configuration
 	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateFile
-	return p.ValidateFile(client)
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
+	return p.ValidateLocal(client)
 }

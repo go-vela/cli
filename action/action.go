@@ -12,6 +12,12 @@ const (
 	// chownAction defines the action for changing ownership of a resource.
 	chownAction = "chown"
 
+	// compileAction defines the action for compiling a resource.
+	compileAction = "compile"
+
+	// expandAction defines the action for expanding a resource.
+	expandAction = "expand"
+
 	// generateAction defines the action for producing a resource.
 	generateAction = "generate"
 

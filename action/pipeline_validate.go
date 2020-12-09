@@ -8,6 +8,8 @@ import (
 	"fmt"
 
 	"github.com/go-vela/cli/action/pipeline"
+	"github.com/go-vela/cli/internal"
+	"github.com/go-vela/cli/internal/client"
 
 	"github.com/go-vela/compiler/compiler/native"
 
@@ -21,6 +23,21 @@ var PipelineValidate = &cli.Command{
 	Usage:       "Validate a Vela pipeline",
 	Action:      pipelineValidate,
 	Flags: []cli.Flag{
+
+		// Repo Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
+			Name:    internal.FlagOrg,
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
+			Name:    internal.FlagRepo,
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the pipeline",
+		},
 
 		// Pipeline Flags
 
@@ -37,16 +54,31 @@ var PipelineValidate = &cli.Command{
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REF", "PIPELINE_REF"},
+			Name:    "ref",
+			Usage:   "provide the repository reference for the pipeline",
+			Value:   "master",
+		},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_TEMPLATE", "PIPELINE_TEMPLATE"},
+			Name:    "template",
+			Usage:   "enables validating a pipeline with templates",
+			Value:   true,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Validate a Vela pipeline.
+  1. Validate a local Vela pipeline.
     $ {{.HelpName}}
-  2. Validate a Vela pipeline in a nested directory.
+  2. Validate a local Vela pipeline in a nested directory.
     $ {{.HelpName}} --path nested/path/to/dir
-  3. Validate a Vela pipeline in a specific directory.
+  3. Validate a local Vela pipeline in a specific directory.
     $ {{.HelpName}} --path /absolute/full/path/to/dir
-
+  4. Validate a remote pipeline for a repository.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo
+  5. Validate a remote pipeline for a repository with json output.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/cli/pipeline/validate/
@@ -57,10 +89,8 @@ DOCUMENTATION:
 // input and create the object used to
 // verify a pipeline.
 func pipelineValidate(c *cli.Context) error {
-	// create a compiler client
-	//
-	// https://godoc.org/github.com/go-vela/compiler/compiler/native#New
-	client, err := native.New(c)
+	// load variables from the config file
+	err := load(c)
 	if err != nil {
 		return err
 	}
@@ -69,9 +99,13 @@ func pipelineValidate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action: validateAction,
-		File:   c.String("file"),
-		Path:   c.String("path"),
+		Action:   validateAction,
+		Org:      c.String(internal.FlagOrg),
+		Repo:     c.String(internal.FlagRepo),
+		File:     c.String("file"),
+		Path:     c.String("path"),
+		Ref:      c.String("ref"),
+		Template: c.Bool("template"),
 	}
 
 	// validate pipeline configuration
@@ -82,7 +116,31 @@ func pipelineValidate(c *cli.Context) error {
 		return err
 	}
 
-	// execute the validate file call for the pipeline configuration
+	// check if pipeline org is provided
+	if len(p.Org) > 0 && len(p.Repo) > 0 {
+		// parse the Vela client from the context
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
+		client, err := client.Parse(c)
+		if err != nil {
+			return err
+		}
+
+		// execute the validate remote call for the pipeline configuration
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateRemote
+		return p.ValidateRemote(client)
+	}
+
+	// create a compiler client
+	//
+	// https://godoc.org/github.com/go-vela/compiler/compiler/native#New
+	client, err := native.New(c)
+	if err != nil {
+		return err
+	}
+
+	// execute the validate local call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
 	return p.ValidateLocal(client)

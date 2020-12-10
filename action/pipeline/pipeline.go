@@ -8,6 +8,9 @@ package pipeline
 // to perform pipeline related requests with Vela.
 type Config struct {
 	Action   string
+	Org      string
+	Repo     string
+	Ref      string
 	File     string
 	Path     string
 	Type     string

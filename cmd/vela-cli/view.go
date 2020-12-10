@@ -44,6 +44,11 @@ var viewCmds = &cli.Command{
 		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#LogView
 		action.LogView,
 
+		// add the sub command for inspecting a pipeline
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#PipelineView
+		action.PipelineView,
+
 		// add the sub command for inspecting a repository
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#RepoView

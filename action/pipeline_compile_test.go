@@ -10,10 +10,11 @@ import (
 	"testing"
 
 	"github.com/go-vela/mock/server"
+
 	"github.com/urfave/cli/v2"
 )
 
-func TestAction_PipelineValidate(t *testing.T) {
+func TestAction_PipelineCompile(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -29,11 +30,6 @@ func TestAction_PipelineValidate(t *testing.T) {
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("output", "json", "doc")
 
-	// setup flags
-	localSet := flag.NewFlagSet("test", 0)
-	localSet.String("file", "generate.yml", "doc")
-	localSet.String("path", "pipeline/testdata", "doc")
-
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -42,10 +38,6 @@ func TestAction_PipelineValidate(t *testing.T) {
 		{
 			failure: false,
 			set:     fullSet,
-		},
-		{
-			failure: false,
-			set:     localSet,
 		},
 		{
 			failure: true,
@@ -59,18 +51,18 @@ func TestAction_PipelineValidate(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := pipelineValidate(cli.NewContext(nil, test.set, nil))
+		err := pipelineCompile(cli.NewContext(nil, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("pipelineValidate should have returned err")
+				t.Errorf("pipelineCompile should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("pipelineValidate returned err: %v", err)
+			t.Errorf("pipelineCompile returned err: %v", err)
 		}
 	}
 }

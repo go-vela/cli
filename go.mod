@@ -9,8 +9,8 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/go-vela/compiler v0.6.0
-	github.com/go-vela/mock v0.6.0
-	github.com/go-vela/sdk-go v0.6.0
+	github.com/go-vela/mock v0.6.1-0.20201117151110-522ea7d3ede0
+	github.com/go-vela/sdk-go v0.6.1-0.20201203165423-4f2885bbeb93
 	github.com/go-vela/types v0.6.1-0.20201208161822-ed8b4140a657
 	github.com/gosuri/uitable v0.0.3
 	github.com/kr/pretty v0.2.0 // indirect
@@ -18,7 +18,7 @@ require (
 	github.com/manifoldco/promptui v0.7.0
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
-	github.com/sirupsen/logrus v1.6.0
+	github.com/sirupsen/logrus v1.7.0
 	github.com/spf13/afero v1.3.0
 	github.com/stretchr/testify v1.5.1 // indirect
 	github.com/urfave/cli/v2 v2.2.0

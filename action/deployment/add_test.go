@@ -92,7 +92,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 				Target:      "production",
 				Task:        "deploy:vela",
 				Output:      "yaml",
-				Payload:     []string{"foo=test1", "bar=test2"},
+				Parameters:  []string{"foo=test1", "bar=test2"},
 			},
 		},
 		{
@@ -106,7 +106,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 				Target:      "production",
 				Task:        "deploy:vela",
 				Output:      "yaml",
-				Payload:     []string{"badinput"},
+				Parameters:  []string{"badinput"},
 			},
 		},
 	}

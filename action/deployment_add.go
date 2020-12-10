@@ -67,10 +67,10 @@ var DeploymentAdd = &cli.Command{
 			Value:   "deploy:vela",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_PAYLOAD", "DEPLOYMENT_PAYLOAD"},
-			Name:    "payload",
+			EnvVars: []string{"VELA_PARAMETER", "DEPLOYMENT_PARAMETER"},
+			Name:    "parameter",
 			Aliases: []string{"p"},
-			Usage:   "provide the payload for the deployment",
+			Usage:   "provide the parameter(s) within `key=value` format for the deployment",
 		},
 
 		// Output Flags
@@ -94,8 +94,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --ref 48afb5bdc41ad69bf22588491333f7cf71135163
   5. Add a deployment for a repository with a specific description.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
-  6. Add a deployment for a repository with a specific payload.
-    $ {{.HelpName}} --org MyOrg --repo MyRep --payload 'key=value'
+  6. Add a deployment for a repository with two parameters.
+    $ {{.HelpName}} --org MyOrg --repo MyRep --parameter 'key=value' --parameter 'foo=bar'
   7. Add a deployment for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
@@ -135,7 +135,7 @@ func deploymentAdd(c *cli.Context) error {
 		Target:      c.String("target"),
 		Task:        c.String("task"),
 		Output:      c.String(internal.FlagOutput),
-		Payload:     c.StringSlice("payload"),
+		Parameters:  c.StringSlice("parameter"),
 	}
 
 	// validate deployment configuration

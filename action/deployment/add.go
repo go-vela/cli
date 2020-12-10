@@ -45,10 +45,10 @@ func (c *Config) Add(client *vela.Client) error {
 		Description: &c.Description,
 	}
 
-	// check if the payload is present
-	if len(c.Payload) != 0 {
-		// convert the payload into map[string]string
-		payload, err := parseKeyValue(c.Payload)
+	// check if the user provided any parameters
+	if len(c.Parameters) != 0 {
+		// convert the parameters into map[string]string format
+		payload, err := parseKeyValue(c.Parameters)
 		if err != nil {
 			return err
 		}

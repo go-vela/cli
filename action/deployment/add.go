@@ -23,7 +23,7 @@ func parseKeyValue(input []string) (raw.StringSliceMap, error) {
 	payload := raw.StringSliceMap{}
 	for _, i := range input {
 		parts := strings.SplitN(i, "=", 2) //nolint
-		if len(parts) != 2 {
+		if len(parts) != 2 {               //nolint
 			return nil, fmt.Errorf("%s is not in key=value format", i)
 		}
 		payload[parts[0]] = parts[1]

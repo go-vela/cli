@@ -11,7 +11,7 @@ require (
 	github.com/go-vela/compiler v0.6.0
 	github.com/go-vela/mock v0.6.1-0.20201117151110-522ea7d3ede0
 	github.com/go-vela/sdk-go v0.6.1-0.20201203165423-4f2885bbeb93
-	github.com/go-vela/types v0.6.1-0.20201019123446-226d0cc72538
+	github.com/go-vela/types v0.6.1-0.20201208161822-ed8b4140a657
 	github.com/gosuri/uitable v0.0.3
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/lunixbochs/vtclean v1.0.0 // indirect

@@ -67,7 +67,7 @@ var DeploymentAdd = &cli.Command{
 			Value:   "deploy:vela",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_PARAMETER", "DEPLOYMENT_PARAMETER"},
+			EnvVars: []string{"VELA_PARAMETERS", "DEPLOYMENT_PARAMETERS"},
 			Name:    "parameter",
 			Aliases: []string{"p"},
 			Usage:   "provide the parameter(s) within `key=value` format for the deployment",
@@ -95,7 +95,7 @@ EXAMPLES:
   5. Add a deployment for a repository with a specific description.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
   6. Add a deployment for a repository with two parameters.
-    $ {{.HelpName}} --org MyOrg --repo MyRep --parameter 'key=value' --parameter 'foo=bar'
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --parameter 'key=value' --parameter 'foo=bar'
   7. Add a deployment for a repository when config or environment variables are set.
     $ {{.HelpName}}
 

@@ -13,7 +13,7 @@ import (
 // restartCmds defines the commands for restarting resources.
 var restartCmds = &cli.Command{
 	Name:                   "restart",
-	Category:               "Pipeline Management",
+	Category:               "Resource Management",
 	Aliases:                []string{"rs"},
 	Description:            "Use this command to restart a resource for Vela.",
 	Usage:                  "Restart a resource for Vela via subcommands",

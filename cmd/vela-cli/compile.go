@@ -13,7 +13,7 @@ import (
 // compileCmds defines the commands for compiling resources.
 var compileCmds = &cli.Command{
 	Name:                   "compile",
-	Category:               "Resource Management",
+	Category:               "Pipeline Management",
 	Description:            "Use this command to compile a resource for Vela.",
 	Usage:                  "Compile a resource for Vela via subcommands",
 	UseShortOptionHandling: true,

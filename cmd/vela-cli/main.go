@@ -50,6 +50,7 @@ func main() {
 		addCmds,
 		chownCmds,
 		compileCmds,
+		execCmds,
 		expandCmds,
 		generateCmds,
 		getCmds,

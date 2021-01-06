@@ -15,6 +15,9 @@ const (
 	// compileAction defines the action for compiling a resource.
 	compileAction = "compile"
 
+	// execAction defines the action for executing a resource.
+	execAction = "exec"
+
 	// expandAction defines the action for expanding a resource.
 	expandAction = "expand"
 

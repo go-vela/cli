@@ -15,7 +15,7 @@ require (
 	github.com/gosuri/uitable v0.0.4
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
-	github.com/manifoldco/promptui v0.7.0
+	github.com/manifoldco/promptui v0.8.0
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
 	github.com/sirupsen/logrus v1.7.0

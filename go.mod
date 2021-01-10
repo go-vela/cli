@@ -19,7 +19,7 @@ require (
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
 	github.com/sirupsen/logrus v1.7.0
-	github.com/spf13/afero v1.3.0
+	github.com/spf13/afero v1.5.1
 	github.com/stretchr/testify v1.5.1 // indirect
 	github.com/urfave/cli/v2 v2.2.0
 	gopkg.in/yaml.v2 v2.3.0

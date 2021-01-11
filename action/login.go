@@ -32,6 +32,9 @@ var Login = &cli.Command{
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
 		},
+
+		// User Flags
+
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
 			Name:    internal.FlagAPIAccessToken,
@@ -50,22 +53,13 @@ var Login = &cli.Command{
 			Aliases: []string{"t"},
 			Usage:   "token used for communication with the Vela server",
 		},
-
-		// User Flags
-
-		// &cli.StringFlag{
-		// 	EnvVars: []string{"VELA_TOKEN", "LOGIN_TOKEN"},
-		// 	Name:    "token",
-		// 	Aliases: []string{"t"},
-		// 	Usage:   "use a personal access token to authenticate",
-		// },
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela with terminal prompts.
     $ {{.HelpName}} --api.addr https://vela.example.com
-  2. Login to Vela using a supplied Personal Access Token
-    $ {{.HelpName}} --token foo 
+  3. Login to Vela using a supplied Personal Access Token
+    $ {{.HelpName}} --token foo
 
 DOCUMENTATION:
 

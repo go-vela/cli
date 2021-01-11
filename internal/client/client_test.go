@@ -18,6 +18,11 @@ func TestClient_Parse(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
+	// create a simple sample app
+	a := new(cli.App)
+	a.Name = "vela"
+	a.Version = "v1.0.0"
+
 	// setup flags
 	serverSet := flag.NewFlagSet("test", 0)
 	serverSet.String("api.addr", s.URL, "doc")
@@ -29,6 +34,11 @@ func TestClient_Parse(t *testing.T) {
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token", "superSecretToken", "doc")
 
+	fullSetTokenSet := flag.NewFlagSet("test", 0)
+	fullSetTokenSet.String("api.addr", s.URL, "doc")
+	fullSetTokenSet.String("api.token.access", "superSecretAccessToken", "doc")
+	fullSetTokenSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -37,6 +47,10 @@ func TestClient_Parse(t *testing.T) {
 		{
 			failure: false,
 			set:     fullSet,
+		},
+		{
+			failure: false,
+			set:     fullSetTokenSet,
 		},
 		{
 			failure: true,
@@ -50,7 +64,7 @@ func TestClient_Parse(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		_, err := Parse(cli.NewContext(nil, test.set, nil))
+		_, err := Parse(cli.NewContext(a, test.set, nil))
 
 		if test.failure {
 			if err == nil {

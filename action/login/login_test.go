@@ -18,7 +18,7 @@ func TestLogin_Config_Login(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, nil)
+	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}
@@ -31,17 +31,14 @@ func TestLogin_Config_Login(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:   "login",
-				Username: "octocat",
-				Password: "superSecretPassword",
-				OTP:      "123456",
+				Action: "login",
 			},
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Login(client)
+		err := test.config.Login(client, "http://localhost:8080")
 
 		if test.failure {
 			if err == nil {

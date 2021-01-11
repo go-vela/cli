@@ -76,6 +76,18 @@ func (c *Config) Remove() error {
 			config.API.Token = ""
 		}
 
+		// check if API access token flag should be removed
+		if strings.EqualFold(flag, internal.FlagAPIAccessToken) {
+			// set the API access token field to empty in config
+			config.API.AccessToken = ""
+		}
+
+		// check if API refresh token flag should be removed
+		if strings.EqualFold(flag, internal.FlagAPIRefreshToken) {
+			// set the API refresh token field to empty in config
+			config.API.RefreshToken = ""
+		}
+
 		// check if API version flag should be removed
 		if strings.EqualFold(flag, internal.FlagAPIVersion) {
 			// set the API version field to empty in config

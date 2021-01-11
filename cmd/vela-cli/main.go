@@ -91,6 +91,18 @@ func main() {
 			Usage:   "token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN", "SERVER_ACCESS_TOKEN"},
+			Name:    internal.FlagAPIAccessToken,
+			Aliases: []string{"at"},
+			Usage:   "access token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN", "SERVER_REFRESH_TOKEN"},
+			Name:    internal.FlagAPIRefreshToken,
+			Aliases: []string{"rt"},
+			Usage:   "refresh access token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION", "API_VERSION"},
 			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},

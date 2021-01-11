@@ -30,6 +30,18 @@ var ConfigUpdate = &cli.Command{
 			Usage:   "update the API addr in the config file",
 		},
 		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
+			Name:    internal.FlagAPIAccessToken,
+			Aliases: []string{"at"},
+			Usage:   "access token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"},
+			Name:    internal.FlagAPIRefreshToken,
+			Aliases: []string{"rt"},
+			Usage:   "refresh token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
@@ -125,6 +137,8 @@ func configUpdate(c *cli.Context) error {
 	// create variables from flags provided
 	addr := c.String(internal.FlagAPIAddress)
 	token := c.String(internal.FlagAPIToken)
+	accessToken := c.String(internal.FlagAPIAccessToken)
+	refreshToken := c.String(internal.FlagAPIRefreshToken)
 	version := c.String(internal.FlagAPIVersion)
 	level := c.String(internal.FlagLogLevel)
 	output := c.String(internal.FlagOutput)
@@ -141,6 +155,16 @@ func configUpdate(c *cli.Context) error {
 	// check if the API token flag should be modified
 	if len(token) > 0 {
 		conf.UpdateFlags[internal.FlagAPIToken] = token
+	}
+
+	// check if the API access token flag should be modified
+	if len(accessToken) > 0 {
+		conf.UpdateFlags[internal.FlagAPIAccessToken] = accessToken
+	}
+
+	// check if the API refresh token flag should be modified
+	if len(refreshToken) > 0 {
+		conf.UpdateFlags[internal.FlagAPIRefreshToken] = refreshToken
 	}
 
 	// check if the API version flag should be modified

@@ -2,9 +2,14 @@ module github.com/go-vela/cli
 
 go 1.13
 
+replace github.com/go-vela/types => ../types
+
+replace github.com/go-vela/sdk-go => ../sdk-go
+
 require (
 	github.com/Masterminds/semver/v3 v3.1.1
 	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3
+	github.com/cli/browser v1.0.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-vela/compiler v0.6.1

@@ -7,17 +7,19 @@ package config
 // Config represents the configuration necessary
 // to perform config related quests with Vela.
 type Config struct {
-	Action      string
-	File        string
-	Addr        string
-	Token       string
-	Version     string
-	LogLevel    string
-	Org         string
-	Repo        string
-	Engine      string
-	Type        string
-	UpdateFlags map[string]string
-	RemoveFlags []string
-	Output      string
+	Action       string
+	File         string
+	Addr         string
+	Token        string
+	AccessToken  string
+	RefreshToken string
+	Version      string
+	LogLevel     string
+	Org          string
+	Repo         string
+	Engine       string
+	Type         string
+	UpdateFlags  map[string]string
+	RemoveFlags  []string
+	Output       string
 }

@@ -19,6 +19,16 @@ const (
 	// flag when setting the API token.
 	FlagAPIToken = "api.token"
 
+	// FlagAPIAccessToken defines the key for
+	// the flag when setting the API access token.
+	FlagAPIAccessToken = "api.token.access"
+
+	// FlagAPIRefreshToken defines the key for
+	// for the flag when setting the API
+	// refresh token.
+	// nolint:gosec // false negative - not a real token
+	FlagAPIRefreshToken = "api.token.refresh"
+
 	// FlagAPIVersion defines the key for the
 	// flag when setting the API version.
 	FlagAPIVersion = "api.version"

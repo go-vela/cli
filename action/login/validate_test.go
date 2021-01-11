@@ -17,43 +17,31 @@ func TestLogin_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:   "login",
-				Username: "octocat",
-				Password: "superSecretPassword",
+				Action: "login",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:   "login",
-				Username: "octocat",
-				Password: "superSecretPassword",
-				OTP:      "123456",
+				Action: "login",
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action:   "login",
-				Password: "superSecretPassword",
-				OTP:      "123456",
+				Action: "login",
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action:   "login",
-				Username: "octocat",
-				OTP:      "123456",
+				Action: "login",
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action:   "login",
-				Username: "octocat",
-				Password: "superSecretPassword",
-				Retry:    true,
+				Action: "login",
 			},
 		},
 	}

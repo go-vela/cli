@@ -18,7 +18,7 @@ func TestStep_Config_View(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, nil)
+	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}

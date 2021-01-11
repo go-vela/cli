@@ -11,7 +11,7 @@ import (
 )
 
 // validate is a helper function to verify the input provided.
-func validate(address, token string) error {
+func validate(address, token, accessToken, refreshToken string) error {
 	logrus.Debug("validating provided configuration for Vela client")
 
 	// check if client address is set
@@ -19,8 +19,8 @@ func validate(address, token string) error {
 		return fmt.Errorf("no client address provided")
 	}
 
-	// check if client token is set
-	if len(token) == 0 {
+	// check that a token is set
+	if len(token) == 0 && (len(accessToken) == 0 && len(refreshToken) == 0) {
 		return fmt.Errorf("no client token provided")
 	}
 

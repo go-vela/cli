@@ -19,9 +19,11 @@ type ConfigFile struct {
 // populated in the config file to perform requests
 // with Vela.
 type API struct {
-	Address string `yaml:"addr,omitempty"`
-	Token   string `yaml:"token,omitempty"`
-	Version string `yaml:"version,omitempty"`
+	Address      string `yaml:"addr,omitempty"`
+	Token        string `yaml:"token,omitempty"`
+	AccessToken  string `yaml:"access_token,omitempty"`
+	RefreshToken string `yaml:"refresh_token,omitempty"`
+	Version      string `yaml:"version,omitempty"`
 }
 
 // Log represents the log related configuration fields

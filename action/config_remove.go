@@ -31,6 +31,18 @@ var ConfigRemove = &cli.Command{
 			Value:   "false",
 		},
 		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
+			Name:    internal.FlagAPIAccessToken,
+			Aliases: []string{"at"},
+			Usage:   "access token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"},
+			Name:    internal.FlagAPIRefreshToken,
+			Aliases: []string{"rt"},
+			Usage:   "refresh token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
@@ -139,6 +151,16 @@ func configRemove(c *cli.Context) error {
 	// check if the API token flag should be removed
 	if c.Bool(internal.FlagAPIToken) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIToken)
+	}
+
+	// check if the API access token flag should be removed
+	if c.Bool(internal.FlagAPIAccessToken) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIAccessToken)
+	}
+
+	// check if the API refresh token flag should be removed
+	if c.Bool(internal.FlagAPIRefreshToken) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIRefreshToken)
 	}
 
 	// check if the API version flag should be removed

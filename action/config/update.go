@@ -66,6 +66,18 @@ func (c *Config) Update() error {
 			config.API.Token = value
 		}
 
+		// check if API access token flag should be modified
+		if strings.EqualFold(key, internal.FlagAPIAccessToken) {
+			// set the API access token field to value provided
+			config.API.AccessToken = value
+		}
+
+		// check if API refresh token flag should be modified
+		if strings.EqualFold(key, internal.FlagAPIRefreshToken) {
+			// set the API refresh token field to value provided
+			config.API.RefreshToken = value
+		}
+
 		// check if API version flag should be modified
 		if strings.EqualFold(key, internal.FlagAPIVersion) {
 			// set the API version field to value provided

@@ -18,7 +18,7 @@ func TestSecret_Config_Add(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, nil)
+	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}
@@ -156,7 +156,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, nil)
+	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}

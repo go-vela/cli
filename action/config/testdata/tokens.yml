@@ -1,0 +1,13 @@
+api:
+  addr: https://vela-server.localhost
+  access_token: deadbeef
+  refresh_token: deadbeef
+  version: "1"
+log:
+  level: info
+secret:
+  engine: native
+  type: repo
+output: json
+org: github
+repo: octocat

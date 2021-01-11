@@ -20,6 +20,8 @@ func TestConfig_Config_Load(t *testing.T) {
 		&cli.StringFlag{Name: "config"},
 		&cli.StringFlag{Name: "api.addr"},
 		&cli.StringFlag{Name: "api.token"},
+		&cli.StringFlag{Name: "api.token.access"},
+		&cli.StringFlag{Name: "api.token.refresh"},
 		&cli.StringFlag{Name: "api.version"},
 		&cli.StringFlag{Name: "log.level"},
 		&cli.StringFlag{Name: "output"},
@@ -36,6 +38,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", "https://vela-server.localhost", "doc")
 	fullSet.String("api.token", "superSecretToken", "doc")
+	fullSet.String("api.token.access", "superSecretAccessToken", "doc")
+	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("api.version", "1", "doc")
 	fullSet.String("log.level", "info", "doc")
 	fullSet.String("output", "json", "doc")
@@ -86,17 +90,19 @@ func TestConfig_Config_Load(t *testing.T) {
 
 		// create test config for generating file
 		config := &Config{
-			Action:   "generate",
-			File:     test.config.File,
-			Addr:     ctx.String("api.addr"),
-			Token:    ctx.String("api.token"),
-			Version:  ctx.String("api.version"),
-			LogLevel: ctx.String("log.level"),
-			Engine:   ctx.String("secret.engine"),
-			Type:     ctx.String("secret.type"),
-			Output:   ctx.String("output"),
-			Org:      ctx.String("org"),
-			Repo:     ctx.String("repo"),
+			Action:       "generate",
+			File:         test.config.File,
+			Addr:         ctx.String("api.addr"),
+			Token:        ctx.String("api.token"),
+			AccessToken:  ctx.String("api.token.access"),
+			RefreshToken: ctx.String("api.token.refresh"),
+			Version:      ctx.String("api.version"),
+			LogLevel:     ctx.String("log.level"),
+			Engine:       ctx.String("secret.engine"),
+			Type:         ctx.String("secret.type"),
+			Output:       ctx.String("output"),
+			Org:          ctx.String("org"),
+			Repo:         ctx.String("repo"),
 		}
 
 		// generate config file

@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/login"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/sirupsen/logrus"
 
 	"github.com/urfave/cli/v2"
 )
@@ -31,34 +32,40 @@ var Login = &cli.Command{
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
+			Name:    internal.FlagAPIAccessToken,
+			Aliases: []string{"at"},
+			Usage:   "access token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"},
+			Name:    internal.FlagAPIRefreshToken,
+			Aliases: []string{"rt"},
+			Usage:   "refresh token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
+			Name:    internal.FlagAPIToken,
+			Aliases: []string{"t"},
+			Usage:   "token used for communication with the Vela server",
+		},
 
 		// User Flags
 
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_USERNAME", "LOGIN_USERNAME"},
-			Name:    "username",
-			Aliases: []string{"u"},
-			Usage:   "overrides the prompt for a username",
-		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_PASSWORD", "LOGIN_PASSWORD"},
-			Name:    "password",
-			Aliases: []string{"p"},
-			Usage:   "overrides the prompt for a password",
-		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_OTP", "LOGIN_OTP"},
-			Name:    "otp",
-			Aliases: []string{"o"},
-			Usage:   "overrides the prompt for a OTP",
-		},
+		// &cli.StringFlag{
+		// 	EnvVars: []string{"VELA_TOKEN", "LOGIN_TOKEN"},
+		// 	Name:    "token",
+		// 	Aliases: []string{"t"},
+		// 	Usage:   "use a personal access token to authenticate",
+		// },
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela with terminal prompts.
     $ {{.HelpName}} --api.addr https://vela.example.com
-  2. Login to Vela with no prompts for username and password
-    $ {{.HelpName}} --username foo --password bar
+  2. Login to Vela using a supplied Personal Access Token
+    $ {{.HelpName}} --token foo 
 
 DOCUMENTATION:
 
@@ -87,39 +94,9 @@ func runLogin(c *cli.Context) error {
 	// create the login configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config
-	l := &login.Config{
-		Action:   loginAction,
-		Username: c.String("username"),
-		Password: c.String("password"),
-		OTP:      c.String("otp"),
-	}
+	l := &login.Config{}
 
-	// check if username was provided from flags
-	if len(l.Username) == 0 {
-		// prompt user to provide username via terminal input
-		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptUsername
-		err = l.PromptUsername(os.Stdin)
-		if err != nil {
-			return err
-		}
-	}
-
-	// check if password was provided from flags
-	if len(l.Password) == 0 {
-		// prompt user to provide password via terminal input
-		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptPassword
-		err = l.PromptPassword(os.Stdin)
-		if err != nil {
-			return err
-		}
-	}
-
-	// validate login configuration
-	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Validate
-	err = l.Validate()
+	err = l.PromptBrowserConfirm(os.Stdin, c.String(internal.FlagAPIAddress))
 	if err != nil {
 		return err
 	}
@@ -127,38 +104,42 @@ func runLogin(c *cli.Context) error {
 	// execute the login call for the login configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Login
-	err = l.Login(client)
-	if err == nil {
-		// return instantly if no error occurred during the login
-		return nil
-	}
-
-	// check if the retry mechanism is set
-	//
-	// an error might be returned with the retry mechanism set if
-	// the source system Vela is integrated with requires a OTP
-	if !l.Retry {
-		return err
-	}
-
-	// prompt user to provide OTP via terminal input
-	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptOTP
-	err = l.PromptOTP(os.Stdin)
+	err = l.Login(client, c.String(internal.FlagAPIAddress))
 	if err != nil {
 		return err
 	}
 
-	// validate login configuration
-	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Validate
-	err = l.Validate()
+	// no error means above means we have tokens, set them
+	err = c.Set(internal.FlagAPIAccessToken, l.AccessToken)
 	if err != nil {
 		return err
 	}
 
-	// execute the login call for the login configuration
-	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Login
-	return l.Login(client)
+	err = c.Set(internal.FlagAPIRefreshToken, l.RefreshToken)
+	if err != nil {
+		return err
+	}
+
+	// ask to write config
+	err = l.PromptConfigConfirm(os.Stdin)
+	if err != nil {
+		return err
+	}
+
+	// generate new config
+	// ideally, we update the config
+	// but if one doesn't exist, it
+	// currently errors out
+	err = configGenerate(c)
+	if err != nil {
+		return err
+	}
+
+	logrus.Info("configuration successfully created - enjoy")
+	// err = configUpdate(c)
+	// if err != nil {
+	// 	return err
+	// }
+
+	return nil
 }

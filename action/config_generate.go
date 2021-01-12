@@ -30,6 +30,18 @@ var ConfigGenerate = &cli.Command{
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
 		},
 		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
+			Name:    internal.FlagAPIAccessToken,
+			Aliases: []string{"at"},
+			Usage:   "access token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"},
+			Name:    internal.FlagAPIRefreshToken,
+			Aliases: []string{"rt"},
+			Usage:   "refresh token used for communication with the Vela server",
+		},
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
@@ -117,17 +129,19 @@ func configGenerate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
-		Action:   generateAction,
-		File:     c.String(internal.FlagConfig),
-		Addr:     c.String(internal.FlagAPIAddress),
-		Token:    c.String(internal.FlagAPIToken),
-		Version:  c.String(internal.FlagAPIVersion),
-		LogLevel: c.String(internal.FlagLogLevel),
-		Output:   c.String(internal.FlagOutput),
-		Org:      c.String(internal.FlagOrg),
-		Repo:     c.String(internal.FlagRepo),
-		Engine:   c.String(internal.FlagSecretEngine),
-		Type:     c.String(internal.FlagSecretType),
+		Action:       generateAction,
+		File:         c.String(internal.FlagConfig),
+		Addr:         c.String(internal.FlagAPIAddress),
+		Token:        c.String(internal.FlagAPIToken),
+		AccessToken:  c.String(internal.FlagAPIAccessToken),
+		RefreshToken: c.String(internal.FlagAPIRefreshToken),
+		Version:      c.String(internal.FlagAPIVersion),
+		LogLevel:     c.String(internal.FlagLogLevel),
+		Output:       c.String(internal.FlagOutput),
+		Org:          c.String(internal.FlagOrg),
+		Repo:         c.String(internal.FlagRepo),
+		Engine:       c.String(internal.FlagSecretEngine),
+		Type:         c.String(internal.FlagSecretType),
 	}
 
 	// validate config file configuration

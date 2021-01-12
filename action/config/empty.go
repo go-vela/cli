@@ -26,6 +26,16 @@ func (c *ConfigFile) Empty() bool {
 			return false
 		}
 
+		// check if the API access token is set
+		if len(c.API.AccessToken) > 0 {
+			return false
+		}
+
+		// check if the API refresh token is set
+		if len(c.API.RefreshToken) > 0 {
+			return false
+		}
+
 		// check if the API version is set
 		if len(c.API.Version) > 0 {
 			return false

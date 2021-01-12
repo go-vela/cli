@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/go-vela/mock/server"
 
 	"github.com/urfave/cli/v2"
@@ -22,12 +23,14 @@ func TestAction_load(t *testing.T) {
 	authSet := flag.NewFlagSet("test", 0)
 	authSet.String("config", "config/testdata/empty.yml", "doc")
 	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token", "superSecretToken", "doc")
+	authSet.String("api.token.access", test.TestTokenGood, "doc")
+	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("config", "config/testdata/empty.yml", "doc")
 	fullSet.String("api.addr", "https://vela-server.localhost", "doc")
-	fullSet.String("api.token", "superSecretToken", "doc")
+	fullSet.String("api.token.access", test.TestTokenGood, "doc")
+	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("api.version", "1", "doc")
 	fullSet.String("log.level", "info", "doc")
 	fullSet.String("output", "json", "doc")
@@ -57,7 +60,7 @@ func TestAction_load(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := load(cli.NewContext(nil, test.set, nil))
+		err := load(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

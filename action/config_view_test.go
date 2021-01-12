@@ -33,7 +33,7 @@ func TestAction_ConfigView(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := configView(cli.NewContext(nil, test.set, nil))
+		err := configView(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/go-vela/mock/server"
 
 	"github.com/urfave/cli/v2"
@@ -21,7 +22,8 @@ func TestAction_RepoGet(t *testing.T) {
 	// setup flags
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token", "superSecretToken", "doc")
+	fullSet.String("api.token.access", test.TestTokenGood, "doc")
+	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.Int("page", 1, "doc")
 	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
@@ -43,7 +45,7 @@ func TestAction_RepoGet(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := repoGet(cli.NewContext(nil, test.set, nil))
+		err := repoGet(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

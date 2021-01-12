@@ -42,7 +42,7 @@ func TestAction_ConfigUpdate(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := configUpdate(cli.NewContext(nil, test.set, nil))
+		err := configUpdate(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

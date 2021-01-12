@@ -28,9 +28,11 @@ func (c *Config) Generate() error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#ConfigFile
 	config := &ConfigFile{
 		API: &API{
-			Address: c.Addr,
-			Token:   c.Token,
-			Version: c.Version,
+			Address:      c.Addr,
+			Token:        c.Token,
+			AccessToken:  c.AccessToken,
+			RefreshToken: c.RefreshToken,
+			Version:      c.Version,
 		},
 		Log: &Log{
 			Level: c.LogLevel,

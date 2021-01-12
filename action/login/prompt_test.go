@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func TestLogin_Config_PromptUsername(t *testing.T) {
+func TestLogin_Config_PromptBrowserConfirm(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -24,10 +24,10 @@ func TestLogin_Config_PromptUsername(t *testing.T) {
 			config: &Config{
 				Action: "login",
 			},
-			data: "foo\n",
+			data: "y\n",
 		},
 		{
-			failure: true,
+			failure: false,
 			config: &Config{
 				Action: "login",
 			},
@@ -38,13 +38,13 @@ func TestLogin_Config_PromptUsername(t *testing.T) {
 			config: &Config{
 				Action: "login",
 			},
-			data: "foo",
+			data: "n\n",
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		in, err := ioutil.TempFile("/tmp", "username")
+		in, err := ioutil.TempFile("/tmp", "browser")
 		if err != nil {
 			t.Errorf("unable to create temporary file: %v", err)
 		}
@@ -62,23 +62,23 @@ func TestLogin_Config_PromptUsername(t *testing.T) {
 
 		defer in.Close()
 
-		err = test.config.PromptUsername(in)
+		err = test.config.PromptBrowserConfirm(in)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("PromptUsername should have returned err")
+				t.Errorf("PromptBrowserConfirm should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("PromptUsername returned err: %v", err)
+			t.Errorf("PromptBrowserConfirm returned err: %v", err)
 		}
 	}
 }
 
-func TestLogin_Config_PromptPassword(t *testing.T) {
+func TestLogin_Config_PromptConfigConfirm(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -90,7 +90,7 @@ func TestLogin_Config_PromptPassword(t *testing.T) {
 			config: &Config{
 				Action: "login",
 			},
-			data: "foo\n",
+			data: "y\n",
 		},
 		{
 			failure: true,
@@ -104,80 +104,13 @@ func TestLogin_Config_PromptPassword(t *testing.T) {
 			config: &Config{
 				Action: "login",
 			},
-			data: "foo",
+			data: "n\n",
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		in, err := ioutil.TempFile("/tmp", "password")
-		if err != nil {
-			t.Errorf("unable to create temporary file: %v", err)
-		}
-
-		defer os.Remove(in.Name())
-
-		_, err = in.Write([]byte(test.data))
-		if err != nil {
-			t.Errorf("unable to write content to temporary file: %v", err)
-		}
-
-		_, err = in.Seek(0, 0)
-		if err != nil {
-			t.Errorf("unable to seek temporary file: %v", err)
-		}
-
-		defer in.Close()
-
-		err = test.config.PromptPassword(in)
-
-		if test.failure {
-			if err == nil {
-				t.Errorf("PromptPassword should have returned err")
-			}
-
-			continue
-		}
-
-		if err != nil {
-			t.Errorf("PromptPassword returned err: %v", err)
-		}
-	}
-}
-
-func TestLogin_Config_PromptOTP(t *testing.T) {
-	// setup tests
-	tests := []struct {
-		failure bool
-		config  *Config
-		data    string
-	}{
-		{
-			failure: false,
-			config: &Config{
-				Action: "login",
-			},
-			data: "foo\n",
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "login",
-			},
-			data: "\n",
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "login",
-			},
-			data: "foo",
-		},
-	}
-
-	// run tests
-	for _, test := range tests {
-		in, err := ioutil.TempFile("/tmp", "otp")
+		in, err := ioutil.TempFile("/tmp", "config")
 		if err != nil {
 			t.Errorf("unable to create temporary file: %v", err)
 		}
@@ -195,18 +128,18 @@ func TestLogin_Config_PromptOTP(t *testing.T) {
 
 		defer in.Close()
 
-		err = test.config.PromptOTP(in)
+		err = test.config.PromptConfigConfirm(in)
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("PromptOTP should have returned err")
+				t.Errorf("PromptConfigConfirm should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("PromptOTP returned err: %v", err)
+			t.Errorf("PromptConfigConfirm returned err: %v", err)
 		}
 	}
 }

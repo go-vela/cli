@@ -85,7 +85,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 		flags = append(flags, ctx.Command.VisibleFlags()...)
 	}
 
-	// iterate thro ugh all available flags in the current context
+	// iterate through all available flags in the current context
 	for _, flag := range flags {
 		// capture string value for flag
 		f := strings.Join(flag.Names(), " ")
@@ -111,6 +111,34 @@ func (c *Config) Load(ctx *cli.Context) error {
 			len(config.API.Token) > 0 {
 			// set the API token field to value from config
 			err = ctx.Set(internal.FlagAPIToken, config.API.Token)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the API access token flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagAPIAccessToken) &&
+			!ctx.IsSet(internal.FlagAPIAccessToken) &&
+			len(config.API.AccessToken) > 0 {
+			// set the API access token field to value from config
+			err = ctx.Set(internal.FlagAPIAccessToken, config.API.AccessToken)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the API refresh token flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagAPIRefreshToken) &&
+			!ctx.IsSet(internal.FlagAPIRefreshToken) &&
+			len(config.API.RefreshToken) > 0 {
+			// set the API refresh token field to value from config
+			err = ctx.Set(internal.FlagAPIRefreshToken, config.API.RefreshToken)
 			if err != nil {
 				return err
 			}

@@ -42,7 +42,7 @@ func TestAction_ConfigRemove(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := configRemove(cli.NewContext(nil, test.set, nil))
+		err := configRemove(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

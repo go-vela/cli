@@ -13,92 +13,42 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// PromptUsername asks the user to provide a username via
-// terminal input based off the provided configuration.
-func (c *Config) PromptUsername(in io.ReadCloser) error {
-	logrus.Debug("executing prompt for username for login configuration")
+// PromptBrowserConfirm provides a prompt to confirm opening a browser window.
+func (c *Config) PromptBrowserConfirm(in io.ReadCloser) error {
+	logrus.Debug("executing prompt to confirm opening a browser")
 
-	// create variable to store errors
-	var err error
+	txtPressEnter := promptui.Styler(promptui.FGBold)("Press Enter")
 
-	// create the prompt for a username
 	p := promptui.Prompt{
-		Label: "Please enter a username: ",
-		Stdin: in,
+		Label: fmt.Sprintf("Open %s in your browser and complete authentication (%s to confirm)",
+			c.Address, txtPressEnter),
+		IsConfirm: true,
+		Default:   "y",
+		Stdin:     in,
 	}
 
-	// run the prompt to capture the username from the input
-	c.Username, err = p.Run()
+	_, err := p.Run()
 	if err != nil {
 		return err
-	}
-
-	logrus.Trace("checking username input provided")
-
-	// check if login username is set
-	if len(c.Username) == 0 {
-		return fmt.Errorf("no login username provided")
 	}
 
 	return nil
 }
 
-// PromptPassword asks the user to provide a password via
-// terminal input based off the provided configuration.
-func (c *Config) PromptPassword(in io.ReadCloser) error {
-	logrus.Debug("executing prompt for password for login configuration")
+// PromptConfigConfirm provides a prompt to confirm config generation.
+func (c *Config) PromptConfigConfirm(in io.ReadCloser) error {
+	logrus.Debug("executing prompt to confirm config write")
 
-	// create variable to store errors
-	var err error
-
-	// create the prompt for a password
 	p := promptui.Prompt{
-		Label: "Please enter a password: ",
-		Mask:  '*',
-		Stdin: in,
+		Label:     "Ready to write config. Any existing config will be overwritten. Continue",
+		IsConfirm: true,
+		Default:   "n",
+		Stdin:     in,
 	}
 
-	// run the prompt to capture the password from the input
-	c.Password, err = p.Run()
+	_, err := p.Run()
 	if err != nil {
 		return err
-	}
-
-	logrus.Trace("checking password input provided")
-
-	// check if login password is set
-	if len(c.Password) == 0 {
-		return fmt.Errorf("no login password provided")
-	}
-
-	return nil
-}
-
-// PromptOTP asks the user to provide a OTP via
-// terminal input based off the provided configuration.
-func (c *Config) PromptOTP(in io.ReadCloser) error {
-	logrus.Debug("executing prompt for one time password (OTP) for login configuration")
-
-	// create variable to store errors
-	var err error
-
-	// create the prompt for a OTP
-	p := promptui.Prompt{
-		Label: "Please enter a one time password (OTP): ",
-		Stdin: in,
-	}
-
-	// run the prompt to capture the OTP from the input
-	c.OTP, err = p.Run()
-	if err != nil {
-		return err
-	}
-
-	logrus.Trace("checking one time password (OTP) input provided")
-
-	// check if login OTP is set
-	if len(c.OTP) == 0 {
-		return fmt.Errorf("no login one time password (OTP) provided")
 	}
 
 	return nil

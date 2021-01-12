@@ -17,6 +17,8 @@ func TestAction_ConfigGenerate(t *testing.T) {
 	set.String("config", "config/testdata/generate.yml", "doc")
 	set.String("api.addr", "https://vela-server.localhost", "doc")
 	set.String("api.token", "superSecretToken", "doc")
+	set.String("api.token.access", "superSecretAccessToken", "doc")
+	set.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	set.String("api.version", "1", "doc")
 	set.String("log.level", "info", "doc")
 	set.String("output", "json", "doc")
@@ -42,7 +44,7 @@ func TestAction_ConfigGenerate(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := configGenerate(cli.NewContext(nil, test.set, nil))
+		err := configGenerate(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

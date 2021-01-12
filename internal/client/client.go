@@ -6,6 +6,7 @@ package client
 
 import (
 	"fmt"
+	"runtime"
 
 	"github.com/go-vela/cli/internal"
 
@@ -28,24 +29,43 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 	// capture the token from the context
 	token := c.String(internal.FlagAPIToken)
 
+	// capture the access token from the context
+	accessToken := c.String(internal.FlagAPIAccessToken)
+
+	// capture the refresh token from the context
+	refreshToken := c.String(internal.FlagAPIRefreshToken)
+
 	// validate the provided configuration
-	err := validate(address, token)
+	err := validate(address, token, accessToken, refreshToken)
 	if err != nil {
 		return nil, err
 	}
 
 	logrus.Tracef("creating Vela client for %s", address)
 
+	// create the client id; will be in the form of
+	// "vela; <version>; <os>; <architecture>"
+	// used in user agent string in the sdk
+	clientID := fmt.Sprintf("%s; %s; %s; %s",
+		c.App.Name, c.App.Version, runtime.GOOS, runtime.GOARCH)
+
 	// create a vela client from the provided address
-	client, err := vela.NewClient(address, nil)
+	client, err := vela.NewClient(address, clientID, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	logrus.Trace("setting token for Vela client")
 
-	// set the authentication mechanism from the provided token
-	client.Authentication.SetTokenAuth(token)
+	// pass the tokens to the client instance
+	if len(accessToken) > 0 && len(refreshToken) > 0 {
+		client.Authentication.SetAccessAndRefreshAuth(accessToken, refreshToken)
+	}
+
+	// pass the token to the client instance
+	if len(token) > 0 {
+		client.Authentication.SetTokenAuth(token)
+	}
 
 	return client, nil
 }
@@ -67,5 +87,5 @@ func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
 	logrus.Tracef("creating Vela client for %s", address)
 
 	// create a vela client from the provided address
-	return vela.NewClient(address, nil)
+	return vela.NewClient(address, c.App.Name, nil)
 }

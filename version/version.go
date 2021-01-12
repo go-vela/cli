@@ -32,6 +32,9 @@ var (
 
 // New creates a new version object for Vela that is used throughout the application.
 func New() *version.Version {
+	if len(Tag) == 0 {
+		Tag = "v0.0.0"
+	}
 	v, err := semver.NewVersion(Tag)
 	if err != nil {
 		fmt.Println(fmt.Errorf("unable to parse semantic version for %s: %v", Tag, err))

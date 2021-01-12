@@ -21,7 +21,7 @@ func (c *Config) Cancel(client *vela.Client) error {
 	// send API call to cancel a build
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Cancel
-	build, _, err := client.Build.Cancel(c.Org, c.Repo, c.Number)
+	build, _, err := client.Build.Restart(c.Org, c.Repo, c.Number)
 	if err != nil {
 		return err
 	}

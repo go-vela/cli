@@ -13,7 +13,7 @@ import (
 // cancelCmds defines the commands for canceling resources.
 var cancelCmds = &cli.Command{
 	Name:                   "cancel",
-	Category:               "Pipeline Management",
+	Category:               "Resource Management",
 	Aliases:                []string{"cx"},
 	Description:            "Use this command to cancel a resource for Vela.",
 	Usage:                  "Cancel a resource for Vela via subcommands",

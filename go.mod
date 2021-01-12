@@ -2,6 +2,8 @@ module github.com/go-vela/cli
 
 go 1.13
 
+replace github.com/go-vela/pkg-executor => ../pkg-executor
+
 require (
 	github.com/Masterminds/semver/v3 v3.1.1
 	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3
@@ -11,6 +13,8 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-vela/compiler v0.6.1-0.20210111222408-a8b5012a5943
 	github.com/go-vela/mock v0.6.1-0.20210111203055-2629f560e9b7
+	github.com/go-vela/pkg-executor v0.0.0-00010101000000-000000000000
+	github.com/go-vela/pkg-runtime v0.6.1-0.20210111230700-42483a9ea3c1
 	github.com/go-vela/sdk-go v0.6.1-0.20210111215046-d4ccd4904b94
 	github.com/go-vela/types v0.6.1-0.20210111181528-d3bb371e9ec6
 	github.com/gosuri/uitable v0.0.4

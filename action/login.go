@@ -110,14 +110,6 @@ func runLogin(c *cli.Context) error {
 		}
 	}
 
-	// validate login information
-	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Validate
-	err = l.Validate()
-	if err != nil {
-		return err
-	}
-
 	// show a prompt to open a browser, unless yes-all flag is set
 	if !c.Bool("yes-all") {
 		// prompt user to confirm opening browser

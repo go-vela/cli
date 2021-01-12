@@ -5,6 +5,8 @@
 package build
 
 import (
+	"io/ioutil"
+
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -21,10 +23,20 @@ func (c *Config) Cancel(client *vela.Client) error {
 	// send API call to cancel a build
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Cancel
-	build, _, err := client.Build.Cancel(c.Org, c.Repo, c.Number)
+	_, resp, err := client.Build.Cancel(c.Org, c.Repo, c.Number)
 	if err != nil {
 		return err
 	}
+
+	defer resp.Body.Close()
+
+	// Read Response Body
+	respBody, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	respS := string(respBody)
 
 	// handle the output based off the provided configuration
 	switch c.Output {
@@ -32,26 +44,26 @@ func (c *Config) Cancel(client *vela.Client) error {
 		// output the build in dump format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
-		return output.Dump(build)
+		return output.Dump(respS)
 	case output.DriverJSON:
 		// output the build in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(build)
+		return output.JSON(respS)
 	case output.DriverSpew:
 		// output the build in spew format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
-		return output.Spew(build)
+		return output.Spew(respS)
 	case output.DriverYAML:
 		// output the build in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(build)
+		return output.YAML(&respS)
 	default:
 		// output the build in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(build)
+		return output.Stdout(respS)
 	}
 }

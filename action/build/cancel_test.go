@@ -18,7 +18,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, nil)
+	client, err := vela.NewClient(s.URL, "", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}

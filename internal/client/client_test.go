@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/go-vela/mock/server"
 
 	"github.com/urfave/cli/v2"
@@ -32,7 +33,8 @@ func TestClient_Parse(t *testing.T) {
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token", "superSecretToken", "doc")
+	fullSet.String("api.token.access", test.TestTokenGood, "doc")
+	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 
 	fullSetTokenSet := flag.NewFlagSet("test", 0)
 	fullSetTokenSet.String("api.addr", s.URL, "doc")
@@ -105,7 +107,7 @@ func TestClient_ParseEmptyToken(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		_, err := ParseEmptyToken(cli.NewContext(nil, test.set, nil))
+		_, err := ParseEmptyToken(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

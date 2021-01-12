@@ -88,7 +88,7 @@ func Test_localServer_ServeHTTP(t *testing.T) {
 	if w2.status != 200 {
 		t.Errorf("status = %d", w2.status)
 	}
-	if w2.written.String() != "<p>You may now close this page and return to the client app.</p>" {
+	if w2.written.String() != authSuccess {
 		t.Errorf("written: %q", w2.written.String())
 	}
 	if w2.Header().Get("Content-Type") != "text/html" {

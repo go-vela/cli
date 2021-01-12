@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/go-vela/mock/server"
 
 	"github.com/urfave/cli/v2"
@@ -21,12 +22,12 @@ func TestAction_BuildGet(t *testing.T) {
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
 	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", "superSecretAccessToken", "doc")
+	authSet.String("api.token.access", test.TestTokenGood, "doc")
 	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token.access", "superSecretAccessToken", "doc")
+	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")

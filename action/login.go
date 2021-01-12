@@ -53,12 +53,19 @@ var Login = &cli.Command{
 			Aliases: []string{"t"},
 			Usage:   "token used for communication with the Vela server",
 		},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_YES_ALL", "CONFIG_YES_ALL"},
+			Name:    "yes-all",
+			Aliases: []string{"y"},
+			Usage:   "auto-confirm all prompts (default: false)",
+			Value:   false,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela with terminal prompts.
     $ {{.HelpName}} --api.addr https://vela.example.com
-  3. Login to Vela using a supplied Personal Access Token
+  2. Login to Vela using a supplied Personal Access Token
     $ {{.HelpName}} --token foo
 
 DOCUMENTATION:
@@ -88,17 +95,44 @@ func runLogin(c *cli.Context) error {
 	// create the login configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config
-	l := &login.Config{}
+	l := &login.Config{
+		Address: c.String(internal.FlagAPIAddress),
+	}
 
-	err = l.PromptBrowserConfirm(os.Stdin, c.String(internal.FlagAPIAddress))
+	// check if address was provided from flags
+	if len(l.Address) == 0 {
+		// prompt user to provide address via terminal input
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptAddress
+		err = l.PromptAddress(os.Stdin)
+		if err != nil {
+			return err
+		}
+	}
+
+	// validate login information
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Validate
+	err = l.Validate()
 	if err != nil {
 		return err
+	}
+
+	// show a prompt to open a browser, unless yes-all flag is set
+	if !c.Bool("yes-all") {
+		// prompt user to confirm opening browser
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptBrowserConfirm
+		err = l.PromptBrowserConfirm(os.Stdin, c.String(internal.FlagAPIAddress))
+		if err != nil {
+			return err
+		}
 	}
 
 	// execute the login call for the login configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Login
-	err = l.Login(client, c.String(internal.FlagAPIAddress))
+	err = l.Login(client)
 	if err != nil {
 		return err
 	}
@@ -114,10 +148,15 @@ func runLogin(c *cli.Context) error {
 		return err
 	}
 
-	// ask to write config
-	err = l.PromptConfigConfirm(os.Stdin)
-	if err != nil {
-		return err
+	// show a prompt to write config, unless yes-all flag is set
+	if !c.Bool("yes-all") {
+		// prompt user to confirm writing new config
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptConfigConfirm
+		err = l.PromptConfigConfirm(os.Stdin)
+		if err != nil {
+			return err
+		}
 	}
 
 	// generate new config

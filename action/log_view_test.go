@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/go-vela/mock/server"
 
 	"github.com/urfave/cli/v2"
@@ -21,7 +22,8 @@ func TestAction_LogView(t *testing.T) {
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
 	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token", "superSecretToken", "doc")
+	authSet.String("api.token.access", test.TestTokenGood, "doc")
+	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 
 	serviceSet := flag.NewFlagSet("test", 0)
 	serviceSet.String("api.addr", s.URL, "doc")
@@ -78,7 +80,7 @@ func TestAction_LogView(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := logView(cli.NewContext(nil, test.set, nil))
+		err := logView(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

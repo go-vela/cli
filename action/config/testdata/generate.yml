@@ -1,6 +1,8 @@
 api:
   addr: https://vela-server.localhost
   token: superSecretToken
+  access_token: superSecretAccessToken
+  refresh_token: superSecretRefreshToken
   version: "1"
 log:
   level: info

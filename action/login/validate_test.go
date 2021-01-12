@@ -17,13 +17,8 @@ func TestLogin_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "login",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "login",
+				Action:  "login",
+				Address: "http://vela.example.com",
 			},
 		},
 		{
@@ -35,13 +30,8 @@ func TestLogin_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "login",
-			},
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "login",
+				Action:  "login",
+				Address: "vela.example.com",
 			},
 		},
 	}

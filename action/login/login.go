@@ -26,6 +26,7 @@ type Config struct {
 	server *localServer
 
 	Action              string
+	Address             string
 	PersonalAccessToken string
 	AccessToken         string
 	RefreshToken        string
@@ -115,7 +116,7 @@ func (c *Config) Tokens(addr string) error {
 }
 
 // Login authenticates and logs in to Vela via the API based off the provided configuration.
-func (c *Config) Login(client *vela.Client, addr string) error {
+func (c *Config) Login(client *vela.Client) error {
 	logrus.Debug("executing login for login configuration")
 
 	// start the local server
@@ -146,7 +147,7 @@ func (c *Config) Login(client *vela.Client, addr string) error {
 	}
 
 	// capture the tokens
-	err = c.Tokens(addr)
+	err = c.Tokens(c.Address)
 	if err != nil {
 		return err
 	}

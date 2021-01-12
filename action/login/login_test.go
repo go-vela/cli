@@ -2,6 +2,8 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// +build integration
+
 package login
 
 import (
@@ -18,7 +20,7 @@ func TestLogin_Config_Login(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
+	client, err := vela.NewClient(s.URL, "vela", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}
@@ -31,14 +33,15 @@ func TestLogin_Config_Login(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "login",
+				Action:  "login",
+				Address: "http://localhost:8080",
 			},
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Login(client, "http://localhost:8080")
+		err := test.config.Login(client)
 
 		if test.failure {
 			if err == nil {

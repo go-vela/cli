@@ -13,6 +13,35 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// PromptAddress
+func (c *Config) PromptAddress(in io.ReadCloser) error {
+	logrus.Debug("executing prompt for address for login configuration")
+
+	// create variable to store errors
+	var err error
+
+	// create the prompt for the address
+	p := promptui.Prompt{
+		Label: "Please enter the Vela server address: ",
+		Stdin: in,
+	}
+
+	// run the prompt to capture the address from the input
+	c.Address, err = p.Run()
+	if err != nil {
+		return err
+	}
+
+	logrus.Trace("checking address input provided")
+
+	// check if address is set
+	if len(c.Address) == 0 {
+		return fmt.Errorf("no address provided")
+	}
+
+	return nil
+}
+
 // PromptBrowserConfirm provides a prompt to confirm opening a browser window.
 func (c *Config) PromptBrowserConfirm(in io.ReadCloser, site string) error {
 	logrus.Debug("executing prompt to confirm opening a browser")

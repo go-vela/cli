@@ -114,7 +114,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 
 func TestPipeline_Config_ValidateLocal(t *testing.T) {
 	// setup types
-	c := cli.NewContext(nil, flag.NewFlagSet("test", 0), nil)
+	c := cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, flag.NewFlagSet("test", 0), nil)
 
 	// create a vela client
 	client, err := native.New(c)
@@ -188,7 +188,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
+	client, err := vela.NewClient(s.URL, "vela", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}

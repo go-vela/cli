@@ -44,7 +44,7 @@ func TestAction_ConfigGenerate(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := configGenerate(cli.NewContext(nil, test.set, nil))
+		err := configGenerate(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

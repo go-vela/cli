@@ -18,7 +18,7 @@ func TestRepo_Config_View(t *testing.T) {
 	s := httptest.NewServer(server.FakeHandler())
 
 	// create a vela client
-	client, err := vela.NewClient(s.URL, "Vela CLI", nil)
+	client, err := vela.NewClient(s.URL, "vela", nil)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}

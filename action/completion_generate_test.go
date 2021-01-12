@@ -40,7 +40,7 @@ func TestAction_CompletionGenerate(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := completionGenerate(cli.NewContext(nil, test.set, nil))
+		err := completionGenerate(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

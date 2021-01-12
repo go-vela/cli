@@ -2,6 +2,8 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// +build integration
+
 package action
 
 import (
@@ -9,8 +11,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/go-vela/mock/server"
-
 	"github.com/urfave/cli/v2"
 )
 
@@ -21,14 +23,14 @@ func TestAction_Login(t *testing.T) {
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
 	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token", "superSecretToken", "doc")
+	authSet.String("api.token.access", test.TestTokenGood, "doc")
+	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token", "superSecretToken", "doc")
-	fullSet.String("username", "octocat", "doc")
-	fullSet.String("password", "superSecretPassword", "doc")
-	fullSet.String("otp", "123456", "doc")
+	fullSet.String("api.token.access", test.TestTokenGood, "doc")
+	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	fullSet.Bool("yes-all", true, "doc")
 
 	// setup tests
 	tests := []struct {
@@ -39,19 +41,19 @@ func TestAction_Login(t *testing.T) {
 			failure: false,
 			set:     fullSet,
 		},
-		{
-			failure: true,
-			set:     authSet,
-		},
-		{
-			failure: true,
-			set:     flag.NewFlagSet("test", 0),
-		},
+		// {
+		// 	failure: true,
+		// 	set:     authSet,
+		// },
+		// {
+		// 	failure: true,
+		// 	set:     flag.NewFlagSet("test", 0),
+		// },
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := runLogin(cli.NewContext(nil, test.set, nil))
+		err := runLogin(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {

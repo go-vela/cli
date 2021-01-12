@@ -8,6 +8,7 @@ import (
 	"flag"
 	"testing"
 
+	"github.com/go-vela/cli/test"
 	"github.com/spf13/afero"
 
 	"github.com/urfave/cli/v2"
@@ -37,8 +38,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", "https://vela-server.localhost", "doc")
-	fullSet.String("api.token", "superSecretToken", "doc")
-	fullSet.String("api.token.access", "superSecretAccessToken", "doc")
+	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("api.version", "1", "doc")
 	fullSet.String("log.level", "info", "doc")

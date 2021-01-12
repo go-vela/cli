@@ -126,6 +126,8 @@ github.com/go-vela/mock v0.6.1-0.20210111203055-2629f560e9b7 h1:X8MlnMw6ipcRHnLW
 github.com/go-vela/mock v0.6.1-0.20210111203055-2629f560e9b7/go.mod h1:AYp7yyYW10fRmUCfnUj7QdpAdxor7mDFn163R7ni4Dk=
 github.com/go-vela/sdk-go v0.6.1-0.20210111215046-d4ccd4904b94 h1:4gf7MAd9QxfL1N5AYKp+QOAXShRO4v8Mdr+/zgzx9l8=
 github.com/go-vela/sdk-go v0.6.1-0.20210111215046-d4ccd4904b94/go.mod h1:+RRcqqGGg2fYUuOYL5Jg1iNsQ8+cSA3u+tb+pB1xEwY=
+github.com/go-vela/sdk-go v0.6.1-0.20210111221334-6365bf063936 h1:xf2S5yjda1IwbZPHbppHFiGy5FTmxGjSoaRYdTbcauA=
+github.com/go-vela/sdk-go v0.6.1-0.20210111221334-6365bf063936/go.mod h1:+RRcqqGGg2fYUuOYL5Jg1iNsQ8+cSA3u+tb+pB1xEwY=
 github.com/go-vela/types v0.6.1-0.20210111181528-d3bb371e9ec6 h1:zmdwRI81qWFTw7H37nIzu/Y3UoSD5cih0UwjeO3kI3o=
 github.com/go-vela/types v0.6.1-0.20210111181528-d3bb371e9ec6/go.mod h1:ATtwTwp2l4jI4GUmw840xHZgHmg8FbZPo4g0azImggA=
 github.com/goccy/go-yaml v1.8.4 h1:AOEdR7aQgbgwHznGe3BLkDQVujxCPUpHOZZcQcp8Y3M=

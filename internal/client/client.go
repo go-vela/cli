@@ -50,7 +50,6 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 		c.App.Name, c.App.Version, runtime.GOOS, runtime.GOARCH)
 
 	// create a vela client from the provided address
-	// TODO: add client type?
 	client, err := vela.NewClient(address, clientID, nil)
 	if err != nil {
 		return nil, err

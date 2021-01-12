@@ -84,9 +84,9 @@ func (c *Config) Tokens(addr string) error {
 
 	req.Header.Set("Content-Type", "application/json")
 
-	// create a new http client with 30s timeout
+	// create a new http client with timeout
 	httpClient := http.DefaultClient
-	httpClient.Timeout = 30 * time.Second
+	httpClient.Timeout = 15 * time.Second
 
 	// send the request to get tokens
 	resp, err := httpClient.Do(req)

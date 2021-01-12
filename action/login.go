@@ -99,23 +99,12 @@ func runLogin(c *cli.Context) error {
 		Address: c.String(internal.FlagAPIAddress),
 	}
 
-	// check if address was provided from flags
-	if len(l.Address) == 0 {
-		// prompt user to provide address via terminal input
-		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptAddress
-		err = l.PromptAddress(os.Stdin)
-		if err != nil {
-			return err
-		}
-	}
-
 	// show a prompt to open a browser, unless yes-all flag is set
 	if !c.Bool("yes-all") {
 		// prompt user to confirm opening browser
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptBrowserConfirm
-		err = l.PromptBrowserConfirm(os.Stdin, c.String(internal.FlagAPIAddress))
+		err = l.PromptBrowserConfirm(os.Stdin)
 		if err != nil {
 			return err
 		}

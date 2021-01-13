@@ -46,6 +46,13 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 	// create the client id; will be in the form of
 	// "vela; <version>; <os>; <architecture>"
 	// used in user agent string in the sdk
+	fmt.Printf("c.App: %+v", c.App)
+	fmt.Printf("runtime.GOOS: %s", runtime.GOOS)
+	fmt.Printf("runtime.GOARCH: %s", runtime.GOARCH)
+	if len(c.App.Name) == 0 {
+		fmt.Printf("c.App.Name: %s", c.App.Name)
+	}
+	fmt.Printf("c.App.Version: %s", c.App.Version)
 	clientID := fmt.Sprintf("%s; %s; %s; %s",
 		c.App.Name, c.App.Version, runtime.GOOS, runtime.GOARCH)
 

@@ -53,11 +53,9 @@ p {
     color: hsl(0, 0%, 16%);
     background-color: hsl(0, 0%, 98%);
   }
-
   .vela-logo-inner {
     fill: hsl(0, 0%, 16%);
   }
-
   .box {
     background-color: hsl(0, 0%, 98%);
 }

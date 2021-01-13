@@ -9,7 +9,7 @@ const (
 	// addAction defines the action for creating a resource.
 	addAction = "add"
 
-	// cancelAction defines the action for changing ownership of a resource.
+	// cancelAction defines the action for canceling of a resource.
 	cancelAction = "cancel"
 
 	// chownAction defines the action for changing ownership of a resource.

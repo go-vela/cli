@@ -9,10 +9,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
-	github.com/go-vela/compiler v0.6.1-0.20210111222408-a8b5012a5943
-	github.com/go-vela/mock v0.6.1-0.20210112201653-ecad0dfe0e48
-	github.com/go-vela/sdk-go v0.6.1-0.20210112212028-77fd54952b28
-	github.com/go-vela/types v0.6.1-0.20210111181528-d3bb371e9ec6
+	github.com/go-vela/compiler v0.7.0-rc1
+	github.com/go-vela/mock v0.7.0-rc1
+	github.com/go-vela/sdk-go v0.7.0-rc1
+	github.com/go-vela/types v0.7.0-rc1
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0

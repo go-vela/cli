@@ -2,6 +2,8 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// Package build contains resources for managing builds
+// nolint:dupl // code is similar to action/build_restart.go, but is not duplicative
 package build
 
 import (

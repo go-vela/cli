@@ -16,7 +16,7 @@ const authSuccess = `
 <style type="text/css">
 body {
   color: hsl(0, 0%, 98%);
-  background-color: hsl(0, 0%, 16%); 
+  background-color: hsl(0, 0%, 16%);
   font-size: 14px;
   font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -36,15 +36,6 @@ body {
 .box {
   background-color: hsl(0, 0%, 16%);
 }
-@media (prefers-color-scheme: light) {
-  body {
-    color: hsl(0, 0%, 16%);
-    background-color: hsl(0, 0%, 98%);
-  }
-  .vela-logo-inner {
-    fill: hsl(0, 0%, 16%);
-  }
-}
 h1 {
   font-size: 24px;
   margin-bottom: 0;
@@ -56,6 +47,19 @@ p {
   border: 1px solid hsl(286, 29%, 51%);
   padding: 24px;
   margin: 28px;
+}
+@media (prefers-color-scheme: light) {
+  body {
+    color: hsl(0, 0%, 16%);
+    background-color: hsl(0, 0%, 98%);
+  }
+
+  .vela-logo-inner {
+    fill: hsl(0, 0%, 16%);
+  }
+
+  .box {
+    background-color: hsl(0, 0%, 98%);
 }
 </style>
 <body>

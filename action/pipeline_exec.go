@@ -7,7 +7,9 @@ package action
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
+	"github.com/go-vela/compiler/compiler/native"
 
 	"github.com/urfave/cli/v2"
 )
@@ -39,11 +41,22 @@ var PipelineExec = &cli.Command{
 			Usage:   "provide the file name for the pipeline",
 			Value:   ".vela.yml",
 		},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_LOCAL", "PIPELINE_LOCAL"},
+			Name:    "local",
+			Usage:   "enables mounting local directory to pipeline",
+			Value:   true,
+		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PATH", "PIPELINE_PATH"},
 			Name:    "path",
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_VOLUMES", "PIPELINE_VOLUMES"},
+			Name:    "volumes",
+			Usage:   "provide list of local volumes to mount",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -65,8 +78,41 @@ DOCUMENTATION:
 // input and create the object used to
 // execute a pipeline.
 func pipelineExec(c *cli.Context) error {
-	// TODO: implement in a future PR
+	// load variables from the config file
+	err := load(c)
+	if err != nil {
+		return err
+	}
+
+	// create the pipeline configuration
 	//
-	// currently does nothing to keep PR sizes smaller
-	return nil
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
+	p := &pipeline.Config{
+		Action:  execAction,
+		File:    c.String("file"),
+		Local:   c.Bool("local"),
+		Path:    c.String("path"),
+		Volumes: c.StringSlice("volumes"),
+	}
+
+	// validate pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Validate
+	err = p.Validate()
+	if err != nil {
+		return err
+	}
+
+	// create a compiler client
+	//
+	// https://godoc.org/github.com/go-vela/compiler/compiler/native#New
+	client, err := native.New(c)
+	if err != nil {
+		return err
+	}
+
+	// execute the exec call for the pipeline configuration
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Exec
+	return p.Exec(client)
 }

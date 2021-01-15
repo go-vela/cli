@@ -8,9 +8,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"os/signal"
 	"path/filepath"
-	"syscall"
 
 	"github.com/go-vela/compiler/compiler"
 	"github.com/go-vela/pkg-executor/executor"
@@ -44,35 +42,45 @@ func (c *Config) Exec(client compiler.Engine) error {
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile into a pipeline
-	_pipeline, err := client.Compile(path)
+	_pipeline, err := client.
+		WithLocal(true).
+		Compile(path)
 	if err != nil {
 		return err
 	}
 
-	// uncomment for testing purposes
-	//
-	// TODO: remove this
-	// err = output.YAML(_pipeline)
-	// if err != nil {
-	// 	return err
-	// }
+	// check if the local configuration is enabled
+	if c.Local {
+		// TODO: consider making this a constant
+		//
+		// create current directory path for local mount
+		mount := fmt.Sprintf("%s:%s", base, "/vela/src")
+
+		// add the current directory path to volume mounts
+		c.Volumes = append(c.Volumes, mount)
+	}
+
+	logrus.Tracef("creating runtime engine %s", constants.DriverDocker)
 
 	// setup the runtime
 	//
 	// https://pkg.go.dev/github.com/go-vela/pkg-runtime/runtime?tab=doc#New
 	_runtime, err := runtime.New(&runtime.Setup{
-		Driver: constants.DriverDocker,
+		Driver:  constants.DriverDocker,
+		Volumes: c.Volumes,
 	})
 	if err != nil {
 		return err
 	}
+
+	logrus.Tracef("creating executor engine %s", constants.DriverLocal)
 
 	// setup the executor
 	//
 	// https://godoc.org/github.com/go-vela/pkg-executor/executor#New
 	_executor, err := executor.New(&executor.Setup{
 		// TODO: switch to using constant from go-vela/types
-		Driver:   "local",
+		Driver:   constants.DriverLocal,
 		Runtime:  _runtime,
 		Pipeline: _pipeline.Sanitize(constants.DriverDocker),
 	})
@@ -83,29 +91,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// create a background context
 	ctx := context.Background()
 
-	// create channel for catching OS signals
-	sigchan := make(chan os.Signal, 1)
-
-	// add a cancelation signal to our current context
-	ctx, sig := context.WithCancel(ctx)
-
-	// set the OS signals the Worker will respond to
-	signal.Notify(sigchan, syscall.SIGTERM)
-
-	// spawn a goroutine to listen for the signals
-	go func() {
-		select {
-		case <-sigchan:
-			sig()
-		case <-ctx.Done():
-		}
-	}()
-
 	defer func() {
-		// canceling the context
-		signal.Stop(sigchan)
-		sig()
-
 		// destroy the build with the executor
 		err = _executor.DestroyBuild(context.Background())
 		if err != nil {

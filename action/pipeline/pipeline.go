@@ -16,5 +16,7 @@ type Config struct {
 	Type     string
 	Stages   bool
 	Template bool
+	Local    bool
+	Volumes  []string
 	Output   string
 }

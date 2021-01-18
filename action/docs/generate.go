@@ -36,7 +36,7 @@ func (c *Config) Generate(a *cli.App) error {
 		logrus.Tracef("creating man pages documentation")
 
 		// generate the documentation from the application configuration
-		man, err := a.ToMarkdown()
+		man, err := a.ToMan()
 		if err != nil {
 			return err
 		}

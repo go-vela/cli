@@ -48,6 +48,7 @@ func main() {
 		action.Login,
 		action.Version,
 		addCmds,
+		cancelCmds,
 		chownCmds,
 		compileCmds,
 		execCmds,

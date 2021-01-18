@@ -18,6 +18,7 @@ var DocsGenerate = &cli.Command{
 	Description: "Use this command to generate CLI docs.",
 	Usage:       "Generate CLI documentation for repository",
 	Action:      docsGenerate,
+	Hidden:      true,
 	Flags: []cli.Flag{
 
 		// Shell Flags

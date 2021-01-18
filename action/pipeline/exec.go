@@ -14,6 +14,7 @@ import (
 	"github.com/go-vela/pkg-executor/executor"
 	"github.com/go-vela/pkg-runtime/runtime"
 	"github.com/go-vela/types/constants"
+	"github.com/go-vela/types/library"
 
 	"github.com/sirupsen/logrus"
 )
@@ -39,11 +40,27 @@ func (c *Config) Exec(client compiler.Engine) error {
 		path = filepath.Join(c.Path, c.File)
 	}
 
+	// create build object for use in pipeline
+	b := new(library.Build)
+	b.SetBranch(c.Branch)
+	b.SetDeploy(c.Target)
+	b.SetEvent(c.Event)
+	b.SetRef(c.Tag)
+
+	// create repo object for use in pipeline
+	r := new(library.Repo)
+	r.SetOrg(c.Org)
+	r.SetName(c.Repo)
+	r.SetFullName(fmt.Sprintf("%s/%s", c.Org, c.Repo))
+
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile into a pipeline
 	_pipeline, err := client.
+		WithBuild(b).
+		WithComment(c.Comment).
 		WithLocal(true).
+		WithRepo(r).
 		Compile(path)
 	if err != nil {
 		return err
@@ -51,10 +68,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 	// check if the local configuration is enabled
 	if c.Local {
-		// TODO: consider making this a constant
-		//
 		// create current directory path for local mount
-		mount := fmt.Sprintf("%s:%s", base, "/vela/src")
+		mount := fmt.Sprintf("%s:%s", base, constants.WorkspaceDefault)
 
 		// add the current directory path to volume mounts
 		c.Volumes = append(c.Volumes, mount)
@@ -79,10 +94,11 @@ func (c *Config) Exec(client compiler.Engine) error {
 	//
 	// https://godoc.org/github.com/go-vela/pkg-executor/executor#New
 	_executor, err := executor.New(&executor.Setup{
-		// TODO: switch to using constant from go-vela/types
 		Driver:   constants.DriverLocal,
 		Runtime:  _runtime,
 		Pipeline: _pipeline.Sanitize(constants.DriverDocker),
+		Build:    b,
+		Repo:     r,
 	})
 	if err != nil {
 		return err

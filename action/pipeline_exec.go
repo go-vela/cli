@@ -22,10 +22,42 @@ var PipelineExec = &cli.Command{
 	Action:      pipelineExec,
 	Flags: []cli.Flag{
 
+		// Build Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_BRANCH", "PIPELINE_BRANCH"},
+			Name:    "branch",
+			Aliases: []string{"b"},
+			Usage:   "provide the build branch for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMMENT", "PIPELINE_COMMENT"},
+			Name:    "comment",
+			Aliases: []string{"c"},
+			Usage:   "provide the build comment for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_EVENT", "PIPELINE_EVENT"},
+			Name:    "event",
+			Aliases: []string{"e"},
+			Usage:   "provide the build event for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG"},
+			Name:    "tag",
+			Aliases: []string{"t"},
+			Usage:   "provide the build tag for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TARGET", "PIPELINE_TARGET"},
+			Name:    "target",
+			Usage:   "provide the build target for the pipeline",
+		},
+
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			EnvVars: []string{"VELA_OUTPUT", "PIPELINE_OUTPUT"},
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -44,6 +76,7 @@ var PipelineExec = &cli.Command{
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_LOCAL", "PIPELINE_LOCAL"},
 			Name:    "local",
+			Aliases: []string{"l"},
 			Usage:   "enables mounting local directory to pipeline",
 			Value:   true,
 		},
@@ -55,8 +88,24 @@ var PipelineExec = &cli.Command{
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_VOLUMES", "PIPELINE_VOLUMES"},
-			Name:    "volumes",
+			Name:    "volume",
+			Aliases: []string{"v"},
 			Usage:   "provide list of local volumes to mount",
+		},
+
+		// Repo Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_ORG", "PIPELINE_ORG"},
+			Name:    internal.FlagOrg,
+			Aliases: []string{"o"},
+			Usage:   "provide the organization for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_REPO", "PIPELINE_REPO"},
+			Name:    internal.FlagRepo,
+			Aliases: []string{"r"},
+			Usage:   "provide the repository for the pipeline",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -64,9 +113,13 @@ EXAMPLES:
   1. Execute a local Vela pipeline.
     $ {{.HelpName}}
   2. Execute a local Vela pipeline in a nested directory.
-    $ {{.HelpName}} --path nested/path/to/dir
+    $ {{.HelpName}} --path nested/path/to/dir --file .vela.local.yml
   3. Execute a local Vela pipeline in a specific directory.
-    $ {{.HelpName}} --path /absolute/full/path/to/dir
+    $ {{.HelpName}} --path /absolute/full/path/to/dir --file .vela.local.yml
+  4. Execute a local Vela pipeline with ruleset information.
+    $ {{.HelpName}} --branch master --event push
+  5. Execute a local Vela pipeline with extra local volumes.
+    $ {{.HelpName}} --volume /tmp/foo.txt:/tmp/foo.txt --volume /tmp/bar.txt:/tmp/bar.txt
 
 DOCUMENTATION:
 
@@ -89,10 +142,17 @@ func pipelineExec(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
 		Action:  execAction,
+		Branch:  c.String("branch"),
+		Comment: c.String("comment"),
+		Event:   c.String("event"),
+		Tag:     c.String("tag"),
+		Target:  c.String("target"),
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
 		File:    c.String("file"),
 		Local:   c.Bool("local"),
 		Path:    c.String("path"),
-		Volumes: c.StringSlice("volumes"),
+		Volumes: c.StringSlice("volume"),
 	}
 
 	// validate pipeline configuration

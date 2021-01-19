@@ -34,7 +34,7 @@ vela [GLOBAL OPTIONS] command [COMMAND OPTIONS] [ARGUMENTS...]
 
 **--api.version, --av**="": API version for communication with the Vela server (default: v1)
 
-**--config, -c**="": path to Vela configuration file (default: /Users/Z001NR1/.vela/config.yml)
+**--config, -c**="": path to Vela configuration file (default: ~/.vela/config.yml)
 
 **--log.level, -l**="": set the level of logging - options: (trace|debug|info|warn|error|fatal|panic) (default: info)
 

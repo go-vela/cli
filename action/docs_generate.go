@@ -52,8 +52,7 @@ DOCUMENTATION:
 }
 
 // helper function to capture the provided
-// input and create the object used to
-// produce the config file.
+// input and create the cli docs.
 func docsGenerate(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

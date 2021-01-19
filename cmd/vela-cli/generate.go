@@ -29,6 +29,11 @@ var generateCmds = &cli.Command{
 		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#ConfigGenerate
 		action.ConfigGenerate,
 
+		// add the sub command for producing documentation
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#DocsGenerate
+		action.DocsGenerate,
+
 		// add the sub command for producing a pipeline
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#PipelineGenerate

@@ -69,7 +69,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// check if the local configuration is enabled
 	if c.Local {
 		// create current directory path for local mount
-		mount := fmt.Sprintf("%s:%s", base, constants.WorkspaceDefault)
+		mount := fmt.Sprintf("%s:%s:rw", base, constants.WorkspaceDefault)
 
 		// add the current directory path to volume mounts
 		c.Volumes = append(c.Volumes, mount)

@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/go-vela/cli/version"
 	"github.com/go-vela/compiler/compiler"
 	"github.com/go-vela/pkg-executor/executor"
 	"github.com/go-vela/pkg-runtime/runtime"
@@ -99,6 +100,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 		Pipeline: _pipeline.Sanitize(constants.DriverDocker),
 		Build:    b,
 		Repo:     r,
+		Version:  version.New().Semantic(),
 	})
 	if err != nil {
 		return err

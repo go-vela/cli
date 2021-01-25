@@ -11,7 +11,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-vela/compiler v0.7.0-rc2
 	github.com/go-vela/mock v0.7.0-rc2
-	github.com/go-vela/pkg-executor v0.7.0-rc2
+	github.com/go-vela/pkg-executor v0.7.0-rc2.0.20210125155500-a6fec1db703f
 	github.com/go-vela/pkg-runtime v0.7.0-rc2
 	github.com/go-vela/sdk-go v0.7.0-rc2
 	github.com/go-vela/types v0.7.0-rc2

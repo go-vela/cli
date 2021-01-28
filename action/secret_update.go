@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2021 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -84,11 +84,6 @@ var SecretUpdate = &cli.Command{
 			Name:    "event",
 			Aliases: []string{"ev"},
 			Usage:   "provide the event(s) that can access this secret",
-			Value: cli.NewStringSlice(
-				constants.EventDeploy,
-				constants.EventPush,
-				constants.EventTag,
-			),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_COMMAND", "SECRET_COMMAND"},

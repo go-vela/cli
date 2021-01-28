@@ -9,8 +9,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
-	github.com/go-vela/compiler v0.7.0-rc1
+	github.com/go-vela/compiler v0.7.0-rc2
 	github.com/go-vela/mock v0.7.0-rc2.0.20210125180806-8e357d6fa4a7
+	github.com/go-vela/pkg-executor v0.7.0-rc2.0.20210125155500-a6fec1db703f
+	github.com/go-vela/pkg-runtime v0.7.0-rc2
 	github.com/go-vela/sdk-go v0.7.0-rc2.0.20210128195742-f47eb64c959e
 	github.com/go-vela/types v0.7.0-rc2
 	github.com/gosuri/uitable v0.0.4

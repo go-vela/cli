@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2021 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -28,6 +28,11 @@ var generateCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#ConfigGenerate
 		action.ConfigGenerate,
+
+		// add the sub command for producing documentation
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#DocsGenerate
+		action.DocsGenerate,
 
 		// add the sub command for producing a pipeline
 		//

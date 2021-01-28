@@ -47,12 +47,6 @@ var Login = &cli.Command{
 			Aliases: []string{"rt"},
 			Usage:   "refresh token used for communication with the Vela server",
 		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
-			Name:    internal.FlagAPIToken,
-			Aliases: []string{"t"},
-			Usage:   "token used for communication with the Vela server",
-		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_YES_ALL", "CONFIG_YES_ALL"},
 			Name:    "yes-all",
@@ -63,10 +57,8 @@ var Login = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Login to Vela with terminal prompts.
+  1. Login to Vela (will launch browser).
     $ {{.HelpName}} --api.addr https://vela.example.com
-  2. Login to Vela using a supplied Personal Access Token
-    $ {{.HelpName}} --token foo
 
 DOCUMENTATION:
 
@@ -76,7 +68,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided
 // input and create the object used to
-//  authenticate and login to Vela.
+// authenticate and login to Vela.
 func runLogin(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)
@@ -136,6 +128,7 @@ func runLogin(c *cli.Context) error {
 		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptConfigConfirm
 		err = l.PromptConfigConfirm(os.Stdin)
 		if err != nil {
+			logrus.Warn("configuration not saved")
 			return err
 		}
 	}

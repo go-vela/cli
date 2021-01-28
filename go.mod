@@ -2,6 +2,8 @@ module github.com/go-vela/cli
 
 go 1.13
 
+replace github.com/go-vela/sdk-go => ../sdk-go
+
 require (
 	github.com/Masterminds/semver/v3 v3.1.1
 	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3
@@ -10,9 +12,9 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-vela/compiler v0.7.0-rc1
-	github.com/go-vela/mock v0.7.0-rc1
+	github.com/go-vela/mock v0.7.0-rc2.0.20210125180806-8e357d6fa4a7
 	github.com/go-vela/sdk-go v0.7.0-rc1
-	github.com/go-vela/types v0.7.0-rc1
+	github.com/go-vela/types v0.7.0-rc2
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0

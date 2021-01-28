@@ -6,6 +6,7 @@ package client
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/sirupsen/logrus"
 )
@@ -17,6 +18,12 @@ func validate(address, token, accessToken, refreshToken string) error {
 	// check if client address is set
 	if len(address) == 0 {
 		return fmt.Errorf("no client address provided")
+	}
+
+	// check for valid URL
+	_, err := url.ParseRequestURI(address)
+	if err != nil {
+		return fmt.Errorf("client address is not a valid url")
 	}
 
 	// check that a token is set

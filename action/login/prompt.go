@@ -20,8 +20,8 @@ func (c *Config) PromptBrowserConfirm(in io.ReadCloser) error {
 	txtPressEnter := promptui.Styler(promptui.FGBold)("Press Enter")
 
 	p := promptui.Prompt{
-		Label: fmt.Sprintf("Open %s in your browser and complete authentication (%s to confirm)",
-			c.Address, txtPressEnter),
+		Label: fmt.Sprintf("Open %s in your browser and complete "+
+			"authentication (%s to confirm)", c.Address, txtPressEnter),
 		IsConfirm: true,
 		Default:   "y",
 		Stdin:     in,
@@ -40,7 +40,8 @@ func (c *Config) PromptConfigConfirm(in io.ReadCloser) error {
 	logrus.Debug("executing prompt to confirm config write")
 
 	p := promptui.Prompt{
-		Label:     "Ready to write config. Any existing config will be overwritten. Continue",
+		Label: "Authentication complete. Continue to save configuration " +
+			"(existing config will be overwritten)",
 		IsConfirm: true,
 		Default:   "n",
 		Stdin:     in,

@@ -6,6 +6,7 @@ package client
 
 import (
 	"fmt"
+	"net/url"
 	"runtime"
 
 	"github.com/go-vela/cli/internal"
@@ -62,9 +63,9 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 		client.Authentication.SetAccessAndRefreshAuth(accessToken, refreshToken)
 	}
 
-	// pass the token to the client instance
+	// pass the token to the client instance, overrides previous method
 	if len(token) > 0 {
-		client.Authentication.SetTokenAuth(token)
+		client.Authentication.SetPersonalAccessTokenAuth(token)
 	}
 
 	return client, nil
@@ -82,6 +83,12 @@ func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
 	// check if client address is set
 	if len(address) == 0 {
 		return nil, fmt.Errorf("no client address provided")
+	}
+
+	// check for valid URL
+	_, err := url.ParseRequestURI(address)
+	if err != nil {
+		return nil, fmt.Errorf("client address is not a valid url")
 	}
 
 	logrus.Tracef("creating Vela client for %s", address)

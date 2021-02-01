@@ -51,8 +51,17 @@ var Login = &cli.Command{
 			EnvVars: []string{"VELA_YES_ALL", "CONFIG_YES_ALL"},
 			Name:    "yes-all",
 			Aliases: []string{"y"},
-			Usage:   "auto-confirm all prompts (default: false)",
+			Usage:   "auto-confirm all prompts",
 			Value:   false,
+		},
+
+		// the following flag is only present to help clear
+		// existing legacy tokens
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
+			Name:    internal.FlagAPIToken,
+			Usage:   "hidden flag to clear existing token",
+			Hidden:  true,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -131,6 +140,14 @@ func runLogin(c *cli.Context) error {
 			logrus.Warn("configuration not saved")
 			return err
 		}
+	}
+
+	// remove existing token from the config
+	// before writing
+	err = c.Set(internal.FlagAPIToken, "")
+	if err != nil {
+		// fail silently; not returning err
+		logrus.Debugf("error while emptying token: %v", err)
 	}
 
 	// generate new config

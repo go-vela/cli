@@ -81,7 +81,7 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/pipeline/validate/
+  https://go-vela.github.io/docs/reference/cli/pipeline/validate/
 `, cli.CommandHelpTemplate),
 }
 

@@ -125,7 +125,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/pipeline/exec/
+  https://go-vela.github.io/docs/reference/cli/pipeline/exec/
 `, cli.CommandHelpTemplate),
 }
 

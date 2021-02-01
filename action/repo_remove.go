@@ -57,7 +57,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/repo/remove/
+  https://go-vela.github.io/docs/reference/cli/repo/remove/
 `, cli.CommandHelpTemplate),
 }
 

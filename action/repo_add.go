@@ -125,7 +125,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/repo/add/
+  https://go-vela.github.io/docs/reference/cli/repo/add/
 `, cli.CommandHelpTemplate),
 }
 

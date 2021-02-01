@@ -76,7 +76,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/step/view/
+  https://go-vela.github.io/docs/reference/cli/step/view/
 `, cli.CommandHelpTemplate),
 }
 

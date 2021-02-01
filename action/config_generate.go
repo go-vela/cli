@@ -117,7 +117,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/config/generate/
+  https://go-vela.github.io/docs/reference/cli/config/generate/
 `, cli.CommandHelpTemplate),
 }
 

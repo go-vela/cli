@@ -92,7 +92,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/secret/remove/
+  https://go-vela.github.io/docs/reference/cli/secret/remove/
 `, cli.CommandHelpTemplate),
 }
 

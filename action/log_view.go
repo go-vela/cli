@@ -88,7 +88,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/log/view/
+  https://go-vela.github.io/docs/reference/cli/log/view/
 `, cli.CommandHelpTemplate),
 }
 

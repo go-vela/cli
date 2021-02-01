@@ -47,7 +47,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/docs/generate/
+  https://go-vela.github.io/docs/reference/cli/docs/generate/
 `, cli.CommandHelpTemplate),
 }
 

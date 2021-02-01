@@ -68,7 +68,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/pipeline/generate/
+  https://go-vela.github.io/docs/reference/cli/pipeline/generate/
 `, cli.CommandHelpTemplate),
 }
 

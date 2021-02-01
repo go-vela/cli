@@ -26,7 +26,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/config/view/
+  https://go-vela.github.io/docs/reference/cli/config/view/
 `, cli.CommandHelpTemplate),
 }
 

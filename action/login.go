@@ -71,7 +71,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/login/
+  https://go-vela.github.io/docs/reference/cli/login/
 `, cli.CommandHelpTemplate),
 }
 

@@ -117,7 +117,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/config/update/
+  https://go-vela.github.io/docs/reference/cli/config/update/
 `, cli.CommandHelpTemplate),
 }
 

@@ -40,7 +40,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/version/
+  https://go-vela.github.io/docs/reference/cli/version/
 `, cli.CommandHelpTemplate),
 }
 

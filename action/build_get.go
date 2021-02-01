@@ -79,7 +79,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/build/get/
+  https://go-vela.github.io/docs/reference/cli/build/get/
 `, cli.CommandHelpTemplate),
 }
 

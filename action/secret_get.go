@@ -104,7 +104,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/secret/get/
+  https://go-vela.github.io/docs/reference/cli/secret/get/
 `, cli.CommandHelpTemplate),
 }
 

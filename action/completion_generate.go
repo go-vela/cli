@@ -44,13 +44,13 @@ EXAMPLES:
   2. Enable auto completion for the current zsh session.
     $ source <({{.HelpName}} --zsh true)
   3. Enable auto completion for bash permanently.
-    visit https://go-vela.github.io/docs/cli/completion/generate/#bash
+    visit https://go-vela.github.io/docs/reference/cli/completion/generate/#bash
   4. Enable auto completion for zsh permanently.
-    visit https://go-vela.github.io/docs/cli/completion/generate/#zsh
+    visit https://go-vela.github.io/docs/reference/cli/completion/generate/#zsh
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/completion/generate/
+  https://go-vela.github.io/docs/reference/cli/completion/generate/
 `, cli.CommandHelpTemplate),
 }
 

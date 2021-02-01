@@ -131,7 +131,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/cli/secret/update/
+  https://go-vela.github.io/docs/reference/cli/secret/update/
 `, cli.CommandHelpTemplate),
 }
 

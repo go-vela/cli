@@ -10,11 +10,11 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-vela/compiler v0.7.0-rc3
-	github.com/go-vela/mock v0.7.0-rc4
+	github.com/go-vela/mock v0.7.0
 	github.com/go-vela/pkg-executor v0.7.0-rc3
 	github.com/go-vela/pkg-runtime v0.7.0-rc3
 	github.com/go-vela/sdk-go v0.7.0-rc3
-	github.com/go-vela/types v0.7.0-rc3
+	github.com/go-vela/types v0.7.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0

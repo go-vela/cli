@@ -95,6 +95,8 @@ func wideTable(deployments *[]library.Deployment) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
+		//
+		// nolint: lll // ignore long line length due to number of columns
 		table.AddRow(d.GetID(), d.GetTask(), d.GetUser(), d.GetRef(), d.GetTarget(), d.GetCommit(), d.GetDescription())
 	}
 

@@ -2,10 +2,12 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// nolint: dupl // ignore similar code among actions
 package repo
 
 import (
 	"fmt"
+
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"

@@ -13,6 +13,8 @@ import (
 )
 
 // ViewService inspects a service log based on the provided configuration.
+//
+// nolint: dupl // ignore similar code among actions
 func (c *Config) ViewService(client *vela.Client) error {
 	logrus.Debug("executing view service for log configuration")
 
@@ -57,6 +59,8 @@ func (c *Config) ViewService(client *vela.Client) error {
 }
 
 // ViewStep inspects a service log based on the provided configuration.
+//
+// nolint: dupl // ignore similar code among actions
 func (c *Config) ViewStep(client *vela.Client) error {
 	logrus.Debug("executing view step for log configuration")
 

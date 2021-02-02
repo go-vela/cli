@@ -76,6 +76,8 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // capture a list of build logs.
+//
+// nolint: dupl // ignore similar code among actions
 func logGet(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

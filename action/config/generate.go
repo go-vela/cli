@@ -78,5 +78,5 @@ func (c *Config) Generate() error {
 	// send Filesystem call to create config file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
-	return a.WriteFile(c.File, []byte(out), 0600)
+	return a.WriteFile(c.File, out, 0600)
 }

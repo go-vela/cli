@@ -17,6 +17,8 @@ import (
 )
 
 // Remove deletes one or more fields from the config file based off the provided configuration.
+//
+// nolint: funlen // ignore function length due to comments and conditionals
 func (c *Config) Remove() error {
 	logrus.Debug("executing remove for config file configuration")
 
@@ -146,5 +148,5 @@ func (c *Config) Remove() error {
 	// send Filesystem call to create config file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
-	return a.WriteFile(c.File, []byte(out), 0600)
+	return a.WriteFile(c.File, out, 0600)
 }

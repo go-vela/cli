@@ -14,6 +14,8 @@ import (
 )
 
 // ConfigUpdate defines the command for modifying one or more fields from the config file.
+//
+// nolint: dupl // ignore similar code among actions
 var ConfigUpdate = &cli.Command{
 	Name:        "config",
 	Description: "Use this command to update one or more fields from the config file.",

@@ -4,7 +4,7 @@
 
 package action
 
-// list of defined actions
+// list of defined actions.
 const (
 	// addAction defines the action for creating a resource.
 	addAction = "add"
@@ -32,9 +32,6 @@ const (
 
 	// loadAction defines the action for loading a resource.
 	loadAction = "load"
-
-	// loginAction defines the action for logging in to Vela.
-	loginAction = "login"
 
 	// removeAction defines the action for deleting a resource.
 	removeAction = "remove"

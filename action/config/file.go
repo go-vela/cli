@@ -6,6 +6,8 @@ package config
 
 // ConfigFile represents the configuration file
 // to perform config related requests with Vela.
+//
+// nolint: golint // ignore studder for package and struct name
 type ConfigFile struct {
 	API    *API    `yaml:"api,omitempty"`
 	Log    *Log    `yaml:"log,omitempty"`

@@ -86,6 +86,8 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // capture a list of builds.
+//
+// nolint: dupl // ignore similar code among actions
 func buildGet(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

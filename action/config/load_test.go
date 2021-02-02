@@ -34,7 +34,10 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	// setup flags
 	configSet := flag.NewFlagSet("test", 0)
-	configSet.Parse([]string{"view", "config"})
+	err := configSet.Parse([]string{"view", "config"})
+	if err != nil {
+		t.Errorf("unable to parse configset: %v", err)
+	}
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", "https://vela-server.localhost", "doc")

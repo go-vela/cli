@@ -107,6 +107,8 @@ func wideTable(hooks *[]library.Hook) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
+		//
+		// nolint: lll // ignore long line length due to number of columns
 		table.AddRow(h.GetNumber(), h.GetSourceID(), h.GetStatus(), h.GetHost(), h.GetEvent(), h.GetBranch(), c)
 	}
 

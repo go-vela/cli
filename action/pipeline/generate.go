@@ -79,5 +79,5 @@ func (c *Config) Generate() error {
 	// send Filesystem call to create pipeline file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
-	return a.WriteFile(path, []byte(out), 0644)
+	return a.WriteFile(path, out, 0644)
 }

@@ -14,6 +14,8 @@ import (
 )
 
 // ConfigGenerate defines the command for producing the config file.
+//
+// nolint: dupl // ignore similar code among actions
 var ConfigGenerate = &cli.Command{
 	Name:        "config",
 	Description: "Use this command to generate the config file.",

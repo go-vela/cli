@@ -142,6 +142,8 @@ github.com/go-playground/validator/v10 v10.4.1 h1:pH2c5ADXtd66mxoE0Zm9SUhxE20r7a
 github.com/go-playground/validator/v10 v10.4.1/go.mod h1:nlOn6nFhuKACm19sB/8EGNn9GlaMV7XkbRSipzJ0Ii4=
 github.com/go-vela/compiler v0.7.0-rc3 h1:mCw6uUGqpGuPHIQfBYswMEcCSU9R/ZK2t+GLQagHJ+M=
 github.com/go-vela/compiler v0.7.0-rc3/go.mod h1:XbNRK9QmVlYh+iVeRmwLAxRe3mCQ/xxJcR4vruSqs/U=
+github.com/go-vela/compiler v0.7.0-rc4 h1:S6lJMvJo4yaZHXYS3NbqRdTmq5EeZSyVfE+bLYi6WuQ=
+github.com/go-vela/compiler v0.7.0-rc4/go.mod h1:XbNRK9QmVlYh+iVeRmwLAxRe3mCQ/xxJcR4vruSqs/U=
 github.com/go-vela/mock v0.7.0-rc4 h1:iZbuaW6L8XpbK0DNZ8sO/4Xr1NdgVw9D4iVYudRXpQc=
 github.com/go-vela/mock v0.7.0-rc4/go.mod h1:usmS36SotbkJWmY/9pNXiaruSgUNwwDkavfC4aOc/Fw=
 github.com/go-vela/pkg-executor v0.7.0-rc3 h1:7Djtda75Gg/YNBep4V7U+yFQu6LuSwt3PY/FOVNjjMM=

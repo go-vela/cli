@@ -18,6 +18,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+// nolint: funlen // ignore function length due to flags
 func main() {
 	app := cli.NewApp()
 

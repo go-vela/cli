@@ -53,6 +53,8 @@ func table(steps *[]library.Step) error {
 		logrus.Tracef("adding step %d to step table", s.GetNumber())
 
 		// calculate duration based off the step timestamps
+		//
+		// nolint: gosec // ignore memory aliasing
 		d := duration(&s)
 
 		// add a row to the table with the specified values
@@ -100,6 +102,8 @@ func wideTable(steps *[]library.Step) error {
 		logrus.Tracef("adding step %d to wide step table", s.GetNumber())
 
 		// calculate duration based off the step timestamps
+		//
+		// nolint: gosec // ignore memory aliasing
 		d := duration(&s)
 
 		// calculate created timestamp in human readable form

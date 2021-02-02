@@ -83,6 +83,8 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // inspect a service.
+//
+// nolint: dupl // ignore similar code among actions
 func serviceView(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

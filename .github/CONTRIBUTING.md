@@ -22,6 +22,7 @@ We are always open to new PRs! You can follow the below guide for learning how y
 
 * [Review the commit guide we follow](https://chris.beams.io/posts/git-commit/#seven-rules) - ensure your commits follow our standards
 * [Golang](https://golang.org/dl/) - for source code and [dependency management](https://github.com/golang/go/wiki/Modules)
+* [Make](https://www.gnu.org/software/make/) - start up local development
 
 ### Setup
 
@@ -60,15 +61,23 @@ cd $HOME/go-vela/cli
 * Build the repository code:
 
 ```bash
-# Build the code with `go`
-CGO_ENABLED=0 go build -o ./vela-cli github.com/go-vela/cli
+# execute the `build` target with `make`
+make build
+
+# This command will output binaries to the following locations:
+#
+# * $HOME/go-vela/cli/release/darwin/amd64/vela
+# * $HOME/go-vela/cli/release/linux/amd64/vela
+# * $HOME/go-vela/cli/release/linux/arm64/vela
+# * $HOME/go-vela/cli/release/linux/arm/vela
+# * $HOME/go-vela/cli/release/windows/amd64/vela
 ```
 
 * Run the repository code:
 
 ```bash
-# Run the code
-./vela-cli
+# run the Go binary for your specific operating system and architecture
+release/darwin/amd64/vela
 ```
 
 ### Development
@@ -80,23 +89,37 @@ CGO_ENABLED=0 go build -o ./vela-cli github.com/go-vela/cli
 cd $HOME/go-vela/cli
 ```
 
-* Write your code and [test locally](#running-locally)
-  - Please be sure to [follow our commit rules](https://chris.beams.io/posts/git-commit/#seven-rules)
+* Write your code and tests to implement the changes you desire.
+  * Please be sure to [follow our commit rules](https://chris.beams.io/posts/git-commit/#seven-rules)
+  * Please address linter warnings appropriately. If you are intentionally violating a rule that triggers a linter, please annotate the respective code with `nolint` declarations [[docs](https://golangci-lint.run/usage/false-positives/)]. we are using the following format for `nolint` declarations:
 
-* Write tests for your changes and ensure they pass:
+    ```go
+    // nolint:<linter(s)> // <short reason>
+    ```
+  
+    Example:
+
+    ```go
+    // nolint:gocyclo // legacy function is complex, needs simplification
+    func superComplexFunction() error {
+      // ..
+    }
+    ```
+
+    Check the [documentation for more examples](https://golangci-lint.run/usage/false-positives/).
+
+* Test the repository code (ensures your changes don't break existing functionality):
 
 ```bash
-# Test the code with `go`
-go test ./...
+# execute the `test` target with `make`
+make test
 ```
 
-* Ensure your code meets the project standards:
+* Clean the repository code (ensures your code meets the project standards):
 
 ```bash
-# Clean the code with `go`
-go mod tidy
-go fmt ./...
-go vet ./...
+# execute the `test` target with `make`
+make clean
 ```
 
 * Push to your fork:
@@ -106,4 +129,25 @@ go vet ./...
 git push fork master
 ```
 
-* Open a pull request. Thank you for your contribution!
+* Open a pull request!
+  * For the title of the pull request, please use the following format for the title:
+
+    ```text
+    feat(wobble): add hat wobble
+    ^--^^------^  ^------------^
+    |   |         |
+    |   |         +---> Summary in present tense.
+    |   +---> Scope: a noun describing a section of the codebase (optional)
+    +---> Type: chore, docs, feat, fix, refactor, or test.
+    ```
+
+    * feat: adds a new feature (equivalent to a MINOR in Semantic Versioning)
+    * fix: fixes a bug (equivalent to a PATCH in Semantic Versioning)
+    * docs: changes to the documentation
+    * refactor: refactors production code, eg. renaming a variable; doesn't change public API
+    * test: adds missing tests, refactors tests; no production code change
+    * chore: updates something without impacting the user (ex: bump a dependency in package.json or go.mod); no production code change
+
+    If a code change introduces a breaking change, place ! suffix after type, ie. feat(change)!: adds breaking change. correlates with MAJOR in semantic versioning.
+
+Thank you for your contribution!

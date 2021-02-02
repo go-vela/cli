@@ -2,6 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// nolint: dupl // ignore similar code among actions
 package action
 
 import (
@@ -86,6 +87,8 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // capture a list of hooks.
+//
+// nolint: dupl // ignore similar code among actions
 func hookGet(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

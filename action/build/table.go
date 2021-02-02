@@ -53,6 +53,8 @@ func table(builds *[]library.Build) error {
 		logrus.Tracef("adding build %d to build table", b.GetNumber())
 
 		// calculate duration based off the build timestamps
+		//
+		// nolint: gosec // ignore memory aliasing
 		d := duration(&b)
 
 		// add a row to the table with the specified values
@@ -93,6 +95,8 @@ func wideTable(builds *[]library.Build) error {
 	// set of build fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
+	//
+	// nolint: lll // ignore long line length due to number of columns
 	table.AddRow("NUMBER", "STATUS", "EVENT", "BRANCH", "COMMIT", "DURATION", "CREATED", "FINISHED", "AUTHOR")
 
 	// iterate through all builds in the list
@@ -100,6 +104,8 @@ func wideTable(builds *[]library.Build) error {
 		logrus.Tracef("adding build %d to wide build table", b.GetNumber())
 
 		// calculate duration based off the build timestamps
+		//
+		// nolint: gosec // ignore memory aliasing
 		d := duration(&b)
 
 		// calculate created timestamp in human readable form
@@ -115,6 +121,8 @@ func wideTable(builds *[]library.Build) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
+		//
+		// nolint: lll // ignore long line length due to number of columns
 		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), b.GetCommit(), d, c, f, b.GetAuthor())
 	}
 

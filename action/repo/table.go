@@ -49,6 +49,7 @@ func table(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to repo table", r.GetFullName())
 
+		// nolint: gosec // ignore memory aliasing
 		e := strings.Join(events(&r), ",")
 
 		// add a row to the table with the specified values
@@ -95,6 +96,7 @@ func wideTable(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to wide repo table", r.GetFullName())
 
+		// nolint: gosec // ignore memory aliasing
 		e := strings.Join(events(&r), ",")
 
 		// add a row to the table with the specified values

@@ -2,8 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-// Package action contains all cli actions
-// nolint:dupl // code is similar to action/build_restart.go, but is not duplicative
+// nolint: dupl // ignore similar code among actions
 package action
 
 import (

@@ -2,6 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// nolint: dupl // ignore similar code among actions
 package action
 
 import (
@@ -77,6 +78,7 @@ var SecretView = &cli.Command{
 			Usage:   "format the output in json, spew or yaml",
 		},
 	},
+	// nolint: lll // ignore long line length due to flags
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View repository secret details.

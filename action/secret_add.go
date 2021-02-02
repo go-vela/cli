@@ -113,6 +113,7 @@ var SecretAdd = &cli.Command{
 			Usage:   "format the output in json, spew or yaml",
 		},
 	},
+	// nolint: lll // ignore long line length due to flags
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a repository secret.
@@ -143,6 +144,8 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // create a secret.
+//
+// nolint: dupl // ignore similar code among actions
 func secretAdd(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

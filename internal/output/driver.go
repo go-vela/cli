@@ -4,7 +4,7 @@
 
 package output
 
-// output drivers
+// output drivers.
 const (
 	// DriverStdout defines the driver type
 	// when outputting in stdout format.

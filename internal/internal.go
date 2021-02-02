@@ -9,7 +9,7 @@ package internal
 //   * https://golang.org/doc/go1.4#internalpackages
 //   * https://docs.google.com/document/d/1e8kOo3r51b2BWtTs_1uADIA5djfXhPT36s6eHVRIvaU/edit
 
-// API flag keys
+// API flag keys.
 const (
 	// FlagAPIAddress defines the key for the
 	// flag when setting the API address.
@@ -34,14 +34,14 @@ const (
 	FlagAPIVersion = "api.version"
 )
 
-// build flag keys
+// build flag keys.
 const (
 	// FlagBuild defines the key for the
 	// flag when setting the build.
 	FlagBuild = "build"
 )
 
-// generic flag keys
+// generic flag keys.
 const (
 	// FlagConfig defines the key for the
 	// flag when setting the config.
@@ -52,14 +52,14 @@ const (
 	FlagOutput = "output"
 )
 
-// log flag keys
+// log flag keys.
 const (
 	// FlagLogLevel defines the key for the
 	// flag when setting the log level.
 	FlagLogLevel = "log.level"
 )
 
-// pagination flag keys
+// pagination flag keys.
 const (
 	// FlagPage defines the key for the
 	// flag when setting the page.
@@ -70,7 +70,7 @@ const (
 	FlagPerPage = "per.page"
 )
 
-// repository flag keys
+// repository flag keys.
 const (
 	// FlagOrg defines the key for the
 	// flag when setting the org.
@@ -81,7 +81,7 @@ const (
 	FlagRepo = "repo"
 )
 
-// secret flag keys
+// secret flag keys.
 const (
 	// FlagSecretEngine defines the key for the
 	// flag when setting the secret engine.
@@ -92,14 +92,14 @@ const (
 	FlagSecretType = "secret.type"
 )
 
-// service flag keys
+// service flag keys.
 const (
 	// FlagService defines the key for the
 	// flag when setting the service.
 	FlagService = "service"
 )
 
-// step flag keys
+// step flag keys.
 const (
 	// FlagStep defines the key for the
 	// flag when setting the step.

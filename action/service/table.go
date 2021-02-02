@@ -53,6 +53,8 @@ func table(services *[]library.Service) error {
 		logrus.Tracef("adding service %d to service table", s.GetNumber())
 
 		// calculate duration based off the service timestamps
+		//
+		// nolint: gosec // ignore memory aliasing
 		d := duration(&s)
 
 		// add a row to the table with the specified values
@@ -100,6 +102,8 @@ func wideTable(services *[]library.Service) error {
 		logrus.Tracef("adding service %d to wide service table", s.GetNumber())
 
 		// calculate duration based off the service timestamps
+		//
+		// nolint: gosec // ignore memory aliasing
 		d := duration(&s)
 
 		// calculate created timestamp in human readable form

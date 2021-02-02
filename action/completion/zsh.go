@@ -7,6 +7,8 @@ package completion
 // ZshAutoComplete represents the script used
 // to enable automatic completion for the
 // Zsh (https://ohmyz.sh/) Unix shell.
+//
+// nolint: lll // ignore long line length
 const ZshAutoComplete = `#comdef vela
   _cli_zsh_autocomplete() {
     local -a opts

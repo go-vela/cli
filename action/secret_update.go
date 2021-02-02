@@ -108,6 +108,7 @@ var SecretUpdate = &cli.Command{
 			Usage:   "Print the output in default, yaml or json format",
 		},
 	},
+	// nolint: lll // ignore long line length due to flags
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a repository secret.
@@ -138,6 +139,8 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // modify a secret.
+//
+// nolint: dupl // ignore similar code among actions
 func secretUpdate(c *cli.Context) error {
 	// load variables from the config file
 	err := load(c)

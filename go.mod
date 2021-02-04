@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/Masterminds/semver/v3 v3.1.1
-	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3
+	github.com/buildkite/yaml/v2/v2 v2.2.0
 	github.com/cli/browser v1.0.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

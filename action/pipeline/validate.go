@@ -73,7 +73,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Tracef("parsing pipeline %s", path)
 
 	// parse the object into a pipeline
-	pipeline, raw, err := client.Parse(path)
+	pipeline, err := client.Parse(path)
 	if err != nil {
 		return err
 	}
@@ -81,7 +81,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Tracef("validating pipeline %s", path)
 
 	// validate the pipeline
-	err = pipeline.Validate(raw)
+	err = client.Validate(pipeline)
 	if err != nil {
 		return err
 	}

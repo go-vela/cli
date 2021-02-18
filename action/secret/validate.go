@@ -38,6 +38,18 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("no secret org provided")
 	}
 
+	// check if the secret type provided is valid
+	switch c.Type {
+	case constants.SecretRepo:
+		fallthrough
+	case constants.SecretOrg:
+		fallthrough
+	case constants.SecretShared:
+		break
+	default:
+		return fmt.Errorf("invalid secret type provided: %s", c.Type)
+	}
+
 	// check if secret type is repo
 	if strings.EqualFold(c.Type, constants.SecretRepo) {
 		// check if secret repo is set
@@ -67,6 +79,25 @@ func (c *Config) Validate() error {
 		// check if secret value is set
 		if len(c.Value) == 0 {
 			return fmt.Errorf("no secret value provided")
+		}
+
+		// iterate through all secret events
+		for _, event := range c.Events {
+			// check if the secret event provided is valid
+			switch event {
+			case constants.EventComment:
+				fallthrough
+			case constants.EventDeploy:
+				fallthrough
+			case constants.EventPull:
+				fallthrough
+			case constants.EventPush:
+				fallthrough
+			case constants.EventTag:
+				break
+			default:
+				return fmt.Errorf("invalid secret event provided: %s", event)
+			}
 		}
 	}
 

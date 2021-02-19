@@ -10,17 +10,17 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fatih/color v1.10.0 // indirect
-	github.com/go-vela/compiler v0.7.2
-	github.com/go-vela/mock v0.7.2
-	github.com/go-vela/pkg-executor v0.7.2
-	github.com/go-vela/pkg-runtime v0.7.2
-	github.com/go-vela/sdk-go v0.7.2
-	github.com/go-vela/types v0.7.2
+	github.com/go-vela/compiler v0.7.3
+	github.com/go-vela/mock v0.7.3
+	github.com/go-vela/pkg-executor v0.7.3
+	github.com/go-vela/pkg-runtime v0.7.3
+	github.com/go-vela/sdk-go v0.7.3
+	github.com/go-vela/types v0.7.3
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0
 	github.com/mattn/go-runewidth v0.0.6 // indirect
-	github.com/sirupsen/logrus v1.7.0
+	github.com/sirupsen/logrus v1.8.0
 	github.com/spf13/afero v1.5.1
 	github.com/urfave/cli/v2 v2.3.0
 	gopkg.in/yaml.v2 v2.4.0

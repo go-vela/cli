@@ -51,6 +51,24 @@ func (c *Config) Validate() error {
 	return nil
 }
 
+// validateFile validates the configuration file exists
+func validateFile(path string) (string, error) {
+	// check if file exists
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		// attempt to validate if .vela.yaml exists if .vela.yml does not
+		if filepath.Base(path) == ".vela.yml" {
+			// override path if .vela.yaml exists
+			if _, err := os.Stat(filepath.Join(filepath.Dir(path), ".vela.yaml")); err == nil {
+				return filepath.Join(filepath.Dir(path), ".vela.yaml"), nil
+			}
+		}
+
+		return path, fmt.Errorf("configuration file of %s does not exist", path)
+	}
+
+	return path, nil
+}
+
 // ValidateLocal verifies a local pipeline based off the provided configuration.
 func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Debug("executing validate for local pipeline configuration")
@@ -68,6 +86,11 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	if len(c.Path) > 0 {
 		// create custom full path for pipeline file
 		path = filepath.Join(c.Path, c.File)
+	}
+
+	path, err = validateFile(path)
+	if err != nil {
+		return err
 	}
 
 	logrus.Tracef("parsing pipeline %s", path)

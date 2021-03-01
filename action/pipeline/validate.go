@@ -51,7 +51,7 @@ func (c *Config) Validate() error {
 	return nil
 }
 
-// validateFile validates the configuration file exists
+// validateFile validates the configuration file exists.
 func validateFile(path string) (string, error) {
 	// check if file exists
 	if _, err := os.Stat(path); os.IsNotExist(err) {

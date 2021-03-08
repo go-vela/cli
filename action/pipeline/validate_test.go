@@ -7,6 +7,8 @@ package pipeline
 import (
 	"flag"
 	"net/http/httptest"
+	"os"
+	"path"
 	"testing"
 
 	"github.com/go-vela/compiler/compiler/native"
@@ -269,5 +271,51 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		if err != nil {
 			t.Errorf("ValidateRemote returned err: %v", err)
 		}
+	}
+}
+
+func Test_validateFile(t *testing.T) {
+	cwd, err := os.Getwd()
+	if err != nil {
+		t.Error(err)
+	}
+	type args struct {
+		path   string
+		create string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{"invalid .vela.yaml", args{path: path.Join(cwd, ".vela.yaml")}, path.Join(cwd, ".vela.yaml"), true},
+		{"invalid .vela.yml", args{path: path.Join(cwd, ".vela.yml")}, path.Join(cwd, ".vela.yml"), true},
+		{"valid .vela.yaml", args{path: path.Join(cwd, ".vela.yaml"), create: ".vela.yaml"}, path.Join(cwd, ".vela.yaml"), false},
+		{"update to .vela.yaml", args{path: path.Join(cwd, ".vela.yml"), create: ".vela.yaml"}, path.Join(cwd, ".vela.yaml"), false},
+		{"valid .vela.yml", args{path: path.Join(cwd, ".vela.yml"), create: ".vela.yml"}, path.Join(cwd, ".vela.yml"), false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// remove existing .vela.yml and .vela.yaml
+			for _, file := range []string{".vela.yml", ".vela.yaml"} {
+				os.Remove(path.Join(cwd, file))
+			}
+			// create file if specified
+			if tt.args.create != "" {
+				_, err := os.Create(path.Join(cwd, tt.args.create))
+				if err != nil {
+					t.Error(err)
+				}
+			}
+			got, err := validateFile(tt.args.path)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("validateFile() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("validateFile() got = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

@@ -31,3 +31,6 @@ release/
 *.ipr
 *.iws
 *.xml
+
+action/pipeline/.vela.yaml
+action/pipeline/.vela.yml

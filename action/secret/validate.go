@@ -74,13 +74,16 @@ func (c *Config) Validate() error {
 		}
 	}
 
-	// check if secret action is add or update
-	if c.Action == "add" || c.Action == "update" {
+	// check if secret action is add
+	if c.Action == "add" {
 		// check if secret value is set
 		if len(c.Value) == 0 {
 			return fmt.Errorf("no secret value provided")
 		}
+	}
 
+	// check if secret action is add or update
+	if c.Action == "add" || c.Action == "update" {
 		// iterate through all secret events
 		for _, event := range c.Events {
 			// check if the secret event provided is valid

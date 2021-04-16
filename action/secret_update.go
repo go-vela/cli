@@ -160,7 +160,7 @@ func secretUpdate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
-		Action:       addAction,
+		Action:       updateAction,
 		Engine:       c.String(internal.FlagSecretEngine),
 		Type:         c.String(internal.FlagSecretType),
 		Org:          c.String(internal.FlagOrg),

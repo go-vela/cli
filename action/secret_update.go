@@ -19,7 +19,7 @@ import (
 // SecretUpdate defines the command for inspecting a secret.
 var SecretUpdate = &cli.Command{
 	Name:        "secret",
-	Description: "Use this command to view a secret.",
+	Description: "Use this command to update a secret.",
 	Usage:       "Update details of the provided secret",
 	Action:      secretUpdate,
 	Flags: []cli.Flag{

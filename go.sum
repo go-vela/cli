@@ -144,6 +144,8 @@ github.com/go-vela/pkg-executor v0.7.4 h1:qAY+vywxDTKykIiQet1aZObXRWT45lc9JCBbSU
 github.com/go-vela/pkg-executor v0.7.4/go.mod h1:BHSNSW0RLcvmcRCLi+LtYH/bm3NSWYUldN12b4KOvlQ=
 github.com/go-vela/pkg-runtime v0.7.4 h1:uz9Zqub/YW9Tf/d2jnUc9fCv2fEGyjHMukzZ7yrRet4=
 github.com/go-vela/pkg-runtime v0.7.4/go.mod h1:CCY2iidKjW7Pte4quOG6Zn9Flx7OyV4uQEP0TM2Jj3I=
+github.com/go-vela/pkg-runtime v0.7.5 h1:Fickp6sVhLXLaselaDMBTGKrmXJ8Fjb2IpL+iESds2M=
+github.com/go-vela/pkg-runtime v0.7.5/go.mod h1:CCY2iidKjW7Pte4quOG6Zn9Flx7OyV4uQEP0TM2Jj3I=
 github.com/go-vela/sdk-go v0.7.4 h1:OXUR8LZzO8kBmNY3yRuFojcmjWaMoK1s2q5iIpu5vhg=
 github.com/go-vela/sdk-go v0.7.4/go.mod h1:I1K3LpWOnfsJUhHXJf7DpwR9zVz4h65hRXzQ5IOxPuo=
 github.com/go-vela/types v0.7.4 h1:iVz1kDS/uvkOoridyyt0bTZ5tG2j3QYx25rbyFdu35M=

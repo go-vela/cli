@@ -76,7 +76,7 @@ var RepoUpdate = &cli.Command{
 			EnvVars: []string{"VELA_COUNTER", "REPO_COUNTER"},
 			Name:    "counter",
 			Aliases: []string{"ct"},
-			Usage:   "max time allowed per build in repository",
+			Usage:   "set a value for a new build number",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PRIVATE", "REPO_PRIVATE"},
@@ -169,7 +169,7 @@ func repoUpdate(c *cli.Context) error {
 		Clone:      c.String("clone"),
 		Visibility: c.String("visibility"),
 		Timeout:    c.Int64("timeout"),
-		Counter:    c.Int("Counter"),
+		Counter:    c.Int("counter"),
 		Private:    c.Bool("private"),
 		Trusted:    c.Bool("trusted"),
 		Active:     c.Bool("active"),

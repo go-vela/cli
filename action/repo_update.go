@@ -130,8 +130,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
   4. Update a repository when config or environment variables are set.
     $ {{.HelpName}}
-	5. Update a repository with a new build number.
-		$ {{.HelpName}} --org MyOrg --repo MyRepo --counter 200
+  5. Update a repository with a new build number.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 200
 
 DOCUMENTATION:
 

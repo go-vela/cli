@@ -94,7 +94,7 @@ func (c *Config) Tokens(client *vela.Client, addr string) error {
 		// log the response object for troubleshooting purposes
 		logrus.Debug(resp)
 
-		if err != nil {
+		if resp == nil {
 			return fmt.Errorf("unable to successfully connect to %s: %w", addr, err)
 		}
 

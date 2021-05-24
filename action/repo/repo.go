@@ -15,6 +15,7 @@ type Config struct {
 	Clone      string
 	Visibility string
 	Timeout    int64
+	Counter    int
 	Private    bool
 	Trusted    bool
 	Active     bool

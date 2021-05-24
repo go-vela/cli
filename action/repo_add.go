@@ -72,6 +72,12 @@ var RepoAdd = &cli.Command{
 			Usage:   "max time allowed per build in repository",
 			Value:   30,
 		},
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_COUNTER", "REPO_COUNTER"},
+			Name:    "counter",
+			Aliases: []string{"ct"},
+			Usage:   "set a value for a new build number",
+		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PRIVATE", "REPO_PRIVATE"},
 			Name:    "private",
@@ -124,6 +130,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
   4. Add a repository when config or environment variables are set.
     $ {{.HelpName}} --event push --event pull_request
+  5. Add a repository with a starting build number.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
 
 DOCUMENTATION:
 
@@ -161,6 +169,7 @@ func repoAdd(c *cli.Context) error {
 		Clone:      c.String("clone"),
 		Visibility: c.String("visibility"),
 		Timeout:    c.Int64("timeout"),
+		Counter:    c.Int("counter"),
 		Private:    c.Bool("private"),
 		Trusted:    c.Bool("trusted"),
 		Active:     c.Bool("active"),

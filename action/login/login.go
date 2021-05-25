@@ -94,6 +94,10 @@ func (c *Config) Tokens(client *vela.Client, addr string) error {
 		// log the response object for troubleshooting purposes
 		logrus.Debug(resp)
 
+		if resp == nil {
+			return fmt.Errorf("unable to successfully connect to %s: %w", addr, err)
+		}
+
 		// check if expected unauthorized (401) status code was returned
 		if resp.StatusCode != http.StatusUnauthorized {
 			// log a warning indicating the unexpected status code receive

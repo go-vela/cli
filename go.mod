@@ -14,7 +14,7 @@ require (
 	github.com/go-vela/pkg-executor v0.8.1
 	github.com/go-vela/pkg-runtime v0.8.1
 	github.com/go-vela/sdk-go v0.8.1
-	github.com/go-vela/types v0.8.2
+	github.com/go-vela/types v0.8.3-0.20210709135941-cea3e4e5d4a9
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0

@@ -42,6 +42,8 @@ github.com/Azure/go-autorest/logger v0.2.0/go.mod h1:T9E3cAhj2VqvPOtCYAvby9aBXkZ
 github.com/Azure/go-autorest/tracing v0.6.0/go.mod h1:+vhtPC754Xsa23ID7GlGsrdKBpUA79WCAKPPZVC2DeU=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
+github.com/GregoryDosh/sdk-go v0.8.2-0.20210714213805-e3b693eeac93 h1:y9xN9ZZnSjYPSMv6YFhRM9xYGc8VlLVr8vn5TdZ5ytM=
+github.com/GregoryDosh/sdk-go v0.8.2-0.20210714213805-e3b693eeac93/go.mod h1:CTNVI4j/nlupUMG1EOV3bG3vBZeu7dokwWIsNA0pPaE=
 github.com/Masterminds/goutils v1.1.1 h1:5nUrii3FMTL5diU80unEVvNevw1nH4+ZV4DSLVJLSYI=
 github.com/Masterminds/goutils v1.1.1/go.mod h1:8cTjp+g8YejhMuvIA5y2vz3BpJxksy863GQaJW2MFNU=
 github.com/Masterminds/semver/v3 v3.1.1 h1:hLg3sBzpNErnxhQtUy/mmLR2I9foDujNK030IGemrRc=
@@ -148,8 +150,6 @@ github.com/go-vela/pkg-executor v0.8.1 h1:x2nD+mlBw7IJtNp3UaTaB7d9HRJ99VL6sheEzw
 github.com/go-vela/pkg-executor v0.8.1/go.mod h1:s0T+g7nRUD/cVrgr+aAVQ7yPPmNgACBg2d9sG+h1suQ=
 github.com/go-vela/pkg-runtime v0.8.1 h1:2xA4soRtpipF/OOJeK18pQQOInTaqyXLOnwgDkWcLLU=
 github.com/go-vela/pkg-runtime v0.8.1/go.mod h1:+tNkePpoyWY5CJYEwvkCkI7W93b0BuWKM6gQ9Wz+Pos=
-github.com/go-vela/sdk-go v0.8.1 h1:0goUbmVVuTOqU8bdhHkO6ASCAkZqEFdN5/6YRM0Zv6I=
-github.com/go-vela/sdk-go v0.8.1/go.mod h1:CTNVI4j/nlupUMG1EOV3bG3vBZeu7dokwWIsNA0pPaE=
 github.com/go-vela/types v0.8.2 h1:XM5fgHfbAOmIk5zzppjh4u1KsC3auTibsEoVfUZs5pc=
 github.com/go-vela/types v0.8.2/go.mod h1:tKk+FpEAv+BTMr9CL3Wed6tMy5IqyOCJpRTKZI88yDc=
 github.com/gogo/protobuf v1.3.1/go.mod h1:SlYgWuQ5SjCEi6WLHjHCa1yvBfUnHcTbrrZtXPKa29o=

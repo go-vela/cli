@@ -145,7 +145,6 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 		}
 		p := string(bodyBytes)
 		pipeline = &p
-
 	} else {
 		// We're only in here if we're pulling the pipeline externally
 

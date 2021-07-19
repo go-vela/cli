@@ -109,6 +109,13 @@ var RepoUpdate = &cli.Command{
 				constants.EventPull,
 			),
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},
+			Name:    "pipeline-type",
+			Aliases: []string{"pt"},
+			Usage:   "type of base pipeline for the compiler to render",
+			Value:   constants.PipelineTypeYAML,
+		},
 
 		// Output Flags
 
@@ -161,20 +168,21 @@ func repoUpdate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
-		Action:     updateAction,
-		Org:        c.String(internal.FlagOrg),
-		Name:       c.String(internal.FlagRepo),
-		Branch:     c.String("branch"),
-		Link:       c.String("link"),
-		Clone:      c.String("clone"),
-		Visibility: c.String("visibility"),
-		Timeout:    c.Int64("timeout"),
-		Counter:    c.Int("counter"),
-		Private:    c.Bool("private"),
-		Trusted:    c.Bool("trusted"),
-		Active:     c.Bool("active"),
-		Events:     c.StringSlice("event"),
-		Output:     c.String(internal.FlagOutput),
+		Action:       updateAction,
+		Org:          c.String(internal.FlagOrg),
+		Name:         c.String(internal.FlagRepo),
+		Branch:       c.String("branch"),
+		Link:         c.String("link"),
+		Clone:        c.String("clone"),
+		Visibility:   c.String("visibility"),
+		Timeout:      c.Int64("timeout"),
+		Counter:      c.Int("counter"),
+		Private:      c.Bool("private"),
+		Trusted:      c.Bool("trusted"),
+		Active:       c.Bool("active"),
+		Events:       c.StringSlice("event"),
+		PipelineType: c.String("pipeline-type"),
+		Output:       c.String(internal.FlagOutput),
 	}
 
 	// validate repo configuration

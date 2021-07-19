@@ -6,10 +6,12 @@ package action
 
 import (
 	"fmt"
+	"io/ioutil"
 
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/compiler/compiler/native"
 
@@ -23,6 +25,20 @@ var PipelineValidate = &cli.Command{
 	Usage:       "Validate a Vela pipeline",
 	Action:      pipelineValidate,
 	Flags: []cli.Flag{
+
+		&cli.BoolFlag{
+			Name:  "raw",
+			Usage: "this needs to be documented and renamed probably",
+		},
+
+		// Output Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
+			Name:    internal.FlagOutput,
+			Aliases: []string{"op"},
+			Usage:   "format the output in json, spew, wide or yaml",
+		},
 
 		// Repo Flags
 
@@ -106,6 +122,17 @@ func pipelineValidate(c *cli.Context) error {
 		Path:     c.String("path"),
 		Ref:      c.String("ref"),
 		Template: c.Bool("template"),
+		Output:   c.String(internal.FlagOutput),
+	}
+
+	isRaw := c.Bool("raw")
+
+	if isRaw {
+		rawPipelineBytes, err := ioutil.ReadFile(p.File)
+		if err != nil {
+			logrus.Errorf("Raw pipeline reading file returned err: %v", err)
+		}
+		p.RawPipeline = rawPipelineBytes
 	}
 
 	// validate pipeline configuration
@@ -117,7 +144,7 @@ func pipelineValidate(c *cli.Context) error {
 	}
 
 	// check if pipeline org is provided
-	if len(p.Org) > 0 && len(p.Repo) > 0 {
+	if (len(p.Org) > 0 && len(p.Repo) > 0) || isRaw {
 		// parse the Vela client from the context
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse

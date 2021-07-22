@@ -92,11 +92,13 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --ref dev
   4. Add a deployment for a repository with a specific commit reference.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --ref 48afb5bdc41ad69bf22588491333f7cf71135163
-  5. Add a deployment for a repository with a specific description.
+  5. Add a deployment for a repository with a specific tag reference.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref refs/tags/1.0.0
+  6. Add a deployment for a repository with a specific description.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
-  6. Add a deployment for a repository with two parameters.
+  7. Add a deployment for a repository with two parameters.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --parameter 'key=value' --parameter 'foo=bar'
-  7. Add a deployment for a repository when config or environment variables are set.
+  8. Add a deployment for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
 DOCUMENTATION:

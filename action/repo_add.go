@@ -109,6 +109,13 @@ var RepoAdd = &cli.Command{
 				constants.EventPull,
 			),
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},
+			Name:    "pipeline-type",
+			Aliases: []string{"pt"},
+			Usage:   "type of base pipeline for the compiler to render",
+			Value:   constants.PipelineTypeYAML,
+		},
 
 		// Output Flags
 
@@ -132,6 +139,8 @@ EXAMPLES:
     $ {{.HelpName}} --event push --event pull_request
   5. Add a repository with a starting build number.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
+  6. Add a repository with a starlark pipeline file.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
 
 DOCUMENTATION:
 
@@ -161,20 +170,21 @@ func repoAdd(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
-		Action:     addAction,
-		Org:        c.String(internal.FlagOrg),
-		Name:       c.String(internal.FlagRepo),
-		Branch:     c.String("branch"),
-		Link:       c.String("link"),
-		Clone:      c.String("clone"),
-		Visibility: c.String("visibility"),
-		Timeout:    c.Int64("timeout"),
-		Counter:    c.Int("counter"),
-		Private:    c.Bool("private"),
-		Trusted:    c.Bool("trusted"),
-		Active:     c.Bool("active"),
-		Events:     c.StringSlice("event"),
-		Output:     c.String(internal.FlagOutput),
+		Action:       addAction,
+		Org:          c.String(internal.FlagOrg),
+		Name:         c.String(internal.FlagRepo),
+		Branch:       c.String("branch"),
+		Link:         c.String("link"),
+		Clone:        c.String("clone"),
+		Visibility:   c.String("visibility"),
+		Timeout:      c.Int64("timeout"),
+		Counter:      c.Int("counter"),
+		Private:      c.Bool("private"),
+		Trusted:      c.Bool("trusted"),
+		Active:       c.Bool("active"),
+		Events:       c.StringSlice("event"),
+		PipelineType: c.String("pipeline-type"),
+		Output:       c.String(internal.FlagOutput),
 	}
 
 	// validate repo configuration

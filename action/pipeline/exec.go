@@ -53,6 +53,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	r.SetOrg(c.Org)
 	r.SetName(c.Repo)
 	r.SetFullName(fmt.Sprintf("%s/%s", c.Org, c.Repo))
+	r.SetPipelineType(c.PipelineType)
 
 	logrus.Tracef("compiling pipeline %s", path)
 

@@ -1,5 +1,7 @@
 module github.com/go-vela/cli
 
+replace github.com/go-vela/compiler => github.com/JordanSussman/compiler v0.1.3-0.20210726211437-20142829e99a
+
 go 1.15
 
 require (
@@ -14,7 +16,7 @@ require (
 	github.com/go-vela/pkg-executor v0.8.1
 	github.com/go-vela/pkg-runtime v0.8.1
 	github.com/go-vela/sdk-go v0.8.1
-	github.com/go-vela/types v0.8.3-0.20210709135941-cea3e4e5d4a9
+	github.com/go-vela/types v0.8.3-0.20210726122150-0eaf6091307b
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0

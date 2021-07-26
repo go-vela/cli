@@ -10,6 +10,7 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/types/constants"
 
 	"github.com/go-vela/compiler/compiler/native"
 
@@ -37,6 +38,13 @@ var PipelineValidate = &cli.Command{
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},
+			Name:    "pipeline-type",
+			Aliases: []string{"pt"},
+			Usage:   "type of pipeline for the compiler to render",
+			Value:   constants.PipelineTypeYAML,
 		},
 
 		// Pipeline Flags
@@ -99,13 +107,14 @@ func pipelineValidate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action:   validateAction,
-		Org:      c.String(internal.FlagOrg),
-		Repo:     c.String(internal.FlagRepo),
-		File:     c.String("file"),
-		Path:     c.String("path"),
-		Ref:      c.String("ref"),
-		Template: c.Bool("template"),
+		Action:       validateAction,
+		Org:          c.String(internal.FlagOrg),
+		Repo:         c.String(internal.FlagRepo),
+		File:         c.String("file"),
+		Path:         c.String("path"),
+		Ref:          c.String("ref"),
+		Template:     c.Bool("template"),
+		PipelineType: c.String("pipeline-type"),
 	}
 
 	// validate pipeline configuration

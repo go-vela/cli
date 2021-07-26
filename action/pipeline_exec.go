@@ -10,6 +10,7 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/compiler/compiler/native"
+	"github.com/go-vela/types/constants"
 
 	"github.com/urfave/cli/v2"
 )
@@ -107,6 +108,13 @@ var PipelineExec = &cli.Command{
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},
+			Name:    "pipeline-type",
+			Aliases: []string{"pt"},
+			Usage:   "type of pipeline for the compiler to render",
+			Value:   constants.PipelineTypeYAML,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -122,6 +130,8 @@ EXAMPLES:
     $ {{.HelpName}} --volume /tmp/foo.txt:/tmp/foo.txt:ro
   6. Execute a local Vela pipeline with a writeable local volume.
     $ {{.HelpName}} --volume /tmp/bar.txt:/tmp/bar.txt:rw
+  7. Execute a local Vela pipeline with type of go
+    $ {{.HelpName}}  --pipeline-type go
 
 DOCUMENTATION:
 
@@ -143,18 +153,19 @@ func pipelineExec(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action:  execAction,
-		Branch:  c.String("branch"),
-		Comment: c.String("comment"),
-		Event:   c.String("event"),
-		Tag:     c.String("tag"),
-		Target:  c.String("target"),
-		Org:     c.String(internal.FlagOrg),
-		Repo:    c.String(internal.FlagRepo),
-		File:    c.String("file"),
-		Local:   c.Bool("local"),
-		Path:    c.String("path"),
-		Volumes: c.StringSlice("volume"),
+		Action:       execAction,
+		Branch:       c.String("branch"),
+		Comment:      c.String("comment"),
+		Event:        c.String("event"),
+		Tag:          c.String("tag"),
+		Target:       c.String("target"),
+		Org:          c.String(internal.FlagOrg),
+		Repo:         c.String(internal.FlagRepo),
+		File:         c.String("file"),
+		Local:        c.Bool("local"),
+		Path:         c.String("path"),
+		Volumes:      c.StringSlice("volume"),
+		PipelineType: c.String("pipeline-type"),
 	}
 
 	// validate pipeline configuration

@@ -46,7 +46,11 @@ func (c *Config) Exec(client compiler.Engine) error {
 	b.SetBranch(c.Branch)
 	b.SetDeploy(c.Target)
 	b.SetEvent(c.Event)
-	b.SetRef(c.Tag)
+	if c.Tag == "" && c.Event == constants.EventPull {
+		b.SetRef("refs/pull/1")
+	} else {
+		b.SetRef(c.Tag)
+	}
 
 	// create repo object for use in pipeline
 	r := new(library.Repo)

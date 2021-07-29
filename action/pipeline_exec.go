@@ -131,7 +131,7 @@ EXAMPLES:
   6. Execute a local Vela pipeline with a writeable local volume.
     $ {{.HelpName}} --volume /tmp/bar.txt:/tmp/bar.txt:rw
   7. Execute a local Vela pipeline with type of go
-    $ {{.HelpName}}  --pipeline-type go
+    $ {{.HelpName}} --pipeline-type go
 
 DOCUMENTATION:
 

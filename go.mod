@@ -1,7 +1,5 @@
 module github.com/go-vela/cli
 
-replace github.com/go-vela/compiler => github.com/JordanSussman/compiler v0.1.3-0.20210726211437-20142829e99a
-
 go 1.15
 
 require (
@@ -11,7 +9,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
-	github.com/go-vela/compiler v0.8.1
+	github.com/go-vela/compiler v0.8.2-0.20210728151243-38af4aebce57
 	github.com/go-vela/mock v0.8.1
 	github.com/go-vela/pkg-executor v0.8.1
 	github.com/go-vela/pkg-runtime v0.8.1

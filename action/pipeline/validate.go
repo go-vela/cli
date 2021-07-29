@@ -11,12 +11,8 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/yaml"
 
 	"github.com/go-vela/compiler/compiler"
-	"github.com/go-vela/compiler/template/native"
-	"github.com/go-vela/compiler/template/starlark"
 
 	"github.com/sirupsen/logrus"
 )
@@ -99,32 +95,10 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 
 	logrus.Tracef("parsing pipeline %s", path)
 
-	var pipeline *yaml.Build
-
 	// parse the object into a pipeline
-	parsedRaw, err := client.ParseRaw(path)
+	pipeline, err := client.Parse(path)
 	if err != nil {
 		return err
-	}
-
-	switch c.PipelineType {
-	case constants.PipelineTypeGo:
-		// expand the base configuration
-		pipeline, err = native.RenderBuild(parsedRaw, nil)
-		if err != nil {
-			return err
-		}
-	case constants.PipelineTypeStarlark:
-		// expand the base configuration
-		pipeline, err = starlark.RenderBuild(parsedRaw, nil)
-		if err != nil {
-			return err
-		}
-	default:
-		pipeline, err = client.Parse(parsedRaw)
-		if err != nil {
-			return err
-		}
 	}
 
 	logrus.Tracef("validating pipeline %s", path)

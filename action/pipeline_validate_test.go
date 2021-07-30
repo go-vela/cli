@@ -31,6 +31,7 @@ func TestAction_PipelineValidate(t *testing.T) {
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("output", "json", "doc")
+	fullSet.String("pipeline-type", "yaml", "doc")
 
 	// setup flags
 	localSet := flag.NewFlagSet("test", 0)

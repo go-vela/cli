@@ -6,7 +6,7 @@
 #  docker build -t target/vela-cli:latest .     #
 #################################################
 
-FROM alpine:3
+FROM alpine:20210730
 
 RUN apk add --update --no-cache ca-certificates
 

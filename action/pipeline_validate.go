@@ -74,6 +74,11 @@ var PipelineValidate = &cli.Command{
 			Usage:   "enables validating a pipeline with templates",
 			Value:   false,
 		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_TEMPLATE_FILE", "PIPELINE_TEMPLATE_FILE"},
+			Name:    "template-file",
+			Usage:   "enables using a local template file for expansion",
+		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_REMOTE", "PIPELINE_REMOTE"},
 			Name:    "remote",
@@ -108,6 +113,10 @@ EXAMPLES:
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo
   5. Validate a remote pipeline for a repository with json output.
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo --output json
+  5. Validate a template pipeline with expanding steps
+    $ {{.HelpName}} --template
+  6. Validate a local template pipeline with expanding steps
+    $ {{.HelpName}} --template --template-file name:/path/to/file
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/pipeline/validate/
@@ -128,15 +137,16 @@ func pipelineValidate(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action:       validateAction,
-		Org:          c.String(internal.FlagOrg),
-		Repo:         c.String(internal.FlagRepo),
-		File:         c.String("file"),
-		Path:         c.String("path"),
-		Ref:          c.String("ref"),
-		Template:     c.Bool("template"),
-		Remote:       c.Bool("remote"),
-		PipelineType: c.String("pipeline-type"),
+		Action:        validateAction,
+		Org:           c.String(internal.FlagOrg),
+		Repo:          c.String(internal.FlagRepo),
+		File:          c.String("file"),
+		Path:          c.String("path"),
+		Ref:           c.String("ref"),
+		Template:      c.Bool("template"),
+		TemplateFiles: c.StringSlice("template-file"),
+		Remote:        c.Bool("remote"),
+		PipelineType:  c.String("pipeline-type"),
 	}
 
 	// validate pipeline configuration
@@ -169,6 +179,11 @@ func pipelineValidate(c *cli.Context) error {
 	client, err := native.New(c)
 	if err != nil {
 		return err
+	}
+
+	// set when user is sourcing templates from local machine
+	if len(p.TemplateFiles) != 0 {
+		client.WithLocal(true)
 	}
 
 	// execute the validate local call for the pipeline configuration

@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
@@ -46,6 +47,16 @@ func (c *Config) Validate() error {
 			// check if pipeline file is set
 			if len(c.File) == 0 {
 				return fmt.Errorf("no pipeline file provided")
+			}
+		}
+
+		for _, file := range c.TemplateFiles {
+			parts := strings.Split(file, ":")
+
+			// golint:mnd // ignore magic number, we are explicitly checking for it to parsed into two parts only
+			if len(parts) != 2 {
+				// golint:lll // ignore lenfth of error message
+				return fmt.Errorf("invalid format for template file: %s (valid format: name:/path/to/file", file)
 			}
 		}
 	}
@@ -88,30 +99,38 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		return err
 	}
 
-	logrus.Tracef("validating pipeline %s", path)
+	templates := mapFromTemplates(p.Templates)
 
-	// validate the pipeline
-	err = client.Validate(p)
-	if err != nil {
-		return err
-	}
+	logrus.Tracef("validating pipeline %s", path)
 
 	if c.Template {
 		logrus.Tracef("expand pipeline %s", path)
 
+		for _, file := range c.TemplateFiles {
+			parts := strings.Split(file, ":")
+
+			templates[parts[0]].Source = parts[1]
+		}
+
 		if len(p.Stages) > 0 {
 			// inject the templates into the stages
-			p.Stages, p.Secrets, p.Services, err = client.ExpandStages(p, mapFromTemplates(p.Templates))
+			p.Stages, p.Secrets, p.Services, err = client.ExpandStages(p, templates)
 			if err != nil {
 				return err
 			}
 		}
 
 		// inject the templates into the steps
-		p.Steps, p.Secrets, p.Services, err = client.ExpandSteps(p, mapFromTemplates(p.Templates))
+		p.Steps, p.Secrets, p.Services, err = client.ExpandSteps(p, templates)
 		if err != nil {
 			return err
 		}
+	}
+
+	// validate the pipeline
+	err = client.Validate(p)
+	if err != nil {
+		return err
 	}
 
 	// output the message in stdout format

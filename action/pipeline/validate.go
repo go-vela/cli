@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/yaml"
 
 	"github.com/go-vela/compiler/compiler"
 
@@ -52,24 +53,6 @@ func (c *Config) Validate() error {
 	return nil
 }
 
-// validateFile validates the configuration file exists.
-func validateFile(path string) (string, error) {
-	// check if file exists
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		// attempt to validate if .vela.yaml exists if .vela.yml does not
-		if filepath.Base(path) == ".vela.yml" {
-			// override path if .vela.yaml exists
-			if _, err := os.Stat(filepath.Join(filepath.Dir(path), ".vela.yaml")); err == nil {
-				return filepath.Join(filepath.Dir(path), ".vela.yaml"), nil
-			}
-		}
-
-		return path, fmt.Errorf("configuration file of %s does not exist", path)
-	}
-
-	return path, nil
-}
-
 // ValidateLocal verifies a local pipeline based off the provided configuration.
 func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Debug("executing validate for local pipeline configuration")
@@ -100,7 +83,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	client.WithRepo(&library.Repo{PipelineType: &c.PipelineType})
 
 	// parse the object into a pipeline
-	pipeline, err := client.Parse(path)
+	p, err := client.Parse(path)
 	if err != nil {
 		return err
 	}
@@ -108,15 +91,41 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Tracef("validating pipeline %s", path)
 
 	// validate the pipeline
-	err = client.Validate(pipeline)
+	err = client.Validate(p)
 	if err != nil {
 		return err
+	}
+
+	if c.Template {
+		logrus.Tracef("expand pipeline %s", path)
+
+		if len(p.Stages) > 0 {
+			// inject the templates into the stages
+			p.Stages, p.Secrets, p.Services, err = client.ExpandStages(p, mapFromTemplates(p.Templates))
+			if err != nil {
+				return err
+			}
+		}
+
+		// inject the templates into the steps
+		p.Steps, p.Secrets, p.Services, err = client.ExpandSteps(p, mapFromTemplates(p.Templates))
+		if err != nil {
+			return err
+		}
 	}
 
 	// output the message in stdout format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-	return output.Stdout(fmt.Sprintf("%s is valid", path))
+	err = output.Stdout(fmt.Sprintf("%s is valid", path))
+	if err != nil {
+		return err
+	}
+
+	// output the validated pipeline in stdout format
+	//
+	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
+	return output.YAML(p)
 }
 
 // ValidateRemote validates a remote pipeline based off the provided configuration.
@@ -170,4 +179,33 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
 		return output.Stdout(pipeline)
 	}
+}
+
+// validateFile validates the configuration file exists.
+func validateFile(path string) (string, error) {
+	// check if file exists
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		// attempt to validate if .vela.yaml exists if .vela.yml does not
+		if filepath.Base(path) == ".vela.yml" {
+			// override path if .vela.yaml exists
+			if _, err := os.Stat(filepath.Join(filepath.Dir(path), ".vela.yaml")); err == nil {
+				return filepath.Join(filepath.Dir(path), ".vela.yaml"), nil
+			}
+		}
+
+		return path, fmt.Errorf("configuration file of %s does not exist", path)
+	}
+
+	return path, nil
+}
+
+// helper function that creates a map of templates from a yaml configuration.
+func mapFromTemplates(templates []*yaml.Template) map[string]*yaml.Template {
+	m := make(map[string]*yaml.Template)
+
+	for _, tmpl := range templates {
+		m[tmpl.Name] = tmpl
+	}
+
+	return m
 }

@@ -72,7 +72,28 @@ var PipelineValidate = &cli.Command{
 			EnvVars: []string{"VELA_TEMPLATE", "PIPELINE_TEMPLATE"},
 			Name:    "template",
 			Usage:   "enables validating a pipeline with templates",
-			Value:   true,
+			Value:   false,
+		},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_REMOTE", "PIPELINE_REMOTE"},
+			Name:    "remote",
+			Usage:   "enables validating a pipeline on a remote server",
+			Value:   false,
+		},
+
+		// Compiler Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Name:    internal.FlagCompilerGitHubToken,
+			Aliases: []string{"ct"},
+			Usage:   "github compiler token",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Name:    internal.FlagCompilerGitHubURL,
+			Aliases: []string{"cgu"},
+			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -84,9 +105,9 @@ EXAMPLES:
   3. Validate a local Vela pipeline in a specific directory.
     $ {{.HelpName}} --path /absolute/full/path/to/dir
   4. Validate a remote pipeline for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.HelpName}} --remote --org MyOrg --repo MyRepo
   5. Validate a remote pipeline for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
+    $ {{.HelpName}} --remote --org MyOrg --repo MyRepo --output json
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/pipeline/validate/
@@ -114,6 +135,7 @@ func pipelineValidate(c *cli.Context) error {
 		Path:         c.String("path"),
 		Ref:          c.String("ref"),
 		Template:     c.Bool("template"),
+		Remote:       c.Bool("remote"),
 		PipelineType: c.String("pipeline-type"),
 	}
 
@@ -126,7 +148,7 @@ func pipelineValidate(c *cli.Context) error {
 	}
 
 	// check if pipeline org is provided
-	if len(p.Org) > 0 && len(p.Repo) > 0 {
+	if len(p.Org) > 0 && len(p.Repo) > 0 && p.Remote {
 		// parse the Vela client from the context
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse
@@ -152,5 +174,5 @@ func pipelineValidate(c *cli.Context) error {
 	// execute the validate local call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
-	return p.ValidateLocal(client)
+	return p.ValidateLocal(client.WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

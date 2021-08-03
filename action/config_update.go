@@ -103,6 +103,21 @@ var ConfigUpdate = &cli.Command{
 			Aliases: []string{"ty"},
 			Usage:   "update the secret type in the config file",
 		},
+
+		// Compiler Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Name:    internal.FlagCompilerGitHubToken,
+			Aliases: []string{"ct"},
+			Usage:   "github compiler token",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Name:    internal.FlagCompilerGitHubURL,
+			Aliases: []string{"cgu"},
+			Usage:   "github url, used by compiler, for pulling registry templates",
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -126,6 +141,7 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // modify the config file.
+// nolint:funlen // ignore function length
 func configUpdate(c *cli.Context) error {
 	// create the config file configuration
 	//
@@ -148,6 +164,8 @@ func configUpdate(c *cli.Context) error {
 	repo := c.String(internal.FlagRepo)
 	engine := c.String(internal.FlagSecretEngine)
 	typee := c.String(internal.FlagSecretType)
+	githubToken := c.String(internal.FlagCompilerGitHubToken)
+	githubURL := c.String(internal.FlagCompilerGitHubURL)
 
 	// check if the API addr flag should be modified
 	if len(addr) > 0 {
@@ -202,6 +220,16 @@ func configUpdate(c *cli.Context) error {
 	// check if the secret type flag should be modified
 	if len(typee) > 0 {
 		conf.UpdateFlags[internal.FlagSecretType] = typee
+	}
+
+	// check if the compiler github token flag should be modified
+	if len(githubToken) > 0 {
+		conf.UpdateFlags[internal.FlagCompilerGitHubToken] = githubToken
+	}
+
+	// check if the compiler github url flag should be modified
+	if len(githubURL) > 0 {
+		conf.UpdateFlags[internal.FlagCompilerGitHubURL] = githubURL
 	}
 
 	// validate config file configuration

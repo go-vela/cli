@@ -2,6 +2,8 @@ module github.com/go-vela/cli
 
 go 1.15
 
+replace github.com/go-vela/compiler => /Users/z001nr1/github/go-vela/compiler
+
 require (
 	github.com/Masterminds/semver/v3 v3.1.1
 	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3

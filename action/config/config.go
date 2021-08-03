@@ -19,6 +19,8 @@ type Config struct {
 	Repo         string
 	Engine       string
 	Type         string
+	GitHubToken  string
+	GitHubURL    string
 	UpdateFlags  map[string]string
 	RemoveFlags  []string
 	Output       string

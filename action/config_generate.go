@@ -103,6 +103,21 @@ var ConfigGenerate = &cli.Command{
 			Aliases: []string{"ty"},
 			Usage:   "provide the secret type for the CLI",
 		},
+
+		// Compiler Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Name:    internal.FlagCompilerGitHubToken,
+			Aliases: []string{"ct"},
+			Usage:   "github compiler token",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Name:    internal.FlagCompilerGitHubURL,
+			Aliases: []string{"cgu"},
+			Usage:   "github url, used by compiler, for pulling registry templates",
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -144,6 +159,8 @@ func configGenerate(c *cli.Context) error {
 		Repo:         c.String(internal.FlagRepo),
 		Engine:       c.String(internal.FlagSecretEngine),
 		Type:         c.String(internal.FlagSecretType),
+		GitHubToken:  c.String(internal.FlagCompilerGitHubToken),
+		GitHubURL:    c.String(internal.FlagCompilerGitHubURL),
 	}
 
 	// validate config file configuration

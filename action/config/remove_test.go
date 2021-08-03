@@ -37,6 +37,8 @@ func TestConfig_Config_Remove(t *testing.T) {
 					"log.level",
 					"secret.engine",
 					"secret.type",
+					"compiler.GitHubToken",
+					"compiler.GitHubURL",
 					"org",
 					"repo",
 					"output",

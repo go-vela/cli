@@ -9,12 +9,13 @@ package config
 //
 // nolint: golint // ignore studder for package and struct name
 type ConfigFile struct {
-	API    *API    `yaml:"api,omitempty"`
-	Log    *Log    `yaml:"log,omitempty"`
-	Secret *Secret `yaml:"secret,omitempty"`
-	Output string  `yaml:"output,omitempty"`
-	Org    string  `yaml:"org,omitempty"`
-	Repo   string  `yaml:"repo,omitempty"`
+	API      *API      `yaml:"api,omitempty"`
+	Log      *Log      `yaml:"log,omitempty"`
+	Secret   *Secret   `yaml:"secret,omitempty"`
+	Compiler *Compiler `yaml:"compiler,omitempty"`
+	Output   string    `yaml:"output,omitempty"`
+	Org      string    `yaml:"org,omitempty"`
+	Repo     string    `yaml:"repo,omitempty"`
 }
 
 // API represents the API related configuration fields
@@ -41,4 +42,12 @@ type Log struct {
 type Secret struct {
 	Engine string `yaml:"engine,omitempty"`
 	Type   string `yaml:"type,omitempty"`
+}
+
+// Compiler represents the compiler configuration fields
+// populated in the config file to perform requests
+// with Vela.
+type Compiler struct {
+	GitHubToken string `yaml:"github_token,omitempty"`
+	GitHubURL   string `yaml:"github_url,omitempty"`
 }

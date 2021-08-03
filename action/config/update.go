@@ -104,6 +104,18 @@ func (c *Config) Update() error {
 			config.Secret.Type = value
 		}
 
+		// check if compiler github token flag should be modified
+		if strings.EqualFold(key, internal.FlagCompilerGitHubToken) {
+			// set the compiler github token field to value provided
+			config.Compiler.GitHubToken = value
+		}
+
+		// check if compiler github url flag should be modified
+		if strings.EqualFold(key, internal.FlagCompilerGitHubURL) {
+			// set the compiler github url field to value provided
+			config.Compiler.GitHubURL = value
+		}
+
 		// check if org flag should be modified
 		if strings.EqualFold(key, internal.FlagOrg) {
 			// set the org field to value provided

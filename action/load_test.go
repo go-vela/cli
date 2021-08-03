@@ -38,6 +38,8 @@ func TestAction_load(t *testing.T) {
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("secret.engine", "native", "doc")
 	fullSet.String("secret.type", "repo", "doc")
+	fullSet.String("compiler.github.driver", "true", "doc")
+	fullSet.String("compiler.github.url", "github.com", "doc")
 
 	// setup tests
 	tests := []struct {

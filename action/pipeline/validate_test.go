@@ -130,7 +130,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 		config  *Config
 	}{
 		{
-			failure: false,
+			failure: true,
 			config: &Config{
 				Action: "validate",
 				File:   "default.yml",

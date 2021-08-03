@@ -22,6 +22,7 @@ type Config struct {
 	Stages       bool
 	Template     bool
 	Local        bool
+	Remote       bool
 	Volumes      []string
 	Output       string
 	PipelineType string

@@ -189,5 +189,6 @@ func pipelineValidate(c *cli.Context) error {
 	// execute the validate local call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
+	// nolint:lll // ignore line length
 	return p.ValidateLocal(client.WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

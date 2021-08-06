@@ -60,6 +60,16 @@ func TestPipeline_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: true,
+			config: &Config{
+				Action:        "validate",
+				File:          "default.yml",
+				Path:          "testdata",
+				Type:          "",
+				TemplateFiles: []string{"nottwoelements"},
+			},
+		},
+		{
 			failure: false,
 			config: &Config{
 				Action: "view",

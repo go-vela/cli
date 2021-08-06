@@ -23,4 +23,5 @@ require (
 	github.com/spf13/afero v1.6.0
 	github.com/urfave/cli/v2 v2.3.0
 	gopkg.in/yaml.v2 v2.4.0
+	k8s.io/client-go v0.22.0 // indirect
 )

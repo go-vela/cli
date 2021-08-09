@@ -1,6 +1,6 @@
 module github.com/go-vela/cli
 
-go 1.15
+go 1.16
 
 require (
 	github.com/Masterminds/semver/v3 v3.1.1
@@ -22,5 +22,6 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/afero v1.6.0
 	github.com/urfave/cli/v2 v2.3.0
+	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )

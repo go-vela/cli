@@ -13,7 +13,7 @@ require (
 	github.com/go-vela/pkg-executor v0.9.0-rc2
 	github.com/go-vela/pkg-runtime v0.9.0-rc2
 	github.com/go-vela/sdk-go v0.9.0-rc2
-	github.com/go-vela/types v0.9.0-rc2
+	github.com/go-vela/types v0.9.0-rc3
 	github.com/golang-jwt/jwt/v4 v4.0.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect

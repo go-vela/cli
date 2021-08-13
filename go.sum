@@ -150,8 +150,9 @@ github.com/go-vela/pkg-runtime v0.9.0-rc2/go.mod h1:CmGPylVrxZ4t/UGPoc5uCDVyUCBG
 github.com/go-vela/sdk-go v0.9.0-rc2 h1:r0BFTLaa/vsVR0gpElaOpTHY/iPtVlu4q71eBPtTWpc=
 github.com/go-vela/sdk-go v0.9.0-rc2/go.mod h1:5QHRnWdzgAvPJhy4hPey5ueSQbK39KnOLHmE2Of9SNA=
 github.com/go-vela/types v0.8.2/go.mod h1:tKk+FpEAv+BTMr9CL3Wed6tMy5IqyOCJpRTKZI88yDc=
-github.com/go-vela/types v0.9.0-rc2 h1:DRkKJG075OaQ1g0ptRAGy7M03wf/2pP3eP5xV8ltiO4=
 github.com/go-vela/types v0.9.0-rc2/go.mod h1:uiQ8TITRIemGwgnfACIHaTdcTVJaZTo7eO1HZeFgnHc=
+github.com/go-vela/types v0.9.0-rc3 h1:ucWTlDvIf1Hd3tUD4dC9plN0RbgPWny84vE/42oYctM=
+github.com/go-vela/types v0.9.0-rc3/go.mod h1:uiQ8TITRIemGwgnfACIHaTdcTVJaZTo7eO1HZeFgnHc=
 github.com/gogo/protobuf v1.3.1/go.mod h1:SlYgWuQ5SjCEi6WLHjHCa1yvBfUnHcTbrrZtXPKa29o=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=
 github.com/gogo/protobuf v1.3.2/go.mod h1:P1XiOD3dCwIKUDQYPy72D8LYyHL2YPYrpS2s69NZV8Q=

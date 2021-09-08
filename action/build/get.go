@@ -19,9 +19,14 @@ func (c *Config) Get(client *vela.Client) error {
 	// set the pagination options for list of builds
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
-	opts := &vela.ListOptions{
-		Page:    c.Page,
-		PerPage: c.PerPage,
+	opts := &vela.BuildListOptions{
+		Branch: c.Branch,
+		Event:  c.Event,
+		Status: c.Status,
+		ListOptions: vela.ListOptions{
+			Page:    c.Page,
+			PerPage: c.PerPage,
+		},
 	}
 
 	logrus.Tracef("capturing builds for repo %s/%s", c.Org, c.Repo)

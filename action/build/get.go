@@ -18,7 +18,7 @@ func (c *Config) Get(client *vela.Client) error {
 
 	// set the pagination options for list of builds
 	//
-	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildListOptions
 	opts := &vela.BuildListOptions{
 		Branch: c.Branch,
 		Event:  c.Event,

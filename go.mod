@@ -1,7 +1,5 @@
 module github.com/go-vela/cli
 
-replace github.com/go-vela/sdk-go => github.com/JordanSussman/sdk-go v0.1.2-0.20210908184645-0f26a72fa616
-
 go 1.16
 
 require (
@@ -14,7 +12,7 @@ require (
 	github.com/go-vela/mock v0.9.0
 	github.com/go-vela/pkg-executor v0.9.0
 	github.com/go-vela/pkg-runtime v0.9.0
-	github.com/go-vela/sdk-go v0.9.0
+	github.com/go-vela/sdk-go v0.9.1-0.20210909145443-b6d9f296e7f1
 	github.com/go-vela/types v0.9.0
 	github.com/golang-jwt/jwt/v4 v4.0.0
 	github.com/gosuri/uitable v0.0.4

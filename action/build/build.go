@@ -11,6 +11,9 @@ type Config struct {
 	Org     string
 	Repo    string
 	Number  int
+	Event   string
+	Status  string
+	Branch  string
 	Page    int
 	PerPage int
 	Output  string

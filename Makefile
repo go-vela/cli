@@ -125,6 +125,13 @@ build-darwin:
 		-ldflags '${LD_FLAGS}' \
 		-o release/darwin/amd64/vela \
 		github.com/go-vela/cli/cmd/vela-cli
+	@echo
+	@echo "### Building release/darwin/arm64/vela binary"
+	GOOS=darwin CGO_ENABLED=0 GOARCH=arm64 \
+		go build -a \
+		-ldflags '${LD_FLAGS}' \
+		-o release/darwin/arm64/vela \
+		github.com/go-vela/cli/cmd/vela-cli
 
 # The `build-linux` target is intended to compile the
 # Go source code into a Linux compatible binary.
@@ -181,6 +188,14 @@ build-darwin-static:
 		-ldflags '-s -w -extldflags "-static" ${LD_FLAGS}' \
 		-o release/darwin/amd64/vela \
 		github.com/go-vela/cli/cmd/vela-cli
+	@echo
+	@echo "### Building release/darwin/arm64/vela binary"
+	GOOS=darwin CGO_ENABLED=0 GOARCH=amd64 \
+		go build -a \
+		-ldflags '-s -w -extldflags "-static" ${LD_FLAGS}' \
+		-o release/darwin/arm64/vela \
+		github.com/go-vela/cli/cmd/vela-cli
+
 
 # The `build-linux-static` target is intended to compile the
 # Go source code into a statically linked, Linux compatible binary.

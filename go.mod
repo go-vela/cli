@@ -8,13 +8,14 @@ require (
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
-	github.com/go-vela/compiler v0.9.0
-	github.com/go-vela/mock v0.9.0
-	github.com/go-vela/pkg-executor v0.9.0
-	github.com/go-vela/pkg-runtime v0.9.0
-	github.com/go-vela/sdk-go v0.9.1-0.20210909145443-b6d9f296e7f1
-	github.com/go-vela/types v0.9.0
+	github.com/go-vela/compiler v0.10.0-rc1
+	github.com/go-vela/mock v0.10.0-rc1
+	github.com/go-vela/pkg-executor v0.10.0-rc1
+	github.com/go-vela/pkg-runtime v0.10.0-rc1
+	github.com/go-vela/sdk-go v0.10.0-rc1
+	github.com/go-vela/types v0.10.0-rc1
 	github.com/golang-jwt/jwt/v4 v4.1.0
+	github.com/google/go-github/v38 v38.1.0 // indirect
 	github.com/gosuri/uitable v0.0.4
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.8.0

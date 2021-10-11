@@ -41,6 +41,12 @@ func (c *Config) Exec(client compiler.Engine) error {
 		path = filepath.Join(c.Path, c.File)
 	}
 
+	// check if full path to pipeline file exists
+	_, err = os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("unable to find pipeline %s: %v", path, err)
+	}
+
 	// create build object for use in pipeline
 	b := new(library.Build)
 	b.SetBranch(c.Branch)

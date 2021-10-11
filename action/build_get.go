@@ -37,6 +37,24 @@ var BuildGet = &cli.Command{
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_EVENT", "BUILD_EVENT"},
+			Name:    "event",
+			Aliases: []string{"e"},
+			Usage:   "provide the event filter for the build",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_STATUS", "BUILD_STATUS"},
+			Name:    "status",
+			Aliases: []string{"s"},
+			Usage:   "provide the status filter for the build",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_BRANCH", "BUILD_BRANCH"},
+			Name:    "branch",
+			Aliases: []string{"b"},
+			Usage:   "provide the branch filter for the build",
+		},
 
 		// Output Flags
 
@@ -68,13 +86,19 @@ var BuildGet = &cli.Command{
 EXAMPLES:
   1. Get builds for a repository.
     $ {{.HelpName}} --org MyOrg --repo MyRepo
-  2. Get builds for a repository with wide view output.
+  2. Get builds for a repository with the pull_request event.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --event pull_request
+  3. Get builds for a repository with the status of success.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --status success
+  4. Get builds for a repository with the branch of main.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --branch main
+  5. Get builds for a repository with wide view output.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --output wide
-  3. Get builds for a repository with yaml output.
+  6. Get builds for a repository with yaml output.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --output yaml
-  4. Get builds for a repository with json output.
+  7. Get builds for a repository with json output.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
-  5. Get builds for a repository when config or environment variables are set.
+  8. Get builds for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
 DOCUMENTATION:
@@ -110,6 +134,9 @@ func buildGet(c *cli.Context) error {
 		Action:  getAction,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
+		Event:   c.String("event"),
+		Status:  c.String("status"),
+		Branch:  c.String("branch"),
 		Page:    c.Int(internal.FlagPage),
 		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),

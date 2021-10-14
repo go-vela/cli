@@ -248,6 +248,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 		// and if it is set in the context
 		if strings.Contains(f, internal.FlagCompilerGitHubToken) &&
 			!ctx.IsSet(internal.FlagCompilerGitHubToken) &&
+			config.Compiler != nil &&
 			len(config.Compiler.GitHubToken) > 0 {
 			// set the compiler github token field to value from config
 			err = ctx.Set(internal.FlagCompilerGitHubToken, config.Compiler.GitHubToken)
@@ -262,6 +263,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 		// and if it is set in the context
 		if strings.Contains(f, internal.FlagCompilerGitHubURL) &&
 			!ctx.IsSet(internal.FlagCompilerGitHubURL) &&
+			config.Compiler != nil &&
 			len(config.Compiler.GitHubURL) > 0 {
 			// set the compiler github url field to value from config
 			err = ctx.Set(internal.FlagCompilerGitHubURL, config.Compiler.GitHubURL)

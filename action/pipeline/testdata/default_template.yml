@@ -1,0 +1,17 @@
+version: "1"
+
+templates:
+  - name: sample
+    source: github.com/go-vela/vela-artifactory/.vela/template.yml
+    type: github
+
+steps:
+  - name: version
+    image: alpine:latest
+    pull: true
+    commands:
+      - echo hello
+
+  - name: alpine
+    template:
+      name: sample

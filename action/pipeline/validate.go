@@ -53,9 +53,9 @@ func (c *Config) Validate() error {
 		for _, file := range c.TemplateFiles {
 			parts := strings.Split(file, ":")
 
-			// nolint:mnd,lll // ignore magic number and line length we are explicitly checking for it to parsed into two parts only
+			// nolint:gomnd,lll // ignore magic number and line length we are explicitly checking for it to parsed into two parts only
 			if len(parts) != 2 {
-				return fmt.Errorf("invalid format for template file: %s (valid format: name:/path/to/file", file)
+				return fmt.Errorf("invalid format for template file: %s (valid format: <name>:<source>)", file)
 			}
 		}
 	}
@@ -105,9 +105,38 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	if c.Template {
 		logrus.Tracef("expand pipeline %s", path)
 
+		// count all the templates
+		nTemplates := len(templates)
+		nTemplateFiles := len(c.TemplateFiles)
+
+		// ensure a 'templates' block exists
+		// in the pipeline
+		if nTemplates == 0 {
+			return fmt.Errorf("templates block not properly configured in pipeline")
+		}
+
+		// since the whole client is put into local mode as soon
+		// as we define any template files, you have to override
+		// all templates locally
+		if nTemplateFiles > 0 && nTemplateFiles < nTemplates {
+			// nolint:lll // helpful error messages breaks line length
+			return fmt.Errorf("found %d template references in your pipeline, but only %d template(s) given to override", nTemplates, nTemplateFiles)
+		}
+
 		for _, file := range c.TemplateFiles {
+			// local templates override format is
+			// <name>:<source>
+			//
+			// example: example:/path/to/template.yml
 			parts := strings.Split(file, ":")
 
+			// make sure the template was configured
+			_, ok := templates[parts[0]]
+			if !ok {
+				return fmt.Errorf("template with name %q is not configured", parts[0])
+			}
+
+			// override the source for the given template
 			templates[parts[0]].Source = parts[1]
 		}
 

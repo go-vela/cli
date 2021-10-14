@@ -32,6 +32,7 @@ func TestAction_PipelineValidate(t *testing.T) {
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("output", "json", "doc")
 	fullSet.String("pipeline-type", "yaml", "doc")
+	fullSet.Bool("remote", true, "doc")
 
 	// setup flags
 	localSet := flag.NewFlagSet("test", 0)
@@ -40,22 +41,27 @@ func TestAction_PipelineValidate(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		name    string
 		failure bool
 		set     *flag.FlagSet
 	}{
 		{
+			name:    "fullSet",
 			failure: false,
 			set:     fullSet,
 		},
 		{
+			name:    "localSet",
 			failure: false,
 			set:     localSet,
 		},
 		{
+			name:    "authSet",
 			failure: true,
 			set:     authSet,
 		},
 		{
+			name:    "newFlagSet",
 			failure: true,
 			set:     flag.NewFlagSet("test", 0),
 		},
@@ -67,14 +73,14 @@ func TestAction_PipelineValidate(t *testing.T) {
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("pipelineValidate should have returned err")
+				t.Errorf("(%s) pipelineValidate should have returned err", test.name)
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("pipelineValidate returned err: %v", err)
+			t.Errorf("(%s) pipelineValidate returned err: %v", test.name, err)
 		}
 	}
 }

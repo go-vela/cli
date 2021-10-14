@@ -1,0 +1,9 @@
+metadata:
+  template: true
+
+steps:
+  - name: echo
+    image: alpine:latest
+    pull: always
+    commands:
+      - echo "i'm a template 2 step"

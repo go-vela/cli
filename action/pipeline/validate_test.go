@@ -181,6 +181,17 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
+			name:    "stages default",
+			failure: false,
+			config: &Config{
+				Action:   "validate",
+				File:     "default_stages_template.yml",
+				Path:     "testdata",
+				Type:     "",
+				Template: true,
+			},
+		},
+		{
 			name:    "pipeline with template (remote)",
 			failure: false,
 			config: &Config{
@@ -213,6 +224,41 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 				Type:          "",
 				Template:      true,
 				TemplateFiles: []string{"sample:testdata/templates/template.yml", "sample2:testdata/templates/template2.yml"},
+			},
+		},
+		{
+			name:    "default without template but wants to use template",
+			failure: true,
+			config: &Config{
+				Action:   "validate",
+				File:     "default.yml",
+				Path:     "testdata",
+				Type:     "",
+				Template: true,
+			},
+		},
+		{
+			name:    "pipeline with multiple template (local overrides) template mismatch",
+			failure: true,
+			config: &Config{
+				Action:        "validate",
+				File:          "default_multi_template.yml",
+				Path:          "testdata",
+				Type:          "",
+				Template:      true,
+				TemplateFiles: []string{"sample2:testdata/templates/template2.yml"},
+			},
+		},
+		{
+			name:    "pipeline with template (local override), wrong name in override",
+			failure: true,
+			config: &Config{
+				Action:        "validate",
+				File:          "default_template.yml",
+				Path:          "testdata",
+				Type:          "",
+				Template:      true,
+				TemplateFiles: []string{"foo:testdata/templates/template.yml"},
 			},
 		},
 	}

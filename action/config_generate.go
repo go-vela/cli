@@ -159,8 +159,10 @@ func configGenerate(c *cli.Context) error {
 		Repo:         c.String(internal.FlagRepo),
 		Engine:       c.String(internal.FlagSecretEngine),
 		Type:         c.String(internal.FlagSecretType),
-		GitHubToken:  c.String(internal.FlagCompilerGitHubToken),
-		GitHubURL:    c.String(internal.FlagCompilerGitHubURL),
+		GitHub: &config.GitHub{
+			Token: c.String(internal.FlagCompilerGitHubToken),
+			URL:   c.String(internal.FlagCompilerGitHubURL),
+		},
 	}
 
 	// validate config file configuration

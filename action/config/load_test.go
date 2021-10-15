@@ -107,11 +107,13 @@ func TestConfig_Config_Load(t *testing.T) {
 			LogLevel:     ctx.String("log.level"),
 			Engine:       ctx.String("secret.engine"),
 			Type:         ctx.String("secret.type"),
-			GitHubToken:  ctx.String("compiler.github.driver"),
-			GitHubURL:    ctx.String("compiler.github.url"),
-			Output:       ctx.String("output"),
-			Org:          ctx.String("org"),
-			Repo:         ctx.String("repo"),
+			GitHub: &GitHub{
+				Token: ctx.String("compiler.github.token"),
+				URL:   ctx.String("compiler.github.url"),
+			},
+			Output: ctx.String("output"),
+			Org:    ctx.String("org"),
+			Repo:   ctx.String("repo"),
 		}
 
 		// generate config file

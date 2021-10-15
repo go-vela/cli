@@ -21,6 +21,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 			config: &Config{
 				Action: "remove",
 				File:   "testdata/config.yml",
+				GitHub: &GitHub{},
 			},
 		},
 		{
@@ -43,6 +44,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 					"repo",
 					"output",
 				},
+				GitHub: &GitHub{},
 			},
 		},
 	}
@@ -56,6 +58,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 		config := &Config{
 			Action: "generate",
 			File:   test.config.File,
+			GitHub: &GitHub{},
 		}
 
 		// generate config file

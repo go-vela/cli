@@ -48,6 +48,13 @@ type Secret struct {
 // populated in the config file to perform requests
 // with Vela.
 type Compiler struct {
-	GitHubToken string `yaml:"github_token,omitempty"`
-	GitHubURL   string `yaml:"github_url,omitempty"`
+	GitHub *GitHub `yaml:"github,omitempty"`
+}
+
+// GitHub represents the compiler configuration fields
+// populated in the config file to perform requests
+// with Vela.
+type GitHub struct {
+	Token string `yaml:"token,omitempty"`
+	URL   string `yaml:"url,omitempty"`
 }

@@ -117,13 +117,13 @@ func (c *Config) Remove() error {
 		// check if compiler github token flag should be removed
 		if strings.EqualFold(flag, internal.FlagCompilerGitHubToken) {
 			// set the compiler github token field to empty in config
-			config.Compiler.GitHubToken = ""
+			config.Compiler.GitHub.Token = ""
 		}
 
 		// check if compiler github url flag should be removed
 		if strings.EqualFold(flag, internal.FlagCompilerGitHubURL) {
 			// set the compiler github url field to empty in config
-			config.Compiler.GitHubURL = ""
+			config.Compiler.GitHub.URL = ""
 		}
 
 		// check if org flag should be removed

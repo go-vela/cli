@@ -107,13 +107,13 @@ func (c *Config) Update() error {
 		// check if compiler github token flag should be modified
 		if strings.EqualFold(key, internal.FlagCompilerGitHubToken) {
 			// set the compiler github token field to value provided
-			config.Compiler.GitHubToken = value
+			config.Compiler.GitHub.Token = value
 		}
 
 		// check if compiler github url flag should be modified
 		if strings.EqualFold(key, internal.FlagCompilerGitHubURL) {
 			// set the compiler github url field to value provided
-			config.Compiler.GitHubURL = value
+			config.Compiler.GitHub.URL = value
 		}
 
 		// check if org flag should be modified

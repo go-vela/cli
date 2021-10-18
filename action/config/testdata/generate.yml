@@ -9,6 +9,8 @@ log:
 secret:
   engine: native
   type: repo
+compiler:
+  github: {}
 output: json
 org: github
 repo: octocat

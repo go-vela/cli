@@ -21,6 +21,7 @@ func TestConfig_Config_Generate(t *testing.T) {
 			config: &Config{
 				Action: "generate",
 				File:   ".vela.yml",
+				GitHub: &GitHub{},
 			},
 		},
 	}

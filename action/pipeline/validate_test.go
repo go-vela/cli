@@ -60,6 +60,16 @@ func TestPipeline_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: true,
+			config: &Config{
+				Action:        "validate",
+				File:          "default.yml",
+				Path:          "testdata",
+				Type:          "",
+				TemplateFiles: []string{"nottwoelements"},
+			},
+		},
+		{
 			failure: false,
 			config: &Config{
 				Action: "view",
@@ -126,10 +136,12 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		name    string
 		failure bool
 		config  *Config
 	}{
 		{
+			name:    "default",
 			failure: false,
 			config: &Config{
 				Action: "validate",
@@ -139,6 +151,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
+			name:    "go pipeline",
 			failure: false,
 			config: &Config{
 				Action: "validate",
@@ -148,6 +161,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
+			name:    "java pipeline",
 			failure: false,
 			config: &Config{
 				Action: "validate",
@@ -157,6 +171,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
+			name:    "node pipeline",
 			failure: false,
 			config: &Config{
 				Action: "validate",
@@ -165,22 +180,105 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 				Type:   "",
 			},
 		},
+		{
+			name:    "stages default",
+			failure: false,
+			config: &Config{
+				Action:   "validate",
+				File:     "default_stages_template.yml",
+				Path:     "testdata",
+				Type:     "",
+				Template: true,
+			},
+		},
+		{
+			name:    "pipeline with template (remote)",
+			failure: false,
+			config: &Config{
+				Action:   "validate",
+				File:     "default_template.yml",
+				Path:     "testdata",
+				Type:     "",
+				Template: true,
+			},
+		},
+		{
+			name:    "pipeline with template (local override)",
+			failure: false,
+			config: &Config{
+				Action:        "validate",
+				File:          "default_template.yml",
+				Path:          "testdata",
+				Type:          "",
+				Template:      true,
+				TemplateFiles: []string{"sample:testdata/templates/template.yml"},
+			},
+		},
+		{
+			name:    "pipeline with multiple template (local overrides)",
+			failure: false,
+			config: &Config{
+				Action:        "validate",
+				File:          "default_multi_template.yml",
+				Path:          "testdata",
+				Type:          "",
+				Template:      true,
+				TemplateFiles: []string{"sample:testdata/templates/template.yml", "sample2:testdata/templates/template2.yml"},
+			},
+		},
+		{
+			name:    "default without template but wants to use template",
+			failure: true,
+			config: &Config{
+				Action:   "validate",
+				File:     "default.yml",
+				Path:     "testdata",
+				Type:     "",
+				Template: true,
+			},
+		},
+		{
+			name:    "pipeline with multiple template (local overrides) template mismatch",
+			failure: true,
+			config: &Config{
+				Action:        "validate",
+				File:          "default_multi_template.yml",
+				Path:          "testdata",
+				Type:          "",
+				Template:      true,
+				TemplateFiles: []string{"sample2:testdata/templates/template2.yml"},
+			},
+		},
+		{
+			name:    "pipeline with template (local override), wrong name in override",
+			failure: true,
+			config: &Config{
+				Action:        "validate",
+				File:          "default_template.yml",
+				Path:          "testdata",
+				Type:          "",
+				Template:      true,
+				TemplateFiles: []string{"foo:testdata/templates/template.yml"},
+			},
+		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.ValidateLocal(client)
+		isLocal := len(test.config.TemplateFiles) > 0
+
+		err := test.config.ValidateLocal(client.WithLocal(isLocal))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("ValidateLocal should have returned err")
+				t.Errorf("(%s) ValidateLocal should have returned err", test.name)
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("ValidateLocal returned err: %v", err)
+			t.Errorf("(%s) ValidateLocal returned err: %v", test.name, err)
 		}
 	}
 }

@@ -21,6 +21,7 @@ func TestConfig_Config_Update(t *testing.T) {
 			config: &Config{
 				Action: "remove",
 				File:   "testdata/config.yml",
+				GitHub: &GitHub{},
 			},
 		},
 		{
@@ -29,17 +30,19 @@ func TestConfig_Config_Update(t *testing.T) {
 				Action: "remove",
 				File:   "testdata/config.yml",
 				UpdateFlags: map[string]string{
-					"api.addr":          "https://vela-server.localhost",
-					"api.token":         "superSecretToken",
-					"api.token.access":  "superSecretAccessToken",
-					"api.token.refresh": "superSecretRefreshToken",
-					"api.version":       "1",
-					"log.level":         "info",
-					"secret.engine":     "native",
-					"secret.type":       "repo",
-					"org":               "github",
-					"repo":              "octocat",
-					"output":            "json",
+					"api.addr":             "https://vela-server.localhost",
+					"api.token":            "superSecretToken",
+					"api.token.access":     "superSecretAccessToken",
+					"api.token.refresh":    "superSecretRefreshToken",
+					"api.version":          "1",
+					"log.level":            "info",
+					"secret.engine":        "native",
+					"secret.type":          "repo",
+					"compiler.GitHubToken": "somePATToken",
+					"compiler.GitHubURL":   "github.com",
+					"org":                  "github",
+					"repo":                 "octocat",
+					"output":               "json",
 				},
 			},
 		},
@@ -54,6 +57,7 @@ func TestConfig_Config_Update(t *testing.T) {
 		config := &Config{
 			Action: "generate",
 			File:   test.config.File,
+			GitHub: &GitHub{},
 		}
 
 		// generate config file

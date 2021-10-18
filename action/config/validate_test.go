@@ -19,6 +19,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "generate",
 				File:   "testdata/config.yml",
+				GitHub: &GitHub{},
 			},
 		},
 		{
@@ -26,6 +27,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "view",
 				File:   "testdata/config.yml",
+				GitHub: &GitHub{},
 			},
 		},
 		{
@@ -33,6 +35,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "view",
 				File:   "",
+				GitHub: &GitHub{},
 			},
 		},
 		{
@@ -40,6 +43,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "view",
 				File:   "foo.txt",
+				GitHub: &GitHub{},
 			},
 		},
 	}

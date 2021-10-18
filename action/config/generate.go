@@ -41,6 +41,12 @@ func (c *Config) Generate() error {
 			Engine: c.Engine,
 			Type:   c.Type,
 		},
+		Compiler: &Compiler{
+			GitHub: &GitHub{
+				Token: c.GitHub.Token,
+				URL:   c.GitHub.URL,
+			},
+		},
 		Org:    c.Org,
 		Repo:   c.Repo,
 		Output: c.Output,

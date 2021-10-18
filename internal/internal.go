@@ -41,6 +41,18 @@ const (
 	FlagBuild = "build"
 )
 
+// compiler flag keys.
+const (
+	// FlagCompilerGitHubToken defines the key for the
+	// flag when setting the compiler github token.
+	// nolint:gosec // ignoring since this is a constant for a user passed token
+	FlagCompilerGitHubToken = "compiler.github.token"
+
+	// FlagCompilerGitHubURL defines the key for the
+	// flag when setting the compiler github url.
+	FlagCompilerGitHubURL = "compiler.github.url"
+)
+
 // generic flag keys.
 const (
 	// FlagConfig defines the key for the

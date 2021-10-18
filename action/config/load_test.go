@@ -30,6 +30,8 @@ func TestConfig_Config_Load(t *testing.T) {
 		&cli.StringFlag{Name: "repo"},
 		&cli.StringFlag{Name: "secret.engine"},
 		&cli.StringFlag{Name: "secret.type"},
+		&cli.StringFlag{Name: "compiler.github.driver"},
+		&cli.StringFlag{Name: "compiler.github.url"},
 	}
 
 	// setup flags
@@ -50,6 +52,8 @@ func TestConfig_Config_Load(t *testing.T) {
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("secret.engine", "native", "doc")
 	fullSet.String("secret.type", "repo", "doc")
+	fullSet.String("compiler.github.driver", "true", "doc")
+	fullSet.String("compiler.github.url", "github.com", "doc")
 
 	// setup tests
 	tests := []struct {
@@ -103,9 +107,13 @@ func TestConfig_Config_Load(t *testing.T) {
 			LogLevel:     ctx.String("log.level"),
 			Engine:       ctx.String("secret.engine"),
 			Type:         ctx.String("secret.type"),
-			Output:       ctx.String("output"),
-			Org:          ctx.String("org"),
-			Repo:         ctx.String("repo"),
+			GitHub: &GitHub{
+				Token: ctx.String("compiler.github.token"),
+				URL:   ctx.String("compiler.github.url"),
+			},
+			Output: ctx.String("output"),
+			Org:    ctx.String("org"),
+			Repo:   ctx.String("repo"),
 		}
 
 		// generate config file

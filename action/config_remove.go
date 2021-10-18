@@ -110,6 +110,21 @@ var ConfigRemove = &cli.Command{
 			Usage:   "removes the secret type from the config file",
 			Value:   "false",
 		},
+
+		// Compiler Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Name:    internal.FlagCompilerGitHubToken,
+			Aliases: []string{"ct"},
+			Usage:   "github compiler token",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Name:    internal.FlagCompilerGitHubURL,
+			Aliases: []string{"cgu"},
+			Usage:   "github url, used by compiler, for pulling registry templates",
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -196,6 +211,16 @@ func configRemove(c *cli.Context) error {
 	// check if the type flag should be removed
 	if c.Bool(internal.FlagSecretType) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagSecretType)
+	}
+
+	// check if the compiler github token flag should be removed
+	if c.Bool(internal.FlagCompilerGitHubToken) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagCompilerGitHubToken)
+	}
+
+	// check if the compiler github url flag should be removed
+	if c.Bool(internal.FlagCompilerGitHubURL) {
+		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagCompilerGitHubURL)
 	}
 
 	// validate config file configuration

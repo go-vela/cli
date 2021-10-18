@@ -10,3 +10,6 @@ secret:
 output: json
 org: github
 repo: octocat
+compiler:
+  github_token: somePATtoken
+  github_url: github.com

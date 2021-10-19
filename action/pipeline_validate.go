@@ -113,7 +113,7 @@ EXAMPLES:
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo
   5. Validate a remote pipeline for a repository with json output.
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo --output json
-  6. Validate a template pipeline with expanding steps (templates are sourced from private Github instance)
+  6. Validate a template pipeline with expanding steps (when templates are sourced from private Github instance)
     $ {{.HelpName}} --template --compiler.github.token <token> --compiler.github.url <url>
   7. Validate a template pipeline with expanding steps
     $ {{.HelpName}} --template

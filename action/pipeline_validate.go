@@ -101,6 +101,7 @@ var PipelineValidate = &cli.Command{
 			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
 	},
+	// nolint:lll // help messages is pushing over limit
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Validate a local Vela pipeline.
@@ -113,9 +114,11 @@ EXAMPLES:
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo
   5. Validate a remote pipeline for a repository with json output.
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo --output json
-  5. Validate a template pipeline with expanding steps
+  6. Validate a template pipeline with expanding steps (when templates are sourced from private Github instance)
+    $ {{.HelpName}} --template --compiler.github.token <token> --compiler.github.url <url>
+  7. Validate a template pipeline with expanding steps
     $ {{.HelpName}} --template
-  6. Validate a local template pipeline with expanding steps
+  8. Validate a local template pipeline with expanding steps
     $ {{.HelpName}} --template --template-file name:/path/to/file
 DOCUMENTATION:
 

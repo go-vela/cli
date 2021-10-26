@@ -91,7 +91,7 @@ DOCUMENTATION:
 // nolint: dupl // ignore similar code among actions
 func deploymentGet(c *cli.Context) error {
 	// load variables from the config file
-	err := load(c)
+	err := Load(c)
 	if err != nil {
 		return err
 	}

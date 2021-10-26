@@ -73,7 +73,7 @@ DOCUMENTATION:
 // capture a list of repos.
 func repoGet(c *cli.Context) error {
 	// load variables from the config file
-	err := load(c)
+	err := Load(c)
 	if err != nil {
 		return err
 	}

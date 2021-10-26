@@ -15,7 +15,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestAction_load(t *testing.T) {
+func TestAction_Load(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -62,18 +62,18 @@ func TestAction_load(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := load(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := Load(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("load should have returned err")
+				t.Errorf("Load should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("load returned err: %v", err)
+			t.Errorf("Load returned err: %v", err)
 		}
 	}
 }

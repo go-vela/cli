@@ -13,8 +13,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// load is a helper function that loads the necessary configuration for the CLI.
-func load(c *cli.Context) error {
+// Load imports the configuration file for the CLI.
+func Load(c *cli.Context) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

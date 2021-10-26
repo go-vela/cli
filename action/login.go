@@ -80,7 +80,7 @@ DOCUMENTATION:
 // authenticate and login to Vela.
 func runLogin(c *cli.Context) error {
 	// load variables from the config file
-	err := load(c)
+	err := Load(c)
 	if err != nil {
 		return err
 	}

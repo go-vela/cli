@@ -103,7 +103,7 @@ DOCUMENTATION:
 // inspect a secret.
 func secretView(c *cli.Context) error {
 	// load variables from the config file
-	err := load(c)
+	err := Load(c)
 	if err != nil {
 		return err
 	}

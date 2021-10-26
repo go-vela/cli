@@ -117,3 +117,51 @@ const (
 	// flag when setting the step.
 	FlagStep = "step"
 )
+
+// list of defined CLI actions.
+const (
+	// ActionAdd defines the action for creating a resource.
+	ActionAdd = "add"
+
+	// ActionCancel defines the action for canceling of a resource.
+	ActionCancel = "cancel"
+
+	// ActionChown defines the action for changing ownership of a resource.
+	ActionChown = "chown"
+
+	// ActionCompile defines the action for compiling a resource.
+	ActionCompile = "compile"
+
+	// ActionExec defines the action for executing a resource.
+	ActionExec = "exec"
+
+	// ActionExpand defines the action for expanding a resource.
+	ActionExpand = "expand"
+
+	// ActionGenerate defines the action for producing a resource.
+	ActionGenerate = "generate"
+
+	// ActionGet defines the action for getting a list of resources.
+	ActionGet = "get"
+
+	// ActionLoad defines the action for loading a resource.
+	ActionLoad = "load"
+
+	// ActionRemove defines the action for deleting a resource.
+	ActionRemove = "remove"
+
+	// ActionRepair defines the action for repairing a resource.
+	ActionRepair = "repair"
+
+	// ActionRestart defines the action for restarting a resource.
+	ActionRestart = "restart"
+
+	// ActionUpdate defines the action for modifying a resource.
+	ActionUpdate = "update"
+
+	// ActionValidate defines the action for validating a resource.
+	ActionValidate = "validate"
+
+	// ActionView defines the action for inspecting a resource.
+	ActionView = "view"
+)

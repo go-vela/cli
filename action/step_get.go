@@ -97,7 +97,7 @@ DOCUMENTATION:
 // capture a list of steps.
 func stepGet(c *cli.Context) error {
 	// load variables from the config file
-	err := load(c)
+	err := Load(c)
 	if err != nil {
 		return err
 	}

@@ -49,7 +49,7 @@ DOCUMENTATION:
 // output version information.
 func runVersion(c *cli.Context) error {
 	// load variables from the config file
-	err := load(c)
+	err := Load(c)
 	if err != nil {
 		return err
 	}

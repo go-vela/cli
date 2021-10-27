@@ -15,7 +15,7 @@ func TestPipeline_Generate(t *testing.T) {
 	// setup flags
 	set := flag.NewFlagSet("test", 0)
 	set.String("file", "generate.yml", "doc")
-	set.String("path", "pipeline/testdata", "doc")
+	set.String("path", "../../action/pipeline/testdata", "doc")
 
 	// setup tests
 	tests := []struct {

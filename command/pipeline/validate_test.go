@@ -37,7 +37,7 @@ func TestPipeline_Validate(t *testing.T) {
 	// setup flags
 	localSet := flag.NewFlagSet("test", 0)
 	localSet.String("file", "generate.yml", "doc")
-	localSet.String("path", "pipeline/testdata", "doc")
+	localSet.String("path", "../../action/pipeline/testdata", "doc")
 
 	// setup tests
 	tests := []struct {

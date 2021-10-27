@@ -1,7 +1,0 @@
-version: "1"
-steps:
-- commands:
-  - echo hello
-  image: alpine:latest
-  name: version
-  pull: always

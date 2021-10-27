@@ -15,7 +15,7 @@ import (
 
 // CommandUpdate defines the command for modifying one or more fields from the config file.
 //
-// nolint: dupl // ignore similar code among actions
+// nolint: dupl // ignore similar code with update
 var CommandUpdate = &cli.Command{
 	Name:        "config",
 	Description: "Use this command to update one or more fields from the config file.",
@@ -141,6 +141,8 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to modify the
 // config file.
+//
+// nolint: funlen // ignore function length due to comments
 func update(c *cli.Context) error {
 	// create the config file configuration
 	//

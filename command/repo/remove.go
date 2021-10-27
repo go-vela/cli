@@ -2,6 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
+// nolint: dupl // ignore similar code with chown and repair
 package repo
 
 import (
@@ -64,6 +65,8 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to remove a repository.
+//
+// nolint: dupl // ignore similar code with chown, get, repair and view
 func remove(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

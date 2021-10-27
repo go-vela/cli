@@ -65,6 +65,8 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a repository.
+//
+// nolint: dupl // ignore similar code with chown, get, remove and repair
 func view(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

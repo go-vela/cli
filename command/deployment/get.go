@@ -87,8 +87,6 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // capture a list of deployments.
-//
-// nolint: dupl // ignore similar code among actions
 func get(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

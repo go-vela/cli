@@ -139,6 +139,8 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to modify a secret.
+//
+// nolint: dupl // ignore similar code with add
 func update(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

@@ -5,7 +5,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/config"
+	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/command/secret"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,17 +23,17 @@ var removeCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for remove a config file
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#ConfigRemove
-		action.ConfigRemove,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandRemove
+		config.CommandRemove,
 
 		// add the sub command for remove a repository
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#RepoRemove
-		action.RepoRemove,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandRemove
+		repo.CommandRemove,
 
 		// add the sub command for remove a secret
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#SecretRemove
-		action.SecretRemove,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/secret?tab=doc#CommandRemove
+		secret.CommandRemove,
 	},
 }

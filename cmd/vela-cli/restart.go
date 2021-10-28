@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/build"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,7 +21,7 @@ var restartCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for restarting a build
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#BuildRestart
-		action.BuildRestart,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandRestart
+		build.CommandRestart,
 	},
 }

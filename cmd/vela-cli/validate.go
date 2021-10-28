@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/pipeline"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,7 +21,7 @@ var validateCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for validating a pipeline
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#PipelineValidate
-		action.PipelineValidate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandValidate
+		pipeline.CommandValidate,
 	},
 }

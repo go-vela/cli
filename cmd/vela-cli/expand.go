@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/pipeline"
 
 	"github.com/urfave/cli/v2"
 )
@@ -20,7 +20,7 @@ var expandCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for expanding a pipeline
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#PipelineExpand
-		action.PipelineExpand,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandExpand
+		pipeline.CommandExpand,
 	},
 }

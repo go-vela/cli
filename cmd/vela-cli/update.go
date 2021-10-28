@@ -5,7 +5,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/config"
+	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/command/secret"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,17 +23,17 @@ var updateCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for modifying a config file
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#ConfigUpdate
-		action.ConfigUpdate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandUpdate
+		config.CommandUpdate,
 
 		// add the sub command for modifying a repository
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#RepoUpdate
-		action.RepoUpdate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandUpdate
+		repo.CommandUpdate,
 
 		// add the sub command for modifying a secret
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#SecretUpdate
-		action.SecretUpdate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/secret?tab=doc#CommandUpdate
+		secret.CommandUpdate,
 	},
 }

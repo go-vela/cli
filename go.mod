@@ -12,7 +12,7 @@ require (
 	github.com/go-vela/mock v0.10.0
 	github.com/go-vela/pkg-executor v0.10.0
 	github.com/go-vela/pkg-runtime v0.10.0
-	github.com/go-vela/sdk-go v0.10.0
+	github.com/go-vela/sdk-go v0.10.1
 	github.com/go-vela/types v0.10.0
 	github.com/golang-jwt/jwt/v4 v4.1.0
 	github.com/gosuri/uitable v0.0.4

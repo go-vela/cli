@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/repo"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,7 +21,7 @@ var repairCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for repairing a repository
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#RepoRepair
-		action.RepoRepair,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandRepair
+		repo.CommandRepair,
 	},
 }

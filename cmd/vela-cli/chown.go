@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/repo"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,7 +21,7 @@ var chownCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for changing ownership of a repository
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#RepoChown
-		action.RepoChown,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandChown
+		repo.CommandChown,
 	},
 }

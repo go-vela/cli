@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/pipeline"
 
 	"github.com/urfave/cli/v2"
 )
@@ -20,7 +20,7 @@ var execCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for executing a pipeline
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#PipelineExec
-		action.PipelineExec,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandExec
+		pipeline.CommandExec,
 	},
 }

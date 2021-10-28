@@ -5,7 +5,14 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/build"
+	"github.com/go-vela/cli/command/deployment"
+	"github.com/go-vela/cli/command/hook"
+	"github.com/go-vela/cli/command/log"
+	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/command/secret"
+	"github.com/go-vela/cli/command/service"
+	"github.com/go-vela/cli/command/step"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,42 +28,42 @@ var getCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for getting a list of builds
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#BuildGet
-		action.BuildGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandGet
+		build.CommandGet,
 
 		// add the sub command for getting a list of deployments
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#DeploymentGet
-		action.DeploymentGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/deployment?tab=doc#CommandGet
+		deployment.CommandGet,
 
 		// add the sub command for getting a list of hooks
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#HookGet
-		action.HookGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandGet
+		hook.CommandGet,
 
 		// add the sub command for getting a list of build logs
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#LogGet
-		action.LogGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/log?tab=doc#CommandGet
+		log.CommandGet,
 
 		// add the sub command for getting a list of repositories
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#RepoGet
-		action.RepoGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandGet
+		repo.CommandGet,
 
 		// add the sub command for getting a list of secrets
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#SecretGet
-		action.SecretGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/secret?tab=doc#CommandGet
+		secret.CommandGet,
 
 		// add the sub command for getting a list of services
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#ServiceGet
-		action.ServiceGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/service?tab=doc#CommandGet
+		service.CommandGet,
 
 		// add the sub command for getting a list of steps
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#StepGet
-		action.StepGet,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/step?tab=doc#CommandGet
+		step.CommandGet,
 	},
 }

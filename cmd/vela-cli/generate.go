@@ -5,7 +5,10 @@
 package main
 
 import (
-	"github.com/go-vela/cli/action"
+	"github.com/go-vela/cli/command/completion"
+	"github.com/go-vela/cli/command/config"
+	"github.com/go-vela/cli/command/docs"
+	"github.com/go-vela/cli/command/pipeline"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,22 +24,22 @@ var generateCmds = &cli.Command{
 	Subcommands: []*cli.Command{
 		// add the sub command for producing a shell auto completion script
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#CompletionGenerate
-		action.CompletionGenerate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/completion?tab=doc#CommandGenerate
+		completion.CommandGenerate,
 
 		// add the sub command for producing a config file
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#ConfigGenerate
-		action.ConfigGenerate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandGenerate
+		config.CommandGenerate,
 
 		// add the sub command for producing documentation
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#DocsGenerate
-		action.DocsGenerate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/docs?tab=doc#CommandGenerate
+		docs.CommandGenerate,
 
 		// add the sub command for producing a pipeline
 		//
-		// https://pkg.go.dev/github.com/go-vela/cli/action?tab=doc#PipelineGenerate
-		action.PipelineGenerate,
+		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandGenerate
+		pipeline.CommandGenerate,
 	},
 }

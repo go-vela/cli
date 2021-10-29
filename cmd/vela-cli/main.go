@@ -9,8 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-vela/cli/action"
-  "github.com/go-vela/cli/command/login"
+	"github.com/go-vela/cli/command/login"
 	_version "github.com/go-vela/cli/command/version"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/version"

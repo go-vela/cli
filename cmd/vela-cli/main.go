@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/go-vela/cli/action"
+  "github.com/go-vela/cli/command/login"
 	_version "github.com/go-vela/cli/command/version"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/version"
@@ -47,7 +48,7 @@ func main() {
 	// CLI Commands
 
 	app.Commands = []*cli.Command{
-		action.Login,
+		login.CommandLogin,
 		_version.CommandVersion,
 		addCmds,
 		cancelCmds,

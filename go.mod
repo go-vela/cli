@@ -16,8 +16,7 @@ require (
 	github.com/go-vela/types v0.10.0
 	github.com/golang-jwt/jwt/v4 v4.1.0
 	github.com/gosuri/uitable v0.0.4
-	github.com/lunixbochs/vtclean v1.0.0 // indirect
-	github.com/manifoldco/promptui v0.8.0
+	github.com/manifoldco/promptui v0.9.0
 	github.com/mattn/go-runewidth v0.0.6 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/afero v1.6.0

@@ -11,9 +11,9 @@ import (
 	"path"
 	"testing"
 
-	"github.com/go-vela/compiler/compiler/native"
-	"github.com/go-vela/mock/server"
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/compiler/native"
+	"github.com/go-vela/server/mock/server"
 
 	"github.com/urfave/cli/v2"
 )

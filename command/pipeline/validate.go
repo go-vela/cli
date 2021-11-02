@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/types/constants"
 
-	"github.com/go-vela/compiler/compiler/native"
+	"github.com/go-vela/server/compiler/native"
 
 	"github.com/urfave/cli/v2"
 )
@@ -178,7 +178,7 @@ func validate(c *cli.Context) error {
 
 	// create a compiler client
 	//
-	// https://godoc.org/github.com/go-vela/compiler/compiler/native#New
+	// https://godoc.org/github.com/go-vela/server/compiler/native#New
 	client, err := native.New(c)
 	if err != nil {
 		return err

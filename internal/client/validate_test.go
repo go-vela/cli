@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-vela/mock/server"
+	"github.com/go-vela/server/mock/server"
 )
 
 func TestClient_validate(t *testing.T) {

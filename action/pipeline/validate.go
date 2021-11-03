@@ -15,7 +15,7 @@ import (
 	"github.com/go-vela/types/library"
 	"github.com/go-vela/types/yaml"
 
-	"github.com/go-vela/compiler/compiler"
+	"github.com/go-vela/server/compiler"
 
 	"github.com/sirupsen/logrus"
 )
@@ -148,14 +148,14 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 
 		if len(p.Stages) > 0 {
 			// inject the templates into the stages
-			p.Stages, p.Secrets, p.Services, err = client.ExpandStages(p, templates)
+			p.Stages, p.Secrets, p.Services, _, err = client.ExpandStages(p, templates)
 			if err != nil {
 				return err
 			}
 		}
 
 		// inject the templates into the steps
-		p.Steps, p.Secrets, p.Services, err = client.ExpandSteps(p, templates)
+		p.Steps, p.Secrets, p.Services, _, err = client.ExpandSteps(p, templates)
 		if err != nil {
 			return err
 		}

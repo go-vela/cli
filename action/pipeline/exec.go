@@ -11,11 +11,11 @@ import (
 	"path/filepath"
 
 	"github.com/go-vela/cli/version"
-	"github.com/go-vela/compiler/compiler"
-	"github.com/go-vela/pkg-executor/executor"
-	"github.com/go-vela/pkg-runtime/runtime"
+	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+	"github.com/go-vela/worker/executor"
+	"github.com/go-vela/worker/runtime"
 
 	"github.com/sirupsen/logrus"
 )
@@ -91,7 +91,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 	// setup the runtime
 	//
-	// https://pkg.go.dev/github.com/go-vela/pkg-runtime/runtime?tab=doc#New
+	// https://pkg.go.dev/github.com/go-vela/worker/runtime?tab=doc#New
 	_runtime, err := runtime.New(&runtime.Setup{
 		Driver:      constants.DriverDocker,
 		HostVolumes: c.Volumes,
@@ -104,7 +104,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 	// setup the executor
 	//
-	// https://godoc.org/github.com/go-vela/pkg-executor/executor#New
+	// https://godoc.org/github.com/go-vela/worker/executor#New
 	_executor, err := executor.New(&executor.Setup{
 		Driver:   constants.DriverLocal,
 		Runtime:  _runtime,

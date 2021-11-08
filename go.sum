@@ -192,8 +192,8 @@ github.com/go-vela/server v0.11.0-rc1 h1:y/Fln79cIYMSOJbwvy+Hf5GstoHvnWo9MKHPrZ1
 github.com/go-vela/server v0.11.0-rc1/go.mod h1:tnGr39vUKkG4lfC9lu2qXLM1c6P/tZAF1ThHyZREUho=
 github.com/go-vela/types v0.11.0-rc1 h1:1/wQA0NadOYpGKBuAwFisc4qIiw79wlU1qdiZClUfes=
 github.com/go-vela/types v0.11.0-rc1/go.mod h1:8Oml/G1ATFTJsKdsIsstUuHVLsUv7pl6+EiIyOaUqH0=
-github.com/go-vela/worker v0.11.0-rc1 h1:jgibc4+9Nnw/car0SC11p6dsFzU/Gh5oPAVV+qFUHI8=
-github.com/go-vela/worker v0.11.0-rc1/go.mod h1:tdfomIHibzrQlg8GtoKidu7DbHRhgeTPrL4zOfleDKw=
+github.com/go-vela/worker v0.11.0-rc2 h1:bN+d8Iva1yBEDrAeX18aKUvWI+n5Gqs2SxfzsO5aaTU=
+github.com/go-vela/worker v0.11.0-rc2/go.mod h1:tdfomIHibzrQlg8GtoKidu7DbHRhgeTPrL4zOfleDKw=
 github.com/gofrs/uuid v4.0.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=

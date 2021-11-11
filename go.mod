@@ -8,9 +8,9 @@ require (
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
-	github.com/go-vela/sdk-go v0.11.0-rc3
-	github.com/go-vela/server v0.11.0-rc3
-	github.com/go-vela/types v0.11.0-rc3
+	github.com/go-vela/sdk-go v0.11.0
+	github.com/go-vela/server v0.11.0
+	github.com/go-vela/types v0.11.0
 	github.com/go-vela/worker v0.11.0-rc3
 	github.com/golang-jwt/jwt/v4 v4.1.0
 	github.com/gosuri/uitable v0.0.4

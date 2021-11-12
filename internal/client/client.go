@@ -7,7 +7,9 @@ package client
 import (
 	"fmt"
 	"net/url"
+	"os/exec"
 	"runtime"
+	"strings"
 
 	"github.com/go-vela/cli/internal"
 
@@ -95,4 +97,26 @@ func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
 
 	// create a vela client from the provided address
 	return vela.NewClient(address, c.App.Name, nil)
+}
+
+func GetCwdOrg() string {
+	cmd := exec.Command("git", []string{"config", "--get", "remote.origin.url"}...)
+	stdout, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+	output := string(stdout)
+	o := strings.Split(strings.Split(output, ":")[1], "/")[0]
+	return o
+}
+
+func GetCwdRepo() string {
+	cmd := exec.Command("git", []string{"config", "--get", "remote.origin.url"}...)
+	stdout, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+	output := string(stdout)
+	r := strings.Split(strings.Split(strings.Split(output, ":")[1], "/")[1], ".")[0]
+	return r
 }

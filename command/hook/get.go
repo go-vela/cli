@@ -31,12 +31,14 @@ var CommandGet = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the hook",
+			Value:   client.GetCwdOrg(),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "HOOK_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the hook",
+			Value:   client.GetCwdRepo(),
 		},
 
 		// Output Flags

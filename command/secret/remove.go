@@ -33,12 +33,14 @@ var CommandRemove = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
+			Value:   client.GetCwdOrg(),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
+			Value:   client.GetCwdRepo(),
 		},
 
 		// Secret Flags

@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
+	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
 )
@@ -81,12 +82,14 @@ var CommandGenerate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the CLI",
+			Value:   client.GetCwdOrg(),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the CLI",
+			Value:   client.GetCwdRepo(),
 		},
 
 		// Secret Flags

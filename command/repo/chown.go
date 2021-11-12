@@ -31,12 +31,14 @@ var CommandChown = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the repository",
+			Value:   client.GetCwdOrg(),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the name for the repository",
+			Value:   client.GetCwdRepo(),
 		},
 
 		// Output Flags

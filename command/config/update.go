@@ -9,7 +9,6 @@ import (
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
-	"github.com/go-vela/cli/internal/client"
 
 	"github.com/urfave/cli/v2"
 )
@@ -82,14 +81,14 @@ var CommandUpdate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "update the org in the config file",
-			Value:   client.GetCwdOrg(),
+			Value:   internal.GetCwdOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "update the repo in the config file",
-			Value:   client.GetCwdRepo(),
+			Value:   internal.GetCwdRepo("./"),
 		},
 
 		// Secret Flags

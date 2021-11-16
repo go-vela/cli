@@ -8,6 +8,8 @@ require (
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
+	github.com/go-git/go-git v4.7.0+incompatible
+	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-vela/sdk-go v0.11.0-rc3
 	github.com/go-vela/server v0.11.0-rc3
 	github.com/go-vela/types v0.11.0-rc3
@@ -19,5 +21,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/afero v1.6.0
 	github.com/urfave/cli/v2 v2.3.0
+	github.com/whilp/git-urls v1.0.0
+	gopkg.in/src-d/go-git.v4 v4.13.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )

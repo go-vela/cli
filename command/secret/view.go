@@ -33,14 +33,14 @@ var CommandView = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
-			Value:   client.GetCwdOrg(),
+			Value:   internal.GetCwdOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
-			Value:   client.GetCwdRepo(),
+			Value:   internal.GetCwdRepo("./"),
 		},
 
 		// Secret Flags

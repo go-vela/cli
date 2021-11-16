@@ -10,7 +10,6 @@ import (
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
-	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/types/constants"
 
@@ -103,14 +102,14 @@ var CommandExec = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the pipeline",
-			Value:   client.GetCwdOrg(),
+			Value:   internal.GetCwdOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "PIPELINE_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
-			Value:   client.GetCwdRepo(),
+			Value:   internal.GetCwdRepo("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},

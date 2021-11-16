@@ -31,14 +31,14 @@ var CommandCancel = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
-			Value:   client.GetCwdOrg(),
+			Value:   internal.GetCwdOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
-			Value:   client.GetCwdRepo(),
+			Value:   internal.GetCwdRepo("./"),
 		},
 
 		// Build Flags

@@ -81,14 +81,14 @@ var CommandUpdate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "update the org in the config file",
-			Value:   internal.GetCwdOrg("./"),
+			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "update the repo in the config file",
-			Value:   internal.GetCwdRepo("./"),
+			Value:   internal.GetGitConfigRepo("./"),
 		},
 
 		// Secret Flags

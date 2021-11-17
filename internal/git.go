@@ -11,7 +11,7 @@ import (
 	giturls "github.com/whilp/git-urls"
 )
 
-func GetCwdOrg(path string) string {
+func GetGitConfigOrg(path string) string {
 	r, err := git.PlainOpen(path)
 	if err != nil {
 		return ""
@@ -29,7 +29,7 @@ func GetCwdOrg(path string) string {
 	return org
 }
 
-func GetCwdRepo(path string) string {
+func GetGitConfigRepo(path string) string {
 	r, err := git.PlainOpen(path)
 	if err != nil {
 		return ""

@@ -30,14 +30,14 @@ var CommandView = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
-			Value:   internal.GetCwdOrg("./"),
+			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
-			Value:   internal.GetCwdRepo("./"),
+			Value:   internal.GetGitConfigRepo("./"),
 		},
 
 		// Build Flags

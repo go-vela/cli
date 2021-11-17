@@ -33,14 +33,14 @@ var CommandUpdate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the repository",
-			Value:   internal.GetCwdOrg("./"),
+			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the name for the repository",
-			Value:   internal.GetCwdRepo("./"),
+			Value:   internal.GetGitConfigRepo("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_BRANCH", "REPO_BRANCH"},

@@ -12,7 +12,7 @@ import (
 	"github.com/go-git/go-git/v5/config"
 )
 
-func TestGit_GetCwdOrg(t *testing.T) {
+func TestGit_GetGitConfigOrg(t *testing.T) {
 	testSetup(t)
 	// setup tests
 	tests := []struct {
@@ -35,16 +35,16 @@ func TestGit_GetCwdOrg(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		got := GetCwdOrg(test.input)
+		got := GetGitConfigOrg(test.input)
 		if got != test.expect {
-			t.Errorf("GetCwdOrg returned org: %s\n Expected org: %s\n", got, test.expect)
+			t.Errorf("GetGitConfigOrg returned org: %s\n Expected org: %s\n", got, test.expect)
 		}
 	}
 
 	testTearDown()
 }
 
-func TestGit_GetCwdRepo(t *testing.T) {
+func TestGit_GetGitConfigRepo(t *testing.T) {
 	testSetup(t)
 	// setup tests
 	tests := []struct {
@@ -67,9 +67,9 @@ func TestGit_GetCwdRepo(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		got := GetCwdRepo(test.input)
+		got := GetGitConfigRepo(test.input)
 		if got != test.expect {
-			t.Errorf("GetCwdRepo returned repo: %s\n Expected repo: %s\n", got, test.expect)
+			t.Errorf("GetGitConfigRepo returned repo: %s\n Expected repo: %s\n", got, test.expect)
 		}
 	}
 
@@ -78,15 +78,21 @@ func TestGit_GetCwdRepo(t *testing.T) {
 
 func testSetup(t *testing.T) {
 	// setup configs
-	r1, _ := git.PlainInit("./testdata/project1/", false)
-	_, err := r1.CreateRemote(&config.RemoteConfig{
+	r1, err := git.PlainInit("./testdata/project1/", false)
+	if err != nil {
+		t.Errorf("Failed to init repo for project 1")
+	}
+	_, err = r1.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
 		URLs: []string{"git@github.com:go-vela/api-handler.git"},
 	})
 	if err != nil {
 		t.Errorf("Could not create remote")
 	}
-	r2, _ := git.PlainInit("./testdata/project2/", false)
+	r2, err := git.PlainInit("./testdata/project2/", false)
+	if err != nil {
+		t.Errorf("Failed to init repo for project 2")
+	}
 	_, err = r2.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
 		URLs: []string{"git@github.com:OctoKitty/catCastle.git"},
@@ -94,7 +100,10 @@ func testSetup(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not create remote")
 	}
-	r3, _ := git.PlainInit("./testdata/project3/", false)
+	r3, err := git.PlainInit("./testdata/project3/", false)
+	if err != nil {
+		t.Errorf("Failed to init repo for project 3")
+	}
 	_, err = r3.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
 		URLs: []string{"git@github.com:testing/test-test.git"},

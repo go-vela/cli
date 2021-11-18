@@ -18,14 +18,8 @@ ifndef GITHUB_TAG
 	GITHUB_TAG = $(shell git describe --tag --abbrev=0)
 endif
 
-# check if a go version is already set
-ifndef GOLANG_VERSION
-	# capture the current go version we build the application from
-	GOLANG_VERSION = $(shell go version | awk '{ print $$3 }')
-endif
-
 # create a list of linker flags for building the golang application
-LD_FLAGS = -X github.com/go-vela/cli/version.Commit=${GITHUB_SHA} -X github.com/go-vela/cli/version.Date=${BUILD_DATE} -X github.com/go-vela/cli/version.Go=${GOLANG_VERSION} -X github.com/go-vela/cli/version.Tag=${GITHUB_TAG}
+LD_FLAGS = -X github.com/go-vela/cli/version.Commit=${GITHUB_SHA} -X github.com/go-vela/cli/version.Date=${BUILD_DATE} -X github.com/go-vela/cli/version.Tag=${GITHUB_TAG}
 
 # The `clean` target is intended to clean the workspace
 # and prepare the local changes for submission.

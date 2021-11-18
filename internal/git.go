@@ -71,7 +71,7 @@ func GetGitConfigOrg(path string) string {
 
 // GetGitConfigRepo opens the git repository, fetches
 // the remote origin url, and parses the url to find
-// the repo of the current working directory
+// the repo of the current working directory.
 func GetGitConfigRepo(path string) string {
 	// open repository
 	r, err := git.PlainOpen(path)

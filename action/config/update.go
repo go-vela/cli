@@ -92,6 +92,12 @@ func (c *Config) Update() error {
 			config.Log.Level = value
 		}
 
+		// check if git sync flag should be modified
+		if strings.EqualFold(key, internal.FlagGitSync) {
+			// set the git sync field to value provided
+			config.GitSync = value
+		}
+
 		// check if secret engine flag should be modified
 		if strings.EqualFold(key, internal.FlagSecretEngine) {
 			// set the secret engine field to value provided

@@ -102,6 +102,12 @@ func (c *Config) Remove() error {
 			config.Log.Level = ""
 		}
 
+		// check if git sync flag should be removed
+		if strings.EqualFold(flag, internal.FlagGitSync) {
+			// set the git sync field to empty in config
+			config.GitSync = ""
+		}
+
 		// check if secret engine flag should be removed
 		if strings.EqualFold(flag, internal.FlagSecretEngine) {
 			// set the secret engine field to empty in config

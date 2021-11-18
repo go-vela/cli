@@ -47,9 +47,10 @@ func (c *Config) Generate() error {
 				URL:   c.GitHub.URL,
 			},
 		},
-		Org:    c.Org,
-		Repo:   c.Repo,
-		Output: c.Output,
+		Org:     c.Org,
+		Repo:    c.Repo,
+		Output:  c.Output,
+		GitSync: c.GitSync,
 	}
 
 	logrus.Trace("creating file content for config file")

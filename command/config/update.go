@@ -65,6 +65,15 @@ var CommandUpdate = &cli.Command{
 			Usage:   "update the log level in the config file",
 		},
 
+		// Git Sync Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_GIT_SYNC", "CONFIG_GIT_SYNC", "GIT_SYNC"},
+			Name:    internal.FlagGitSync,
+			Aliases: []string{"gs"},
+			Usage:   "update the status of syncing git repo and org with .git/ directory",
+		},
+
 		// Output Flags
 
 		&cli.StringFlag{
@@ -81,14 +90,12 @@ var CommandUpdate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "update the org in the config file",
-			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "update the repo in the config file",
-			Value:   internal.GetGitConfigRepo("./"),
 		},
 
 		// Secret Flags
@@ -162,6 +169,7 @@ func update(c *cli.Context) error {
 	refreshToken := c.String(internal.FlagAPIRefreshToken)
 	version := c.String(internal.FlagAPIVersion)
 	level := c.String(internal.FlagLogLevel)
+	gitSync := c.String(internal.FlagGitSync)
 	output := c.String(internal.FlagOutput)
 	org := c.String(internal.FlagOrg)
 	repo := c.String(internal.FlagRepo)
@@ -198,6 +206,11 @@ func update(c *cli.Context) error {
 	// check if the log level flag should be modified
 	if len(level) > 0 {
 		conf.UpdateFlags[internal.FlagLogLevel] = level
+	}
+
+	// check if the git sync flag should be modified
+	if len(gitSync) > 0 {
+		conf.UpdateFlags[internal.FlagGitSync] = gitSync
 	}
 
 	// check if the output flag should be modified

@@ -82,5 +82,10 @@ func (c *ConfigFile) Empty() bool {
 		return false
 	}
 
+	// check if the gitsync is set
+	if len(c.GitSync) > 0 {
+		return false
+	}
+
 	return true
 }

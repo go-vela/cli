@@ -122,6 +122,16 @@ func main() {
 			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
 			Value:   "info",
 		},
+
+		// Git Sync Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_GIT_SYNC", "CONFIG_GIT_SYNC", "GIT_SYNC"},
+			Name:    internal.FlagGitSync,
+			Aliases: []string{"gs"},
+			Usage:   "set the status of syncing git repo and org with .git/ directory",
+			Value:   "true",
+		},
 	}
 
 	// CLI Start

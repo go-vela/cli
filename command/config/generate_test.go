@@ -21,6 +21,7 @@ func TestConfig_Generate(t *testing.T) {
 	set.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	set.String("api.version", "1", "doc")
 	set.String("log.level", "info", "doc")
+	set.String("gitsync", "true", "doc")
 	set.String("output", "json", "doc")
 	set.String("org", "github", "doc")
 	set.String("repo", "octocat", "doc")

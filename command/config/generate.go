@@ -81,14 +81,12 @@ var CommandGenerate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the CLI",
-			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the CLI",
-			Value:   internal.GetGitConfigRepo("./"),
 		},
 
 		// Secret Flags
@@ -156,6 +154,7 @@ func generate(c *cli.Context) error {
 		RefreshToken: c.String(internal.FlagAPIRefreshToken),
 		Version:      c.String(internal.FlagAPIVersion),
 		LogLevel:     c.String(internal.FlagLogLevel),
+		GitSync:      c.String(internal.FlagGitSync),
 		Output:       c.String(internal.FlagOutput),
 		Org:          c.String(internal.FlagOrg),
 		Repo:         c.String(internal.FlagRepo),

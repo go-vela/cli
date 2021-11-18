@@ -33,14 +33,12 @@ var CommandValidate = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the pipeline",
-			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
-			Value:   internal.GetGitConfigRepo("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},

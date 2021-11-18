@@ -36,6 +36,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 					"api.token.refresh",
 					"api.version",
 					"log.level",
+					"gitsync",
 					"secret.engine",
 					"secret.type",
 					"compiler.GitHubToken",

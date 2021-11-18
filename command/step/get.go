@@ -31,14 +31,12 @@ var CommandGet = &cli.Command{
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the step",
-			Value:   internal.GetGitConfigOrg("./"),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_REPO", "STEP_REPO"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the step",
-			Value:   internal.GetGitConfigRepo("./"),
 		},
 
 		// Build Flags

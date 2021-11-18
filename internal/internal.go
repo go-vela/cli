@@ -71,18 +71,11 @@ const (
 	FlagLogLevel = "log.level"
 )
 
-// git sync flag keys.
+// no git flag keys.
 const (
-	// FlagGitSync defines the key for the
-	// flag when setting the gitsync status.
-	FlagGitSync = "gitsync"
-)
-
-// git sync flag status variable.
-var (
-	// FlagGitSyncStatus allows for access to
-	// config field without context.
-	FlagGitSyncStatus = true
+	// FlagNoGit defines the key for the
+	// flag when setting the no-git status.
+	FlagNoGit = "no-git"
 )
 
 // pagination flag keys.

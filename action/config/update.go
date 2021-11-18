@@ -93,9 +93,9 @@ func (c *Config) Update() error {
 		}
 
 		// check if git sync flag should be modified
-		if strings.EqualFold(key, internal.FlagGitSync) {
+		if strings.EqualFold(key, internal.FlagNoGit) {
 			// set the git sync field to value provided
-			config.GitSync = value
+			config.NoGit = value
 		}
 
 		// check if secret engine flag should be modified

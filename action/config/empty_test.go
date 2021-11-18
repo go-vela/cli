@@ -29,7 +29,7 @@ func TestConfig_ConfigFile_Empty(t *testing.T) {
 				Log: &Log{
 					Level: "info",
 				},
-				GitSync: "true",
+				NoGit: "true",
 				Secret: &Secret{
 					Engine: "native",
 					Type:   "repo",
@@ -67,7 +67,7 @@ func TestConfig_ConfigFile_Empty(t *testing.T) {
 		{
 			want: false,
 			config: &ConfigFile{
-				GitSync: "true",
+				NoGit: "true",
 			},
 		},
 		{

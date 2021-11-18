@@ -25,7 +25,7 @@ func TestConfig_Config_Load(t *testing.T) {
 		&cli.StringFlag{Name: "api.token.refresh"},
 		&cli.StringFlag{Name: "api.version"},
 		&cli.StringFlag{Name: "log.level"},
-		&cli.StringFlag{Name: "gitsync"},
+		&cli.StringFlag{Name: "no-git"},
 		&cli.StringFlag{Name: "output"},
 		&cli.StringFlag{Name: "org"},
 		&cli.StringFlag{Name: "repo"},
@@ -48,7 +48,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("api.version", "1", "doc")
 	fullSet.String("log.level", "info", "doc")
-	fullSet.String("gitsync", "true", "doc")
+	fullSet.String("no-git", "true", "doc")
 	fullSet.String("output", "json", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")

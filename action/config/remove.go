@@ -103,9 +103,9 @@ func (c *Config) Remove() error {
 		}
 
 		// check if git sync flag should be removed
-		if strings.EqualFold(flag, internal.FlagGitSync) {
+		if strings.EqualFold(flag, internal.FlagNoGit) {
 			// set the git sync field to empty in config
-			config.GitSync = ""
+			config.NoGit = ""
 		}
 
 		// check if secret engine flag should be removed

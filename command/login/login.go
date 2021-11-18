@@ -164,7 +164,7 @@ func runLogin(c *cli.Context) error {
 		RefreshToken: c.String(internal.FlagAPIRefreshToken),
 		Version:      c.String(internal.FlagAPIVersion),
 		LogLevel:     c.String(internal.FlagLogLevel),
-		GitSync:      c.String(internal.FlagGitSync),
+		NoGit:        c.String(internal.FlagNoGit),
 		Output:       c.String(internal.FlagOutput),
 		Org:          c.String(internal.FlagOrg),
 		Repo:         c.String(internal.FlagRepo),

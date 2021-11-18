@@ -6,7 +6,7 @@ api:
   version: "1"
 log:
   level: info
-git_sync: "true"
+no-git: "true"
 secret:
   engine: native
   type: repo

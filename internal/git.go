@@ -15,11 +15,11 @@ import (
 
 // SetGitConfigContext attempts to set the org and repo
 // based on the .git/ directory, provided the user has
-// the config flag of gitsync set to true.
+// the config flag of no-git set to true.
 func SetGitConfigContext(c *cli.Context) {
 	// check to see if config and command allow for
 	// automatic setting of org and repo.
-	if c.String(FlagGitSync) == "true" &&
+	if c.String(FlagNoGit) == "false" &&
 		c.String(FlagOrg) == "" &&
 		c.String(FlagRepo) == "" {
 		// set the org

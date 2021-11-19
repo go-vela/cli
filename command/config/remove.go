@@ -72,7 +72,7 @@ var CommandRemove = &cli.Command{
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
 			Name:    internal.FlagNoGit,
-			Aliases: []string{"gs"},
+			Aliases: []string{"ng"},
 			Usage:   "removes the status of syncing git repo and org with .git/ directory",
 			Value:   "false",
 		},

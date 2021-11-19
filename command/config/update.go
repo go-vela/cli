@@ -65,10 +65,10 @@ var CommandUpdate = &cli.Command{
 
 		// No Git Flags
 
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
 			Name:    internal.FlagNoGit,
-			Aliases: []string{"gs"},
+			Aliases: []string{"ng"},
 			Usage:   "update the status of syncing git repo and org with .git/ directory",
 		},
 

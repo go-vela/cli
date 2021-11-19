@@ -5,6 +5,7 @@
 package internal
 
 import (
+	"strconv"
 	"strings"
 
 	"github.com/go-git/go-git/v5"
@@ -19,12 +20,17 @@ import (
 func SetGitConfigContext(c *cli.Context) {
 	// check to see if config and command allow for
 	// automatic setting of org and repo.
-	if !c.Bool(FlagNoGit) &&
+	nogit, err := strconv.ParseBool(c.String(FlagNoGit))
+	if err != nil {
+		logrus.Debug("Invalid bool value for flag no-git")
+		return
+	}
+	if !nogit &&
 		c.String(FlagOrg) == "" &&
 		c.String(FlagRepo) == "" {
 		// set the org
 		logrus.Trace("attempting to set org from .git/")
-		err := c.Set(FlagOrg, GetGitConfigOrg("./"))
+		err = c.Set(FlagOrg, GetGitConfigOrg("./"))
 
 		if err != nil {
 			logrus.Debug("failed to set org in context")

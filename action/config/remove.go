@@ -102,9 +102,9 @@ func (c *Config) Remove() error {
 			config.Log.Level = ""
 		}
 
-		// check if git sync flag should be removed
+		// check if no git flag should be removed
 		if strings.EqualFold(flag, internal.FlagNoGit) {
-			// set the git sync field to empty in config
+			// set the no git field to empty in config
 			config.NoGit = ""
 		}
 

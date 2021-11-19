@@ -19,7 +19,7 @@ import (
 func SetGitConfigContext(c *cli.Context) {
 	// check to see if config and command allow for
 	// automatic setting of org and repo.
-	if c.String(FlagNoGit) == "false" &&
+	if !c.Bool(FlagNoGit) &&
 		c.String(FlagOrg) == "" &&
 		c.String(FlagRepo) == "" {
 		// set the org
@@ -62,9 +62,18 @@ func GetGitConfigOrg(path string) string {
 	if err != nil {
 		return ""
 	}
+	// nolint: gomnd // ignore magic number
+	splitOrg := strings.SplitN(url.Path, "/", 2)
+
+	// check if url path is expected format
+	// nolint: gomnd // ignore magic number
+	if len(splitOrg) != 2 {
+		logrus.Debug("Invalid remote origin url -- please specify org and repo")
+		return ""
+	}
 
 	// path is :org/:repo.git - get org
-	org := strings.Split(url.Path, "/")[0]
+	org := splitOrg[0]
 
 	return org
 }
@@ -92,7 +101,26 @@ func GetGitConfigRepo(path string) string {
 		return ""
 	}
 
-	// path is :org/:repo.git - get repo
-	repoName := strings.Split(strings.Split(url.Path, "/")[1], ".git")[0]
+	// nolint: gomnd // ignore magic number
+	splitRepo := strings.SplitN(url.Path, "/", 2)
+
+	// check if url path is expected format
+	// nolint: gomnd // ignore magic number
+	if len(splitRepo) != 2 {
+		logrus.Debug("Invalid remote origin url -- please specify org and repo")
+		return ""
+	}
+
+	// nolint: gomnd // ignore magic number
+	splitDotGit := strings.SplitN(splitRepo[1], ".git", 2)
+
+	// check if repo name is expected format
+	// nolint: gomnd // ignore magic number
+	if len(splitDotGit) != 2 {
+		logrus.Debug("Invalid remote origin url -- please specify org and repo")
+		return ""
+	}
+
+	repoName := splitDotGit[0]
 	return repoName
 }

@@ -63,10 +63,10 @@ var CommandUpdate = &cli.Command{
 			Usage:   "update the log level in the config file",
 		},
 
-		// Git Sync Flags
+		// No Git Flags
 
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_GIT_SYNC", "CONFIG_GIT_SYNC", "GIT_SYNC"},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
 			Name:    internal.FlagNoGit,
 			Aliases: []string{"gs"},
 			Usage:   "update the status of syncing git repo and org with .git/ directory",
@@ -208,7 +208,7 @@ func update(c *cli.Context) error {
 		conf.UpdateFlags[internal.FlagLogLevel] = level
 	}
 
-	// check if the git sync flag should be modified
+	// check if the no git flag should be modified
 	if len(noGit) > 0 {
 		conf.UpdateFlags[internal.FlagNoGit] = noGit
 	}

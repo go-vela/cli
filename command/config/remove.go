@@ -67,10 +67,10 @@ var CommandRemove = &cli.Command{
 			Value:   "false",
 		},
 
-		// Git Sync Flags
+		// No Git Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_GIT_SYNC", "CONFIG_GIT_SYNC", "GIT_SYNC"},
+			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
 			Name:    internal.FlagNoGit,
 			Aliases: []string{"gs"},
 			Usage:   "removes the status of syncing git repo and org with .git/ directory",
@@ -197,7 +197,7 @@ func remove(c *cli.Context) error {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagLogLevel)
 	}
 
-	// check if the git sync flag should be removed
+	// check if the no git flag should be removed
 	if c.Bool(internal.FlagNoGit) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagNoGit)
 	}

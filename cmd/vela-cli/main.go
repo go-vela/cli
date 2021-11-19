@@ -123,14 +123,14 @@ func main() {
 			Value:   "info",
 		},
 
-		// Git Sync Flags
+		// No Git Flags
 
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_GIT_SYNC", "CONFIG_GIT_SYNC", "GIT_SYNC"},
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
 			Name:    internal.FlagNoGit,
 			Aliases: []string{"gs"},
 			Usage:   "set the status of syncing git repo and org with .git/ directory",
-			Value:   "false",
+			Value:   false,
 		},
 	}
 

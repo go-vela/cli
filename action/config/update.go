@@ -92,9 +92,9 @@ func (c *Config) Update() error {
 			config.Log.Level = value
 		}
 
-		// check if git sync flag should be modified
+		// check if no git flag should be modified
 		if strings.EqualFold(key, internal.FlagNoGit) {
-			// set the git sync field to value provided
+			// set the no git field to value provided
 			config.NoGit = value
 		}
 

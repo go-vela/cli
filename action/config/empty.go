@@ -82,5 +82,10 @@ func (c *ConfigFile) Empty() bool {
 		return false
 	}
 
+	// check if the no-git is set
+	if len(c.NoGit) > 0 {
+		return false
+	}
+
 	return true
 }

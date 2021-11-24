@@ -14,8 +14,6 @@ import (
 )
 
 // CommandUpdate defines the command for modifying one or more fields from the config file.
-//
-// nolint: dupl // ignore similar code with update
 var CommandUpdate = &cli.Command{
 	Name:        "config",
 	Description: "Use this command to update one or more fields from the config file.",
@@ -63,6 +61,15 @@ var CommandUpdate = &cli.Command{
 			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "update the log level in the config file",
+		},
+
+		// No Git Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
+			Name:    internal.FlagNoGit,
+			Aliases: []string{"ng"},
+			Usage:   "update the status of syncing git repo and org with .git/ directory",
 		},
 
 		// Output Flags
@@ -129,7 +136,9 @@ EXAMPLES:
     $ {{.HelpName}} --secret.engine native --secret.type org
   4. Update the log level field in the config file.
     $ {{.HelpName}} --log.level trace
-  5. Update the config file when environment variables are set.
+  5. Update the no git field in the config file.
+    $ {{.HelpName}} --no-git bool
+  6. Update the config file when environment variables are set.
     $ {{.HelpName}}
 
 DOCUMENTATION:
@@ -160,6 +169,7 @@ func update(c *cli.Context) error {
 	refreshToken := c.String(internal.FlagAPIRefreshToken)
 	version := c.String(internal.FlagAPIVersion)
 	level := c.String(internal.FlagLogLevel)
+	noGit := c.String(internal.FlagNoGit)
 	output := c.String(internal.FlagOutput)
 	org := c.String(internal.FlagOrg)
 	repo := c.String(internal.FlagRepo)
@@ -196,6 +206,11 @@ func update(c *cli.Context) error {
 	// check if the log level flag should be modified
 	if len(level) > 0 {
 		conf.UpdateFlags[internal.FlagLogLevel] = level
+	}
+
+	// check if the no git flag should be modified
+	if len(noGit) > 0 {
+		conf.UpdateFlags[internal.FlagNoGit] = noGit
 	}
 
 	// check if the output flag should be modified

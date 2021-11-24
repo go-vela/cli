@@ -50,6 +50,7 @@ func (c *Config) Generate() error {
 		Org:    c.Org,
 		Repo:   c.Repo,
 		Output: c.Output,
+		NoGit:  c.NoGit,
 	}
 
 	logrus.Trace("creating file content for config file")

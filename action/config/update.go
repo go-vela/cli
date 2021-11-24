@@ -92,6 +92,12 @@ func (c *Config) Update() error {
 			config.Log.Level = value
 		}
 
+		// check if no git flag should be modified
+		if strings.EqualFold(key, internal.FlagNoGit) {
+			// set the no git field to value provided
+			config.NoGit = value
+		}
+
 		// check if secret engine flag should be modified
 		if strings.EqualFold(key, internal.FlagSecretEngine) {
 			// set the secret engine field to value provided

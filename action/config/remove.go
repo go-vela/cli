@@ -102,6 +102,12 @@ func (c *Config) Remove() error {
 			config.Log.Level = ""
 		}
 
+		// check if no git flag should be removed
+		if strings.EqualFold(flag, internal.FlagNoGit) {
+			// set the no git field to empty in config
+			config.NoGit = ""
+		}
+
 		// check if secret engine flag should be removed
 		if strings.EqualFold(flag, internal.FlagSecretEngine) {
 			// set the secret engine field to empty in config

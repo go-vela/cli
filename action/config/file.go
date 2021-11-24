@@ -11,6 +11,7 @@ package config
 type ConfigFile struct {
 	API      *API      `yaml:"api,omitempty"`
 	Log      *Log      `yaml:"log,omitempty"`
+	NoGit    string    `yaml:"no-git,omitempty"`
 	Secret   *Secret   `yaml:"secret,omitempty"`
 	Compiler *Compiler `yaml:"compiler,omitempty"`
 	Output   string    `yaml:"output,omitempty"`

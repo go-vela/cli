@@ -122,6 +122,16 @@ func main() {
 			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
 			Value:   "info",
 		},
+
+		// No Git Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
+			Name:    internal.FlagNoGit,
+			Aliases: []string{"ng"},
+			Usage:   "set the status of syncing git repo and org with .git/ directory",
+			Value:   "false",
+		},
 	}
 
 	// CLI Start

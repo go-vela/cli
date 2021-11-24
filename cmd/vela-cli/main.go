@@ -60,6 +60,7 @@ func main() {
 		removeCmds,
 		repairCmds,
 		restartCmds,
+		syncCmds,
 		updateCmds,
 		validateCmds,
 		viewCmds,

@@ -18,7 +18,7 @@ func (c *Config) Sync(client *vela.Client) error {
 	logrus.Tracef("syncing repo %s/%s", c.Org, c.Name)
 
 	// send API call to sync repository
-	msg, _, err := client.Repo.Sync(c.Org, c.Name)
+	msg, _, err := client.SCM.Sync(c.Org, c.Name)
 	if err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ func (c *Config) SyncAll(client *vela.Client) error {
 	logrus.Tracef("syncing repos for org: %s...", c.Org)
 
 	// send API call to sync org repos
-	msg, _, err := client.Repo.SyncAll(c.Org)
+	msg, _, err := client.SCM.SyncAll(c.Org)
 	if err != nil {
 		return err
 	}

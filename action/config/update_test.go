@@ -36,6 +36,7 @@ func TestConfig_Config_Update(t *testing.T) {
 					"api.token.refresh":    "superSecretRefreshToken",
 					"api.version":          "1",
 					"log.level":            "info",
+					"no-git":               "true",
 					"secret.engine":        "native",
 					"secret.type":          "repo",
 					"compiler.GitHubToken": "somePATToken",

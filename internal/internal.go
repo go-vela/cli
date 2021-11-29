@@ -71,6 +71,13 @@ const (
 	FlagLogLevel = "log.level"
 )
 
+// no git flag keys.
+const (
+	// FlagNoGit defines the key for the
+	// flag when setting the no-git status.
+	FlagNoGit = "no-git"
+)
+
 // pagination flag keys.
 const (
 	// FlagPage defines the key for the

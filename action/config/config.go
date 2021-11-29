@@ -15,6 +15,7 @@ type Config struct {
 	RefreshToken string
 	Version      string
 	LogLevel     string
+	NoGit        string
 	Org          string
 	Repo         string
 	Engine       string

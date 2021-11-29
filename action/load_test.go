@@ -33,6 +33,7 @@ func TestAction_Load(t *testing.T) {
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("api.version", "1", "doc")
 	fullSet.String("log.level", "info", "doc")
+	fullSet.String("no-git", "true", "doc")
 	fullSet.String("output", "json", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")

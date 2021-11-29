@@ -37,6 +37,9 @@ func Load(c *cli.Context) error {
 		}
 	}
 
+	// set org and repo
+	internal.SetGitConfigContext(c)
+
 	// set log level for the CLI
 	switch c.String(internal.FlagLogLevel) {
 	case "t", "trace", "Trace", "TRACE":

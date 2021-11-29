@@ -174,6 +174,17 @@ func (c *Config) Load(ctx *cli.Context) error {
 			}
 		}
 
+		// check if the git sync flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagNoGit) &&
+			!ctx.IsSet(internal.FlagNoGit) &&
+			len(config.NoGit) > 0 {
+			err = ctx.Set(internal.FlagNoGit, config.NoGit)
+			if err != nil {
+				return err
+			}
+		}
+
 		// check if the output flag is available
 		// and if it is set in the context
 		if strings.Contains(f, internal.FlagOutput) &&

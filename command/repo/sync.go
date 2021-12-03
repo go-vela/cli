@@ -84,7 +84,7 @@ func sync(c *cli.Context) error {
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 		r := &repo.Config{
-			Action: "syncAll",
+			Action: internal.ActionSyncAll,
 			Org:    c.String(internal.FlagOrg),
 		}
 		// validate repo configuration
@@ -104,7 +104,7 @@ func sync(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
-		Action: "sync",
+		Action: internal.ActionSync,
 		Org:    c.String(internal.FlagOrg),
 		Name:   c.String(internal.FlagRepo),
 	}

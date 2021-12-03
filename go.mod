@@ -13,7 +13,7 @@ require (
 	github.com/go-vela/server v0.11.0
 	github.com/go-vela/types v0.11.0
 	github.com/go-vela/worker v0.11.0
-	github.com/golang-jwt/jwt/v4 v4.1.0
+	github.com/golang-jwt/jwt/v4 v4.2.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
 	github.com/mattn/go-runewidth v0.0.13 // indirect

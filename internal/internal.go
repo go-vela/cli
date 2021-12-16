@@ -163,6 +163,12 @@ const (
 	// ActionRestart defines the action for restarting a resource.
 	ActionRestart = "restart"
 
+	// ActionSync defines the action for syncing a resource with SCM.
+	ActionSync = "sync"
+
+	// ActionSyncAll defines the action for syncing all org resources with SCM.
+	ActionSyncAll = "syncAll"
+
 	// ActionUpdate defines the action for modifying a resource.
 	ActionUpdate = "update"
 

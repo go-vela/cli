@@ -27,13 +27,13 @@ var CommandSync = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
+			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
+			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",

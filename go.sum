@@ -233,12 +233,12 @@ github.com/go-vela/sdk-go v0.11.1-0.20211129213556-3283a0be08e6 h1:8Z9ATQoV+A74D
 github.com/go-vela/sdk-go v0.11.1-0.20211129213556-3283a0be08e6/go.mod h1:dVAJZrdLZun0BIWd6VfAowEZQiCRRlkLzom7rncuXAk=
 github.com/go-vela/server v0.11.0/go.mod h1:0phuhEP09iKIiNKpO+cfOa6qU+epgr9Oon1MAZ1nIJ0=
 github.com/go-vela/server v0.11.1-0.20211126213057-0338730ea3a6/go.mod h1:j3j8JcPqUTEU6faR+XqbG5C63fpFk75R0rt87Ltc4zw=
-github.com/go-vela/server v0.11.1-0.20211222151016-58c0dc5151bb h1:n2TcRw/kPP8dY9LciXAMU/uHdRXAzN53epJIGlvykr4=
-github.com/go-vela/server v0.11.1-0.20211222151016-58c0dc5151bb/go.mod h1:fwg+L20zuIf9dcLSGdQW85i0sXtSNlvbvU/vU4EyjMA=
+github.com/go-vela/server v0.11.1-0.20211223142347-991228016176 h1:4AROTWegxOOOJm2cSaP6nE9HRd7oW6DTRqD658asJW8=
+github.com/go-vela/server v0.11.1-0.20211223142347-991228016176/go.mod h1:zynZ5V2uz52uNOlnGOcro1koAmHMEmKh92IBZJFuYQk=
 github.com/go-vela/types v0.11.0/go.mod h1:8Oml/G1ATFTJsKdsIsstUuHVLsUv7pl6+EiIyOaUqH0=
 github.com/go-vela/types v0.11.1-0.20211117152001-4dc404f4aabc/go.mod h1:W00S1BayYQhCVqI4GuuhGjg173MOfU9UvK3JEDCr1aw=
-github.com/go-vela/types v0.11.1-0.20211220173353-3a2c30f155d4 h1:WclRf9fmnabPEElNpZTZlEndNrJCIY57C3crCREvPzI=
-github.com/go-vela/types v0.11.1-0.20211220173353-3a2c30f155d4/go.mod h1:W00S1BayYQhCVqI4GuuhGjg173MOfU9UvK3JEDCr1aw=
+github.com/go-vela/types v0.11.1-0.20211223141437-fea825c201fe h1:JEy4j6KgACm/LvhMNARf3U6qULqwoRL/nLqeO7Ncj9E=
+github.com/go-vela/types v0.11.1-0.20211223141437-fea825c201fe/go.mod h1:mWqotU/Dtrrr9dsmPneWouoEeBdofAOIRLu8V4N23vg=
 github.com/go-vela/worker v0.11.1-0.20211125034617-1617279aa3dc h1:tYtwC7QBaYWPEFkZxONV6zk3AiEmQmFJh7FNHS+B8SM=
 github.com/go-vela/worker v0.11.1-0.20211125034617-1617279aa3dc/go.mod h1:fmNZ7dmjULL8JgTTh5E/i9Er+vxAz68QOsQmpUqrsu4=
 github.com/gofrs/uuid v4.0.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=

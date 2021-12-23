@@ -66,7 +66,7 @@ var CommandUpdate = &cli.Command{
 			Usage:   "access level required to view the repository",
 			Value:   constants.VisibilityPublic,
 		},
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			EnvVars: []string{"VELA_BUILD_LIMIT", "REPO_BUILD_LIMIT"},
 			Name:    "build.limit",
 			Usage:   "limit of concurrent builds allowed in repository",
@@ -181,7 +181,7 @@ func update(c *cli.Context) error {
 		Link:         c.String("link"),
 		Clone:        c.String("clone"),
 		Visibility:   c.String("visibility"),
-		BuildLimit:   c.Int("build.limit"),
+		BuildLimit:   c.Int64("build.limit"),
 		Timeout:      c.Int64("timeout"),
 		Counter:      c.Int("counter"),
 		Private:      c.Bool("private"),

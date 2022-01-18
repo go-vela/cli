@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2022 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -28,7 +28,7 @@ func main() {
 	app.Name = "vela"
 	app.HelpName = "vela"
 	app.Usage = "CLI for interacting with Vela and managing resources"
-	app.Copyright = "Copyright (c) 2021 Target Brands, Inc. All rights reserved."
+	app.Copyright = "Copyright (c) 2022 Target Brands, Inc. All rights reserved."
 	app.Authors = []*cli.Author{
 		{
 			Name:  "Vela Admins",

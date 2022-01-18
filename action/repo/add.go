@@ -32,6 +32,7 @@ func (c *Config) Add(client *vela.Client) error {
 		Link:         vela.String(c.Link),
 		Clone:        vela.String(c.Clone),
 		Branch:       vela.String(c.Branch),
+		BuildLimit:   vela.Int64(c.BuildLimit),
 		Timeout:      vela.Int64(c.Timeout),
 		Counter:      vela.Int(c.Counter),
 		Visibility:   vela.String(c.Visibility),

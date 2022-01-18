@@ -14,6 +14,7 @@ type Config struct {
 	Link         string
 	Clone        string
 	Visibility   string
+	BuildLimit   int64
 	Timeout      int64
 	Counter      int
 	Private      bool

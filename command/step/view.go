@@ -52,7 +52,7 @@ var CommandView = &cli.Command{
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_STEP", "STEP_NUMBER"},
 			Name:    internal.FlagStep,
-			Aliases: []string{"s"},
+			Aliases: []string{"s", "number", "sn"},
 			Usage:   "provide the number for the step",
 		},
 

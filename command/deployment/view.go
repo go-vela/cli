@@ -43,7 +43,7 @@ var CommandView = &cli.Command{
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_DEPLOYMENT", "DEPLOYMENT_NUMBER"},
 			Name:    "deployment",
-			Aliases: []string{"d"},
+			Aliases: []string{"d", "number", "dn"},
 			Usage:   "provide the number for the deployment",
 		},
 

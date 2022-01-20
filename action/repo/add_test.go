@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2022 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -37,6 +37,7 @@ func TestRepo_Config_Add(t *testing.T) {
 				Link:         "https://github.com/github/octocat",
 				Clone:        "https://github.com/github/octocat.git",
 				Branch:       "master",
+				BuildLimit:   10,
 				Timeout:      60,
 				Counter:      0,
 				Visibility:   "public",
@@ -57,6 +58,7 @@ func TestRepo_Config_Add(t *testing.T) {
 				Link:         "https://github.com/github/octocat",
 				Clone:        "https://github.com/github/octocat.git",
 				Branch:       "master",
+				BuildLimit:   10,
 				Timeout:      60,
 				Counter:      0,
 				Visibility:   "public",
@@ -77,6 +79,7 @@ func TestRepo_Config_Add(t *testing.T) {
 				Link:         "https://github.com/github/octocat",
 				Clone:        "https://github.com/github/octocat.git",
 				Branch:       "master",
+				BuildLimit:   10,
 				Timeout:      60,
 				Visibility:   "public",
 				Private:      false,
@@ -96,6 +99,7 @@ func TestRepo_Config_Add(t *testing.T) {
 				Link:         "https://github.com/github/octocat",
 				Clone:        "https://github.com/github/octocat.git",
 				Branch:       "master",
+				BuildLimit:   10,
 				Timeout:      60,
 				Counter:      0,
 				Visibility:   "public",
@@ -116,6 +120,7 @@ func TestRepo_Config_Add(t *testing.T) {
 				Link:         "https://github.com/github/octocat",
 				Clone:        "https://github.com/github/octocat.git",
 				Branch:       "master",
+				BuildLimit:   10,
 				Timeout:      60,
 				Counter:      0,
 				Visibility:   "public",

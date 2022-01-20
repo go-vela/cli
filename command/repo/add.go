@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2022 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -64,14 +64,20 @@ var CommandAdd = &cli.Command{
 			Name:    "visibility",
 			Aliases: []string{"v"},
 			Usage:   "access level required to view the repository",
-			Value:   "public",
+			Value:   constants.VisibilityPublic,
+		},
+		&cli.Int64Flag{
+			EnvVars: []string{"VELA_BUILD_LIMIT", "REPO_BUILD_LIMIT"},
+			Name:    "build.limit",
+			Usage:   "limit of concurrent builds allowed in repository",
+			Value:   constants.BuildLimitDefault,
 		},
 		&cli.Int64Flag{
 			EnvVars: []string{"VELA_TIMEOUT", "REPO_TIMEOUT"},
 			Name:    "timeout",
 			Aliases: []string{"t"},
 			Usage:   "max time allowed per build in repository",
-			Value:   30,
+			Value:   constants.BuildTimeoutDefault,
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_COUNTER", "REPO_COUNTER"},
@@ -177,6 +183,7 @@ func add(c *cli.Context) error {
 		Link:         c.String("link"),
 		Clone:        c.String("clone"),
 		Visibility:   c.String("visibility"),
+		BuildLimit:   c.Int64("build.limit"),
 		Timeout:      c.Int64("timeout"),
 		Counter:      c.Int("counter"),
 		Private:      c.Bool("private"),

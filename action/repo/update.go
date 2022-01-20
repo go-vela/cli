@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2022 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -32,6 +32,7 @@ func (c *Config) Update(client *vela.Client) error {
 		Link:         vela.String(c.Link),
 		Clone:        vela.String(c.Clone),
 		Branch:       vela.String(c.Branch),
+		BuildLimit:   vela.Int64(c.BuildLimit),
 		Timeout:      vela.Int64(c.Timeout),
 		Counter:      vela.Int(c.Counter),
 		Visibility:   vela.String(c.Visibility),

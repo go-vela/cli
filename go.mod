@@ -10,7 +10,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-vela/sdk-go v0.11.1-0.20211129213556-3283a0be08e6
-	github.com/go-vela/server v0.11.1-0.20220118173608-277945aa1311
+	github.com/go-vela/server v0.11.1
 	github.com/go-vela/types v0.11.1-0.20211223141437-fea825c201fe
 	github.com/go-vela/worker v0.11.1-0.20211125034617-1617279aa3dc
 	github.com/golang-jwt/jwt/v4 v4.2.0
@@ -55,7 +55,7 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.6 // indirect
-	github.com/google/go-github/v42 v42.0.0 // indirect
+	github.com/google/go-github/v39 v39.2.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect

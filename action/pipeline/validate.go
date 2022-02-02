@@ -83,11 +83,6 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	}
 
 	// check if full path to pipeline file exists
-	_, err = os.Stat(path)
-	if err != nil {
-		return fmt.Errorf("unable to find pipeline %s: %v", path, err)
-	}
-
 	path, err = validateFile(path)
 	if err != nil {
 		return err

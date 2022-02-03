@@ -9,10 +9,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-git/go-git/v5 v5.4.2
-	github.com/go-vela/sdk-go v0.12.0-rc1
-	github.com/go-vela/server v0.12.0-rc2
+	github.com/go-vela/sdk-go v0.12.0-rc2
+	github.com/go-vela/server v0.12.0-rc3
 	github.com/go-vela/types v0.12.0-rc1
-	github.com/go-vela/worker v0.12.0-rc1
+	github.com/go-vela/worker v0.12.0-rc2
 	github.com/golang-jwt/jwt/v4 v4.2.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
@@ -109,12 +109,12 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
-	k8s.io/api v0.23.2 // indirect
-	k8s.io/apimachinery v0.23.2 // indirect
-	k8s.io/client-go v0.23.2 // indirect
+	k8s.io/api v0.23.3 // indirect
+	k8s.io/apimachinery v0.23.3 // indirect
+	k8s.io/client-go v0.23.3 // indirect
 	k8s.io/klog/v2 v2.30.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20211115234752-e816edb12b65 // indirect
-	k8s.io/utils v0.0.0-20210930125809-cb0fa318a74b // indirect
+	k8s.io/utils v0.0.0-20211116205334-6203023598ed // indirect
 	sigs.k8s.io/json v0.0.0-20211020170558-c049b76a60c6 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.1 // indirect
 	sigs.k8s.io/yaml v1.2.0 // indirect

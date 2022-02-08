@@ -51,6 +51,10 @@ const (
 	// FlagCompilerGitHubURL defines the key for the
 	// flag when setting the compiler github url.
 	FlagCompilerGitHubURL = "compiler.github.url"
+
+	// FlagCompilerGithubDriver defines the key for the
+	// flag when setting the compiler github driver.
+	FlagCompilerGithubDriver = "compiler.github.driver"
 )
 
 // generic flag keys.

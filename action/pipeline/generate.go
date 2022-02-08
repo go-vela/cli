@@ -20,6 +20,7 @@ import (
 // https://godoc.org/github.com/spf13/afero#NewOsFs
 var appFS = afero.NewOsFs()
 
+// nolint: gomnd // ignore magic number
 // Generate produces a pipeline based off the provided configuration.
 func (c *Config) Generate() error {
 	logrus.Debug("executing generate for pipeline configuration")

@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "view",
+				Action:  internal.ActionView,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -42,7 +43,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "view",
+				Action:  internal.ActionView,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -53,7 +54,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "view",
+				Action:  internal.ActionView,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -64,7 +65,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "view",
+				Action:  internal.ActionView,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -75,7 +76,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "view",
+				Action:  internal.ActionView,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -86,7 +87,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -131,7 +132,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -142,7 +143,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -153,7 +154,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -164,7 +165,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -175,7 +176,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -186,7 +187,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,

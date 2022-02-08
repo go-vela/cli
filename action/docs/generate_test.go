@@ -7,6 +7,7 @@ package docs
 import (
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/urfave/cli/v2"
 )
 
@@ -21,21 +22,21 @@ func TestDocs_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:   "generate",
+				Action:   internal.ActionGenerate,
 				Markdown: true,
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				Man:    true,
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 			},
 		},
 	}

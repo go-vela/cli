@@ -9,6 +9,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/server/mock/server"
 	"github.com/go-vela/types/raw"
@@ -32,7 +33,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -45,7 +46,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -58,7 +59,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -71,7 +72,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -84,7 +85,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -98,7 +99,7 @@ func TestDeployment_Config_Add(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",

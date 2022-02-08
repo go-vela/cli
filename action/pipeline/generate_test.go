@@ -7,6 +7,7 @@ package pipeline
 import (
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/spf13/afero"
 )
 
@@ -19,7 +20,7 @@ func TestPipeline_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Type:   "",
 			},
@@ -27,7 +28,7 @@ func TestPipeline_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Type:   "go",
 			},
@@ -35,7 +36,7 @@ func TestPipeline_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Type:   "java",
 			},
@@ -43,7 +44,7 @@ func TestPipeline_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Type:   "node",
 			},
@@ -51,7 +52,7 @@ func TestPipeline_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Path:   "/tmp",
 				Type:   "",
@@ -60,7 +61,7 @@ func TestPipeline_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Stages: true,
 				Type:   "",

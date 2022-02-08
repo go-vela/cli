@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -43,7 +44,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "org",
 				Org:    "github",
@@ -55,7 +56,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "shared",
 				Org:    "github",
@@ -67,7 +68,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -79,7 +80,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -91,7 +92,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -103,7 +104,7 @@ func TestSecret_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",

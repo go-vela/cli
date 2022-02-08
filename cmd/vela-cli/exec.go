@@ -6,13 +6,14 @@ package main
 
 import (
 	"github.com/go-vela/cli/command/pipeline"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // execCmds defines the commands for executing resources.
 var execCmds = &cli.Command{
-	Name:                   "exec",
+	Name:                   internal.ActionExec,
 	Category:               "Pipeline Management",
 	Description:            "Use this command to execute a resource for Vela.",
 	Usage:                  "Execute a resource for Vela via subcommands",

@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestRepo_Config_Sync(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "sync",
+				Action: internal.ActionSync,
 				Org:    "github",
 				Name:   "octocat",
 			},
@@ -39,7 +40,7 @@ func TestRepo_Config_Sync(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "sync",
+				Action: internal.ActionSync,
 				Org:    "github",
 				Name:   "not-found",
 			},
@@ -82,14 +83,14 @@ func TestRepo_Config_SyncAll(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "sync",
+				Action: internal.ActionSync,
 				Org:    "github",
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action: "sync",
+				Action: internal.ActionSync,
 				Org:    "not-found",
 			},
 		},

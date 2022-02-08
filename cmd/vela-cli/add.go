@@ -8,12 +8,13 @@ import (
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/secret"
+	"github.com/go-vela/cli/internal"
 	"github.com/urfave/cli/v2"
 )
 
 // addCmds defines the commands for creating resources.
 var addCmds = &cli.Command{
-	Name:                   "add",
+	Name:                   internal.ActionAdd,
 	Category:               "Resource Management",
 	Aliases:                []string{"a"},
 	Description:            "Use this command to add resources to Vela.",

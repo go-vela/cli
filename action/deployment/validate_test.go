@@ -6,6 +6,8 @@ package deployment
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestDeployment_Config_Validate(t *testing.T) {
@@ -17,7 +19,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -30,7 +32,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Page:    1,
@@ -41,7 +43,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -51,7 +53,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -63,7 +65,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action:      "add",
+				Action:      internal.ActionAdd,
 				Org:         "github",
 				Repo:        "octocat",
 				Description: "Deployment request from Vela",
@@ -75,7 +77,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "",
 				Repo:   "octocat",
 				Number: 1,
@@ -85,7 +87,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "",
 				Number: 1,
@@ -95,7 +97,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 0,

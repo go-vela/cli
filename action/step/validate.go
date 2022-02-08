@@ -7,6 +7,7 @@ package step
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
 )
 
@@ -30,7 +31,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if step action is view
-	if c.Action == "view" {
+	if c.Action == internal.ActionView {
 		// check if step number is set
 		if c.Number <= 0 {
 			return fmt.Errorf("no step number provided")

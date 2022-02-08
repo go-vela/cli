@@ -6,6 +6,8 @@ package step
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestStep_Config_Validate(t *testing.T) {
@@ -17,7 +19,7 @@ func TestStep_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -29,7 +31,7 @@ func TestStep_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -40,7 +42,7 @@ func TestStep_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "",
 				Repo:   "octocat",
 				Build:  1,
@@ -51,7 +53,7 @@ func TestStep_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "",
 				Build:  1,
@@ -62,7 +64,7 @@ func TestStep_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  0,
@@ -73,7 +75,7 @@ func TestStep_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,

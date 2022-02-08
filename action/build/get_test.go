@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestBuild_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Status:  "failure",
@@ -43,7 +44,7 @@ func TestBuild_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Branch:  "master",
@@ -55,7 +56,7 @@ func TestBuild_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Event:   "pull_request",
@@ -67,7 +68,7 @@ func TestBuild_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Page:    1,
@@ -78,7 +79,7 @@ func TestBuild_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Page:    1,
@@ -89,7 +90,7 @@ func TestBuild_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Repo:    "octocat",
 				Page:    1,

@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/types/constants"
 
 	"github.com/sirupsen/logrus"
@@ -67,7 +68,8 @@ func (c *Config) Validate() error {
 	}
 
 	// check if secret action is remove, update or view
-	if c.Action == "remove" || c.Action == "update" || c.Action == "view" {
+	if c.Action == internal.ActionRemove ||
+		c.Action == internal.ActionUpdate || c.Action == internal.ActionView {
 		// check if secret name is set
 		if len(c.Name) == 0 {
 			return fmt.Errorf("no secret name provided")
@@ -75,7 +77,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if secret action is add
-	if c.Action == "add" {
+	if c.Action == internal.ActionAdd {
 		// check if secret value is set
 		if len(c.Value) == 0 {
 			return fmt.Errorf("no secret value provided")
@@ -83,7 +85,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if secret action is add or update
-	if c.Action == "add" || c.Action == "update" {
+	if c.Action == internal.ActionAdd || c.Action == internal.ActionUpdate {
 		// iterate through all secret events
 		for _, event := range c.Events {
 			// check if the secret event provided is valid

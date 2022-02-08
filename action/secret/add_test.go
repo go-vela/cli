@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -44,7 +45,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "org",
 				Org:    "github",
@@ -56,7 +57,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "shared",
 				Org:    "github",
@@ -69,7 +70,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -82,7 +83,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -95,7 +96,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -108,7 +109,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -121,7 +122,7 @@ func TestSecret_Config_Add(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -169,7 +170,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/repo.yml",
 				Output: "",
 			},
@@ -177,7 +178,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/org.yml",
 				Output: "",
 			},
@@ -185,7 +186,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/shared.yml",
 				Output: "",
 			},
@@ -193,7 +194,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/multiple.yml",
 				Output: "",
 			},
@@ -201,7 +202,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/repo.yml",
 				Output: "dump",
 			},
@@ -209,7 +210,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/repo.yml",
 				Output: "json",
 			},
@@ -217,7 +218,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/repo.yml",
 				Output: "spew",
 			},
@@ -225,7 +226,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/repo.yml",
 				Output: "yaml",
 			},

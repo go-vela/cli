@@ -7,6 +7,7 @@ package deployment
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
 )
 
@@ -25,7 +26,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if deployment action is add
-	if c.Action == "add" {
+	if c.Action == internal.ActionAdd {
 		// check if deployment ref is set
 		if len(c.Ref) == 0 {
 			return fmt.Errorf("no deployment ref provided")
@@ -38,7 +39,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if deployment action is view
-	if c.Action == "view" {
+	if c.Action == internal.ActionView {
 		// check if deployment number is set
 		if c.Number <= 0 {
 			return fmt.Errorf("no deployment number provided")

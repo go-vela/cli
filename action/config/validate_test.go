@@ -6,6 +6,8 @@ package config
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestConfig_Config_Validate(t *testing.T) {
@@ -17,7 +19,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   "testdata/config.yml",
 				GitHub: &GitHub{},
 			},
@@ -25,7 +27,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				File:   "testdata/config.yml",
 				GitHub: &GitHub{},
 			},
@@ -33,7 +35,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				File:   "",
 				GitHub: &GitHub{},
 			},
@@ -41,7 +43,7 @@ func TestConfig_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				File:   "foo.txt",
 				GitHub: &GitHub{},
 			},

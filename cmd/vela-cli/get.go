@@ -13,13 +13,14 @@ import (
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // getCmds defines the commands for getting a list of resources.
 var getCmds = &cli.Command{
-	Name:                   "get",
+	Name:                   internal.ActionGet,
 	Category:               "Resource Management",
 	Aliases:                []string{"g"},
 	Description:            "Use this command to get a list of resources for Vela.",

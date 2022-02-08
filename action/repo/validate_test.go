@@ -6,6 +6,8 @@ package repo
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestRepo_Config_Validate(t *testing.T) {
@@ -17,7 +19,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:     "add",
+				Action:     internal.ActionAdd,
 				Org:        "github",
 				Name:       "octocat",
 				Link:       "https://github.com/github/octocat",
@@ -35,7 +37,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "chown",
+				Action: internal.ActionChown,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "",
@@ -44,7 +46,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Org:     "github",
 				Page:    1,
 				PerPage: 10,
@@ -54,7 +56,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "",
@@ -63,7 +65,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "repair",
+				Action: internal.ActionRepair,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "",
@@ -72,7 +74,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:     "update",
+				Action:     internal.ActionUpdate,
 				Org:        "github",
 				Name:       "octocat",
 				Link:       "https://github.com/github/octocat",
@@ -90,7 +92,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "",
@@ -99,7 +101,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "",
 				Name:   "octocat",
 				Output: "",
@@ -108,7 +110,7 @@ func TestRepo_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Name:   "",
 				Output: "",

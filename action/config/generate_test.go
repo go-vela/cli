@@ -7,6 +7,7 @@ package config
 import (
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/spf13/afero"
 )
 
@@ -19,7 +20,7 @@ func TestConfig_Config_Generate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				GitHub: &GitHub{},
 			},

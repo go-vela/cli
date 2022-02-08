@@ -11,6 +11,7 @@ import (
 	"path"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/server/mock/server"
@@ -27,7 +28,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "compile",
+				Action: internal.ActionCompile,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "",
@@ -36,7 +37,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "expand",
+				Action: internal.ActionExpand,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "",
@@ -45,7 +46,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   ".vela.yml",
 				Type:   "",
 			},
@@ -53,7 +54,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				File:   "default.yml",
 				Path:   "testdata",
 				Type:   "",
@@ -62,7 +63,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action:        "validate",
+				Action:        internal.ActionValidate,
 				File:          "default.yml",
 				Path:          "testdata",
 				Type:          "",
@@ -72,7 +73,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "",
@@ -81,7 +82,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				File:   "",
 				Type:   "",
 			},
@@ -89,7 +90,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "",
 				Repo:   "octocat",
 				Output: "",
@@ -98,7 +99,7 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "",
 				Output: "",
@@ -144,7 +145,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "default",
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				File:   "default.yml",
 				Path:   "testdata",
 				Type:   "",
@@ -154,7 +155,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "go pipeline",
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				File:   "go.yml",
 				Path:   "testdata",
 				Type:   "",
@@ -164,7 +165,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "java pipeline",
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				File:   "java.yml",
 				Path:   "testdata",
 				Type:   "",
@@ -174,7 +175,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "node pipeline",
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				File:   "node.yml",
 				Path:   "testdata",
 				Type:   "",
@@ -184,7 +185,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "stages default",
 			failure: false,
 			config: &Config{
-				Action:   "validate",
+				Action:   internal.ActionValidate,
 				File:     "default_stages_template.yml",
 				Path:     "testdata",
 				Type:     "",
@@ -195,7 +196,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "pipeline with template (remote)",
 			failure: false,
 			config: &Config{
-				Action:   "validate",
+				Action:   internal.ActionValidate,
 				File:     "default_template.yml",
 				Path:     "testdata",
 				Type:     "",
@@ -206,7 +207,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "pipeline with template (local override)",
 			failure: false,
 			config: &Config{
-				Action:        "validate",
+				Action:        internal.ActionValidate,
 				File:          "default_template.yml",
 				Path:          "testdata",
 				Type:          "",
@@ -218,7 +219,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "pipeline with multiple template (local overrides)",
 			failure: false,
 			config: &Config{
-				Action:        "validate",
+				Action:        internal.ActionValidate,
 				File:          "default_multi_template.yml",
 				Path:          "testdata",
 				Type:          "",
@@ -230,7 +231,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "default without template but wants to use template",
 			failure: true,
 			config: &Config{
-				Action:   "validate",
+				Action:   internal.ActionValidate,
 				File:     "default.yml",
 				Path:     "testdata",
 				Type:     "",
@@ -241,7 +242,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "pipeline with multiple template (local overrides) template mismatch",
 			failure: true,
 			config: &Config{
-				Action:        "validate",
+				Action:        internal.ActionValidate,
 				File:          "default_multi_template.yml",
 				Path:          "testdata",
 				Type:          "",
@@ -253,7 +254,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			name:    "pipeline with template (local override), wrong name in override",
 			failure: true,
 			config: &Config{
-				Action:        "validate",
+				Action:        internal.ActionValidate,
 				File:          "default_template.yml",
 				Path:          "testdata",
 				Type:          "",
@@ -301,7 +302,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "",
@@ -310,7 +311,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "dump",
@@ -319,7 +320,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "json",
@@ -328,7 +329,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "spew",
@@ -337,7 +338,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				Org:    "github",
 				Repo:   "octocat",
 				Output: "yaml",
@@ -346,7 +347,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "validate",
+				Action: internal.ActionValidate,
 				Org:    "github",
 				Repo:   "not-found",
 				Output: "",

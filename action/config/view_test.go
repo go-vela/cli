@@ -7,6 +7,7 @@ package config
 import (
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/spf13/afero"
 )
 
@@ -19,14 +20,14 @@ func TestConfig_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				File:   "testdata/config.yml",
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				File:   "",
 			},
 		},

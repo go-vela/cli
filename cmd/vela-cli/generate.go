@@ -9,13 +9,14 @@ import (
 	"github.com/go-vela/cli/command/config"
 	"github.com/go-vela/cli/command/docs"
 	"github.com/go-vela/cli/command/pipeline"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // generateCmds defines the commands for producing resources.
 var generateCmds = &cli.Command{
-	Name:                   "generate",
+	Name:                   internal.ActionGenerate,
 	Category:               "Resource Management",
 	Aliases:                []string{"gn"},
 	Description:            "Use this command to generate resources for Vela.",

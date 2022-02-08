@@ -7,6 +7,7 @@ package config
 import (
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/spf13/afero"
 )
 
@@ -19,7 +20,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				File:   "testdata/config.yml",
 				GitHub: &GitHub{},
 			},
@@ -27,7 +28,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				File:   "testdata/config.yml",
 				RemoveFlags: []string{
 					"api.addr",
@@ -57,7 +58,7 @@ func TestConfig_Config_Remove(t *testing.T) {
 
 		// create test config for generating file
 		config := &Config{
-			Action: "generate",
+			Action: internal.ActionGenerate,
 			File:   test.config.File,
 			GitHub: &GitHub{},
 		}

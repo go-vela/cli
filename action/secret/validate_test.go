@@ -6,6 +6,8 @@ package secret
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestSecret_Config_Validate(t *testing.T) {
@@ -17,7 +19,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -30,7 +32,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				File:   "testdata/repo.yml",
 				Output: "",
 			},
@@ -38,7 +40,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",
@@ -51,7 +53,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -63,7 +65,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "update",
+				Action: internal.ActionUpdate,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -76,7 +78,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "update",
+				Action: internal.ActionUpdate,
 				File:   "testdata/repo.yml",
 				Output: "",
 			},
@@ -84,7 +86,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -96,7 +98,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -110,7 +112,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "add",
+				Action: internal.ActionAdd,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -123,7 +125,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "",
 				Type:   "repo",
 				Org:    "github",
@@ -135,7 +137,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "",
 				Org:    "github",
@@ -147,7 +149,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "baz",
 				Org:    "github",
@@ -159,7 +161,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "",
@@ -171,7 +173,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",
@@ -183,7 +185,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "shared",
 				Org:    "github",
@@ -195,7 +197,7 @@ func TestSecret_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Engine: "native",
 				Type:   "repo",
 				Org:    "github",

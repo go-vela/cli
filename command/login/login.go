@@ -82,8 +82,7 @@ DOCUMENTATION:
 // and login to Vela.
 func runLogin(c *cli.Context) error {
 	// load variables from the config file
-	err := action.Load(c)
-	if err != nil {
+	if err := action.Load(c); err != nil {
 		return err
 	}
 
@@ -102,13 +101,11 @@ func runLogin(c *cli.Context) error {
 		Address: c.String(internal.FlagAPIAddress),
 	}
 
-	// show a prompt to open a browser, unless yes-all flag is set
 	if !c.Bool("yes-all") {
-		// prompt user to confirm opening browser
+		// prompt user to confirm opening browser unless yes-all flag is set
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptBrowserConfirm
-		err = l.PromptBrowserConfirm(os.Stdin)
-		if err != nil {
+		if err = l.PromptBrowserConfirm(os.Stdin); err != nil {
 			return err
 		}
 	}
@@ -116,39 +113,30 @@ func runLogin(c *cli.Context) error {
 	// execute the login call for the login configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Login
-	err = l.Login(client)
-	if err != nil {
+	if err = l.Login(client); err != nil {
 		return err
 	}
 
 	// no error means above means we have tokens, set them
-	err = c.Set(internal.FlagAPIAccessToken, l.AccessToken)
-	if err != nil {
+	if err = c.Set(internal.FlagAPIAccessToken, l.AccessToken); err != nil {
+		return err
+	}
+	if err = c.Set(internal.FlagAPIRefreshToken, l.RefreshToken); err != nil {
 		return err
 	}
 
-	err = c.Set(internal.FlagAPIRefreshToken, l.RefreshToken)
-	if err != nil {
-		return err
-	}
-
-	// show a prompt to write config, unless yes-all flag is set
 	if !c.Bool("yes-all") {
-		// prompt user to confirm writing new config
+		// prompt user to confirm writing new config unless yes-all flag is set
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.PromptConfigConfirm
-		err = l.PromptConfigConfirm(os.Stdin)
-		if err != nil {
+		if err = l.PromptConfigConfirm(os.Stdin); err != nil {
 			logrus.Warn("configuration not saved")
 			return err
 		}
 	}
 
-	// remove existing token from the config
-	// before writing
-	err = c.Set(internal.FlagAPIToken, "")
-	if err != nil {
-		// fail silently; not returning err
+	// remove existing token from the config before writing, fail silently
+	if err = c.Set(internal.FlagAPIToken, ""); err != nil {
 		logrus.Debugf("error while emptying token: %v", err)
 	}
 
@@ -179,16 +167,14 @@ func runLogin(c *cli.Context) error {
 	// validate config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Validate
-	err = conf.Validate()
-	if err != nil {
+	if err = conf.Validate(); err != nil {
 		return err
 	}
 
 	// execute the generate call for the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Generate
-	err = conf.Generate()
-	if err != nil {
+	if err = conf.Generate(); err != nil {
 		return err
 	}
 

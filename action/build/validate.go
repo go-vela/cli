@@ -7,6 +7,7 @@ package build
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
 )
 
@@ -25,7 +26,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if build action is restart or view
-	if c.Action == "restart" || c.Action == "view" {
+	if c.Action == internal.ActionRestart || c.Action == internal.ActionView {
 		// check if build number is set
 		if c.Number <= 0 {
 			return fmt.Errorf("no build number provided")

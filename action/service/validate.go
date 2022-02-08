@@ -7,6 +7,7 @@ package service
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
 )
 
@@ -30,7 +31,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if service action is view
-	if c.Action == "view" {
+	if c.Action == internal.ActionView {
 		// check if service number is set
 		if c.Number <= 0 {
 			return fmt.Errorf("no service number provided")

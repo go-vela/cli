@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",
@@ -44,7 +45,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "org",
 				Org:     "github",
@@ -57,7 +58,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "shared",
 				Org:     "github",
@@ -71,7 +72,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",
@@ -84,7 +85,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",
@@ -97,7 +98,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",
@@ -110,7 +111,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",
@@ -123,7 +124,7 @@ func TestSecret_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
+				Action:  internal.ActionGet,
 				Engine:  "native",
 				Type:    "repo",
 				Org:     "github",

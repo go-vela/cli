@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -141,7 +142,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 			//
 			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 			s := &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Engine:       f.Metadata.Engine,
 				Type:         s.GetType(),
 				Org:          s.GetOrg(),

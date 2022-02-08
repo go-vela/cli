@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "cancel",
+				Action: internal.ActionCancel,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -41,7 +42,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "cancel",
+				Action: internal.ActionCancel,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -51,7 +52,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "cancel",
+				Action: internal.ActionCancel,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -61,7 +62,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "cancel",
+				Action: internal.ActionCancel,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -71,7 +72,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "cancel",
+				Action: internal.ActionCancel,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 1,
@@ -81,7 +82,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "cancel",
+				Action: internal.ActionCancel,
 				Org:    "github",
 				Repo:   "octocat",
 				Number: 0,

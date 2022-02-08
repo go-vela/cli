@@ -18,12 +18,12 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// nolint: gomnd // ignore magic number
 // parseKeyValue converts the slice of key=value into a map.
 func parseKeyValue(input []string) (raw.StringSliceMap, error) {
 	payload := raw.StringSliceMap{}
 	for _, i := range input {
 		parts := strings.SplitN(i, "=", 2)
-		// nolint: gomnd // ignore magic number
 		if len(parts) != 2 {
 			return nil, fmt.Errorf("%s is not in key=value format", i)
 		}

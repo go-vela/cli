@@ -8,13 +8,14 @@ import (
 	"github.com/go-vela/cli/command/config"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/secret"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // updateCmds defines the commands for modifying resources.
 var updateCmds = &cli.Command{
-	Name:                   "update",
+	Name:                   internal.ActionUpdate,
 	Category:               "Resource Management",
 	Aliases:                []string{"u"},
 	Description:            "Use this command to update a resource for Vela.",

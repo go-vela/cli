@@ -7,6 +7,8 @@ package pipeline
 // Config represents the configuration necessary
 // to perform pipeline related requests with Vela.
 type Config struct {
+	TemplateFiles []string
+	Volumes       []string
 	Action        string
 	Branch        string
 	Comment       string
@@ -19,12 +21,10 @@ type Config struct {
 	File          string
 	Path          string
 	Type          string
-	Stages        bool
-	Template      bool
-	TemplateFiles []string
-	Local         bool
-	Remote        bool
-	Volumes       []string
 	Output        string
 	PipelineType  string
+	Stages        bool
+	Template      bool
+	Local         bool
+	Remote        bool
 }

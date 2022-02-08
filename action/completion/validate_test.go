@@ -6,6 +6,8 @@ package completion
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestCompletion_Config_Validate(t *testing.T) {
@@ -17,21 +19,21 @@ func TestCompletion_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				Bash:   true,
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				Zsh:    true,
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				Bash:   true,
 				Zsh:    true,
 			},
@@ -39,7 +41,7 @@ func TestCompletion_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 			},
 		},
 	}

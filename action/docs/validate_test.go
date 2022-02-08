@@ -6,6 +6,8 @@ package docs
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestDocs_Config_Validate(t *testing.T) {
@@ -17,21 +19,21 @@ func TestDocs_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:   "generate",
+				Action:   internal.ActionGenerate,
 				Markdown: true,
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 				Man:    true,
 			},
 		},
 		{
 			failure: true,
 			config: &Config{
-				Action:   "generate",
+				Action:   internal.ActionGenerate,
 				Markdown: true,
 				Man:      true,
 			},
@@ -39,7 +41,7 @@ func TestDocs_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "generate",
+				Action: internal.ActionGenerate,
 			},
 		},
 	}

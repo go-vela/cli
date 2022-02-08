@@ -15,13 +15,14 @@ import (
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // viewCmds defines the commands for inspecting resources.
 var viewCmds = &cli.Command{
-	Name:                   "view",
+	Name:                   internal.ActionView,
 	Category:               "Resource Management",
 	Aliases:                []string{"v"},
 	Description:            "Use this command to view a resource for Vela.",

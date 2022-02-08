@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestLog_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "get",
+				Action: internal.ActionGet,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -41,7 +42,7 @@ func TestLog_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "get",
+				Action: internal.ActionGet,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -51,7 +52,7 @@ func TestLog_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "get",
+				Action: internal.ActionGet,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -61,7 +62,7 @@ func TestLog_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "get",
+				Action: internal.ActionGet,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -71,7 +72,7 @@ func TestLog_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "get",
+				Action: internal.ActionGet,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,

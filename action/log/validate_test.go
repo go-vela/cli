@@ -6,6 +6,8 @@ package log
 
 import (
 	"testing"
+
+	"github.com/go-vela/cli/internal"
 )
 
 func TestLog_Config_Validate(t *testing.T) {
@@ -17,7 +19,7 @@ func TestLog_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "get",
+				Action: internal.ActionGet,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -27,7 +29,7 @@ func TestLog_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "view",
+				Action:  internal.ActionView,
 				Org:     "github",
 				Repo:    "octocat",
 				Build:   1,
@@ -38,7 +40,7 @@ func TestLog_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  1,
@@ -49,7 +51,7 @@ func TestLog_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "",
 				Repo:   "octocat",
 				Build:  1,
@@ -60,7 +62,7 @@ func TestLog_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "",
 				Build:  1,
@@ -71,7 +73,7 @@ func TestLog_Config_Validate(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "view",
+				Action: internal.ActionView,
 				Org:    "github",
 				Repo:   "octocat",
 				Build:  0,

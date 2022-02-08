@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "",
@@ -40,7 +41,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "dump",
@@ -49,7 +50,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "json",
@@ -58,7 +59,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "spew",
@@ -67,7 +68,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "octocat",
 				Output: "yaml",
@@ -76,7 +77,7 @@ func TestRepo_Config_Remove(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action: "remove",
+				Action: internal.ActionRemove,
 				Org:    "github",
 				Name:   "not-found",
 				Output: "",

@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -31,7 +32,7 @@ func TestRepo_Config_Update(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Org:          "github",
 				Name:         "octocat",
 				Link:         "https://github.com/github/octocat",
@@ -51,7 +52,7 @@ func TestRepo_Config_Update(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Org:          "github",
 				Name:         "octocat",
 				Link:         "https://github.com/github/octocat",
@@ -71,7 +72,7 @@ func TestRepo_Config_Update(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Org:          "github",
 				Name:         "octocat",
 				Link:         "https://github.com/github/octocat",
@@ -91,7 +92,7 @@ func TestRepo_Config_Update(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Org:          "github",
 				Name:         "octocat",
 				Link:         "https://github.com/github/octocat",
@@ -111,7 +112,7 @@ func TestRepo_Config_Update(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Org:          "github",
 				Name:         "octocat",
 				Link:         "https://github.com/github/octocat",
@@ -131,7 +132,7 @@ func TestRepo_Config_Update(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action:       "update",
+				Action:       internal.ActionUpdate,
 				Org:          "github",
 				Name:         "not-found",
 				Link:         "https://github.com/github/octocat",

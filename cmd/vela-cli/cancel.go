@@ -6,13 +6,14 @@ package main
 
 import (
 	"github.com/go-vela/cli/command/build"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // cancelCmds defines the commands for canceling resources.
 var cancelCmds = &cli.Command{
-	Name:                   "cancel",
+	Name:                   internal.ActionCancel,
 	Category:               "Resource Management",
 	Aliases:                []string{"cx"},
 	Description:            "Use this command to cancel a resource for Vela.",

@@ -6,13 +6,14 @@ package main
 
 import (
 	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // syncCmds defines the commands for syncing resources.
 var syncCmds = &cli.Command{
-	Name:                   "sync",
+	Name:                   internal.ActionSync,
 	Category:               "Resource Management",
 	Aliases:                []string{"s"},
 	Description:            "Use this command to sync Vela Database with SCM",

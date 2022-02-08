@@ -6,13 +6,14 @@ package main
 
 import (
 	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // chownCmds defines the commands for changing ownership of a resource.
 var chownCmds = &cli.Command{
-	Name:                   "chown",
+	Name:                   internal.ActionChown,
 	Category:               "Repository Management",
 	Aliases:                []string{"c"},
 	Description:            "Use this command to change ownership of a resource for Vela.",

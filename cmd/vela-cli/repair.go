@@ -6,13 +6,14 @@ package main
 
 import (
 	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // repairCmds defines the commands for repairing resources.
 var repairCmds = &cli.Command{
-	Name:                   "repair",
+	Name:                   internal.ActionRepair,
 	Category:               "Repository Management",
 	Aliases:                []string{"rp"},
 	Description:            "Use this command to repair a resource for Vela.",

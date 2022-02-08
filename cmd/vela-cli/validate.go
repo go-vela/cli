@@ -6,13 +6,14 @@ package main
 
 import (
 	"github.com/go-vela/cli/command/pipeline"
+	"github.com/go-vela/cli/internal"
 
 	"github.com/urfave/cli/v2"
 )
 
 // validateCmds defines the commands for validating resources.
 var validateCmds = &cli.Command{
-	Name:                   "validate",
+	Name:                   internal.ActionValidate,
 	Category:               "Pipeline Management",
 	Aliases:                []string{"vd"},
 	Description:            "Use this command to validate a resource for Vela.",

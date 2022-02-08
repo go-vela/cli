@@ -39,7 +39,7 @@ func load(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
-		Action: "load",
+		Action: internal.ActionLoad,
 		File:   c.String(internal.FlagConfig),
 	}
 

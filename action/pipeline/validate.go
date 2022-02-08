@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
@@ -26,11 +27,11 @@ func (c *Config) Validate() error {
 
 	// handle the action based off the provided configuration
 	switch c.Action {
-	case "compile":
+	case internal.ActionCompile:
 		fallthrough
-	case "expand":
+	case internal.ActionExpand:
 		fallthrough
-	case "view":
+	case internal.ActionView:
 		// check if pipeline org is set
 		if len(c.Org) == 0 {
 			return fmt.Errorf("no pipeline org provided")
@@ -40,9 +41,9 @@ func (c *Config) Validate() error {
 		if len(c.Repo) == 0 {
 			return fmt.Errorf("no pipeline name provided")
 		}
-	case "generate":
+	case internal.ActionGenerate:
 		fallthrough
-	case "validate":
+	case internal.ActionValidate:
 		if len(c.Org) == 0 || len(c.Repo) == 0 {
 			// check if pipeline file is set
 			if len(c.File) == 0 {
@@ -110,30 +111,23 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		nTemplates := len(templates)
 		nTemplateFiles := len(c.TemplateFiles)
 
-		// ensure a 'templates' block exists
-		// in the pipeline
+		// ensure a 'templates' block exists in the pipeline
 		if nTemplates == 0 {
 			return fmt.Errorf("templates block not properly configured in pipeline")
 		}
 
-		// since the whole client is put into local mode as soon
-		// as we define any template files, you have to override
-		// all templates locally
+		// whole client put into local mode when we define any template files, override templates locally
 		if nTemplateFiles > 0 && nTemplateFiles < nTemplates {
 			// nolint:lll // helpful error messages breaks line length
 			return fmt.Errorf("found %d template references in your pipeline, but only %d template(s) given to override", nTemplates, nTemplateFiles)
 		}
 
 		for _, file := range c.TemplateFiles {
-			// local templates override format is
-			// <name>:<source>
-			//
-			// example: example:/path/to/template.yml
+			// local templates override format is <name>:<source>, example: example:/path/to/template.yml
 			parts := strings.Split(file, ":")
 
 			// make sure the template was configured
-			_, ok := templates[parts[0]]
-			if !ok {
+			if _, ok := templates[parts[0]]; !ok {
 				return fmt.Errorf("template with name %q is not configured", parts[0])
 			}
 
@@ -157,16 +151,14 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	}
 
 	// validate the pipeline
-	err = client.Validate(p)
-	if err != nil {
+	if err = client.Validate(p); err != nil {
 		return err
 	}
 
 	// output the message in stdout format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-	err = output.Stdout(fmt.Sprintf("%s is valid", path))
-	if err != nil {
+	if err = output.Stdout(fmt.Sprintf("%s is valid", path)); err != nil {
 		return err
 	}
 

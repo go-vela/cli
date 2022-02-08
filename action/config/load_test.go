@@ -8,6 +8,7 @@ import (
 	"flag"
 	"testing"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/test"
 	"github.com/spf13/afero"
 
@@ -29,8 +30,8 @@ func TestConfig_Config_Load(t *testing.T) {
 		&cli.StringFlag{Name: "output"},
 		&cli.StringFlag{Name: "org"},
 		&cli.StringFlag{Name: "repo"},
-		&cli.StringFlag{Name: "secret.engine"},
-		&cli.StringFlag{Name: "secret.type"},
+		&cli.StringFlag{Name: internal.FlagSecretEngine},
+		&cli.StringFlag{Name: internal.FlagSecretType},
 		&cli.StringFlag{Name: "compiler.github.driver"},
 		&cli.StringFlag{Name: "compiler.github.url"},
 	}
@@ -66,7 +67,7 @@ func TestConfig_Config_Load(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "load",
+				Action: internal.ActionLoad,
 				File:   "testdata/config.yml",
 			},
 			set: configSet,
@@ -74,7 +75,7 @@ func TestConfig_Config_Load(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "load",
+				Action: internal.ActionLoad,
 				File:   "testdata/config.yml",
 			},
 			set: fullSet,
@@ -82,7 +83,7 @@ func TestConfig_Config_Load(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "load",
+				Action: internal.ActionLoad,
 				File:   "testdata/config.yml",
 			},
 			set: flag.NewFlagSet("test", 0),
@@ -99,7 +100,7 @@ func TestConfig_Config_Load(t *testing.T) {
 
 		// create test config for generating file
 		config := &Config{
-			Action:       "generate",
+			Action:       internal.ActionGenerate,
 			File:         test.config.File,
 			Addr:         ctx.String("api.addr"),
 			Token:        ctx.String("api.token"),
@@ -107,8 +108,8 @@ func TestConfig_Config_Load(t *testing.T) {
 			RefreshToken: ctx.String("api.token.refresh"),
 			Version:      ctx.String("api.version"),
 			LogLevel:     ctx.String("log.level"),
-			Engine:       ctx.String("secret.engine"),
-			Type:         ctx.String("secret.type"),
+			Engine:       ctx.String(internal.FlagSecretEngine),
+			Type:         ctx.String(internal.FlagSecretType),
 			GitHub: &GitHub{
 				Token: ctx.String("compiler.github.token"),
 				URL:   ctx.String("compiler.github.url"),

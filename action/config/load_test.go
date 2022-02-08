@@ -19,21 +19,21 @@ func TestConfig_Config_Load(t *testing.T) {
 	// setup app
 	app := cli.NewApp()
 	app.Flags = []cli.Flag{
-		&cli.StringFlag{Name: "config"},
-		&cli.StringFlag{Name: "api.addr"},
-		&cli.StringFlag{Name: "api.token"},
-		&cli.StringFlag{Name: "api.token.access"},
-		&cli.StringFlag{Name: "api.token.refresh"},
-		&cli.StringFlag{Name: "api.version"},
-		&cli.StringFlag{Name: "log.level"},
-		&cli.StringFlag{Name: "no-git"},
-		&cli.StringFlag{Name: "output"},
-		&cli.StringFlag{Name: "org"},
-		&cli.StringFlag{Name: "repo"},
+		&cli.StringFlag{Name: internal.FlagConfig},
+		&cli.StringFlag{Name: internal.FlagAPIAddress},
+		&cli.StringFlag{Name: internal.FlagAPIToken},
+		&cli.StringFlag{Name: internal.FlagAPIAccessToken},
+		&cli.StringFlag{Name: internal.FlagAPIRefreshToken},
+		&cli.StringFlag{Name: internal.FlagAPIVersion},
+		&cli.StringFlag{Name: internal.FlagLogLevel},
+		&cli.StringFlag{Name: internal.FlagNoGit},
+		&cli.StringFlag{Name: internal.FlagOutput},
+		&cli.StringFlag{Name: internal.FlagOrg},
+		&cli.StringFlag{Name: internal.FlagRepo},
 		&cli.StringFlag{Name: internal.FlagSecretEngine},
 		&cli.StringFlag{Name: internal.FlagSecretType},
-		&cli.StringFlag{Name: "compiler.github.driver"},
-		&cli.StringFlag{Name: "compiler.github.url"},
+		&cli.StringFlag{Name: internal.FlagCompilerGithubDriver},
+		&cli.StringFlag{Name: internal.FlagCompilerGitHubURL},
 	}
 
 	// setup flags
@@ -102,21 +102,21 @@ func TestConfig_Config_Load(t *testing.T) {
 		config := &Config{
 			Action:       internal.ActionGenerate,
 			File:         test.config.File,
-			Addr:         ctx.String("api.addr"),
-			Token:        ctx.String("api.token"),
-			AccessToken:  ctx.String("api.token.access"),
-			RefreshToken: ctx.String("api.token.refresh"),
-			Version:      ctx.String("api.version"),
-			LogLevel:     ctx.String("log.level"),
+			Addr:         ctx.String(internal.FlagAPIAddress),
+			Token:        ctx.String(internal.FlagAPIToken),
+			AccessToken:  ctx.String(internal.FlagAPIAccessToken),
+			RefreshToken: ctx.String(internal.FlagAPIRefreshToken),
+			Version:      ctx.String(internal.FlagAPIVersion),
+			LogLevel:     ctx.String(internal.FlagLogLevel),
 			Engine:       ctx.String(internal.FlagSecretEngine),
 			Type:         ctx.String(internal.FlagSecretType),
 			GitHub: &GitHub{
-				Token: ctx.String("compiler.github.token"),
-				URL:   ctx.String("compiler.github.url"),
+				Token: ctx.String(internal.FlagCompilerGitHubToken),
+				URL:   ctx.String(internal.FlagCompilerGitHubURL),
 			},
-			Output: ctx.String("output"),
-			Org:    ctx.String("org"),
-			Repo:   ctx.String("repo"),
+			Output: ctx.String(internal.FlagOutput),
+			Org:    ctx.String(internal.FlagOrg),
+			Repo:   ctx.String(internal.FlagRepo),
 		}
 
 		// generate config file

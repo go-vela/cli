@@ -109,7 +109,6 @@ var CommandUpdate = &cli.Command{
 			Usage:   "Print the output in default, yaml or json format",
 		},
 	},
-	// nolint: lll // ignore long line length due to flags
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a repository secret.

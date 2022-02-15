@@ -150,8 +150,6 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to modify the
 // config file.
-//
-// nolint: funlen // ignore function length due to comments
 func update(c *cli.Context) error {
 	// create the config file configuration
 	//

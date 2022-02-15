@@ -61,6 +61,7 @@ func (s *localServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
+
 	defer func() {
 		_ = s.Close()
 	}()
@@ -72,6 +73,7 @@ func (s *localServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Add("content-type", "text/html")
+
 	if s.WriteSuccessHTML != nil {
 		s.WriteSuccessHTML(w)
 	} else {

@@ -11,8 +11,8 @@ import (
 func TestConfig_ConfigFile_Empty(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		want   bool
 		config *ConfigFile
+		want   bool
 	}{
 		{
 			want:   true,

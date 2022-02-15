@@ -19,12 +19,12 @@ type Config struct {
 	File          string
 	Path          string
 	Type          string
-	Stages        bool
-	Template      bool
-	TemplateFiles []string
-	Local         bool
-	Remote        bool
-	Volumes       []string
 	Output        string
 	PipelineType  string
+	TemplateFiles []string
+	Volumes       []string
+	Stages        bool
+	Template      bool
+	Local         bool
+	Remote        bool
 }

@@ -23,8 +23,8 @@ func TestService_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Service
+		failure bool
 	}{
 		{
 			failure: false,
@@ -66,8 +66,8 @@ func TestService_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Service
+		failure bool
 	}{
 		{
 			failure: false,

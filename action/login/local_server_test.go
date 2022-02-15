@@ -16,8 +16,8 @@ import (
 )
 
 type fakeListener struct {
-	closed bool
 	addr   *net.TCPAddr
+	closed bool
 }
 
 func (l *fakeListener) Accept() (net.Conn, error) {

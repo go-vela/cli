@@ -26,8 +26,8 @@ func TestDeployment_Config_Add(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
+		failure bool
 	}{
 		{
 			failure: false,
@@ -136,12 +136,12 @@ func Test_parseKeyValue(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		args    args
 		want    raw.StringSliceMap
+		args    args
 		wantErr bool
 	}{
-		{"valid input", args{input: []string{"foo=test1", "bar=test2"}}, raw.StringSliceMap{"foo": "test1", "bar": "test2"}, false},
-		{"invalid input", args{input: []string{"foo=test1", "badinput"}}, nil, true},
+		{"valid input", raw.StringSliceMap{"foo": "test1", "bar": "test2"}, args{input: []string{"foo=test1", "bar=test2"}}, false},
+		{"invalid input", nil, args{input: []string{"foo=test1", "badinput"}}, true},
 	}
 
 	for _, tt := range tests {

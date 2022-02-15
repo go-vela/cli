@@ -25,8 +25,8 @@ func TestPipeline_Config_View(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
+		failure bool
 	}{
 		{
 			failure: false,

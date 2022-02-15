@@ -26,8 +26,8 @@ func TestSecret_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		secrets *[]library.Secret
+		failure bool
 	}{
 		{
 			failure: false,
@@ -73,8 +73,8 @@ func TestSecret_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		secrets *[]library.Secret
+		failure bool
 	}{
 		{
 			failure: false,

@@ -14,15 +14,15 @@ type Config struct {
 	Link         string
 	Clone        string
 	Visibility   string
+	PipelineType string
+	Output       string
+	Events       []string
 	BuildLimit   int64
 	Timeout      int64
 	Counter      int
+	Page         int
+	PerPage      int
 	Private      bool
 	Trusted      bool
 	Active       bool
-	Events       []string
-	PipelineType string
-	Page         int
-	PerPage      int
-	Output       string
 }

@@ -10,11 +10,11 @@ type Config struct {
 	Action  string
 	Org     string
 	Repo    string
-	Number  int
 	Event   string
 	Status  string
 	Branch  string
+	Output  string
+	Number  int
 	Page    int
 	PerPage int
-	Output  string
 }

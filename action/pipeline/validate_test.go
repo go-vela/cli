@@ -21,8 +21,8 @@ import (
 func TestPipeline_Config_Validate(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
+		failure bool
 	}{
 		{
 			failure: false,
@@ -136,9 +136,9 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		config  *Config
 		name    string
 		failure bool
-		config  *Config
 	}{
 		{
 			name:    "default",
@@ -295,8 +295,8 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
+		failure bool
 	}{
 		{
 			failure: false,

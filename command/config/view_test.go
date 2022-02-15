@@ -18,8 +18,8 @@ func TestConfig_View(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		set     *flag.FlagSet
+		failure bool
 	}{
 		{
 			failure: false,

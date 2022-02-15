@@ -23,13 +23,13 @@ type Config struct {
 	Team         string
 	Name         string
 	Value        string
+	File         string
+	Output       string
 	Images       []string
 	Events       []string
-	AllowCommand bool
-	File         string
 	Page         int
 	PerPage      int
-	Output       string
+	AllowCommand bool
 }
 
 // setValue is a helper function to check if the value

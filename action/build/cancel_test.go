@@ -25,8 +25,8 @@ func TestBuild_Config_Cancel(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
+		failure bool
 	}{
 		{
 			failure: false,

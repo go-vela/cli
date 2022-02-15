@@ -17,11 +17,11 @@ func TestClient_validate(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure      bool
 		address      string
 		token        string
 		accessToken  string
 		refreshToken string
+		failure      bool
 	}{
 		{
 			failure:      false,

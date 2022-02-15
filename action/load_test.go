@@ -44,8 +44,8 @@ func TestAction_Load(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		set     *flag.FlagSet
+		failure bool
 	}{
 		{
 			failure: false,

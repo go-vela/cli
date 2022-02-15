@@ -11,8 +11,8 @@ import (
 func TestOutput_Default(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		failure bool
 		input   interface{}
+		failure bool
 	}{
 		{
 			failure: false,

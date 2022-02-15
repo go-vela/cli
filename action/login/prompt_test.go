@@ -16,9 +16,9 @@ import (
 func TestLogin_Config_PromptBrowserConfirm(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
 		data    string
+		failure bool
 	}{
 		{
 			failure: false,
@@ -83,9 +83,9 @@ func TestLogin_Config_PromptBrowserConfirm(t *testing.T) {
 func TestLogin_Config_PromptConfigConfirm(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
 		data    string
+		failure bool
 	}{
 		{
 			failure: false,

@@ -21,8 +21,8 @@ func TestHook_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Hook
+		failure bool
 	}{
 		{
 			failure: false,
@@ -61,8 +61,8 @@ func TestHook_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Hook
+		failure bool
 	}{
 		{
 			failure: false,

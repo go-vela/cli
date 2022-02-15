@@ -23,8 +23,8 @@ func TestStep_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Step
+		failure bool
 	}{
 		{
 			failure: false,
@@ -66,8 +66,8 @@ func TestStep_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Step
+		failure bool
 	}{
 		{
 			failure: false,

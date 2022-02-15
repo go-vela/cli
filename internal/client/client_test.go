@@ -43,8 +43,8 @@ func TestClient_Parse(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		set     *flag.FlagSet
+		failure bool
 	}{
 		{
 			failure: false,
@@ -92,8 +92,8 @@ func TestClient_ParseEmptyToken(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		set     *flag.FlagSet
+		failure bool
 	}{
 		{
 			failure: false,

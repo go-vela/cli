@@ -20,8 +20,8 @@ func TestDeployment_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Deployment
+		failure bool
 	}{
 		{
 			failure: false,
@@ -60,8 +60,8 @@ func TestDeployment_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		steps   *[]library.Deployment
+		failure bool
 	}{
 		{
 			failure: false,

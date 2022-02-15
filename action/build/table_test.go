@@ -24,8 +24,8 @@ func TestBuild_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		builds  *[]library.Build
+		failure bool
 	}{
 		{
 			failure: false,
@@ -68,8 +68,8 @@ func TestBuild_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		builds  *[]library.Build
+		failure bool
 	}{
 		{
 			failure: false,

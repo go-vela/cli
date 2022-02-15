@@ -41,9 +41,9 @@ func TestPipeline_Validate(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		set     *flag.FlagSet
 		name    string
 		failure bool
-		set     *flag.FlagSet
 	}{
 		{
 			name:    "fullSet",

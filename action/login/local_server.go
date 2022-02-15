@@ -19,11 +19,10 @@ type CodeResponse struct {
 }
 
 type localServer struct {
-	CallbackPath     string
 	WriteSuccessHTML func(w io.Writer)
-
-	resultChan chan (CodeResponse)
-	listener   net.Listener
+	resultChan       chan (CodeResponse)
+	listener         net.Listener
+	CallbackPath     string
 }
 
 // bindLocalServer initializes a LocalServer that will listen on a randomly available TCP port.

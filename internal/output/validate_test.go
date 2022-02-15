@@ -11,9 +11,9 @@ import (
 func TestOutput_validate(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		failure bool
-		driver  string
 		input   interface{}
+		driver  string
+		failure bool
 	}{
 		{
 			failure: false,

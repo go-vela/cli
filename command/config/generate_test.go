@@ -30,8 +30,8 @@ func TestConfig_Generate(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		failure bool
 		set     *flag.FlagSet
+		failure bool
 	}{
 		{
 			failure: false,

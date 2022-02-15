@@ -14,8 +14,8 @@ import (
 func TestPipeline_stages(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		pipelineType string
 		want         *yaml.Build
+		pipelineType string
 	}{
 		{
 			pipelineType: "",

@@ -13,8 +13,8 @@ import (
 func TestConfig_Config_Remove(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		failure bool
 		config  *Config
+		failure bool
 	}{
 		{
 			failure: false,

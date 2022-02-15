@@ -10,8 +10,8 @@ type Config struct {
 	Action  string
 	Org     string
 	Repo    string
+	Output  string
 	Build   int
 	Service int
 	Step    int
-	Output  string
 }

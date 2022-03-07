@@ -6,17 +6,12 @@ package build
 
 import (
 	"sort"
-	"strings"
 	"time"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
-
 	"github.com/dustin/go-humanize"
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/types/library"
 	"github.com/gosuri/uitable"
-
 	"github.com/sirupsen/logrus"
 )
 
@@ -52,15 +47,10 @@ func table(builds *[]library.Build) error {
 	for _, b := range reverse(*builds) {
 		logrus.Tracef("adding build %d to build table", b.GetNumber())
 
-		// calculate duration based off the build timestamps
-		//
-		// nolint: gosec // ignore memory aliasing
-		d := duration(&b)
-
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), d)
+		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), b.Duration())
 	}
 
 	// output the table in stdout format
@@ -101,11 +91,6 @@ func wideTable(builds *[]library.Build) error {
 	for _, b := range reverse(*builds) {
 		logrus.Tracef("adding build %d to wide build table", b.GetNumber())
 
-		// calculate duration based off the build timestamps
-		//
-		// nolint: gosec // ignore memory aliasing
-		d := duration(&b)
-
 		// calculate created timestamp in human readable form
 		//
 		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
@@ -119,38 +104,13 @@ func wideTable(builds *[]library.Build) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), b.GetCommit(), d, c, f, b.GetAuthor())
+		table.AddRow(b.GetNumber(), b.GetStatus(), b.GetEvent(), b.GetBranch(), b.GetCommit(), b.Duration(), c, f, b.GetAuthor())
 	}
 
 	// output the wide table in stdout format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
 	return output.Stdout(table)
-}
-
-// duration is a helper function to calculate
-// the total duration a build ran for in a
-// more consumable, human readable format.
-func duration(b *library.Build) string {
-	// check if build is in a pending or running state
-	if strings.EqualFold(b.GetStatus(), constants.StatusPending) ||
-		strings.EqualFold(b.GetStatus(), constants.StatusRunning) {
-		// return a default value to display the build is not complete
-		return "..."
-	}
-
-	// capture finished unix timestamp from build
-	f := time.Unix(b.GetFinished(), 0)
-	// capture started unix timestamp from build
-	s := time.Unix(b.GetStarted(), 0)
-
-	// get the duration by subtracting the build
-	// started unix timestamp from the build finished
-	// unix timestamp.
-	d := f.Sub(s)
-
-	// return duration in a human readable form
-	return d.String()
 }
 
 // reverse is a helper function to sort the builds

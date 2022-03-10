@@ -7,8 +7,6 @@ package config
 // Config represents the configuration necessary
 // to perform config related quests with Vela.
 type Config struct {
-	UpdateFlags  map[string]string
-	GitHub       *GitHub
 	Action       string
 	File         string
 	Addr         string
@@ -22,6 +20,8 @@ type Config struct {
 	Repo         string
 	Engine       string
 	Type         string
-	Output       string
+	GitHub       *GitHub
+	UpdateFlags  map[string]string
 	RemoveFlags  []string
+	Output       string
 }

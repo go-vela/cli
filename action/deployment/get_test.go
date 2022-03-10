@@ -25,8 +25,8 @@ func TestDeployment_Config_Get(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

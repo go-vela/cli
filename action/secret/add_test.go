@@ -25,8 +25,8 @@ func TestSecret_Config_Add(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,
@@ -163,8 +163,8 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

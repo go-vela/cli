@@ -11,8 +11,8 @@ import (
 func TestCompletion_Config_Validate(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

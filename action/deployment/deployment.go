@@ -10,13 +10,13 @@ type Config struct {
 	Action      string
 	Org         string
 	Repo        string
+	Number      int
 	Description string
 	Ref         string
 	Target      string
 	Task        string
-	Output      string
-	Parameters  []string
 	Page        int
 	PerPage     int
-	Number      int
+	Output      string
+	Parameters  []string
 }

@@ -60,9 +60,9 @@ func TestConfig_Config_Load(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		set     *flag.FlagSet
-		config  *Config
 		failure bool
+		config  *Config
+		set     *flag.FlagSet
 	}{
 		{
 			failure: false,

@@ -11,8 +11,8 @@ import (
 func TestOutput_RawJSON(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		input   interface{}
 		failure bool
+		input   interface{}
 	}{
 		{
 			failure: false,

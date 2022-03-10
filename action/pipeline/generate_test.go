@@ -13,8 +13,8 @@ import (
 func TestPipeline_Config_Generate(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

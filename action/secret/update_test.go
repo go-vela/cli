@@ -25,8 +25,8 @@ func TestSecret_Config_Update(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,
@@ -164,8 +164,8 @@ func TestSecret_Config_UpdateFromFile(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

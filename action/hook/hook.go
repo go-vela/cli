@@ -10,8 +10,8 @@ type Config struct {
 	Action  string
 	Org     string
 	Repo    string
-	Output  string
 	Number  int
 	Page    int
 	PerPage int
+	Output  string
 }

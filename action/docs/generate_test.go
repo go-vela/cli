@@ -15,8 +15,8 @@ func TestDocs_Config_Generate(t *testing.T) {
 	fakeApp := cli.NewApp()
 
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

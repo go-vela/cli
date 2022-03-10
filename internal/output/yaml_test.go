@@ -12,8 +12,8 @@ import (
 func TestOutput_YAML(t *testing.T) {
 	// setup tests
 	tests := []struct {
-		input   interface{}
 		failure bool
+		input   interface{}
 	}{
 		{
 			failure: false,

@@ -24,8 +24,8 @@ func TestRepo_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		repos   *[]library.Repo
 		failure bool
+		repos   *[]library.Repo
 	}{
 		{
 			failure: false,
@@ -68,8 +68,8 @@ func TestRepo_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		repos   *[]library.Repo
 		failure bool
+		repos   *[]library.Repo
 	}{
 		{
 			failure: false,

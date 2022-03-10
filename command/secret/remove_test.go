@@ -38,8 +38,8 @@ func TestSecret_Remove(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		set     *flag.FlagSet
 		failure bool
+		set     *flag.FlagSet
 	}{
 		{
 			failure: false,

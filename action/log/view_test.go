@@ -25,8 +25,8 @@ func TestLog_Config_ViewService(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,
@@ -125,8 +125,8 @@ func TestService_Config_ViewStep(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

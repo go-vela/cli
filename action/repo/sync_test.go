@@ -25,8 +25,8 @@ func TestRepo_Config_Sync(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,
@@ -76,8 +76,8 @@ func TestRepo_Config_SyncAll(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
-		config  *Config
 		failure bool
+		config  *Config
 	}{
 		{
 			failure: false,

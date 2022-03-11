@@ -7,8 +7,6 @@ package login
 // authSuccess provides the HTML for rendering
 // a message in the browser after successfully
 // completing the oauth workflow.
-//
-// nolint:lll // lots of html, ignoring line length
 const authSuccess = `
 <!doctype html>
 <meta charset="utf-8">

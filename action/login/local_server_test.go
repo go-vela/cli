@@ -8,6 +8,7 @@ package login
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"net"
 	"net/http"
@@ -40,12 +41,14 @@ func (w *responseWriter) Header() http.Header {
 	if w.header == nil {
 		w.header = make(http.Header)
 	}
+
 	return w.header
 }
 func (w *responseWriter) Write(b []byte) (int, error) {
 	if w.status == 0 {
 		w.status = 200
 	}
+
 	return w.written.Write(b)
 }
 func (w *responseWriter) WriteHeader(s int) {
@@ -64,10 +67,12 @@ func Test_localServer_ServeHTTP(t *testing.T) {
 	w2 := &responseWriter{}
 
 	serveChan := make(chan struct{})
+
 	go func() {
-		req1, _ := http.NewRequest("GET", "http://127.0.0.1:12345/favicon.ico", nil)
+		req1, _ := http.NewRequestWithContext(context.Background(), "GET", "http://127.0.0.1:12345/favicon.ico", nil)
 		s.ServeHTTP(w1, req1)
-		req2, _ := http.NewRequest("GET", "http://127.0.0.1:12345/hello?code=ABC-123&state=xy%2Fz", nil)
+
+		req2, _ := http.NewRequestWithContext(context.Background(), "GET", "http://127.0.0.1:12345/hello?code=ABC-123&state=xy%2Fz", nil)
 		s.ServeHTTP(w2, req2)
 		serveChan <- struct{}{}
 	}()
@@ -76,11 +81,13 @@ func Test_localServer_ServeHTTP(t *testing.T) {
 	if res.Code != "ABC-123" {
 		t.Errorf("got code %q", res.Code)
 	}
+
 	if res.State != "xy/z" {
 		t.Errorf("got state %q", res.State)
 	}
 
 	<-serveChan
+
 	if w1.status != 404 {
 		t.Errorf("status = %d", w2.status)
 	}
@@ -88,12 +95,15 @@ func Test_localServer_ServeHTTP(t *testing.T) {
 	if w2.status != 200 {
 		t.Errorf("status = %d", w2.status)
 	}
+
 	if w2.written.String() != authSuccess {
 		t.Errorf("written: %q", w2.written.String())
 	}
+
 	if w2.Header().Get("Content-Type") != "text/html" {
 		t.Errorf("Content-Type: %v", w2.Header().Get("Content-Type"))
 	}
+
 	if !listener.closed {
 		t.Error("expected listener to be closed")
 	}

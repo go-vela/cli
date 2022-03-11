@@ -53,7 +53,6 @@ func (c *Config) Validate() error {
 		for _, file := range c.TemplateFiles {
 			parts := strings.Split(file, ":")
 
-			// nolint:gomnd,lll // ignore magic number and line length we are explicitly checking for it to parsed into two parts only
 			if len(parts) != 2 {
 				return fmt.Errorf("invalid format for template file: %s (valid format: <name>:<source>)", file)
 			}
@@ -120,7 +119,6 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		// as we define any template files, you have to override
 		// all templates locally
 		if nTemplateFiles > 0 && nTemplateFiles < nTemplates {
-			// nolint:lll // helpful error messages breaks line length
 			return fmt.Errorf("found %d template references in your pipeline, but only %d template(s) given to override", nTemplates, nTemplateFiles)
 		}
 

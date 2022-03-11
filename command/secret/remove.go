@@ -79,7 +79,6 @@ var CommandRemove = &cli.Command{
 			Usage:   "format the output in json, spew or yaml",
 		},
 	},
-	// nolint: lll // ignore long line length due to flags
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove repository secret details.

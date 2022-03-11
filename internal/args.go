@@ -16,10 +16,12 @@ import (
 // resource to that value in the context.
 func ProcessArgs(c *cli.Context, resource string, expect string) error {
 	args := c.Args()
+
 	val := args.First()
 	if val == "" {
 		return nil
 	}
+
 	if expect == "int" {
 		_, err := strconv.Atoi(val)
 		if err != nil {
@@ -27,9 +29,11 @@ func ProcessArgs(c *cli.Context, resource string, expect string) error {
 			return retErr
 		}
 	}
+
 	err := c.Set(resource, val)
 	if err != nil {
 		return err
 	}
+
 	return nil
 }

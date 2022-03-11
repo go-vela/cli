@@ -102,7 +102,6 @@ var CommandValidate = &cli.Command{
 			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
 	},
-	// nolint:lll // help messages is pushing over limit
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Validate a local Vela pipeline.
@@ -192,6 +191,5 @@ func validate(c *cli.Context) error {
 	// execute the validate local call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
-	// nolint:lll // ignore line length
 	return p.ValidateLocal(client.WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

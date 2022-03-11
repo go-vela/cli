@@ -82,6 +82,7 @@ func testSetup(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to init repo for project 1")
 	}
+
 	_, err = r1.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
 		URLs: []string{"git@github.com:go-vela/api-handler.git"},
@@ -89,10 +90,12 @@ func testSetup(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not create remote")
 	}
+
 	r2, err := git.PlainInit("./testdata/project2/", false)
 	if err != nil {
 		t.Errorf("Failed to init repo for project 2")
 	}
+
 	_, err = r2.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
 		URLs: []string{"git@github.com:OctoKitty/catCastle.git"},
@@ -100,10 +103,12 @@ func testSetup(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not create remote")
 	}
+
 	r3, err := git.PlainInit("./testdata/project3/", false)
 	if err != nil {
 		t.Errorf("Failed to init repo for project 3")
 	}
+
 	_, err = r3.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
 		URLs: []string{"git@github.com:testing/test-test.git"},

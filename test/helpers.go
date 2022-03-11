@@ -11,8 +11,7 @@ import (
 	jwt "github.com/golang-jwt/jwt/v4"
 )
 
-// expose some pre-computed test tokens
-// nolint:gomnd // ignoring these two instances of 100
+// expose some pre-computed test tokens.
 var (
 	TestTokenGood    = makeSampleToken(jwt.MapClaims{"exp": float64(time.Now().Unix() + 100)})
 	TestTokenExpired = makeSampleToken(jwt.MapClaims{"exp": float64(time.Now().Unix() - 100)})

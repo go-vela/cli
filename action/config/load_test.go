@@ -38,6 +38,7 @@ func TestConfig_Config_Load(t *testing.T) {
 	// setup flags
 	configSet := flag.NewFlagSet("test", 0)
 	err := configSet.Parse([]string{"view", "config"})
+
 	if err != nil {
 		t.Errorf("unable to parse configset: %v", err)
 	}

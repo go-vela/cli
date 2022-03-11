@@ -90,7 +90,6 @@ var CommandGet = &cli.Command{
 			Value:   10,
 		},
 	},
-	// nolint: lll // ignore long line length due to flags
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get repository secret details.

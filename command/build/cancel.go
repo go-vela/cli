@@ -44,7 +44,7 @@ var CommandCancel = &cli.Command{
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_BUILD", "BUILD_NUMBER"},
 			Name:    internal.FlagBuild,
-			Aliases: []string{"b"},
+			Aliases: []string{"b", "number", "bn"},
 			Usage:   "provide the number for the build",
 		},
 

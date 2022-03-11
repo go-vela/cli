@@ -17,8 +17,6 @@ import (
 )
 
 // Update modifies one or more fields from the config file based off the provided configuration.
-//
-// nolint: funlen // ignore function length due to comments and conditionals
 func (c *Config) Update() error {
 	logrus.Debug("executing update for config file configuration")
 

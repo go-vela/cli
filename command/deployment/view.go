@@ -82,6 +82,12 @@ func view(c *cli.Context) error {
 		return err
 	}
 
+	// grab first command line argument, if it exists, and set it as resource
+	err = internal.ProcessArgs(c, "deployment", "int")
+	if err != nil {
+		return err
+	}
+
 	// parse the Vela client from the context
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/client?tab=doc#Parse

@@ -6,17 +6,12 @@ package service
 
 import (
 	"sort"
-	"strings"
 	"time"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
-
 	"github.com/dustin/go-humanize"
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/types/library"
 	"github.com/gosuri/uitable"
-
 	"github.com/sirupsen/logrus"
 )
 
@@ -52,15 +47,10 @@ func table(services *[]library.Service) error {
 	for _, s := range reverse(*services) {
 		logrus.Tracef("adding service %d to service table", s.GetNumber())
 
-		// calculate duration based off the service timestamps
-		//
-		// nolint: gosec // ignore memory aliasing
-		d := duration(&s)
-
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), d)
+		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), s.Duration())
 	}
 
 	// output the table in stdout format
@@ -101,11 +91,6 @@ func wideTable(services *[]library.Service) error {
 	for _, s := range reverse(*services) {
 		logrus.Tracef("adding service %d to wide service table", s.GetNumber())
 
-		// calculate duration based off the service timestamps
-		//
-		// nolint: gosec // ignore memory aliasing
-		d := duration(&s)
-
 		// calculate created timestamp in human readable form
 		//
 		// https://pkg.go.dev/github.com/dustin/go-humanize?tab=doc#Time
@@ -119,38 +104,13 @@ func wideTable(services *[]library.Service) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), d, c, f)
+		table.AddRow(s.GetNumber(), s.GetName(), s.GetStatus(), s.Duration(), c, f)
 	}
 
 	// output the wide table in stdout format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
 	return output.Stdout(table)
-}
-
-// duration is a helper function to calculate
-// the total duration a service ran for in a
-// more consumable, human readable format.
-func duration(s *library.Service) string {
-	// check if service is in a pending or running state
-	if strings.EqualFold(s.GetStatus(), constants.StatusPending) ||
-		strings.EqualFold(s.GetStatus(), constants.StatusRunning) {
-		// return a default value to display the service is not complete
-		return "..."
-	}
-
-	// capture finished unix timestamp from service
-	f := time.Unix(s.GetFinished(), 0)
-	// capture started unix timestamp from service
-	st := time.Unix(s.GetStarted(), 0)
-
-	// get the duration by subtracting the service
-	// started unix timestamp from the service finished
-	// unix timestamp.
-	d := f.Sub(st)
-
-	// return duration in a human readable form
-	return d.String()
 }
 
 // reverse is a helper function to sort the services

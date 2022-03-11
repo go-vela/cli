@@ -53,7 +53,6 @@ func (c *Config) Validate() error {
 		for _, file := range c.TemplateFiles {
 			parts := strings.Split(file, ":")
 
-			// nolint:gomnd,lll // ignore magic number and line length we are explicitly checking for it to parsed into two parts only
 			if len(parts) != 2 {
 				return fmt.Errorf("invalid format for template file: %s (valid format: <name>:<source>)", file)
 			}

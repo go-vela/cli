@@ -52,7 +52,7 @@ var CommandView = &cli.Command{
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_SERVICE", "SERVICE_NUMBER"},
 			Name:    internal.FlagService,
-			Aliases: []string{"s"},
+			Aliases: []string{"s", "number", "sn"},
 			Usage:   "provide the number for the service",
 		},
 

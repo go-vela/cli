@@ -48,7 +48,7 @@ func (c *Config) setValue() error {
 		// capture the contents from the file to be added as a secret value
 		data, err := ioutil.ReadFile(path)
 		if err != nil {
-			return fmt.Errorf("unable to read file %s: %v", path, err)
+			return fmt.Errorf("unable to read file %s: %w", path, err)
 		}
 
 		// set the secret value to the contents from the file

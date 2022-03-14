@@ -13,7 +13,6 @@ import (
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
-	"github.com/go-vela/types/yaml"
 
 	"github.com/go-vela/server/compiler"
 
@@ -181,15 +180,4 @@ func validateFile(path string) (string, error) {
 	}
 
 	return path, nil
-}
-
-// helper function that creates a map of templates from a yaml configuration.
-func mapFromTemplates(templates []*yaml.Template) map[string]*yaml.Template {
-	m := make(map[string]*yaml.Template)
-
-	for _, tmpl := range templates {
-		m[tmpl.Name] = tmpl
-	}
-
-	return m
 }

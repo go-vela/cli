@@ -227,17 +227,6 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
-			name:    "default without template but wants to use template",
-			failure: true,
-			config: &Config{
-				Action:   "validate",
-				File:     "default.yml",
-				Path:     "testdata",
-				Type:     "",
-				Template: true,
-			},
-		},
-		{
 			name:    "pipeline with multiple template (local overrides) template mismatch",
 			failure: true,
 			config: &Config{

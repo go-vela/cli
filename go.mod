@@ -10,8 +10,8 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-vela/sdk-go v0.13.0-rc1
-	github.com/go-vela/server v0.13.0-rc1
-	github.com/go-vela/types v0.13.0-rc1
+	github.com/go-vela/server v0.13.0-rc1.0.20220316201650-413ebb31a6be
+	github.com/go-vela/types v0.13.0-rc2
 	github.com/go-vela/worker v0.13.0-rc1
 	github.com/golang-jwt/jwt/v4 v4.3.0
 	github.com/gosuri/uitable v0.0.4
@@ -62,7 +62,9 @@ require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/gnostic v0.5.5 // indirect
 	github.com/goware/urlx v0.3.1 // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.0 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect

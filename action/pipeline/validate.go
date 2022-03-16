@@ -13,7 +13,6 @@ import (
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
-	"github.com/go-vela/types/yaml"
 
 	"github.com/go-vela/server/compiler"
 
@@ -87,75 +86,13 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		return err
 	}
 
-	logrus.Tracef("parsing pipeline %s", path)
-
 	// set pipelineType within client
 	client.WithRepo(&library.Repo{PipelineType: &c.PipelineType})
 
-	// parse the object into a pipeline
-	p, err := client.Parse(path)
-	if err != nil {
-		return err
-	}
+	logrus.Tracef("compiling pipeline %s", path)
 
-	templates := mapFromTemplates(p.Templates)
-
-	logrus.Tracef("validating pipeline %s", path)
-
-	if c.Template {
-		logrus.Tracef("expand pipeline %s", path)
-
-		// count all the templates
-		nTemplates := len(templates)
-		nTemplateFiles := len(c.TemplateFiles)
-
-		// ensure a 'templates' block exists
-		// in the pipeline
-		if nTemplates == 0 {
-			return fmt.Errorf("templates block not properly configured in pipeline")
-		}
-
-		// since the whole client is put into local mode as soon
-		// as we define any template files, you have to override
-		// all templates locally
-		if nTemplateFiles > 0 && nTemplateFiles < nTemplates {
-			return fmt.Errorf("found %d template references in your pipeline, but only %d template(s) given to override", nTemplates, nTemplateFiles)
-		}
-
-		for _, file := range c.TemplateFiles {
-			// local templates override format is
-			// <name>:<source>
-			//
-			// example: example:/path/to/template.yml
-			parts := strings.Split(file, ":")
-
-			// make sure the template was configured
-			_, ok := templates[parts[0]]
-			if !ok {
-				return fmt.Errorf("template with name %q is not configured", parts[0])
-			}
-
-			// override the source for the given template
-			templates[parts[0]].Source = parts[1]
-		}
-
-		if len(p.Stages) > 0 {
-			// inject the templates into the stages
-			p.Stages, p.Secrets, p.Services, _, err = client.ExpandStages(p, templates)
-			if err != nil {
-				return err
-			}
-		}
-
-		// inject the templates into the steps
-		p.Steps, p.Secrets, p.Services, _, err = client.ExpandSteps(p, templates)
-		if err != nil {
-			return err
-		}
-	}
-
-	// validate the pipeline
-	err = client.Validate(p)
+	// compile the object into a pipeline
+	p, err := client.CompileLite(path, c.Template, false, c.TemplateFiles)
 	if err != nil {
 		return err
 	}
@@ -243,15 +180,4 @@ func validateFile(path string) (string, error) {
 	}
 
 	return path, nil
-}
-
-// helper function that creates a map of templates from a yaml configuration.
-func mapFromTemplates(templates []*yaml.Template) map[string]*yaml.Template {
-	m := make(map[string]*yaml.Template)
-
-	for _, tmpl := range templates {
-		m[tmpl.Name] = tmpl
-	}
-
-	return m
 }

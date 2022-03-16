@@ -227,10 +227,12 @@ github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0/go.mod h1:fyg78
 github.com/go-test/deep v1.0.2/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
 github.com/go-vela/sdk-go v0.13.0-rc1 h1:GvmEs0T3ePVN5t9RfD0fABPWo4P/YXkrliuVYuBv19c=
 github.com/go-vela/sdk-go v0.13.0-rc1/go.mod h1:4LWFl8oouiS7CpVpUH9Oi1y0RHJpSJRD+wnaA2jKGGE=
-github.com/go-vela/server v0.13.0-rc1 h1:BWSx+V1fkC/Yz2P7DoUFqqDp2TPpP4x+13Xg0tBTu/0=
 github.com/go-vela/server v0.13.0-rc1/go.mod h1:F2CFqqo2maVAhB3yyg3Do+f3T9ihxFsVFBko/bP1yyk=
-github.com/go-vela/types v0.13.0-rc1 h1:y4A5R/zbjlz/XXdwDE7iOdl+/6hgB0B/jVz9LFDfznw=
+github.com/go-vela/server v0.13.0-rc1.0.20220316201650-413ebb31a6be h1:J3dtEwo6Nl3OaUI/S2Gbs9Gu35Lpx4TI/b5Nl44S4NE=
+github.com/go-vela/server v0.13.0-rc1.0.20220316201650-413ebb31a6be/go.mod h1:ltr/Ied01GTID566AmJreo79kFU/zVeIpSiQoLvwHIM=
 github.com/go-vela/types v0.13.0-rc1/go.mod h1:n2aGQj5hzLFUvl1LnxyzItaPKSgC7jSiuSq+6XkRly8=
+github.com/go-vela/types v0.13.0-rc2 h1:NPlRRnew8qFW/lz6rpYbk8CZXUs8VjjCVJBI6dlk9fg=
+github.com/go-vela/types v0.13.0-rc2/go.mod h1:n2aGQj5hzLFUvl1LnxyzItaPKSgC7jSiuSq+6XkRly8=
 github.com/go-vela/worker v0.13.0-rc1 h1:WM6w+MnoM89H8rg4TjuM4a5ZhuYLmELkykoTWSODBEs=
 github.com/go-vela/worker v0.13.0-rc1/go.mod h1:+N7cgmfVzv23/AmIEjAXVLHW8zTvLbq7B3wFlEwYOjM=
 github.com/gofrs/uuid v4.0.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
@@ -337,6 +339,7 @@ github.com/goware/urlx v0.3.1/go.mod h1:h8uwbJy68o+tQXCGZNa9D73WN8n0r9OBae5bUnLc
 github.com/gregjones/httpcache v0.0.0-20180305231024-9cad4c3443a7/go.mod h1:FecbI9+v66THATjSRHfNgh1IVFe/9kFxbXtjV0ctIMA=
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
+github.com/hashicorp/errwrap v1.1.0 h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I=
 github.com/hashicorp/errwrap v1.1.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-cleanhttp v0.5.0/go.mod h1:JpRdi6/HCYpAwUzNwuwqhbovhLtngrth3wmdIIUrZ80=
 github.com/hashicorp/go-cleanhttp v0.5.1/go.mod h1:JpRdi6/HCYpAwUzNwuwqhbovhLtngrth3wmdIIUrZ80=
@@ -350,6 +353,7 @@ github.com/hashicorp/go-immutable-radix v1.0.0/go.mod h1:0y9vanUI8NX6FsYoO3zeMjh
 github.com/hashicorp/go-immutable-radix v1.3.1/go.mod h1:0y9vanUI8NX6FsYoO3zeMjhV/C5i9g4Q3DwcSNZ4P60=
 github.com/hashicorp/go-kms-wrapping/entropy v0.1.0/go.mod h1:d1g9WGtAunDNpek8jUIEJnBlbgKS1N2Q61QkHiZyR1g=
 github.com/hashicorp/go-multierror v1.0.0/go.mod h1:dHtQlpGsu+cZNNAkkCN/P3hoUDHhCYQXV3UM06sGGrk=
+github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo=
 github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM=
 github.com/hashicorp/go-plugin v1.4.3/go.mod h1:5fGEH17QVwTTcR0zV7yhDPLLmFX9YSZ38b18Udy6vYQ=
 github.com/hashicorp/go-retryablehttp v0.5.3/go.mod h1:9B5zBasrRhHXnJnui7y6sL7es7NDiJgTc6Er0maI1Xs=

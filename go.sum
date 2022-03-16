@@ -225,11 +225,12 @@ github.com/go-redis/redis/v8 v8.11.4/go.mod h1:2Z2wHZXdQpCDXEGzqMockDpNyYvi2l4Px
 github.com/go-stack/stack v1.8.0/go.mod h1:v0f6uXyyMGvRgIKkXu+yp6POWl0qKG85gN/melR3HDY=
 github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0/go.mod h1:fyg7847qk6SyHyPtNmDHnmrv/HOrqktSC+C9fM+CJOE=
 github.com/go-test/deep v1.0.2/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
-github.com/go-vela/sdk-go v0.13.0-rc1 h1:GvmEs0T3ePVN5t9RfD0fABPWo4P/YXkrliuVYuBv19c=
 github.com/go-vela/sdk-go v0.13.0-rc1/go.mod h1:4LWFl8oouiS7CpVpUH9Oi1y0RHJpSJRD+wnaA2jKGGE=
+github.com/go-vela/sdk-go v0.13.0-rc2 h1:qUXtbGA+NBobouXndl2ftVterpigP4HRNvMJpn2dRog=
+github.com/go-vela/sdk-go v0.13.0-rc2/go.mod h1:UWWzAjaNslDrExso17RZ7YWqIUH1fUl2lN8My9FwzYs=
 github.com/go-vela/server v0.13.0-rc1/go.mod h1:F2CFqqo2maVAhB3yyg3Do+f3T9ihxFsVFBko/bP1yyk=
-github.com/go-vela/server v0.13.0-rc1.0.20220316201650-413ebb31a6be h1:J3dtEwo6Nl3OaUI/S2Gbs9Gu35Lpx4TI/b5Nl44S4NE=
-github.com/go-vela/server v0.13.0-rc1.0.20220316201650-413ebb31a6be/go.mod h1:ltr/Ied01GTID566AmJreo79kFU/zVeIpSiQoLvwHIM=
+github.com/go-vela/server v0.13.0-rc2 h1:ZeUYtltHGzKC2FZM4A8AWbXUGHp3yOX+qJo8K+xo9bg=
+github.com/go-vela/server v0.13.0-rc2/go.mod h1:ltr/Ied01GTID566AmJreo79kFU/zVeIpSiQoLvwHIM=
 github.com/go-vela/types v0.13.0-rc1/go.mod h1:n2aGQj5hzLFUvl1LnxyzItaPKSgC7jSiuSq+6XkRly8=
 github.com/go-vela/types v0.13.0-rc2 h1:NPlRRnew8qFW/lz6rpYbk8CZXUs8VjjCVJBI6dlk9fg=
 github.com/go-vela/types v0.13.0-rc2/go.mod h1:n2aGQj5hzLFUvl1LnxyzItaPKSgC7jSiuSq+6XkRly8=

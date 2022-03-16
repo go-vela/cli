@@ -8,7 +8,6 @@ We'd love to accept your contributions to this project! If you are a first time 
 
 * [Review the commit guide we follow](https://chris.beams.io/posts/git-commit/#seven-rules) - ensure your commits follow our standards
 * Review our [style guide](https://go-vela.github.io/docs/community/contributing_guidelines/#style-guide) to ensure your code is clean and consistent.
-* Check out [Golang](https://golang.org/dl/) - for source code and [dependency management](https://github.com/golang/go/wiki/Modules)
 * Check out [Make](https://www.gnu.org/software/make/) - start up local development
 
 ### Setup

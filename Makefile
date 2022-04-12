@@ -184,7 +184,7 @@ build-darwin-static:
 		github.com/go-vela/cli/cmd/vela-cli
 	@echo
 	@echo "### Building release/darwin/arm64/vela binary"
-	GOOS=darwin CGO_ENABLED=0 GOARCH=amd64 \
+	GOOS=darwin CGO_ENABLED=0 GOARCH=arm64 \
 		go build -a \
 		-ldflags '-s -w -extldflags "-static" ${LD_FLAGS}' \
 		-o release/darwin/arm64/vela \

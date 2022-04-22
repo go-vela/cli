@@ -227,17 +227,6 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
-			name:    "default without template but wants to use template",
-			failure: true,
-			config: &Config{
-				Action:   "validate",
-				File:     "default.yml",
-				Path:     "testdata",
-				Type:     "",
-				Template: true,
-			},
-		},
-		{
 			name:    "pipeline with multiple template (local overrides) template mismatch",
 			failure: true,
 			config: &Config{
@@ -377,10 +366,12 @@ func Test_validateFile(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	type args struct {
 		path   string
 		create string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -393,6 +384,7 @@ func Test_validateFile(t *testing.T) {
 		{"update to .vela.yaml", args{path: path.Join(cwd, ".vela.yml"), create: ".vela.yaml"}, path.Join(cwd, ".vela.yaml"), false},
 		{"valid .vela.yml", args{path: path.Join(cwd, ".vela.yml"), create: ".vela.yml"}, path.Join(cwd, ".vela.yml"), false},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// remove existing .vela.yml and .vela.yaml

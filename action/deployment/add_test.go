@@ -133,6 +133,7 @@ func Test_parseKeyValue(t *testing.T) {
 	type args struct {
 		input []string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -142,6 +143,7 @@ func Test_parseKeyValue(t *testing.T) {
 		{"valid input", args{input: []string{"foo=test1", "bar=test2"}}, raw.StringSliceMap{"foo": "test1", "bar": "test2"}, false},
 		{"invalid input", args{input: []string{"foo=test1", "badinput"}}, nil, true},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := parseKeyValue(tt.args.input)
@@ -149,6 +151,7 @@ func Test_parseKeyValue(t *testing.T) {
 				t.Errorf("parseKeyValue() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
+
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("parseKeyValue() = %v, want %v", got, tt.want)
 			}

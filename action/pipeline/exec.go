@@ -21,8 +21,6 @@ import (
 )
 
 // Exec executes a pipeline based off the provided configuration.
-//
-// nolint: funlen // ignore function length due to comments
 func (c *Config) Exec(client compiler.Engine) error {
 	logrus.Debug("executing exec for pipeline configuration")
 
@@ -44,7 +42,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// check if full path to pipeline file exists
 	_, err = os.Stat(path)
 	if err != nil {
-		return fmt.Errorf("unable to find pipeline %s: %v", path, err)
+		return fmt.Errorf("unable to find pipeline %s: %w", path, err)
 	}
 
 	// create build object for use in pipeline
@@ -52,6 +50,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	b.SetBranch(c.Branch)
 	b.SetDeploy(c.Target)
 	b.SetEvent(c.Event)
+
 	if c.Tag == "" && c.Event == constants.EventPull {
 		b.SetRef("refs/pull/1")
 	} else {
@@ -131,25 +130,25 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// create the build with the executor
 	err = _executor.CreateBuild(ctx)
 	if err != nil {
-		return fmt.Errorf("unable to create build: %v", err)
+		return fmt.Errorf("unable to create build: %w", err)
 	}
 
 	// plan the build with the executor
 	err = _executor.PlanBuild(ctx)
 	if err != nil {
-		return fmt.Errorf("unable to plan build: %v", err)
+		return fmt.Errorf("unable to plan build: %w", err)
 	}
 
 	// assemble the build with the executor
 	err = _executor.AssembleBuild(ctx)
 	if err != nil {
-		return fmt.Errorf("unable to assemble build: %v", err)
+		return fmt.Errorf("unable to assemble build: %w", err)
 	}
 
 	// execute the build with the executor
 	err = _executor.ExecBuild(ctx)
 	if err != nil {
-		return fmt.Errorf("unable to execute build: %v", err)
+		return fmt.Errorf("unable to execute build: %w", err)
 	}
 
 	return nil

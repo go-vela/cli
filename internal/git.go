@@ -25,21 +25,20 @@ func SetGitConfigContext(c *cli.Context) {
 		logrus.Debug("Invalid bool value for flag no-git")
 		return
 	}
-	if !nogit &&
-		c.String(FlagOrg) == "" &&
-		c.String(FlagRepo) == "" {
-		// set the org
-		logrus.Trace("attempting to set org from .git/")
-		err = c.Set(FlagOrg, GetGitConfigOrg("./"))
 
+	if !nogit && c.String(FlagOrg) == "" && c.String(FlagRepo) == "" {
+		logrus.Trace("attempting to set org from .git/")
+
+		// set the org
+		err = c.Set(FlagOrg, GetGitConfigOrg("./"))
 		if err != nil {
 			logrus.Debug("failed to set org in context")
 		}
 
-		// set the repo
 		logrus.Trace("attempting to set repo from .git/")
-		err = c.Set(FlagRepo, GetGitConfigRepo("./"))
 
+		// set the repo
+		err = c.Set(FlagRepo, GetGitConfigRepo("./"))
 		if err != nil {
 			logrus.Debug("failed to set repo in context")
 		}
@@ -64,15 +63,15 @@ func GetGitConfigOrg(path string) string {
 	if err != nil {
 		return ""
 	}
+
 	url, err := giturls.Parse(origin.Config().URLs[0])
 	if err != nil {
 		return ""
 	}
-	// nolint: gomnd // ignore magic number
+
 	splitOrg := strings.SplitN(url.Path, "/", 2)
 
 	// check if url path is expected format
-	// nolint: gomnd // ignore magic number
 	if len(splitOrg) != 2 {
 		logrus.Debug("Invalid remote origin url -- please specify org and repo")
 		return ""
@@ -102,31 +101,29 @@ func GetGitConfigRepo(path string) string {
 	if err != nil {
 		return ""
 	}
+
 	url, err := giturls.Parse(origin.Config().URLs[0])
 	if err != nil {
 		return ""
 	}
 
-	// nolint: gomnd // ignore magic number
 	splitRepo := strings.SplitN(url.Path, "/", 2)
 
 	// check if url path is expected format
-	// nolint: gomnd // ignore magic number
 	if len(splitRepo) != 2 {
 		logrus.Debug("Invalid remote origin url -- please specify org and repo")
 		return ""
 	}
 
-	// nolint: gomnd // ignore magic number
 	splitDotGit := strings.SplitN(splitRepo[1], ".git", 2)
 
 	// check if repo name is expected format
-	// nolint: gomnd // ignore magic number
 	if len(splitDotGit) != 2 {
 		logrus.Debug("Invalid remote origin url -- please specify org and repo")
 		return ""
 	}
 
 	repoName := splitDotGit[0]
+
 	return repoName
 }

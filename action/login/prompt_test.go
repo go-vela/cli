@@ -49,6 +49,7 @@ func TestLogin_Config_PromptBrowserConfirm(t *testing.T) {
 		if err != nil {
 			t.Errorf("unable to create temporary file: %v", err)
 		}
+
 		defer os.Remove(in.Name())
 
 		_, err = in.Write([]byte(test.data))
@@ -115,6 +116,7 @@ func TestLogin_Config_PromptConfigConfirm(t *testing.T) {
 		if err != nil {
 			t.Errorf("unable to create temporary file: %v", err)
 		}
+
 		defer os.Remove(in.Name())
 
 		_, err = in.Write([]byte(test.data))

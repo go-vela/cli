@@ -67,7 +67,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile into a pipeline
-	_pipeline, err := client.
+	_pipeline, _, err := client.
+		Duplicate().
 		WithBuild(b).
 		WithComment(c.Comment).
 		WithLocal(true).

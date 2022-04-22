@@ -92,7 +92,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile the object into a pipeline
-	p, err := client.CompileLite(path, c.Template, false, c.TemplateFiles)
+	p, _, err := client.CompileLite(path, c.Template, false, c.TemplateFiles)
 	if err != nil {
 		return err
 	}
@@ -122,14 +122,13 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineOptions
 	opts := &vela.PipelineOptions{
 		Output:   c.Output,
-		Ref:      c.Ref,
 		Template: c.Template,
 	}
 
 	// send API call to validate a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Validate
-	pipeline, _, err := client.Pipeline.Validate(c.Org, c.Repo, opts)
+	pipeline, _, err := client.Pipeline.Validate(c.Org, c.Repo, c.Ref, opts)
 	if err != nil {
 		return err
 	}

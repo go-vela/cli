@@ -24,13 +24,12 @@ func (c *Config) View(client *vela.Client) error {
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineOptions
 	opts := &vela.PipelineOptions{
 		Output: c.Output,
-		Ref:    c.Ref,
 	}
 
 	// send API call to capture a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Get
-	pipeline, _, err := client.Pipeline.Get(c.Org, c.Repo, opts)
+	pipeline, _, err := client.Pipeline.Get(c.Org, c.Repo, c.Ref, opts)
 	if err != nil {
 		return err
 	}

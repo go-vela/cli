@@ -50,6 +50,7 @@ github.com/Azure/go-autorest/logger v0.2.1/go.mod h1:T9E3cAhj2VqvPOtCYAvby9aBXkZ
 github.com/Azure/go-autorest/tracing v0.6.0/go.mod h1:+vhtPC754Xsa23ID7GlGsrdKBpUA79WCAKPPZVC2DeU=
 github.com/Bose/minisentinel v0.0.0-20200130220412-917c5a9223bb/go.mod h1:WsAABbY4HQBgd3mGuG4KMNTbHJCPvx9IVBHzysbknss=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/BurntSushi/toml v1.1.0/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/DATA-DOG/go-sqlmock v1.5.0/go.mod h1:f/Ixk793poVmq4qj/V1dPUg2JEAKC73Q5eFN3EC/SaM=
 github.com/DataDog/datadog-go v3.2.0+incompatible/go.mod h1:LButxg5PwREeZtORoXG3tL4fMGNddJ+vMq1mwgfaqoQ=
@@ -225,12 +226,13 @@ github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0/go.mod h1:fyg78
 github.com/go-test/deep v1.0.2/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
 github.com/go-vela/sdk-go v0.13.0 h1:aHC6RWXr664GtmlLHs2IW59gmSNk3jcLXuxfZwM51ks=
 github.com/go-vela/sdk-go v0.13.0/go.mod h1:nhfjNURKBw9tumFIaCaRko1z0Tlf2Z0NLFkjVseHjBo=
-github.com/go-vela/server v0.13.0 h1:wcPH5fcu4QP7srVkJXXrftyHpVCCD4q6KnkLmmxVWfs=
 github.com/go-vela/server v0.13.0/go.mod h1:mxoUplM5cTM6qi9FbtmubGTsTXTlh3tchHYD8TwF6OU=
+github.com/go-vela/server v0.13.1 h1:5Ht9uqRtIzhf8kusM1Y5WzIwFIY1BW1aBFx+lWUPXmQ=
+github.com/go-vela/server v0.13.1/go.mod h1:mxoUplM5cTM6qi9FbtmubGTsTXTlh3tchHYD8TwF6OU=
 github.com/go-vela/types v0.13.0 h1:PX/0wtKMXbtqHbrWgwlCDzuBzeh+4V042k56siDSm1o=
 github.com/go-vela/types v0.13.0/go.mod h1:n2aGQj5hzLFUvl1LnxyzItaPKSgC7jSiuSq+6XkRly8=
-github.com/go-vela/worker v0.13.0 h1:6k+5+pwmMhT2LitlDI6jSxVfWqMBynnmaSVfG2LiiPk=
-github.com/go-vela/worker v0.13.0/go.mod h1:FbmrL0L7sJCXf4R6pvUw9zYb/tkPyXHJYG2buWcrrFY=
+github.com/go-vela/worker v0.13.1 h1:gdplS2l2tzTRIsYMbEFKk4U/UQZ7+atZfL//JzckEKQ=
+github.com/go-vela/worker v0.13.1/go.mod h1:FbmrL0L7sJCXf4R6pvUw9zYb/tkPyXHJYG2buWcrrFY=
 github.com/gofrs/uuid v4.0.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=
@@ -629,8 +631,9 @@ github.com/ugorji/go v1.1.11/go.mod h1:kbRrdMyHY64ADdazOwkrQP9btxt35Z26OJueD3Tq0
 github.com/ugorji/go/codec v1.1.7/go.mod h1:Ax+UKWsSmolVDwsd+7N3ZtXu+yMGCf907BLYF3GoBXY=
 github.com/ugorji/go/codec v1.1.11 h1:GaQDxjNe1J3vCZvlVaDjUIHIbFuUByFXY7rMqnhB5ck=
 github.com/ugorji/go/codec v1.1.11/go.mod h1:svMFxxx5FVQJPnJ9vbpAgscNufuiXDyldvzApI86qQo=
-github.com/urfave/cli/v2 v2.4.0 h1:m2pxjjDFgDxSPtO8WSdbndj17Wu2y8vOT86wE/tjr+I=
 github.com/urfave/cli/v2 v2.4.0/go.mod h1:NX9W0zmTvedE5oDoOMs2RTC8RvdK98NTYZE5LbaEYPg=
+github.com/urfave/cli/v2 v2.4.4 h1:IvwT3XfI6RytTmIzC35UAu9oyK+bHgUPXDDZNqribkI=
+github.com/urfave/cli/v2 v2.4.4/go.mod h1:oDzoM7pVwz6wHn5ogWgFUU1s4VJayeQS+aEZDqXIEJs=
 github.com/whilp/git-urls v1.0.0 h1:95f6UMWN5FKW71ECsXRUd3FVYiXdrE7aX4NZKcPmIjU=
 github.com/whilp/git-urls v1.0.0/go.mod h1:J16SAmobsqc3Qcy98brfl5f5+e0clUvg1krgwk/qCfE=
 github.com/xanzy/ssh-agent v0.3.0 h1:wUMzuKtKilRgBAD1sUb8gOwwRr2FGoBVumcjoOACClI=

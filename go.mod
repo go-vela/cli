@@ -10,15 +10,15 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-vela/sdk-go v0.13.0
-	github.com/go-vela/server v0.13.0
+	github.com/go-vela/server v0.13.1
 	github.com/go-vela/types v0.13.0
-	github.com/go-vela/worker v0.13.0
+	github.com/go-vela/worker v0.13.1
 	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/afero v1.8.2
-	github.com/urfave/cli/v2 v2.4.0
+	github.com/urfave/cli/v2 v2.4.4
 	github.com/whilp/git-urls v1.0.0
 	gopkg.in/yaml.v2 v2.4.0
 )

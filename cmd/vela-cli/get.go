@@ -9,6 +9,7 @@ import (
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/hook"
 	"github.com/go-vela/cli/command/log"
+	"github.com/go-vela/cli/command/pipeline"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
@@ -45,6 +46,11 @@ var getCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/log?tab=doc#CommandGet
 		log.CommandGet,
+
+		// add the sub command for getting a list of pipelines
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandGet
+		pipeline.CommandGet,
 
 		// add the sub command for getting a list of repositories
 		//

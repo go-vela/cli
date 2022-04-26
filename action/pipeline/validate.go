@@ -29,6 +29,8 @@ func (c *Config) Validate() error {
 		fallthrough
 	case "expand":
 		fallthrough
+	case "get":
+		fallthrough
 	case "view":
 		// check if pipeline org is set
 		if len(c.Org) == 0 {

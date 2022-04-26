@@ -53,6 +53,17 @@ func TestPipeline_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
+				Action:  "get",
+				Org:     "github",
+				Repo:    "octocat",
+				Page:    1,
+				PerPage: 10,
+				Output:  "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
 				Action: "validate",
 				File:   "default.yml",
 				Path:   "testdata",

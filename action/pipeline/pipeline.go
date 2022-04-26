@@ -25,6 +25,8 @@ type Config struct {
 	Local         bool
 	Remote        bool
 	Volumes       []string
+	Page          int
+	PerPage       int
 	Output        string
 	PipelineType  string
 }

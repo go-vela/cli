@@ -19,17 +19,10 @@ func (c *Config) View(client *vela.Client) error {
 
 	logrus.Tracef("inspecting pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
 
-	// set the pipeline options for the call
-	//
-	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineOptions
-	opts := &vela.PipelineOptions{
-		Output: c.Output,
-	}
-
 	// send API call to capture a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Get
-	pipeline, _, err := client.Pipeline.Get(c.Org, c.Repo, c.Ref, opts)
+	pipeline, _, err := client.Pipeline.Get(c.Org, c.Repo, c.Ref)
 	if err != nil {
 		return err
 	}
@@ -60,6 +53,6 @@ func (c *Config) View(client *vela.Client) error {
 		// output the pipeline in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(pipeline)
+		return output.Stdout(string(pipeline.GetData()))
 	}
 }

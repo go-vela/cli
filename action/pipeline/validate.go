@@ -25,11 +25,19 @@ func (c *Config) Validate() error {
 
 	// handle the action based off the provided configuration
 	switch c.Action {
+	case "get":
+		// check if pipeline org is set
+		if len(c.Org) == 0 {
+			return fmt.Errorf("no pipeline org provided")
+		}
+
+		// check if pipeline repo is set
+		if len(c.Repo) == 0 {
+			return fmt.Errorf("no pipeline name provided")
+		}
 	case "compile":
 		fallthrough
 	case "expand":
-		fallthrough
-	case "get":
 		fallthrough
 	case "view":
 		// check if pipeline org is set
@@ -40,6 +48,11 @@ func (c *Config) Validate() error {
 		// check if pipeline repo is set
 		if len(c.Repo) == 0 {
 			return fmt.Errorf("no pipeline name provided")
+		}
+
+		// check if pipeline ref is set
+		if len(c.Ref) == 0 {
+			return fmt.Errorf("no pipeline ref provided")
 		}
 	case "generate":
 		fallthrough

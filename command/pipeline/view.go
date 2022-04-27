@@ -46,7 +46,6 @@ var CommandView = &cli.Command{
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
-			Value:   "yaml",
 		},
 
 		// Pipeline Flags
@@ -55,15 +54,14 @@ var CommandView = &cli.Command{
 			EnvVars: []string{"VELA_REF", "PIPELINE_REF"},
 			Name:    "ref",
 			Usage:   "provide the repository reference for the pipeline",
-			Value:   "master",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of a pipeline for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
   2. View details of a pipeline for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
   3. View details of a pipeline for a repository when config or environment variables are set.
     $ {{.HelpName}}
 

@@ -15,7 +15,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestPipeline_Compile(t *testing.T) {
+func TestPipeline_Get(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -31,23 +31,28 @@ func TestPipeline_Compile(t *testing.T) {
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
-	fullSet.String("ref", "48afb5bdc41ad69bf22588491333f7cf71135163", "doc")
+	fullSet.Int("page", 1, "doc")
+	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests
 	tests := []struct {
+		name    string
 		failure bool
 		set     *flag.FlagSet
 	}{
 		{
+			name:    "full flag set",
 			failure: false,
 			set:     fullSet,
 		},
 		{
+			name:    "auth flag set",
 			failure: true,
 			set:     authSet,
 		},
 		{
+			name:    "empty flag set",
 			failure: true,
 			set:     flag.NewFlagSet("test", 0),
 		},
@@ -55,18 +60,20 @@ func TestPipeline_Compile(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := compile(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		t.Run(test.name, func(t *testing.T) {
+			err := get(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
-		if test.failure {
-			if err == nil {
-				t.Errorf("compile should have returned err")
+			if test.failure {
+				if err == nil {
+					t.Errorf("get should have returned err")
+				}
+
+				return
 			}
 
-			continue
-		}
-
-		if err != nil {
-			t.Errorf("compile returned err: %v", err)
-		}
+			if err != nil {
+				t.Errorf("get returned err: %v", err)
+			}
+		})
 	}
 }

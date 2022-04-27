@@ -31,6 +31,7 @@ func TestPipeline_Expand(t *testing.T) {
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
+	fullSet.String("ref", "48afb5bdc41ad69bf22588491333f7cf71135163", "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests

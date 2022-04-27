@@ -25,6 +25,16 @@ func (c *Config) Validate() error {
 
 	// handle the action based off the provided configuration
 	switch c.Action {
+	case "get":
+		// check if pipeline org is set
+		if len(c.Org) == 0 {
+			return fmt.Errorf("no pipeline org provided")
+		}
+
+		// check if pipeline repo is set
+		if len(c.Repo) == 0 {
+			return fmt.Errorf("no pipeline name provided")
+		}
 	case "compile":
 		fallthrough
 	case "expand":
@@ -38,6 +48,11 @@ func (c *Config) Validate() error {
 		// check if pipeline repo is set
 		if len(c.Repo) == 0 {
 			return fmt.Errorf("no pipeline name provided")
+		}
+
+		// check if pipeline ref is set
+		if len(c.Ref) == 0 {
+			return fmt.Errorf("no pipeline ref provided")
 		}
 	case "generate":
 		fallthrough
@@ -92,7 +107,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile the object into a pipeline
-	p, err := client.CompileLite(path, c.Template, false, c.TemplateFiles)
+	p, _, err := client.CompileLite(path, c.Template, false, c.TemplateFiles)
 	if err != nil {
 		return err
 	}
@@ -122,14 +137,13 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineOptions
 	opts := &vela.PipelineOptions{
 		Output:   c.Output,
-		Ref:      c.Ref,
 		Template: c.Template,
 	}
 
 	// send API call to validate a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Validate
-	pipeline, _, err := client.Pipeline.Validate(c.Org, c.Repo, opts)
+	pipeline, _, err := client.Pipeline.Validate(c.Org, c.Repo, c.Ref, opts)
 	if err != nil {
 		return err
 	}

@@ -37,18 +37,22 @@ func TestPipeline_Get(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		name    string
 		failure bool
 		set     *flag.FlagSet
 	}{
 		{
+			name:    "full flag set",
 			failure: false,
 			set:     fullSet,
 		},
 		{
+			name:    "auth flag set",
 			failure: true,
 			set:     authSet,
 		},
 		{
+			name:    "empty flag set",
 			failure: true,
 			set:     flag.NewFlagSet("test", 0),
 		},
@@ -56,18 +60,20 @@ func TestPipeline_Get(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := get(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		t.Run(test.name, func(t *testing.T) {
+			err := get(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
-		if test.failure {
-			if err == nil {
-				t.Errorf("get should have returned err")
+			if test.failure {
+				if err == nil {
+					t.Errorf("get should have returned err")
+				}
+
+				return
 			}
 
-			continue
-		}
-
-		if err != nil {
-			t.Errorf("get returned err: %v", err)
-		}
+			if err != nil {
+				t.Errorf("get returned err: %v", err)
+			}
+		})
 	}
 }

@@ -20,10 +20,12 @@ func TestPipeline_table(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		name      string
 		failure   bool
 		pipelines *[]library.Pipeline
 	}{
 		{
+			name:    "success",
 			failure: false,
 			pipelines: &[]library.Pipeline{
 				*p1,
@@ -34,19 +36,21 @@ func TestPipeline_table(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := table(test.pipelines)
+		t.Run(test.name, func(t *testing.T) {
+			err := table(test.pipelines)
 
-		if test.failure {
-			if err == nil {
-				t.Errorf("table should have returned err")
+			if test.failure {
+				if err == nil {
+					t.Errorf("table should have returned err")
+				}
+
+				return
 			}
 
-			continue
-		}
-
-		if err != nil {
-			t.Errorf("table returned err: %v", err)
-		}
+			if err != nil {
+				t.Errorf("table returned err: %v", err)
+			}
+		})
 	}
 }
 
@@ -60,10 +64,12 @@ func TestPipeline_wideTable(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		name      string
 		failure   bool
 		pipelines *[]library.Pipeline
 	}{
 		{
+			name:    "success",
 			failure: false,
 			pipelines: &[]library.Pipeline{
 				*p1,
@@ -74,19 +80,21 @@ func TestPipeline_wideTable(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := wideTable(test.pipelines)
+		t.Run(test.name, func(t *testing.T) {
+			err := wideTable(test.pipelines)
 
-		if test.failure {
-			if err == nil {
-				t.Errorf("wideTable should have returned err")
+			if test.failure {
+				if err == nil {
+					t.Errorf("wideTable should have returned err")
+				}
+
+				return
 			}
 
-			continue
-		}
-
-		if err != nil {
-			t.Errorf("wideTable returned err: %v", err)
-		}
+			if err != nil {
+				t.Errorf("wideTable returned err: %v", err)
+			}
+		})
 	}
 }
 

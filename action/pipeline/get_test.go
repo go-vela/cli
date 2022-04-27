@@ -25,10 +25,12 @@ func TestPipeline_Config_Get(t *testing.T) {
 
 	// setup tests
 	tests := []struct {
+		name    string
 		failure bool
 		config  *Config
 	}{
 		{
+			name:    "get with no output",
 			failure: false,
 			config: &Config{
 				Action:  "get",
@@ -40,6 +42,7 @@ func TestPipeline_Config_Get(t *testing.T) {
 			},
 		},
 		{
+			name:    "get with dump output",
 			failure: false,
 			config: &Config{
 				Action:  "get",
@@ -51,6 +54,7 @@ func TestPipeline_Config_Get(t *testing.T) {
 			},
 		},
 		{
+			name:    "get with json output",
 			failure: false,
 			config: &Config{
 				Action:  "get",
@@ -62,6 +66,7 @@ func TestPipeline_Config_Get(t *testing.T) {
 			},
 		},
 		{
+			name:    "get with spew output",
 			failure: false,
 			config: &Config{
 				Action:  "get",
@@ -73,6 +78,7 @@ func TestPipeline_Config_Get(t *testing.T) {
 			},
 		},
 		{
+			name:    "get with yaml output",
 			failure: false,
 			config: &Config{
 				Action:  "get",
@@ -87,18 +93,20 @@ func TestPipeline_Config_Get(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Get(client)
+		t.Run(test.name, func(t *testing.T) {
+			err := test.config.Get(client)
 
-		if test.failure {
-			if err == nil {
-				t.Errorf("Get should have returned err")
+			if test.failure {
+				if err == nil {
+					t.Errorf("Get should have returned err")
+				}
+
+				return
 			}
 
-			continue
-		}
-
-		if err != nil {
-			t.Errorf("Get returned err: %v", err)
-		}
+			if err != nil {
+				t.Errorf("Get returned err: %v", err)
+			}
+		})
 	}
 }

@@ -23,13 +23,17 @@ func TestGit_GetGitConfigOrg(t *testing.T) {
 			expect: "go-vela",
 			input:  "./testdata/project1/",
 		},
-		{ // map
+		{
 			expect: "OctoKitty",
 			input:  "./testdata/project2/",
 		},
 		{
 			expect: "testing",
 			input:  "./testdata/project3/",
+		},
+		{
+			expect: "http-test",
+			input:  "./testdata/project4/",
 		},
 	}
 
@@ -62,6 +66,10 @@ func TestGit_GetGitConfigRepo(t *testing.T) {
 		{
 			expect: "test-test",
 			input:  "./testdata/project3/",
+		},
+		{
+			expect: "test-repo",
+			input:  "./testdata/project4/",
 		},
 	}
 
@@ -98,7 +106,7 @@ func testSetup(t *testing.T) {
 
 	_, err = r2.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
-		URLs: []string{"git@github.com:OctoKitty/catCastle.git"},
+		URLs: []string{"git@github.com:OctoKitty/catCastle"},
 	})
 	if err != nil {
 		t.Errorf("Could not create remote")
@@ -111,7 +119,20 @@ func testSetup(t *testing.T) {
 
 	_, err = r3.CreateRemote(&config.RemoteConfig{
 		Name: "origin",
-		URLs: []string{"git@github.com:testing/test-test.git"},
+		URLs: []string{"ssh://git@github.com/testing/test-test.git"},
+	})
+	if err != nil {
+		t.Errorf("Could not create remote")
+	}
+
+	r4, err := git.PlainInit("./testdata/project4/", false)
+	if err != nil {
+		t.Errorf("Failed to init repo for project 4")
+	}
+
+	_, err = r4.CreateRemote(&config.RemoteConfig{
+		Name: "origin",
+		URLs: []string{"https://github.com/http-test/test-repo"},
 	})
 	if err != nil {
 		t.Errorf("Could not create remote")
@@ -122,4 +143,5 @@ func testTearDown() {
 	os.RemoveAll("./testdata/project1/.git")
 	os.RemoveAll("./testdata/project2/.git")
 	os.RemoveAll("./testdata/project3/.git")
+	os.RemoveAll("./testdata/project4/.git")
 }

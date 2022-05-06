@@ -5,7 +5,6 @@
 package internal
 
 import (
-	"regexp"
 	"strconv"
 	"strings"
 
@@ -70,30 +69,15 @@ func GetGitConfigOrg(path string) string {
 		return ""
 	}
 
-	var (
-		splitOrg []string
-		org      string
-	)
+	urlPath := strings.TrimPrefix(url.Path, "/")
 
-	// some ssh and https url paths start with a /, some with a :
-	// therefore, split logic is different
-	if style, _ := regexp.MatchString(`^\/`, url.Path); style {
-		splitOrg = strings.SplitN(url.Path, "/", 3)
-		if len(splitOrg) != 3 {
-			logrus.Debug("Invalid remote origin url -- please specify org and repo")
-			return ""
-		}
-
-		org = splitOrg[1]
-	} else {
-		splitOrg = strings.SplitN(url.Path, "/", 2)
-		if len(splitOrg) != 2 {
-			logrus.Debug("Invalid remote origin url -- please specify org and repo")
-			return ""
-		}
-
-		org = splitOrg[0]
+	splitOrg := strings.SplitN(urlPath, "/", 2)
+	if len(splitOrg) != 2 {
+		logrus.Debug("Invalid remote origin url -- please specify org and repo")
+		return ""
 	}
+
+	org := splitOrg[0]
 
 	return org
 }
@@ -122,29 +106,15 @@ func GetGitConfigRepo(path string) string {
 		return ""
 	}
 
-	var (
-		splitRepo []string
-		repo      string
-	)
+	urlPath := strings.TrimPrefix(url.Path, "/")
 
-	// same logic as org, handle different starting characters
-	if style, _ := regexp.MatchString(`^\/`, url.Path); style {
-		splitRepo = strings.SplitN(url.Path, "/", 3)
-		if len(splitRepo) != 3 {
-			logrus.Debug("Invalid remote origin url -- please specify org and repo")
-			return ""
-		}
-
-		repo = splitRepo[2]
-	} else {
-		splitRepo = strings.SplitN(url.Path, "/", 2)
-		if len(splitRepo) != 2 {
-			logrus.Debug("Invalid remote origin url -- please specify org and repo")
-			return ""
-		}
-
-		repo = splitRepo[1]
+	splitRepo := strings.SplitN(urlPath, "/", 2)
+	if len(splitRepo) != 2 {
+		logrus.Debug("Invalid remote origin url -- please specify org and repo")
+		return ""
 	}
+
+	repo := splitRepo[1]
 
 	// chop off .git at the end of the repo name if it exists
 	splitDotGit := strings.SplitN(repo, ".git", 2)

@@ -69,15 +69,14 @@ func GetGitConfigOrg(path string) string {
 		return ""
 	}
 
-	splitOrg := strings.SplitN(url.Path, "/", 2)
+	urlPath := strings.TrimPrefix(url.Path, "/")
 
-	// check if url path is expected format
+	splitOrg := strings.SplitN(urlPath, "/", 2)
 	if len(splitOrg) != 2 {
 		logrus.Debug("Invalid remote origin url -- please specify org and repo")
 		return ""
 	}
 
-	// path is :org/:repo.git - get org
 	org := splitOrg[0]
 
 	return org
@@ -107,21 +106,18 @@ func GetGitConfigRepo(path string) string {
 		return ""
 	}
 
-	splitRepo := strings.SplitN(url.Path, "/", 2)
+	urlPath := strings.TrimPrefix(url.Path, "/")
 
-	// check if url path is expected format
+	splitRepo := strings.SplitN(urlPath, "/", 2)
 	if len(splitRepo) != 2 {
 		logrus.Debug("Invalid remote origin url -- please specify org and repo")
 		return ""
 	}
 
-	splitDotGit := strings.SplitN(splitRepo[1], ".git", 2)
+	repo := splitRepo[1]
 
-	// check if repo name is expected format
-	if len(splitDotGit) != 2 {
-		logrus.Debug("Invalid remote origin url -- please specify org and repo")
-		return ""
-	}
+	// chop off .git at the end of the repo name if it exists
+	splitDotGit := strings.SplitN(repo, ".git", 2)
 
 	repoName := splitDotGit[0]
 

@@ -14,6 +14,8 @@ type Config struct {
 	Event   string
 	Status  string
 	Branch  string
+	Before  int64
+	After   int64
 	Page    int
 	PerPage int
 	Output  string

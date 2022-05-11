@@ -78,6 +78,17 @@ const (
 	FlagNoGit = "no-git"
 )
 
+// time constraint flag keys
+const (
+	// FlagBefore defines the key for the
+	// flag when setting the "before" time constraint.
+	FlagBefore = "before"
+
+	// FlagAfter defines the key for the
+	// flag when setting the "after" time constraint.
+	FlagAfter = "after"
+)
+
 // pagination flag keys.
 const (
 	// FlagPage defines the key for the

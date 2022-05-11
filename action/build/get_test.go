@@ -38,6 +38,8 @@ func TestBuild_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "",
+				Before:  1651881600,
+				After:   1651449600,
 			},
 		},
 		{
@@ -50,6 +52,8 @@ func TestBuild_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "dump",
+				Before:  1651881600,
+				After:   1651449600,
 			},
 		},
 		{
@@ -62,6 +66,8 @@ func TestBuild_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "json",
+				Before:  1651881600,
+				After:   1651449600,
 			},
 		},
 		{
@@ -73,6 +79,8 @@ func TestBuild_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "spew",
+				Before:  1651881600,
+				After:   1651449600,
 			},
 		},
 		{
@@ -84,6 +92,8 @@ func TestBuild_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "wide",
+				Before:  1651881600,
+				After:   1651449600,
 			},
 		},
 		{
@@ -95,6 +105,8 @@ func TestBuild_Config_Get(t *testing.T) {
 				Page:    1,
 				PerPage: 10,
 				Output:  "yaml",
+				Before:  1651881600,
+				After:   1651449600,
 			},
 		},
 	}

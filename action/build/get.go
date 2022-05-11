@@ -23,6 +23,8 @@ func (c *Config) Get(client *vela.Client) error {
 		Branch: c.Branch,
 		Event:  c.Event,
 		Status: c.Status,
+		Before: c.Before,
+		After:  c.After,
 		ListOptions: vela.ListOptions{
 			Page:    c.Page,
 			PerPage: c.PerPage,

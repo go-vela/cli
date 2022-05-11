@@ -116,8 +116,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   8. Get builds for a repository when config or environment variables are set.
     $ {{.HelpName}}
-  9. Get builds for a repository that were created before 1/1/22 & after 1/1/21.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --before 1640995200 --after 1609459200
+  9. Get builds for a repository that were created before 1/2/22 & after 1/1/22.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --before 1641081600 --after 1640995200
 
 DOCUMENTATION:
 

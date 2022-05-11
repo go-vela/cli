@@ -78,7 +78,7 @@ const (
 	FlagNoGit = "no-git"
 )
 
-// time constraint flag keys
+// time constraint flag keys.
 const (
 	// FlagBefore defines the key for the
 	// flag when setting the "before" time constraint.

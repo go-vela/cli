@@ -33,6 +33,8 @@ func TestBuild_Get(t *testing.T) {
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.Int("page", 1, "doc")
 	fullSet.Int("per.page", 10, "doc")
+	fullSet.Int64("before", 1651881600, "doc")
+	fullSet.Int64("after", 1651449600, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests

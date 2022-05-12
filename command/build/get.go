@@ -66,6 +66,21 @@ var CommandGet = &cli.Command{
 			Usage:   "format the output in json, spew, wide or yaml",
 		},
 
+		// Time Flags
+
+		&cli.Int64Flag{
+			EnvVars: []string{"VELA_BEFORE", "BUILD_BEFORE"},
+			Name:    internal.FlagBefore,
+			Aliases: []string{"bf"},
+			Usage:   "before time constraint",
+		},
+		&cli.Int64Flag{
+			EnvVars: []string{"VELA_AFTER", "BUILD_AFTER"},
+			Name:    internal.FlagAfter,
+			Aliases: []string{"af"},
+			Usage:   "after time constraint",
+		},
+
 		// Pagination Flags
 
 		&cli.IntFlag{
@@ -101,6 +116,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
   8. Get builds for a repository when config or environment variables are set.
     $ {{.HelpName}}
+  9. Get builds for a repository that were created before 1/2/22 & after 1/1/22.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --before 1641081600 --after 1640995200
 
 DOCUMENTATION:
 
@@ -136,6 +153,8 @@ func get(c *cli.Context) error {
 		Event:   c.String("event"),
 		Status:  c.String("status"),
 		Branch:  c.String("branch"),
+		Before:  c.Int64(internal.FlagBefore),
+		After:   c.Int64(internal.FlagAfter),
 		Page:    c.Int(internal.FlagPage),
 		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),

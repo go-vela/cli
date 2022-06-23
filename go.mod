@@ -13,7 +13,7 @@ require (
 	github.com/go-vela/server v0.14.0
 	github.com/go-vela/types v0.14.0
 	github.com/go-vela/worker v0.14.0
-	github.com/golang-jwt/jwt/v4 v4.4.1
+	github.com/golang-jwt/jwt/v4 v4.4.2
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.8.1

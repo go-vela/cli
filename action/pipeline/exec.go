@@ -118,7 +118,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}
 
 	// create a background context
-	ctx := context.Background()
+	ctx, done := context.WithCancel(context.Background())
+	defer done()
 
 	defer func() {
 		// destroy the build with the executor
@@ -139,6 +140,17 @@ func (c *Config) Exec(client compiler.Engine) error {
 	if err != nil {
 		return fmt.Errorf("unable to plan build: %w", err)
 	}
+
+	// log/event streaming
+	go func() {
+		logrus.Info("streaming build logs")
+		// start process to handle StreamRequests
+		// from Steps and Services
+		err = _executor.StreamBuild(ctx)
+		if err != nil {
+			logrus.Errorf("unable to stream build logs: %v", err)
+		}
+	}()
 
 	// assemble the build with the executor
 	err = _executor.AssembleBuild(ctx)

@@ -143,7 +143,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 	// log/event streaming
 	go func() {
-		logrus.Info("streaming build logs")
+		logrus.Debug("streaming build logs")
 		// start process to handle StreamRequests
 		// from Steps and Services
 		err = _executor.StreamBuild(ctx)

@@ -45,7 +45,7 @@ jobs:
           args: 'release/vela*'
 
     - name: publish
-      uses: elgohr/Publish-Docker-Github-Action@v4
+      uses: elgohr/Publish-Docker-Github-Action@20190331160914
       with:
         name: target/vela-cli
         cache: true

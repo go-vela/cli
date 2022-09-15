@@ -6,5 +6,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/action/pipeline"
+//	import "github.com/go-vela/cli/action/pipeline"
 package pipeline

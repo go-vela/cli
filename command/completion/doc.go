@@ -6,5 +6,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/command/completion"
+//	import "github.com/go-vela/cli/command/completion"
 package completion

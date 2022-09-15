@@ -10,8 +10,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    container:
-      image: golang:1.17
+    
     steps:
     - name: clone
       uses: actions/checkout@v3
@@ -19,13 +18,20 @@ jobs:
         # ensures we fetch tag history for the repository
         fetch-depth: 0
 
+    - name: install go
+      uses: actions/setup-go@v3
+      with:
+        # use version from go.mod file
+        go-version-file: 'go.mod'
+        cache: true
+
     - name: build
       uses: skx/github-action-build@master
       with:
         builder: ./release.sh
 
     - name: publish
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       with:
         name: target/vela-cli
         cache: true

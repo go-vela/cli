@@ -6,5 +6,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/command/version"
+//	import "github.com/go-vela/cli/command/version"
 package version

@@ -6,5 +6,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/command/config"
+//	import "github.com/go-vela/cli/command/config"
 package config

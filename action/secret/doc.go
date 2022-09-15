@@ -6,5 +6,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/action/secret"
+//	import "github.com/go-vela/cli/action/secret"
 package secret

@@ -30,7 +30,7 @@ jobs:
       with:
         # use version from go.mod file
         go-version-file: 'go.mod'
-        cache: tru
+        cache: true
 
     - name: build
       uses: skx/github-action-build@release-0.6.1

@@ -3,7 +3,6 @@
 // Use of this source code is governed by the LICENSE file in this repository.
 
 //go:build !race
-// +build !race
 
 package login
 

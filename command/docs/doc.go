@@ -6,5 +6,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/command/docs"
+//	import "github.com/go-vela/cli/command/docs"
 package docs

@@ -7,5 +7,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/internal/client"
+//	import "github.com/go-vela/cli/internal/client"
 package client

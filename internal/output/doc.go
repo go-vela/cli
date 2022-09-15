@@ -7,5 +7,5 @@
 //
 // Usage:
 //
-// 	import "github.com/go-vela/cli/internal/output"
+//	import "github.com/go-vela/cli/internal/output"
 package output

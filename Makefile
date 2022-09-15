@@ -271,7 +271,7 @@ check-full: check-install
 check-install:
 	@echo
 	@echo "### Installing psampaz/go-mod-outdated"
-	@go get -u github.com/psampaz/go-mod-outdated
+	@go install github.com/psampaz/go-mod-outdated@latest
 
 # The `bump-deps` target is intended to upgrade
 # non-test dependencies for the Go module.

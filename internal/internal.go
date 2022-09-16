@@ -26,7 +26,7 @@ const (
 	// FlagAPIRefreshToken defines the key for
 	// for the flag when setting the API
 	// refresh token.
-	// nolint:gosec // false negative - not a real token
+	//nolint:gosec // false negative - not a real token
 	FlagAPIRefreshToken = "api.token.refresh"
 
 	// FlagAPIVersion defines the key for the
@@ -45,7 +45,7 @@ const (
 const (
 	// FlagCompilerGitHubToken defines the key for the
 	// flag when setting the compiler github token.
-	// nolint:gosec // ignoring since this is a constant for a user passed token
+	//nolint:gosec // ignoring since this is a constant for a user passed token
 	FlagCompilerGitHubToken = "compiler.github.token"
 
 	// FlagCompilerGitHubURL defines the key for the

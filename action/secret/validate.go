@@ -97,7 +97,7 @@ func (c *Config) Validate() error {
 			case constants.EventPush:
 				fallthrough
 			case constants.EventTag:
-				break
+				continue
 			default:
 				return fmt.Errorf("invalid secret event provided: %s", event)
 			}

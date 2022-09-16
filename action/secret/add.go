@@ -2,12 +2,12 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-// nolint: dupl // ignore similar code among actions
+//nolint:dupl // ignore similar code among actions
 package secret
 
 import (
 	"bytes"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -116,7 +116,7 @@ func (c *Config) AddFromFile(client *vela.Client) error {
 	logrus.Tracef("reading secret contents from %s", path)
 
 	// read contents of secret file
-	contents, err := ioutil.ReadFile(path)
+	contents, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}

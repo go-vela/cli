@@ -52,7 +52,7 @@ func table(secrets *[]library.Secret) error {
 
 		// calculate the key for the secret
 		//
-		// nolint: gosec // ignore memory aliasing
+		//nolint:gosec // ignore memory aliasing
 		k := key(&s)
 
 		// add a row to the table with the specified values
@@ -107,7 +107,7 @@ func wideTable(secrets *[]library.Secret) error {
 
 		// calculate the key for the secret
 		//
-		// nolint: gosec // ignore memory aliasing
+		//nolint:gosec // ignore memory aliasing
 		k := key(&s)
 
 		// add a row to the table with the specified values

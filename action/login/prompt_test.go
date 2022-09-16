@@ -7,7 +7,6 @@
 package login
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 )
@@ -44,7 +43,7 @@ func TestLogin_Config_PromptBrowserConfirm(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		in, err := ioutil.TempFile("/tmp", "browser")
+		in, err := os.CreateTemp("", "browser")
 		if err != nil {
 			t.Errorf("unable to create temporary file: %v", err)
 		}
@@ -111,7 +110,7 @@ func TestLogin_Config_PromptConfigConfirm(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		in, err := ioutil.TempFile("/tmp", "config")
+		in, err := os.CreateTemp("", "config")
 		if err != nil {
 			t.Errorf("unable to create temporary file: %v", err)
 		}

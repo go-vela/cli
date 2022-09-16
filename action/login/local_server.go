@@ -48,6 +48,7 @@ func (s *localServer) Close() error {
 }
 
 func (s *localServer) Serve() error {
+	//nolint:gosec // TODO: add a way to timeout the local server
 	return http.Serve(s.listener, s)
 }
 

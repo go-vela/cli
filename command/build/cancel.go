@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-// nolint: dupl // ignore similar code with restart
+//nolint:dupl // ignore similar code with restart
 package build
 
 import (
@@ -73,7 +73,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to cancel a build.
 //
-// nolint: dupl // ignore similar code with view
+//nolint:dupl // ignore similar code with view
 func cancel(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

@@ -20,7 +20,7 @@ import (
 
 // Load reads the config file and sets the values based off the provided configuration.
 //
-// nolint: funlen,gocyclo // ignore cyclomatic complexity and function length
+//nolint:funlen,gocyclo // ignore cyclomatic complexity and function length
 func (c *Config) Load(ctx *cli.Context) error {
 	logrus.Debug("executing load for config file configuration")
 

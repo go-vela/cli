@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-// nolint: dupl // ignore similar code with remove and repair
+//nolint:dupl // ignore similar code with remove and repair
 package repo
 
 import (
@@ -67,7 +67,7 @@ DOCUMENTATION:
 // and create the object used to change ownership
 // of a repository.
 //
-// nolint: dupl // ignore similar code with get, remove, repair and view
+//nolint:dupl // ignore similar code with get, remove, repair and view
 func chown(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

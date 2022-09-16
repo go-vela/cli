@@ -6,7 +6,7 @@ package secret
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -46,7 +46,7 @@ func (c *Config) setValue() error {
 		logrus.Tracef("reading contents from %s", path)
 
 		// capture the contents from the file to be added as a secret value
-		data, err := ioutil.ReadFile(path)
+		data, err := os.ReadFile(path)
 		if err != nil {
 			return fmt.Errorf("unable to read file %s: %w", path, err)
 		}

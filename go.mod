@@ -9,10 +9,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-git/go-git/v5 v5.4.2
-	github.com/go-vela/sdk-go v0.15.0-rc1
-	github.com/go-vela/server v0.15.0-rc1
-	github.com/go-vela/types v0.15.0-rc1
-	github.com/go-vela/worker v0.15.0-rc1
+	github.com/go-vela/sdk-go v0.15.0-rc2
+	github.com/go-vela/server v0.15.0-rc2
+	github.com/go-vela/types v0.15.0-rc2
+	github.com/go-vela/worker v0.15.0-rc2
 	github.com/golang-jwt/jwt/v4 v4.4.2
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
@@ -100,11 +100,11 @@ require (
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	go.starlark.net v0.0.0-20220926145019-14b050677505 // indirect
-	golang.org/x/crypto v0.0.0-20220315160706-3147a52a75dd // indirect
-	golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b // indirect
+	go.starlark.net v0.0.0-20220928063852-5fccb4daaf6d // indirect
+	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa // indirect
+	golang.org/x/net v0.0.0-20221002022538-bcab6841153b // indirect
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1 // indirect
-	golang.org/x/sync v0.0.0-20220923202941-7f9b1623fab7 // indirect
+	golang.org/x/sync v0.0.0-20220929204114-8fcdb60fdcc0 // indirect
 	golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab // indirect
 	golang.org/x/term v0.0.0-20220526004731-065cf7ba2467 // indirect
 	golang.org/x/text v0.3.7 // indirect

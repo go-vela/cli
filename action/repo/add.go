@@ -59,6 +59,11 @@ func (c *Config) Add(client *vela.Client) error {
 			r.AllowTag = vela.Bool(true)
 		}
 
+		// check if the repository should allow release events
+		if event == constants.EventRelease {
+			r.AllowRelease = vela.Bool(true)
+		}
+
 		// check if the repository should allow deployment events
 		if event == constants.EventDeploy {
 			r.AllowDeploy = vela.Bool(true)

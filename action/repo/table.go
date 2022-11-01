@@ -142,5 +142,10 @@ func events(r *library.Repo) []string {
 		e = append(e, constants.EventTag)
 	}
 
+	// check if the repository allows release events
+	if r.GetAllowRelease() {
+		e = append(e, constants.EventRelease)
+	}
+
 	return e
 }

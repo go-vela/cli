@@ -138,7 +138,7 @@ EXAMPLES:
   1. Add a repository with push and pull request enabled.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
   2. Add a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event release --event deployment --event comment
   3. Add a repository with a longer build timeout.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
   4. Add a repository when config or environment variables are set.

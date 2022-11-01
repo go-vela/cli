@@ -89,6 +89,7 @@ var CommandAdd = &cli.Command{
 				constants.EventDeploy,
 				constants.EventPush,
 				constants.EventTag,
+				constants.EventRelease,
 			),
 		},
 		&cli.StringFlag{
@@ -123,7 +124,7 @@ EXAMPLES:
   3. Add a shared secret.
     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
   4. Add a repository secret with all event types enabled.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag
+     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag --event release
   5. Add a repository secret with an image whitelist.
     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --image alpine --image golang:* --image postgres:latest
   6. Add a secret with value from a file.

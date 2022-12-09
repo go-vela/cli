@@ -3,7 +3,7 @@ module github.com/go-vela/cli
 go 1.19
 
 require (
-	github.com/Masterminds/semver/v3 v3.1.1
+	github.com/Masterminds/semver/v3 v3.2.0
 	github.com/buildkite/yaml v0.0.0-20181016232759-0caa5f0796e3
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1

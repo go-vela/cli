@@ -13,12 +13,12 @@ require (
 	github.com/go-vela/server v0.16.2
 	github.com/go-vela/types v0.16.2
 	github.com/go-vela/worker v0.16.2
-	github.com/golang-jwt/jwt/v4 v4.4.2
+	github.com/golang-jwt/jwt/v4 v4.4.3
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/spf13/afero v1.9.2
-	github.com/urfave/cli/v2 v2.23.5
+	github.com/spf13/afero v1.9.3
+	github.com/urfave/cli/v2 v2.23.6
 	github.com/whilp/git-urls v1.0.0
 	gopkg.in/yaml.v2 v2.4.0
 )

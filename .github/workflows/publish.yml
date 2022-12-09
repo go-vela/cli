@@ -32,7 +32,7 @@ jobs:
         builder: ./release.sh
 
     - name: publish
-      uses: elgohr/Publish-Docker-Github-Action@v4
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: target/vela-cli
         cache: true

@@ -153,10 +153,10 @@ github.com/go-playground/validator/v10 v10.10.0 h1:I7mrTYv78z8k8VXa/qJlOlEXn/nBh
 github.com/go-playground/validator/v10 v10.10.0/go.mod h1:74x4gJWsvQexRdW8Pn3dXSGrTK4nAUsbPlLADvpJkos=
 github.com/go-vela/sdk-go v0.17.0-rc1 h1:V33/5nRoKE3NYAlVaZzahv13JWTHtrgyvrwiDf4lWuI=
 github.com/go-vela/sdk-go v0.17.0-rc1/go.mod h1:7fEajiLq+LSpvTZMEzNfQXZbCQjGYqIJxsoqZ/Y07qs=
-github.com/go-vela/server v0.17.0-rc1 h1:tF0mI5hjS/9hihDmOgq2rQt+kx7vT2oM9BssvC+t8oI=
-github.com/go-vela/server v0.17.0-rc1/go.mod h1:OBAqZdb+ifgllVgRCB53jyXHV/KiBlpguWzUcQgRJ9Q=
-github.com/go-vela/types v0.17.0-rc1 h1:OnQByNmqWssqpfe9RNai7d9V1KfMJGfamymnsqFAaC0=
-github.com/go-vela/types v0.17.0-rc1/go.mod h1:6KoRkvXMw9DkAcLdtI7PxPqMlT2Bl0DiigQamLGGjwo=
+github.com/go-vela/server v0.17.0-rc2 h1:uUk9v83U+BIcLvSCx4LTpvv1H5WUbtE5zWa+efJysWY=
+github.com/go-vela/server v0.17.0-rc2/go.mod h1:TzF+jckLGeuYAD1CPEkWvQImmwcCtjMYoIUpydDZs6o=
+github.com/go-vela/types v0.17.0-rc2 h1:Rrh7GzgT2QzTOLedD8T5mT0lvh/FxFhO3Zh5/b9STGQ=
+github.com/go-vela/types v0.17.0-rc2/go.mod h1:6KoRkvXMw9DkAcLdtI7PxPqMlT2Bl0DiigQamLGGjwo=
 github.com/go-vela/worker v0.17.0-rc1 h1:iDXBoBnmQ8k98G82RcXkbAzM6PDmCh5rKHJVHVPkJdo=
 github.com/go-vela/worker v0.17.0-rc1/go.mod h1:gpHryPOcle/pfnBXM2MN0A6eWRG7xmPhfdVxGF1FU40=
 github.com/goccy/go-json v0.9.7 h1:IcB+Aqpx/iMHu5Yooh7jEzJk1JZ7Pjtmys2ukPr7EeM=

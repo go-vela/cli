@@ -9,10 +9,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-git/go-git/v5 v5.5.1
-	github.com/go-vela/sdk-go v0.17.0-rc1
-	github.com/go-vela/server v0.17.0-rc1
-	github.com/go-vela/types v0.17.0-rc1
-	github.com/go-vela/worker v0.17.0-rc1
+	github.com/go-vela/sdk-go v0.17.0-rc2
+	github.com/go-vela/server v0.17.0-rc2
+	github.com/go-vela/types v0.17.0-rc2
+	github.com/go-vela/worker v0.17.0-rc2
 	github.com/golang-jwt/jwt/v4 v4.4.3
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
@@ -37,7 +37,7 @@ require (
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
-	github.com/docker/docker v20.10.21+incompatible // indirect
+	github.com/docker/docker v20.10.22+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/drone/envsubst v1.0.3 // indirect

@@ -17,7 +17,7 @@ require (
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/spf13/afero v1.9.3
+	github.com/spf13/afero v1.9.4
 	github.com/urfave/cli/v2 v2.24.4
 	github.com/whilp/git-urls v1.0.0
 	gopkg.in/yaml.v2 v2.4.0

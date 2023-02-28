@@ -7,8 +7,8 @@ require (
 	github.com/buildkite/yaml v0.0.0-20210326113714-4a3f40911396
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
-	github.com/dustin/go-humanize v1.0.0
-	github.com/go-git/go-git/v5 v5.5.1
+	github.com/dustin/go-humanize v1.0.1
+	github.com/go-git/go-git/v5 v5.5.2
 	github.com/go-vela/sdk-go v0.17.0
 	github.com/go-vela/server v0.17.0
 	github.com/go-vela/types v0.17.0
@@ -49,7 +49,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.8.1 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
-	github.com/go-git/go-billy/v5 v5.3.1 // indirect
+	github.com/go-git/go-billy/v5 v5.4.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.20.0 // indirect

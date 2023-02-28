@@ -20,7 +20,7 @@ require (
 	github.com/spf13/afero v1.9.4
 	github.com/urfave/cli/v2 v2.24.4
 	github.com/whilp/git-urls v1.0.0
-	gopkg.in/yaml.v2 v2.4.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (

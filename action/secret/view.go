@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/go-vela/cli/internal/output"
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 
 	"github.com/go-vela/sdk-go/vela"
 

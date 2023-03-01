@@ -11,7 +11,7 @@ import (
 
 	"github.com/spf13/afero"
 
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 
 	"github.com/sirupsen/logrus"
 )
@@ -54,7 +54,7 @@ func (c *Config) Remove() error {
 
 	// update the config object with the current content
 	//
-	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Unmarshal
+	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Unmarshal
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
 		return err
@@ -153,7 +153,7 @@ func (c *Config) Remove() error {
 
 	// create output for config file
 	//
-	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Marshal
+	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Marshal
 	out, err := yaml.Marshal(config)
 	if err != nil {
 		return err

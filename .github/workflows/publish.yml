@@ -27,9 +27,7 @@ jobs:
         check-latest: true
 
     - name: build
-      uses: skx/github-action-build@master
-      with:
-        builder: ./release.sh
+      run: ./release.sh
 
     - name: publish
       uses: elgohr/Publish-Docker-Github-Action@v5

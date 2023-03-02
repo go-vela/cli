@@ -34,9 +34,7 @@ jobs:
         check-latest: true
 
     - name: build
-      uses: skx/github-action-build@release-0.6.1
-      with:
-        builder: ./release.sh
+      run: ./release.sh
 
     - name: upload
       uses: skx/github-action-publish-binaries@release-1.3

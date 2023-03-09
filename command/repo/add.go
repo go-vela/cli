@@ -111,10 +111,6 @@ var CommandAdd = &cli.Command{
 			Name:    "event",
 			Aliases: []string{"e"},
 			Usage:   "webhook event(s) repository responds to",
-			Value: cli.NewStringSlice(
-				constants.EventPush,
-				constants.EventPull,
-			),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},

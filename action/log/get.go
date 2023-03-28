@@ -18,10 +18,18 @@ func (c *Config) Get(client *vela.Client) error {
 
 	logrus.Tracef("capturing logs for build %s/%s/%d", c.Org, c.Repo, c.Build)
 
+	// set the pagination options for list of build logs
+	//
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
+	opts := &vela.ListOptions{
+		Page:    c.Page,
+		PerPage: c.PerPage,
+	}
+
 	// send API call to capture a list of build logs
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.GetLogs
-	logs, _, err := client.Build.GetLogs(c.Org, c.Repo, c.Build)
+	logs, _, err := client.Build.GetLogs(c.Org, c.Repo, c.Build, opts)
 	if err != nil {
 		return err
 	}

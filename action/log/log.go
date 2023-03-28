@@ -13,5 +13,7 @@ type Config struct {
 	Build   int
 	Service int
 	Step    int
+	Page    int
+	PerPage int
 	Output  string
 }

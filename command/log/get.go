@@ -56,6 +56,23 @@ var CommandGet = &cli.Command{
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
 		},
+
+		// Pagination Flags
+
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_PAGE", "LOG_PAGE"},
+			Name:    internal.FlagPage,
+			Aliases: []string{"p"},
+			Usage:   "print a specific page of build logs",
+			Value:   1,
+		},
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_PER_PAGE", "LOG_PER_PAGE"},
+			Name:    internal.FlagPerPage,
+			Aliases: []string{"pp"},
+			Usage:   "number of build logs to print per page",
+			Value:   100, // server defaults to 10
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -96,11 +113,13 @@ func get(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config
 	l := &log.Config{
-		Action: internal.ActionGet,
-		Org:    c.String(internal.FlagOrg),
-		Repo:   c.String(internal.FlagRepo),
-		Build:  c.Int(internal.FlagBuild),
-		Output: c.String(internal.FlagOutput),
+		Action:  internal.ActionGet,
+		Org:     c.String(internal.FlagOrg),
+		Repo:    c.String(internal.FlagRepo),
+		Build:   c.Int(internal.FlagBuild),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
+		Output:  c.String(internal.FlagOutput),
 	}
 
 	// validate log configuration

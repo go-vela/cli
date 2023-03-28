@@ -136,6 +136,21 @@ const (
 	FlagStep = "step"
 )
 
+// worker flag keys.
+const (
+	// FlagWorkerAddress defines the key for the
+	// flag when setting the worker address.
+	FlagWorkerAddress = "worker.address"
+
+	// FlagWorkerHostname defines the key for the
+	// flag when setting the worker hostname.
+	FlagWorkerHostname = "worker.hostname"
+
+	// FlagWorkerRegistrationToken defines the key for the
+	// flag when viewing the worker registration token.
+	FlagWorkerRegistrationToken = "worker.registration.token"
+)
+
 // list of defined CLI actions.
 const (
 	// ActionAdd defines the action for creating a resource.

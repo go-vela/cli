@@ -8,6 +8,7 @@ import (
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/secret"
+	"github.com/go-vela/cli/command/worker"
 	"github.com/urfave/cli/v2"
 )
 
@@ -34,5 +35,10 @@ var addCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/secret?tab=doc#CommandAdd
 		secret.CommandAdd,
+
+		// add the sub command for creating a worker
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/worker?tab=doc#CommandAdd
+		worker.CommandAdd,
 	},
 }

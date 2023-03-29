@@ -73,6 +73,7 @@ func TestWorker_Config_Add(t *testing.T) {
 				Output:   "yaml",
 			},
 		},
+		// TODO: mock doesn't have failure for worker creation
 	}
 
 	// run tests

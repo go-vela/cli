@@ -92,7 +92,7 @@ func TestWorker_Config_Update(t *testing.T) {
 			failure: true,
 			config: &Config{
 				Action:     "update",
-				Hostname:   "MyWorker",
+				Hostname:   "0",
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,

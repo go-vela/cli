@@ -24,8 +24,6 @@ func TestWorker_Get(t *testing.T) {
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.Int("page", 1, "doc")
-	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests

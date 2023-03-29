@@ -31,57 +31,46 @@ func TestWorker_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Page:    1,
-				PerPage: 10,
-				Output:  "",
+				Action: "get",
+				Output: "",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Page:    1,
-				PerPage: 10,
-				Output:  "dump",
+				Action: "get",
+				Output: "dump",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Page:    1,
-				PerPage: 10,
-				Output:  "json",
+				Action: "get",
+				Output: "json",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Page:    1,
-				PerPage: 10,
-				Output:  "spew",
+				Action: "get",
+				Output: "spew",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Page:    1,
-				PerPage: 10,
-				Output:  "wide",
+				Action: "get",
+				Output: "wide",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Page:    1,
-				PerPage: 10,
-				Output:  "yaml",
+				Action: "get",
+				Output: "yaml",
 			},
 		},
+		// TODO: mock doesn't have failure for listing workers
 	}
 
 	// run tests

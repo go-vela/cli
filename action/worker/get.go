@@ -16,20 +16,12 @@ import (
 func (c *Config) Get(client *vela.Client) error {
 	logrus.Debug("executing get for worker configuration")
 
-	// set the pagination options for list of workers
-	//
-	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ListOptions
-	opts := &vela.ListOptions{
-		Page:    c.Page,
-		PerPage: c.PerPage,
-	}
-
 	logrus.Tracef("capturing workers")
 
 	// send API call to capture a list of workers
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#WorkerService.GetAll
-	workers, _, err := client.Worker.GetAll(opts)
+	workers, _, err := client.Worker.GetAll()
 	if err != nil {
 		return err
 	}

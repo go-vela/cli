@@ -32,23 +32,6 @@ var CommandGet = &cli.Command{
 			Usage:   "format the output in json, spew or yaml",
 			Value:   "yaml",
 		},
-
-		// Pagination Flags
-
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "WORKER_PAGE"},
-			Name:    internal.FlagPage,
-			Aliases: []string{"p"},
-			Usage:   "print a specific page of workers",
-			Value:   1,
-		},
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "WORKER_PER_PAGE"},
-			Name:    internal.FlagPerPage,
-			Aliases: []string{"pp"},
-			Usage:   "number of workers to print per page",
-			Value:   10,
-		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -93,10 +76,8 @@ func get(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config
 	w := &worker.Config{
-		Action:  internal.ActionView,
-		Page:    c.Int(internal.FlagPage),
-		PerPage: c.Int(internal.FlagPerPage),
-		Output:  c.String(internal.FlagOutput),
+		Action: internal.ActionGet,
+		Output: c.String(internal.FlagOutput),
 	}
 
 	// validate worker configuration

@@ -81,7 +81,7 @@ func TestWorker_Config_View(t *testing.T) {
 			failure: true,
 			config: &Config{
 				Action:   "view",
-				Hostname: "",
+				Hostname: "0",
 				Output:   "",
 			},
 		},

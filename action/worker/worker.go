@@ -14,7 +14,5 @@ type Config struct {
 	Routes            []string
 	BuildLimit        int64
 	RegistrationToken bool
-	Page              int
-	PerPage           int
 	Output            string
 }

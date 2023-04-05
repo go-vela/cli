@@ -6,9 +6,11 @@ package worker
 
 import (
 	"flag"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/gin-gonic/gin"
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
 
@@ -18,6 +20,15 @@ import (
 func TestWorker_Add(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
+
+	// set up new gin instance for fake worker
+	e := gin.New()
+
+	// mock endpoint for worker register call
+	e.GET("/register", func(c *gin.Context) { c.JSON(http.StatusOK, "worker registered successfully") })
+
+	// create a new test server
+	w := httptest.NewServer(e)
 
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
@@ -30,7 +41,7 @@ func TestWorker_Add(t *testing.T) {
 	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("worker.hostname", "MyWorker", "doc")
-	fullSet.String("worker.address", "myworker.example.com", "doc")
+	fullSet.String("worker.address", w.URL, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests

@@ -25,7 +25,7 @@ func TestWorker_Add(t *testing.T) {
 	e := gin.New()
 
 	// mock endpoint for worker register call
-	e.GET("/register", func(c *gin.Context) { c.JSON(http.StatusOK, "worker registered successfully") })
+	e.POST("/register", func(c *gin.Context) { c.JSON(http.StatusOK, "worker registered successfully") })
 
 	// create a new test server
 	w := httptest.NewServer(e)

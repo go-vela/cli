@@ -5,15 +5,20 @@
 package worker
 
 import (
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/gin-gonic/gin"
 	"github.com/go-vela/server/mock/server"
 
 	"github.com/go-vela/sdk-go/vela"
 )
 
 func TestWorker_Config_Add(t *testing.T) {
+	// setup context
+	gin.SetMode(gin.TestMode)
+
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -22,6 +27,15 @@ func TestWorker_Config_Add(t *testing.T) {
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}
+
+	// set up new gin instance for fake worker
+	e := gin.New()
+
+	// mock endpoint for worker register call
+	e.GET("/register", func(c *gin.Context) { c.JSON(http.StatusOK, "worker registered successfully") })
+
+	// create a new test server
+	w := httptest.NewServer(e)
 
 	// setup tests
 	tests := []struct {
@@ -33,7 +47,7 @@ func TestWorker_Config_Add(t *testing.T) {
 			config: &Config{
 				Action:   "add",
 				Hostname: "MyWorker",
-				Address:  "myworker.example.com",
+				Address:  w.URL,
 				Output:   "",
 			},
 		},
@@ -42,7 +56,7 @@ func TestWorker_Config_Add(t *testing.T) {
 			config: &Config{
 				Action:   "add",
 				Hostname: "MyWorker",
-				Address:  "myworker.example.com",
+				Address:  w.URL,
 				Output:   "dump",
 			},
 		},
@@ -51,7 +65,7 @@ func TestWorker_Config_Add(t *testing.T) {
 			config: &Config{
 				Action:   "add",
 				Hostname: "MyWorker",
-				Address:  "myworker.example.com",
+				Address:  w.URL,
 				Output:   "json",
 			},
 		},
@@ -60,7 +74,7 @@ func TestWorker_Config_Add(t *testing.T) {
 			config: &Config{
 				Action:   "add",
 				Hostname: "MyWorker",
-				Address:  "myworker.example.com",
+				Address:  w.URL,
 				Output:   "spew",
 			},
 		},
@@ -69,7 +83,7 @@ func TestWorker_Config_Add(t *testing.T) {
 			config: &Config{
 				Action:   "add",
 				Hostname: "MyWorker",
-				Address:  "myworker.example.com",
+				Address:  w.URL,
 				Output:   "yaml",
 			},
 		},

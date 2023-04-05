@@ -2,17 +2,19 @@ module github.com/go-vela/cli
 
 go 1.19
 
+replace github.com/go-vela/sdk-go => ../sdk-go // feat/add-worker-registration branch
+
 require (
 	github.com/Masterminds/semver/v3 v3.2.0
-	github.com/buildkite/yaml v0.0.0-20210326113714-4a3f40911396
+	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.1
 	github.com/go-git/go-git/v5 v5.5.2
-	github.com/go-vela/sdk-go v0.18.1
-	github.com/go-vela/server v0.18.1
-	github.com/go-vela/types v0.18.1
-	github.com/go-vela/worker v0.18.1
+	github.com/go-vela/sdk-go v0.18.2-0.20230327141933-e8d38c73b1bb
+	github.com/go-vela/server v0.18.2-0.20230331001256-f8a9aa116391
+	github.com/go-vela/types v0.18.2-0.20230321015315-6c723879639c
+	github.com/go-vela/worker v0.18.2-0.20230404201355-6c146e5199b9
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0

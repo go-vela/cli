@@ -11,8 +11,6 @@ import (
 
 	"github.com/go-vela/sdk-go/vela"
 
-	"github.com/go-vela/types/library"
-
 	"github.com/sirupsen/logrus"
 )
 
@@ -20,32 +18,25 @@ import (
 func (c *Config) Add(client *vela.Client) error {
 	logrus.Debug("executing add for worker configuration")
 
-	// create the worker object
+	// send API call to get a registration token for the given worker
 	//
-	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Worker
-	w := &library.Worker{
-		Hostname: vela.String(c.Hostname),
-		Address:  vela.String(c.Address),
-	}
-
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela#AdminWorkerService.RegisterToken
 	registerToken, _, err := client.Admin.Worker.RegisterToken(c.Hostname)
 	if err != nil || registerToken == nil {
 		return fmt.Errorf("unable to retrieve registration token: %w", err)
 	}
 
-	// set the registration token as the authentication
-	// for the next request to add a worker
-	client.Authentication.SetTokenAuth(*registerToken.Token)
+	logrus.Tracef("got registration token, adding worker %q", c.Hostname)
 
-	logrus.Tracef("adding worker %s", c.Hostname)
-
-	// send API call to add a worker
+	// send API call to register a worker
 	//
-	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#WorkerService.Add
-	worker, _, err := client.Worker.Add(w)
+	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela#AdminWorkerService.Register
+	msg, _, err := client.Admin.Worker.Register(c.Address, registerToken.GetToken())
 	if err != nil {
-		return err
+		return fmt.Errorf("unable to register worker at %q: %w", c.Address, err)
 	}
+
+	logrus.Tracef("worker %q registered", c.Hostname)
 
 	// handle the output based off the provided configuration
 	switch c.Output {
@@ -53,26 +44,26 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the worker in dump format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
-		return output.Dump(worker)
+		return output.Dump(msg)
 	case output.DriverJSON:
 		// output the worker in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(worker)
+		return output.JSON(msg)
 	case output.DriverSpew:
 		// output the worker in spew format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
-		return output.Spew(worker)
+		return output.Spew(msg)
 	case output.DriverYAML:
 		// output the worker in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(worker)
+		return output.YAML(msg)
 	default:
 		// output the worker in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(worker)
+		return output.Stdout(*msg)
 	}
 }

@@ -85,7 +85,7 @@ func wideTable(workers *[]library.Worker) error {
 	// set of worker fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-	table.AddRow("HOSTNAME", "ACTIVE", "ROUTES", "LAST_CHECKED_IN", "BUILD_LIMIT")
+	table.AddRow("HOSTNAME", "ADDRESS", "ACTIVE", "ROUTES", "LAST_CHECKED_IN", "BUILD_LIMIT")
 
 	// iterate through all workers in the list
 	for _, w := range *workers {
@@ -99,7 +99,7 @@ func wideTable(workers *[]library.Worker) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(w.GetHostname(), w.GetActive(), w.GetRoutes(), c, w.GetBuildLimit())
+		table.AddRow(w.GetHostname(), w.GetAddress(), w.GetActive(), w.GetRoutes(), c, w.GetBuildLimit())
 	}
 
 	// output the wide table in stdout format

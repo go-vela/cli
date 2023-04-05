@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/google/uuid"
 
 	"github.com/urfave/cli/v2"
 )
@@ -30,6 +31,9 @@ var CommandView = &cli.Command{
 			Name:    internal.FlagWorkerHostname,
 			Aliases: []string{"wh"},
 			Usage:   "provide the hostname of the worker",
+			// there is no current enforcement on passing a valid hostname
+			// if none is supplied, use a random id.
+			Value: uuid.NewString(),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_WORKER_REGISTRATION_TOKEN", "WORKER_REGISTRATION_TOKEN"},
@@ -54,7 +58,7 @@ EXAMPLES:
   1. View details of a worker.
     $ {{.HelpName}} --worker.hostname MyWorker
   2. View registration token for a worker.
-    $ {{.HelpName}} --worker.hostname MyWorker --worker.registration.token
+    $ {{.HelpName}} --worker.registration.token true
   3. View details of a worker with json output.
     $ {{.HelpName}} --worker.hostname MyWorker --output json
   4. View details of a worker when config or environment variables are set.

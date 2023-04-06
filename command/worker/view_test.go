@@ -32,6 +32,12 @@ func TestWorker_View(t *testing.T) {
 	fullSet.String("worker.hostname", "MyWorker", "doc")
 	fullSet.String("output", "json", "doc")
 
+	noHostSet := flag.NewFlagSet("test", 0)
+	noHostSet.String("api.addr", s.URL, "doc")
+	noHostSet.String("api.token.access", test.TestTokenGood, "doc")
+	noHostSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	noHostSet.String("output", "json", "doc")
+
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -44,6 +50,10 @@ func TestWorker_View(t *testing.T) {
 		{
 			failure: true,
 			set:     authSet,
+		},
+		{
+			failure: true,
+			set:     noHostSet,
 		},
 		{
 			failure: true,

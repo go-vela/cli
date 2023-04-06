@@ -6,13 +6,12 @@ package worker
 
 import (
 	"flag"
-	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
+	"github.com/go-vela/worker/mock/worker"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,14 +20,8 @@ func TestWorker_Add(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// set up new gin instance for fake worker
-	e := gin.New()
-
-	// mock endpoint for worker register call
-	e.POST("/register", func(c *gin.Context) { c.JSON(http.StatusOK, "worker registered successfully") })
-
-	// create a new test server
-	w := httptest.NewServer(e)
+	// create mock worker server
+	w := httptest.NewServer(worker.FakeHandler())
 
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)

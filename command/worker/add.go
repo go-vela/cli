@@ -13,7 +13,6 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 
-	"github.com/google/uuid"
 	"github.com/urfave/cli/v2"
 )
 
@@ -38,10 +37,7 @@ var CommandAdd = &cli.Command{
 			EnvVars: []string{"VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"},
 			Name:    internal.FlagWorkerHostname,
 			Aliases: []string{"wh"},
-			Usage:   "provide the hostname of the worker (defaults is random ID)",
-			// there is no current enforcement on passing a valid hostname
-			// if none is supplied, use a random id.
-			Value: uuid.NewString(),
+			Usage:   "provide the hostname of the worker",
 		},
 
 		// Output Flags
@@ -56,7 +52,7 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a worker reachable at the provided address.
-    $ {{.HelpName}} --worker.address myworker.example.com
+    $ {{.HelpName}} --worker.hostname MyWorker --worker.address myworker.example.com
 
 DOCUMENTATION:
 

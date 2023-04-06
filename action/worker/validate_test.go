@@ -33,6 +33,15 @@ func TestWorker_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: true,
+			config: &Config{
+				Action:   "add",
+				Hostname: "MyWorker",
+				Address:  "",
+				Output:   "",
+			},
+		},
+		{
 			failure: false,
 			config: &Config{
 				Action:   "view",

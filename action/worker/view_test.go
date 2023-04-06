@@ -85,6 +85,15 @@ func TestWorker_Config_View(t *testing.T) {
 				Output:   "",
 			},
 		},
+		{
+			failure: true,
+			config: &Config{
+				Action:            "view",
+				Hostname:          "",
+				Output:            "",
+				RegistrationToken: true,
+			},
+		},
 	}
 
 	// run tests

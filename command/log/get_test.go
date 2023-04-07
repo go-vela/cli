@@ -32,6 +32,8 @@ func TestLog_Get(t *testing.T) {
 	fullSet.String("org", "github", "doc")
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.Int("build", 1, "doc")
+	fullSet.Int("page", 1, "doc")
+	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests

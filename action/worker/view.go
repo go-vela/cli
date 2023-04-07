@@ -6,6 +6,7 @@ package worker
 
 import (
 	"fmt"
+
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"

@@ -54,8 +54,6 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of workers.
-//
-//nolint:dupl // ignore similar code with chown, get, remove and repair
 func get(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

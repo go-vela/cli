@@ -11,6 +11,8 @@ type Config struct {
 	Org     string
 	Repo    string
 	Build   int
+	Page    int
+	PerPage int
 	Service int
 	Step    int
 	Output  string

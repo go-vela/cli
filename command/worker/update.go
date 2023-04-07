@@ -18,7 +18,7 @@ import (
 // CommandUpdate defines the command for modifying a worker.
 var CommandUpdate = &cli.Command{
 	Name:        "worker",
-	Description: "(Admin Only) Use this command to update a worker.",
+	Description: "(Platform Admin Only) Use this command to update a worker.",
 	Usage:       "Update a worker from the provided configuration",
 	Action:      update,
 	Flags: []cli.Flag{

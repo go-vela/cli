@@ -18,7 +18,7 @@ import (
 // CommandView defines the command for inspecting a worker.
 var CommandView = &cli.Command{
 	Name:        "worker",
-	Description: "(Admin Only) Use this command to view a worker.",
+	Description: "Use this command to view a worker.",
 	Usage:       "View details of the provided worker",
 	Action:      view,
 	Flags: []cli.Flag{

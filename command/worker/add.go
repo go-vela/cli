@@ -19,7 +19,7 @@ import (
 // CommandAdd defines the command for adding a worker.
 var CommandAdd = &cli.Command{
 	Name:        "worker",
-	Description: "(Admin Only) Use this command to add a worker.",
+	Description: "(Platform Admin Only) Use this command to add a worker.",
 	Usage:       "Add a new worker from the provided configuration",
 	Action:      add,
 	Flags: []cli.Flag{

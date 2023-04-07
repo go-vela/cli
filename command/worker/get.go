@@ -18,7 +18,7 @@ import (
 // CommandGet defines the command for capturing a list of workers.
 var CommandGet = &cli.Command{
 	Name:        "worker",
-	Description: "(Admin Only)  Use this command to get a list of workers.",
+	Description: "Use this command to get a list of workers.",
 	Usage:       "Display a list workers",
 	Action:      get,
 	Flags: []cli.Flag{

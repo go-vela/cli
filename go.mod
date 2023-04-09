@@ -4,15 +4,15 @@ go 1.19
 
 require (
 	github.com/Masterminds/semver/v3 v3.2.0
-	github.com/buildkite/yaml v0.0.0-20210326113714-4a3f40911396
+	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.1
 	github.com/go-git/go-git/v5 v5.5.2
-	github.com/go-vela/sdk-go v0.18.0-rc1
-	github.com/go-vela/server v0.18.0-rc1
-	github.com/go-vela/types v0.18.0-rc1
-	github.com/go-vela/worker v0.17.0
+	github.com/go-vela/sdk-go v0.18.2-0.20230407134447-c34cd778f44a
+	github.com/go-vela/server v0.18.2-0.20230405140822-34164d0412e2
+	github.com/go-vela/types v0.18.2-0.20230321015315-6c723879639c
+	github.com/go-vela/worker v0.18.2-0.20230406165141-c76c2e460786
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
@@ -39,7 +39,7 @@ require (
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
-	github.com/docker/docker v20.10.22+incompatible // indirect
+	github.com/docker/docker v20.10.23+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/drone/envsubst v1.0.3 // indirect
@@ -102,6 +102,7 @@ require (
 	github.com/skeema/knownhosts v1.1.0 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/syndtr/gocapability v0.0.0-20200815063812-42c35b437635 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
@@ -112,7 +113,7 @@ require (
 	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/oauth2 v0.5.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/term v0.5.0 // indirect
 	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/time v0.0.0-20220210224613-90d013bbcef8 // indirect
@@ -121,9 +122,9 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/api v0.26.0 // indirect
-	k8s.io/apimachinery v0.26.1 // indirect
-	k8s.io/client-go v0.26.0 // indirect
+	k8s.io/api v0.26.1 // indirect
+	k8s.io/apimachinery v0.26.2 // indirect
+	k8s.io/client-go v0.26.1 // indirect
 	k8s.io/klog/v2 v2.80.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20221012153701-172d655c2280 // indirect
 	k8s.io/utils v0.0.0-20221107191617-1a15be271d1d // indirect

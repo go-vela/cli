@@ -19,7 +19,7 @@ import (
 var CommandGet = &cli.Command{
 	Name:        "worker",
 	Description: "Use this command to get a list of workers.",
-	Usage:       "Display a list workers",
+	Usage:       "Display a list of workers",
 	Action:      get,
 	Flags: []cli.Flag{
 

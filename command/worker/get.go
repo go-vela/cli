@@ -29,7 +29,7 @@ var CommandGet = &cli.Command{
 			EnvVars: []string{"VELA_OUTPUT", "WORKER_OUTPUT"},
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
-			Usage:   "format the output in json, spew or yaml",
+			Usage:   "format the output in wide, json, spew or yaml",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

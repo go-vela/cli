@@ -73,7 +73,7 @@ var getCmds = &cli.Command{
 		// https://pkg.go.dev/github.com/go-vela/cli/command/step?tab=doc#CommandGet
 		step.CommandGet,
 
-		// add the sub command for getting a list of worker
+		// add the sub command for getting a list of workers
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/worker?tab=doc#CommandGet
 		worker.CommandGet,

@@ -85,7 +85,7 @@ func get(c *cli.Context) error {
 		return err
 	}
 
-	// execute the view call for the worker configuration
+	// execute the get call for the worker configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config.View
 	return w.Get(client)

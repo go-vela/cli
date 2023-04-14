@@ -12,7 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// Get captures a list of deployments based off the provided configuration.
+// Get captures a list of repositories based off the provided configuration.
 func (c *Config) Get(client *vela.Client) error {
 	logrus.Debug("executing get for repo configuration")
 

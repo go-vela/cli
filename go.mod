@@ -8,9 +8,10 @@ require (
 	github.com/cli/browser v1.1.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.1
+	github.com/gin-gonic/gin v1.9.0
 	github.com/go-git/go-git/v5 v5.5.2
 	github.com/go-vela/sdk-go v0.18.2-0.20230407134447-c34cd778f44a
-	github.com/go-vela/server v0.18.2-0.20230405140822-34164d0412e2
+	github.com/go-vela/server v0.18.2-0.20230407143935-3335f6a0134a
 	github.com/go-vela/types v0.18.2-0.20230321015315-6c723879639c
 	github.com/go-vela/worker v0.18.2-0.20230406165141-c76c2e460786
 	github.com/golang-jwt/jwt/v4 v4.5.0
@@ -49,7 +50,6 @@ require (
 	github.com/fatih/color v1.10.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.9.0 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/go-git/go-billy/v5 v5.4.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect

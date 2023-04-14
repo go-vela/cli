@@ -14,6 +14,7 @@ import (
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
+	"github.com/go-vela/cli/command/worker"
 
 	"github.com/urfave/cli/v2"
 )
@@ -71,5 +72,10 @@ var getCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/step?tab=doc#CommandGet
 		step.CommandGet,
+
+		// add the sub command for getting a list of workers
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/worker?tab=doc#CommandGet
+		worker.CommandGet,
 	},
 }

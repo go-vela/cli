@@ -10,6 +10,10 @@ const (
 	// when outputting in stdout format.
 	DriverStdout = "stdout"
 
+	// DriverStderr defines the driver type
+	// when outputting in stderr format.
+	DriverStderr = "stderr"
+
 	// DriverDump defines the driver type
 	// when outputting in dump format.
 	DriverDump = "dump"

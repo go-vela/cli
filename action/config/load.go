@@ -15,7 +15,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 )
 
 // Load reads the config file and sets the values based off the provided configuration.
@@ -56,7 +56,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 
 	// update the config object with the current content
 	//
-	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Unmarshal
+	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Unmarshal
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
 		return err

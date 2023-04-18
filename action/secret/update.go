@@ -20,7 +20,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 )
 
 // Update modifies a secret based on the provided configuration.
@@ -123,7 +123,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 
 	// create a new decoder from the secret file contents
 	//
-	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#NewDecoder
+	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#NewDecoder
 	input := yaml.NewDecoder(bytes.NewReader(contents))
 
 	// create object to store secret file configuration
@@ -133,7 +133,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 
 	// iterate through all secret file configurations
 	//
-	// https://pkg.go.dev/gopkg.in/yaml.v2?tab=doc#Decoder.Decode
+	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Decoder.Decode
 	for input.Decode(f) == nil {
 		// iterate through all secrets from the file configuration
 		for _, s := range f.Secrets {

@@ -49,6 +49,9 @@ func (c *Config) Add(client *vela.Client) error {
 	// add the authorization header using the registration token
 	req.Header.Add("Authorization", "Bearer "+registerToken.GetToken())
 
+	// add the user agent for the request
+	req.Header.Add("User-Agent", client.UserAgent)
+
 	// create a new http client
 	httpClient := http.DefaultClient
 	httpClient.Timeout = time.Second * 15

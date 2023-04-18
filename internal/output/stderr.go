@@ -21,7 +21,7 @@ func Stderr(_input interface{}) error {
 		return err
 	}
 
-	logrus.Tracef("sending output to stdout with %s driver", DriverStderr)
+	logrus.Tracef("sending output to stderr with %s driver", DriverStderr)
 
 	// ensure we output to stderr
 	fmt.Fprintln(os.Stderr, _input)

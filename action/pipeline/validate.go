@@ -112,7 +112,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		return err
 	}
 
-	// output the message in stdout format
+	// output the message in stderr format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stderr
 	err = output.Stderr(fmt.Sprintf("%s is valid", path))

@@ -37,7 +37,7 @@ func (c *Config) Add(client *vela.Client) error {
 	// from .RegisterToken as a Bearer token.
 	//
 	// we will make a call to the registration endpoint on the worker
-	// at the give c.Address for the worker.
+	// at the given c.Address for the worker.
 	workerRegistrationURL := strings.TrimSuffix(c.Address, "/")
 	workerRegistrationURL = fmt.Sprintf("%s/register", workerRegistrationURL)
 

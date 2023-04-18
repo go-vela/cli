@@ -15,6 +15,7 @@ import (
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
+	"github.com/go-vela/cli/command/worker"
 
 	"github.com/urfave/cli/v2"
 )
@@ -77,5 +78,10 @@ var viewCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/step?tab=doc#CommandView
 		step.CommandView,
+
+		// add the sub command for viewing a worker
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/worker?tab=doc#CommandView
+		worker.CommandView,
 	},
 }

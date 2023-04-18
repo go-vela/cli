@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package log
+package worker
 
 import (
 	"flag"
@@ -11,13 +11,17 @@ import (
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
+	"github.com/go-vela/worker/mock/worker"
 
 	"github.com/urfave/cli/v2"
 )
 
-func TestLog_Get(t *testing.T) {
+func TestWorker_Add(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
+
+	// create mock worker server
+	w := httptest.NewServer(worker.FakeHandler())
 
 	// setup flags
 	authSet := flag.NewFlagSet("test", 0)
@@ -29,11 +33,8 @@ func TestLog_Get(t *testing.T) {
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.Int("build", 1, "doc")
-	fullSet.Int("page", 1, "doc")
-	fullSet.Int("per.page", 10, "doc")
+	fullSet.String("worker.hostname", "MyWorker", "doc")
+	fullSet.String("worker.address", w.URL, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests
@@ -57,18 +58,18 @@ func TestLog_Get(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := get(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := add(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("get should have returned err")
+				t.Errorf("add should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("get returned err: %v", err)
+			t.Errorf("add returned err: %v", err)
 		}
 	}
 }

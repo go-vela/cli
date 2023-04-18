@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package log
+package worker
 
 import (
 	"flag"
@@ -15,7 +15,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestLog_Get(t *testing.T) {
+func TestWorker_View(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -29,12 +29,14 @@ func TestLog_Get(t *testing.T) {
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.Int("build", 1, "doc")
-	fullSet.Int("page", 1, "doc")
-	fullSet.Int("per.page", 10, "doc")
+	fullSet.String("worker.hostname", "MyWorker", "doc")
 	fullSet.String("output", "json", "doc")
+
+	noHostSet := flag.NewFlagSet("test", 0)
+	noHostSet.String("api.addr", s.URL, "doc")
+	noHostSet.String("api.token.access", test.TestTokenGood, "doc")
+	noHostSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	noHostSet.String("output", "json", "doc")
 
 	// setup tests
 	tests := []struct {
@@ -51,24 +53,28 @@ func TestLog_Get(t *testing.T) {
 		},
 		{
 			failure: true,
+			set:     noHostSet,
+		},
+		{
+			failure: true,
 			set:     flag.NewFlagSet("test", 0),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := get(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := view(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("get should have returned err")
+				t.Errorf("view should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("get returned err: %v", err)
+			t.Errorf("view returned err: %v", err)
 		}
 	}
 }

@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package log
+package worker
 
 import (
 	"flag"
@@ -15,25 +15,15 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func TestLog_Get(t *testing.T) {
+func TestWorker_Get(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
 	// setup flags
-	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", test.TestTokenGood, "doc")
-	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
 	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.Int("build", 1, "doc")
-	fullSet.Int("page", 1, "doc")
-	fullSet.Int("per.page", 10, "doc")
 	fullSet.String("output", "json", "doc")
 
 	// setup tests
@@ -44,10 +34,6 @@ func TestLog_Get(t *testing.T) {
 		{
 			failure: false,
 			set:     fullSet,
-		},
-		{
-			failure: true,
-			set:     authSet,
 		},
 		{
 			failure: true,

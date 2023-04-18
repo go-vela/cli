@@ -2,7 +2,7 @@
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
-package log
+package worker
 
 import (
 	"net/http/httptest"
@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 )
 
-func TestLog_Config_Get(t *testing.T) {
+func TestWorker_Config_Get(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
@@ -31,63 +31,46 @@ func TestLog_Config_Get(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Org:     "github",
-				Repo:    "octocat",
-				Build:   1,
-				Page:    1,
-				PerPage: 10,
-				Output:  "",
+				Action: "get",
+				Output: "",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Org:     "github",
-				Repo:    "octocat",
-				Build:   1,
-				Page:    1,
-				PerPage: 10,
-				Output:  "dump",
+				Action: "get",
+				Output: "dump",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Org:     "github",
-				Repo:    "octocat",
-				Build:   1,
-				Page:    1,
-				PerPage: 10,
-				Output:  "json",
+				Action: "get",
+				Output: "json",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Org:     "github",
-				Repo:    "octocat",
-				Build:   1,
-				Page:    1,
-				PerPage: 10,
-				Output:  "spew",
+				Action: "get",
+				Output: "spew",
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action:  "get",
-				Org:     "github",
-				Repo:    "octocat",
-				Build:   1,
-				Page:    1,
-				PerPage: 10,
-				Output:  "yaml",
+				Action: "get",
+				Output: "wide",
 			},
 		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "get",
+				Output: "yaml",
+			},
+		},
+		// TODO: mock doesn't have failure for listing workers
 	}
 
 	// run tests

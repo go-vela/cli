@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	jwt "github.com/golang-jwt/jwt/v4"
+	jwt "github.com/golang-jwt/jwt/v5"
 )
 
 // expose some pre-computed test tokens.

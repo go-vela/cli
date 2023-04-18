@@ -5,6 +5,7 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/http"
@@ -41,7 +42,7 @@ func (c *Config) Add(client *vela.Client) error {
 	workerRegistrationURL = fmt.Sprintf("%s/register", workerRegistrationURL)
 
 	// create a new request for the given URL (c.Address)
-	req, err := http.NewRequest("POST", workerRegistrationURL, nil)
+	req, err := http.NewRequestWithContext(context.Background(), "POST", workerRegistrationURL, nil)
 	if err != nil {
 		return fmt.Errorf("unable to form request for worker registration endpoint")
 	}

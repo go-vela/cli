@@ -10,10 +10,10 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-git/go-git/v5 v5.6.1
-	github.com/go-vela/sdk-go v0.18.2-0.20230407134447-c34cd778f44a
+	github.com/go-vela/sdk-go v0.18.2-0.20230417204625-c423fde9337e
 	github.com/go-vela/server v0.18.2-0.20230407143935-3335f6a0134a
-	github.com/go-vela/types v0.18.2-0.20230321015315-6c723879639c
-	github.com/go-vela/worker v0.18.2-0.20230406165141-c76c2e460786
+	github.com/go-vela/types v0.18.2-0.20230407145744-676c45c911b5
+	github.com/go-vela/worker v0.18.2-0.20230414205852-66791e03e03a
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
@@ -63,7 +63,6 @@ require (
 	github.com/go-playground/validator/v10 v10.11.2 // indirect
 	github.com/goccy/go-json v0.10.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/gnostic v0.5.7-v3refs // indirect
 	github.com/google/go-cmp v0.5.9 // indirect

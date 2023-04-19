@@ -65,14 +65,14 @@ func (c *Config) Add(client *vela.Client) error {
 	defer resp.Body.Close()
 
 	// read the body response
-	_, err = io.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return fmt.Errorf("unable to read response body for worker registration call")
 	}
 
 	// if the call was successful but didn't register successfully
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("error while registering worker at %q, received: %d", workerRegistrationURL, resp.StatusCode)
+		return fmt.Errorf("error while registering worker at %q, received: %d - %s", workerRegistrationURL, resp.StatusCode, string(bodyBytes))
 	}
 
 	out := fmt.Sprintf("worker %q registered successfully", c.Hostname)

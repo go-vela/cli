@@ -27,6 +27,15 @@ func TestWorker_Config_Validate(t *testing.T) {
 			failure: true,
 			config: &Config{
 				Action:   "add",
+				Hostname: "MyWorker",
+				Address:  "",
+				Output:   "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:   "add",
 				Hostname: "",
 				Address:  "myworker.example.com",
 				Output:   "",
@@ -38,6 +47,15 @@ func TestWorker_Config_Validate(t *testing.T) {
 				Action:   "add",
 				Hostname: "MyWorker",
 				Address:  "",
+				Output:   "",
+			},
+		},
+		{
+			failure: true,
+			config: &Config{
+				Action:   "add",
+				Hostname: "MyWorker",
+				Address:  "::",
 				Output:   "",
 			},
 		},
@@ -82,6 +100,18 @@ func TestWorker_Config_Validate(t *testing.T) {
 				Action:     "update",
 				Hostname:   "",
 				Address:    "myworker.example.com",
+				Active:     true,
+				BuildLimit: 1,
+				Routes:     []string{"large", "small"},
+				Output:     "",
+			},
+		},
+		{
+			failure: true,
+			config: &Config{
+				Action:     "update",
+				Hostname:   "",
+				Address:    "::",
 				Active:     true,
 				BuildLimit: 1,
 				Routes:     []string{"large", "small"},

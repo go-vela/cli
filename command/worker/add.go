@@ -7,6 +7,7 @@ package worker
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -30,14 +31,14 @@ var CommandAdd = &cli.Command{
 			EnvVars: []string{"VELA_WORKER_ADDRESS", "WORKER_ADDRESS"},
 			Name:    internal.FlagWorkerAddress,
 			Aliases: []string{"wa"},
-			Usage:   "provide the address of the worker",
+			Usage:   "provide the address of the worker as a fully qualified url (<scheme>://<host>)",
 		},
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"},
 			Name:    internal.FlagWorkerHostname,
 			Aliases: []string{"wh"},
-			Usage:   "provide the hostname of the worker",
+			Usage:   "provide the hostname of the worker (defaults to hostname of worker address)",
 		},
 
 		// Output Flags
@@ -52,7 +53,9 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a worker reachable at the provided address.
-    $ {{.HelpName}} --worker.hostname MyWorker --worker.address myworker.example.com
+    $ {{.HelpName}} --worker.address https://myworker.example.com
+  2. Add a worker reachable at the provided address with specific hostname.
+    $ {{.HelpName}} --worker.hostname MyWorker --worker.address https://myworker.example.com
 
 DOCUMENTATION:
 
@@ -85,6 +88,17 @@ func add(c *cli.Context) error {
 		Address:  c.String(internal.FlagWorkerAddress),
 		Hostname: c.String(internal.FlagWorkerHostname),
 		Output:   c.String(internal.FlagOutput),
+	}
+
+	// if no hostname was passed in, parse the hostname
+	// out of the provided address
+	if len(w.Hostname) == 0 {
+		url, err := url.Parse(w.Address)
+		if err != nil {
+			return fmt.Errorf("address is not a valid url")
+		}
+
+		w.Hostname = url.Hostname()
 	}
 
 	// validate worker configuration

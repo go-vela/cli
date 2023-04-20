@@ -37,6 +37,23 @@ func TestWorker_Add(t *testing.T) {
 	fullSet.String("worker.address", w.URL, "doc")
 	fullSet.String("output", "json", "doc")
 
+	noAddressSet := flag.NewFlagSet("test", 0)
+	noAddressSet.String("api.addr", s.URL, "doc")
+	noAddressSet.String("api.token.access", test.TestTokenGood, "doc")
+	noAddressSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+
+	noHostnameSet := flag.NewFlagSet("test", 0)
+	noHostnameSet.String("api.addr", s.URL, "doc")
+	noHostnameSet.String("api.token.access", test.TestTokenGood, "doc")
+	noHostnameSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	noHostnameSet.String("worker.address", w.URL, "doc")
+
+	badAddressSet := flag.NewFlagSet("test", 0)
+	badAddressSet.String("api.addr", s.URL, "doc")
+	badAddressSet.String("api.token.access", test.TestTokenGood, "doc")
+	badAddressSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	badAddressSet.String("worker.address", "::", "doc")
+
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -53,6 +70,18 @@ func TestWorker_Add(t *testing.T) {
 		{
 			failure: true,
 			set:     flag.NewFlagSet("test", 0),
+		},
+		{
+			failure: true,
+			set:     noAddressSet,
+		},
+		{
+			failure: false,
+			set:     noHostnameSet,
+		},
+		{
+			failure: true,
+			set:     badAddressSet,
 		},
 	}
 

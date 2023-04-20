@@ -6,6 +6,7 @@ package worker
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
@@ -15,13 +16,28 @@ import (
 func (c *Config) Validate() error {
 	logrus.Debug("validating worker configuration")
 
-	// we need address for adding a worker
-	if c.Action == internal.ActionAdd && len(c.Address) == 0 {
-		return fmt.Errorf("no worker address provided")
+	// address is required for adding a worker, validate it
+	if c.Action == internal.ActionAdd {
+		if len(c.Address) == 0 {
+			return fmt.Errorf("no worker address provided")
+		}
+
+		_, err := url.Parse(c.Address)
+		if err != nil {
+			return fmt.Errorf("error while parsing worker address provided")
+		}
 	}
 
-	// anything other than "get" action needs hostname
-	if c.Action != internal.ActionGet && len(c.Hostname) == 0 {
+	// address is optional for update, but validate it if provided
+	if c.Action == internal.ActionUpdate && len(c.Address) > 0 {
+		_, err := url.Parse(c.Address)
+		if err != nil {
+			return fmt.Errorf("error while parsing worker address provided")
+		}
+	}
+
+	// anything other than "get" and "add" action needs hostname
+	if (c.Action != internal.ActionGet && c.Action != internal.ActionAdd) && len(c.Hostname) == 0 {
 		return fmt.Errorf("no worker hostname provided")
 	}
 

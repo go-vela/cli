@@ -35,7 +35,7 @@ var CommandUpdate = &cli.Command{
 			EnvVars: []string{"VELA_WORKER_ADDRESS", "WORKER_ADDRESS"},
 			Name:    internal.FlagWorkerAddress,
 			Aliases: []string{"wa"},
-			Usage:   "provide the address of the worker",
+			Usage:   "provide the address of the worker as a fully qualified url (<scheme>://<host>)",
 		},
 		&cli.IntFlag{
 			EnvVars: []string{"VELA_WORKER_BUILD_LIMIT", "WORKER_BUILD_LIMIT"},

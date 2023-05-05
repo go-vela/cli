@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2023 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -11,11 +11,11 @@ import (
 	"github.com/go-vela/cli/command/log"
 	"github.com/go-vela/cli/command/pipeline"
 	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/command/schedule"
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
 	"github.com/go-vela/cli/command/worker"
-
 	"github.com/urfave/cli/v2"
 )
 
@@ -57,6 +57,11 @@ var getCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandGet
 		repo.CommandGet,
+
+		// add the sub command for getting a list of schedules
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/schedule?tab=doc#CommandGet
+		schedule.CommandGet,
 
 		// add the sub command for getting a list of secrets
 		//

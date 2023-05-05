@@ -111,6 +111,13 @@ const (
 	FlagRepo = "repo"
 )
 
+// schedule flag keys.
+const (
+	// FlagSchedule defines the key for the
+	// flag when setting the schedule.
+	FlagSchedule = "schedule"
+)
+
 // secret flag keys.
 const (
 	// FlagSecretEngine defines the key for the

@@ -9,7 +9,7 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/server/api/types"
+	"github.com/go-vela/types/library"
 	"github.com/gosuri/uitable"
 	"github.com/sirupsen/logrus"
 )
@@ -17,7 +17,7 @@ import (
 // table is a helper function to output the
 // provided schedules in a table format with
 // a specific set of fields displayed.
-func table(schedules *[]types.Schedule) error {
+func table(schedules *[]library.Schedule) error {
 	logrus.Debug("creating table for list of schedules")
 
 	// create a new table
@@ -66,7 +66,7 @@ func table(schedules *[]types.Schedule) error {
 // wideTable is a helper function to output the
 // provided schedules in a wide table format with
 // a specific set of fields displayed.
-func wideTable(schedules *[]types.Schedule) error {
+func wideTable(schedules *[]library.Schedule) error {
 	logrus.Debug("creating wide table for list of schedules")
 
 	// create new wide table

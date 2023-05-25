@@ -8,7 +8,7 @@ package schedule
 import (
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/server/api/types"
+	"github.com/go-vela/types/library"
 	"github.com/sirupsen/logrus"
 )
 
@@ -17,7 +17,7 @@ func (c *Config) Update(client *vela.Client) error {
 	logrus.Debug("executing update for schedule configuration")
 
 	// create the schedule object
-	s := &types.Schedule{
+	s := &library.Schedule{
 		Active: vela.Bool(c.Active),
 		Name:   vela.String(c.Name),
 		Entry:  vela.String(c.Entry),

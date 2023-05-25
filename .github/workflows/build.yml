@@ -10,6 +10,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ darwin, linux, windows ]
     
     steps:
     - name: clone
@@ -25,4 +29,4 @@ jobs:
 
     - name: build
       run: |
-        make build
+        make build-${{ matrix.os }}

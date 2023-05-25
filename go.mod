@@ -13,13 +13,13 @@ require (
 	github.com/go-vela/sdk-go v0.19.3-0.20230525152744-4c6fc715258c
 	github.com/go-vela/server v0.19.3-0.20230522192918-46fcc273b3aa
 	github.com/go-vela/types v0.19.3-0.20230519215217-0da8c8b5e90f
-	github.com/go-vela/worker v0.19.1
+	github.com/go-vela/worker v0.19.2
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/afero v1.9.5
-	github.com/urfave/cli/v2 v2.25.1
+	github.com/urfave/cli/v2 v2.25.3
 	github.com/whilp/git-urls v1.0.0
 	gopkg.in/yaml.v3 v3.0.1
 )

@@ -163,8 +163,8 @@ github.com/go-vela/server v0.19.3-0.20230522192918-46fcc273b3aa h1:hx23gVdmDlMG/
 github.com/go-vela/server v0.19.3-0.20230522192918-46fcc273b3aa/go.mod h1:sjfqYOyuXG7uqgeQF03URz7GGNjVE+JNIhkGK00eT9o=
 github.com/go-vela/types v0.19.3-0.20230519215217-0da8c8b5e90f h1:13H381Djx9iFC3BSj2f/ac57HlaI3mQL0el9vM7a3+k=
 github.com/go-vela/types v0.19.3-0.20230519215217-0da8c8b5e90f/go.mod h1:0lsuPfGyVyTWJSi2h3NS6uaEW6DgnFvIzaZu1sXYKrs=
-github.com/go-vela/worker v0.19.1 h1:CeYVef/tDFxF1/QggtT2OjOTECQgpji7diGXv523Gpo=
-github.com/go-vela/worker v0.19.1/go.mod h1:YYRTXtwINsBIhPXbE+3a6h/ATGNnc2NXfeM8mAR3pqA=
+github.com/go-vela/worker v0.19.2 h1:8pdgoXTKBob4eyZOSpVghX5Fi3uyFMY1h0jnGp+Shd4=
+github.com/go-vela/worker v0.19.2/go.mod h1:TtOlVyjoh/fbrqUMei/+5PxlllR+M32epvSTy8LOPwU=
 github.com/goccy/go-json v0.10.0 h1:mXKd9Qw4NuzShiRlOXKews24ufknHO7gx30lsDyokKA=
 github.com/goccy/go-json v0.10.0/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=
@@ -381,8 +381,8 @@ github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.2.9 h1:rmenucSohSTiyL09Y+l2OCk+FrMxGMzho2+tjr5ticU=
 github.com/ugorji/go/codec v1.2.9/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZgYf6w6lg=
-github.com/urfave/cli/v2 v2.25.1 h1:zw8dSP7ghX0Gmm8vugrs6q9Ku0wzweqPyshy+syu9Gw=
-github.com/urfave/cli/v2 v2.25.1/go.mod h1:GHupkWPMM0M/sj1a2b4wUrWBPzazNrIjouW6fmdJLxc=
+github.com/urfave/cli/v2 v2.25.3 h1:VJkt6wvEBOoSjPFQvOkv6iWIrsJyCrKGtCtxXWwmGeY=
+github.com/urfave/cli/v2 v2.25.3/go.mod h1:GHupkWPMM0M/sj1a2b4wUrWBPzazNrIjouW6fmdJLxc=
 github.com/whilp/git-urls v1.0.0 h1:95f6UMWN5FKW71ECsXRUd3FVYiXdrE7aX4NZKcPmIjU=
 github.com/whilp/git-urls v1.0.0/go.mod h1:J16SAmobsqc3Qcy98brfl5f5+e0clUvg1krgwk/qCfE=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=

@@ -8,7 +8,9 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"os/signal"
 	"path/filepath"
+	"syscall"
 
 	"github.com/go-vela/cli/version"
 	"github.com/go-vela/server/compiler"
@@ -120,6 +122,21 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// create a background context
 	ctx, done := context.WithCancel(context.Background())
 	defer done()
+
+	// handle aborting local build process
+	signalChan := make(chan os.Signal, 1)
+	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
+
+	// spawn go routine to wait for syscall signals
+	go func() {
+		// wait for signal
+		<-signalChan
+
+		logrus.Info("pipeline exec canceled! cleaning up - you may see some errors during cleanup")
+
+		// cancel the context passed into build process
+		done()
+	}()
 
 	defer func() {
 		// destroy the build with the executor

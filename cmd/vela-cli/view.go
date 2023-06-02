@@ -29,57 +29,57 @@ var viewCmds = &cli.Command{
 	Usage:                  "View details for a resource for Vela via subcommands",
 	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
-		// add the sub command for getting a list of builds
+		// add the sub command for viewing a build
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandView
 		build.CommandView,
 
-		// add the sub command for inspecting a config file
+		// add the sub command for viewing a config file
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandView
 		config.CommandView,
 
-		// add the sub command for getting a list of deployments
+		// add the sub command for viewing a deployment
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/deployment?tab=doc#CommandView
 		deployment.CommandView,
 
-		// add the sub command for getting a list of hooks
+		// add the sub command for viewing a hook
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandView
 		hook.CommandView,
 
-		// add the sub command for getting a list of build logs
+		// add the sub command for viewing a build log
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/log?tab=doc#CommandView
 		log.CommandView,
 
-		// add the sub command for inspecting a pipeline
+		// add the sub command for viewing a pipeline
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandView
 		pipeline.CommandView,
 
-		// add the sub command for getting a list of repositories
+		// add the sub command for viewing a repository
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandView
 		repo.CommandView,
 
-		// add the sub command for getting a list of schedules
+		// add the sub command for viewing a schedule
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/schedule?tab=doc#CommandView
 		schedule.CommandView,
 
-		// add the sub command for getting a list of secrets
+		// add the sub command for viewing a secret
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/secret?tab=doc#CommandView
 		secret.CommandView,
 
-		// add the sub command for getting a list of services
+		// add the sub command for viewing a service
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/service?tab=doc#CommandView
 		service.CommandView,
 
-		// add the sub command for getting a list of steps
+		// add the sub command for viewing a step
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/step?tab=doc#CommandView
 		step.CommandView,

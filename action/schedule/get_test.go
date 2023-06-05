@@ -19,7 +19,7 @@ func TestSchedule_Config_Get(t *testing.T) {
 	// create a vela client
 	client, err := vela.NewClient(s.URL, "vela", nil)
 	if err != nil {
-		t.Errorf("unable to create tes client: %v", err)
+		t.Errorf("unable to create test client: %v", err)
 	}
 
 	// setup tests
@@ -116,7 +116,7 @@ func TestSchedule_Config_Get(t *testing.T) {
 			}
 
 			if err != nil {
-				t.Errorf("Get for %s returned err: %v", err, test.name)
+				t.Errorf("Get for %s returned err: %v", test.name, err)
 			}
 		})
 	}

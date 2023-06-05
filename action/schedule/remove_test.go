@@ -19,7 +19,7 @@ func TestSchedule_Config_Remove(t *testing.T) {
 	// create a vela client
 	client, err := vela.NewClient(s.URL, "vela", nil)
 	if err != nil {
-		t.Errorf("unable to create client: %v", err)
+		t.Errorf("unable to create test client: %v", err)
 	}
 
 	// setup tests
@@ -110,7 +110,7 @@ func TestSchedule_Config_Remove(t *testing.T) {
 			}
 
 			if err != nil {
-				t.Errorf("Remove for %s returned err: %v", err, test.name)
+				t.Errorf("Remove for %s returned err: %v", test.name, err)
 			}
 		})
 	}

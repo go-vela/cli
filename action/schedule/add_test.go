@@ -107,7 +107,7 @@ func TestSchedule_Config_Add(t *testing.T) {
 			}
 
 			if err != nil {
-				t.Errorf("Add for %s returned err: %v", err, test.name)
+				t.Errorf("Add for %s returned err: %v", test.name, err)
 			}
 		})
 	}

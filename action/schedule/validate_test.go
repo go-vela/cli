@@ -133,7 +133,7 @@ func TestSchedule_Config_Validate(t *testing.T) {
 			}
 
 			if err != nil {
-				t.Errorf("Validate %s returned err: %v", test.name, err)
+				t.Errorf("Validate for %s returned err: %v", test.name, err)
 			}
 		})
 	}

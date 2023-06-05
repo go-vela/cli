@@ -39,14 +39,14 @@ func TestSchedule_table(t *testing.T) {
 
 			if test.failure {
 				if err == nil {
-					t.Errorf("table should have returned err")
+					t.Errorf("table for %s should have returned err", test.name)
 				}
 
 				return
 			}
 
 			if err != nil {
-				t.Errorf("table returned err: %v", err)
+				t.Errorf("table for %s returned err: %v", test.name, err)
 			}
 		})
 	}
@@ -80,14 +80,14 @@ func TestSchedule_wideTable(t *testing.T) {
 
 			if test.failure {
 				if err == nil {
-					t.Errorf("wideTable should have returned err")
+					t.Errorf("wideTable for %s should have returned err", test.name)
 				}
 
 				return
 			}
 
 			if err != nil {
-				t.Errorf("wideTable returned err: %v", err)
+				t.Errorf("wideTable for %s returned err: %v", test.name, err)
 			}
 		})
 	}

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Target Brands, Inc. All rights reserved.
+// Copyright (c) 2023 Target Brands, Inc. All rights reserved.
 //
 // Use of this source code is governed by the LICENSE file in this repository.
 
@@ -7,6 +7,7 @@ package main
 import (
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/repo"
+	"github.com/go-vela/cli/command/schedule"
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/worker"
 	"github.com/urfave/cli/v2"
@@ -30,6 +31,11 @@ var addCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandAdd
 		repo.CommandAdd,
+
+		// add the sub command for creating a schedule
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/schedule?tab=doc#CommandAdd
+		schedule.CommandAdd,
 
 		// add the sub command for creating a secret
 		//

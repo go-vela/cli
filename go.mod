@@ -12,7 +12,7 @@ require (
 	github.com/go-git/go-git/v5 v5.7.0
 	github.com/go-vela/sdk-go v0.19.3-0.20230609172535-4dfd42c3640a
 	github.com/go-vela/server v0.19.3-0.20230609145007-f8c795f7aa03
-	github.com/go-vela/types v0.19.3-0.20230523200921-35a0d5fc088c
+	github.com/go-vela/types v0.19.3-0.20230614134928-b1b57c0b34af
 	github.com/go-vela/worker v0.19.3-0.20230612142624-b3dcc9bcc326
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4

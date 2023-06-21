@@ -160,6 +160,8 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 		t.Errorf("unable to create client: %v", err)
 	}
 
+	client.TemplateDepth = 1
+
 	// setup tests
 	tests := []struct {
 		name    string

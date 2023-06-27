@@ -104,7 +104,7 @@ func update(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/schedule?tab=doc#Config
 	s := &schedule.Config{
-		Action: internal.ActionAdd,
+		Action: internal.ActionUpdate,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
 		Active: c.Bool("active"),

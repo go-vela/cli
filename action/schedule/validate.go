@@ -32,8 +32,8 @@ func (c *Config) Validate() error {
 		}
 	}
 
-	// check if schedule action is add or update
-	if c.Action == "add" || c.Action == "update" {
+	// check if schedule action is add
+	if c.Action == "add" {
 		// check if schedule entry is set
 		if len(c.Entry) == 0 {
 			return fmt.Errorf("no schedule entry provided")

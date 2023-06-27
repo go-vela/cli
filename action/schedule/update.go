@@ -28,7 +28,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// send API call to modify a schedule
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ScheduleService.Update
-	schedule, _, err := client.Schedule.Update(c.Org, c.Name, s)
+	schedule, _, err := client.Schedule.Update(c.Org, c.Repo, s)
 	if err != nil {
 		return err
 	}

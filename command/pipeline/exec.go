@@ -94,6 +94,12 @@ var CommandExec = &cli.Command{
 			Aliases: []string{"v"},
 			Usage:   "provide list of local volumes to mount",
 		},
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_MAX_TEMPLATE_DEPTH", "MAX_TEMPLATE_DEPTH"},
+			Name:    "max-template-depth",
+			Usage:   "set the maximum depth for nested templates",
+			Value:   3,
+		},
 
 		// Repo Flags
 
@@ -183,6 +189,9 @@ func exec(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+
+	// set the max template depth using provided configuration
+	client.TemplateDepth = c.Int("max-template-depth")
 
 	// execute the exec call for the pipeline configuration
 	//

@@ -11,8 +11,8 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-git/go-git/v5 v5.7.0
 	github.com/go-vela/sdk-go v0.20.0-rc3
-	github.com/go-vela/server v0.20.0-rc3
-	github.com/go-vela/types v0.20.0-rc1
+	github.com/go-vela/server v0.20.1-0.20230725195029-acbb8f116c4e
+	github.com/go-vela/types v0.20.0
 	github.com/go-vela/worker v0.20.0-rc2
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4
@@ -111,7 +111,7 @@ require (
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	go.starlark.net v0.0.0-20230612165344-9532f5667272 // indirect
+	go.starlark.net v0.0.0-20230712173630-2226322290fc // indirect
 	golang.org/x/arch v0.3.0 // indirect
 	golang.org/x/crypto v0.10.0 // indirect
 	golang.org/x/net v0.11.0 // indirect

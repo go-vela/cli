@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/compiler/native"
+	"github.com/go-vela/server/util"
 	"github.com/go-vela/types/constants"
 
 	"github.com/urfave/cli/v2"
@@ -190,8 +191,8 @@ func exec(c *cli.Context) error {
 		return err
 	}
 
-	// set the max template depth using provided configuration
-	client.TemplateDepth = c.Int("max-template-depth")
+	// set the max template depth using provided configuration (max of 5)
+	client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
 
 	// execute the exec call for the pipeline configuration
 	//

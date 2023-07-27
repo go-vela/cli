@@ -12,8 +12,10 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/types/constants"
+	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/server/compiler/native"
+	"github.com/go-vela/server/util"
 
 	"github.com/urfave/cli/v2"
 )
@@ -191,13 +193,16 @@ func validate(c *cli.Context) error {
 		return err
 	}
 
-	// set the max template depth using provided configuration
-	client.TemplateDepth = c.Int("max-template-depth")
-
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocal(true)
 		client.WithLocalTemplates(p.TemplateFiles)
+		client.TemplateDepth = c.Int("max-template-depth")
+	} else {
+		// set max template depth to 3 if local templates are not provided.
+		// This prevents users from spamming SCM
+		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
+		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
 	}
 
 	// execute the validate local call for the pipeline configuration

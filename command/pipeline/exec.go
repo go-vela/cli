@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/compiler/native"
+	"github.com/go-vela/server/util"
 	"github.com/go-vela/types/constants"
 
 	"github.com/urfave/cli/v2"
@@ -93,6 +94,12 @@ var CommandExec = &cli.Command{
 			Name:    "volume",
 			Aliases: []string{"v"},
 			Usage:   "provide list of local volumes to mount",
+		},
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_MAX_TEMPLATE_DEPTH", "MAX_TEMPLATE_DEPTH"},
+			Name:    "max-template-depth",
+			Usage:   "set the maximum depth for nested templates",
+			Value:   3,
 		},
 
 		// Repo Flags
@@ -183,6 +190,9 @@ func exec(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+
+	// set the max template depth using provided configuration (max of 5)
+	client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
 
 	// execute the exec call for the pipeline configuration
 	//

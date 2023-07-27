@@ -199,7 +199,7 @@ func validate(c *cli.Context) error {
 		client.WithLocalTemplates(p.TemplateFiles)
 		client.TemplateDepth = c.Int("max-template-depth")
 	} else {
-		// set max template depth to 3 if local templates are not provided.
+		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
 		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)

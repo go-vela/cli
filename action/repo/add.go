@@ -68,6 +68,11 @@ func (c *Config) Add(client *vela.Client) error {
 		if event == constants.EventComment {
 			r.AllowComment = vela.Bool(true)
 		}
+
+		// check if the repository should allow delete events
+		if event == constants.EventDelete {
+			r.AllowDelete = vela.Bool(true)
+		}
 	}
 
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)

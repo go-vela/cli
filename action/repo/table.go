@@ -137,6 +137,11 @@ func events(r *library.Repo) []string {
 		e = append(e, constants.EventPush)
 	}
 
+	// check if the repository allows delete events
+	if r.GetAllowDelete() {
+		e = append(e, constants.EventDelete)
+	}
+
 	// check if the repository allows tag events
 	if r.GetAllowTag() {
 		e = append(e, constants.EventTag)

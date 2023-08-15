@@ -117,6 +117,7 @@ func testRepo() *library.Repo {
 	r.SetActive(true)
 	r.SetAllowPull(true)
 	r.SetAllowPush(true)
+	r.SetAllowDelete(true)
 	r.SetAllowDeploy(false)
 	r.SetAllowTag(false)
 	r.SetAllowComment(false)

@@ -2,8 +2,6 @@ module github.com/go-vela/cli
 
 go 1.19
 
-replace github.com/go-vela/types => ../types
-
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835

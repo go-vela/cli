@@ -62,7 +62,7 @@ var CommandUpdate = &cli.Command{
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_BRANCH", "SCHEDULE_BRANCH"},
 			Name:    "branch",
-			Aliases: []string{"e"},
+			Aliases: []string{"b"},
 			Usage:   "provide the branch for the schedule",
 		},
 

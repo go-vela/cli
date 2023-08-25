@@ -16,4 +16,5 @@ type Config struct {
 	Page    int
 	PerPage int
 	Output  string
+	Branch  string
 }

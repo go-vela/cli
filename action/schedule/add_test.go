@@ -39,6 +39,7 @@ func TestSchedule_Config_Add(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "",
+				Branch: "main",
 			},
 		},
 		{
@@ -52,6 +53,7 @@ func TestSchedule_Config_Add(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "dump",
+				Branch: "main",
 			},
 		},
 		{
@@ -65,6 +67,7 @@ func TestSchedule_Config_Add(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "json",
+				Branch: "main",
 			},
 		},
 		{
@@ -78,6 +81,7 @@ func TestSchedule_Config_Add(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "spew",
+				Branch: "main",
 			},
 		},
 		{
@@ -91,6 +95,7 @@ func TestSchedule_Config_Add(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "yaml",
+				Branch: "main",
 			},
 		},
 	}

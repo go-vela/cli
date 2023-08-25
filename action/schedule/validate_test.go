@@ -26,6 +26,7 @@ func TestSchedule_Config_Validate(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "",
+				Branch: "main",
 			},
 		},
 		{
@@ -60,6 +61,7 @@ func TestSchedule_Config_Validate(t *testing.T) {
 				Name:   "foo",
 				Entry:  "@weekly",
 				Output: "",
+				Branch: "main",
 			},
 		},
 		{

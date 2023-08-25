@@ -33,6 +33,7 @@ func TestSchedule_Update(t *testing.T) {
 	fullSet.String("schedule", "foo", "doc")
 	fullSet.String("entry", "@weekly", "doc")
 	fullSet.String("output", "json", "doc")
+	fullSet.String("branch", "main", "doc")
 
 	// setup tests
 	tests := []struct {

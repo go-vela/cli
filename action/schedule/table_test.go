@@ -105,6 +105,7 @@ func testSchedule() *library.Schedule {
 	s.SetUpdatedAt(time.Now().Add(time.Hour * 1).UTC().Unix())
 	s.SetUpdatedBy("user2")
 	s.SetScheduledAt(time.Now().Add(time.Hour * 2).UTC().Unix())
+	s.SetBranch("main")
 
 	return s
 }

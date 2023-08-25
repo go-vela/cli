@@ -21,6 +21,7 @@ func (c *Config) Update(client *vela.Client) error {
 		Active: vela.Bool(c.Active),
 		Name:   vela.String(c.Name),
 		Entry:  vela.String(c.Entry),
+		Branch: vela.String(c.Branch),
 	}
 
 	logrus.Tracef("updating schedule %s/%s/%s", c.Org, c.Repo, c.Name)

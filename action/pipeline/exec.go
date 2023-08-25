@@ -41,6 +41,11 @@ func (c *Config) Exec(client compiler.Engine) error {
 		path = filepath.Join(c.Path, c.File)
 	}
 
+	path, err = validateFile(path)
+	if err != nil {
+		return err
+	}
+
 	// check if full path to pipeline file exists
 	_, err = os.Stat(path)
 	if err != nil {

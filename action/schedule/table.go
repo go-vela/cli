@@ -40,7 +40,7 @@ func table(schedules *[]library.Schedule) error {
 	// set of schedule fields we display in a table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-	table.AddRow("NAME", "ENTRY", "ACTIVE", "SCHEDULED_AT")
+	table.AddRow("NAME", "ENTRY", "ACTIVE", "SCHEDULED_AT", "BRANCH")
 
 	// iterate through all schedules in the list
 	for _, s := range *schedules {
@@ -54,7 +54,7 @@ func table(schedules *[]library.Schedule) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(s.GetName(), s.GetEntry(), s.GetActive(), sTime)
+		table.AddRow(s.GetName(), s.GetEntry(), s.GetActive(), sTime, s.GetBranch())
 	}
 
 	// output the table in stdout format
@@ -89,7 +89,7 @@ func wideTable(schedules *[]library.Schedule) error {
 	// set of schedule fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-	table.AddRow("NAME", "ENTRY", "ACTIVE", "SCHEDULED_AT", "CREATED_AT", "CREATED_BY", "UPDATED_AT", "UPDATED_BY")
+	table.AddRow("NAME", "ENTRY", "ACTIVE", "SCHEDULED_AT", "CREATED_AT", "CREATED_BY", "UPDATED_AT", "UPDATED_BY", "BRANCH")
 
 	// iterate through all schedules in the list
 	for _, s := range *schedules {
@@ -113,7 +113,7 @@ func wideTable(schedules *[]library.Schedule) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(s.GetName(), s.GetEntry(), s.GetActive(), sTime, cTime, s.GetCreatedBy(), uTime, s.GetUpdatedBy())
+		table.AddRow(s.GetName(), s.GetEntry(), s.GetActive(), sTime, cTime, s.GetCreatedBy(), uTime, s.GetUpdatedBy(), s.GetBranch())
 	}
 
 	// output the wide table in stdout format

@@ -59,6 +59,12 @@ var CommandUpdate = &cli.Command{
 			Aliases: []string{"e"},
 			Usage:   "provide the entry for the schedule",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_BRANCH", "SCHEDULE_BRANCH"},
+			Name:    "branch",
+			Aliases: []string{"b"},
+			Usage:   "provide the branch for the schedule",
+		},
 
 		// Output Flags
 
@@ -111,6 +117,7 @@ func update(c *cli.Context) error {
 		Name:   c.String(internal.FlagSchedule),
 		Entry:  c.String("entry"),
 		Output: c.String(internal.FlagOutput),
+		Branch: c.String(internal.FlagBranch),
 	}
 
 	// validate schedule configuration

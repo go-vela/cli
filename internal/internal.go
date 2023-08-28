@@ -116,6 +116,10 @@ const (
 	// FlagSchedule defines the key for the
 	// flag when setting the schedule.
 	FlagSchedule = "schedule"
+
+	// FlagBranch defines the key for the
+	// flag when setting the branch.
+	FlagBranch = "branch"
 )
 
 // secret flag keys.

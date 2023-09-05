@@ -96,6 +96,8 @@ func (c *Config) Validate() error {
 				fallthrough
 			case constants.EventPush:
 				fallthrough
+			case constants.EventSchedule:
+				fallthrough
 			case constants.EventTag:
 				continue
 			default:

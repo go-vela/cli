@@ -94,6 +94,20 @@ func TestSecret_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: false,
+			config: &Config{
+				Action: "add",
+				Engine: "native",
+				Type:   "repo",
+				Org:    "github",
+				Repo:   "octocat",
+				Name:   "foo",
+				Value:  "bar",
+				Events: []string{"comment", "push", "pull_request", "tag", "deployment", "schedule"},
+				Output: "",
+			},
+		},
+		{
 			failure: true,
 			config: &Config{
 				Action: "add",

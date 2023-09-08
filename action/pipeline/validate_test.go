@@ -284,7 +284,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 	for _, test := range tests {
 		isLocal := len(test.config.TemplateFiles) > 0
 
-		err := test.config.ValidateLocal(client.WithLocal(isLocal))
+		err := test.config.ValidateLocal(client.WithLocal(isLocal).WithLocalTemplates(test.config.TemplateFiles))
 
 		if test.failure {
 			if err == nil {

@@ -196,6 +196,7 @@ func validate(c *cli.Context) error {
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocal(true)
+		client.WithLocalTemplates(p.TemplateFiles)
 		client.TemplateDepth = c.Int("max-template-depth")
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.

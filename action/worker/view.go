@@ -28,8 +28,8 @@ func (c *Config) View(client *vela.Client) error {
 	)
 
 	// handle RegistrationToken flag
-	if c.RegistrationToken {
-		response, _, err = client.Admin.Worker.RegisterToken(c.Hostname)
+	if c.RegistrationInfo {
+		response, _, err = client.Admin.Worker.RegisterWorker(c.Hostname)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve registration token for worker %q: %w", c.Hostname, err)
 		}

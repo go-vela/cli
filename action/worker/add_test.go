@@ -27,7 +27,6 @@ func TestWorker_Config_Add(t *testing.T) {
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}
-
 	// create mock worker server
 	w := httptest.NewServer(worker.FakeHandler())
 

@@ -157,9 +157,9 @@ const (
 	// flag when setting the worker hostname.
 	FlagWorkerHostname = "worker.hostname"
 
-	// FlagWorkerRegistrationToken defines the key for the
-	// flag when viewing the worker registration token.
-	FlagWorkerRegistrationToken = "worker.registration.token"
+	// FlagWorkerRegistrationInfo defines the key for the
+	// flag when viewing the worker registration info.
+	FlagWorkerRegistrationInfo = "worker.registration.info"
 )
 
 // list of defined CLI actions.

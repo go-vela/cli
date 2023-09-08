@@ -7,12 +7,12 @@ package worker
 // Config represents the configuration necessary
 // to perform worker related requests with Vela.
 type Config struct {
-	Action            string
-	Address           string
-	Hostname          string
-	Active            bool
-	Routes            []string
-	BuildLimit        int64
-	RegistrationToken bool
-	Output            string
+	Action           string
+	Address          string
+	Hostname         string
+	Active           bool
+	Routes           []string
+	BuildLimit       int64
+	RegistrationInfo bool
+	Output           string
 }

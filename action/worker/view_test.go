@@ -71,10 +71,10 @@ func TestWorker_Config_View(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action:            "view",
-				Hostname:          "MyWorker",
-				RegistrationToken: true,
-				Output:            "yaml",
+				Action:           "view",
+				Hostname:         "MyWorker",
+				RegistrationInfo: true,
+				Output:           "yaml",
 			},
 		},
 		{
@@ -88,10 +88,10 @@ func TestWorker_Config_View(t *testing.T) {
 		{
 			failure: true,
 			config: &Config{
-				Action:            "view",
-				Hostname:          "",
-				Output:            "",
-				RegistrationToken: true,
+				Action:           "view",
+				Hostname:         "",
+				Output:           "",
+				RegistrationInfo: true,
 			},
 		},
 	}

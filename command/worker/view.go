@@ -32,10 +32,10 @@ var CommandView = &cli.Command{
 			Usage:   "provide the hostname of the worker",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_REGISTRATION_TOKEN", "WORKER_REGISTRATION_TOKEN"},
-			Name:    internal.FlagWorkerRegistrationToken,
+			EnvVars: []string{"VELA_WORKER_REGISTRATION_INFO", "WORKER_REGISTRATION_INFO"},
+			Name:    internal.FlagWorkerRegistrationInfo,
 			Aliases: []string{"wr"},
-			Usage:   "toggle to show the registration token for the worker",
+			Usage:   "toggle to show the registration info for the worker",
 			Value:   "false",
 		},
 
@@ -89,10 +89,10 @@ func view(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config
 	w := &worker.Config{
-		Action:            internal.ActionView,
-		Hostname:          c.String(internal.FlagWorkerHostname),
-		RegistrationToken: c.Bool(internal.FlagWorkerRegistrationToken),
-		Output:            c.String(internal.FlagOutput),
+		Action:           internal.ActionView,
+		Hostname:         c.String(internal.FlagWorkerHostname),
+		RegistrationInfo: c.Bool(internal.FlagWorkerRegistrationInfo),
+		Output:           c.String(internal.FlagOutput),
 	}
 
 	// validate worker configuration

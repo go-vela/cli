@@ -107,7 +107,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile the object into a pipeline
-	p, _, err := client.CompileLite(path, c.Template, false, c.TemplateFiles)
+	p, _, err := client.CompileLite(path, c.Template, false)
 	if err != nil {
 		return err
 	}

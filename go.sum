@@ -157,8 +157,14 @@ github.com/go-playground/universal-translator v0.18.1/go.mod h1:xekY+UJKNuX9WP91
 github.com/go-playground/validator/v10 v10.14.0 h1:vgvQWe3XCz3gIeFDm/HnTIbj6UGmg/+t63MyGU2n5js=
 github.com/go-playground/validator/v10 v10.14.0/go.mod h1:9iXMNT7sEkjXb0I+enO7QXmzG6QCsPWY4zveKFVRSyU=
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 h1:tfuBGBXKqDEevZMzYi5KSi8KkcZtzBcTgAUUtapy0OI=
+github.com/go-vela/sdk-go v0.20.2-0.20230824133536-0b0212b996f5 h1:PfGWo9Yzv6xfHYSYYArlsrWfs3cvOlBopCjHyHi/SPs=
+github.com/go-vela/sdk-go v0.20.2-0.20230824133536-0b0212b996f5/go.mod h1:j7DFviaUd+XArpFr9KoHLWwUXRyFYAiZvPPF42gktoA=
+github.com/go-vela/server v0.20.1 h1:TsAhCj3wqm4kxfq9M6J8+3MmBKlDeJoTr4UGknT9yQw=
+github.com/go-vela/server v0.20.1/go.mod h1:M4rSAg8arMhIQYXQpc/ZmMbNW73ur8yE88klMk0Dq9w=
 github.com/go-vela/types v0.20.2-0.20230906184356-3829fd1ca79f h1:KqCcaXbzdJ8DwBYzKW20oHZsEO/yXxCJv/ii6Oa32S0=
 github.com/go-vela/types v0.20.2-0.20230906184356-3829fd1ca79f/go.mod h1:fVmUP4y7Cw8cG6CBWTdjIdgXNNrpVo25yoE9NmNBdOg=
+github.com/go-vela/worker v0.20.1 h1:3RetSe4+Z3CL4afogomkNdT88EppKh2UOf8UXJ0WPhc=
+github.com/go-vela/worker v0.20.1/go.mod h1:qkJs4581m+K2d7xGQm9P/75cJ3aypZmgQURFG8sZNr0=
 github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
 github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=
@@ -211,8 +217,8 @@ github.com/google/go-cmp v0.5.4/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
-github.com/google/go-github/v54 v54.0.0 h1:OZdXwow4EAD5jEo5qg+dGFH2DpkyZvVsAehjvJuUL/c=
-github.com/google/go-github/v54 v54.0.0/go.mod h1:Sw1LXWHhXRZtzJ9LI5fyJg9wbQzYvFhW8W5P2yaAQ7s=
+github.com/google/go-github/v53 v53.2.0 h1:wvz3FyF53v4BK+AsnvCmeNhf8AkTaeh2SoYu/XUvTtI=
+github.com/google/go-github/v53 v53.2.0/go.mod h1:XhFRObz+m/l+UCm9b7KSIC3lT3NWSXGt7mOsAWEloao=
 github.com/google/go-querystring v1.1.0 h1:AnCroh3fv4ZBgVIf1Iwtovgjaw/GiKJo8M8yD/fhyJ8=
 github.com/google/go-querystring v1.1.0/go.mod h1:Kcdr2DB4koayq7X8pmAG4sNG59So17icRSOU623lUBU=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=

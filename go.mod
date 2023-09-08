@@ -2,12 +2,6 @@ module github.com/go-vela/cli
 
 go 1.19
 
-replace (
-	github.com/go-vela/sdk-go => ../sdk-go
-	github.com/go-vela/server => ../server
-	github.com/go-vela/worker => ../worker
-)
-
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
@@ -75,7 +69,7 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
-	github.com/google/go-github/v54 v54.0.0 // indirect
+	github.com/google/go-github/v53 v53.2.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.1 // indirect

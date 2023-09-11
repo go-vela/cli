@@ -28,7 +28,7 @@ func (c *Config) Validate() error {
 	if c.Action == "add" {
 		// check if deployment ref is set
 		if len(c.Ref) == 0 {
-			return fmt.Errorf("no deployment ref provided")
+			logrus.Debug("no ref provided. Using repo default branch...")
 		}
 
 		// check if deployment target is set

@@ -44,7 +44,6 @@ var CommandAdd = &cli.Command{
 			EnvVars: []string{"VELA_REF", "DEPLOYMENT_REF"},
 			Name:    "ref",
 			Usage:   "provide the reference to deploy - this can be a branch, commit (SHA) or tag",
-			Value:   "refs/heads/master",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TARGET", "DEPLOYMENT_TARGET"},

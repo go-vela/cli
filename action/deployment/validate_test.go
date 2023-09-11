@@ -49,7 +49,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 			},
 		},
 		{
-			failure: true,
+			failure: false,
 			config: &Config{
 				Action:      "add",
 				Org:         "github",

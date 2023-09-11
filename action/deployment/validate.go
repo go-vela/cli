@@ -33,7 +33,7 @@ func (c *Config) Validate() error {
 
 		// check if deployment target is set
 		if len(c.Target) == 0 {
-			return fmt.Errorf("no deployment target provided")
+			logrus.Debug("no deployment target provided")
 		}
 	}
 

@@ -48,7 +48,7 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Output: "",
 			},
 		},
-		{
+		{ // no ref should still be valid
 			failure: false,
 			config: &Config{
 				Action:      "add",
@@ -60,8 +60,8 @@ func TestDeployment_Config_Validate(t *testing.T) {
 				Output:      "",
 			},
 		},
-		{
-			failure: true,
+		{ // no target should still be valid
+			failure: false,
 			config: &Config{
 				Action:      "add",
 				Org:         "github",

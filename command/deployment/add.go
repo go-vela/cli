@@ -50,7 +50,6 @@ var CommandAdd = &cli.Command{
 			Name:    "target",
 			Aliases: []string{"t"},
 			Usage:   "provide the name for the target deployment environment",
-			Value:   "production",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_DESCRIPTION", "DEPLOYMENT_DESCRIPTION"},

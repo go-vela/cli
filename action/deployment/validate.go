@@ -28,12 +28,12 @@ func (c *Config) Validate() error {
 	if c.Action == "add" {
 		// check if deployment ref is set
 		if len(c.Ref) == 0 {
-			logrus.Debug("no ref provided. Using repo default branch...")
+			logrus.Warn("no deployment ref provided. Using repo default branch")
 		}
 
 		// check if deployment target is set
 		if len(c.Target) == 0 {
-			logrus.Debug("no deployment target provided")
+			logrus.Warn("no deployment target provided")
 		}
 	}
 

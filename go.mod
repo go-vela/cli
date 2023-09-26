@@ -1,6 +1,8 @@
 module github.com/go-vela/cli
 
-go 1.19
+go 1.21
+
+toolchain go1.21.1
 
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
@@ -10,10 +12,10 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-git/go-git/v5 v5.9.0
-	github.com/go-vela/sdk-go v0.20.3
-	github.com/go-vela/server v0.20.3
-	github.com/go-vela/types v0.20.3
-	github.com/go-vela/worker v0.20.3
+	github.com/go-vela/sdk-go v0.20.1
+	github.com/go-vela/server v0.20.1
+	github.com/go-vela/types v0.20.2-0.20230926151838-42959d67d753
+	github.com/go-vela/worker v0.20.1
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0

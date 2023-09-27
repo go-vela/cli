@@ -10,10 +10,10 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-git/go-git/v5 v5.9.0
-	github.com/go-vela/sdk-go v0.20.2-0.20230926211649-173d614eb291
-	github.com/go-vela/server v0.20.1-0.20230926211153-dff96335528a
-	github.com/go-vela/types v0.20.2-0.20230926151838-42959d67d753
-	github.com/go-vela/worker v0.20.2-0.20230926204933-57324b274f7e
+	github.com/go-vela/sdk-go v0.20.3
+	github.com/go-vela/server v0.20.3
+	github.com/go-vela/types v0.20.3
+	github.com/go-vela/worker v0.20.3
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/manifoldco/promptui v0.9.0
@@ -70,7 +70,7 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
-	github.com/google/go-github/v54 v54.0.0 // indirect
+	github.com/google/go-github/v53 v53.2.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.1 // indirect

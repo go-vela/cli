@@ -131,7 +131,7 @@ EXAMPLES:
   3. Execute a local Vela pipeline in a specific directory.
     $ {{.HelpName}} --path /absolute/full/path/to/dir --file .vela.local.yml
   4. Execute a local Vela pipeline with ruleset information.
-    $ {{.HelpName}} --branch master --event push
+    $ {{.HelpName}} --branch main --event push
   5. Execute a local Vela pipeline with a read-only local volume.
     $ {{.HelpName}} --volume /tmp/foo.txt:/tmp/foo.txt:ro
   6. Execute a local Vela pipeline with a writeable local volume.

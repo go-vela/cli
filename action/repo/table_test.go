@@ -107,7 +107,7 @@ func testRepo() *library.Repo {
 	r.SetFullName("github/octocat")
 	r.SetLink("https://github.com/github/octocat")
 	r.SetClone("https://github.com/github/octocat.git")
-	r.SetBranch("master")
+	r.SetBranch("main")
 	r.SetTimeout(30)
 	r.SetVisibility("public")
 	r.SetPrivate(false)

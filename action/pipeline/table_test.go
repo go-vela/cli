@@ -106,7 +106,7 @@ func testPipeline() *library.Pipeline {
 	p.SetCommit("48afb5bdc41ad69bf22588491333f7cf71135163")
 	p.SetFlavor("large")
 	p.SetPlatform("docker")
-	p.SetRef("refs/heads/master")
+	p.SetRef("refs/heads/main")
 	p.SetRef("yaml")
 	p.SetVersion("1")
 	p.SetExternalSecrets(false)

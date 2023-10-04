@@ -77,7 +77,7 @@ Add a new deployment from the provided configuration
 
 **--parameter, -p**="": provide the parameter(s) within `key=value` format for the deployment
 
-**--ref**="": provide the reference to deploy - this can be a branch, commit (SHA) or tag (default: refs/heads/master)
+**--ref**="": provide the reference to deploy - this can be a branch, commit (SHA) or tag (default: refs/heads/main)
 
 **--repo, -r**="": provide the repository for the deployment
 
@@ -91,7 +91,7 @@ Add a new repository from the provided configuration
 
 **--active, -a**="": current status of the repository (default: true)
 
-**--branch, -b**="": default branch for the repository (default: master)
+**--branch, -b**="": default branch for the repository (default: main)
 
 **--clone, -c**="": full clone URL to repository in source control
 
@@ -183,7 +183,7 @@ Compile the provided pipeline
 
 **--output, --op**="": format the output in json, spew or yaml (default: yaml)
 
-**--ref**="": provide the repository reference for the pipeline (default: master)
+**--ref**="": provide the repository reference for the pipeline (default: main)
 
 **--repo, -r**="": provide the repository for the pipeline
 
@@ -213,7 +213,7 @@ Expand the provided pipeline
 
 **--output, --op**="": format the output in json, spew or yaml (default: yaml)
 
-**--ref**="": provide the repository reference for the pipeline (default: master)
+**--ref**="": provide the repository reference for the pipeline (default: main)
 
 **--repo, -r**="": provide the repository for the pipeline
 
@@ -511,7 +511,7 @@ Update a new repository from the provided configuration
 
 **--active, -a**="": current status of the repository (default: true)
 
-**--branch, -b**="": default branch for the repository (default: master)
+**--branch, -b**="": default branch for the repository (default: main)
 
 **--clone, -c**="": full clone URL to repository in source control
 
@@ -575,7 +575,7 @@ Validate a Vela pipeline
 
 **--path, -p**="": provide the path to the file for the pipeline
 
-**--ref**="": provide the repository reference for the pipeline (default: master)
+**--ref**="": provide the repository reference for the pipeline (default: main)
 
 **--repo, -r**="": provide the repository for the pipeline
 
@@ -649,7 +649,7 @@ View details of the provided pipeline
 
 **--output, --op**="": format the output in json, spew or yaml (default: yaml)
 
-**--ref**="": provide the repository reference for the pipeline (default: master)
+**--ref**="": provide the repository reference for the pipeline (default: main)
 
 **--repo, -r**="": provide the repository for the pipeline
 

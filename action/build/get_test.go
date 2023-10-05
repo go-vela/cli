@@ -46,7 +46,7 @@ func TestBuild_Config_Get(t *testing.T) {
 				Action:  "get",
 				Org:     "github",
 				Repo:    "octocat",
-				Branch:  "master",
+				Branch:  "main",
 				Page:    1,
 				PerPage: 10,
 				Output:  "dump",

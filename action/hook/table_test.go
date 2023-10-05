@@ -102,7 +102,7 @@ func testHook() *library.Hook {
 	h.SetCreated(time.Now().UTC().Unix())
 	h.SetHost("github.com")
 	h.SetEvent("push")
-	h.SetBranch("master")
+	h.SetBranch("main")
 	h.SetError("")
 	h.SetStatus("success")
 	h.SetLink("https://github.com/github/octocat/settings/hooks/1")

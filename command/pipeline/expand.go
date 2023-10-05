@@ -53,7 +53,7 @@ var CommandExpand = &cli.Command{
 			EnvVars: []string{"VELA_REF", "PIPELINE_REF"},
 			Name:    "ref",
 			Usage:   "provide the repository reference for the pipeline",
-			Value:   "master",
+			Value:   "main",
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s

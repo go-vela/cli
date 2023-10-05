@@ -67,7 +67,7 @@ var CommandValidate = &cli.Command{
 			EnvVars: []string{"VELA_REF", "PIPELINE_REF"},
 			Name:    "ref",
 			Usage:   "provide the repository reference for the pipeline",
-			Value:   "master",
+			Value:   "main",
 		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_TEMPLATE", "PIPELINE_TEMPLATE"},

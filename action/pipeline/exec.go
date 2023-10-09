@@ -78,19 +78,17 @@ func (c *Config) Exec(client compiler.Engine) error {
 		WithComment(c.Comment).
 		WithLocal(true).
 		WithRepo(r).
+		WithLocalTemplates(c.TemplateFiles).
 		Compile(path)
 	if err != nil {
 		return err
 	}
 
-	// check if the local configuration is enabled
-	if c.Local {
-		// create current directory path for local mount
-		mount := fmt.Sprintf("%s:%s:rw", base, constants.WorkspaceDefault)
+	// create current directory path for local mount
+	mount := fmt.Sprintf("%s:%s:rw", base, constants.WorkspaceDefault)
 
-		// add the current directory path to volume mounts
-		c.Volumes = append(c.Volumes, mount)
-	}
+	// add the current directory path to volume mounts
+	c.Volumes = append(c.Volumes, mount)
 
 	logrus.Tracef("creating runtime engine %s", constants.DriverDocker)
 

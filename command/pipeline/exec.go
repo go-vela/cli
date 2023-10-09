@@ -4,6 +4,8 @@ package pipeline
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
@@ -11,7 +13,9 @@ import (
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/server/util"
 	"github.com/go-vela/types/constants"
+	"github.com/sirupsen/logrus"
 
+	"github.com/joho/godotenv"
 	"github.com/urfave/cli/v2"
 )
 
@@ -26,31 +30,31 @@ var CommandExec = &cli.Command{
 		// Build Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_BRANCH", "PIPELINE_BRANCH"},
+			EnvVars: []string{"VELA_BRANCH", "PIPELINE_BRANCH", "VELA_BUILD_BRANCH"},
 			Name:    "branch",
 			Aliases: []string{"b"},
 			Usage:   "provide the build branch for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMMENT", "PIPELINE_COMMENT"},
+			EnvVars: []string{"VELA_COMMENT", "PIPELINE_COMMENT", "VELA_BUILD_COMMENT"},
 			Name:    "comment",
 			Aliases: []string{"c"},
 			Usage:   "provide the build comment for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_EVENT", "PIPELINE_EVENT"},
+			EnvVars: []string{"VELA_EVENT", "PIPELINE_EVENT", "VELA_BUILD_EVENT"},
 			Name:    "event",
 			Aliases: []string{"e"},
 			Usage:   "provide the build event for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG"},
+			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"},
 			Name:    "tag",
 			Aliases: []string{"t"},
 			Usage:   "provide the build tag for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TARGET", "PIPELINE_TARGET"},
+			EnvVars: []string{"VELA_TARGET", "PIPELINE_TARGET", "VELA_BUILD_TARGET"},
 			Name:    "target",
 			Usage:   "provide the build target for the pipeline",
 		},
@@ -93,12 +97,6 @@ var CommandExec = &cli.Command{
 			Aliases: []string{"v"},
 			Usage:   "provide list of local volumes to mount",
 		},
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_MAX_TEMPLATE_DEPTH", "MAX_TEMPLATE_DEPTH"},
-			Name:    "max-template-depth",
-			Usage:   "set the maximum depth for nested templates",
-			Value:   3,
-		},
 
 		// Repo Flags
 
@@ -121,6 +119,60 @@ var CommandExec = &cli.Command{
 			Usage:   "type of pipeline for the compiler to render",
 			Value:   constants.PipelineTypeYAML,
 		},
+
+		// Compiler Template Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Name:    internal.FlagCompilerGitHubToken,
+			Aliases: []string{"ct"},
+			Usage:   "github compiler token",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Name:    internal.FlagCompilerGitHubURL,
+			Aliases: []string{"cgu"},
+			Usage:   "github url, used by compiler, for pulling registry templates",
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_TEMPLATE_FILE", "PIPELINE_TEMPLATE_FILE"},
+			Name:    "template-file",
+			Aliases: []string{"tf, tfs, template-files"},
+			Usage:   "enables using a local template file for expansion in the form <name>:<path>",
+		},
+		&cli.IntFlag{
+			EnvVars: []string{"VELA_MAX_TEMPLATE_DEPTH", "MAX_TEMPLATE_DEPTH"},
+			Name:    "max-template-depth",
+			Usage:   "set the maximum depth for nested templates",
+			Value:   3,
+		},
+
+		// Environment Flags
+		&cli.BoolFlag{
+			EnvVars: []string{"VELA_ENV_FILE", "ENV_FILE"},
+			Name:    "env-file",
+			Aliases: []string{"ef"},
+			Usage:   "load environment variables from a .env file",
+			Value:   false,
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_ENV_FILE_PATH", "ENV_FILE_PATH"},
+			Name:    "env-file-path",
+			Aliases: []string{"efp"},
+			Usage:   "provide the path to the file for the environment",
+		},
+		&cli.BoolFlag{
+			EnvVars: []string{"ONBOARD_LOCAL_ENV", "LOCAL_ENV"},
+			Name:    "local-env",
+			Usage:   "load environment variables from local environment",
+			Value:   false,
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_ENV_VARS"},
+			Name:    "env-vars",
+			Aliases: []string{"env"},
+			Usage:   "load a set of environment variables in the form of KEY1=VAL1,KEY2=VAL2",
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -138,6 +190,18 @@ EXAMPLES:
     $ {{.HelpName}} --volume /tmp/bar.txt:/tmp/bar.txt:rw
   7. Execute a local Vela pipeline with type of go
     $ {{.HelpName}} --pipeline-type go
+  8. Execute a local Vela pipeline with local templates
+    $ {{.HelpName}} --template-file <template_name>:<path_to_template>
+  9. Execute a local Vela pipeline with specific environment variables
+    $ {{.HelpName}} --env KEY1=VAL1,KEY2=VAL2
+  10. Execute a local Vela pipeline with your existing local environment loaded into pipeline
+    $ {{.HelpName}} --local-env
+  11. Execute a local Vela pipeline with an environment file loaded in
+    $ {{.HelpName}} --env-file (uses .env by default)
+      OR
+    $ {{.HelpName}} --env-file-path <path_to_file>
+  12. Execute a local Vela pipeline using remote templates
+    $ {{.HelpName}} --compiler.github.token <GITHUB_PAT> --compiler.github.url <GITHUB_URL>
 
 DOCUMENTATION:
 
@@ -154,23 +218,52 @@ func exec(c *cli.Context) error {
 		return err
 	}
 
+	// clear local environment unless told otherwise
+	if !c.Bool("local-env") {
+		os.Clearenv()
+	}
+
+	// iterate through command-based env variables and set them in environment
+	for _, envSet := range c.StringSlice("env-vars") {
+		parts := strings.SplitN(envSet, "=", 2)
+
+		os.Setenv(parts[0], parts[1])
+	}
+
+	// load env file if provided
+	if c.Bool("env-file") || len(c.String("env-file-path")) > 0 {
+		switch len(c.String("env-file-path")) {
+		case 0:
+			err := godotenv.Load()
+			if err != nil {
+				logrus.Fatal("Error loading env file")
+			}
+		default:
+			err := godotenv.Load(c.String("env-file-path"))
+			if err != nil {
+				logrus.Fatal("Error loading env file")
+			}
+		}
+	}
+
 	// create the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action:       internal.ActionExec,
-		Branch:       c.String("branch"),
-		Comment:      c.String("comment"),
-		Event:        c.String("event"),
-		Tag:          c.String("tag"),
-		Target:       c.String("target"),
-		Org:          c.String(internal.FlagOrg),
-		Repo:         c.String(internal.FlagRepo),
-		File:         c.String("file"),
-		Local:        c.Bool("local"),
-		Path:         c.String("path"),
-		Volumes:      c.StringSlice("volume"),
-		PipelineType: c.String("pipeline-type"),
+		Action:        internal.ActionExec,
+		Branch:        c.String("branch"),
+		Comment:       c.String("comment"),
+		Event:         c.String("event"),
+		Tag:           c.String("tag"),
+		Target:        c.String("target"),
+		Org:           c.String(internal.FlagOrg),
+		Repo:          c.String(internal.FlagRepo),
+		File:          c.String("file"),
+		TemplateFiles: c.StringSlice("template-file"),
+		Local:         c.Bool("local"),
+		Path:          c.String("path"),
+		Volumes:       c.StringSlice("volume"),
+		PipelineType:  c.String("pipeline-type"),
 	}
 
 	// validate pipeline configuration
@@ -189,11 +282,19 @@ func exec(c *cli.Context) error {
 		return err
 	}
 
-	// set the max template depth using provided configuration (max of 5)
-	client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
+	// set when user is sourcing templates from local machine
+	if len(p.TemplateFiles) != 0 {
+		client.WithLocalTemplates(p.TemplateFiles)
+		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 10)
+	} else {
+		// set max template depth to minimum of 5 and provided value if local templates are not provided.
+		// This prevents users from spamming SCM
+		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
+		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
+	}
 
 	// execute the exec call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Exec
-	return p.Exec(client)
+	return p.Exec(client.WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

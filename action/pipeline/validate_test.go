@@ -253,8 +253,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 			},
 		},
 		{
-			name:    "pipeline with multiple template (local overrides) template mismatch",
-			failure: true,
+			name: "pipeline with multiple template (local overrides) only one template specified",
 			config: &Config{
 				Action:        "validate",
 				File:          "default_multi_template.yml",

@@ -110,6 +110,22 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		return err
 	}
 
+	// check to see if locally provided templates were included in compilation
+	for _, tmpl := range c.TemplateFiles {
+		parts := strings.Split(tmpl, ":")
+		included := false
+
+		for _, pTmpl := range p.Templates {
+			if strings.EqualFold(parts[0], pTmpl.Name) {
+				included = true
+			}
+		}
+
+		if !included {
+			return fmt.Errorf("local template with name %s not included in pipeline templates", parts[0])
+		}
+	}
+
 	// output the message in stderr format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stderr

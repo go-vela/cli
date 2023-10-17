@@ -11,9 +11,9 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-git/go-git/v5 v5.9.0
 	github.com/go-vela/sdk-go v0.21.0
-	github.com/go-vela/server v0.21.1-0.20231006151542-174ab52b94ff
-	github.com/go-vela/types v0.21.0
-	github.com/go-vela/worker v0.21.1-0.20231009163044-26628ba836f7
+	github.com/go-vela/server v0.21.1-0.20231017135815-bb35e76f6056
+	github.com/go-vela/types v0.21.1-0.20231012142227-0c0b890487af
+	github.com/go-vela/worker v0.21.1-0.20231017153328-bcdf8e448bdf
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1

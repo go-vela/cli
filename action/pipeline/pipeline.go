@@ -15,6 +15,7 @@ type Config struct {
 	Repo          string
 	Ref           string
 	File          string
+	FileChangeset []string
 	Path          string
 	Type          string
 	Stages        bool

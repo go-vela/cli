@@ -76,6 +76,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 		Duplicate().
 		WithBuild(b).
 		WithComment(c.Comment).
+		WithFiles(c.FileChangeset).
 		WithLocal(true).
 		WithRepo(r).
 		WithLocalTemplates(c.TemplateFiles).

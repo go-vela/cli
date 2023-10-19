@@ -58,6 +58,12 @@ var CommandExec = &cli.Command{
 			Name:    "target",
 			Usage:   "provide the build target for the pipeline",
 		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_FILE_CHANGESET", "FILE_CHANGESET"},
+			Name:    "file-changeset",
+			Aliases: []string{"fcs"},
+			Usage:   "provide a list of files changed for ruleset matching",
+		},
 
 		// Output Flags
 
@@ -259,6 +265,7 @@ func exec(c *cli.Context) error {
 		Org:           c.String(internal.FlagOrg),
 		Repo:          c.String(internal.FlagRepo),
 		File:          c.String("file"),
+		FileChangeset: c.StringSlice("file-changeset"),
 		TemplateFiles: c.StringSlice("template-file"),
 		Local:         c.Bool("local"),
 		Path:          c.String("path"),

@@ -5,16 +5,16 @@ go 1.21
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
-	github.com/cli/browser v1.2.0
+	github.com/cli/browser v1.3.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/go-git/go-git/v5 v5.9.0
+	github.com/go-git/go-git/v5 v5.10.0
 	github.com/go-vela/sdk-go v0.22.0-rc1
 	github.com/go-vela/server v0.22.0-rc1
 	github.com/go-vela/types v0.22.0-rc1
 	github.com/go-vela/worker v0.22.0-rc1
-	github.com/golang-jwt/jwt/v5 v5.0.0
+	github.com/golang-jwt/jwt/v5 v5.1.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/manifoldco/promptui v0.9.0

@@ -13,6 +13,7 @@ func TestRepo_table(t *testing.T) {
 	r1 := testRepo()
 	r1.SetAllowDeploy(true)
 	r1.SetAllowTag(true)
+	r1.SetAllowRelease(true)
 	r1.SetAllowComment(true)
 
 	r2 := testRepo()
@@ -57,6 +58,7 @@ func TestRepo_wideTable(t *testing.T) {
 	r1 := testRepo()
 	r1.SetAllowDeploy(true)
 	r1.SetAllowTag(true)
+	r1.SetAllowRelease(true)
 	r1.SetAllowComment(true)
 
 	r2 := testRepo()
@@ -117,6 +119,7 @@ func testRepo() *library.Repo {
 	r.SetAllowPush(true)
 	r.SetAllowDeploy(false)
 	r.SetAllowTag(false)
+	r.SetAllowRelease(false)
 	r.SetAllowComment(false)
 
 	return r

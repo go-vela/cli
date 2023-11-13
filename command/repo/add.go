@@ -43,7 +43,6 @@ var CommandAdd = &cli.Command{
 			Name:    "branch",
 			Aliases: []string{"b"},
 			Usage:   "default branch for the repository",
-			Value:   "main",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_LINK", "REPO_LINK"},

@@ -19,8 +19,15 @@ type Config struct {
 	Trusted      bool
 	Active       bool
 	Events       []string
+	DropEvents   []string
 	PipelineType string
 	Page         int
 	PerPage      int
 	Output       string
 }
+
+// Alternate constants for webhook events.
+const (
+	AlternateDeploy = "deploy"
+	AlternatePull   = "pull"
+)

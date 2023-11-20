@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
 
-//nolint:dupl // ignore similar code with update
 package repo
 
 import (
@@ -104,9 +103,9 @@ var CommandAdd = &cli.Command{
 			Value:   "true",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS"},
+			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS", "VELA_ADD_EVENTS", "REPO_ADD_EVENTS"},
 			Name:    "event",
-			Aliases: []string{"e"},
+			Aliases: []string{"events", "add-event", "add-events", "e"},
 			Usage:   "webhook event(s) repository responds to",
 		},
 		&cli.StringFlag{

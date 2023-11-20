@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
 
-//nolint:dupl // ignore similar code with add
 package repo
 
 import (
@@ -104,14 +103,16 @@ var CommandUpdate = &cli.Command{
 			Value:   "true",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS"},
+			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS", "VELA_ADD_EVENTS", "REPO_ADD_EVENTS"},
 			Name:    "event",
-			Aliases: []string{"e"},
+			Aliases: []string{"events", "add-event", "add-events", "e"},
 			Usage:   "webhook event(s) repository responds to",
-			Value: cli.NewStringSlice(
-				constants.EventPush,
-				constants.EventPull,
-			),
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_DROP_EVENTS", "REPO_DROP_EVENTS"},
+			Name:    "drop-event",
+			Aliases: []string{"drop-events", "de"},
+			Usage:   "remove webhook event(s) repository responds to",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},
@@ -136,6 +137,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
   2. Update a repository with all event types enabled.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
+  3. Update a repository to disable the comment and deploy events.
+	$ {{.HelpName}} --org MyOrg --repo MyRepo --event push --drop-events deployment,comment
   3. Update a repository with a longer build timeout.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
   4. Update a repository when config or environment variables are set.
@@ -184,6 +187,7 @@ func update(c *cli.Context) error {
 		Trusted:      c.Bool("trusted"),
 		Active:       c.Bool("active"),
 		Events:       c.StringSlice("event"),
+		DropEvents:   c.StringSlice("drop-event"),
 		PipelineType: c.String("pipeline-type"),
 		Output:       c.String(internal.FlagOutput),
 	}

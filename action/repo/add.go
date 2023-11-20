@@ -48,7 +48,7 @@ func (c *Config) Add(client *vela.Client) error {
 		}
 
 		// check if the repository should allow pull_request events
-		if event == constants.EventPull {
+		if event == constants.EventPull || event == AlternatePull {
 			r.AllowPull = vela.Bool(true)
 		}
 

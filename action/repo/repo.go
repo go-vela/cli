@@ -26,5 +26,8 @@ type Config struct {
 	Output       string
 }
 
-// AlternateDeploy is a common representation of constants.EventDeploy.
-const AlternateDeploy = "deploy"
+// Alternate constants for webhook events.
+const (
+	AlternateDeploy = "deploy"
+	AlternatePull   = "pull"
+)

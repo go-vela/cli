@@ -58,13 +58,36 @@ func (c *Config) Update(client *vela.Client) error {
 		}
 
 		// check if the repository should allow deployment events
-		if event == constants.EventDeploy {
+		if event == constants.EventDeploy || event == AlternateDeploy {
 			r.AllowDeploy = vela.Bool(true)
 		}
 
 		// check if the repository should allow comment events
 		if event == constants.EventComment {
 			r.AllowComment = vela.Bool(true)
+		}
+	}
+
+	// iterate through all drop events provided
+	for _, event := range c.DropEvents {
+		if event == constants.EventPush {
+			r.AllowPush = vela.Bool(false)
+		}
+
+		if event == constants.EventPull {
+			r.AllowPull = vela.Bool(false)
+		}
+
+		if event == constants.EventTag {
+			r.AllowTag = vela.Bool(false)
+		}
+
+		if event == constants.EventDeploy || event == AlternateDeploy {
+			r.AllowDeploy = vela.Bool(false)
+		}
+
+		if event == constants.EventComment {
+			r.AllowComment = vela.Bool(false)
 		}
 	}
 

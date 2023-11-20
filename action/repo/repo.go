@@ -19,8 +19,12 @@ type Config struct {
 	Trusted      bool
 	Active       bool
 	Events       []string
+	DropEvents   []string
 	PipelineType string
 	Page         int
 	PerPage      int
 	Output       string
 }
+
+// AlternateDeploy is a common representation of constants.EventDeploy.
+const AlternateDeploy = "deploy"

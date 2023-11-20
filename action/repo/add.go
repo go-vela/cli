@@ -58,7 +58,7 @@ func (c *Config) Add(client *vela.Client) error {
 		}
 
 		// check if the repository should allow deployment events
-		if event == constants.EventDeploy {
+		if event == constants.EventDeploy || event == AlternateDeploy {
 			r.AllowDeploy = vela.Bool(true)
 		}
 

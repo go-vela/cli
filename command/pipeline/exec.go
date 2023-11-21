@@ -97,11 +97,20 @@ var CommandExec = &cli.Command{
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
 		},
+
+		// Runtime Flags
+
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_VOLUMES", "PIPELINE_VOLUMES"},
 			Name:    "volume",
 			Aliases: []string{"v"},
 			Usage:   "provide list of local volumes to mount",
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_PRIVILEGED_IMAGES", "PIPELINE_PRIVILEGED_IMAGES"},
+			Name:    "privileged-images",
+			Aliases: []string{"pi"},
+			Usage:   "provide list of pipeline images that will run in privileged mode",
 		},
 
 		// Repo Flags
@@ -256,21 +265,22 @@ func exec(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
 	p := &pipeline.Config{
-		Action:        internal.ActionExec,
-		Branch:        c.String("branch"),
-		Comment:       c.String("comment"),
-		Event:         c.String("event"),
-		Tag:           c.String("tag"),
-		Target:        c.String("target"),
-		Org:           c.String(internal.FlagOrg),
-		Repo:          c.String(internal.FlagRepo),
-		File:          c.String("file"),
-		FileChangeset: c.StringSlice("file-changeset"),
-		TemplateFiles: c.StringSlice("template-file"),
-		Local:         c.Bool("local"),
-		Path:          c.String("path"),
-		Volumes:       c.StringSlice("volume"),
-		PipelineType:  c.String("pipeline-type"),
+		Action:           internal.ActionExec,
+		Branch:           c.String("branch"),
+		Comment:          c.String("comment"),
+		Event:            c.String("event"),
+		Tag:              c.String("tag"),
+		Target:           c.String("target"),
+		Org:              c.String(internal.FlagOrg),
+		Repo:             c.String(internal.FlagRepo),
+		File:             c.String("file"),
+		FileChangeset:    c.StringSlice("file-changeset"),
+		TemplateFiles:    c.StringSlice("template-file"),
+		Local:            c.Bool("local"),
+		Path:             c.String("path"),
+		Volumes:          c.StringSlice("volume"),
+		PrivilegedImages: c.StringSlice("privileged-images"),
+		PipelineType:     c.String("pipeline-type"),
 	}
 
 	// validate pipeline configuration

@@ -97,8 +97,9 @@ func (c *Config) Exec(client compiler.Engine) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/worker/runtime?tab=doc#New
 	_runtime, err := runtime.New(&runtime.Setup{
-		Driver:      constants.DriverDocker,
-		HostVolumes: c.Volumes,
+		Driver:           constants.DriverDocker,
+		HostVolumes:      c.Volumes,
+		PrivilegedImages: c.PrivilegedImages,
 	})
 	if err != nil {
 		return err

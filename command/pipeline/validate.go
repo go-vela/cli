@@ -86,6 +86,13 @@ var CommandValidate = &cli.Command{
 			Usage:   "set the maximum depth for nested templates",
 			Value:   3,
 		},
+		&cli.Uint64Flag{
+			EnvVars: []string{"VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"},
+			Name:    "compiler-starlark-exec-limit",
+			Aliases: []string{"starlark-exec-limit", "sel"},
+			Usage:   "set the starlark execution step limit for compiling starlark pipelines",
+			Value:   7500,
+		},
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_REMOTE", "PIPELINE_REMOTE"},
 			Name:    "remote",
@@ -190,6 +197,9 @@ func validate(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+
+	// set starlark exec limit
+	client.StarlarkExecLimit = c.Uint64("compiler-starlark-exec-limit")
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {

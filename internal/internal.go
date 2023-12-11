@@ -165,6 +165,9 @@ const (
 	// ActionAdd defines the action for creating a resource.
 	ActionAdd = "add"
 
+	// ActionApprove defines the action for approving a resource.
+	ActionApprove = "approve"
+
 	// ActionCancel defines the action for canceling of a resource.
 	ActionCancel = "cancel"
 

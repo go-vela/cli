@@ -47,6 +47,7 @@ func main() {
 		login.CommandLogin,
 		_version.CommandVersion,
 		addCmds,
+		approveCmds,
 		cancelCmds,
 		chownCmds,
 		compileCmds,

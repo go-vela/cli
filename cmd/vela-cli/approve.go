@@ -12,7 +12,6 @@ import (
 var approveCmds = &cli.Command{
 	Name:                   "approve",
 	Category:               "Resource Management",
-	Aliases:                []string{"rs"},
 	Description:            "Use this command to approve a resource for Vela.",
 	Usage:                  "Approve a resource for Vela via subcommands",
 	UseShortOptionHandling: true,

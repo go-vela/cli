@@ -94,6 +94,13 @@ func populateEvents(r *library.Repo, events []string) {
 	comment := new(actions.Comment)
 	deploy := new(actions.Deploy)
 
+	// -- legacy allow events init --
+	r.SetAllowPush(false)
+	r.SetAllowPull(false)
+	r.SetAllowTag(false)
+	r.SetAllowDeploy(false)
+	r.SetAllowComment(false)
+
 	// iterate through all events provided
 	for _, event := range events {
 		switch event {

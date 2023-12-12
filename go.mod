@@ -15,6 +15,7 @@ require (
 	github.com/go-vela/types v0.22.1-0.20231211143329-1eae2f5e371b
 	github.com/go-vela/worker v0.22.0
 	github.com/golang-jwt/jwt/v5 v5.1.0
+	github.com/google/go-cmp v0.6.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/manifoldco/promptui v0.9.0
@@ -71,7 +72,6 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/go-github/v56 v56.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect

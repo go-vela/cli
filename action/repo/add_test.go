@@ -156,6 +156,7 @@ func TestRepo_Config_Add(t *testing.T) {
 func TestRepo_populateEvents(t *testing.T) {
 	// setup types
 	tBool := true
+	fBool := false
 
 	// setup tests
 	tests := []struct {
@@ -196,9 +197,11 @@ func TestRepo_populateEvents(t *testing.T) {
 			name:   "action specific",
 			events: []string{"push:branch", "push:tag", "pull_request:opened", "pull_request:edited", "deployment:created", "comment:created"},
 			want: &library.Repo{
-				AllowPush:   &tBool,
-				AllowTag:    &tBool,
-				AllowDeploy: &tBool,
+				AllowPush:    &tBool,
+				AllowPull:    &fBool,
+				AllowTag:     &tBool,
+				AllowDeploy:  &tBool,
+				AllowComment: &fBool,
 				AllowEvents: &library.Events{
 					Push: &actions.Push{
 						Branch: &tBool,

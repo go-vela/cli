@@ -7,6 +7,9 @@ import (
 	"testing"
 
 	"github.com/go-vela/server/mock/server"
+	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/library/actions"
+	"github.com/google/go-cmp/cmp"
 
 	"github.com/go-vela/sdk-go/vela"
 )
@@ -146,6 +149,83 @@ func TestRepo_Config_Add(t *testing.T) {
 
 		if err != nil {
 			t.Errorf("Add returned err: %v", err)
+		}
+	}
+}
+
+func TestRepo_populateEvents(t *testing.T) {
+	// setup types
+	tBool := true
+
+	// setup tests
+	tests := []struct {
+		name   string
+		events []string
+		want   *library.Repo
+	}{
+		{
+			name:   "happy path legacy events",
+			events: []string{"push", "pull_request", "tag", "deploy", "comment"},
+			want: &library.Repo{
+				AllowPush:    &tBool,
+				AllowPull:    &tBool,
+				AllowTag:     &tBool,
+				AllowDeploy:  &tBool,
+				AllowComment: &tBool,
+				AllowEvents: &library.Events{
+					Push: &actions.Push{
+						Branch: &tBool,
+						Tag:    &tBool,
+					},
+					PullRequest: &actions.Pull{
+						Opened:      &tBool,
+						Reopened:    &tBool,
+						Synchronize: &tBool,
+					},
+					Deployment: &actions.Deploy{
+						Created: &tBool,
+					},
+					Comment: &actions.Comment{
+						Created: &tBool,
+						Edited:  &tBool,
+					},
+				},
+			},
+		},
+		{
+			name:   "action specific",
+			events: []string{"push:branch", "push:tag", "pull_request:opened", "pull_request:edited", "deployment:created", "comment:created"},
+			want: &library.Repo{
+				AllowPush:   &tBool,
+				AllowTag:    &tBool,
+				AllowDeploy: &tBool,
+				AllowEvents: &library.Events{
+					Push: &actions.Push{
+						Branch: &tBool,
+						Tag:    &tBool,
+					},
+					PullRequest: &actions.Pull{
+						Opened: &tBool,
+						Edited: &tBool,
+					},
+					Deployment: &actions.Deploy{
+						Created: &tBool,
+					},
+					Comment: &actions.Comment{
+						Created: &tBool,
+					},
+				},
+			},
+		},
+	}
+
+	// run tests
+	for _, test := range tests {
+		repo := new(library.Repo)
+		populateEvents(repo, test.events)
+
+		if diff := cmp.Diff(test.want, repo); diff != "" {
+			t.Errorf("populateEvents failed for %s mismatch (-want +got):\n%s", test.name, diff)
 		}
 	}
 }

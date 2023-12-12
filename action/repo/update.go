@@ -10,7 +10,6 @@ import (
 
 	"github.com/go-vela/sdk-go/vela"
 
-	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 
 	"github.com/sirupsen/logrus"
@@ -40,55 +39,8 @@ func (c *Config) Update(client *vela.Client) error {
 		PipelineType: vela.String(c.PipelineType),
 	}
 
-	// iterate through all events provided
-	for _, event := range c.Events {
-		// check if the repository should allow push events
-		if event == constants.EventPush {
-			r.AllowPush = vela.Bool(true)
-		}
-
-		// check if the repository should allow pull_request events
-		if event == constants.EventPull || event == AlternatePull {
-			r.AllowPull = vela.Bool(true)
-		}
-
-		// check if the repository should allow tag events
-		if event == constants.EventTag {
-			r.AllowTag = vela.Bool(true)
-		}
-
-		// check if the repository should allow deployment events
-		if event == constants.EventDeploy || event == AlternateDeploy {
-			r.AllowDeploy = vela.Bool(true)
-		}
-
-		// check if the repository should allow comment events
-		if event == constants.EventComment {
-			r.AllowComment = vela.Bool(true)
-		}
-	}
-
-	// iterate through all drop events provided
-	for _, event := range c.DropEvents {
-		if event == constants.EventPush {
-			r.AllowPush = vela.Bool(false)
-		}
-
-		if event == constants.EventPull || event == AlternatePull {
-			r.AllowPull = vela.Bool(false)
-		}
-
-		if event == constants.EventTag {
-			r.AllowTag = vela.Bool(false)
-		}
-
-		if event == constants.EventDeploy || event == AlternateDeploy {
-			r.AllowDeploy = vela.Bool(false)
-		}
-
-		if event == constants.EventComment {
-			r.AllowComment = vela.Bool(false)
-		}
+	if len(c.Events) > 0 {
+		populateEvents(r, c.Events)
 	}
 
 	logrus.Tracef("updating repo %s/%s", c.Org, c.Name)

@@ -12,6 +12,7 @@ import (
 
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/library/actions"
 
 	"github.com/sirupsen/logrus"
 )
@@ -40,35 +41,11 @@ func (c *Config) Add(client *vela.Client) error {
 		PipelineType: vela.String(c.PipelineType),
 	}
 
-	// iterate through all events provided
-	for _, event := range c.Events {
-		// check if the repository should allow push events
-		if event == constants.EventPush {
-			r.AllowPush = vela.Bool(true)
-		}
-
-		// check if the repository should allow pull_request events
-		if event == constants.EventPull || event == AlternatePull {
-			r.AllowPull = vela.Bool(true)
-		}
-
-		// check if the repository should allow tag events
-		if event == constants.EventTag {
-			r.AllowTag = vela.Bool(true)
-		}
-
-		// check if the repository should allow deployment events
-		if event == constants.EventDeploy || event == AlternateDeploy {
-			r.AllowDeploy = vela.Bool(true)
-		}
-
-		// check if the repository should allow comment events
-		if event == constants.EventComment {
-			r.AllowComment = vela.Bool(true)
-		}
-	}
-
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)
+
+	if len(c.Events) > 0 {
+		populateEvents(r, c.Events)
+	}
 
 	// send API call to add a repository
 	//
@@ -106,4 +83,64 @@ func (c *Config) Add(client *vela.Client) error {
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
 		return output.Stdout(repo)
 	}
+}
+
+// populateEvents is a helper function designed to fill both the legacy `Allow<_>` fields
+// as well as the `AllowEvents` struct with the correct values based on a slice input.
+func populateEvents(r *library.Repo, events []string) {
+	result := new(library.Events)
+	push := new(actions.Push)
+	pull := new(actions.Pull)
+	comment := new(actions.Comment)
+	deploy := new(actions.Deploy)
+
+	// -- legacy allow events init --
+	r.SetAllowPush(false)
+	r.SetAllowPull(false)
+	r.SetAllowTag(false)
+	r.SetAllowDeploy(false)
+	r.SetAllowComment(false)
+
+	// iterate through all events provided
+	for _, event := range events {
+		switch event {
+		case constants.EventPush, constants.EventPush + ":branch":
+			r.SetAllowPush(true)
+			push.SetBranch(true)
+		case constants.EventTag, constants.EventPush + ":" + constants.EventTag:
+			r.SetAllowTag(true)
+			push.SetTag(true)
+		case constants.EventPull, AlternatePull:
+			r.SetAllowPull(true)
+			pull.SetOpened(true)
+			pull.SetReopened(true)
+			pull.SetSynchronize(true)
+		case constants.EventDeploy, AlternateDeploy, constants.EventDeploy + ":" + constants.ActionCreated:
+			r.SetAllowDeploy(true)
+			deploy.SetCreated(true)
+		case constants.EventComment:
+			r.SetAllowComment(true)
+			comment.SetCreated(true)
+			comment.SetEdited(true)
+		case constants.EventPull + ":" + constants.ActionOpened:
+			pull.SetOpened(true)
+		case constants.EventPull + ":" + constants.ActionEdited:
+			pull.SetEdited(true)
+		case constants.EventPull + ":" + constants.ActionSynchronize:
+			pull.SetSynchronize(true)
+		case constants.EventPull + ":" + constants.ActionReopened:
+			pull.SetReopened(true)
+		case constants.EventComment + ":" + constants.ActionCreated:
+			comment.SetCreated(true)
+		case constants.EventComment + ":" + constants.ActionEdited:
+			comment.SetEdited(true)
+		}
+	}
+
+	result.SetPush(push)
+	result.SetPullRequest(pull)
+	result.SetDeployment(deploy)
+	result.SetComment(comment)
+
+	r.SetAllowEvents(result)
 }

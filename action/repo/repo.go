@@ -19,7 +19,6 @@ type Config struct {
 	Trusted      bool
 	Active       bool
 	Events       []string
-	DropEvents   []string
 	PipelineType string
 	Page         int
 	PerPage      int

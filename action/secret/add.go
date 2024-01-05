@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/go-vela/cli/internal/events"
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -46,6 +47,15 @@ func (c *Config) Add(client *vela.Client) error {
 		return err
 	}
 
+	e := new(library.Events)
+
+	if len(c.Events) > 0 {
+		e, err = events.Populate(c.Events)
+		if err != nil {
+			return err
+		}
+	}
+
 	// create the secret object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Secret
@@ -57,7 +67,7 @@ func (c *Config) Add(client *vela.Client) error {
 		Name:         &c.Name,
 		Value:        &c.Value,
 		Images:       &c.Images,
-		Events:       &c.Events,
+		AllowEvents:  e,
 		AllowCommand: &c.AllowCommand,
 	}
 

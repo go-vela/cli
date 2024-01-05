@@ -6,6 +6,7 @@ package repo
 import (
 	"fmt"
 
+	"github.com/go-vela/cli/internal/events"
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -40,7 +41,12 @@ func (c *Config) Update(client *vela.Client) error {
 	}
 
 	if len(c.Events) > 0 {
-		populateEvents(r, c.Events)
+		e, err := events.Populate(c.Events)
+		if err != nil {
+			return err
+		}
+
+		r.SetAllowEvents(e)
 	}
 
 	logrus.Tracef("updating repo %s/%s", c.Org, c.Name)

@@ -83,11 +83,6 @@ var CommandAdd = &cli.Command{
 			Name:    "event",
 			Aliases: []string{"ev"},
 			Usage:   "provide the event(s) that can access this secret",
-			Value: cli.NewStringSlice(
-				constants.EventDeploy,
-				constants.EventPush,
-				constants.EventTag,
-			),
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_COMMAND", "SECRET_COMMAND"},

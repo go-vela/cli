@@ -80,29 +80,5 @@ func (c *Config) Validate() error {
 		}
 	}
 
-	// check if secret action is add or update
-	if c.Action == "add" || c.Action == "update" {
-		// iterate through all secret events
-		for _, event := range c.Events {
-			// check if the secret event provided is valid
-			switch event {
-			case constants.EventComment:
-				fallthrough
-			case constants.EventDeploy:
-				fallthrough
-			case constants.EventPull:
-				fallthrough
-			case constants.EventPush:
-				fallthrough
-			case constants.EventSchedule:
-				fallthrough
-			case constants.EventTag:
-				continue
-			default:
-				return fmt.Errorf("invalid secret event provided: %s", event)
-			}
-		}
-	}
-
 	return nil
 }

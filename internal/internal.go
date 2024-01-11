@@ -158,6 +158,10 @@ const (
 	// FlagWorkerRegistrationToken defines the key for the
 	// flag when viewing the worker registration token.
 	FlagWorkerRegistrationToken = "worker.registration.token"
+
+	// FlagActive defines the key for the flag when getting
+	// a list of workers to filter based on active status.
+	FlagActive = "active"
 )
 
 // list of defined CLI actions.

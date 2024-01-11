@@ -4,6 +4,7 @@ package worker
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -21,6 +22,29 @@ var CommandGet = &cli.Command{
 	Usage:       "Display a list of workers",
 	Action:      get,
 	Flags: []cli.Flag{
+		// Filter Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACTIVE", "WORKER_ACTIVE"},
+			Name:    internal.FlagActive,
+			Aliases: []string{"a"},
+			Usage:   "return workers based on active status",
+		},
+
+		// Time Flags
+
+		&cli.Int64Flag{
+			EnvVars: []string{"VELA_CHECKED_IN_BEFORE", "CHECKED_IN_BEFORE"},
+			Name:    internal.FlagBefore,
+			Aliases: []string{"bf", "until"},
+			Usage:   "before time constraint",
+		},
+		&cli.Int64Flag{
+			EnvVars: []string{"VELA_CHECKED_IN_AFTER", "CHECKED_IN_AFTER"},
+			Name:    internal.FlagAfter,
+			Aliases: []string{"af", "since"},
+			Usage:   "after time constraint",
+		},
 
 		// Output Flags
 
@@ -68,12 +92,24 @@ func get(c *cli.Context) error {
 		return err
 	}
 
+	var active bool
+
+	if len(c.String(internal.FlagActive)) > 0 {
+		active, err = strconv.ParseBool(c.String(internal.FlagActive))
+		if err != nil {
+			return err
+		}
+	}
+
 	// create the worker configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config
 	w := &worker.Config{
-		Action: internal.ActionGet,
-		Output: c.String(internal.FlagOutput),
+		Action:          internal.ActionGet,
+		Active:          &active,
+		Output:          c.String(internal.FlagOutput),
+		CheckedInBefore: c.Int64(internal.FlagBefore),
+		CheckedInAfter:  c.Int64(internal.FlagAfter),
 	}
 
 	// validate worker configuration

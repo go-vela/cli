@@ -23,6 +23,9 @@ func TestWorker_Get(t *testing.T) {
 	fullSet.String("api.token.access", test.TestTokenGood, "doc")
 	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
 	fullSet.String("output", "json", "doc")
+	fullSet.Int64("before", 42, "doc")
+	fullSet.Int64("after", 0, "doc")
+	fullSet.String("active", "true", "doc")
 
 	// setup tests
 	tests := []struct {

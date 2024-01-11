@@ -5,6 +5,7 @@ package worker
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -33,13 +34,13 @@ var CommandGet = &cli.Command{
 
 		// Time Flags
 
-		&cli.Int64Flag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_CHECKED_IN_BEFORE", "CHECKED_IN_BEFORE"},
 			Name:    internal.FlagBefore,
 			Aliases: []string{"bf", "until"},
 			Usage:   "before time constraint",
 		},
-		&cli.Int64Flag{
+		&cli.StringFlag{
 			EnvVars: []string{"VELA_CHECKED_IN_AFTER", "CHECKED_IN_AFTER"},
 			Name:    internal.FlagAfter,
 			Aliases: []string{"af", "since"},
@@ -101,6 +102,16 @@ func get(c *cli.Context) error {
 		}
 	}
 
+	before, err := parseUnix(c.String(internal.FlagBefore))
+	if err != nil {
+		return fmt.Errorf("unable to parse flag `before`: %w", err)
+	}
+
+	after, err := parseUnix(c.String(internal.FlagAfter))
+	if err != nil {
+		return fmt.Errorf("unable to parse flag `after`: %w", err)
+	}
+
 	// create the worker configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config
@@ -108,8 +119,8 @@ func get(c *cli.Context) error {
 		Action:          internal.ActionGet,
 		Active:          &active,
 		Output:          c.String(internal.FlagOutput),
-		CheckedInBefore: c.Int64(internal.FlagBefore),
-		CheckedInAfter:  c.Int64(internal.FlagAfter),
+		CheckedInBefore: before,
+		CheckedInAfter:  after,
 	}
 
 	// validate worker configuration
@@ -124,4 +135,30 @@ func get(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config.Get
 	return w.Get(client)
+}
+
+// parseUnix is a helper function that converts a string of type Time, Duration, or Unix into an int64.
+func parseUnix(input string) (int64, error) {
+	var result int64
+
+	if len(input) > 0 {
+		timestamp, err := time.Parse("2006-01-02T15:04:05", input)
+		if err != nil {
+			duration, err := time.ParseDuration(input)
+			if err != nil {
+				unix, err := strconv.ParseInt(input, 10, 64)
+				if err != nil {
+					return result, fmt.Errorf("invalid input for flag")
+				}
+
+				result = unix
+			} else {
+				result = time.Now().Add(-duration).Unix()
+			}
+		} else {
+			result = timestamp.Unix()
+		}
+	}
+
+	return result, nil
 }

@@ -49,7 +49,7 @@ func table(deployments *[]library.Deployment) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(d.GetID(), d.GetTask(), d.GetUser(), d.GetRef(), d.GetTarget())
+		table.AddRow(d.GetID(), d.GetTask(), d.GetCreatedBy(), d.GetRef(), d.GetTarget())
 	}
 
 	// output the table in stdout format
@@ -93,7 +93,7 @@ func wideTable(deployments *[]library.Deployment) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(d.GetID(), d.GetTask(), d.GetUser(), d.GetRef(), d.GetTarget(), d.GetCommit(), d.GetDescription())
+		table.AddRow(d.GetID(), d.GetTask(), d.GetCreatedBy(), d.GetRef(), d.GetTarget(), d.GetCommit(), d.GetDescription())
 	}
 
 	// output the wide table in stdout format

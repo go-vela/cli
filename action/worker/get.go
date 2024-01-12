@@ -19,8 +19,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of workers
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#WorkerService.GetAll
-	// TODO: add ability to pass in filter options
-	workers, _, err := client.Worker.GetAll(nil)
+	workers, _, err := client.Worker.GetAll()
 	if err != nil {
 		return err
 	}

@@ -96,7 +96,7 @@ func testDeployment() *library.Deployment {
 	d.SetID(1)
 	d.SetRepoID(1)
 	d.SetURL("https://api.github.com/repos/github/octocat/deployments/1")
-	d.SetCreatedBy("octocat")
+	d.SetUser("octocat")
 	d.SetCommit("48afb5bdc41ad69bf22588491333f7cf71135163")
 	d.SetRef("refs/heads/main")
 	d.SetTask("vela-deploy")

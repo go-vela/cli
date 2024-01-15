@@ -4,6 +4,8 @@ package worker
 
 import (
 	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -21,6 +23,29 @@ var CommandGet = &cli.Command{
 	Usage:       "Display a list of workers",
 	Action:      get,
 	Flags: []cli.Flag{
+		// Filter Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_ACTIVE", "WORKER_ACTIVE"},
+			Name:    internal.FlagActive,
+			Aliases: []string{"a"},
+			Usage:   "return workers based on active status",
+		},
+
+		// Time Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_CHECKED_IN_BEFORE", "CHECKED_IN_BEFORE"},
+			Name:    internal.FlagBefore,
+			Aliases: []string{"bf", "until"},
+			Usage:   "before time constraint",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_CHECKED_IN_AFTER", "CHECKED_IN_AFTER"},
+			Name:    internal.FlagAfter,
+			Aliases: []string{"af", "since"},
+			Usage:   "after time constraint",
+		},
 
 		// Output Flags
 
@@ -68,12 +93,34 @@ func get(c *cli.Context) error {
 		return err
 	}
 
+	var active bool
+
+	if len(c.String(internal.FlagActive)) > 0 {
+		active, err = strconv.ParseBool(c.String(internal.FlagActive))
+		if err != nil {
+			return err
+		}
+	}
+
+	before, err := parseUnix(c.String(internal.FlagBefore))
+	if err != nil {
+		return fmt.Errorf("unable to parse flag `before`: %w", err)
+	}
+
+	after, err := parseUnix(c.String(internal.FlagAfter))
+	if err != nil {
+		return fmt.Errorf("unable to parse flag `after`: %w", err)
+	}
+
 	// create the worker configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config
 	w := &worker.Config{
-		Action: internal.ActionGet,
-		Output: c.String(internal.FlagOutput),
+		Action:          internal.ActionGet,
+		Active:          &active,
+		Output:          c.String(internal.FlagOutput),
+		CheckedInBefore: before,
+		CheckedInAfter:  after,
 	}
 
 	// validate worker configuration
@@ -88,4 +135,30 @@ func get(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config.Get
 	return w.Get(client)
+}
+
+// parseUnix is a helper function that converts a string of type Time, Duration, or Unix into an int64.
+func parseUnix(input string) (int64, error) {
+	var result int64
+
+	if len(input) > 0 {
+		timestamp, err := time.Parse("2006-01-02T15:04:05", input)
+		if err != nil {
+			duration, err := time.ParseDuration(input)
+			if err != nil {
+				unix, err := strconv.ParseInt(input, 10, 64)
+				if err != nil {
+					return result, fmt.Errorf("invalid input for flag")
+				}
+
+				result = unix
+			} else {
+				result = time.Now().Add(-duration).Unix()
+			}
+		} else {
+			result = timestamp.Unix()
+		}
+	}
+
+	return result, nil
 }

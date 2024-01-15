@@ -22,7 +22,7 @@ func (c *Config) Update(client *vela.Client) error {
 	w := &library.Worker{
 		Hostname:   vela.String(c.Hostname),
 		Address:    vela.String(c.Address),
-		Active:     vela.Bool(c.Active),
+		Active:     c.Active,
 		Routes:     vela.Strings(c.Routes),
 		BuildLimit: vela.Int64(c.BuildLimit),
 	}

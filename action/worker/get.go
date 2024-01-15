@@ -3,6 +3,8 @@
 package worker
 
 import (
+	"fmt"
+
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -16,11 +18,22 @@ func (c *Config) Get(client *vela.Client) error {
 
 	logrus.Tracef("capturing workers")
 
+	filters := &vela.WorkerListOptions{
+		CheckedInAfter: c.CheckedInAfter,
+	}
+
+	if c.Active != nil {
+		filters.Active = fmt.Sprintf("%b", c.Active)
+	}
+
+	if c.CheckedInBefore > 0 {
+		filters.CheckedInBefore = c.CheckedInBefore
+	}
+
 	// send API call to capture a list of workers
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#WorkerService.GetAll
-	// TODO: add ability to pass in filter options
-	workers, _, err := client.Worker.GetAll(nil)
+	workers, _, err := client.Worker.GetAll(filters)
 	if err != nil {
 		return err
 	}

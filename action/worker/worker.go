@@ -7,8 +7,10 @@ package worker
 type Config struct {
 	Action            string
 	Address           string
+	CheckedInBefore   int64
+	CheckedInAfter    int64
 	Hostname          string
-	Active            bool
+	Active            *bool
 	Routes            []string
 	BuildLimit        int64
 	RegistrationToken bool

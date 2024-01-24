@@ -117,12 +117,16 @@ github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 h1:tfuBGBXKqDEe
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572/go.mod h1:9Pwr4B2jHnOSGXyyzV8ROjYa2ojvAY6HCGYYfMoC3Ls=
 github.com/go-vela/sdk-go v0.22.1-0.20231211213353-23e6a2ee9817 h1:YTvVN2nfMiU5EpSwN/Zwrxn/bixBB+y1EcwsEBB7bMU=
 github.com/go-vela/sdk-go v0.22.1-0.20231211213353-23e6a2ee9817/go.mod h1:EVAthIAXxYtP6I/AxbzTJngTtgvLwrNtRLZ39TBqZtg=
+github.com/go-vela/sdk-go v0.22.1-0.20240118151315-18ea1c51b5b2 h1:yM4z4PSY2Jr/edCIFjoQwKbr7W0WNnHAavp4LsHm+IA=
+github.com/go-vela/sdk-go v0.22.1-0.20240118151315-18ea1c51b5b2/go.mod h1:EVAthIAXxYtP6I/AxbzTJngTtgvLwrNtRLZ39TBqZtg=
 github.com/go-vela/server v0.22.3-0.20240124164127-136cd544d576 h1:GQgYRl6sUJAcSk2BuRcN8nd1uoWGFdZqRafph4Kzvp0=
 github.com/go-vela/server v0.22.3-0.20240124164127-136cd544d576/go.mod h1:4fjiQD+7EAMxjJ1/qsnWpCrM7hrssY52aQr9o5T6UKA=
 github.com/go-vela/types v0.22.1-0.20240122175704-d058de26b401 h1:LdqaHKseq6EUXIJU0h01p14J2rpXF2oFwKbJtsrdE2Y=
 github.com/go-vela/types v0.22.1-0.20240122175704-d058de26b401/go.mod h1:cax3mW1kVz/ioI8qltZE+wl9rOLgOPdwBIvCooL09e4=
 github.com/go-vela/worker v0.22.0 h1:zmGiuykclbd0cfH6XKpCnoeIagYhYt7CJQ/y5HfqjZk=
 github.com/go-vela/worker v0.22.0/go.mod h1:ErPzlBEBWgYcinlbscn5q+9iArIuajy1DO+Oe9Ya2NA=
+github.com/go-vela/worker v0.22.1-0.20240118173944-724912db3b72 h1:nW9WwRN7RMrvpG0VIhizEHlWErvUMbIlOb8K+hDlVzE=
+github.com/go-vela/worker v0.22.1-0.20240118173944-724912db3b72/go.mod h1:ErPzlBEBWgYcinlbscn5q+9iArIuajy1DO+Oe9Ya2NA=
 github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
 github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=

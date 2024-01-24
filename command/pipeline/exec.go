@@ -268,6 +268,16 @@ func exec(c *cli.Context) error {
 		}
 	}
 
+	// account for users omitting the `refs/tags` prefix of the tag value
+	tag := c.String("tag")
+
+	if len(tag) > 0 {
+		if !strings.HasPrefix(tag, "refs/tags/") {
+			logrus.Debugf("setting tag value to refs/tags/%s", tag)
+			tag = "refs/tags/" + tag
+		}
+	}
+
 	// create the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
@@ -276,7 +286,7 @@ func exec(c *cli.Context) error {
 		Branch:           c.String("branch"),
 		Comment:          c.String("comment"),
 		Event:            c.String("event"),
-		Tag:              c.String("tag"),
+		Tag:              tag,
 		Target:           c.String("target"),
 		Org:              c.String(internal.FlagOrg),
 		Repo:             c.String(internal.FlagRepo),

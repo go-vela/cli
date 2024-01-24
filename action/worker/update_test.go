@@ -21,6 +21,8 @@ func TestWorker_Config_Update(t *testing.T) {
 		t.Errorf("unable to create client: %v", err)
 	}
 
+	tBool := true
+
 	// setup tests
 	tests := []struct {
 		failure bool
@@ -34,7 +36,7 @@ func TestWorker_Config_Update(t *testing.T) {
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,
-				Active:     true,
+				Active:     &tBool,
 				Output:     "",
 			},
 		},
@@ -46,7 +48,7 @@ func TestWorker_Config_Update(t *testing.T) {
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,
-				Active:     true,
+				Active:     &tBool,
 				Output:     "dump",
 			},
 		},
@@ -58,7 +60,7 @@ func TestWorker_Config_Update(t *testing.T) {
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,
-				Active:     true,
+				Active:     &tBool,
 				Output:     "json",
 			},
 		},
@@ -70,7 +72,7 @@ func TestWorker_Config_Update(t *testing.T) {
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,
-				Active:     true,
+				Active:     &tBool,
 				Output:     "spew",
 			},
 		},
@@ -82,7 +84,7 @@ func TestWorker_Config_Update(t *testing.T) {
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,
-				Active:     true,
+				Active:     &tBool,
 				Output:     "yaml",
 			},
 		},
@@ -94,7 +96,7 @@ func TestWorker_Config_Update(t *testing.T) {
 				Address:    "myworker.example.com",
 				Routes:     []string{"large", "small"},
 				BuildLimit: 1,
-				Active:     true,
+				Active:     &tBool,
 				Output:     "",
 			},
 		},

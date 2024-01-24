@@ -4,6 +4,7 @@ package worker
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -25,7 +26,7 @@ var CommandUpdate = &cli.Command{
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_WORKER_ACTIVE", "WORKER_ACTIVE"},
-			Name:    "active",
+			Name:    internal.FlagActive,
 			Aliases: []string{"a"},
 			Usage:   "current status of the worker",
 		},
@@ -93,11 +94,20 @@ func update(c *cli.Context) error {
 		return err
 	}
 
+	var active bool
+
+	if len(c.String(internal.FlagActive)) > 0 {
+		active, err = strconv.ParseBool(c.String(internal.FlagActive))
+		if err != nil {
+			return err
+		}
+	}
+
 	// create the worker configuration
 	w := &worker.Config{
 		Hostname:   c.String(internal.FlagWorkerHostname),
 		Address:    c.String(internal.FlagWorkerAddress),
-		Active:     c.Bool("active"),
+		Active:     &active,
 		Routes:     c.StringSlice("routes"),
 		BuildLimit: c.Int64("build-limit"),
 	}

@@ -8,6 +8,8 @@ import (
 
 func TestWorker_Config_Validate(t *testing.T) {
 	// setup tests
+	tBool := true
+
 	tests := []struct {
 		failure bool
 		config  *Config
@@ -86,7 +88,7 @@ func TestWorker_Config_Validate(t *testing.T) {
 				Action:     "update",
 				Hostname:   "MyWorker",
 				Address:    "myworker.example.com",
-				Active:     true,
+				Active:     &tBool,
 				BuildLimit: 1,
 				Routes:     []string{"large", "small"},
 				Output:     "",
@@ -98,7 +100,7 @@ func TestWorker_Config_Validate(t *testing.T) {
 				Action:     "update",
 				Hostname:   "",
 				Address:    "myworker.example.com",
-				Active:     true,
+				Active:     &tBool,
 				BuildLimit: 1,
 				Routes:     []string{"large", "small"},
 				Output:     "",
@@ -110,7 +112,7 @@ func TestWorker_Config_Validate(t *testing.T) {
 				Action:     "update",
 				Hostname:   "",
 				Address:    "::",
-				Active:     true,
+				Active:     &tBool,
 				BuildLimit: 1,
 				Routes:     []string{"large", "small"},
 				Output:     "",

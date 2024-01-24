@@ -122,6 +122,9 @@ func populateEvents(r *library.Repo, events []string) {
 			r.SetAllowComment(true)
 			comment.SetCreated(true)
 			comment.SetEdited(true)
+		case constants.EventDelete:
+			push.SetDeleteBranch(true)
+			push.SetDeleteTag(true)
 		case constants.EventPull + ":" + constants.ActionOpened:
 			pull.SetOpened(true)
 		case constants.EventPull + ":" + constants.ActionEdited:
@@ -134,6 +137,10 @@ func populateEvents(r *library.Repo, events []string) {
 			comment.SetCreated(true)
 		case constants.EventComment + ":" + constants.ActionEdited:
 			comment.SetEdited(true)
+		case constants.EventDelete + ":" + constants.ActionBranch:
+			push.SetDeleteBranch(true)
+		case constants.EventDelete + ":" + constants.ActionTag:
+			push.SetDeleteTag(true)
 		}
 	}
 

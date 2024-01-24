@@ -166,7 +166,7 @@ func TestRepo_populateEvents(t *testing.T) {
 	}{
 		{
 			name:   "happy path legacy events",
-			events: []string{"push", "pull_request", "tag", "deploy", "comment"},
+			events: []string{"push", "pull_request", "tag", "deploy", "comment", "delete"},
 			want: &library.Repo{
 				AllowPush:    &tBool,
 				AllowPull:    &tBool,
@@ -175,8 +175,10 @@ func TestRepo_populateEvents(t *testing.T) {
 				AllowComment: &tBool,
 				AllowEvents: &library.Events{
 					Push: &actions.Push{
-						Branch: &tBool,
-						Tag:    &tBool,
+						Branch:       &tBool,
+						Tag:          &tBool,
+						DeleteBranch: &tBool,
+						DeleteTag:    &tBool,
 					},
 					PullRequest: &actions.Pull{
 						Opened:      &tBool,
@@ -195,7 +197,7 @@ func TestRepo_populateEvents(t *testing.T) {
 		},
 		{
 			name:   "action specific",
-			events: []string{"push:branch", "push:tag", "pull_request:opened", "pull_request:edited", "deployment:created", "comment:created"},
+			events: []string{"push:branch", "push:tag", "pull_request:opened", "pull_request:edited", "deployment:created", "comment:created", "delete:branch", "delete:tag"},
 			want: &library.Repo{
 				AllowPush:    &tBool,
 				AllowPull:    &fBool,
@@ -204,8 +206,10 @@ func TestRepo_populateEvents(t *testing.T) {
 				AllowComment: &fBool,
 				AllowEvents: &library.Events{
 					Push: &actions.Push{
-						Branch: &tBool,
-						Tag:    &tBool,
+						Branch:       &tBool,
+						Tag:          &tBool,
+						DeleteBranch: &tBool,
+						DeleteTag:    &tBool,
 					},
 					PullRequest: &actions.Pull{
 						Opened: &tBool,

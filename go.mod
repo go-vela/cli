@@ -9,7 +9,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/go-git/go-git/v5 v5.10.1
+	github.com/go-git/go-git/v5 v5.11.0
 	github.com/go-vela/sdk-go v0.22.1-0.20231211213353-23e6a2ee9817
 	github.com/go-vela/server v0.22.3-0.20240124164127-136cd544d576
 	github.com/go-vela/types v0.22.1-0.20240122175704-d058de26b401

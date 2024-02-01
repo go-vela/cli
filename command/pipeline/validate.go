@@ -72,8 +72,7 @@ var CommandValidate = &cli.Command{
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_TEMPLATE", "PIPELINE_TEMPLATE"},
 			Name:    "template",
-			Usage:   "enables validating a pipeline with templates",
-			Value:   false,
+			Usage:   "DEPRECATED (Vela CLI will attempt to fetch templates if they exist)",
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_TEMPLATE_FILE", "PIPELINE_TEMPLATE_FILE"},
@@ -128,13 +127,11 @@ EXAMPLES:
   5. Validate a remote pipeline for a repository with json output.
     $ {{.HelpName}} --remote --org MyOrg --repo MyRepo --output json
   6. Validate a template pipeline with expanding steps (when templates are sourced from private Github instance)
-    $ {{.HelpName}} --template --compiler.github.token <token> --compiler.github.url <url>
-  7. Validate a template pipeline with expanding steps
-    $ {{.HelpName}} --template
-  8. Validate a local template pipeline with expanding steps
-    $ {{.HelpName}} --template --template-file name:/path/to/file
-  9. Validate a local, nested template pipeline with custom template depth.
-    $ {{.HelpName}} --template --template-file name:/path/to/file name:/path/to/file --max-template-depth 2
+    $ {{.HelpName}} --compiler.github.token <token> --compiler.github.url <url>
+  7. Validate a local template pipeline with expanding steps
+    $ {{.HelpName}} --template-file name:/path/to/file
+  8. Validate a local, nested template pipeline with custom template depth.
+    $ {{.HelpName}} --template-file name:/path/to/file name:/path/to/file --max-template-depth 2
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/pipeline/validate/
@@ -150,6 +147,10 @@ func validate(c *cli.Context) error {
 		return err
 	}
 
+	if c.Bool("template") {
+		logrus.Warnf("`template` flag is deprecated and will be removed in a later release")
+	}
+
 	// create the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
@@ -160,7 +161,6 @@ func validate(c *cli.Context) error {
 		File:          c.String("file"),
 		Path:          c.String("path"),
 		Ref:           c.String("ref"),
-		Template:      c.Bool("template"),
 		TemplateFiles: c.StringSlice("template-file"),
 		Remote:        c.Bool("remote"),
 		PipelineType:  c.String("pipeline-type"),

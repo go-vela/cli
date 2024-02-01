@@ -19,7 +19,6 @@ type Config struct {
 	Path             string
 	Type             string
 	Stages           bool
-	Template         bool
 	TemplateFiles    []string
 	Local            bool
 	Remote           bool

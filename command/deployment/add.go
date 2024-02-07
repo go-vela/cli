@@ -4,11 +4,15 @@ package deployment
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/deployment"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/types/raw"
+	"github.com/joho/godotenv"
 
 	"github.com/urfave/cli/v2"
 )
@@ -69,6 +73,12 @@ var CommandAdd = &cli.Command{
 			Aliases: []string{"p"},
 			Usage:   "provide the parameter(s) within `key=value` format for the deployment",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_PARAMETERS_FILE", "DEPLOYMENT_PARAMETERS_FILE"},
+			Name:    "parameters-file",
+			Aliases: []string{"pf", "parameter-file"},
+			Usage:   "provide deployment parameters via a JSON or env file",
+		},
 
 		// Output Flags
 
@@ -95,7 +105,9 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
   7. Add a deployment for a repository with two parameters.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --parameter 'key=value' --parameter 'foo=bar'
-  8. Add a deployment for a repository when config or environment variables are set.
+  8. Add a deployment for a repository with a parameters JSON file.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --parameters-file params.json
+  9. Add a deployment for a repository when config or environment variables are set.
     $ {{.HelpName}}
 
 DOCUMENTATION:
@@ -112,6 +124,26 @@ func add(c *cli.Context) error {
 	err := action.Load(c)
 	if err != nil {
 		return err
+	}
+
+	var parameters raw.StringSliceMap
+
+	pFile := c.String("parameters-file")
+	pInput := c.StringSlice("parameter")
+
+	if len(pFile) > 0 {
+		parameters, err = parseParamFile(pFile)
+		if err != nil {
+			return err
+		}
+	}
+
+	if len(pInput) > 0 {
+		// convert the parameters into map[string]string format
+		parameters, err = parseKeyValue(pInput)
+		if err != nil {
+			return err
+		}
 	}
 
 	// parse the Vela client from the context
@@ -134,7 +166,7 @@ func add(c *cli.Context) error {
 		Target:      c.String("target"),
 		Task:        c.String("task"),
 		Output:      c.String(internal.FlagOutput),
-		Parameters:  c.StringSlice("parameter"),
+		Parameters:  parameters,
 	}
 
 	// validate deployment configuration
@@ -149,4 +181,45 @@ func add(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.Add
 	return d.Add(client)
+}
+
+// parseKeyValue converts the slice of key=value into a map.
+func parseKeyValue(input []string) (raw.StringSliceMap, error) {
+	payload := raw.StringSliceMap{}
+
+	for _, i := range input {
+		parts := strings.SplitN(i, "=", 2)
+		if len(parts) != 2 {
+			return nil, fmt.Errorf("%s is not in key=value format", i)
+		}
+
+		payload[parts[0]] = parts[1]
+	}
+
+	return payload, nil
+}
+
+// parseParamFile is a helper function that populates a slice map with values from a file.
+func parseParamFile(pFile string) (raw.StringSliceMap, error) {
+	payload := raw.StringSliceMap{}
+
+	data, err := os.ReadFile(pFile)
+	if err != nil {
+		return nil, err
+	}
+
+	switch {
+	case strings.HasSuffix(pFile, ".json"), strings.HasSuffix(pFile, ".JSON"):
+		err = payload.UnmarshalJSON(data)
+		if err != nil {
+			return nil, err
+		}
+	default:
+		payload, err = godotenv.Read(pFile)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return payload, nil
 }

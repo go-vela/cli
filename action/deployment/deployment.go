@@ -2,6 +2,8 @@
 
 package deployment
 
+import "github.com/go-vela/types/raw"
+
 // Config represents the configuration necessary
 // to perform deployment related quests with Vela.
 type Config struct {
@@ -16,5 +18,5 @@ type Config struct {
 	Page        int
 	PerPage     int
 	Output      string
-	Parameters  []string
+	Parameters  raw.StringSliceMap
 }

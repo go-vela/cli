@@ -33,7 +33,7 @@ var CommandVersion = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Output Vela version information
-    $ {{.HelpName}} --api.addr https://vela.example.com
+    $ {{.HelpName}}
   2. Output Vela version information with JSON output
     $ {{.HelpName}} --output json
 

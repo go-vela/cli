@@ -33,6 +33,25 @@ func TestPipeline_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: true,
+			config: &Config{
+				Action: "exec",
+				Org:    "github",
+				Repo:   "octocat",
+				Event:  "tag",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "exec",
+				Org:    "github",
+				Repo:   "octocat",
+				Event:  "tag",
+				Tag:    "v1.0.0",
+			},
+		},
+		{
 			failure: false,
 			config: &Config{
 				Action: "expand",

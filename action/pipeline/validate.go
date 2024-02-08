@@ -38,10 +38,6 @@ func (c *Config) Validate() error {
 		fallthrough
 	case "expand":
 		fallthrough
-	case "exec":
-		if strings.EqualFold(c.Event, constants.EventTag) && len(c.Tag) == 0 {
-			return fmt.Errorf("no tag provided for tag event")
-		}
 	case "view":
 		// check if pipeline org is set
 		if len(c.Org) == 0 {
@@ -73,6 +69,10 @@ func (c *Config) Validate() error {
 			if len(parts) != 2 {
 				return fmt.Errorf("invalid format for template file: %s (valid format: <name>:<source>)", file)
 			}
+		}
+	case "exec":
+		if strings.EqualFold(c.Event, constants.EventTag) && len(c.Tag) == 0 {
+			return fmt.Errorf("no tag provided for tag event")
 		}
 	}
 

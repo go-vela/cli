@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
+//nolint:dupl // ignore duplicate of add
 package repo
 
 import (
@@ -115,6 +116,12 @@ var CommandUpdate = &cli.Command{
 			Usage:   "type of base pipeline for the compiler to render",
 			Value:   constants.PipelineTypeYAML,
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_APPROVE_BUILD", "REPO_APPROVE_BUILD"},
+			Name:    "approve-build",
+			Aliases: []string{"ab", "approve-build-setting"},
+			Usage:   "when to require admin approval to run builds from outside contributors (`fork-always`, `fork-no-write`, or `never`)",
+		},
 
 		// Output Flags
 
@@ -137,6 +144,8 @@ EXAMPLES:
     $ {{.HelpName}}
   5. Update a repository with a new build number.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 200
+  6. Update a repository with approve build setting set to fork-always.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-always
 
 DOCUMENTATION:
 
@@ -180,6 +189,7 @@ func update(c *cli.Context) error {
 		Active:       c.Bool("active"),
 		Events:       c.StringSlice("event"),
 		PipelineType: c.String("pipeline-type"),
+		ApproveBuild: c.String("approve-build"),
 		Output:       c.String(internal.FlagOutput),
 	}
 

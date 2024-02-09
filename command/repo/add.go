@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
+//nolint:dupl // ignore duplicate of update
 package repo
 
 import (
@@ -115,6 +116,12 @@ var CommandAdd = &cli.Command{
 			Usage:   "type of base pipeline for the compiler to render",
 			Value:   constants.PipelineTypeYAML,
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_APPROVE_BUILD", "REPO_APPROVE_BUILD"},
+			Name:    "approve-build",
+			Aliases: []string{"ab", "approve-build-setting"},
+			Usage:   "when to require admin approval to run builds from outside contributors (`fork-always`, `fork-no-write`, or `never`)",
+		},
 
 		// Output Flags
 
@@ -139,6 +146,8 @@ EXAMPLES:
     $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
   6. Add a repository with a starlark pipeline file.
     $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
+  7. Add a repository with approve build setting set to fork-no-write.
+    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
 
 DOCUMENTATION:
 
@@ -182,6 +191,7 @@ func add(c *cli.Context) error {
 		Active:       c.Bool("active"),
 		Events:       c.StringSlice("event"),
 		PipelineType: c.String("pipeline-type"),
+		ApproveBuild: c.String("approve-build"),
 		Output:       c.String(internal.FlagOutput),
 	}
 

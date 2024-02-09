@@ -39,6 +39,7 @@ func (c *Config) Add(client *vela.Client) error {
 		Trusted:      vela.Bool(c.Trusted),
 		Active:       vela.Bool(c.Active),
 		PipelineType: vela.String(c.PipelineType),
+		ApproveBuild: vela.String(c.ApproveBuild),
 	}
 
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)

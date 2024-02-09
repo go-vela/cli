@@ -10,6 +10,7 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 
 	"github.com/go-vela/server/compiler"
@@ -68,6 +69,10 @@ func (c *Config) Validate() error {
 			if len(parts) != 2 {
 				return fmt.Errorf("invalid format for template file: %s (valid format: <name>:<source>)", file)
 			}
+		}
+	case "exec":
+		if strings.EqualFold(c.Event, constants.EventTag) && len(c.Tag) == 0 {
+			return fmt.Errorf("no tag provided for tag event")
 		}
 	}
 

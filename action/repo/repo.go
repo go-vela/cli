@@ -20,6 +20,7 @@ type Config struct {
 	Active       bool
 	Events       []string
 	PipelineType string
+	ApproveBuild string
 	Page         int
 	PerPage      int
 	Output       string

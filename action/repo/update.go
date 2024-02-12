@@ -37,6 +37,7 @@ func (c *Config) Update(client *vela.Client) error {
 		Trusted:      vela.Bool(c.Trusted),
 		Active:       vela.Bool(c.Active),
 		PipelineType: vela.String(c.PipelineType),
+		ApproveBuild: vela.String(c.ApproveBuild),
 	}
 
 	if len(c.Events) > 0 {

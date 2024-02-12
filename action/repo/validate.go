@@ -5,6 +5,7 @@ package repo
 import (
 	"fmt"
 
+	"github.com/go-vela/types/constants"
 	"github.com/sirupsen/logrus"
 )
 
@@ -25,6 +26,21 @@ func (c *Config) Validate() error {
 			if len(c.Name) == 0 {
 				return fmt.Errorf("no repo name provided")
 			}
+		}
+	}
+
+	// check if approve build setting is valid if supplied
+	if c.Action == "add" || c.Action == "update" {
+		if len(c.ApproveBuild) > 0 &&
+			c.ApproveBuild != constants.ApproveForkAlways &&
+			c.ApproveBuild != constants.ApproveForkNoWrite &&
+			c.ApproveBuild != constants.ApproveNever {
+			return fmt.Errorf(
+				"invalid input for approve-build: must be `%s`, `%s`, or `%s`",
+				constants.ApproveForkAlways,
+				constants.ApproveForkNoWrite,
+				constants.ApproveNever,
+			)
 		}
 	}
 

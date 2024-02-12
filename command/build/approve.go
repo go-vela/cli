@@ -54,7 +54,7 @@ EXAMPLES:
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/reference/cli/build/Approve/
+  https://go-vela.github.io/docs/reference/cli/build/approve/
 `, cli.CommandHelpTemplate),
 }
 

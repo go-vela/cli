@@ -97,6 +97,25 @@ func TestRepo_Config_Validate(t *testing.T) {
 			},
 		},
 		{
+			failure: false,
+			config: &Config{
+				Action:       "update",
+				Org:          "github",
+				Name:         "octocat",
+				Link:         "https://github.com/github/octocat",
+				Clone:        "https://github.com/github/octocat.git",
+				Branch:       "main",
+				Timeout:      60,
+				Visibility:   "public",
+				Private:      false,
+				Trusted:      false,
+				Active:       true,
+				Events:       []string{"push", "pull_request", "comment", "deployment", "tag"},
+				ApproveBuild: "first-time",
+				Output:       "",
+			},
+		},
+		{
 			failure: true,
 			config: &Config{
 				Action:       "update",

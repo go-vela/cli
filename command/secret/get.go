@@ -94,11 +94,13 @@ EXAMPLES:
     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo
   2. Get organization secret details.
     $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg
-  3. Get shared secret details.
+  3. Get shared secret details for an organization.
+    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team '*'
+  4. Get shared secret details for a team.
     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties
-  4. Get repository secret details with json output.
+  5. Get repository secret details with json output.
     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --output json
-  5. Get secret details when config or environment variables are set.
+  6. Get secret details when config or environment variables are set.
     $ {{.HelpName}} --org MyOrg --repo MyRepo
 
 DOCUMENTATION:

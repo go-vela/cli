@@ -34,11 +34,13 @@ func (c *Config) Validate() error {
 		if len(c.ApproveBuild) > 0 &&
 			c.ApproveBuild != constants.ApproveForkAlways &&
 			c.ApproveBuild != constants.ApproveForkNoWrite &&
+			c.ApproveBuild != constants.ApproveOnce &&
 			c.ApproveBuild != constants.ApproveNever {
 			return fmt.Errorf(
-				"invalid input for approve-build: must be `%s`, `%s`, or `%s`",
+				"invalid input for approve-build: must be `%s`, `%s`, `%s`, or `%s`",
 				constants.ApproveForkAlways,
 				constants.ApproveForkNoWrite,
+				constants.ApproveOnce,
 				constants.ApproveNever,
 			)
 		}

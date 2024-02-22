@@ -203,7 +203,6 @@ func validate(c *cli.Context) error {
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
-		client.WithLocal(true)
 		client.WithLocalTemplates(p.TemplateFiles)
 		client.TemplateDepth = c.Int("max-template-depth")
 	} else {
@@ -216,5 +215,5 @@ func validate(c *cli.Context) error {
 	// execute the validate local call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
-	return p.ValidateLocal(client.WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
+	return p.ValidateLocal(client.WithLocal(true).WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

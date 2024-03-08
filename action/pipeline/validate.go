@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/pipeline"
 
 	"github.com/go-vela/server/compiler"
 
@@ -107,10 +108,30 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	// set pipelineType within client
 	client.WithRepo(&library.Repo{PipelineType: &c.PipelineType})
 
+	// define rule data if provided
+	var ruleData *pipeline.RuleData
+	if len(c.Branch) > 0 ||
+		len(c.Comment) > 0 ||
+		len(c.Event) > 0 ||
+		len(c.FileChangeset) > 0 ||
+		len(c.Status) > 0 ||
+		len(c.Tag) > 0 ||
+		len(c.Target) > 0 {
+		ruleData = &pipeline.RuleData{
+			Branch:  c.Branch,
+			Comment: c.Comment,
+			Event:   c.Event,
+			Path:    c.FileChangeset,
+			Status:  c.Status,
+			Tag:     c.Tag,
+			Target:  c.Target,
+		}
+	}
+
 	logrus.Tracef("compiling pipeline %s", path)
 
 	// compile the object into a pipeline
-	p, _, err := client.CompileLite(path, false)
+	p, _, err := client.CompileLite(path, ruleData, false)
 	if err != nil {
 		return err
 	}

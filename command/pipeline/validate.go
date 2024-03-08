@@ -99,6 +99,49 @@ var CommandValidate = &cli.Command{
 			Value:   false,
 		},
 
+		// RuleData Flags
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_BRANCH", "PIPELINE_BRANCH", "VELA_BUILD_BRANCH"},
+			Name:    "branch",
+			Aliases: []string{"b"},
+			Usage:   "provide the build branch for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMMENT", "PIPELINE_COMMENT", "VELA_BUILD_COMMENT"},
+			Name:    "comment",
+			Aliases: []string{"c"},
+			Usage:   "provide the build comment for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_EVENT", "PIPELINE_EVENT", "VELA_BUILD_EVENT"},
+			Name:    "event",
+			Aliases: []string{"e"},
+			Usage:   "provide the build event for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_STATUS", "PIPELINE_STATUS", "VELA_BUILD_STATUS"},
+			Name:    "status",
+			Usage:   "provide the expected build status for the local validation",
+			Value:   "success",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"},
+			Name:    "tag",
+			Aliases: []string{"t"},
+			Usage:   "provide the build tag for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TARGET", "PIPELINE_TARGET", "VELA_BUILD_TARGET"},
+			Name:    "target",
+			Usage:   "provide the build target for the pipeline",
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_FILE_CHANGESET", "FILE_CHANGESET"},
+			Name:    "file-changeset",
+			Aliases: []string{"fcs"},
+			Usage:   "provide a list of files changed for ruleset matching",
+		},
+
 		// Compiler Flags
 
 		&cli.StringFlag{
@@ -164,6 +207,13 @@ func validate(c *cli.Context) error {
 		TemplateFiles: c.StringSlice("template-file"),
 		Remote:        c.Bool("remote"),
 		PipelineType:  c.String("pipeline-type"),
+		Branch:        c.String("branch"),
+		Comment:       c.String("comment"),
+		Event:         c.String("event"),
+		FileChangeset: c.StringSlice("file-changeset"),
+		Status:        c.String("status"),
+		Tag:           c.String("tag"),
+		Target:        c.String("target"),
 	}
 
 	// validate pipeline configuration

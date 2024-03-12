@@ -14,7 +14,7 @@ require (
 	github.com/go-vela/server v0.23.2-0.20240312184244-a645c822da1d
 	github.com/go-vela/types v0.23.2-0.20240312183632-2e046fceb8fe
 	github.com/go-vela/worker v0.23.2-0.20240312185333-e1572743b008
-	github.com/golang-jwt/jwt/v5 v5.2.0
+	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/google/go-cmp v0.6.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1

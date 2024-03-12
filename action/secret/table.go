@@ -91,7 +91,7 @@ func wideTable(secrets *[]library.Secret) error {
 	// set of secret fields we display in a wide table
 	//
 	// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-	table.AddRow("NAME", "ORG", "TYPE", "KEY", "EVENTS", "IMAGES")
+	table.AddRow("NAME", "ORG", "TYPE", "KEY", "EVENTS", "IMAGES", "ALLOW COMMANDS", "ALLOW SUBSTITUTION")
 
 	// iterate through all secrets in the list
 	for _, s := range *secrets {
@@ -111,7 +111,7 @@ func wideTable(secrets *[]library.Secret) error {
 		// add a row to the table with the specified values
 		//
 		// https://pkg.go.dev/github.com/gosuri/uitable?tab=doc#Table.AddRow
-		table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), k, e, i)
+		table.AddRow(s.GetName(), s.GetOrg(), s.GetType(), k, e, i, s.GetAllowCommand(), s.GetAllowSubstitution())
 	}
 
 	// output the wide table in stdout format

@@ -134,6 +134,8 @@ func populateEvents(r *library.Repo, events []string) {
 			pull.SetSynchronize(true)
 		case constants.EventPull + ":" + constants.ActionReopened:
 			pull.SetReopened(true)
+		case constants.EventPull + ":" + constants.ActionLabeled:
+			pull.SetLabeled(true)
 		case constants.EventComment + ":" + constants.ActionCreated:
 			comment.SetCreated(true)
 		case constants.EventComment + ":" + constants.ActionEdited:

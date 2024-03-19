@@ -200,7 +200,7 @@ func TestRepo_populateEvents(t *testing.T) {
 		},
 		{
 			name:   "action specific",
-			events: []string{"push:branch", "push:tag", "pull_request:opened", "pull_request:edited", "deployment:created", "comment:created", "delete:branch", "delete:tag"},
+			events: []string{"push:branch", "push:tag", "pull_request:opened", "pull_request:edited", "pull_request:labeled", "deployment:created", "comment:created", "delete:branch", "delete:tag"},
 			want: &library.Repo{
 				AllowPush:    &tBool,
 				AllowPull:    &fBool,
@@ -215,8 +215,9 @@ func TestRepo_populateEvents(t *testing.T) {
 						DeleteTag:    &tBool,
 					},
 					PullRequest: &actions.Pull{
-						Opened: &tBool,
-						Edited: &tBool,
+						Opened:  &tBool,
+						Edited:  &tBool,
+						Labeled: &tBool,
 					},
 					Deployment: &actions.Deploy{
 						Created: &tBool,

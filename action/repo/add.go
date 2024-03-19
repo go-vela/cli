@@ -136,6 +136,8 @@ func populateEvents(r *library.Repo, events []string) {
 			pull.SetReopened(true)
 		case constants.EventPull + ":" + constants.ActionLabeled:
 			pull.SetLabeled(true)
+		case constants.EventPull + ":" + constants.ActionUnlabeled:
+			pull.SetUnlabeled(true)
 		case constants.EventComment + ":" + constants.ActionCreated:
 			comment.SetCreated(true)
 		case constants.EventComment + ":" + constants.ActionEdited:

@@ -82,7 +82,7 @@ var CommandUpdate = &cli.Command{
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_EVENTS", "SECRET_EVENTS"},
 			Name:    "event",
-			Aliases: []string{"ev"},
+			Aliases: []string{"events", "ev"},
 			Usage:   "provide the event(s) that can access this secret",
 		},
 		&cli.StringFlag{

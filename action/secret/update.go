@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -60,6 +61,11 @@ func (c *Config) Update(client *vela.Client) error {
 		Events:            &c.Events,
 		AllowCommand:      c.AllowCommand,
 		AllowSubstitution: c.AllowSubstitution,
+	}
+
+	// populate events if provided
+	if len(c.Events) > 0 {
+		s.SetAllowEvents(internal.PopulateEvents(c.Events))
 	}
 
 	logrus.Tracef("modifying secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)

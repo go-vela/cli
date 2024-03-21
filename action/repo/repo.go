@@ -25,9 +25,3 @@ type Config struct {
 	PerPage      int
 	Output       string
 }
-
-// Alternate constants for webhook events.
-const (
-	AlternateDeploy = "deploy"
-	AlternatePull   = "pull"
-)

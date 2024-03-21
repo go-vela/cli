@@ -62,6 +62,11 @@ func (c *Config) Update(client *vela.Client) error {
 		AllowSubstitution: c.AllowSubstitution,
 	}
 
+	// populate events if provided
+	if len(c.Events) > 0 {
+		s.SetAllowEvents(library.NewEventsFromSlice(c.Events))
+	}
+
 	logrus.Tracef("modifying secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)
 
 	// send API call to update a secret

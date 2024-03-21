@@ -118,8 +118,8 @@ github.com/go-vela/sdk-go v0.23.2 h1:DQzhz7ggbLXmi2Kg0x0C4h/ujSujSSyHbxUORMgt/hk
 github.com/go-vela/sdk-go v0.23.2/go.mod h1:kppIcwY9Bd6qke7sHVWJ0F+SNvYuTUw2sNvAnrkqayg=
 github.com/go-vela/server v0.23.2 h1:G/JLZPHgokZxthE4PMfiMIZCKdYadoafYEqh/P91ECk=
 github.com/go-vela/server v0.23.2/go.mod h1:Iqs8vB35nPcN6GpjmvWwIjBZZ42oKHgOTrGSpz2wvNI=
-github.com/go-vela/types v0.23.2 h1:QDt2lta7FPEfN2RK/Bn++DkqyjGIB4H/Q4XkFAj3hXQ=
-github.com/go-vela/types v0.23.2/go.mod h1:aTE6dzssqTGOvU6m2/vsI9NoSW/3hH/yLzf3cCSo0Zk=
+github.com/go-vela/types v0.23.3-0.20240321143352-e9cd33aaba61 h1:1LIYUJZBEPnutS/xtgixS/rMBdYRmiQj7hcckALvmOI=
+github.com/go-vela/types v0.23.3-0.20240321143352-e9cd33aaba61/go.mod h1:aTE6dzssqTGOvU6m2/vsI9NoSW/3hH/yLzf3cCSo0Zk=
 github.com/go-vela/worker v0.23.2 h1:ypYzhLk94xkAUbpBb9d+QU8rw4jVQC9rIOCIZ2XNb90=
 github.com/go-vela/worker v0.23.2/go.mod h1:M1GzqlX6bIi/p+Fb6HuJ/uGHzPbaQBS6KVreClInZKg=
 github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=

@@ -6,7 +6,6 @@ package repo
 import (
 	"fmt"
 
-	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -44,7 +43,7 @@ func (c *Config) Add(client *vela.Client) error {
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)
 
 	if len(c.Events) > 0 {
-		r.SetAllowEvents(internal.PopulateEvents(c.Events))
+		r.SetAllowEvents(library.NewEventsFromSlice(c.Events))
 	}
 
 	// send API call to add a repository

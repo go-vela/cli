@@ -106,7 +106,7 @@ var CommandUpdate = &cli.Command{
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_EVENTS", "REPO_EVENTS", "VELA_ADD_EVENTS", "REPO_ADD_EVENTS"},
 			Name:    "event",
-			Aliases: []string{"events", "add-event", "add-events", "e"},
+			Aliases: []string{"events", "e"},
 			Usage:   "webhook event(s) repository responds to",
 		},
 		&cli.StringFlag{

@@ -6,8 +6,7 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
-
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 
 	"github.com/sirupsen/logrus"
 )
@@ -19,7 +18,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// create the worker object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Worker
-	w := &library.Worker{
+	w := &api.Worker{
 		Hostname:   vela.String(c.Hostname),
 		Address:    vela.String(c.Address),
 		Active:     c.Active,

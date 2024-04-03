@@ -90,7 +90,6 @@ func (c *Config) Validate() error {
 			valid := false
 
 			for _, e := range validEvents() {
-
 				if event == e {
 					valid = true
 					break

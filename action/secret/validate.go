@@ -88,7 +88,6 @@ func (c *Config) Validate() error {
 		for _, event := range c.AllowEvents {
 			// check if the secret event provided is valid
 			valid := false
-
 			for _, e := range validEvents() {
 				if event == e {
 					valid = true

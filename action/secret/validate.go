@@ -83,7 +83,7 @@ func (c *Config) Validate() error {
 	// check if secret action is add or update
 	if c.Action == "add" || c.Action == "update" {
 		// iterate through all secret events
-		for _, event := range c.Events {
+		for _, event := range c.AllowEvents {
 			// check if the secret event provided is valid
 			switch event {
 			case constants.EventComment:

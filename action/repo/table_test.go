@@ -11,9 +11,9 @@ import (
 func TestRepo_table(t *testing.T) {
 	// setup types
 	r1 := testRepo()
-	r1.SetAllowDeploy(true)
-	r1.SetAllowTag(true)
-	r1.SetAllowComment(true)
+	r1.GetAllowEvents().GetDeployment().SetCreated(true)
+	r1.GetAllowEvents().GetPush().SetTag(true)
+	r1.GetAllowEvents().GetComment().SetCreated(true)
 
 	r2 := testRepo()
 	r2.SetID(2)
@@ -55,9 +55,9 @@ func TestRepo_table(t *testing.T) {
 func TestRepo_wideTable(t *testing.T) {
 	// setup types
 	r1 := testRepo()
-	r1.SetAllowDeploy(true)
-	r1.SetAllowTag(true)
-	r1.SetAllowComment(true)
+	r1.GetAllowEvents().GetDeployment().SetCreated(true)
+	r1.GetAllowEvents().GetPush().SetTag(true)
+	r1.GetAllowEvents().GetComment().SetCreated(true)
 
 	r2 := testRepo()
 	r2.SetID(2)
@@ -113,11 +113,13 @@ func testRepo() *library.Repo {
 	r.SetPrivate(false)
 	r.SetTrusted(false)
 	r.SetActive(true)
-	r.SetAllowPull(true)
-	r.SetAllowPush(true)
-	r.SetAllowDeploy(false)
-	r.SetAllowTag(false)
-	r.SetAllowComment(false)
+	r.GetAllowEvents().GetPullRequest().SetOpened(true)
+	r.GetAllowEvents().GetPullRequest().SetSynchronize(true)
+	r.GetAllowEvents().GetPullRequest().SetEdited(true)
+	r.GetAllowEvents().GetPush().SetBranch(true)
+	r.GetAllowEvents().GetDeployment().SetCreated(false)
+	r.GetAllowEvents().GetPush().SetTag(false)
+	r.GetAllowEvents().GetComment().SetCreated(false)
 
 	return r
 }

@@ -22,7 +22,7 @@ type Config struct {
 	Name              string
 	Value             string
 	Images            []string
-	Events            []string
+	AllowEvents       []string
 	AllowCommand      *bool
 	AllowSubstitution *bool
 	File              string

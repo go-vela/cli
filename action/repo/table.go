@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 
-	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 
 	"github.com/gosuri/uitable"
@@ -48,7 +47,7 @@ func table(repos *[]library.Repo) error {
 		logrus.Tracef("adding repo %s to repo table", r.GetFullName())
 
 		//nolint:gosec // ignore memory aliasing
-		e := strings.Join(events(&r), ",")
+		e := strings.Join(r.AllowEvents.List(), ",")
 
 		// add a row to the table with the specified values
 		//
@@ -95,7 +94,7 @@ func wideTable(repos *[]library.Repo) error {
 		logrus.Tracef("adding repo %s to wide repo table", r.GetFullName())
 
 		//nolint:gosec // ignore memory aliasing
-		e := strings.Join(events(&r), ",")
+		e := strings.Join(r.AllowEvents.List(), ",")
 
 		// add a row to the table with the specified values
 		//
@@ -107,38 +106,4 @@ func wideTable(repos *[]library.Repo) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
 	return output.Stdout(table)
-}
-
-// events is a helper function to output
-// the event types a repo is configured
-// to trigger builds off of.
-func events(r *library.Repo) []string {
-	e := []string{}
-
-	// check if the repository allows comment events
-	if r.GetAllowComment() {
-		e = append(e, constants.EventComment)
-	}
-
-	// check if the repository allows deployment events
-	if r.GetAllowDeploy() {
-		e = append(e, constants.EventDeploy)
-	}
-
-	// check if the repository allows pull_request events
-	if r.GetAllowPull() {
-		e = append(e, constants.EventPull)
-	}
-
-	// check if the repository allows push events
-	if r.GetAllowPush() {
-		e = append(e, constants.EventPush)
-	}
-
-	// check if the repository allows tag events
-	if r.GetAllowTag() {
-		e = append(e, constants.EventTag)
-	}
-
-	return e
 }

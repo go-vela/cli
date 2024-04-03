@@ -90,6 +90,7 @@ func (c *Config) Validate() error {
 			valid := false
 
 			for _, e := range validEvents() {
+				fmt.Println(e, event)
 				if event == e {
 					valid = true
 					break
@@ -107,12 +108,12 @@ func (c *Config) Validate() error {
 
 // returns a useable list of valid events using a combination of hardcoded shorthand names and AllowEvents.List().
 func validEvents() []string {
-	shorthands := []string{
-		"push",
+	unlistedEvents := []string{
 		"pull_request",
-		"deployment",
-		"comment",
-		"schedule",
+		"push:branch",
+		"push:tag",
+		"deployment:created",
+		"schedule:run",
 	}
 
 	t := true
@@ -142,5 +143,5 @@ func validEvents() []string {
 		},
 	}
 
-	return append(evs.List(), shorthands...)
+	return append(evs.List(), unlistedEvents...)
 }

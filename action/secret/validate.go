@@ -88,6 +88,10 @@ func (c *Config) Validate() error {
 			switch event {
 			case constants.EventPush:
 				fallthrough
+			case constants.EventPush + ":" + constants.ActionBranch:
+				fallthrough
+			case constants.EventPush + ":" + constants.ActionTag:
+				fallthrough
 			case constants.EventPull + ":" + constants.ActionOpened:
 				fallthrough
 			case constants.EventPull + ":" + constants.ActionSynchronize:

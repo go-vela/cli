@@ -7,6 +7,8 @@ import (
 	"strings"
 
 	"github.com/go-vela/types/constants"
+	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/library/actions"
 
 	"github.com/sirupsen/logrus"
 )
@@ -85,40 +87,58 @@ func (c *Config) Validate() error {
 		// iterate through all secret events
 		for _, event := range c.AllowEvents {
 			// check if the secret event provided is valid
-			switch event {
-			case constants.EventPush:
-				fallthrough
-			case constants.EventPush + ":" + constants.ActionBranch:
-				fallthrough
-			case constants.EventPush + ":" + constants.ActionTag:
-				fallthrough
-			case constants.EventPull + ":" + constants.ActionOpened:
-				fallthrough
-			case constants.EventPull + ":" + constants.ActionSynchronize:
-				fallthrough
-			case constants.EventPull + ":" + constants.ActionEdited:
-				fallthrough
-			case constants.EventPull + ":" + constants.ActionReopened:
-				fallthrough
-			case constants.EventTag:
-				fallthrough
-			case constants.EventComment + ":" + constants.ActionCreated:
-				fallthrough
-			case constants.EventComment + ":" + constants.ActionEdited:
-				fallthrough
-			case constants.EventDeploy:
-				fallthrough
-			case constants.EventSchedule:
-				fallthrough
-			case constants.EventDelete + ":" + constants.ActionBranch:
-				fallthrough
-			case constants.EventDelete + ":" + constants.ActionTag:
-				continue
-			default:
+			valid := false
+			for _, e := range validEvents() {
+				if event == e {
+					valid = true
+					break
+				}
+			}
+
+			if !valid {
 				return fmt.Errorf("invalid secret event provided: %s", event)
 			}
 		}
 	}
 
 	return nil
+}
+
+func validEvents() []string {
+	t := true
+
+	evs := library.Events{
+		Push: &actions.Push{
+			Branch:       &t,
+			Tag:          &t,
+			DeleteBranch: &t,
+			DeleteTag:    &t,
+		},
+		PullRequest: &actions.Pull{
+			Opened:      &t,
+			Edited:      &t,
+			Synchronize: &t,
+			Reopened:    &t,
+		},
+		Deployment: &actions.Deploy{
+			Created: &t,
+		},
+		Comment: &actions.Comment{
+			Created: &t,
+			Edited:  &t,
+		},
+		Schedule: &actions.Schedule{
+			Run: &t,
+		},
+	}
+
+	legacyEvs := []string{
+		"push",
+		"pull_request",
+		"deployment",
+		"comment",
+		"schedule",
+	}
+
+	return append(evs.List(), legacyEvs...)
 }

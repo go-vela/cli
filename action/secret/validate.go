@@ -105,7 +105,7 @@ func (c *Config) Validate() error {
 	return nil
 }
 
-// returns a useable list of valid events using a combination of hardcoded shorthand names and AllowEvents.List()
+// returns a useable list of valid events using a combination of hardcoded shorthand names and AllowEvents.List().
 func validEvents() []string {
 	shorthands := []string{
 		"push",

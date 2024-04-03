@@ -104,7 +104,16 @@ func (c *Config) Validate() error {
 	return nil
 }
 
+// returns a useable list of valid events using a combination of hardcoded shorthand names and AllowEvents.List()
 func validEvents() []string {
+	shorthands := []string{
+		"push",
+		"pull_request",
+		"deployment",
+		"comment",
+		"schedule",
+	}
+
 	t := true
 
 	evs := library.Events{
@@ -132,13 +141,5 @@ func validEvents() []string {
 		},
 	}
 
-	legacyEvs := []string{
-		"push",
-		"pull_request",
-		"deployment",
-		"comment",
-		"schedule",
-	}
-
-	return append(evs.List(), legacyEvs...)
+	return append(evs.List(), shorthands...)
 }

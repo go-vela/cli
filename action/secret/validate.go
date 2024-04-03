@@ -86,17 +86,29 @@ func (c *Config) Validate() error {
 		for _, event := range c.AllowEvents {
 			// check if the secret event provided is valid
 			switch event {
-			case constants.EventComment:
+			case constants.EventPush:
+				fallthrough
+			case constants.EventPull + ":" + constants.ActionOpened:
+				fallthrough
+			case constants.EventPull + ":" + constants.ActionSynchronize:
+				fallthrough
+			case constants.EventPull + ":" + constants.ActionEdited:
+				fallthrough
+			case constants.EventPull + ":" + constants.ActionReopened:
+				fallthrough
+			case constants.EventTag:
+				fallthrough
+			case constants.EventComment + ":" + constants.ActionCreated:
+				fallthrough
+			case constants.EventComment + ":" + constants.ActionEdited:
 				fallthrough
 			case constants.EventDeploy:
 				fallthrough
-			case constants.EventPull:
-				fallthrough
-			case constants.EventPush:
-				fallthrough
 			case constants.EventSchedule:
 				fallthrough
-			case constants.EventTag:
+			case constants.EventDelete + ":" + constants.ActionBranch:
+				fallthrough
+			case constants.EventDelete + ":" + constants.ActionTag:
 				continue
 			default:
 				return fmt.Errorf("invalid secret event provided: %s", event)

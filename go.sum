@@ -118,8 +118,8 @@ github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 h1:tfuBGBXKqDEe
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572/go.mod h1:9Pwr4B2jHnOSGXyyzV8ROjYa2ojvAY6HCGYYfMoC3Ls=
 github.com/go-vela/types v0.23.4-0.20240402153726-f16c3e4cb5fb h1:jHao/NNRswInMLEb0m1OJ84d1m/LGWMCmaeRqSDnWQY=
 github.com/go-vela/types v0.23.4-0.20240402153726-f16c3e4cb5fb/go.mod h1:mEF9dLkk00rUXf/t39n2WvXZgJbxnPEEWy+DHqIlRUo=
-github.com/go-vela/worker v0.23.3 h1:dejrxSO3t9/toD2mQ3LWvyJt6NXxoZcceteS9h9vFhY=
-github.com/go-vela/worker v0.23.3/go.mod h1:FcM0YPBVU1j683r9B0JomkaBxM/deSGI8nbIXL4Zpb4=
+github.com/go-vela/worker v0.23.2 h1:ypYzhLk94xkAUbpBb9d+QU8rw4jVQC9rIOCIZ2XNb90=
+github.com/go-vela/worker v0.23.2/go.mod h1:M1GzqlX6bIi/p+Fb6HuJ/uGHzPbaQBS6KVreClInZKg=
 github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
 github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=

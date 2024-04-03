@@ -167,18 +167,18 @@ func add(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
-		Action: internal.ActionAdd,
-		Engine: c.String(internal.FlagSecretEngine),
-		Type:   c.String(internal.FlagSecretType),
-		Org:    c.String(internal.FlagOrg),
-		Repo:   c.String(internal.FlagRepo),
-		Team:   c.String("team"),
-		Name:   c.String("name"),
-		Value:  c.String("value"),
-		Images: c.StringSlice("image"),
-		Events: c.StringSlice("event"),
-		File:   c.String("file"),
-		Output: c.String(internal.FlagOutput),
+		Action:      internal.ActionAdd,
+		Engine:      c.String(internal.FlagSecretEngine),
+		Type:        c.String(internal.FlagSecretType),
+		Org:         c.String(internal.FlagOrg),
+		Repo:        c.String(internal.FlagRepo),
+		Team:        c.String("team"),
+		Name:        c.String("name"),
+		Value:       c.String("value"),
+		Images:      c.StringSlice("image"),
+		AllowEvents: c.StringSlice("event"),
+		File:        c.String("file"),
+		Output:      c.String(internal.FlagOutput),
 	}
 
 	// check if allow_command and allow_substitution are provided

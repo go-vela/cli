@@ -7,6 +7,8 @@ import (
 	"strings"
 
 	"github.com/go-vela/types/constants"
+	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/library/actions"
 
 	"github.com/sirupsen/logrus"
 )
@@ -83,26 +85,61 @@ func (c *Config) Validate() error {
 	// check if secret action is add or update
 	if c.Action == "add" || c.Action == "update" {
 		// iterate through all secret events
-		for _, event := range c.Events {
+		for _, event := range c.AllowEvents {
 			// check if the secret event provided is valid
-			switch event {
-			case constants.EventComment:
-				fallthrough
-			case constants.EventDeploy:
-				fallthrough
-			case constants.EventPull:
-				fallthrough
-			case constants.EventPush:
-				fallthrough
-			case constants.EventSchedule:
-				fallthrough
-			case constants.EventTag:
-				continue
-			default:
+			valid := false
+			for _, e := range validEvents() {
+				if event == e {
+					valid = true
+					break
+				}
+			}
+
+			if !valid {
 				return fmt.Errorf("invalid secret event provided: %s", event)
 			}
 		}
 	}
 
 	return nil
+}
+
+// returns a useable list of valid events using a combination of hardcoded shorthand names and AllowEvents.List().
+func validEvents() []string {
+	unlistedEvents := []string{
+		"pull_request",
+		"push:branch",
+		"push:tag",
+		"deployment:created",
+		"schedule:run",
+	}
+
+	t := true
+
+	evs := library.Events{
+		Push: &actions.Push{
+			Branch:       &t,
+			Tag:          &t,
+			DeleteBranch: &t,
+			DeleteTag:    &t,
+		},
+		PullRequest: &actions.Pull{
+			Opened:      &t,
+			Edited:      &t,
+			Synchronize: &t,
+			Reopened:    &t,
+		},
+		Deployment: &actions.Deploy{
+			Created: &t,
+		},
+		Comment: &actions.Comment{
+			Created: &t,
+			Edited:  &t,
+		},
+		Schedule: &actions.Schedule{
+			Run: &t,
+		},
+	}
+
+	return append(evs.List(), unlistedEvents...)
 }

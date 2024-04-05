@@ -8,7 +8,6 @@ import (
 
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
-	"github.com/go-vela/types/library/actions"
 
 	"github.com/sirupsen/logrus"
 )
@@ -91,44 +90,4 @@ func (c *Config) Validate() error {
 	}
 
 	return nil
-}
-
-// returns a useable list of valid events using a combination of hardcoded shorthand names and AllowEvents.List().
-func validEvents() []string {
-	unlistedEvents := []string{
-		"pull_request",
-		"push:branch",
-		"push:tag",
-		"deployment:created",
-		"schedule:run",
-	}
-
-	t := true
-
-	evs := library.Events{
-		Push: &actions.Push{
-			Branch:       &t,
-			Tag:          &t,
-			DeleteBranch: &t,
-			DeleteTag:    &t,
-		},
-		PullRequest: &actions.Pull{
-			Opened:      &t,
-			Edited:      &t,
-			Synchronize: &t,
-			Reopened:    &t,
-		},
-		Deployment: &actions.Deploy{
-			Created: &t,
-		},
-		Comment: &actions.Comment{
-			Created: &t,
-			Edited:  &t,
-		},
-		Schedule: &actions.Schedule{
-			Run: &t,
-		},
-	}
-
-	return append(evs.List(), unlistedEvents...)
 }

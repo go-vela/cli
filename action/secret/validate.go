@@ -84,20 +84,9 @@ func (c *Config) Validate() error {
 
 	// check if secret action is add or update
 	if c.Action == "add" || c.Action == "update" {
-		// iterate through all secret events
-		for _, event := range c.AllowEvents {
-			// check if the secret event provided is valid
-			valid := false
-			for _, e := range validEvents() {
-				if event == e {
-					valid = true
-					break
-				}
-			}
-
-			if !valid {
-				return fmt.Errorf("invalid secret event provided: %s", event)
-			}
+		_, err := library.NewEventsFromSlice(c.AllowEvents)
+		if err != nil {
+			return err
 		}
 	}
 

@@ -63,7 +63,12 @@ func (c *Config) Update(client *vela.Client) error {
 
 	// populate events if provided
 	if len(c.AllowEvents) > 0 {
-		s.SetAllowEvents(library.NewEventsFromSlice(c.AllowEvents))
+		evs, err := library.NewEventsFromSlice(c.AllowEvents)
+		if err != nil {
+			return err
+		}
+
+		s.SetAllowEvents(evs)
 	}
 
 	logrus.Tracef("modifying secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)

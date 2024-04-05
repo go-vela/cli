@@ -43,7 +43,12 @@ func (c *Config) Add(client *vela.Client) error {
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)
 
 	if len(c.Events) > 0 {
-		r.SetAllowEvents(library.NewEventsFromSlice(c.Events))
+		evs, err := library.NewEventsFromSlice(c.Events)
+		if err != nil {
+			return err
+		}
+
+		r.SetAllowEvents(evs)
 	}
 
 	// send API call to add a repository

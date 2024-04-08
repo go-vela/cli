@@ -117,7 +117,9 @@ func testSecret() *library.Secret {
 	s.SetValue("bar")
 	s.SetType("repo")
 	s.SetImages([]string{"alpine"})
-	s.SetEvents([]string{"push", "tag", "deployment"})
+	s.GetAllowEvents().GetPush().SetBranch(true)
+	s.GetAllowEvents().GetDeployment().SetCreated(false)
+	s.GetAllowEvents().GetPush().SetTag(false)
 	s.SetAllowCommand(true)
 	s.SetAllowSubstitution(true)
 

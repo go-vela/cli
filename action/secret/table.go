@@ -98,7 +98,7 @@ func wideTable(secrets *[]library.Secret) error {
 		logrus.Tracef("adding secret %s to wide secret table", s.GetName())
 
 		// capture list of events for secret
-		e := strings.Join(s.GetEvents(), ",")
+		e := strings.Join(s.GetAllowEvents().List(), ",")
 
 		// capture list of images for secret
 		i := strings.Join(s.GetImages(), ",")

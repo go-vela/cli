@@ -30,6 +30,13 @@ func TestPipeline_Validate(t *testing.T) {
 	fullSet.String("repo", "octocat", "doc")
 	fullSet.String("output", "json", "doc")
 	fullSet.String("pipeline-type", "yaml", "doc")
+	fullSet.String("branch", "main", "doc")
+	fullSet.String("comment", "comment", "doc")
+	fullSet.String("event", "push", "doc")
+	fullSet.String("status", "success", "doc")
+	fullSet.String("tag", "v0.0.0", "doc")
+	fullSet.String("target", "production", "doc")
+	fullSet.String("file-changeset", "README.md,main,go", "doc")
 	fullSet.Uint64("compiler-starlark-exec-limit", 10000, "doc")
 	fullSet.Bool("remote", true, "doc")
 

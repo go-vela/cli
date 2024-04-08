@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 
 	"github.com/dustin/go-humanize"
 	"github.com/gosuri/uitable"
@@ -16,7 +16,7 @@ import (
 // table is a helper function to output the
 // provided workers in a table format with
 // a specific set of fields displayed.
-func table(workers *[]library.Worker) error {
+func table(workers *[]api.Worker) error {
 	logrus.Debug("creating table for list of workers")
 
 	// create a new table
@@ -60,7 +60,7 @@ func table(workers *[]library.Worker) error {
 // wideTable is a helper function to output the
 // provided workers in a wide table format with
 // a specific set of fields displayed.
-func wideTable(workers *[]library.Worker) error {
+func wideTable(workers *[]api.Worker) error {
 	logrus.Debug("creating wide table for list of workers")
 
 	// create new wide table

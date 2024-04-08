@@ -41,7 +41,12 @@ func (c *Config) Update(client *vela.Client) error {
 	}
 
 	if len(c.Events) > 0 {
-		r.SetAllowEvents(library.NewEventsFromSlice(c.Events))
+		evs, err := library.NewEventsFromSlice(c.Events)
+		if err != nil {
+			return err
+		}
+
+		r.SetAllowEvents(evs)
 	}
 
 	logrus.Tracef("updating repo %s/%s", c.Org, c.Name)

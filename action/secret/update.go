@@ -57,14 +57,18 @@ func (c *Config) Update(client *vela.Client) error {
 		Name:              &c.Name,
 		Value:             &c.Value,
 		Images:            &c.Images,
-		Events:            &c.Events,
 		AllowCommand:      c.AllowCommand,
 		AllowSubstitution: c.AllowSubstitution,
 	}
 
 	// populate events if provided
-	if len(c.Events) > 0 {
-		s.SetAllowEvents(library.NewEventsFromSlice(c.Events))
+	if len(c.AllowEvents) > 0 {
+		evs, err := library.NewEventsFromSlice(c.AllowEvents)
+		if err != nil {
+			return err
+		}
+
+		s.SetAllowEvents(evs)
 	}
 
 	logrus.Tracef("modifying secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)
@@ -154,7 +158,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 				Name:              s.GetName(),
 				Value:             s.GetValue(),
 				Images:            s.GetImages(),
-				Events:            s.GetEvents(),
+				AllowEvents:       s.GetAllowEvents().List(),
 				AllowCommand:      s.AllowCommand,
 				AllowSubstitution: s.AllowSubstitution,
 				Output:            c.Output,

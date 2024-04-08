@@ -5,7 +5,7 @@ package worker
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestWorker_table(t *testing.T) {
@@ -22,11 +22,11 @@ func TestWorker_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		workers *[]library.Worker
+		workers *[]api.Worker
 	}{
 		{
 			failure: false,
-			workers: &[]library.Worker{
+			workers: &[]api.Worker{
 				*w1,
 				*w2,
 			},
@@ -66,11 +66,11 @@ func TestWorker_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		workers *[]library.Worker
+		workers *[]api.Worker
 	}{
 		{
 			failure: false,
-			workers: &[]library.Worker{
+			workers: &[]api.Worker{
 				*w1,
 				*w2,
 			},
@@ -97,8 +97,8 @@ func TestWorker_wideTable(t *testing.T) {
 
 // testWorker is a test helper function to create a Worker
 // type with all fields set to a fake value.
-func testWorker() *library.Worker {
-	w := new(library.Worker)
+func testWorker() *api.Worker {
+	w := new(api.Worker)
 
 	w.SetID(1)
 	w.SetActive(true)

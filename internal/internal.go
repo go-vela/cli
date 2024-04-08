@@ -129,6 +129,14 @@ const (
 	// FlagSecretType defines the key for the
 	// flag when setting the secret type.
 	FlagSecretType = "secret.type"
+
+	// FlagSecretCommands defines the key for the
+	// flag when setting the secret allow_command value.
+	FlagSecretCommands = "commands"
+
+	// FlagSecretSubstitutions defines the key for the
+	// flag when setting the secret allow_substitution value.
+	FlagSecretSubstitution = "substitution"
 )
 
 // service flag keys.

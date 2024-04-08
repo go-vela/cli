@@ -13,21 +13,22 @@ import (
 // Config represents the configuration necessary
 // to perform secret related requests with Vela.
 type Config struct {
-	Action       string
-	Engine       string
-	Type         string
-	Org          string
-	Repo         string
-	Team         string
-	Name         string
-	Value        string
-	Images       []string
-	Events       []string
-	AllowCommand bool
-	File         string
-	Page         int
-	PerPage      int
-	Output       string
+	Action            string
+	Engine            string
+	Type              string
+	Org               string
+	Repo              string
+	Team              string
+	Name              string
+	Value             string
+	Images            []string
+	Events            []string
+	AllowCommand      *bool
+	AllowSubstitution *bool
+	File              string
+	Page              int
+	PerPage           int
+	Output            string
 }
 
 // setValue is a helper function to check if the value

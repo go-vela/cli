@@ -68,6 +68,8 @@ func TestSecret_wideTable(t *testing.T) {
 	s3.SetRepo("")
 	s3.SetTeam("octokitties")
 	s3.SetType("shared")
+	s3.SetAllowCommand(false)
+	s3.SetAllowSubstitution(false)
 
 	// setup tests
 	tests := []struct {
@@ -117,6 +119,7 @@ func testSecret() *library.Secret {
 	s.SetImages([]string{"alpine"})
 	s.SetEvents([]string{"push", "tag", "deployment"})
 	s.SetAllowCommand(true)
+	s.SetAllowSubstitution(true)
 
 	return s
 }

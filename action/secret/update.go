@@ -50,15 +50,21 @@ func (c *Config) Update(client *vela.Client) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Secret
 	s := &library.Secret{
-		Type:         &c.Type,
-		Org:          &c.Org,
-		Repo:         &c.Repo,
-		Team:         &c.Team,
-		Name:         &c.Name,
-		Value:        &c.Value,
-		Images:       &c.Images,
-		Events:       &c.Events,
-		AllowCommand: &c.AllowCommand,
+		Type:              &c.Type,
+		Org:               &c.Org,
+		Repo:              &c.Repo,
+		Team:              &c.Team,
+		Name:              &c.Name,
+		Value:             &c.Value,
+		Images:            &c.Images,
+		Events:            &c.Events,
+		AllowCommand:      c.AllowCommand,
+		AllowSubstitution: c.AllowSubstitution,
+	}
+
+	// populate events if provided
+	if len(c.Events) > 0 {
+		s.SetAllowEvents(library.NewEventsFromSlice(c.Events))
 	}
 
 	logrus.Tracef("modifying secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)
@@ -139,18 +145,19 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 			//
 			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 			s := &Config{
-				Action:       "update",
-				Engine:       f.Metadata.Engine,
-				Type:         s.GetType(),
-				Org:          s.GetOrg(),
-				Repo:         s.GetRepo(),
-				Team:         s.GetTeam(),
-				Name:         s.GetName(),
-				Value:        s.GetValue(),
-				Images:       s.GetImages(),
-				Events:       s.GetEvents(),
-				AllowCommand: s.GetAllowCommand(),
-				Output:       c.Output,
+				Action:            "update",
+				Engine:            f.Metadata.Engine,
+				Type:              s.GetType(),
+				Org:               s.GetOrg(),
+				Repo:              s.GetRepo(),
+				Team:              s.GetTeam(),
+				Name:              s.GetName(),
+				Value:             s.GetValue(),
+				Images:            s.GetImages(),
+				Events:            s.GetEvents(),
+				AllowCommand:      s.AllowCommand,
+				AllowSubstitution: s.AllowSubstitution,
+				Output:            c.Output,
 			}
 
 			// validate secret configuration

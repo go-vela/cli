@@ -9,6 +9,7 @@ type Config struct {
 	Branch           string
 	Comment          string
 	Event            string
+	Status           string
 	Tag              string
 	Target           string
 	Org              string

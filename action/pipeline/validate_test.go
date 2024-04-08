@@ -288,6 +288,40 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 				TemplateFiles: []string{"foo:testdata/templates/template.yml"},
 			},
 		},
+		{
+			name:    "pipeline with rulesets - no ruledata provided",
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "ruleset.yml",
+				Path:   "testdata",
+				Type:   "",
+			},
+		},
+		{
+			name:    "pipeline with rulesets - push to main",
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "ruleset.yml",
+				Path:   "testdata",
+				Type:   "",
+				Branch: "main",
+				Event:  "push",
+			},
+		},
+		{
+			name:    "pipeline with rulesets - tag of v1",
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "ruleset.yml",
+				Path:   "testdata",
+				Type:   "",
+				Event:  "tag",
+				Tag:    "v1",
+			},
+		},
 	}
 
 	// run tests

@@ -12,6 +12,8 @@ import (
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
+	"github.com/go-vela/types/pipeline"
+	"github.com/go-vela/types/yaml"
 
 	"github.com/go-vela/server/compiler"
 
@@ -107,12 +109,40 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	// set pipelineType within client
 	client.WithRepo(&library.Repo{PipelineType: &c.PipelineType})
 
-	logrus.Tracef("compiling pipeline %s", path)
+	var p *yaml.Build
 
-	// compile the object into a pipeline
-	p, _, err := client.CompileLite(path, false)
-	if err != nil {
-		return err
+	if len(c.Branch) > 0 ||
+		len(c.Comment) > 0 ||
+		len(c.Event) > 0 ||
+		len(c.FileChangeset) > 0 ||
+		len(c.Tag) > 0 ||
+		len(c.Target) > 0 {
+		logrus.Debugf("compiling pipeline with ruledata")
+
+		// define ruledata
+		ruleData := &pipeline.RuleData{
+			Branch:  c.Branch,
+			Comment: c.Comment,
+			Event:   c.Event,
+			Path:    c.FileChangeset,
+			Status:  c.Status,
+			Tag:     c.Tag,
+			Target:  c.Target,
+		}
+
+		// compile the object into a pipeline with ruledata
+		p, _, err = client.CompileLite(path, ruleData, false)
+		if err != nil {
+			return err
+		}
+	} else {
+		logrus.Debugf("compiling pipeline")
+
+		// compile the object into a pipeline without ruledata
+		p, _, err = client.CompileLite(path, nil, false)
+		if err != nil {
+			return err
+		}
 	}
 
 	// check to see if locally provided templates were included in compilation
@@ -155,7 +185,15 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineOptions
 	opts := &vela.PipelineOptions{
-		Output: c.Output,
+		Output:  c.Output,
+		Branch:  c.Branch,
+		Comment: c.Comment,
+		Event:   c.Event,
+		Repo:    c.Repo,
+		Status:  c.Status,
+		Tag:     c.Tag,
+		Target:  c.Target,
+		Path:    c.FileChangeset,
 	}
 
 	// send API call to validate a pipeline

@@ -127,7 +127,6 @@ var CommandValidate = &cli.Command{
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"},
 			Name:    "tag",
-			Aliases: []string{"t"},
 			Usage:   "provide the build tag for the pipeline",
 		},
 		&cli.StringFlag{

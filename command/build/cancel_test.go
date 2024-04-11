@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
-
-	"github.com/urfave/cli/v2"
 )
 
 func TestBuild_Cancel(t *testing.T) {

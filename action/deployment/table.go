@@ -5,13 +5,11 @@ package deployment
 import (
 	"sort"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/types/library"
-
 	"github.com/gosuri/uitable"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/types/library"
 )
 
 // table is a helper function to output the

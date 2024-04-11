@@ -5,12 +5,12 @@ package worker
 import (
 	"fmt"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandView defines the command for inspecting a worker.
@@ -67,7 +67,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to inspect a worker.
 //
-//nolint:dupl // ignore similar code with chown, get, remove and repair
+
 func view(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

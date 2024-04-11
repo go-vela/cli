@@ -3,13 +3,11 @@
 package deployment
 
 import (
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
-	"github.com/go-vela/types/library"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/types/library"
 )
 
 // Add creates a deployment based off the provided configuration.

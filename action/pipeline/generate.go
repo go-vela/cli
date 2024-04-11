@@ -6,11 +6,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/spf13/afero"
-
 	"github.com/buildkite/yaml"
-
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/afero"
 )
 
 // create filesystem based on the operating system

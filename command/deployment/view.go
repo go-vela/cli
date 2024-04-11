@@ -5,12 +5,12 @@ package deployment
 import (
 	"fmt"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/deployment"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandView defines the command for inspecting a deployment.

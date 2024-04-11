@@ -3,11 +3,10 @@
 package config
 
 import (
-	"github.com/go-vela/cli/internal/output"
-
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/afero"
 
-	"github.com/sirupsen/logrus"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // View inspects the config file based off the provided configuration.

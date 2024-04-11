@@ -6,13 +6,11 @@ package repo
 import (
 	"fmt"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
-	"github.com/go-vela/types/library"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/types/library"
 )
 
 // Update modifies a repository based off the provided configuration.

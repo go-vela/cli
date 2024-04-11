@@ -7,10 +7,10 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-vela/server/mock/server"
-	"github.com/go-vela/worker/mock/worker"
 
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/mock/server"
+	"github.com/go-vela/worker/mock/worker"
 )
 
 func TestWorker_Config_Add(t *testing.T) {

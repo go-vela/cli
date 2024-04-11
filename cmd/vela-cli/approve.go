@@ -3,9 +3,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/command/build"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/command/build"
 )
 
 // approveCmds defines the commands for approving resources.

@@ -3,9 +3,10 @@
 package schedule
 
 import (
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/sirupsen/logrus"
 )
 
 // Get captures a list of schedules based off the provided configuration.

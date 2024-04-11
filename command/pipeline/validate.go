@@ -5,17 +5,16 @@ package pipeline
 import (
 	"fmt"
 
+	"github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-	"github.com/go-vela/types/constants"
-	"github.com/sirupsen/logrus"
-
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/server/util"
-
-	"github.com/urfave/cli/v2"
+	"github.com/go-vela/types/constants"
 )
 
 // CommandValidate defines the command for verifying a pipeline.

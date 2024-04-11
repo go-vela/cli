@@ -6,14 +6,13 @@ package repo
 import (
 	"fmt"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/repo"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
 	"github.com/go-vela/types/constants"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandUpdate defines the command for modifying a repository.

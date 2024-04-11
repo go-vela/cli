@@ -10,11 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // Add creates a worker based off the provided configuration.

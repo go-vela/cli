@@ -7,14 +7,14 @@ import (
 	"os"
 	"strings"
 
+	"github.com/joho/godotenv"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/deployment"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/types/raw"
-	"github.com/joho/godotenv"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandAdd defines the command for creating a deployment.

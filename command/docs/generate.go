@@ -5,11 +5,11 @@ package docs
 import (
 	"fmt"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/docs"
 	"github.com/go-vela/cli/internal"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandGenerate defines the command for producing documentation.

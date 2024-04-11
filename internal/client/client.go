@@ -7,13 +7,11 @@ import (
 	"net/url"
 	"runtime"
 
-	"github.com/go-vela/cli/internal"
-
-	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/sirupsen/logrus"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/internal"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // Parse digests the provided urfave/cli context

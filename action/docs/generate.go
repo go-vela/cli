@@ -5,10 +5,10 @@ package docs
 import (
 	"fmt"
 
-	"github.com/go-vela/cli/internal/output"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 
-	"github.com/sirupsen/logrus"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // Generate produces documentation for the CLI.

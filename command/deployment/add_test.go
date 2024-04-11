@@ -8,11 +8,11 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
 	"github.com/go-vela/types/raw"
-
-	"github.com/urfave/cli/v2"
 )
 
 func TestDeployment_Add(t *testing.T) {

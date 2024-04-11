@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-vela/sdk-go/vela"
+	"github.com/cli/browser"
 	"github.com/sirupsen/logrus"
 
-	"github.com/cli/browser"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // Config represents the configuration necessary

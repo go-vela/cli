@@ -3,11 +3,12 @@
 package main
 
 import (
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/command/config"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/schedule"
 	"github.com/go-vela/cli/command/secret"
-	"github.com/urfave/cli/v2"
 )
 
 // removeCmds defines the commands for deleting resources.

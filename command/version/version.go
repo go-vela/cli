@@ -5,12 +5,12 @@ package version
 import (
 	"fmt"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/cli/version"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandVersion defines the command for returning version information on the CLI.

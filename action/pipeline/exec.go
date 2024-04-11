@@ -10,14 +10,14 @@ import (
 	"path/filepath"
 	"syscall"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/cli/version"
 	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 	"github.com/go-vela/worker/executor"
 	"github.com/go-vela/worker/runtime"
-
-	"github.com/sirupsen/logrus"
 )
 
 // Exec executes a pipeline based off the provided configuration.

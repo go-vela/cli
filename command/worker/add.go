@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: Apache-2.0
 
-//nolint:dupl // ignore similar code with update
+
 package worker
 
 import (
 	"fmt"
 	"net/url"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandAdd defines the command for adding a worker.

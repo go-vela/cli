@@ -5,9 +5,9 @@ package completion
 import (
 	"fmt"
 
-	"github.com/go-vela/cli/internal/output"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
 )
 
 // Generate produces a script used to enable

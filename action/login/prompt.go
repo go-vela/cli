@@ -7,7 +7,6 @@ import (
 	"io"
 
 	"github.com/manifoldco/promptui"
-
 	"github.com/sirupsen/logrus"
 )
 

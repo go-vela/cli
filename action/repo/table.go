@@ -5,13 +5,11 @@ package repo
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/types/library"
-
 	"github.com/gosuri/uitable"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/types/library"
 )
 
 // table is a helper function to output the
@@ -46,7 +44,7 @@ func table(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to repo table", r.GetFullName())
 
-		//nolint:gosec // ignore memory aliasing
+		
 		e := strings.Join(r.AllowEvents.List(), ",")
 
 		// add a row to the table with the specified values
@@ -93,7 +91,7 @@ func wideTable(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to wide repo table", r.GetFullName())
 
-		//nolint:gosec // ignore memory aliasing
+		
 		e := strings.Join(r.AllowEvents.List(), ",")
 
 		// add a row to the table with the specified values

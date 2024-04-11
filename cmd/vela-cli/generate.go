@@ -3,12 +3,12 @@
 package main
 
 import (
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/command/completion"
 	"github.com/go-vela/cli/command/config"
 	"github.com/go-vela/cli/command/docs"
 	"github.com/go-vela/cli/command/pipeline"
-
-	"github.com/urfave/cli/v2"
 )
 
 // generateCmds defines the commands for producing resources.

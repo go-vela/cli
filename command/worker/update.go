@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandUpdate defines the command for modifying a worker.

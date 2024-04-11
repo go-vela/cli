@@ -3,9 +3,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/command/build"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/command/build"
 )
 
 // cancelCmds defines the commands for canceling resources.

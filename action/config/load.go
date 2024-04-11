@@ -5,15 +5,12 @@ package config
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal"
-
 	"github.com/sirupsen/logrus"
-
 	"github.com/spf13/afero"
-
 	"github.com/urfave/cli/v2"
-
 	yaml "gopkg.in/yaml.v3"
+
+	"github.com/go-vela/cli/internal"
 )
 
 // Load reads the config file and sets the values based off the provided configuration.

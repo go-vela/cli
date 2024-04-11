@@ -5,11 +5,10 @@ package build
 import (
 	"fmt"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // Approve approves a build based off the provided configuration.

@@ -8,16 +8,15 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
 	"github.com/go-vela/types/pipeline"
 	"github.com/go-vela/types/yaml"
-
-	"github.com/go-vela/server/compiler"
-
-	"github.com/sirupsen/logrus"
 )
 
 // Validate verifies the configuration provided.

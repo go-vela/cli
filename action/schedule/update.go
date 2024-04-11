@@ -4,10 +4,11 @@
 package schedule
 
 import (
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/types/library"
-	"github.com/sirupsen/logrus"
 )
 
 // Update modifies a schedule based off the provided configuration.

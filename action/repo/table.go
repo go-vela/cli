@@ -44,7 +44,6 @@ func table(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to repo table", r.GetFullName())
 
-		
 		e := strings.Join(r.AllowEvents.List(), ",")
 
 		// add a row to the table with the specified values
@@ -91,7 +90,6 @@ func wideTable(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to wide repo table", r.GetFullName())
 
-		
 		e := strings.Join(r.AllowEvents.List(), ",")
 
 		// add a row to the table with the specified values

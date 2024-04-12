@@ -9,8 +9,7 @@ import (
 	"github.com/go-vela/cli/internal/output"
 
 	"github.com/go-vela/sdk-go/vela"
-
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 
 	"github.com/sirupsen/logrus"
 )
@@ -21,8 +20,8 @@ func (c *Config) Add(client *vela.Client) error {
 
 	// create the repository object
 	//
-	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Repo
-	r := &library.Repo{
+	// https://pkg.go.dev/github.com/go-vela/server/api/types?tab=doc#Repo
+	r := &api.Repo{
 		Org:          vela.String(c.Org),
 		Name:         vela.String(c.Name),
 		FullName:     vela.String(fmt.Sprintf("%s/%s", c.Org, c.Name)),
@@ -43,7 +42,7 @@ func (c *Config) Add(client *vela.Client) error {
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)
 
 	if len(c.Events) > 0 {
-		evs, err := library.NewEventsFromSlice(c.Events)
+		evs, err := api.NewEventsFromSlice(c.Events)
 		if err != nil {
 			return err
 		}

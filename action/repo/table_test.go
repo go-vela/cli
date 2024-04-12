@@ -5,7 +5,7 @@ package repo
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestRepo_table(t *testing.T) {
@@ -23,11 +23,11 @@ func TestRepo_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		repos   *[]library.Repo
+		repos   *[]api.Repo
 	}{
 		{
 			failure: false,
-			repos: &[]library.Repo{
+			repos: &[]api.Repo{
 				*r1,
 				*r2,
 			},
@@ -67,11 +67,11 @@ func TestRepo_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		repos   *[]library.Repo
+		repos   *[]api.Repo
 	}{
 		{
 			failure: false,
-			repos: &[]library.Repo{
+			repos: &[]api.Repo{
 				*r1,
 				*r2,
 			},
@@ -98,8 +98,8 @@ func TestRepo_wideTable(t *testing.T) {
 
 // testRepo is a test helper function to create a Repo
 // type with all fields set to a fake value.
-func testRepo() *library.Repo {
-	r := new(library.Repo)
+func testRepo() *api.Repo {
+	r := new(api.Repo)
 
 	r.SetID(1)
 	r.SetOrg("github")

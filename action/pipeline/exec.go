@@ -11,6 +11,7 @@ import (
 	"syscall"
 
 	"github.com/go-vela/cli/version"
+	api "github.com/go-vela/server/api/types"
 	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
@@ -63,7 +64,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}
 
 	// create repo object for use in pipeline
-	r := new(library.Repo)
+	r := new(api.Repo)
 	r.SetOrg(c.Org)
 	r.SetName(c.Repo)
 	r.SetFullName(fmt.Sprintf("%s/%s", c.Org, c.Repo))

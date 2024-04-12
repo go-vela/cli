@@ -12,9 +12,9 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
+	api "github.com/go-vela/server/api/types"
 	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
 	"github.com/go-vela/types/pipeline"
 	"github.com/go-vela/types/yaml"
 )
@@ -106,7 +106,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	}
 
 	// set pipelineType within client
-	client.WithRepo(&library.Repo{PipelineType: &c.PipelineType})
+	client.WithRepo(&api.Repo{PipelineType: &c.PipelineType})
 
 	var p *yaml.Build
 

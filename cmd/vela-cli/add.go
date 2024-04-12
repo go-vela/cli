@@ -3,12 +3,13 @@
 package main
 
 import (
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/schedule"
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/worker"
-	"github.com/urfave/cli/v2"
 )
 
 // addCmds defines the commands for creating resources.

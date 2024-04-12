@@ -3,11 +3,10 @@
 package deployment
 
 import (
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // View inspects a deployment based off the provided configuration.

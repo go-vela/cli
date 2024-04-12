@@ -9,16 +9,13 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+	yaml "gopkg.in/yaml.v3"
+
 	"github.com/go-vela/cli/internal/output"
-
 	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
-
-	"github.com/sirupsen/logrus"
-
-	yaml "gopkg.in/yaml.v3"
 )
 
 // Add creates a secret based on the provided configuration.

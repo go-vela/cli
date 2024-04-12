@@ -5,12 +5,11 @@ package repo
 import (
 	"strings"
 
+	"github.com/gosuri/uitable"
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/cli/internal/output"
 	api "github.com/go-vela/server/api/types"
-
-	"github.com/gosuri/uitable"
-
-	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the

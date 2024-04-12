@@ -6,12 +6,11 @@ package repo
 import (
 	"fmt"
 
-	"github.com/go-vela/cli/internal/output"
+	"github.com/sirupsen/logrus"
 
+	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	api "github.com/go-vela/server/api/types"
-
-	"github.com/sirupsen/logrus"
 )
 
 // Add creates a repository based off the provided configuration.

@@ -6,9 +6,8 @@ import (
 	"fmt"
 	"os"
 
-	"gopkg.in/yaml.v3"
-
 	"github.com/sirupsen/logrus"
+	"gopkg.in/yaml.v3"
 )
 
 // YAML parses the provided input and

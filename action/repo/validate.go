@@ -5,8 +5,9 @@ package repo
 import (
 	"fmt"
 
-	"github.com/go-vela/types/constants"
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/types/constants"
 )
 
 // Validate verifies the configuration provided.

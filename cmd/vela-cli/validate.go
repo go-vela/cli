@@ -3,9 +3,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/command/pipeline"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/command/pipeline"
 )
 
 // validateCmds defines the commands for validating resources.

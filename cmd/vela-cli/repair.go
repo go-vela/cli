@@ -3,9 +3,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/command/repo"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/command/repo"
 )
 
 // repairCmds defines the commands for repairing resources.

@@ -3,12 +3,11 @@
 package action
 
 import (
+	"github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
-
-	"github.com/sirupsen/logrus"
-
-	"github.com/urfave/cli/v2"
 )
 
 // Load imports the configuration file for the CLI.

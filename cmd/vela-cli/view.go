@@ -3,6 +3,8 @@
 package main
 
 import (
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/command/build"
 	"github.com/go-vela/cli/command/config"
 	"github.com/go-vela/cli/command/deployment"
@@ -15,7 +17,6 @@ import (
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
 	"github.com/go-vela/cli/command/worker"
-	"github.com/urfave/cli/v2"
 )
 
 // viewCmds defines the commands for inspecting resources.

@@ -6,14 +6,13 @@ import (
 	"fmt"
 	"slices"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
 	"github.com/go-vela/types/constants"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandAdd defines the command for creating a secret.
@@ -147,7 +146,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to create a secret.
 //
-//nolint:dupl // ignore similar code with update
+
 func add(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

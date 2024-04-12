@@ -3,6 +3,8 @@
 package main
 
 import (
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/command/build"
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/hook"
@@ -14,7 +16,6 @@ import (
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/step"
 	"github.com/go-vela/cli/command/worker"
-	"github.com/urfave/cli/v2"
 )
 
 // getCmds defines the commands for getting a list of resources.

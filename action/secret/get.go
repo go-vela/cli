@@ -5,13 +5,11 @@ package secret
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
-	"github.com/go-vela/types/constants"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/types/constants"
 )
 
 // Get captures a list of secrets based on the provided configuration.

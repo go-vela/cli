@@ -11,13 +11,13 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the
 // provided builds in a table format with
 // a specific set of fields displayed.
-func table(builds *[]library.Build) error {
+func table(builds *[]api.Build) error {
 	logrus.Debug("creating table for list of builds")
 
 	// create a new table
@@ -61,7 +61,7 @@ func table(builds *[]library.Build) error {
 // wideTable is a helper function to output the
 // provided builds in a wide table format with
 // a specific set of fields displayed.
-func wideTable(builds *[]library.Build) error {
+func wideTable(builds *[]api.Build) error {
 	logrus.Debug("creating wide table for list of builds")
 
 	// create new wide table
@@ -115,7 +115,7 @@ func wideTable(builds *[]library.Build) error {
 // reverse is a helper function to sort the builds
 // based off the build number and then flip the
 // order they get displayed in.
-func reverse(b []library.Build) []library.Build {
+func reverse(b []api.Build) []api.Build {
 	// sort the list of builds based off the build number
 	sort.SliceStable(b, func(i, j int) bool {
 		return b[i].GetNumber() < b[j].GetNumber()

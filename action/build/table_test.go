@@ -5,7 +5,7 @@ package build
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestBuild_table(t *testing.T) {
@@ -23,11 +23,11 @@ func TestBuild_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		builds  *[]library.Build
+		builds  *[]api.Build
 	}{
 		{
 			failure: false,
-			builds: &[]library.Build{
+			builds: &[]api.Build{
 				*b1,
 				*b2,
 			},
@@ -67,11 +67,11 @@ func TestBuild_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		builds  *[]library.Build
+		builds  *[]api.Build
 	}{
 		{
 			failure: false,
-			builds: &[]library.Build{
+			builds: &[]api.Build{
 				*b1,
 				*b2,
 			},
@@ -98,11 +98,14 @@ func TestBuild_wideTable(t *testing.T) {
 
 // testBuild is a test helper function to create a Build
 // type with all fields set to a fake value.
-func testBuild() *library.Build {
-	b := new(library.Build)
+func testBuild() *api.Build {
+	r := new(api.Repo)
+	r.SetID(1)
+
+	b := new(api.Build)
 
 	b.SetID(1)
-	b.SetRepoID(1)
+	b.SetRepo(r)
 	b.SetNumber(1)
 	b.SetParent(1)
 	b.SetEvent("push")

@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 // Update modifies a schedule based off the provided configuration.
@@ -16,7 +16,7 @@ func (c *Config) Update(client *vela.Client) error {
 	logrus.Debug("executing update for schedule configuration")
 
 	// create the schedule object
-	s := &library.Schedule{
+	s := &api.Schedule{
 		Active: vela.Bool(c.Active),
 		Name:   vela.String(c.Name),
 		Entry:  vela.String(c.Entry),

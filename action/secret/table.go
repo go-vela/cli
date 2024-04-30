@@ -6,14 +6,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-vela/cli/internal/output"
+	"github.com/gosuri/uitable"
+	"github.com/sirupsen/logrus"
 
+	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
-
-	"github.com/gosuri/uitable"
-
-	"github.com/sirupsen/logrus"
 )
 
 // table is a helper function to output the

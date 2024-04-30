@@ -3,9 +3,9 @@
 package main
 
 import (
-	"github.com/go-vela/cli/command/pipeline"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/command/pipeline"
 )
 
 // compileCmds defines the commands for compiling resources.

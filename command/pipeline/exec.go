@@ -7,16 +7,16 @@ import (
 	"os"
 	"strings"
 
+	"github.com/joho/godotenv"
+	"github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/server/util"
 	"github.com/go-vela/types/constants"
-	"github.com/sirupsen/logrus"
-
-	"github.com/joho/godotenv"
-	"github.com/urfave/cli/v2"
 )
 
 // CommandExec defines the command for executing a pipeline.
@@ -50,7 +50,6 @@ var CommandExec = &cli.Command{
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"},
 			Name:    "tag",
-			Aliases: []string{"t"},
 			Usage:   "provide the build tag for the pipeline",
 		},
 		&cli.StringFlag{
@@ -317,16 +316,16 @@ func exec(c *cli.Context) error {
 	}
 
 	// set starlark exec limit
-	client.StarlarkExecLimit = c.Uint64("compiler-starlark-exec-limit")
+	client.SetStarlarkExecLimit(c.Uint64("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocalTemplates(p.TemplateFiles)
-		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 10)
+		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 10))
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
-		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
+		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
 	}
 

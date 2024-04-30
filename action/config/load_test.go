@@ -6,10 +6,10 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/go-vela/cli/test"
 	"github.com/spf13/afero"
-
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/test"
 )
 
 func TestConfig_Config_Load(t *testing.T) {

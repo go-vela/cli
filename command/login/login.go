@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/action/login"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-	"github.com/sirupsen/logrus"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandLogin defines the command for authenticating and logging in to Vela.

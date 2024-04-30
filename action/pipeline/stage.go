@@ -3,9 +3,9 @@
 package pipeline
 
 import (
-	"github.com/go-vela/types/yaml"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/types/yaml"
 )
 
 func stages(pipelineType string) *yaml.Build {

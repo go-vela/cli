@@ -6,14 +6,13 @@ import (
 	"fmt"
 	"slices"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
 	"github.com/go-vela/types/constants"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandUpdate defines the command for updating a secret.
@@ -147,7 +146,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to modify a secret.
 //
-//nolint:dupl // ignore similar code with add
+
 func update(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

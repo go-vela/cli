@@ -7,11 +7,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
 	"github.com/go-vela/worker/mock/worker"
-
-	"github.com/urfave/cli/v2"
 )
 
 func TestWorker_Add(t *testing.T) {

@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal"
 )
 
 // Validate verifies the configuration provided.

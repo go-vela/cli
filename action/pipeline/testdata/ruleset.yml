@@ -1,0 +1,23 @@
+version: "1"
+
+steps:
+  - name: always
+    image: alpine
+    commands:
+      - echo always
+
+  - name: push to main
+    image: alpine
+    ruleset:
+      event: push
+      branch: main
+    commands:
+      - echo "push to main"
+
+  - name: tag of v1
+    image: alpine
+    ruleset:
+      event: push
+      tag: v1
+    commands:
+      - echo "tag of v1"

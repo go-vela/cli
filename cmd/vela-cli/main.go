@@ -7,14 +7,13 @@ import (
 	"os"
 	"time"
 
+	"github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/command/login"
 	_version "github.com/go-vela/cli/command/version"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/version"
-
-	"github.com/sirupsen/logrus"
-
-	"github.com/urfave/cli/v2"
 )
 
 func main() {

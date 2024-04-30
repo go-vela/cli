@@ -9,16 +9,13 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+	yaml "gopkg.in/yaml.v3"
+
 	"github.com/go-vela/cli/internal/output"
-
 	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/library"
-
-	"github.com/sirupsen/logrus"
-
-	yaml "gopkg.in/yaml.v3"
 )
 
 // Update modifies a secret based on the provided configuration.
@@ -63,7 +60,12 @@ func (c *Config) Update(client *vela.Client) error {
 
 	// populate events if provided
 	if len(c.AllowEvents) > 0 {
-		s.SetAllowEvents(library.NewEventsFromSlice(c.AllowEvents))
+		evs, err := library.NewEventsFromSlice(c.AllowEvents)
+		if err != nil {
+			return err
+		}
+
+		s.SetAllowEvents(evs)
 	}
 
 	logrus.Tracef("modifying secret %s/%s/%s/%s/%s", c.Engine, c.Type, c.Org, name, c.Name)

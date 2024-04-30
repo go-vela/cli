@@ -5,17 +5,16 @@ package pipeline
 import (
 	"fmt"
 
+	"github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-	"github.com/go-vela/types/constants"
-	"github.com/sirupsen/logrus"
-
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/server/util"
-
-	"github.com/urfave/cli/v2"
+	"github.com/go-vela/types/constants"
 )
 
 // CommandValidate defines the command for verifying a pipeline.
@@ -99,6 +98,48 @@ var CommandValidate = &cli.Command{
 			Value:   false,
 		},
 
+		// RuleData Flags
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_BRANCH", "PIPELINE_BRANCH", "VELA_BUILD_BRANCH"},
+			Name:    "branch",
+			Aliases: []string{"b"},
+			Usage:   "provide the build branch for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COMMENT", "PIPELINE_COMMENT", "VELA_BUILD_COMMENT"},
+			Name:    "comment",
+			Aliases: []string{"c"},
+			Usage:   "provide the build comment for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_EVENT", "PIPELINE_EVENT", "VELA_BUILD_EVENT"},
+			Name:    "event",
+			Aliases: []string{"e"},
+			Usage:   "provide the build event for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_STATUS", "PIPELINE_STATUS", "VELA_BUILD_STATUS"},
+			Name:    "status",
+			Usage:   "provide the expected build status for the local validation",
+			Value:   "success",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"},
+			Name:    "tag",
+			Usage:   "provide the build tag for the pipeline",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_TARGET", "PIPELINE_TARGET", "VELA_BUILD_TARGET"},
+			Name:    "target",
+			Usage:   "provide the build target for the pipeline",
+		},
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_FILE_CHANGESET", "FILE_CHANGESET"},
+			Name:    "file-changeset",
+			Aliases: []string{"fcs"},
+			Usage:   "provide a list of files changed for ruleset matching",
+		},
+
 		// Compiler Flags
 
 		&cli.StringFlag{
@@ -164,6 +205,13 @@ func validate(c *cli.Context) error {
 		TemplateFiles: c.StringSlice("template-file"),
 		Remote:        c.Bool("remote"),
 		PipelineType:  c.String("pipeline-type"),
+		Branch:        c.String("branch"),
+		Comment:       c.String("comment"),
+		Event:         c.String("event"),
+		FileChangeset: c.StringSlice("file-changeset"),
+		Status:        c.String("status"),
+		Tag:           c.String("tag"),
+		Target:        c.String("target"),
 	}
 
 	// validate pipeline configuration
@@ -199,16 +247,16 @@ func validate(c *cli.Context) error {
 	}
 
 	// set starlark exec limit
-	client.StarlarkExecLimit = c.Uint64("compiler-starlark-exec-limit")
+	client.SetStarlarkExecLimit(c.Uint64("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocalTemplates(p.TemplateFiles)
-		client.TemplateDepth = c.Int("max-template-depth")
+		client.SetTemplateDepth(c.Int("max-template-depth"))
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
-		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
+		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
 	}
 

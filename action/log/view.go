@@ -3,11 +3,10 @@
 package log
 
 import (
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // ViewService inspects a service log based on the provided configuration.

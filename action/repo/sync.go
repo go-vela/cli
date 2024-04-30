@@ -2,11 +2,10 @@
 package repo
 
 import (
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/sdk-go/vela"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/sdk-go/vela"
 )
 
 // Sync synchronizes a single repository in the Vela Database with the SCM.

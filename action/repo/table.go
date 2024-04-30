@@ -5,19 +5,17 @@ package repo
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal/output"
-
-	"github.com/go-vela/types/library"
-
 	"github.com/gosuri/uitable"
-
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the
 // provided repos in a table format with
 // a specific set of fields displayed.
-func table(repos *[]library.Repo) error {
+func table(repos *[]api.Repo) error {
 	logrus.Debug("creating table for list of repos")
 
 	// create a new table
@@ -46,8 +44,7 @@ func table(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to repo table", r.GetFullName())
 
-		//nolint:gosec // ignore memory aliasing
-		e := strings.Join(r.AllowEvents.List(), ",")
+		e := strings.Join(r.GetAllowEvents().List(), ",")
 
 		// add a row to the table with the specified values
 		//
@@ -64,7 +61,7 @@ func table(repos *[]library.Repo) error {
 // wideTable is a helper function to output the
 // provided repos in a wide table format with
 // a specific set of fields displayed.
-func wideTable(repos *[]library.Repo) error {
+func wideTable(repos *[]api.Repo) error {
 	logrus.Debug("creating wide table for list of repos")
 
 	// create new wide table
@@ -93,8 +90,7 @@ func wideTable(repos *[]library.Repo) error {
 	for _, r := range *repos {
 		logrus.Tracef("adding repo %s to wide repo table", r.GetFullName())
 
-		//nolint:gosec // ignore memory aliasing
-		e := strings.Join(r.AllowEvents.List(), ",")
+		e := strings.Join(r.GetAllowEvents().List(), ",")
 
 		// add a row to the table with the specified values
 		//

@@ -10,17 +10,19 @@ import (
 	"path/filepath"
 	"syscall"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/cli/version"
+	api "github.com/go-vela/server/api/types"
 	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
 	"github.com/go-vela/worker/executor"
 	"github.com/go-vela/worker/runtime"
-
-	"github.com/sirupsen/logrus"
 )
 
 // Exec executes a pipeline based off the provided configuration.
+//
+//nolint:funlen // ignore function length
 func (c *Config) Exec(client compiler.Engine) error {
 	logrus.Debug("executing exec for pipeline configuration")
 
@@ -51,7 +53,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}
 
 	// create build object for use in pipeline
-	b := new(library.Build)
+	b := new(api.Build)
 	b.SetBranch(c.Branch)
 	b.SetDeploy(c.Target)
 	b.SetEvent(c.Event)
@@ -63,11 +65,13 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}
 
 	// create repo object for use in pipeline
-	r := new(library.Repo)
+	r := new(api.Repo)
 	r.SetOrg(c.Org)
 	r.SetName(c.Repo)
 	r.SetFullName(fmt.Sprintf("%s/%s", c.Org, c.Repo))
 	r.SetPipelineType(c.PipelineType)
+
+	b.SetRepo(r)
 
 	logrus.Tracef("compiling pipeline %s", path)
 
@@ -115,7 +119,6 @@ func (c *Config) Exec(client compiler.Engine) error {
 		Runtime:  _runtime,
 		Pipeline: _pipeline.Sanitize(constants.DriverDocker),
 		Build:    b,
-		Repo:     r,
 		Version:  version.New().Semantic(),
 	})
 	if err != nil {

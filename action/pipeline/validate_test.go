@@ -9,11 +9,11 @@ import (
 	"path"
 	"testing"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/server/compiler/native"
 	"github.com/go-vela/server/mock/server"
-
-	"github.com/urfave/cli/v2"
 )
 
 func TestPipeline_Config_Validate(t *testing.T) {
@@ -177,7 +177,7 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 		t.Errorf("unable to create client: %v", err)
 	}
 
-	client.TemplateDepth = 1
+	client.SetTemplateDepth(1)
 
 	// setup tests
 	tests := []struct {
@@ -286,6 +286,40 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 				Path:          "testdata",
 				Type:          "",
 				TemplateFiles: []string{"foo:testdata/templates/template.yml"},
+			},
+		},
+		{
+			name:    "pipeline with rulesets - no ruledata provided",
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "ruleset.yml",
+				Path:   "testdata",
+				Type:   "",
+			},
+		},
+		{
+			name:    "pipeline with rulesets - push to main",
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "ruleset.yml",
+				Path:   "testdata",
+				Type:   "",
+				Branch: "main",
+				Event:  "push",
+			},
+		},
+		{
+			name:    "pipeline with rulesets - tag of v1",
+			failure: false,
+			config: &Config{
+				Action: "validate",
+				File:   "ruleset.yml",
+				Path:   "testdata",
+				Type:   "",
+				Event:  "tag",
+				Tag:    "v1",
 			},
 		},
 	}

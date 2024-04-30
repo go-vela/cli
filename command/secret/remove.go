@@ -6,14 +6,13 @@ package secret
 import (
 	"fmt"
 
+	"github.com/urfave/cli/v2"
+
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-
 	"github.com/go-vela/types/constants"
-
-	"github.com/urfave/cli/v2"
 )
 
 // CommandRemove defines the command for inspecting a secret.

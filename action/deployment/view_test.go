@@ -6,9 +6,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-vela/server/mock/server"
-
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/mock/server"
 )
 
 func TestDeployment_Config_View(t *testing.T) {

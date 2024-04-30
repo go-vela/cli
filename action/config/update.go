@@ -5,13 +5,11 @@ package config
 import (
 	"strings"
 
-	"github.com/go-vela/cli/internal"
-
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/afero"
-
 	yaml "gopkg.in/yaml.v3"
 
-	"github.com/sirupsen/logrus"
+	"github.com/go-vela/cli/internal"
 )
 
 // Update modifies one or more fields from the config file based off the provided configuration.

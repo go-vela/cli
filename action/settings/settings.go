@@ -6,11 +6,11 @@ package settings
 // to perform settings related requests with Vela.
 type Config struct {
 	Action string
+	Output string
 	Compiler
 	Queue
 	RepoAllowlist     *[]string
 	ScheduleAllowlist *[]string
-	Output            string
 }
 
 type Compiler struct {

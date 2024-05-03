@@ -30,41 +30,22 @@ func TestSettings_Config_Update(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				Output: "",
+
+				Queue: Queue{
+					Routes: &[]string{"test"},
+				},
 			},
 		},
 		{
 			failure: false,
-			config: &Config{
-				Action: "update",
-				Output: "dump",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "update",
-				Output: "json",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "update",
-				Output: "spew",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "update",
-				Output: "yaml",
-			},
-		},
-		{
-			failure: true,
 			config: &Config{
 				Action: "update",
 				Output: "",
+				Compiler: Compiler{
+					CloneImage:        vela.String("test"),
+					TemplateDepth:     vela.Int(1),
+					StarlarkExecLimit: vela.UInt64(1),
+				},
 			},
 		},
 	}

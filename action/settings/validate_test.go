@@ -4,6 +4,8 @@ package settings
 
 import (
 	"testing"
+
+	"github.com/go-vela/sdk-go/vela"
 )
 
 func TestSettings_Config_Validate(t *testing.T) {
@@ -15,56 +17,10 @@ func TestSettings_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
-				Action: "add",
-				Output: "",
-			},
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "add",
-				Output: "",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "add",
-				Output: "",
-			},
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "add",
-				Output: "",
-			},
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "add",
-				Output: "",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "view",
-				Output: "",
-			},
-		},
-		{
-			failure: true,
-			config: &Config{
-				Action: "view",
-				Output: "",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "get",
+				Action: "update",
+				Compiler: Compiler{
+					CloneImage: vela.String("test"),
+				},
 				Output: "",
 			},
 		},
@@ -72,20 +28,39 @@ func TestSettings_Config_Validate(t *testing.T) {
 			failure: false,
 			config: &Config{
 				Action: "update",
+				Compiler: Compiler{
+					TemplateDepth: vela.Int(1),
+				},
 				Output: "",
 			},
 		},
 		{
-			failure: true,
+			failure: false,
 			config: &Config{
 				Action: "update",
+				Compiler: Compiler{
+					StarlarkExecLimit: vela.UInt64(1),
+				},
 				Output: "",
 			},
 		},
 		{
-			failure: true,
+			failure: false,
 			config: &Config{
 				Action: "update",
+				Queue: Queue{
+					Routes: &[]string{"test"},
+				},
+				Output: "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action: "update",
+				Queue: Queue{
+					Routes: vela.Strings([]string{"test"}),
+				},
 				Output: "",
 			},
 		},

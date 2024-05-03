@@ -15,6 +15,7 @@ import (
 	"github.com/go-vela/cli/command/schedule"
 	"github.com/go-vela/cli/command/secret"
 	"github.com/go-vela/cli/command/service"
+	"github.com/go-vela/cli/command/settings"
 	"github.com/go-vela/cli/command/step"
 	"github.com/go-vela/cli/command/worker"
 )
@@ -77,6 +78,11 @@ var viewCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/service?tab=doc#CommandView
 		service.CommandView,
+
+		// add the sub command for viewing settings
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/settings?tab=doc#CommandView
+		settings.CommandView,
 
 		// add the sub command for viewing a step
 		//

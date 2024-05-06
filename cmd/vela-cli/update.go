@@ -6,6 +6,7 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/go-vela/cli/command/config"
+	"github.com/go-vela/cli/command/dashboard"
 	"github.com/go-vela/cli/command/repo"
 	"github.com/go-vela/cli/command/schedule"
 	"github.com/go-vela/cli/command/secret"
@@ -25,6 +26,8 @@ var updateCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandUpdate
 		config.CommandUpdate,
+
+		dashboard.CommandUpdate,
 
 		// add the sub command for modifying a repository
 		//

@@ -2,6 +2,8 @@ module github.com/go-vela/cli
 
 go 1.21.9
 
+replace github.com/go-vela/sdk-go => ../sdk-go
+
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
@@ -11,7 +13,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-git/go-git/v5 v5.11.0
 	github.com/go-vela/sdk-go v0.23.3-0.20240424150003-64f8eb0ebcc0
-	github.com/go-vela/server v0.23.4-0.20240424144436-b55aa2bb3684
+	github.com/go-vela/server v0.23.4-0.20240502160659-58ef7e861ce4
 	github.com/go-vela/types v0.23.4-0.20240405205548-f24f795ac0b7
 	github.com/go-vela/worker v0.23.3-0.20240424172515-3d4399807a4b
 	github.com/golang-jwt/jwt/v5 v5.2.1

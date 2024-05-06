@@ -6,6 +6,7 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/go-vela/cli/command/build"
+	"github.com/go-vela/cli/command/dashboard"
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/hook"
 	"github.com/go-vela/cli/command/log"
@@ -31,6 +32,8 @@ var getCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandGet
 		build.CommandGet,
+
+		dashboard.CommandGet,
 
 		// add the sub command for getting a list of deployments
 		//

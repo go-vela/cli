@@ -21,7 +21,7 @@ var CommandAdd = &cli.Command{
 	Action:      add,
 	Flags: []cli.Flag{
 
-		// Repo Flags
+		// Dashboard Flags
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_DASHBOARD_NAME", "DASHBOARD_NAME"},
@@ -31,7 +31,8 @@ var CommandAdd = &cli.Command{
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_DASHBOARD_REPOS", "DASHBOARD_REPOS"},
 			Name:    "repos",
-			Usage:   "provide the list of repositories for the dashboard",
+			Aliases: []string{"add-repos"},
+			Usage:   "provide the list of repositories (org/repo) for the dashboard",
 		},
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_DASHBOARD_REPOS_BRANCH", "DASHBOARD_REPOS_BRANCH"},
@@ -62,29 +63,23 @@ var CommandAdd = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Add a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
-  2. Add a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
-  3. Add a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
-  4. Add a repository when config or environment variables are set.
-    $ {{.HelpName}} --event push --event pull_request
-  5. Add a repository with a starting build number.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
-  6. Add a repository with a starlark pipeline file.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
-  7. Add a repository with approve build setting set to fork-no-write.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
+  1. Add a dashboard.
+    $ {{.HelpName}} --name my-dashboard
+  2. Add a dashboard with repositories.
+    $ {{.HelpName}} --name my-dashboard --repos Org-1/Repo-1,Org-2/Repo-2
+  3. Add a dashboard with repositories filtering builds by pushes to main.
+    $ {{.HelpName}} --name my-dashboard --repos Org-1/Repo-1,Org-2/Repo-2 --branch main --event push
+  4. Add a dashboard with multiple admins.
+    $ {{.HelpName}} --name my-dashboard --admins JohnDoe,JaneDoe
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/reference/cli/repo/add/
+  https://go-vela.github.io/docs/reference/cli/dashboard/add/
 `, cli.CommandHelpTemplate),
 }
 
 // helper function to capture the provided input
-// and create the object used to create a repo.
+// and create the object used to create a dashboard.
 func add(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

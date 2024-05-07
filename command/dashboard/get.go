@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/cli/internal/client"
 )
 
-// CommandGet defines the command for viewing a dashboard.
+// CommandGet defines the command for viewing all user dashboards.
 var CommandGet = &cli.Command{
 	Name:        "dashboard",
 	Aliases:     []string{"dashboards"},
@@ -25,7 +25,7 @@ var CommandGet = &cli.Command{
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_FULL", "DASHBOARD_FULL"},
 			Name:    "full",
-			Usage:   "output the full details of the dashboard",
+			Usage:   "output the repo and build information for the dashboard",
 		},
 
 		&cli.StringFlag{
@@ -37,29 +37,19 @@ var CommandGet = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Add a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
-  2. Add a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
-  3. Add a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
-  4. Add a repository when config or environment variables are set.
-    $ {{.HelpName}} --event push --event pull_request
-  5. Add a repository with a starting build number.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
-  6. Add a repository with a starlark pipeline file.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
-  7. Add a repository with approve build setting set to fork-no-write.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
+  1. Get user dashboards.
+    $ {{.HelpName}}
+  2. Get user dashboards with repo and build information.
+    $ {{.HelpName}} --full
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/reference/cli/repo/add/
+  https://go-vela.github.io/docs/reference/cli/dashboard/get/
 `, cli.CommandHelpTemplate),
 }
 
 // helper function to capture the provided input
-// and create the object used to view a dashboard.
+// and create the object used to get user dashboards.
 func get(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)
@@ -88,6 +78,6 @@ func get(c *cli.Context) error {
 		return err
 	}
 
-	// execute the add call for the dashboard configuration
+	// execute the get call for the dashboard configuration
 	return d.Get(client)
 }

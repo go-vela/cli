@@ -6,11 +6,24 @@ import (
 	"fmt"
 
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/server/constants"
 )
 
 // Validate verifies the configuration provided.
 func (c *Config) Validate() error {
 	logrus.Debug("validating dashboard configuration")
+
+	if c.Action == "add" {
+		// check if dashboard name is set
+		if len(c.Name) == 0 {
+			return fmt.Errorf("no dashboard name provided")
+		}
+
+		if len(c.AddRepos) > constants.DashboardRepoLimit {
+			return fmt.Errorf("maximum number of repositories for a dashboard is %d", constants.DashboardRepoLimit)
+		}
+	}
 
 	// check if dashboard action is update or view
 	if c.Action == "update" || c.Action == "view" {

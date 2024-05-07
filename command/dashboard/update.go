@@ -13,11 +13,11 @@ import (
 	"github.com/go-vela/cli/internal/client"
 )
 
-// CommandUpdate defines the command for creating a dashboard.
+// CommandUpdate defines the command for updating a dashboard.
 var CommandUpdate = &cli.Command{
 	Name:        "dashboard",
 	Description: "Use this command to update a dashboard.",
-	Usage:       "Update a new dashboard from the provided configuration",
+	Usage:       "Update a dashboard from the provided configuration",
 	Action:      update,
 	Flags: []cli.Flag{
 
@@ -70,11 +70,6 @@ var CommandUpdate = &cli.Command{
 			Aliases: []string{"event"},
 			Usage:   "filter builds in all repositories by event",
 		},
-		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_DASHBOARD_ADMINS", "DASHBOARD_ADMINS"},
-			Name:    "admins",
-			Usage:   "provide the list of admins for the dashboard",
-		},
 
 		// Output Flags
 
@@ -87,29 +82,27 @@ var CommandUpdate = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Update a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
-  2. Update a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
-  3. Update a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
-  4. Update a repository when config or environment variables are set.
-    $ {{.HelpName}} --event push --event pull_request
-  5. Update a repository with a starting build number.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
-  6. Update a repository with a starlark pipeline file.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
-  7. Update a repository with approve build setting set to fork-no-write.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
+  1. Update a dashboard to add a repository.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --add-repos Org-1/Repo-1
+  2. Update a dashboard to remove a repository.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --drop-repos Org-1/Repo-1
+  3. Update a dashboard to add event and branch filters to specific repositories.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --target-repos Org-1/Repo-1,Org-2/Repo-2 --branches main --events push
+  4. Update a dashboard to change the name.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --name MyDashboard
+  5. Update a dashboard to add an admin.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --add-admins JohnDoe
+  6. Update a dashboard to remove an admin.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --drop-admins JohnDoe
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/reference/cli/repo/update/
+  https://go-vela.github.io/docs/reference/cli/dashboard/update/
 `, cli.CommandHelpTemplate),
 }
 
 // helper function to capture the provided input
-// and create the object used to create a repo.
+// and create the object used to update a dashboard.
 func update(c *cli.Context) error {
 	// load variables from the config file
 	err := action.Load(c)

@@ -17,7 +17,7 @@ import (
 var CommandView = &cli.Command{
 	Name:        "dashboard",
 	Description: "Use this command to view a dashboard.",
-	Usage:       "View a new dashboard from the provided configuration",
+	Usage:       "View a dashboard from the provided configuration",
 	Action:      view,
 	Flags: []cli.Flag{
 
@@ -34,7 +34,7 @@ var CommandView = &cli.Command{
 		&cli.BoolFlag{
 			EnvVars: []string{"VELA_FULL", "DASHBOARD_FULL"},
 			Name:    "full",
-			Usage:   "output the full details of the dashboard",
+			Usage:   "output the repo and build information for the dashboard",
 		},
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
@@ -45,24 +45,14 @@ var CommandView = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Add a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
-  2. Add a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
-  3. Add a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
-  4. Add a repository when config or environment variables are set.
-    $ {{.HelpName}} --event push --event pull_request
-  5. Add a repository with a starting build number.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
-  6. Add a repository with a starlark pipeline file.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
-  7. Add a repository with approve build setting set to fork-no-write.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
+  1. View a dashboard.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8
+  2. View a dashboard with repo and build information.
+    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --full
 
 DOCUMENTATION:
 
-  https://go-vela.github.io/docs/reference/cli/repo/add/
+  https://go-vela.github.io/docs/reference/cli/dashboard/view/
 `, cli.CommandHelpTemplate),
 }
 
@@ -97,6 +87,6 @@ func view(c *cli.Context) error {
 		return err
 	}
 
-	// execute the add call for the dashboard configuration
+	// execute the view call for the dashboard configuration
 	return d.View(client)
 }

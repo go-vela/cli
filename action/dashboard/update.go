@@ -3,12 +3,14 @@
 package dashboard
 
 import (
+	"fmt"
 	"slices"
 
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/sdk-go/vela"
 	api "github.com/go-vela/server/api/types"
+	"github.com/go-vela/server/constants"
 )
 
 // Update modifies a dashboard based off the provided configuration.
@@ -20,8 +22,10 @@ func (c *Config) Update(client *vela.Client) error {
 		return err
 	}
 
+	// pull dashboard metadata from the API response
 	dashboard := dashCard.Dashboard
 
+	// drop specified repositories from the dashboard
 	if len(c.DropRepos) > 0 {
 		newRepos := []*api.DashboardRepo{}
 
@@ -34,6 +38,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetRepos(newRepos)
 	}
 
+	// add specified repositories from the dashboard
 	if len(c.AddRepos) > 0 {
 		repos := dashboard.GetRepos()
 
@@ -55,6 +60,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetRepos(repos)
 	}
 
+	// update specified repositories from the dashboard
 	if len(c.TargetRepos) > 0 {
 		repos := dashboard.GetRepos()
 		for _, r := range repos {
@@ -72,6 +78,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetRepos(repos)
 	}
 
+	// drop specified admins from the dashboard
 	if len(c.DropAdmins) > 0 {
 		newAdmins := []*api.User{}
 
@@ -84,6 +91,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetAdmins(newAdmins)
 	}
 
+	// add specified admins from the dashboard
 	if len(c.AddAdmins) > 0 {
 		admins := dashboard.GetAdmins()
 
@@ -97,8 +105,14 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetAdmins(admins)
 	}
 
+	// update the name of the dashboard
 	if len(c.Name) > 0 {
 		dashboard.SetName(c.Name)
+	}
+
+	// verify the number of repositories for a dashboard
+	if len(dashboard.GetRepos()) > constants.DashboardRepoLimit {
+		return fmt.Errorf("maximum number of repositories for a dashboard is %d", constants.DashboardRepoLimit)
 	}
 
 	// send API call to modify a dashboard

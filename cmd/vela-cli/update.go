@@ -27,6 +27,9 @@ var updateCmds = &cli.Command{
 		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandUpdate
 		config.CommandUpdate,
 
+		// add the sub command for modifying a dashboard
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/dashboard?tab=doc#CommandUpdate
 		dashboard.CommandUpdate,
 
 		// add the sub command for modifying a repository

@@ -21,7 +21,7 @@ var CommandView = &cli.Command{
 	Action:      view,
 	Flags: []cli.Flag{
 
-		// Repo Flags
+		// Dashboard Flags
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_DASHBOARD_ID", "DASHBOARD_ID"},

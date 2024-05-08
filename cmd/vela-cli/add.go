@@ -22,6 +22,9 @@ var addCmds = &cli.Command{
 	Usage:                  "Add resources to Vela via subcommands",
 	UseShortOptionHandling: true,
 	Subcommands: []*cli.Command{
+		// add the sub command for creating a dashboard
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/dashboard?tab=doc#CommandAdd
 		dashboard.CommandAdd,
 		// add the sub command for creating a deployment
 		//

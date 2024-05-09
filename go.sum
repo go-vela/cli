@@ -123,10 +123,10 @@ github.com/go-playground/validator/v10 v10.14.0 h1:vgvQWe3XCz3gIeFDm/HnTIbj6UGmg
 github.com/go-playground/validator/v10 v10.14.0/go.mod h1:9iXMNT7sEkjXb0I+enO7QXmzG6QCsPWY4zveKFVRSyU=
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 h1:tfuBGBXKqDEevZMzYi5KSi8KkcZtzBcTgAUUtapy0OI=
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572/go.mod h1:9Pwr4B2jHnOSGXyyzV8ROjYa2ojvAY6HCGYYfMoC3Ls=
-github.com/go-vela/sdk-go v0.23.3-0.20240507145321-54c8961e00a9 h1:05QVYi/gRn0ZphF/cMQFEdsmmzROdDssX5dXZv+BrvQ=
-github.com/go-vela/sdk-go v0.23.3-0.20240507145321-54c8961e00a9/go.mod h1:uBY1/Vcz6m2emXJw5vbYDnUOYn1F9aFsmlMaLNHr/2k=
-github.com/go-vela/server v0.23.4-0.20240506154118-8ad123451469 h1:t+g5Gqdhrv7E7XGAD3ZaoxQ1hko/lKA7N1Az0dcXrgI=
-github.com/go-vela/server v0.23.4-0.20240506154118-8ad123451469/go.mod h1:2KcNYX+DfNH/aWwu0pu89Gj9+wAm3S70VMy53/LMZjs=
+github.com/go-vela/sdk-go v0.23.3-0.20240508193030-1cd2e5cf3dbd h1:69FJDdgtnu+jame1Mcu/KCQ51OuOMpKYNoZTvuXvZbc=
+github.com/go-vela/sdk-go v0.23.3-0.20240508193030-1cd2e5cf3dbd/go.mod h1:382f+z7TrcBk+F92US53M+l490mGiU93/h86zGqMU94=
+github.com/go-vela/server v0.23.4-0.20240508133721-300ca456e3bb h1:nzDitT5zNk5k49n/oEESPwL8xwLWf5iLLJDJkT3Vwik=
+github.com/go-vela/server v0.23.4-0.20240508133721-300ca456e3bb/go.mod h1:2KcNYX+DfNH/aWwu0pu89Gj9+wAm3S70VMy53/LMZjs=
 github.com/go-vela/types v0.23.4-0.20240417135026-fb4a95c30338 h1:I0v47dOdAvjX7lOFN4s28uONChmluD6TNgFL1hpav60=
 github.com/go-vela/types v0.23.4-0.20240417135026-fb4a95c30338/go.mod h1:vISsYDdjz9RPEK6qZ+MxtrdZEjTVU4K30NomB3826u8=
 github.com/go-vela/worker v0.23.3-0.20240424172515-3d4399807a4b h1:BAfnoo7pqj7girJPYloKybqehjf3uKT3p9n/aMWMQTU=

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestSchedule_table(t *testing.T) {
@@ -21,12 +21,12 @@ func TestSchedule_table(t *testing.T) {
 	tests := []struct {
 		name      string
 		failure   bool
-		schedules *[]library.Schedule
+		schedules *[]api.Schedule
 	}{
 		{
 			name:      "success",
 			failure:   false,
-			schedules: &[]library.Schedule{*_scheduleOne, *_scheduleTwo},
+			schedules: &[]api.Schedule{*_scheduleOne, *_scheduleTwo},
 		},
 	}
 
@@ -62,12 +62,12 @@ func TestSchedule_wideTable(t *testing.T) {
 	tests := []struct {
 		name      string
 		failure   bool
-		schedules *[]library.Schedule
+		schedules *[]api.Schedule
 	}{
 		{
 			name:      "success",
 			failure:   false,
-			schedules: &[]library.Schedule{*_scheduleOne, *_scheduleTwo},
+			schedules: &[]api.Schedule{*_scheduleOne, *_scheduleTwo},
 		},
 	}
 
@@ -92,8 +92,8 @@ func TestSchedule_wideTable(t *testing.T) {
 }
 
 // testSchedule is a test helper function to create a Schedule type with all fields set to a fake value.
-func testSchedule() *library.Schedule {
-	s := new(library.Schedule)
+func testSchedule() *api.Schedule {
+	s := new(api.Schedule)
 	s.SetID(1)
 	s.SetActive(true)
 	s.SetName("nightly")

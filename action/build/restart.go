@@ -45,7 +45,7 @@ func (c *Config) Restart(client *vela.Client) error {
 		// output the build in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(build)
+		return output.YAML(build, c.Color)
 	default:
 		// output the build in stdout format
 		//

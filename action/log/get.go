@@ -62,7 +62,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the logs in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(logs)
+		return output.YAML(logs, c.Color)
 	default:
 		// output the logs in stdout format
 		//

@@ -99,7 +99,7 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the secret in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(secret)
+		return output.YAML(secret, c.Color)
 	default:
 		// output the secret in stdout format
 		//

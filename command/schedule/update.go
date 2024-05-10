@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/schedule"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandUpdate defines the command for modifying a schedule.
@@ -116,6 +117,7 @@ func update(c *cli.Context) error {
 		Name:   c.String(internal.FlagSchedule),
 		Entry:  c.String("entry"),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 		Branch: c.String(internal.FlagBranch),
 	}
 

@@ -2,6 +2,8 @@
 
 package log
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform log related requests with Vela.
 type Config struct {
@@ -14,4 +16,5 @@ type Config struct {
 	Service int
 	Step    int
 	Output  string
+	Color   output.ColorOptions
 }

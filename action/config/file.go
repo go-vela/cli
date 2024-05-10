@@ -7,14 +7,17 @@ package config
 //
 //nolint:revive // ignore studder for package and struct name
 type ConfigFile struct {
-	API      *API      `yaml:"api,omitempty"`
-	Log      *Log      `yaml:"log,omitempty"`
-	NoGit    string    `yaml:"no-git,omitempty"`
-	Secret   *Secret   `yaml:"secret,omitempty"`
-	Compiler *Compiler `yaml:"compiler,omitempty"`
-	Output   string    `yaml:"output,omitempty"`
-	Org      string    `yaml:"org,omitempty"`
-	Repo     string    `yaml:"repo,omitempty"`
+	API         *API      `yaml:"api,omitempty"`
+	Log         *Log      `yaml:"log,omitempty"`
+	NoGit       string    `yaml:"no-git,omitempty"`
+	Secret      *Secret   `yaml:"secret,omitempty"`
+	Compiler    *Compiler `yaml:"compiler,omitempty"`
+	Output      string    `yaml:"output,omitempty"`
+	Color       *bool     `yaml:"color,omitempty"`
+	ColorFormat string    `yaml:"color_format,omitempty"`
+	ColorTheme  string    `yaml:"color_theme,omitempty"`
+	Org         string    `yaml:"org,omitempty"`
+	Repo        string    `yaml:"repo,omitempty"`
 }
 
 // API represents the API related configuration fields

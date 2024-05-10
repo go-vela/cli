@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandAdd defines the command for adding a worker.
@@ -85,6 +86,7 @@ func add(c *cli.Context) error {
 		Address:  c.String(internal.FlagWorkerAddress),
 		Hostname: c.String(internal.FlagWorkerHostname),
 		Output:   c.String(internal.FlagOutput),
+		Color:    output.ColorOptionsFromCLIContext(c),
 	}
 
 	// if no hostname was passed in, parse the hostname

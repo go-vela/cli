@@ -2,6 +2,8 @@
 
 package worker
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform worker related requests with Vela.
 type Config struct {
@@ -15,4 +17,5 @@ type Config struct {
 	BuildLimit        int64
 	RegistrationToken bool
 	Output            string
+	Color             output.ColorOptions
 }

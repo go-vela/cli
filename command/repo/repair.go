@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/repo"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandRepair defines the command for repairing settings of a repository.
@@ -89,6 +90,7 @@ func repair(c *cli.Context) error {
 		Org:    c.String(internal.FlagOrg),
 		Name:   c.String(internal.FlagRepo),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate repo configuration

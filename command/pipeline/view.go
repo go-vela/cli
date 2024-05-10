@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting a pipeline.
@@ -94,6 +95,7 @@ func view(c *cli.Context) error {
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 		Ref:    c.String("ref"),
 	}
 

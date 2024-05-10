@@ -62,7 +62,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the builds in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(builds)
+		return output.YAML(builds, c.Color)
 	default:
 		// output the builds in table format
 		return table(builds)

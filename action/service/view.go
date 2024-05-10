@@ -44,7 +44,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the service in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(service)
+		return output.YAML(service, c.Color)
 	default:
 		// output the service in stdout format
 		//

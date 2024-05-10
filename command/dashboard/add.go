@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/dashboard"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandAdd defines the command for creating a dashboard.
@@ -104,6 +105,7 @@ func add(c *cli.Context) error {
 		Events:    c.StringSlice("events"),
 		AddAdmins: c.StringSlice("admins"),
 		Output:    c.String(internal.FlagOutput),
+		Color:     output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate dashboard configuration

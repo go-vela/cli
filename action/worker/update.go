@@ -56,7 +56,7 @@ func (c *Config) Update(client *vela.Client) error {
 		// output the worker in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(worker)
+		return output.YAML(worker, c.Color)
 	default:
 		// output the worker in stdout format
 		//

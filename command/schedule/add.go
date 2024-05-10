@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/schedule"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandAdd defines the command for creating a schedule.
@@ -118,6 +119,7 @@ func add(c *cli.Context) error {
 		Name:   c.String(internal.FlagSchedule),
 		Entry:  c.String("entry"),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 		Branch: c.String(internal.FlagBranch),
 	}
 

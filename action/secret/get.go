@@ -73,7 +73,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the secrets in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(secrets)
+		return output.YAML(secrets, c.Color)
 	default:
 		// output the secrets in table format
 		return table(secrets)

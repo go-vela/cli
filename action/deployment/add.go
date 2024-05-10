@@ -56,7 +56,7 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the deployment in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(deployment)
+		return output.YAML(deployment, c.Color)
 	default:
 		// output the deployment in stdout format
 		//

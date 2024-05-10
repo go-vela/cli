@@ -2,6 +2,8 @@
 
 package repo
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform repository related requests with Vela.
 type Config struct {
@@ -24,4 +26,5 @@ type Config struct {
 	Page         int
 	PerPage      int
 	Output       string
+	Color        output.ColorOptions
 }

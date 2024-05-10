@@ -78,7 +78,7 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the repository in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(repo)
+		return output.YAML(repo, c.Color)
 	default:
 		// output the repository in stdout format
 		//

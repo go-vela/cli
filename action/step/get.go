@@ -55,7 +55,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the steps in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(steps)
+		return output.YAML(steps, c.Color)
 	default:
 		// output the steps in table format
 		return table(steps)

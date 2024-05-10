@@ -55,7 +55,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the hooks in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(hooks)
+		return output.YAML(hooks, c.Color)
 	default:
 		// output the hooks in table format
 		return table(hooks)

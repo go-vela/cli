@@ -167,6 +167,8 @@ func update(c *cli.Context) error {
 	level := c.String(internal.FlagLogLevel)
 	noGit := c.String(internal.FlagNoGit)
 	output := c.String(internal.FlagOutput)
+	colorFmt := c.String(internal.FlagColorFormat)
+	colorTheme := c.String(internal.FlagColorTheme)
 	org := c.String(internal.FlagOrg)
 	repo := c.String(internal.FlagRepo)
 	engine := c.String(internal.FlagSecretEngine)
@@ -212,6 +214,26 @@ func update(c *cli.Context) error {
 	// check if the output flag should be modified
 	if len(output) > 0 {
 		conf.UpdateFlags[internal.FlagOutput] = output
+	}
+
+	// check if the color flag should be modified
+	if c.IsSet(internal.FlagColor) {
+		color := "true"
+		if !c.Bool(internal.FlagColor) {
+			color = "false"
+		}
+
+		conf.UpdateFlags[internal.FlagColor] = color
+	}
+
+	// check if the color format flag should be modified
+	if len(colorFmt) > 0 {
+		conf.UpdateFlags[internal.FlagColorFormat] = colorFmt
+	}
+
+	// check if the color theme flag should be modified
+	if len(colorTheme) > 0 {
+		conf.UpdateFlags[internal.FlagColorTheme] = colorTheme
 	}
 
 	// check if the org flag should be modified

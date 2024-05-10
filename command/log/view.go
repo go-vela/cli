@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/log"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting a log.
@@ -119,6 +120,7 @@ func view(c *cli.Context) error {
 		Service: c.Int(internal.FlagService),
 		Step:    c.Int(internal.FlagStep),
 		Output:  c.String(internal.FlagOutput),
+		Color:   output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate log configuration

@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/go-vela/cli/internal/output"
 	"github.com/sirupsen/logrus"
 )
 
@@ -29,6 +30,7 @@ type Config struct {
 	Page              int
 	PerPage           int
 	Output            string
+	Color             output.ColorOptions
 }
 
 // setValue is a helper function to check if the value

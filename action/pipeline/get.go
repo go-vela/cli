@@ -55,7 +55,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the pipelines in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(pipelines)
+		return output.YAML(pipelines, c.Color)
 	default:
 		// output the pipelines in table format
 		return table(pipelines)

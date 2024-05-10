@@ -52,7 +52,7 @@ func (c *Config) Compile(client *vela.Client) error {
 		// output the pipeline in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(pipeline)
+		return output.YAML(pipeline, c.Color)
 	default:
 		// output the pipeline in stdout format
 		//

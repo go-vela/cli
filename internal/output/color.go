@@ -3,7 +3,11 @@
 package output
 
 import (
+	"bytes"
+
+	chroma "github.com/alecthomas/chroma/v2/quick"
 	"github.com/go-vela/cli/internal"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
 
@@ -33,4 +37,20 @@ func ColorOptionsFromCLIContext(c *cli.Context) ColorOptions {
 	}
 
 	return opts
+}
+
+// HighlightYAML uses chroma to highlight the provided yaml string.
+func HighlightYAML(str string, opts ColorOptions) string {
+	if opts.Enabled {
+		buf := new(bytes.Buffer)
+
+		err := chroma.Highlight(buf, str, "yaml", opts.Format, opts.Theme)
+		if err == nil {
+			str = buf.String()
+		} else {
+			logrus.Warnf("unable to highlight yaml output: %v", err)
+		}
+	}
+
+	return str
 }

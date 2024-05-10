@@ -74,6 +74,7 @@ func (c *ConfigFile) Empty() bool {
 	if c.Color != nil {
 		return false
 	}
+
 	// check if the color format is set
 	if len(c.ColorFormat) > 0 {
 		return false

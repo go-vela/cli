@@ -3,11 +3,9 @@
 package output
 
 import (
-	"bytes"
 	"fmt"
 	"os"
 
-	"github.com/alecthomas/chroma/v2/quick"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
@@ -32,17 +30,9 @@ func YAML(_input interface{}, colorOpts ColorOptions) error {
 
 	logrus.Tracef("sending output to stdout with %s driver", DriverYAML)
 
-	strOutput := string(output)
-
-	if colorOpts.Enabled {
-		buf := new(bytes.Buffer)
-		err = quick.Highlight(buf, strOutput, "yaml", colorOpts.Format, colorOpts.Theme)
-		if err == nil {
-			strOutput = buf.String()
-		} else {
-			logrus.Warnf("unable to highlight yaml output: %v", err)
-		}
-	}
+	// attempt to highlight the output
+	// returns the input and logs a warning on failure
+	strOutput := HighlightYAML(string(output), colorOpts)
 
 	// ensure we output to stdout
 	fmt.Fprintln(os.Stdout, strOutput)

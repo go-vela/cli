@@ -68,7 +68,7 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the repository in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(repo)
+		return output.JSON(repo, c.Color)
 	case output.DriverSpew:
 		// output the repository in spew format
 		//

@@ -52,7 +52,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the logs in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(logs)
+		return output.JSON(logs, c.Color)
 	case output.DriverSpew:
 		// output the logs in spew format
 		//

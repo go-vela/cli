@@ -42,7 +42,7 @@ func (c *Config) Expand(client *vela.Client) error {
 		// output the pipeline in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(pipeline)
+		return output.JSON(pipeline, c.Color)
 	case output.DriverSpew:
 		// output the pipeline in spew format
 		//

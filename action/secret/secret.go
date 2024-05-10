@@ -7,8 +7,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/go-vela/cli/internal/output"
 	"github.com/sirupsen/logrus"
+
+	"github.com/go-vela/cli/internal/output"
 )
 
 // Config represents the configuration necessary

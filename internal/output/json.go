@@ -13,7 +13,7 @@ import (
 // JSON parses the provided input and
 // renders the parsed input in pretty
 // JSON before outputting it to stdout.
-func JSON(_input interface{}) error {
+func JSON(_input interface{}, colorOpts ColorOptions) error {
 	logrus.Debugf("creating output with %s driver", DriverJSON)
 
 	// validate the input provided
@@ -30,8 +30,12 @@ func JSON(_input interface{}) error {
 
 	logrus.Tracef("sending output to stdout with %s driver", DriverJSON)
 
+	// attempt to highlight the output
+	// returns the input and logs a warning on failure
+	strOutput := Highlight(string(output), "json", colorOpts)
+
 	// ensure we output to stdout
-	fmt.Fprintln(os.Stdout, string(output))
+	fmt.Fprintln(os.Stdout, strOutput)
 
 	return nil
 }

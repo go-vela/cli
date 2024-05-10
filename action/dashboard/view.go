@@ -40,7 +40,7 @@ func outputDashboard(dashboard interface{}, c *Config) error {
 		// output the dashboard in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(dashboard)
+		return output.JSON(dashboard, c.Color)
 	case output.DriverSpew:
 		// output the dashboard in spew format
 		//

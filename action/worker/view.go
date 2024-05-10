@@ -48,7 +48,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the worker in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(response)
+		return output.JSON(response, c.Color)
 	case output.DriverSpew:
 		// output the worker in spew format
 		//

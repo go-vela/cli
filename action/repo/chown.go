@@ -35,7 +35,7 @@ func (c *Config) Chown(client *vela.Client) error {
 		// output the message in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(msg)
+		return output.JSON(msg, c.Color)
 	case output.DriverSpew:
 		// output the message in spew format
 		//

@@ -36,7 +36,7 @@ func (c *Config) ViewService(client *vela.Client) error {
 		// output the service log in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(log)
+		return output.JSON(log, c.Color)
 	case output.DriverSpew:
 		// output the service log in spew format
 		//
@@ -82,7 +82,7 @@ func (c *Config) ViewStep(client *vela.Client) error {
 		// output the step log in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(log)
+		return output.JSON(log, c.Color)
 	case output.DriverSpew:
 		// output the step log in spew format
 		//

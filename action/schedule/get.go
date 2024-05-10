@@ -42,7 +42,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the schedules in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(schedules)
+		return output.JSON(schedules, c.Color)
 	case output.DriverSpew:
 		// output the schedules in spew format
 		//

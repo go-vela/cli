@@ -46,7 +46,7 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the deployment in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(deployment)
+		return output.JSON(deployment, c.Color)
 	case output.DriverSpew:
 		// output the deployment in spew format
 		//

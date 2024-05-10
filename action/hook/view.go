@@ -34,7 +34,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the hook in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(hook)
+		return output.JSON(hook, c.Color)
 	case output.DriverSpew:
 		// output the hook in spew format
 		//

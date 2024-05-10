@@ -89,7 +89,7 @@ func (c *Config) Add(client *vela.Client) error {
 		// output the secret in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(secret)
+		return output.JSON(secret, c.Color)
 	case output.DriverSpew:
 		// output the secret in spew format
 		//

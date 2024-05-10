@@ -32,7 +32,7 @@ func YAML(_input interface{}, colorOpts ColorOptions) error {
 
 	// attempt to highlight the output
 	// returns the input and logs a warning on failure
-	strOutput := HighlightYAML(string(output), colorOpts)
+	strOutput := Highlight(string(output), "yaml", colorOpts)
 
 	// ensure we output to stdout
 	fmt.Fprintln(os.Stdout, strOutput)

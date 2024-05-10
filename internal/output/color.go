@@ -6,9 +6,10 @@ import (
 	"bytes"
 
 	chroma "github.com/alecthomas/chroma/v2/quick"
-	"github.com/go-vela/cli/internal"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-vela/cli/internal"
 )
 
 // ColorOptions defines the output color options used for syntax highlighting.
@@ -39,16 +40,16 @@ func ColorOptionsFromCLIContext(c *cli.Context) ColorOptions {
 	return opts
 }
 
-// HighlightYAML uses chroma to highlight the provided yaml string.
-func HighlightYAML(str string, opts ColorOptions) string {
+// Highlight uses chroma to highlight the provided yaml string.
+func Highlight(str string, lexer string, opts ColorOptions) string {
 	if opts.Enabled {
 		buf := new(bytes.Buffer)
 
-		err := chroma.Highlight(buf, str, "yaml", opts.Format, opts.Theme)
+		err := chroma.Highlight(buf, str, lexer, opts.Format, opts.Theme)
 		if err == nil {
 			str = buf.String()
 		} else {
-			logrus.Warnf("unable to highlight yaml output: %v", err)
+			logrus.Warnf("unable to highlight output: %v", err)
 		}
 	}
 

@@ -49,7 +49,7 @@ func TestOutput_JSON(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := JSON(test.input)
+		err := JSON(test.input, ColorOptions{Enabled: false})
 
 		if test.failure {
 			if err == nil {

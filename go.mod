@@ -4,6 +4,7 @@ go 1.21.9
 
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
+	github.com/alecthomas/chroma/v2 v2.13.0
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
 	github.com/cli/browser v1.3.0
 	github.com/davecgh/go-spew v1.1.1
@@ -36,7 +37,6 @@ require (
 	github.com/ProtonMail/go-crypto v0.0.0-20230828082145-3c4c8a2d2371 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
-	github.com/alecthomas/chroma/v2 v2.13.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/bytedance/sonic v1.9.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect

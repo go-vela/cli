@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-vela/cli/command/build"
 	"github.com/go-vela/cli/command/config"
+	"github.com/go-vela/cli/command/dashboard"
 	"github.com/go-vela/cli/command/deployment"
 	"github.com/go-vela/cli/command/hook"
 	"github.com/go-vela/cli/command/log"
@@ -33,6 +34,11 @@ var viewCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandView
 		build.CommandView,
+
+		// add the sub command for viewing a dashboard
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/dashboard?tab=doc#CommandView
+		dashboard.CommandView,
 
 		// add the sub command for viewing a config file
 		//

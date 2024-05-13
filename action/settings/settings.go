@@ -31,5 +31,7 @@ type Compiler struct {
 // Queue represents the compiler configurations used
 // to modify the queue settings for Vela.
 type Queue struct {
-	Routes *[]string
+	Routes     *[]string
+	AddRoutes  []string
+	DropRoutes []string
 }

@@ -15,10 +15,11 @@ import (
 )
 
 const (
-	QueueRouteKey                = "queue.routes"
 	CompilerCloneImageKey        = "compiler.clone-image"
 	CompilerTemplateDepthKey     = "compiler.template-depth"
 	CompilerStarlarkExecLimitKey = "compiler.starlark-exec-limit"
+	QueueRouteAddKey             = "queue.add-route"
+	QueueRouteDropKey            = "queue.drop-route"
 	RepoAllowlistAddKey          = "add-repo"
 	RepoAllowlistDropKey         = "drop-repo"
 	ScheduleAllowAddlistKey      = "add-schedule"
@@ -36,10 +37,17 @@ var CommandUpdate = &cli.Command{
 		// Queue Flags
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_QUEUE_ROUTES", "SETTINGS_ROUTES", "QUEUE_ROUTES"},
-			Name:    QueueRouteKey,
-			Aliases: []string{"queue-route", "routes", "route", "r"},
-			Usage:   "route assignment for the queue",
+			EnvVars: []string{"VELA_QUEUE_ADD_ROUTES", "QUEUE_ADD_ROUTES"},
+			Name:    QueueRouteAddKey,
+			Aliases: []string{"queue-route", "add-route", "routes", "route", "r"},
+			Usage:   "list of routes to add to the queue",
+		},
+
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_QUEUE_DROP_ROUTES", "QUEUE_DROP_ROUTES"},
+			Name:    QueueRouteDropKey,
+			Aliases: []string{"drop-route"},
+			Usage:   "list of routes to drop from the queue",
 		},
 
 		// Compiler Flags
@@ -119,11 +127,15 @@ EXAMPLES:
   3. Update settings to change the compiler starlark exec limit to 5.
     $ {{.HelpName}} --compiler.starlark-exec-limit 5
   4. Update settings with additional queue routes.
-    $ {{.HelpName}} --queue.route large --queue.route small
-  5. Update settings with additional repos permitted to use Vela.
-  	$ {{.HelpName}} --repo-allowlist octocat/hello-world --repo-allowlist octocat/*
-  6. Update settings with additional repos permitted to use schedules in Vela.
-	$ {{.HelpName}} --schedule-allowlist octocat/hello-world --schedule-allowlist octocat/*
+    $ {{.HelpName}} --queue.add-route large --queue.add-route small
+  5. Update settings by dropping queue routes.
+    $ {{.HelpName}} --queue.drop-route large --queue.drop-route small
+  6. Update settings with additional repos permitted to use Vela.
+  	$ {{.HelpName}} --add-repo octocat/hello-world --repo octocat/*
+  7. Update settings with additional repos permitted to use schedules in Vela.
+	$ {{.HelpName}} --add-schedule octocat/hello-world --schedule octocat/*
+  8. Update settings from a file.
+	$ {{.HelpName}} --file settings.yml
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/settings/update/
@@ -149,20 +161,18 @@ func update(c *cli.Context) error {
 
 	// create the settings configuration
 	s := &settings.Config{
-		Action:                     internal.ActionUpdate,
-		Output:                     c.String(internal.FlagOutput),
-		File:                       c.String("file"),
-		Queue:                      settings.Queue{},
+		Action: internal.ActionUpdate,
+		Output: c.String(internal.FlagOutput),
+		File:   c.String("file"),
+		Queue: settings.Queue{
+			AddRoutes:  c.StringSlice(QueueRouteAddKey),
+			DropRoutes: c.StringSlice(QueueRouteDropKey),
+		},
 		Compiler:                   settings.Compiler{},
 		RepoAllowlistAddRepos:      c.StringSlice(RepoAllowlistAddKey),
 		RepoAllowlistDropRepos:     c.StringSlice(RepoAllowlistDropKey),
 		ScheduleAllowlistAddRepos:  c.StringSlice(ScheduleAllowAddlistKey),
 		ScheduleAllowlistDropRepos: c.StringSlice(ScheduleAllowDroplistKey),
-	}
-
-	// queue
-	if c.IsSet(QueueRouteKey) {
-		s.Queue.Routes = vela.Strings(c.StringSlice(QueueRouteKey))
 	}
 
 	// compiler

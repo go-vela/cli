@@ -31,7 +31,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// create the settings object
 	sUpdate := &settings.Platform{
 		Queue: &settings.Queue{
-			Routes: c.Queue.Routes,
+			Routes: vela.Strings(s.GetRoutes()),
 		},
 		Compiler: &settings.Compiler{
 			CloneImage:        c.Compiler.CloneImage,
@@ -40,6 +40,30 @@ func (c *Config) Update(client *vela.Client) error {
 		},
 		RepoAllowlist:     vela.Strings(s.GetRepoAllowlist()),
 		ScheduleAllowlist: vela.Strings(s.GetScheduleAllowlist()),
+	}
+
+	// drop specified routes
+	if len(c.Queue.DropRoutes) > 0 {
+		newRoutes := []string{}
+		for _, r := range sUpdate.GetRoutes() {
+			if !slices.Contains(c.Queue.DropRoutes, r) {
+				newRoutes = append(newRoutes, r)
+			}
+		}
+
+		sUpdate.SetRoutes(newRoutes)
+	}
+
+	// add specified routes
+	if len(c.Queue.AddRoutes) > 0 {
+		routes := sUpdate.GetRoutes()
+		for _, r := range c.Queue.AddRoutes {
+			if !slices.Contains(routes, r) {
+				routes = append(routes, r)
+			}
+		}
+
+		sUpdate.SetRoutes(routes)
 	}
 
 	// drop specified repositories from the allowlist
@@ -66,6 +90,30 @@ func (c *Config) Update(client *vela.Client) error {
 		sUpdate.SetRepoAllowlist(repos)
 	}
 
+	// drop specified repositories from the allowlist
+	if len(c.ScheduleAllowlistDropRepos) > 0 {
+		newRepos := []string{}
+		for _, r := range sUpdate.GetScheduleAllowlist() {
+			if !slices.Contains(c.ScheduleAllowlistDropRepos, r) {
+				newRepos = append(newRepos, r)
+			}
+		}
+
+		sUpdate.SetScheduleAllowlist(newRepos)
+	}
+
+	// add specified repositories from the allowlist
+	if len(c.ScheduleAllowlistAddRepos) > 0 {
+		repos := sUpdate.GetScheduleAllowlist()
+		for _, r := range c.ScheduleAllowlistAddRepos {
+			if !slices.Contains(repos, r) {
+				repos = append(repos, r)
+			}
+		}
+
+		sUpdate.SetScheduleAllowlist(repos)
+	}
+
 	// manual overrides (from file)
 	if c.RepoAllowlist != nil {
 		sUpdate.RepoAllowlist = c.RepoAllowlist
@@ -73,6 +121,10 @@ func (c *Config) Update(client *vela.Client) error {
 
 	if c.ScheduleAllowlist != nil {
 		sUpdate.ScheduleAllowlist = c.ScheduleAllowlist
+	}
+
+	if c.Queue.Routes != nil {
+		sUpdate.Queue.Routes = c.Queue.Routes
 	}
 
 	logrus.Trace("updating settings")

@@ -81,7 +81,7 @@ func (c *Config) Update(client *vela.Client) error {
 		sUpdate.SetRepoAllowlist(newRepos)
 	}
 
-	// add specified repositories from the allowlist
+	// add specified repositories to the allowlist
 	if len(c.RepoAllowlistAddRepos) > 0 {
 		repos := sUpdate.GetRepoAllowlist()
 
@@ -107,7 +107,7 @@ func (c *Config) Update(client *vela.Client) error {
 		sUpdate.SetScheduleAllowlist(newRepos)
 	}
 
-	// add specified repositories from the allowlist
+	// add specified repositories to the allowlist
 	if len(c.ScheduleAllowlistAddRepos) > 0 {
 		repos := sUpdate.GetScheduleAllowlist()
 

@@ -45,6 +45,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// drop specified routes
 	if len(c.Queue.DropRoutes) > 0 {
 		newRoutes := []string{}
+
 		for _, r := range sUpdate.GetRoutes() {
 			if !slices.Contains(c.Queue.DropRoutes, r) {
 				newRoutes = append(newRoutes, r)
@@ -57,6 +58,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// add specified routes
 	if len(c.Queue.AddRoutes) > 0 {
 		routes := sUpdate.GetRoutes()
+
 		for _, r := range c.Queue.AddRoutes {
 			if !slices.Contains(routes, r) {
 				routes = append(routes, r)
@@ -69,6 +71,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// drop specified repositories from the allowlist
 	if len(c.RepoAllowlistDropRepos) > 0 {
 		newRepos := []string{}
+
 		for _, r := range sUpdate.GetRepoAllowlist() {
 			if !slices.Contains(c.RepoAllowlistDropRepos, r) {
 				newRepos = append(newRepos, r)
@@ -81,6 +84,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// add specified repositories from the allowlist
 	if len(c.RepoAllowlistAddRepos) > 0 {
 		repos := sUpdate.GetRepoAllowlist()
+
 		for _, r := range c.RepoAllowlistAddRepos {
 			if !slices.Contains(repos, r) {
 				repos = append(repos, r)
@@ -93,6 +97,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// drop specified repositories from the allowlist
 	if len(c.ScheduleAllowlistDropRepos) > 0 {
 		newRepos := []string{}
+
 		for _, r := range sUpdate.GetScheduleAllowlist() {
 			if !slices.Contains(c.ScheduleAllowlistDropRepos, r) {
 				newRepos = append(newRepos, r)
@@ -105,6 +110,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// add specified repositories from the allowlist
 	if len(c.ScheduleAllowlistAddRepos) > 0 {
 		repos := sUpdate.GetScheduleAllowlist()
+
 		for _, r := range c.ScheduleAllowlistAddRepos {
 			if !slices.Contains(repos, r) {
 				repos = append(repos, r)

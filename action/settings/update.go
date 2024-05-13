@@ -7,6 +7,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"slices"
 
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
@@ -21,8 +22,14 @@ import (
 func (c *Config) Update(client *vela.Client) error {
 	logrus.Debug("executing update for settings configuration")
 
+	// send API call to retrieve current settings
+	s, _, err := client.Admin.Settings.Get()
+	if err != nil {
+		return err
+	}
+
 	// create the settings object
-	s := &settings.Platform{
+	sUpdate := &settings.Platform{
 		Queue: &settings.Queue{
 			Routes: c.Queue.Routes,
 		},
@@ -31,14 +38,47 @@ func (c *Config) Update(client *vela.Client) error {
 			TemplateDepth:     c.Compiler.TemplateDepth,
 			StarlarkExecLimit: c.Compiler.StarlarkExecLimit,
 		},
-		RepoAllowlist:     c.RepoAllowlist,
-		ScheduleAllowlist: c.ScheduleAllowlist,
+		RepoAllowlist:     vela.Strings(s.GetRepoAllowlist()),
+		ScheduleAllowlist: vela.Strings(s.GetScheduleAllowlist()),
+	}
+
+	// drop specified repositories from the allowlist
+	if len(c.RepoAllowlistDropRepos) > 0 {
+		newRepos := []string{}
+		for _, r := range sUpdate.GetRepoAllowlist() {
+			if !slices.Contains(c.RepoAllowlistDropRepos, r) {
+				newRepos = append(newRepos, r)
+			}
+		}
+
+		sUpdate.SetRepoAllowlist(newRepos)
+	}
+
+	// add specified repositories from the allowlist
+	if len(c.RepoAllowlistAddRepos) > 0 {
+		repos := sUpdate.GetRepoAllowlist()
+		for _, r := range c.RepoAllowlistAddRepos {
+			if !slices.Contains(repos, r) {
+				repos = append(repos, r)
+			}
+		}
+
+		sUpdate.SetRepoAllowlist(repos)
+	}
+
+	// manual overrides (from file)
+	if c.RepoAllowlist != nil {
+		sUpdate.RepoAllowlist = c.RepoAllowlist
+	}
+
+	if c.ScheduleAllowlist != nil {
+		sUpdate.ScheduleAllowlist = c.ScheduleAllowlist
 	}
 
 	logrus.Trace("updating settings")
 
 	// send API call to modify settings
-	_s, _, err := client.Admin.Settings.Update(s)
+	sUpdated, _, err := client.Admin.Settings.Update(sUpdate)
 	if err != nil {
 		return err
 	}
@@ -49,27 +89,27 @@ func (c *Config) Update(client *vela.Client) error {
 		// output in dump format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
-		return output.Dump(_s)
+		return output.Dump(sUpdated)
 	case output.DriverJSON:
 		// output in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(_s)
+		return output.JSON(sUpdated)
 	case output.DriverSpew:
 		// output in spew format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
-		return output.Spew(_s)
+		return output.Spew(sUpdated)
 	case output.DriverYAML:
 		// output in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(_s)
+		return output.YAML(sUpdated)
 	default:
 		// output in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(_s)
+		return output.Stdout(sUpdated)
 	}
 }
 
@@ -101,12 +141,18 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 		}
 
 		s := &Config{
-			Action:            internal.ActionUpdate,
-			Output:            c.Output,
-			Compiler:          Compiler{},
-			Queue:             Queue{},
-			RepoAllowlist:     f.Platform.RepoAllowlist,
-			ScheduleAllowlist: f.Platform.ScheduleAllowlist,
+			Action:   internal.ActionUpdate,
+			Output:   c.Output,
+			Compiler: Compiler{},
+			Queue:    Queue{},
+		}
+
+		if f.Platform.RepoAllowlist != nil {
+			s.RepoAllowlist = f.Platform.RepoAllowlist
+		}
+
+		if f.Platform.ScheduleAllowlist != nil {
+			s.ScheduleAllowlist = f.Platform.ScheduleAllowlist
 		}
 
 		// update values if set

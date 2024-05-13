@@ -10,8 +10,14 @@ type Config struct {
 	File   string
 	Compiler
 	Queue
-	RepoAllowlist     *[]string
-	ScheduleAllowlist *[]string
+
+	RepoAllowlist          *[]string
+	RepoAllowlistAddRepos  []string
+	RepoAllowlistDropRepos []string
+
+	ScheduleAllowlist          *[]string
+	ScheduleAllowlistAddRepos  []string
+	ScheduleAllowlistDropRepos []string
 }
 
 // Compiler represents the compiler configurations used

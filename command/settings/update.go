@@ -19,8 +19,10 @@ const (
 	CompilerCloneImageKey        = "compiler.clone-image"
 	CompilerTemplateDepthKey     = "compiler.template-depth"
 	CompilerStarlarkExecLimitKey = "compiler.starlark-exec-limit"
-	RepoAllowlistKey             = "repo-allowlist"
-	ScheduleAllowlistKey         = "schedule-allowlist"
+	RepoAllowlistAddKey          = "add-repo"
+	RepoAllowlistDropKey         = "drop-repo"
+	ScheduleAllowAddlistKey      = "add-schedule"
+	ScheduleAllowDroplistKey     = "drop-schedule"
 )
 
 // CommandUpdate defines the command for modifying a settings.
@@ -66,17 +68,29 @@ var CommandUpdate = &cli.Command{
 		// Misc Flags
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_REPO_ALLOWLIST", "REPO_ALLOWLIST"},
-			Name:    RepoAllowlistKey,
-			Aliases: []string{"repoallowlist", "repo", "repos", "ral"},
-			Usage:   "allowlist of repositories that are permitted to use Vela",
+			EnvVars: []string{"VELA_REPO_ALLOWLIST_ADD_REPOS", "REPO_ALLOWLIST_ADD_REPOS"},
+			Name:    RepoAllowlistAddKey,
+			Aliases: []string{"repo", "repos", "ral"},
+			Usage:   "the list of repositories to add to the list of all those permitted to use Vela",
 		},
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_SCHEDULE_ALLOWLIST", "SCHEDULE_ALLOWLIST"},
-			Name:    ScheduleAllowlistKey,
-			Aliases: []string{"scheduleallowlist", "schedule", "schedules", "sal"},
-			Usage:   "allowlist of schedules that are permitted to use Vela",
+			EnvVars: []string{"VELA_REPO_ALLOWLIST_DROP_REPOS", "REPO_ALLOWLIST_DROP_REPOS"},
+			Name:    RepoAllowlistDropKey,
+			Usage:   "the list of repositories to drop from the list of all those permitted to use Vela",
+		},
+
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_SCHEDULE_ALLOWLIST_ADD_REPOS", "SCHEDULE_ALLOWLIST_ADD_REPOS"},
+			Name:    ScheduleAllowAddlistKey,
+			Aliases: []string{"schedule", "schedules", "sal"},
+			Usage:   "the list of repositories to add to the list of all those permitted to use schedules in Vela",
+		},
+
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_SCHEDULE_ALLOWLIST_DROP_REPOS", "SCHEDULE_ALLOWLIST_DROP_REPOS"},
+			Name:    ScheduleAllowDroplistKey,
+			Usage:   "the list of repositories to drop from the list of all those permitted to use schedules in Vela",
 		},
 
 		&cli.StringFlag{
@@ -135,11 +149,15 @@ func update(c *cli.Context) error {
 
 	// create the settings configuration
 	s := &settings.Config{
-		Action:   internal.ActionUpdate,
-		Output:   c.String(internal.FlagOutput),
-		File:     c.String("file"),
-		Queue:    settings.Queue{},
-		Compiler: settings.Compiler{},
+		Action:                     internal.ActionUpdate,
+		Output:                     c.String(internal.FlagOutput),
+		File:                       c.String("file"),
+		Queue:                      settings.Queue{},
+		Compiler:                   settings.Compiler{},
+		RepoAllowlistAddRepos:      c.StringSlice(RepoAllowlistAddKey),
+		RepoAllowlistDropRepos:     c.StringSlice(RepoAllowlistDropKey),
+		ScheduleAllowlistAddRepos:  c.StringSlice(ScheduleAllowAddlistKey),
+		ScheduleAllowlistDropRepos: c.StringSlice(ScheduleAllowDroplistKey),
 	}
 
 	// queue
@@ -158,15 +176,6 @@ func update(c *cli.Context) error {
 
 	if c.IsSet(CompilerStarlarkExecLimitKey) {
 		s.Compiler.StarlarkExecLimit = vela.UInt64(c.Uint64(CompilerStarlarkExecLimitKey))
-	}
-
-	// misc
-	if c.IsSet(RepoAllowlistKey) {
-		s.RepoAllowlist = vela.Strings(c.StringSlice(RepoAllowlistKey))
-	}
-
-	if c.IsSet(ScheduleAllowlistKey) {
-		s.ScheduleAllowlist = vela.Strings(c.StringSlice(ScheduleAllowlistKey))
 	}
 
 	// validate settings configuration

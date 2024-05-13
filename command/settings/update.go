@@ -98,11 +98,18 @@ var CommandUpdate = &cli.Command{
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
-  1. Update settings to change the compiler template depth to 2.
+  1. Update settings to change the compiler clone image to target/vela-git:latest.
+    $ {{.HelpName}} --compiler.clone-image target/vela-git:latest
+  2. Update settings to change the compiler template depth to 2.
     $ {{.HelpName}} --compiler.template-depth 2
-  2. Update settings with custom queue routes.
+  3. Update settings to change the compiler starlark exec limit to 5.
+    $ {{.HelpName}} --compiler.starlark-exec-limit 5
+  4. Update settings with additional queue routes.
     $ {{.HelpName}} --queue.route large --queue.route small
-
+  5. Update settings with additional repos permitted to use Vela.
+  	$ {{.HelpName}} --repo-allowlist octocat/hello-world --repo-allowlist octocat/*
+  6. Update settings with additional repos permitted to use schedules in Vela.
+	$ {{.HelpName}} --schedule-allowlist octocat/hello-world --schedule-allowlist octocat/*
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/settings/update/

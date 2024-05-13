@@ -38,7 +38,7 @@ func (c *Config) Update(client *vela.Client) error {
 	logrus.Trace("updating settings")
 
 	// send API call to modify settings
-	s_, _, err := client.Admin.Settings.Update(s)
+	_s, _, err := client.Admin.Settings.Update(s)
 	if err != nil {
 		return err
 	}
@@ -49,27 +49,27 @@ func (c *Config) Update(client *vela.Client) error {
 		// output in dump format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Dump
-		return output.Dump(s_)
+		return output.Dump(_s)
 	case output.DriverJSON:
 		// output in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(s_)
+		return output.JSON(_s)
 	case output.DriverSpew:
 		// output in spew format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Spew
-		return output.Spew(s_)
+		return output.Spew(_s)
 	case output.DriverYAML:
 		// output in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(s_)
+		return output.YAML(_s)
 	default:
 		// output in stdout format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-		return output.Stdout(s_)
+		return output.Stdout(_s)
 	}
 }
 

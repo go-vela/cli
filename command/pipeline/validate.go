@@ -241,7 +241,7 @@ func validate(c *cli.Context) error {
 	// create a compiler client
 	//
 	// https://godoc.org/github.com/go-vela/server/compiler/native#New
-	client, err := native.New(c)
+	client, err := native.FromCLIContext(c)
 	if err != nil {
 		return err
 	}

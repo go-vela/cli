@@ -1,0 +1,4 @@
+---
+platform:
+  repo_allowlist: [ "foo/bar", "octocat/hello-world" ]
+  schedule_allowlist: [ "*", "octocat/*" ]

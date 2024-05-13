@@ -7,6 +7,7 @@ package settings
 type Config struct {
 	Action string
 	Output string
+	File   string
 	Compiler
 	Queue
 	RepoAllowlist     *[]string

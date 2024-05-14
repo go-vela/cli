@@ -131,7 +131,7 @@ EXAMPLES:
   5. Update settings by dropping queue routes.
     $ {{.HelpName}} --queue.drop-route large --queue.drop-route small
   6. Update settings with additional repos permitted to use Vela.
-    $ {{.HelpName}} --add-repo octocat/hello-world --repo octocat/*
+    $ {{.HelpName}} --add-repo octocat/hello-world --add-repo octocat/*
   7. Update settings with additional repos permitted to use schedules in Vela.
     $ {{.HelpName}} --add-schedule octocat/hello-world --schedule octocat/*
   8. Update settings from a file.

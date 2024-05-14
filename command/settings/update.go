@@ -102,7 +102,7 @@ var CommandUpdate = &cli.Command{
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "SECRET_FILE"},
+			EnvVars: []string{"VELA_FILE", "SETTINGS_FILE"},
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide a file to update settings",

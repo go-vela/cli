@@ -214,7 +214,6 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 		}
 
 		// update values if set
-
 		if f.Compiler != nil {
 			if f.Compiler.CloneImage != nil {
 				s.Compiler.CloneImage = vela.String(f.Compiler.GetCloneImage())

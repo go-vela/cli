@@ -130,10 +130,10 @@ EXAMPLES:
     $ {{.HelpName}} --queue.add-route large --queue.add-route small
   5. Update settings by dropping queue routes.
     $ {{.HelpName}} --queue.drop-route large --queue.drop-route small
-  6. Update settings with additional repos permitted to use Vela.
+  6. Update settings with additional repos permitted to use Vela (patterns containing * wildcards must be wrapped in quotes on the commandline).
     $ {{.HelpName}} --add-repo octocat/hello-world --repo octocat/*
-  7. Update settings with additional repos permitted to use schedules in Vela.
-    $ {{.HelpName}} --add-schedule octocat/hello-world --schedule octocat/*
+  7. Update settings with additional repos permitted to use schedules in Vela (patterns containing * wildcards must be wrapped in quotes on the commandline).
+    $ {{.HelpName}} --add-schedule octocat/hello-world --schedule 'octocat/*'
   8. Update settings from a file.
     $ {{.HelpName}} --file settings.yml
 DOCUMENTATION:

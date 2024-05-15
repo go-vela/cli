@@ -241,22 +241,22 @@ func validate(c *cli.Context) error {
 	// create a compiler client
 	//
 	// https://godoc.org/github.com/go-vela/server/compiler/native#New
-	client, err := native.New(c)
+	client, err := native.FromCLIContext(c)
 	if err != nil {
 		return err
 	}
 
 	// set starlark exec limit
-	client.StarlarkExecLimit = c.Uint64("compiler-starlark-exec-limit")
+	client.SetStarlarkExecLimit(c.Uint64("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocalTemplates(p.TemplateFiles)
-		client.TemplateDepth = c.Int("max-template-depth")
+		client.SetTemplateDepth(c.Int("max-template-depth"))
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
-		client.TemplateDepth = util.MinInt(c.Int("max-template-depth"), 5)
+		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
 	}
 

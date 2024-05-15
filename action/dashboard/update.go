@@ -38,7 +38,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetRepos(newRepos)
 	}
 
-	// add specified repositories from the dashboard
+	// add specified repositories to the dashboard
 	if len(c.AddRepos) > 0 {
 		repos := dashboard.GetRepos()
 
@@ -91,7 +91,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboard.SetAdmins(newAdmins)
 	}
 
-	// add specified admins from the dashboard
+	// add specified admins to the dashboard
 	if len(c.AddAdmins) > 0 {
 		admins := dashboard.GetAdmins()
 

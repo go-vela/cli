@@ -1,0 +1,10 @@
+---
+platform:
+  compiler:
+    clone_image: "target/vela-git:latest"
+    template_depth: 10
+    starlark_exec_limit: 100
+  queue:
+    routes: [ "vela", "foobar" ]
+  repo_allowlist: [ "foo/bar", "octocat/hello-world" ]
+  schedule_allowlist: [ "*", "octocat/*" ]

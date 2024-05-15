@@ -22,6 +22,7 @@ func TestPipeline_Validate(t *testing.T) {
 	authSet.String("api.addr", s.URL, "doc")
 	authSet.String("api.token.access", test.TestTokenGood, "doc")
 	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	authSet.String("clone-image", "target/vela-git:latest", "doc")
 
 	fullSet := flag.NewFlagSet("test", 0)
 	fullSet.String("api.addr", s.URL, "doc")
@@ -40,11 +41,13 @@ func TestPipeline_Validate(t *testing.T) {
 	fullSet.String("file-changeset", "README.md,main,go", "doc")
 	fullSet.Uint64("compiler-starlark-exec-limit", 10000, "doc")
 	fullSet.Bool("remote", true, "doc")
+	fullSet.String("clone-image", "target/vela-git:latest", "doc")
 
 	// setup flags
 	localSet := flag.NewFlagSet("test", 0)
 	localSet.String("file", "generate.yml", "doc")
 	localSet.String("path", "../../action/pipeline/testdata", "doc")
+	localSet.String("clone-image", "target/vela-git:latest", "doc")
 
 	// setup tests
 	tests := []struct {

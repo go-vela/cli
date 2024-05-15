@@ -11,7 +11,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-git/go-git/v5 v5.11.0
 	github.com/go-vela/sdk-go v0.23.3-0.20240508193030-1cd2e5cf3dbd
-	github.com/go-vela/server v0.23.4-0.20240508133721-300ca456e3bb
+	github.com/go-vela/server v0.23.4-0.20240513213926-927dc715e59f
 	github.com/go-vela/types v0.23.4-0.20240417135026-fb4a95c30338
 	github.com/go-vela/worker v0.23.3-0.20240424172515-3d4399807a4b
 	github.com/golang-jwt/jwt/v5 v5.2.1
@@ -46,7 +46,7 @@ require (
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
-	github.com/distribution/reference v0.5.0 // indirect
+	github.com/distribution/reference v0.6.0 // indirect
 	github.com/docker/docker v26.0.0+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect

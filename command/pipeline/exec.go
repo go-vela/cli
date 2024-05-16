@@ -167,6 +167,13 @@ var CommandExec = &cli.Command{
 			Usage:   "set the starlark execution step limit for compiling starlark pipelines",
 			Value:   7500,
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"},
+			Name:    "clone-image",
+			Usage:   "the clone image to use for the injected clone step",
+			// renovate: image=target/vela-git
+			Value: "target/vela-git:v0.8.0@sha256:02de004ae9dbf184c70039cb9ce431c31d6e7580eb9e6ec64a97ebf108aa65cb",
+		},
 
 		// Environment Flags
 		&cli.BoolFlag{
@@ -326,7 +333,7 @@ func exec(c *cli.Context) error {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
 		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
-		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
+		logrus.Debugf("no local template files provided, setting max template depth to %d", client.GetTemplateDepth())
 	}
 
 	// execute the exec call for the pipeline configuration

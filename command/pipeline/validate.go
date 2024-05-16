@@ -154,6 +154,13 @@ var CommandValidate = &cli.Command{
 			Aliases: []string{"cgu"},
 			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"},
+			Name:    "clone-image",
+			Usage:   "the clone image to use for the injected clone step",
+			// renovate: image=target/vela-git
+			Value: "target/vela-git:v0.8.0@sha256:02de004ae9dbf184c70039cb9ce431c31d6e7580eb9e6ec64a97ebf108aa65cb",
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -257,7 +264,7 @@ func validate(c *cli.Context) error {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
 		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
-		logrus.Debugf("no local template files provided, setting max template depth to %d", client.TemplateDepth)
+		logrus.Debugf("no local template files provided, setting max template depth to %d", client.GetTemplateDepth())
 	}
 
 	// execute the validate local call for the pipeline configuration

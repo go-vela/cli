@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/dashboard"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandGet defines the command for viewing all user dashboards.
@@ -70,6 +71,7 @@ func get(c *cli.Context) error {
 		Action: internal.ActionGet,
 		Full:   c.Bool("full"),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate dashboard configuration

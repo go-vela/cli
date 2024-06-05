@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/build"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandCancel defines the command for canceling a build.
@@ -102,6 +103,7 @@ func cancel(c *cli.Context) error {
 		Repo:   c.String(internal.FlagRepo),
 		Number: c.Int(internal.FlagBuild),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate build configuration

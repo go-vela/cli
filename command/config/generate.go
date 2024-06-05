@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandGenerate defines the command for producing the config file.
@@ -152,6 +153,7 @@ func generate(c *cli.Context) error {
 		LogLevel:     c.String(internal.FlagLogLevel),
 		NoGit:        c.String(internal.FlagNoGit),
 		Output:       c.String(internal.FlagOutput),
+		Color:        output.ColorOptionsFromCLIContext(c),
 		Org:          c.String(internal.FlagOrg),
 		Repo:         c.String(internal.FlagRepo),
 		Engine:       c.String(internal.FlagSecretEngine),

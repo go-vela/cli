@@ -60,6 +60,18 @@ const (
 	// FlagOutput defines the key for the
 	// flag when setting the output.
 	FlagOutput = "output"
+
+	// FlagColor defines the key for the
+	// flag when enabling/disabling color output.
+	FlagColor = "color"
+
+	// FlagColorFormat defines the key for the
+	// flag when setting the color format.
+	FlagColorFormat = "color.format"
+
+	// FlagColorTheme defines the key for the
+	// flag when setting the color theme.
+	FlagColorTheme = "color.theme"
 )
 
 // log flag keys.

@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/repo"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandGet defines the command for capturing a list of repositories.
@@ -95,6 +96,7 @@ func get(c *cli.Context) error {
 		Page:    c.Int(internal.FlagPage),
 		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
+		Color:   output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate repo configuration

@@ -57,7 +57,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the secret in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(secret)
+		return output.JSON(secret, c.Color)
 	case output.DriverSpew:
 		// output the secret in spew format
 		//
@@ -67,7 +67,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the secret in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(secret)
+		return output.YAML(secret, c.Color)
 	default:
 		return outputDefault(c.Engine, secret)
 	}

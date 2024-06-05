@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/secret"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/types/constants"
 )
 
@@ -178,6 +179,7 @@ func update(c *cli.Context) error {
 		AllowEvents: c.StringSlice("event"),
 		File:        c.String("file"),
 		Output:      c.String(internal.FlagOutput),
+		Color:       output.ColorOptionsFromCLIContext(c),
 	}
 
 	// check if allow_command and allow_substitution are provided

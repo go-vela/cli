@@ -33,7 +33,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(response)
+		return output.JSON(response, c.Color)
 	case output.DriverSpew:
 		// output in spew format
 		//
@@ -43,7 +43,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(response)
+		return output.YAML(response, c.Color)
 	default:
 		// output in stdout format
 		//

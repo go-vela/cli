@@ -130,6 +130,26 @@ func main() {
 			Usage:   "set the status of syncing git repo and org with .git/ directory",
 			Value:   "false",
 		},
+
+		// Color Flags
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COLOR"},
+			Name:    internal.FlagColor,
+			Usage:   "enable or disable color output",
+		},
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COLOR_FORMAT"},
+			Name:    internal.FlagColorFormat,
+			Usage:   "enable or disable color output",
+		},
+
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_COLOR_THEME"},
+			Name:    internal.FlagColorTheme,
+			Usage:   "configures the output color theme",
+		},
 	}
 
 	// CLI Start

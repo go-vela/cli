@@ -14,6 +14,7 @@ import (
 	"github.com/go-vela/cli/action/deployment"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/types/raw"
 )
 
@@ -166,6 +167,7 @@ func add(c *cli.Context) error {
 		Target:      c.String("target"),
 		Task:        c.String("task"),
 		Output:      c.String(internal.FlagOutput),
+		Color:       output.ColorOptionsFromCLIContext(c),
 		Parameters:  parameters,
 	}
 

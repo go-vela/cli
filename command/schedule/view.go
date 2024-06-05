@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/schedule"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting a schedule.
@@ -95,6 +96,7 @@ func view(c *cli.Context) error {
 		Repo:   c.String(internal.FlagRepo),
 		Name:   c.String(internal.FlagSchedule),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate schedule configuration

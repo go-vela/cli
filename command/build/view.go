@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/build"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting a build.
@@ -104,6 +105,7 @@ func view(c *cli.Context) error {
 		Repo:   c.String(internal.FlagRepo),
 		Number: c.Int(internal.FlagBuild),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate build configuration

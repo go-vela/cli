@@ -169,15 +169,18 @@ func TestPipeline_Config_Validate(t *testing.T) {
 
 func TestPipeline_Config_ValidateLocal(t *testing.T) {
 	// setup types
-	c := cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, flag.NewFlagSet("test", 0), nil)
+	set := flag.NewFlagSet("test", 0)
+	set.String("clone-image", "target/vela-git:latest", "doc")
+
+	c := cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, set, nil)
 
 	// create a vela client
-	client, err := native.New(c)
+	client, err := native.FromCLIContext(c)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}
 
-	client.TemplateDepth = 1
+	client.SetTemplateDepth(1)
 
 	// setup tests
 	tests := []struct {

@@ -1,0 +1,4 @@
+---
+platform:
+  queue:
+    routes: [ "vela", "foobar" ]

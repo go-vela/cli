@@ -49,7 +49,7 @@ func TestOutput_YAML(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := YAML(test.input)
+		err := YAML(test.input, ColorOptions{Format: "disabled"})
 
 		if test.failure {
 			if err == nil {

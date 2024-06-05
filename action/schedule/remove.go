@@ -34,7 +34,7 @@ func (c *Config) Remove(client *vela.Client) error {
 		// output the message in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(msg)
+		return output.JSON(msg, c.Color)
 	case output.DriverSpew:
 		// output the message in spew format
 		//
@@ -44,7 +44,7 @@ func (c *Config) Remove(client *vela.Client) error {
 		// output the message in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(msg)
+		return output.YAML(msg, c.Color)
 	default:
 		// output the message in stdout format
 		//

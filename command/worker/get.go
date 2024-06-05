@@ -13,6 +13,7 @@ import (
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandGet defines the command for capturing a list of workers.
@@ -119,6 +120,7 @@ func get(c *cli.Context) error {
 		Action:          internal.ActionGet,
 		Active:          &active,
 		Output:          c.String(internal.FlagOutput),
+		Color:           output.ColorOptionsFromCLIContext(c),
 		CheckedInBefore: before,
 		CheckedInAfter:  after,
 	}

@@ -4,6 +4,7 @@ go 1.21.9
 
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
+	github.com/alecthomas/chroma/v2 v2.13.0
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
 	github.com/cli/browser v1.3.0
 	github.com/davecgh/go-spew v1.1.1
@@ -47,6 +48,7 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
+	github.com/dlclark/regexp2 v1.11.0 // indirect
 	github.com/docker/docker v26.0.0+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect

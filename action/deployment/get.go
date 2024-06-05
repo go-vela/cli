@@ -42,7 +42,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the deployments in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(deployments)
+		return output.JSON(deployments, c.Color)
 	case output.DriverSpew:
 		// output the deployments in spew format
 		//
@@ -55,7 +55,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the deployments in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(deployments)
+		return output.YAML(deployments, c.Color)
 	default:
 		// output the deployments in table format
 		return table(deployments)

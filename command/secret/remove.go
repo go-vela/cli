@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/secret"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/types/constants"
 )
 
@@ -124,6 +125,7 @@ func remove(c *cli.Context) error {
 		Team:   c.String("team"),
 		Name:   c.String("name"),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate secret configuration

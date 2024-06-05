@@ -2,6 +2,8 @@
 
 package schedule
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform schedule related requests with Vela.
 type Config struct {
@@ -15,4 +17,5 @@ type Config struct {
 	PerPage int
 	Output  string
 	Branch  string
+	Color   output.ColorOptions
 }

@@ -191,6 +191,51 @@ func (c *Config) Load(ctx *cli.Context) error {
 			continue
 		}
 
+		// check if the color flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagColor) &&
+			!ctx.IsSet(internal.FlagColor) {
+			// set the color field to value from config
+			c := "true"
+			if config.Color != nil && !*config.Color {
+				c = "false"
+			}
+			err = ctx.Set(internal.FlagColor, c)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the color format flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagColorFormat) &&
+			!ctx.IsSet(internal.FlagColorFormat) &&
+			len(config.ColorFormat) > 0 {
+			// set the color format field to value from config
+			err = ctx.Set(internal.FlagColorFormat, config.ColorFormat)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
+		// check if the color theme flag is available
+		// and if it is set in the context
+		if strings.Contains(f, internal.FlagColorTheme) &&
+			!ctx.IsSet(internal.FlagColorTheme) &&
+			len(config.ColorFormat) > 0 {
+			// set the color theme field to value from config
+			err = ctx.Set(internal.FlagColorTheme, config.ColorTheme)
+			if err != nil {
+				return err
+			}
+
+			continue
+		}
+
 		// check if the org flag is available
 		// and if it is set in the context
 		if strings.Contains(f, internal.FlagOrg) &&

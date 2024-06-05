@@ -14,6 +14,7 @@ import (
 	"github.com/go-vela/cli/action/login"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandLogin defines the command for authenticating and logging in to Vela.
@@ -164,6 +165,7 @@ func runLogin(c *cli.Context) error {
 		LogLevel:     c.String(internal.FlagLogLevel),
 		NoGit:        c.String(internal.FlagNoGit),
 		Output:       c.String(internal.FlagOutput),
+		Color:        output.ColorOptionsFromCLIContext(c),
 		Org:          c.String(internal.FlagOrg),
 		Repo:         c.String(internal.FlagRepo),
 		Engine:       c.String(internal.FlagSecretEngine),

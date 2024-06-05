@@ -143,6 +143,24 @@ func (c *Config) Remove() error {
 			// set the output field to empty in config
 			config.Output = ""
 		}
+
+		// check if color flag should be removed
+		if strings.EqualFold(flag, internal.FlagColor) {
+			// set the color field to empty in config
+			config.Color = nil
+		}
+
+		// check if color format flag should be removed
+		if strings.EqualFold(flag, internal.FlagColorFormat) {
+			// set the color format field to empty in config
+			config.ColorFormat = ""
+		}
+
+		// check if color theme flag should be removed
+		if strings.EqualFold(flag, internal.FlagColorTheme) {
+			// set the color theme to empty in config
+			config.ColorTheme = ""
+		}
 	}
 
 	logrus.Trace("creating file content for config file")

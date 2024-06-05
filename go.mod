@@ -28,8 +28,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.1
 )
 
-require gopkg.in/yaml.v2 v2.4.0
-
 require (
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
@@ -152,6 +150,7 @@ require (
 	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/api v0.30.1 // indirect
 	k8s.io/apimachinery v0.30.1 // indirect
 	k8s.io/client-go v0.30.1 // indirect

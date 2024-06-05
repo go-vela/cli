@@ -10,7 +10,7 @@ import (
 	"slices"
 
 	"github.com/sirupsen/logrus"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"

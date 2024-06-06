@@ -193,7 +193,6 @@ func (c *Config) Load(ctx *cli.Context) error {
 
 		// check if the color flag is available
 		// and if it is set in the context
-
 		if strings.Contains(f, internal.FlagColor) &&
 			!ctx.IsSet(internal.FlagColor) {
 			// set the color field to value from config

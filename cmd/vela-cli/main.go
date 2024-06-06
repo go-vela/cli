@@ -142,13 +142,13 @@ func main() {
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_COLOR_FORMAT"},
 			Name:    internal.FlagColorFormat,
-			Usage:   "enable or disable color output",
+			Usage:   "overrides the output color format (default: terminal256)",
 		},
 
 		&cli.StringFlag{
 			EnvVars: []string{"VELA_COLOR_THEME"},
 			Name:    internal.FlagColorTheme,
-			Usage:   "configures the output color theme",
+			Usage:   "configures the output color theme (default: monokai)",
 		},
 	}
 

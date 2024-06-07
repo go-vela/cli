@@ -226,7 +226,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 		// and if it is set in the context
 		if strings.Contains(f, internal.FlagColorTheme) &&
 			!ctx.IsSet(internal.FlagColorTheme) &&
-			len(config.ColorFormat) > 0 {
+			len(config.ColorTheme) > 0 {
 			// set the color theme field to value from config
 			err = ctx.Set(internal.FlagColorTheme, config.ColorTheme)
 			if err != nil {

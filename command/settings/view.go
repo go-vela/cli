@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/settings"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting the platform settings record.
@@ -62,6 +63,7 @@ func view(c *cli.Context) error {
 	s := &settings.Config{
 		Action: internal.ActionView,
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate settings configuration

@@ -8,6 +8,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/alecthomas/chroma/v2 v2.14.0
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
+	github.com/chainguard-dev/git-urls v1.0.2
 	github.com/cli/browser v1.3.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustin/go-humanize v1.0.1
@@ -24,7 +25,6 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/afero v1.11.0
 	github.com/urfave/cli/v2 v2.27.2
-	github.com/whilp/git-urls v1.0.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 

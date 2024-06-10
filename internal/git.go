@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
+	giturls "github.com/chainguard-dev/git-urls"
 	"github.com/go-git/go-git/v5"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
-	giturls "github.com/whilp/git-urls"
 )
 
 // SetGitConfigContext attempts to set the org and repo
@@ -49,7 +49,6 @@ func SetGitConfigContext(c *cli.Context) {
 func GetGitConfigOrg(path string) string {
 	// open repository
 	r, err := git.PlainOpen(path)
-
 	// on failure, return empty string to allow for
 	// potential manual setting of org to process
 	if err != nil {
@@ -86,7 +85,6 @@ func GetGitConfigOrg(path string) string {
 func GetGitConfigRepo(path string) string {
 	// open repository
 	r, err := git.PlainOpen(path)
-
 	// on failure, return empty string to allow for
 	// potential manual setting of org to process
 	if err != nil {

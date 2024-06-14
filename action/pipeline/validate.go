@@ -129,6 +129,26 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 			Target:  c.Target,
 		}
 
+		fullEvent := strings.Split(c.Event, ":")
+		if len(fullEvent) != 2 {
+			switch c.Event {
+			case constants.EventPull, constants.EventPullAlternate:
+				logrus.Debug("setting pull_request event action as `opened`")
+
+				ruleData.Event = fmt.Sprintf("%s:%s", constants.EventPull, constants.ActionOpened)
+			case constants.EventComment:
+				logrus.Debug("setting comment event action as `created`")
+
+				ruleData.Event = fmt.Sprintf("%s:%s", c.Event, constants.ActionCreated)
+			case constants.EventDeploy, constants.EventDeployAlternate:
+				logrus.Debug("setting deployment event action as `created`")
+
+				ruleData.Event = fmt.Sprintf("%s:%s", constants.EventDeploy, constants.ActionCreated)
+			case constants.EventDelete:
+				return fmt.Errorf("event %s must supply an action (branch or tag)", c.Event)
+			}
+		}
+
 		// compile the object into a pipeline with ruledata
 		p, _, err = client.CompileLite(path, ruleData, false)
 		if err != nil {

@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"strings"
 	"syscall"
 
 	"github.com/sirupsen/logrus"
@@ -56,9 +57,33 @@ func (c *Config) Exec(client compiler.Engine) error {
 	b := new(api.Build)
 	b.SetBranch(c.Branch)
 	b.SetDeploy(c.Target)
-	b.SetEvent(c.Event)
 
-	if c.Tag == "" && c.Event == constants.EventPull {
+	fullEvent := strings.Split(c.Event, ":")
+	if len(fullEvent) == 2 {
+		b.SetEvent(fullEvent[0])
+		b.SetEventAction(fullEvent[1])
+	} else {
+		b.SetEvent(c.Event)
+
+		switch c.Event {
+		case constants.EventPull, constants.EventPullAlternate:
+			logrus.Debug("setting pull_request event action as `opened`")
+			b.SetEvent(constants.EventPull)
+			b.SetEventAction(constants.ActionOpened)
+		case constants.EventComment:
+			logrus.Debug("setting comment event action as `created`")
+			b.SetEvent(constants.EventComment)
+			b.SetEventAction(constants.ActionCreated)
+		case constants.EventDeploy, constants.EventDeployAlternate:
+			logrus.Debug("setting deployment event action as `created`")
+			b.SetEvent(constants.EventDeploy)
+			b.SetEventAction(constants.ActionCreated)
+		case constants.EventDelete:
+			return fmt.Errorf("event %s must supply an action (branch or tag)", c.Event)
+		}
+	}
+
+	if c.Tag == "" && b.GetEvent() == constants.EventPull {
 		b.SetRef("refs/pull/1")
 	} else {
 		b.SetRef(c.Tag)

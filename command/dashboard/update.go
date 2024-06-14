@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/dashboard"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandUpdate defines the command for updating a dashboard.
@@ -131,6 +132,7 @@ func update(c *cli.Context) error {
 		AddAdmins:   c.StringSlice("add-admins"),
 		DropAdmins:  c.StringSlice("drop-admins"),
 		Output:      c.String(internal.FlagOutput),
+		Color:       output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate dashboard configuration

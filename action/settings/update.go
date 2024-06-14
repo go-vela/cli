@@ -10,7 +10,7 @@ import (
 	"slices"
 
 	"github.com/sirupsen/logrus"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/output"
@@ -152,7 +152,7 @@ func (c *Config) Update(client *vela.Client) error {
 		// output in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(sUpdated)
+		return output.JSON(sUpdated, c.Color)
 	case output.DriverSpew:
 		// output in spew format
 		//
@@ -162,7 +162,7 @@ func (c *Config) Update(client *vela.Client) error {
 		// output in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(sUpdated)
+		return output.YAML(sUpdated, c.Color)
 	default:
 		// output in stdout format
 		//

@@ -12,6 +12,7 @@ import (
 	"github.com/go-vela/cli/action/repo"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/types/constants"
 )
 
@@ -192,6 +193,7 @@ func add(c *cli.Context) error {
 		PipelineType: c.String("pipeline-type"),
 		ApproveBuild: c.String("approve-build"),
 		Output:       c.String(internal.FlagOutput),
+		Color:        output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate repo configuration

@@ -191,7 +191,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 	// output the validated pipeline in stdout format
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#Stdout
-	return output.YAML(p)
+	return output.YAML(p, c.Color)
 }
 
 // ValidateRemote validates a remote pipeline based off the provided configuration.
@@ -234,7 +234,7 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 		// output the pipeline in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(pipeline)
+		return output.JSON(pipeline, c.Color)
 	case output.DriverSpew:
 		// output the pipeline in spew format
 		//
@@ -244,7 +244,7 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 		// output the pipeline in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(pipeline)
+		return output.YAML(pipeline, c.Color)
 	default:
 		// output the pipeline in stdout format
 		//

@@ -34,7 +34,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the repository in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(repo)
+		return output.JSON(repo, c.Color)
 	case output.DriverSpew:
 		// output the repository in spew format
 		//
@@ -44,7 +44,7 @@ func (c *Config) View(client *vela.Client) error {
 		// output the repository in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(repo)
+		return output.YAML(repo, c.Color)
 	default:
 		// output the repository in stdout format
 		//

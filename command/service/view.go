@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/service"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting a service.
@@ -112,6 +113,7 @@ func view(c *cli.Context) error {
 		Build:  c.Int(internal.FlagBuild),
 		Number: c.Int(internal.FlagService),
 		Output: c.String(internal.FlagOutput),
+		Color:  output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate service configuration

@@ -48,7 +48,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the workers in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(workers)
+		return output.JSON(workers, c.Color)
 	case output.DriverSpew:
 		// output the workers in spew format
 		//
@@ -61,7 +61,7 @@ func (c *Config) Get(client *vela.Client) error {
 		// output the workers in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(workers)
+		return output.YAML(workers, c.Color)
 	default:
 		// output the workers in table format
 		return table(workers)

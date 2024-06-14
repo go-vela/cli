@@ -11,6 +11,7 @@ import (
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
+	"github.com/go-vela/cli/internal/output"
 )
 
 // CommandView defines the command for inspecting a worker.
@@ -91,6 +92,7 @@ func view(c *cli.Context) error {
 		Hostname:          c.String(internal.FlagWorkerHostname),
 		RegistrationToken: c.Bool(internal.FlagWorkerRegistrationToken),
 		Output:            c.String(internal.FlagOutput),
+		Color:             output.ColorOptionsFromCLIContext(c),
 	}
 
 	// validate worker configuration

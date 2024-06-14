@@ -2,6 +2,8 @@
 
 package config
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform config related quests with Vela.
 type Config struct {
@@ -22,4 +24,5 @@ type Config struct {
 	UpdateFlags  map[string]string
 	RemoveFlags  []string
 	Output       string
+	Color        output.ColorOptions
 }

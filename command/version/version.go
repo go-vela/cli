@@ -64,7 +64,7 @@ func runVersion(c *cli.Context) error {
 		// output the version in JSON format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#JSON
-		return output.JSON(version.New())
+		return output.JSON(version.New(), output.ColorOptionsFromCLIContext(c))
 	case output.DriverSpew:
 		// output the version in spew format
 		//
@@ -74,7 +74,7 @@ func runVersion(c *cli.Context) error {
 		// output the version in YAML format
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/internal/output?tab=doc#YAML
-		return output.YAML(version.New())
+		return output.YAML(version.New(), output.ColorOptionsFromCLIContext(c))
 	default:
 		// output the version in stdout format
 		//

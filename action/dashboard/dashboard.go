@@ -2,6 +2,8 @@
 
 package dashboard
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform dashboard related requests with Vela.
 type Config struct {
@@ -17,4 +19,5 @@ type Config struct {
 	DropAdmins  []string
 	Full        bool
 	Output      string
+	Color       output.ColorOptions
 }

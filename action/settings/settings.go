@@ -2,6 +2,8 @@
 
 package settings
 
+import "github.com/go-vela/cli/internal/output"
+
 // Config represents the configuration necessary
 // to perform settings related requests with Vela.
 type Config struct {
@@ -18,6 +20,8 @@ type Config struct {
 	ScheduleAllowlist          *[]string
 	ScheduleAllowlistAddRepos  []string
 	ScheduleAllowlistDropRepos []string
+
+	Color output.ColorOptions
 }
 
 // Compiler represents the compiler configurations used

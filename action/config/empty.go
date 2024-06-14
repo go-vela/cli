@@ -70,6 +70,21 @@ func (c *ConfigFile) Empty() bool {
 		return false
 	}
 
+	// check if the color is set
+	if c.Color != nil {
+		return false
+	}
+
+	// check if the color format is set
+	if len(c.ColorFormat) > 0 {
+		return false
+	}
+
+	// check if the color theme is set
+	if len(c.ColorTheme) > 0 {
+		return false
+	}
+
 	// check if the org is set
 	if len(c.Org) > 0 {
 		return false

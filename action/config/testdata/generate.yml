@@ -13,5 +13,8 @@ secret:
 compiler:
     github: {}
 output: json
+color: false
+color_format: terminal256
+color_theme: monokai
 org: github
 repo: octocat

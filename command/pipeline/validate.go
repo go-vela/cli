@@ -3,6 +3,7 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -13,7 +14,6 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/server/compiler/native"
-	"github.com/go-vela/server/util"
 	"github.com/go-vela/types/constants"
 )
 
@@ -286,12 +286,12 @@ func validate(c *cli.Context) error {
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
-		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
+		client.SetTemplateDepth(min(c.Int("max-template-depth"), 5))
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.GetTemplateDepth())
 	}
 
 	// execute the validate local call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateLocal
-	return p.ValidateLocal(client.WithLocal(true).WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
+	return p.ValidateLocal(client.WithLocal(true).WithPrivateGitHub(context.Background(), c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

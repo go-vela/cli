@@ -165,6 +165,13 @@ const (
 	FlagStep = "step"
 )
 
+// user flag keys.
+const (
+	// FlagName defines the key for the
+	// flag when setting the user name.
+	FlagName = "name"
+)
+
 // worker flag keys.
 const (
 	// FlagWorkerAddress defines the key for the

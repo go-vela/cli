@@ -3,6 +3,7 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"strings"
@@ -15,7 +16,6 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/compiler/native"
-	"github.com/go-vela/server/util"
 	"github.com/go-vela/types/constants"
 )
 
@@ -328,16 +328,16 @@ func exec(c *cli.Context) error {
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocalTemplates(p.TemplateFiles)
-		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 10))
+		client.SetTemplateDepth(min(c.Int("max-template-depth"), 10))
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
-		client.SetTemplateDepth(util.MinInt(c.Int("max-template-depth"), 5))
+		client.SetTemplateDepth(min(c.Int("max-template-depth"), 5))
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.GetTemplateDepth())
 	}
 
 	// execute the exec call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Exec
-	return p.Exec(client.WithPrivateGitHub(c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
+	return p.Exec(client.WithPrivateGitHub(context.Background(), c.String(internal.FlagCompilerGitHubURL), c.String(internal.FlagCompilerGitHubToken)))
 }

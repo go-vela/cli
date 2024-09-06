@@ -3,6 +3,7 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -150,7 +151,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		}
 
 		// compile the object into a pipeline with ruledata
-		p, _, err = client.CompileLite(path, ruleData, false)
+		p, _, err = client.CompileLite(context.Background(), path, ruleData, false)
 		if err != nil {
 			return err
 		}
@@ -158,7 +159,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 		logrus.Debugf("compiling pipeline")
 
 		// compile the object into a pipeline without ruledata
-		p, _, err = client.CompileLite(path, nil, false)
+		p, _, err = client.CompileLite(context.Background(), path, nil, false)
 		if err != nil {
 			return err
 		}

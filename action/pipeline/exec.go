@@ -109,7 +109,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 		WithLocal(true).
 		WithRepo(r).
 		WithLocalTemplates(c.TemplateFiles).
-		Compile(path)
+		Compile(context.Background(), path)
 	if err != nil {
 		return err
 	}

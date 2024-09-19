@@ -94,22 +94,22 @@ func update(c *cli.Context) error {
 		return err
 	}
 
-	var active bool
-
-	if len(c.String(internal.FlagActive)) > 0 {
-		active, err = strconv.ParseBool(c.String(internal.FlagActive))
-		if err != nil {
-			return err
-		}
-	}
-
 	// create the worker configuration
 	w := &worker.Config{
 		Hostname:   c.String(internal.FlagWorkerHostname),
 		Address:    c.String(internal.FlagWorkerAddress),
-		Active:     &active,
 		Routes:     c.StringSlice("routes"),
 		BuildLimit: c.Int64("build-limit"),
+	}
+
+	// if active flag provided, parse as bool and set in config
+	if len(c.String(internal.FlagActive)) > 0 {
+		active, err := strconv.ParseBool(c.String(internal.FlagActive))
+		if err != nil {
+			return err
+		}
+
+		w.Active = &active
 	}
 
 	// validate worker configuration

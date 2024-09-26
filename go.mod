@@ -12,10 +12,10 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-git/go-git/v5 v5.12.0
-	github.com/go-vela/sdk-go v0.25.0-rc1
-	github.com/go-vela/server v0.25.0-rc1
-	github.com/go-vela/types v0.25.0-rc1
-	github.com/go-vela/worker v0.25.0-rc1
+	github.com/go-vela/sdk-go v0.25.0-rc2
+	github.com/go-vela/server v0.25.0-rc2
+	github.com/go-vela/types v0.25.0-rc2
+	github.com/go-vela/worker v0.25.0-rc2
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
@@ -49,7 +49,7 @@ require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/dlclark/regexp2 v1.11.0 // indirect
-	github.com/docker/docker v27.3.0+incompatible // indirect
+	github.com/docker/docker v27.3.1+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/drone/envsubst v1.0.3 // indirect
@@ -133,7 +133,7 @@ require (
 	go.opentelemetry.io/otel v1.30.0 // indirect
 	go.opentelemetry.io/otel/metric v1.30.0 // indirect
 	go.opentelemetry.io/otel/trace v1.30.0 // indirect
-	go.starlark.net v0.0.0-20240725214946-42030a7cedce // indirect
+	go.starlark.net v0.0.0-20240925182052-1207426daebd // indirect
 	golang.org/x/arch v0.10.0 // indirect
 	golang.org/x/crypto v0.27.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect

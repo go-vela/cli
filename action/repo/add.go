@@ -57,6 +57,17 @@ func (c *Config) Add(client *vela.Client) error {
 		return err
 	}
 
+	err = c.Install(client, repo)
+	if err != nil {
+		return err
+	}
+
+	// client.Install
+
+	// todo: this just redirects to the auth callback
+	// we need this to redirect to the server
+	// the server then sees whether or not it was a cli auth flow and it
+
 	// handle the output based off the provided configuration
 	switch c.Output {
 	case output.DriverDump:

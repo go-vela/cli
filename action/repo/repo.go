@@ -27,4 +27,6 @@ type Config struct {
 	PerPage      int
 	Output       string
 	Color        output.ColorOptions
+
+	server *localServer
 }

@@ -160,3 +160,11 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
+
+replace github.com/go-vela/types => ../types
+
+replace github.com/go-vela/server => ../server
+
+replace github.com/go-vela/worker => ../worker
+
+replace github.com/go-vela/sdk-go => ../sdk-go

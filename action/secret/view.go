@@ -7,12 +7,12 @@ import (
 	"os"
 	"strings"
 
-	api "github.com/go-vela/server/api/types"
 	"github.com/sirupsen/logrus"
 	yaml "gopkg.in/yaml.v3"
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
+	api "github.com/go-vela/server/api/types"
 	pyaml "github.com/go-vela/server/compiler/types/yaml"
 	"github.com/go-vela/server/constants"
 )

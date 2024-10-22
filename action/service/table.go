@@ -7,11 +7,11 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	api "github.com/go-vela/server/api/types"
 	"github.com/gosuri/uitable"
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the

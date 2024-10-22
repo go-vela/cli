@@ -11,13 +11,13 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the
 // provided hooks in a table format with
 // a specific set of fields displayed.
-func table(hooks *[]library.Hook) error {
+func table(hooks *[]api.Hook) error {
 	logrus.Debug("creating table for list of hooks")
 
 	// create a new table
@@ -66,7 +66,7 @@ func table(hooks *[]library.Hook) error {
 // wideTable is a helper function to output the
 // provided hooks in a wide table format with
 // a specific set of fields displayed.
-func wideTable(hooks *[]library.Hook) error {
+func wideTable(hooks *[]api.Hook) error {
 	logrus.Debug("creating wide table for list of hooks")
 
 	// create new wide table
@@ -115,7 +115,7 @@ func wideTable(hooks *[]library.Hook) error {
 // reverse is a helper function to sort the hooks
 // based off the hook number and then flip the
 // order they get displayed in.
-func reverse(h []library.Hook) []library.Hook {
+func reverse(h []api.Hook) []api.Hook {
 	// sort the list of hooks based off the hook number
 	sort.SliceStable(h, func(i, j int) bool {
 		return h[i].GetNumber() < h[j].GetNumber()

@@ -8,8 +8,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
+	"github.com/go-vela/server/constants"
 )
 
 // Validate verifies the configuration provided.
@@ -83,7 +83,7 @@ func (c *Config) Validate() error {
 
 	// check if secret action is add or update
 	if c.Action == "add" || c.Action == "update" {
-		_, err := library.NewEventsFromSlice(c.AllowEvents)
+		_, err := api.NewEventsFromSlice(c.AllowEvents)
 		if err != nil {
 			return err
 		}

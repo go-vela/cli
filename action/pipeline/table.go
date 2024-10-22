@@ -9,13 +9,13 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the
 // provided pipelines in a table format with
 // a specific set of fields displayed.
-func table(pipelines *[]library.Pipeline) error {
+func table(pipelines *[]api.Pipeline) error {
 	logrus.Debug("creating table for list of pipelines")
 
 	// create a new table
@@ -59,7 +59,7 @@ func table(pipelines *[]library.Pipeline) error {
 // wideTable is a helper function to output the
 // provided pipelines in a wide table format with
 // a specific set of fields displayed.
-func wideTable(pipelines *[]library.Pipeline) error {
+func wideTable(pipelines *[]api.Pipeline) error {
 	logrus.Debug("creating wide table for list of pipelines")
 
 	// create new wide table
@@ -103,7 +103,7 @@ func wideTable(pipelines *[]library.Pipeline) error {
 // reverse is a helper function to sort the pipelines
 // based off the pipeline number and then flip the
 // order they get displayed in.
-func reverse(p []library.Pipeline) []library.Pipeline {
+func reverse(p []api.Pipeline) []api.Pipeline {
 	// sort the list of pipelines based off the pipeline id
 	sort.SliceStable(p, func(i, j int) bool {
 		return p[i].GetID() < p[j].GetID()

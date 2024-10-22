@@ -15,8 +15,6 @@ func (c *Config) Update(client *vela.Client) error {
 	logrus.Debug("executing update for worker configuration")
 
 	// create the worker object
-	//
-	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Worker
 	w := &api.Worker{
 		Hostname:   vela.String(c.Hostname),
 		Address:    vela.String(c.Address),

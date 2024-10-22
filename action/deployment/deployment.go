@@ -4,7 +4,7 @@ package deployment
 
 import (
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/raw"
+	"github.com/go-vela/server/compiler/types/raw"
 )
 
 // Config represents the configuration necessary

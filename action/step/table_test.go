@@ -5,7 +5,7 @@ package step
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestStep_table(t *testing.T) {
@@ -22,11 +22,11 @@ func TestStep_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Step
+		steps   *[]api.Step
 	}{
 		{
 			failure: false,
-			steps: &[]library.Step{
+			steps: &[]api.Step{
 				*s1,
 				*s2,
 			},
@@ -65,11 +65,11 @@ func TestStep_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Step
+		steps   *[]api.Step
 	}{
 		{
 			failure: false,
-			steps: &[]library.Step{
+			steps: &[]api.Step{
 				*s1,
 				*s2,
 			},
@@ -96,8 +96,8 @@ func TestStep_wideTable(t *testing.T) {
 
 // testStep is a test helper function to create a Step
 // type with all fields set to a fake value.
-func testStep() *library.Step {
-	s := new(library.Step)
+func testStep() *api.Step {
+	s := new(api.Step)
 
 	s.SetID(1)
 	s.SetBuildID(1)

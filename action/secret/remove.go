@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/types/constants"
+	"github.com/go-vela/server/constants"
 )
 
 // Remove deletes a secret based on the provided configuration.

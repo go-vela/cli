@@ -11,13 +11,13 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the
 // provided steps in a table format with
 // a specific set of fields displayed.
-func table(steps *[]library.Step) error {
+func table(steps *[]api.Step) error {
 	logrus.Debug("creating table for list of steps")
 
 	// create a new table
@@ -61,7 +61,7 @@ func table(steps *[]library.Step) error {
 // wideTable is a helper function to output the
 // provided steps in a wide table format with
 // a specific set of fields displayed.
-func wideTable(steps *[]library.Step) error {
+func wideTable(steps *[]api.Step) error {
 	logrus.Debug("creating wide table for list of steps")
 
 	// create new wide table
@@ -115,7 +115,7 @@ func wideTable(steps *[]library.Step) error {
 // reverse is a helper function to sort the steps
 // based off the step number and then flip the
 // order they get displayed in.
-func reverse(s []library.Step) []library.Step {
+func reverse(s []api.Step) []api.Step {
 	// sort the list of steps based off the step number
 	sort.SliceStable(s, func(i, j int) bool {
 		return s[i].GetNumber() < s[j].GetNumber()

@@ -12,9 +12,9 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
-	pyaml "github.com/go-vela/types/yaml"
+	api "github.com/go-vela/server/api/types"
+	pyaml "github.com/go-vela/server/compiler/types/yaml"
+	"github.com/go-vela/server/constants"
 )
 
 // View inspects a secret based on the provided configuration.
@@ -76,7 +76,7 @@ func (c *Config) View(client *vela.Client) error {
 // outputDefault is a helper function to output the
 // provided secrets with a copy pipeline secret and
 // library details formatted with yaml.
-func outputDefault(engine string, s *library.Secret) error {
+func outputDefault(engine string, s *api.Secret) error {
 	// create yaml secret
 	secret := &pyaml.Secret{
 		Name:   s.GetName(),
@@ -92,9 +92,9 @@ func outputDefault(engine string, s *library.Secret) error {
 		[]*pyaml.Secret{secret},
 	}
 
-	// anonymous struct for library secret
+	// anonymous struct for API secret
 	_s := struct {
-		Details *library.Secret `yaml:"details"`
+		Details *api.Secret `yaml:"details"`
 	}{
 		s,
 	}

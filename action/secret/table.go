@@ -10,14 +10,14 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
+	"github.com/go-vela/server/constants"
 )
 
 // table is a helper function to output the
 // provided secrets in a table format with
 // a specific set of fields displayed.
-func table(secrets *[]library.Secret) error {
+func table(secrets *[]api.Secret) error {
 	logrus.Debug("creating table for list of secrets")
 
 	// create a new table
@@ -66,7 +66,7 @@ func table(secrets *[]library.Secret) error {
 // wideTable is a helper function to output the
 // provided secrets in a wide table format with
 // a specific set of fields displayed.
-func wideTable(secrets *[]library.Secret) error {
+func wideTable(secrets *[]api.Secret) error {
 	logrus.Debug("creating wide table for list of secrets")
 
 	// create new wide table
@@ -120,7 +120,7 @@ func wideTable(secrets *[]library.Secret) error {
 
 // key is a helper function to calculate the full
 // path to a secret in the storage backend.
-func key(s *library.Secret) string {
+func key(s *api.Secret) string {
 	switch s.GetType() {
 	case constants.SecretShared:
 		return fmt.Sprintf("%s/%s/%s", s.GetOrg(), s.GetTeam(), s.GetName())

@@ -11,8 +11,8 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/go-vela/cli/test"
+	"github.com/go-vela/server/compiler/types/raw"
 	"github.com/go-vela/server/mock/server"
-	"github.com/go-vela/types/raw"
 )
 
 func TestDeployment_Add(t *testing.T) {

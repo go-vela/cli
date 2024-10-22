@@ -15,7 +15,7 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/raw"
+	"github.com/go-vela/server/compiler/types/raw"
 )
 
 // CommandAdd defines the command for creating a deployment.

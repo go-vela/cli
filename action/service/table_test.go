@@ -5,7 +5,7 @@ package service
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestService_table(t *testing.T) {
@@ -22,11 +22,11 @@ func TestService_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Service
+		steps   *[]api.Service
 	}{
 		{
 			failure: false,
-			steps: &[]library.Service{
+			steps: &[]api.Service{
 				*s1,
 				*s2,
 			},
@@ -65,11 +65,11 @@ func TestService_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Service
+		steps   *[]api.Service
 	}{
 		{
 			failure: false,
-			steps: &[]library.Service{
+			steps: &[]api.Service{
 				*s1,
 				*s2,
 			},
@@ -96,8 +96,8 @@ func TestService_wideTable(t *testing.T) {
 
 // testService is a test helper function to create a Service
 // type with all fields set to a fake value.
-func testService() *library.Service {
-	s := new(library.Service)
+func testService() *api.Service {
+	s := new(api.Service)
 
 	s.SetID(1)
 	s.SetBuildID(1)

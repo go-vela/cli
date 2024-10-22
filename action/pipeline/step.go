@@ -5,7 +5,7 @@ package pipeline
 import (
 	"github.com/sirupsen/logrus"
 
-	"github.com/go-vela/types/yaml"
+	"github.com/go-vela/server/compiler/types/yaml"
 )
 
 func steps(pipelineType string) *yaml.Build {
@@ -38,7 +38,7 @@ func steps(pipelineType string) *yaml.Build {
 
 	// return a steps pipeline based off the type
 	//
-	// https://pkg.go.dev/github.com/go-vela/types/yaml?tab=doc#Build
+	// https://pkg.go.dev/github.com/go-vela/server/compiler/types/yaml?tab=doc#Build
 	return &yaml.Build{
 		Version: "1",
 		Steps: yaml.StepSlice{

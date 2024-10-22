@@ -5,7 +5,7 @@ package deployment
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestDeployment_table(t *testing.T) {
@@ -19,11 +19,11 @@ func TestDeployment_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Deployment
+		steps   *[]api.Deployment
 	}{
 		{
 			failure: false,
-			steps: &[]library.Deployment{
+			steps: &[]api.Deployment{
 				*d1,
 				*d2,
 			},
@@ -59,11 +59,11 @@ func TestDeployment_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Deployment
+		steps   *[]api.Deployment
 	}{
 		{
 			failure: false,
-			steps: &[]library.Deployment{
+			steps: &[]api.Deployment{
 				*d1,
 				*d2,
 			},
@@ -90,11 +90,10 @@ func TestDeployment_wideTable(t *testing.T) {
 
 // testDeployment is a test helper function to create a Deployment
 // type with all fields set to a fake value.
-func testDeployment() *library.Deployment {
-	d := new(library.Deployment)
+func testDeployment() *api.Deployment {
+	d := new(api.Deployment)
 
 	d.SetID(1)
-	d.SetRepoID(1)
 	d.SetURL("https://api.github.com/repos/github/octocat/deployments/1")
 	d.SetCreatedBy("octocat")
 	d.SetCommit("48afb5bdc41ad69bf22588491333f7cf71135163")

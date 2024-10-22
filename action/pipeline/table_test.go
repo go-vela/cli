@@ -5,7 +5,7 @@ package pipeline
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestPipeline_table(t *testing.T) {
@@ -20,12 +20,12 @@ func TestPipeline_table(t *testing.T) {
 	tests := []struct {
 		name      string
 		failure   bool
-		pipelines *[]library.Pipeline
+		pipelines *[]api.Pipeline
 	}{
 		{
 			name:    "success",
 			failure: false,
-			pipelines: &[]library.Pipeline{
+			pipelines: &[]api.Pipeline{
 				*p1,
 				*p2,
 			},
@@ -64,12 +64,12 @@ func TestPipeline_wideTable(t *testing.T) {
 	tests := []struct {
 		name      string
 		failure   bool
-		pipelines *[]library.Pipeline
+		pipelines *[]api.Pipeline
 	}{
 		{
 			name:    "success",
 			failure: false,
-			pipelines: &[]library.Pipeline{
+			pipelines: &[]api.Pipeline{
 				*p1,
 				*p2,
 			},
@@ -98,11 +98,10 @@ func TestPipeline_wideTable(t *testing.T) {
 
 // testPipeline is a test helper function to create a Pipeline
 // type with all fields set to a fake value.
-func testPipeline() *library.Pipeline {
-	p := new(library.Pipeline)
+func testPipeline() *api.Pipeline {
+	p := new(api.Pipeline)
 
 	p.SetID(1)
-	p.SetRepoID(1)
 	p.SetCommit("48afb5bdc41ad69bf22588491333f7cf71135163")
 	p.SetFlavor("large")
 	p.SetPlatform("docker")

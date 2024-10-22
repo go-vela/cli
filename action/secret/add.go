@@ -14,8 +14,8 @@ import (
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/types/constants"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
+	"github.com/go-vela/server/constants"
 )
 
 // Add creates a secret based on the provided configuration.
@@ -46,7 +46,7 @@ func (c *Config) Add(client *vela.Client) error {
 	// create the secret object
 	//
 	// https://pkg.go.dev/github.com/go-vela/types/library?tab=doc#Secret
-	s := &library.Secret{
+	s := &api.Secret{
 		Type:              &c.Type,
 		Org:               &c.Org,
 		Repo:              &c.Repo,
@@ -60,7 +60,7 @@ func (c *Config) Add(client *vela.Client) error {
 
 	// populate events if provided
 	if len(c.AllowEvents) > 0 {
-		evs, err := library.NewEventsFromSlice(c.AllowEvents)
+		evs, err := api.NewEventsFromSlice(c.AllowEvents)
 		if err != nil {
 			return err
 		}

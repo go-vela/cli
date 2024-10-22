@@ -16,7 +16,7 @@ import (
 	"github.com/go-vela/cli/version"
 	api "github.com/go-vela/server/api/types"
 	"github.com/go-vela/server/compiler"
-	"github.com/go-vela/types/constants"
+	"github.com/go-vela/server/constants"
 	"github.com/go-vela/worker/executor"
 	"github.com/go-vela/worker/runtime"
 )

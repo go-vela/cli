@@ -11,13 +11,13 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 // table is a helper function to output the
 // provided services in a table format with
 // a specific set of fields displayed.
-func table(services *[]library.Service) error {
+func table(services *[]api.Service) error {
 	logrus.Debug("creating table for list of services")
 
 	// create a new table
@@ -61,7 +61,7 @@ func table(services *[]library.Service) error {
 // wideTable is a helper function to output the
 // provided services in a wide table format with
 // a specific set of fields displayed.
-func wideTable(services *[]library.Service) error {
+func wideTable(services *[]api.Service) error {
 	logrus.Debug("creating wide table for list of services")
 
 	// create new wide table
@@ -115,7 +115,7 @@ func wideTable(services *[]library.Service) error {
 // reverse is a helper function to sort the services
 // based off the service number and then flip the
 // order they get displayed in.
-func reverse(s []library.Service) []library.Service {
+func reverse(s []api.Service) []api.Service {
 	// sort the list of services based off the service number
 	sort.SliceStable(s, func(i, j int) bool {
 		return s[i].GetNumber() < s[j].GetNumber()

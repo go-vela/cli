@@ -16,7 +16,7 @@ import (
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/server/compiler/native"
-	"github.com/go-vela/types/constants"
+	"github.com/go-vela/server/constants"
 )
 
 // CommandExec defines the command for executing a pipeline.

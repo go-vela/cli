@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestHook_table(t *testing.T) {
@@ -20,11 +20,11 @@ func TestHook_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Hook
+		steps   *[]api.Hook
 	}{
 		{
 			failure: false,
-			steps: &[]library.Hook{
+			steps: &[]api.Hook{
 				*h1,
 				*h2,
 			},
@@ -60,11 +60,11 @@ func TestHook_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		steps   *[]library.Hook
+		steps   *[]api.Hook
 	}{
 		{
 			failure: false,
-			steps: &[]library.Hook{
+			steps: &[]api.Hook{
 				*h1,
 				*h2,
 			},
@@ -91,12 +91,10 @@ func TestHook_wideTable(t *testing.T) {
 
 // testHook is a test helper function to create a Hook
 // type with all fields set to a fake value.
-func testHook() *library.Hook {
-	h := new(library.Hook)
+func testHook() *api.Hook {
+	h := new(api.Hook)
 
 	h.SetID(1)
-	h.SetRepoID(1)
-	h.SetBuildID(1)
 	h.SetNumber(1)
 	h.SetSourceID("c8da1302-07d6-11ea-882f-4893bca275b8")
 	h.SetCreated(time.Now().UTC().Unix())

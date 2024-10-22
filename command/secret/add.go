@@ -13,7 +13,7 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/constants"
+	"github.com/go-vela/server/constants"
 )
 
 // CommandAdd defines the command for creating a secret.

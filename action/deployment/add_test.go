@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/compiler/types/raw"
 	"github.com/go-vela/server/mock/server"
-	"github.com/go-vela/types/raw"
 )
 
 func TestDeployment_Config_Add(t *testing.T) {

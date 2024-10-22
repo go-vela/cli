@@ -5,7 +5,7 @@ package secret
 import (
 	"testing"
 
-	"github.com/go-vela/types/library"
+	api "github.com/go-vela/server/api/types"
 )
 
 func TestSecret_table(t *testing.T) {
@@ -25,11 +25,11 @@ func TestSecret_table(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		secrets *[]library.Secret
+		secrets *[]api.Secret
 	}{
 		{
 			failure: false,
-			secrets: &[]library.Secret{
+			secrets: &[]api.Secret{
 				*s1,
 				*s2,
 				*s3,
@@ -74,11 +74,11 @@ func TestSecret_wideTable(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		secrets *[]library.Secret
+		secrets *[]api.Secret
 	}{
 		{
 			failure: false,
-			secrets: &[]library.Secret{
+			secrets: &[]api.Secret{
 				*s1,
 				*s2,
 				*s3,
@@ -106,8 +106,8 @@ func TestSecret_wideTable(t *testing.T) {
 
 // testSecret is a test helper function to create a Secret
 // type with all fields set to a fake value.
-func testSecret() *library.Secret {
-	s := new(library.Secret)
+func testSecret() *api.Secret {
+	s := new(api.Secret)
 
 	s.SetID(1)
 	s.SetOrg("github")

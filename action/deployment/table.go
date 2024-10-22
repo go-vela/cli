@@ -5,17 +5,17 @@ package deployment
 import (
 	"sort"
 
+	api "github.com/go-vela/server/api/types"
 	"github.com/gosuri/uitable"
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/types/library"
 )
 
 // table is a helper function to output the
 // provided deployments in a table format with
 // a specific set of fields displayed.
-func table(deployments *[]library.Deployment) error {
+func table(deployments *[]api.Deployment) error {
 	logrus.Debug("creating table for list of deployments")
 
 	// create a new table
@@ -59,7 +59,7 @@ func table(deployments *[]library.Deployment) error {
 // wideTable is a helper function to output the
 // provided deployments in a wide table format with
 // a specific set of fields displayed.
-func wideTable(deployments *[]library.Deployment) error {
+func wideTable(deployments *[]api.Deployment) error {
 	logrus.Debug("creating wide table for list of deployments")
 
 	// create new wide table
@@ -103,7 +103,7 @@ func wideTable(deployments *[]library.Deployment) error {
 // reverse is a helper function to sort the deployments
 // based off the deployment number and then flip the
 // order they get displayed in.
-func reverse(d []library.Deployment) []library.Deployment {
+func reverse(d []api.Deployment) []api.Deployment {
 	// sort the list of deployments based off the deployment id
 	sort.SliceStable(d, func(i, j int) bool {
 		return d[i].GetID() < d[j].GetID()

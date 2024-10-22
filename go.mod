@@ -12,10 +12,9 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-git/go-git/v5 v5.12.0
-	github.com/go-vela/sdk-go v0.25.1
-	github.com/go-vela/server v0.25.1
-	github.com/go-vela/types v0.25.1
-	github.com/go-vela/worker v0.25.1
+	github.com/go-vela/sdk-go v0.25.2-0.20241022142543-b9de2ce2abea
+	github.com/go-vela/server v0.25.1-0.20241022141112-a2b0d9146d65
+	github.com/go-vela/worker v0.25.2-0.20241022143822-3db6801bfd10
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1

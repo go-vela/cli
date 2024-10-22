@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/go-vela/types/yaml"
+	"github.com/go-vela/server/compiler/types/yaml"
 )
 
 func TestPipeline_stages(t *testing.T) {

@@ -13,7 +13,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-git/go-git/v5 v5.12.0
 	github.com/go-vela/sdk-go v0.25.2-0.20241022142543-b9de2ce2abea
-	github.com/go-vela/server v0.25.1-0.20241022141112-a2b0d9146d65
+	github.com/go-vela/server v0.25.2
 	github.com/go-vela/worker v0.25.2-0.20241022143822-3db6801bfd10
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/gosuri/uitable v0.0.4
@@ -21,7 +21,7 @@ require (
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/afero v1.11.0
-	github.com/urfave/cli/v2 v2.27.4
+	github.com/urfave/cli/v2 v2.27.5
 	gopkg.in/yaml.v3 v3.0.1
 )
 

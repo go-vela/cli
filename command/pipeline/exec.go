@@ -134,6 +134,15 @@ var CommandExec = &cli.Command{
 			Value:   constants.PipelineTypeYAML,
 		},
 
+		// Step Flags
+
+		&cli.StringSliceFlag{
+			EnvVars: []string{"VELA_SKIP_STEP", "SKIP_STEP"},
+			Name:    "skip-step",
+			Aliases: []string{"sk", "skip"},
+			Usage:   "skip a step in the pipeline",
+		},
+
 		// Compiler Template Flags
 
 		&cli.StringFlag{
@@ -151,7 +160,7 @@ var CommandExec = &cli.Command{
 		&cli.StringSliceFlag{
 			EnvVars: []string{"VELA_TEMPLATE_FILE", "PIPELINE_TEMPLATE_FILE"},
 			Name:    "template-file",
-			Aliases: []string{"tf, tfs, template-files"},
+			Aliases: []string{"tf", "tfs", "template-files"},
 			Usage:   "enables using a local template file for expansion in the form <name>:<path>",
 		},
 		&cli.IntFlag{
@@ -218,17 +227,21 @@ EXAMPLES:
     $ {{.HelpName}} --volume /tmp/bar.txt:/tmp/bar.txt:rw
   7. Execute a local Vela pipeline with type of go
     $ {{.HelpName}} --pipeline-type go
-  8. Execute a local Vela pipeline with local templates
+  8. Execute a local Vela pipeline with specific step skipped
+    $ {{.HelpName}} --skip-step echo_hello --skip-step 'echo goodbye'
+  9. Execute a local Vela pipeline with specific template step skipped
+    $ {{.HelpName}} --skip-step <template name>_echo_hello --skip-step '<template name>_echo goodbye'
+  10. Execute a local Vela pipeline with local templates
     $ {{.HelpName}} --template-file <template_name>:<path_to_template>
-  9. Execute a local Vela pipeline with specific environment variables
+  11. Execute a local Vela pipeline with specific environment variables
     $ {{.HelpName}} --env KEY1=VAL1,KEY2=VAL2
-  10. Execute a local Vela pipeline with your existing local environment loaded into pipeline
+  12. Execute a local Vela pipeline with your existing local environment loaded into pipeline
     $ {{.HelpName}} --local-env
-  11. Execute a local Vela pipeline with an environment file loaded in
+  13. Execute a local Vela pipeline with an environment file loaded in
     $ {{.HelpName}} --env-file (uses .env by default)
       OR
     $ {{.HelpName}} --env-file-path <path_to_file>
-  12. Execute a local Vela pipeline using remote templates
+  14. Execute a local Vela pipeline using remote templates
     $ {{.HelpName}} --compiler.github.token <GITHUB_PAT> --compiler.github.url <GITHUB_URL>
 
 DOCUMENTATION:
@@ -296,6 +309,7 @@ func exec(c *cli.Context) error {
 		Target:           c.String("target"),
 		Org:              c.String(internal.FlagOrg),
 		Repo:             c.String(internal.FlagRepo),
+		Steps:            c.StringSlice("skip-step"),
 		File:             c.String("file"),
 		FileChangeset:    c.StringSlice("file-changeset"),
 		TemplateFiles:    c.StringSlice("template-file"),

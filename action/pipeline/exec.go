@@ -128,11 +128,10 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// filter out steps to be removed
 	if len(_pipeline.Stages) > 0 {
 		// if using stages
-
 		// counter for total steps to run
 		totalSteps := 0
-		for i, stage := range _pipeline.Stages {
 
+		for i, stage := range _pipeline.Stages {
 			filteredStageSteps := stage.Steps[:0]
 
 			for _, step := range stage.Steps {

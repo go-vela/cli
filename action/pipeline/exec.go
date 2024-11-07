@@ -131,7 +131,6 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 		// counter for total steps to run
 		totalSteps := 0
-
 		for i, stage := range _pipeline.Stages {
 
 			filteredStageSteps := stage.Steps[:0]
@@ -151,10 +150,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 		if totalSteps <= 1 {
 			return fmt.Errorf("no steps left to run after removing skipped steps")
 		}
-
 	} else {
 		// if not using stages
-
 		filteredSteps := _pipeline.Steps[:0]
 
 		for _, step := range _pipeline.Steps {
@@ -162,6 +159,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 				filteredSteps = append(filteredSteps, step)
 			}
 		}
+
 		_pipeline.Steps = filteredSteps
 
 		// check if any steps are left to run, excluding "init" step

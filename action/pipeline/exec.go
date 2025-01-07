@@ -154,7 +154,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 		// print steps to be removed to the user
 		if len(stepsToRemove) > 0 {
 			for _, stepName := range stepsToRemove {
-				fmt.Println("skip step5: ", stepName)
+				fmt.Println("skip step: ", stepName)
 			}
 		}
 

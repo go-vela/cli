@@ -122,7 +122,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// print and remove steps
 	if len(stepsToRemove) > 0 {
 		for _, stepName := range stepsToRemove {
-			fmt.Println("skip step: ", stepName)
+			logrus.Info("skipping step: ", stepName)
 		}
 
 		if err := skipSteps(_pipeline, stepsToRemove); err != nil {

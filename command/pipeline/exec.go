@@ -309,7 +309,7 @@ func exec(c *cli.Context) error {
 		Target:           c.String("target"),
 		Org:              c.String(internal.FlagOrg),
 		Repo:             c.String(internal.FlagRepo),
-		Steps:            c.StringSlice("skip-step"),
+		SkipSteps:        c.StringSlice("skip-step"),
 		File:             c.String("file"),
 		FileChangeset:    c.StringSlice("file-changeset"),
 		TemplateFiles:    c.StringSlice("template-file"),

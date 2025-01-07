@@ -16,7 +16,7 @@ type Config struct {
 	Target           string
 	Org              string
 	Repo             string
-	Steps            []string
+	SkipSteps        []string
 	Ref              string
 	File             string
 	FileChangeset    []string

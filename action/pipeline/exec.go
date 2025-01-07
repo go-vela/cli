@@ -116,7 +116,7 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}
 
 	// create a slice for steps to be removed
-	stepsToRemove := c.Steps
+	stepsToRemove := c.SkipSteps
 
 	// print steps to be removed to the user
 	if len(stepsToRemove) > 0 {
@@ -137,6 +137,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 			for _, step := range stage.Steps {
 				// if c.steps contains step.Name
 				if !slices.Contains(stepsToRemove, step.Name) {
+					fmt.Println("skip step: ", stepsToRemove)
+
 					filteredStageSteps = append(filteredStageSteps, step)
 					totalSteps++
 				}
@@ -155,6 +157,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 		for _, step := range _pipeline.Steps {
 			if !slices.Contains(stepsToRemove, step.Name) {
+				fmt.Println("skip step: ", stepsToRemove)
+
 				filteredSteps = append(filteredSteps, step)
 			}
 		}

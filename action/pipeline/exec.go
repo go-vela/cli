@@ -119,16 +119,15 @@ func (c *Config) Exec(client compiler.Engine) error {
 	// create a slice for steps to be removed
 	stepsToRemove := c.SkipSteps
 
-	// print steps to be removed to the user
+	// print and remove steps
 	if len(stepsToRemove) > 0 {
 		for _, stepName := range stepsToRemove {
 			fmt.Println("skip step: ", stepName)
 		}
-	}
 
-	// call the skipSteps function
-	if err := skipSteps(_pipeline, stepsToRemove); err != nil {
-		return err
+		if err := skipSteps(_pipeline, stepsToRemove); err != nil {
+			return err
+		}
 	}
 
 	// create current directory path for local mount

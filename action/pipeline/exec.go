@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"slices"
 	"strings"
 	"syscall"
 
@@ -16,6 +17,7 @@ import (
 	"github.com/go-vela/cli/version"
 	api "github.com/go-vela/server/api/types"
 	"github.com/go-vela/server/compiler"
+	"github.com/go-vela/server/compiler/types/pipeline"
 	"github.com/go-vela/server/constants"
 	"github.com/go-vela/worker/executor"
 	"github.com/go-vela/worker/runtime"
@@ -114,6 +116,20 @@ func (c *Config) Exec(client compiler.Engine) error {
 		return err
 	}
 
+	// create a slice for steps to be removed
+	stepsToRemove := c.SkipSteps
+
+	// print and remove steps
+	if len(stepsToRemove) > 0 {
+		for _, stepName := range stepsToRemove {
+			logrus.Info("skipping step: ", stepName)
+		}
+
+		if err := skipSteps(_pipeline, stepsToRemove); err != nil {
+			return err
+		}
+	}
+
 	// create current directory path for local mount
 	mount := fmt.Sprintf("%s:%s:rw", base, constants.WorkspaceDefault)
 
@@ -210,6 +226,51 @@ func (c *Config) Exec(client compiler.Engine) error {
 	err = _executor.ExecBuild(ctx)
 	if err != nil {
 		return fmt.Errorf("unable to execute build: %w", err)
+	}
+
+	return nil
+}
+
+// skipSteps filters out steps to be removed from the pipeline.
+func skipSteps(_pipeline *pipeline.Build, stepsToRemove []string) error {
+	// filter out steps to be removed
+	if len(_pipeline.Stages) > 0 {
+		// counter for total steps to run
+		totalSteps := 0
+
+		for i, stage := range _pipeline.Stages {
+			filteredStageSteps := stage.Steps[:0]
+
+			for _, step := range stage.Steps {
+				if !slices.Contains(stepsToRemove, step.Name) {
+					filteredStageSteps = append(filteredStageSteps, step)
+					totalSteps++
+				}
+			}
+
+			_pipeline.Stages[i].Steps = filteredStageSteps
+		}
+
+		// check if any steps are left to run, excluding "init" step
+		if totalSteps <= 1 {
+			return fmt.Errorf("no steps left to run after removing skipped steps")
+		}
+	} else {
+		// if not using stages
+		filteredSteps := _pipeline.Steps[:0]
+
+		for _, step := range _pipeline.Steps {
+			if !slices.Contains(stepsToRemove, step.Name) {
+				filteredSteps = append(filteredSteps, step)
+			}
+		}
+
+		_pipeline.Steps = filteredSteps
+
+		// check if any steps are left to run, excluding "init" step
+		if len(_pipeline.Steps) <= 1 {
+			return fmt.Errorf("no steps left to run after removing skipped steps")
+		}
 	}
 
 	return nil

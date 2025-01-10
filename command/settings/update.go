@@ -33,7 +33,6 @@ var CommandUpdate = &cli.Command{
 	Usage:       "Update settings from the provided configuration",
 	Action:      update,
 	Flags: []cli.Flag{
-
 		// Queue Flags
 
 		&cli.StringSliceFlag{
@@ -185,7 +184,7 @@ func update(c *cli.Context) error {
 	}
 
 	if c.IsSet(CompilerStarlarkExecLimitKey) {
-		s.Compiler.StarlarkExecLimit = vela.UInt64(c.Uint64(CompilerStarlarkExecLimitKey))
+		s.Compiler.StarlarkExecLimit = vela.Int64(c.Int64(CompilerStarlarkExecLimitKey))
 	}
 
 	// validate settings configuration

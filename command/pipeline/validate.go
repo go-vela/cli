@@ -24,7 +24,6 @@ var CommandValidate = &cli.Command{
 	Usage:       "Validate a Vela pipeline",
 	Action:      validate,
 	Flags: []cli.Flag{
-
 		// Repo Flags
 
 		&cli.StringFlag{
@@ -277,7 +276,7 @@ func validate(c *cli.Context) error {
 	}
 
 	// set starlark exec limit
-	client.SetStarlarkExecLimit(c.Uint64("compiler-starlark-exec-limit"))
+	client.SetStarlarkExecLimit(c.Int64("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {

@@ -39,7 +39,7 @@ func TestSettings_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				Compiler: Compiler{
-					StarlarkExecLimit: vela.UInt64(1),
+					StarlarkExecLimit: vela.Int64(1),
 				},
 				Output: "",
 			},

@@ -29,7 +29,7 @@ type Config struct {
 type Compiler struct {
 	CloneImage        *string
 	TemplateDepth     *int
-	StarlarkExecLimit *uint64
+	StarlarkExecLimit *int64
 }
 
 // Queue represents the compiler configurations used

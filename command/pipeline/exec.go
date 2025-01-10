@@ -26,7 +26,6 @@ var CommandExec = &cli.Command{
 	Usage:       "Execute the provided pipeline",
 	Action:      exec,
 	Flags: []cli.Flag{
-
 		// Build Flags
 
 		&cli.StringFlag{
@@ -337,7 +336,7 @@ func exec(c *cli.Context) error {
 	}
 
 	// set starlark exec limit
-	client.SetStarlarkExecLimit(c.Uint64("compiler-starlark-exec-limit"))
+	client.SetStarlarkExecLimit(c.Int64("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {

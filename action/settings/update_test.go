@@ -44,7 +44,7 @@ func TestSettings_Config_Update(t *testing.T) {
 				Compiler: Compiler{
 					CloneImage:        vela.String("test"),
 					TemplateDepth:     vela.Int(1),
-					StarlarkExecLimit: vela.UInt64(1),
+					StarlarkExecLimit: vela.Int64(1),
 				},
 			},
 		},

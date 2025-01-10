@@ -224,7 +224,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 			}
 
 			if f.Compiler.StarlarkExecLimit != nil {
-				s.Compiler.StarlarkExecLimit = vela.UInt64(f.Compiler.GetStarlarkExecLimit())
+				s.Compiler.StarlarkExecLimit = vela.Int64(f.Compiler.GetStarlarkExecLimit())
 			}
 		}
 

@@ -200,6 +200,7 @@ func (c *Config) Load(ctx *cli.Context) error {
 			if config.Color != nil && !*config.Color {
 				c = "false"
 			}
+
 			err = ctx.Set(internal.FlagColor, c)
 			if err != nil {
 				return err

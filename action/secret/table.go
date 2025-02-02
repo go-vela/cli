@@ -48,7 +48,7 @@ func table(secrets *[]api.Secret) error {
 
 		// calculate the key for the secret
 		//
-		//nolint:gosec // ignore memory aliasing
+
 		k := key(&s)
 
 		// add a row to the table with the specified values
@@ -103,7 +103,7 @@ func wideTable(secrets *[]api.Secret) error {
 
 		// calculate the key for the secret
 		//
-		//nolint:gosec // ignore memory aliasing
+
 		k := key(&s)
 
 		// add a row to the table with the specified values

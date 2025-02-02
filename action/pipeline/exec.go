@@ -250,7 +250,8 @@ func reportMissingSecrets(s map[string]string) {
 
 // collectMissingSecrets searches a given pipeline for used secrets
 // and returns a map of secrets not set in the current environment.
-// The map key is is the step or stage+step name.
+// The map key is is the step or stage+step name formatted to match
+// the local exec log output.
 func collectMissingSecrets(p *pipeline.Build) map[string]string {
 	if p == nil {
 		return make(map[string]string)
@@ -269,7 +270,8 @@ func collectMissingSecrets(p *pipeline.Build) map[string]string {
 
 	for _, step := range p.Steps {
 		for _, secret := range step.Secrets {
-			secrets[step.Name] = secret.Target
+			stepName := formatStepIdentifier("", step.Name)
+			secrets[stepName] = secret.Target
 		}
 	}
 
@@ -293,7 +295,17 @@ func collectMissingSecrets(p *pipeline.Build) map[string]string {
 // the worker logs to make it easier to associate a missing secret
 // with a step.
 func formatStepIdentifier(stageName, stepName string) string {
-	return fmt.Sprintf("[stage: %s][step: %s]", stageName, stepName)
+	output := strings.Builder{}
+
+	if stageName != "" {
+		output.WriteString(fmt.Sprintf("[stage: %s]", stageName))
+	}
+
+	if stepName != "" {
+		output.WriteString(fmt.Sprintf("[step: %s]", stepName))
+	}
+
+	return output.String()
 }
 
 // skipSteps filters out steps to be removed from the pipeline.

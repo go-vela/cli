@@ -250,8 +250,8 @@ func reportMissingSecrets(s map[string]string) {
 
 // collectMissingSecrets searches a given pipeline for used secrets
 // and returns a map of secrets not set in the current environment.
-// The map key is is the step or stage+step name formatted to match
-// the local exec log output.
+// The map key is is the step, stage+step, or secret name formatted
+// to match the local exec log output.
 func collectMissingSecrets(p *pipeline.Build) map[string]string {
 	if p == nil {
 		return make(map[string]string)
@@ -262,7 +262,7 @@ func collectMissingSecrets(p *pipeline.Build) map[string]string {
 	for _, stage := range p.Stages {
 		for _, step := range stage.Steps {
 			for _, secret := range step.Secrets {
-				stepName := formatStepIdentifier(stage.Name, step.Name)
+				stepName := formatStepIdentifier(stage.Name, step.Name, false)
 				secrets[stepName] = secret.Target
 			}
 		}
@@ -270,8 +270,17 @@ func collectMissingSecrets(p *pipeline.Build) map[string]string {
 
 	for _, step := range p.Steps {
 		for _, secret := range step.Secrets {
-			stepName := formatStepIdentifier("", step.Name)
+			stepName := formatStepIdentifier("", step.Name, false)
 			secrets[stepName] = secret.Target
+		}
+	}
+
+	for _, s := range p.Secrets {
+		if !s.Origin.Empty() {
+			for _, secret := range s.Origin.Secrets {
+				stepName := formatStepIdentifier("", s.Origin.Name, true)
+				secrets[stepName] = secret.Target
+			}
 		}
 	}
 
@@ -294,15 +303,25 @@ func collectMissingSecrets(p *pipeline.Build) map[string]string {
 // formatStepIdentifier formats a step name to be consistent with what
 // the worker logs to make it easier to associate a missing secret
 // with a step.
-func formatStepIdentifier(stageName, stepName string) string {
+func formatStepIdentifier(stageName, stepName string, isSecret bool) string {
+	const (
+		secretPrefix = "[secret: %s]" //nolint:gosec // false positive
+		stagePrefix  = "[stage: %s]"
+		stepPrefix   = "[step: %s]"
+	)
+
 	output := strings.Builder{}
 
 	if stageName != "" {
-		output.WriteString(fmt.Sprintf("[stage: %s]", stageName))
+		output.WriteString(fmt.Sprintf(stagePrefix, stageName))
 	}
 
 	if stepName != "" {
-		output.WriteString(fmt.Sprintf("[step: %s]", stepName))
+		if isSecret {
+			output.WriteString(fmt.Sprintf(secretPrefix, stepName))
+		} else {
+			output.WriteString(fmt.Sprintf(stepPrefix, stepName))
+		}
 	}
 
 	return output.String()

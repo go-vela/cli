@@ -3,11 +3,8 @@
 package pipeline
 
 import (
-	"io"
 	"reflect"
 	"testing"
-
-	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/server/compiler/types/pipeline"
 )
@@ -92,6 +89,55 @@ func TestCollectMissingSecrets(t *testing.T) {
 			want: map[string]string{"[stage: stage1][step: step1]": "STAGE_SECRET"},
 		},
 		{
+			name: "secret plugin - supplied",
+			pipeline: &pipeline.Build{
+				Steps: []*pipeline.Container{
+					{
+						Name: "step1",
+					},
+				},
+				Secrets: []*pipeline.Secret{
+					{
+						Origin: &pipeline.Container{
+							Name: "secret from elsewhere",
+							Secrets: pipeline.StepSecretSlice{
+								{
+									Source: "source",
+									Target: "SECRET_FOR_SECRET",
+								},
+							},
+						},
+					},
+				},
+			},
+			envVars: map[string]string{"SECRET_FOR_SECRET": "value"},
+			want:    map[string]string{},
+		},
+		{
+			name: "secret plugin - missing",
+			pipeline: &pipeline.Build{
+				Steps: []*pipeline.Container{
+					{
+						Name: "step1",
+					},
+				},
+				Secrets: []*pipeline.Secret{
+					{
+						Origin: &pipeline.Container{
+							Name: "secret from elsewhere",
+							Secrets: pipeline.StepSecretSlice{
+								{
+									Source: "source",
+									Target: "SECRET_FOR_SECRET",
+								},
+							},
+						},
+					},
+				},
+			},
+			want: map[string]string{"[secret: secret from elsewhere]": "SECRET_FOR_SECRET"},
+		},
+		{
 			name: "provided step secret but value empty",
 			pipeline: &pipeline.Build{
 				Steps: []*pipeline.Container{
@@ -128,6 +174,53 @@ func TestCollectMissingSecrets(t *testing.T) {
 				if got[k] != v {
 					t.Errorf("collectMissingSecrets()[%s] = %v, want %v", k, got[k], v)
 				}
+			}
+		})
+	}
+}
+
+func TestFormatStepIdentifier(t *testing.T) {
+	tests := []struct {
+		name      string
+		stageName string
+		stepName  string
+		isSecret  bool
+		want      string
+	}{
+		{
+			name:      "basic format",
+			stageName: "build",
+			stepName:  "test",
+			isSecret:  false,
+			want:      "[stage: build][step: test]",
+		},
+		{
+			name:      "empty stage name",
+			stageName: "",
+			stepName:  "test",
+			isSecret:  false,
+			want:      "[step: test]",
+		},
+		{
+			name:      "secret format",
+			stageName: "",
+			stepName:  "test",
+			isSecret:  true,
+			want:      "[secret: test]",
+		},
+		{
+			name:      "empty stage and step name",
+			stageName: "",
+			stepName:  "",
+			isSecret:  false,
+			want:      "",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := formatStepIdentifier(tt.stageName, tt.stepName, tt.isSecret); got != tt.want {
+				t.Errorf("formatStepIdentifier() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -266,45 +359,4 @@ func TestSkipSteps(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestFormatStepIdentifier(t *testing.T) {
-	tests := []struct {
-		name      string
-		stageName string
-		stepName  string
-		want      string
-	}{
-		{
-			name:      "basic format",
-			stageName: "build",
-			stepName:  "test",
-			want:      "[stage: build][step: test]",
-		},
-		{
-			name:      "empty stage name",
-			stageName: "",
-			stepName:  "test",
-			want:      "[step: test]",
-		},
-		{
-			name:      "empty stage and step name",
-			stageName: "",
-			stepName:  "",
-			want:      "",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := formatStepIdentifier(tt.stageName, tt.stepName); got != tt.want {
-				t.Errorf("formatStepIdentifier() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func init() {
-	// discard logs for tests
-	logrus.SetOutput(io.Discard)
 }

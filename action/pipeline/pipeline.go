@@ -28,6 +28,7 @@ type Config struct {
 	Remote           bool
 	Volumes          []string
 	PrivilegedImages []string
+	OutputsImage     string
 	Page             int
 	PerPage          int
 	Output           string

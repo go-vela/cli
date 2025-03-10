@@ -152,16 +152,29 @@ func (c *Config) Exec(client compiler.Engine) error {
 
 	logrus.Tracef("creating executor engine %s", constants.DriverLocal)
 
-	// setup the executor
-	//
-	// https://godoc.org/github.com/go-vela/worker/executor#New
-	_executor, err := executor.New(&executor.Setup{
+	execSetup := &executor.Setup{
 		Driver:   constants.DriverLocal,
 		Runtime:  _runtime,
 		Pipeline: _pipeline.Sanitize(constants.DriverDocker),
 		Build:    b,
 		Version:  version.New().Semantic(),
-	})
+	}
+
+	if len(c.OutputsImage) > 0 {
+		logrus.Debugf("using image %s for outputs container", c.OutputsImage)
+
+		outputsCtn := &pipeline.Container{
+			ID:          fmt.Sprintf("outputs_%s_%s", r.GetOrg(), r.GetName()),
+			Detach:      true,
+			Image:       c.OutputsImage,
+			Environment: make(map[string]string),
+			Pull:        constants.PullNotPresent,
+		}
+
+		execSetup.OutputCtn = outputsCtn
+	}
+
+	_executor, err := executor.New(execSetup)
 	if err != nil {
 		return err
 	}

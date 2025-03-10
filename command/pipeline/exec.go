@@ -179,8 +179,13 @@ var CommandExec = &cli.Command{
 			EnvVars: []string{"VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"},
 			Name:    "clone-image",
 			Usage:   "the clone image to use for the injected clone step",
-			// renovate: image=target/vela-git
-			Value: "target/vela-git:v0.8.0@sha256:02de004ae9dbf184c70039cb9ce431c31d6e7580eb9e6ec64a97ebf108aa65cb",
+			Value:   "target/vela-git:v0.8.0@sha256:02de004ae9dbf184c70039cb9ce431c31d6e7580eb9e6ec64a97ebf108aa65cb",
+		},
+		&cli.StringFlag{
+			EnvVars: []string{"VELA_OUTPUTS_IMAGE", "EXECUTOR_OUTPUTS_IMAGE"},
+			Name:    "outputs-image",
+			Usage:   "the outputs image to use for the build",
+			Value:   "library/alpine:3.21.3@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c",
 		},
 
 		// Environment Flags
@@ -316,6 +321,7 @@ func exec(c *cli.Context) error {
 		Path:             c.String("path"),
 		Volumes:          c.StringSlice("volume"),
 		PrivilegedImages: c.StringSlice("privileged-images"),
+		OutputsImage:     c.String("outputs-image"),
 		PipelineType:     c.String("pipeline-type"),
 	}
 

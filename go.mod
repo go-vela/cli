@@ -2,8 +2,6 @@ module github.com/go-vela/cli
 
 go 1.23.5
 
-replace github.com/go-vela/worker => ../worker
-
 require (
 	github.com/Masterminds/semver/v3 v3.3.1
 	github.com/alecthomas/chroma/v2 v2.15.0
@@ -16,7 +14,7 @@ require (
 	github.com/go-git/go-git/v5 v5.14.0
 	github.com/go-vela/sdk-go v0.26.2
 	github.com/go-vela/server v0.26.3
-	github.com/go-vela/worker v0.26.0
+	github.com/go-vela/worker v0.26.1
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1

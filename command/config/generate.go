@@ -5,7 +5,7 @@ package config
 import (
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"

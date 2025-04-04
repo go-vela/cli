@@ -4,7 +4,7 @@ go 1.23.5
 
 require (
 	github.com/Masterminds/semver/v3 v3.3.1
-	github.com/alecthomas/chroma/v2 v2.15.0
+	github.com/alecthomas/chroma/v2 v2.16.0
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
 	github.com/chainguard-dev/git-urls v1.0.2
 	github.com/cli/browser v1.3.0
@@ -13,14 +13,14 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-git/go-git/v5 v5.14.0
 	github.com/go-vela/sdk-go v0.26.2
-	github.com/go-vela/server v0.26.3
+	github.com/go-vela/server v0.26.4
 	github.com/go-vela/worker v0.26.1
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/manifoldco/promptui v0.9.0
 	github.com/sirupsen/logrus v1.9.3
-	github.com/spf13/afero v1.12.0
+	github.com/spf13/afero v1.14.0
 	github.com/urfave/cli/v2 v2.27.6
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -51,7 +51,7 @@ require (
 	github.com/cyphar/filepath-securejoin v0.4.1 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/dlclark/regexp2 v1.11.4 // indirect
+	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/docker/docker v27.5.1+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect

@@ -15,7 +15,7 @@ require (
 	github.com/go-vela/sdk-go v0.26.2
 	github.com/go-vela/server v0.26.3
 	github.com/go-vela/worker v0.26.1
-	github.com/golang-jwt/jwt/v5 v5.2.1
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/manifoldco/promptui v0.9.0

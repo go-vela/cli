@@ -5,7 +5,7 @@ package docs
 import (
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 func TestDocs_Config_Generate(t *testing.T) {

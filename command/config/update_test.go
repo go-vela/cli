@@ -6,7 +6,7 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 func TestConfig_Update(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/afero"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	yaml "gopkg.in/yaml.v3"
 
 	"github.com/go-vela/cli/internal"

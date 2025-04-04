@@ -7,7 +7,7 @@ import (
 
 	chroma "github.com/alecthomas/chroma/v2/quick"
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/internal"
 )

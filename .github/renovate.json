@@ -1,9 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>go-vela/renovate-config"],
-  "regexManagers": [
+  "extends": [
+    "local>go-vela/renovate-config"
+  ],
+  "customManagers": [
     {
-      "fileMatch": ["\\.go$"],
+      "customType": "regex",
+      "fileMatch": [
+        "\\.go$"
+      ],
       "matchStrings": [
         "Value:\\s+\"(?<depName>[^\"]+):(?<currentValue>[^\"]+)@sha256:[a-f0-9]{64}\""
       ],

@@ -3,9 +3,10 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/repo"
@@ -26,7 +27,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -35,14 +36,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "REPO_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "REPO_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of repositories",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "REPO_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "REPO_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of repositories to print per page",
@@ -73,7 +74,7 @@ DOCUMENTATION:
 // of repos.
 //
 //nolint:dupl // ignore similar code with chown, remove, repair and view
-func get(c *cli.Context) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -93,8 +94,8 @@ func get(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action:  internal.ActionGet,
-		Page:    c.Int(internal.FlagPage),
-		PerPage: c.Int(internal.FlagPerPage),
+		Page:    int(c.Int(internal.FlagPage)),
+		PerPage: int(c.Int(internal.FlagPerPage)),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

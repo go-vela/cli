@@ -3,11 +3,10 @@
 package log
 
 import (
-	"flag"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
@@ -17,68 +16,31 @@ func TestLog_View(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// setup flags
-	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", test.TestTokenGood, "doc")
-	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-
-	serviceSet := flag.NewFlagSet("test", 0)
-	serviceSet.String("api.addr", s.URL, "doc")
-	serviceSet.String("api.token", "superSecretToken", "doc")
-	serviceSet.String("org", "github", "doc")
-	serviceSet.String("repo", "octocat", "doc")
-	serviceSet.Int("build", 1, "doc")
-	serviceSet.Int("service", 1, "doc")
-	serviceSet.String("output", "json", "doc")
-
-	stepSet := flag.NewFlagSet("test", 0)
-	stepSet.String("api.addr", s.URL, "doc")
-	stepSet.String("api.token", "superSecretToken", "doc")
-	stepSet.String("org", "github", "doc")
-	stepSet.String("repo", "octocat", "doc")
-	stepSet.Int("build", 1, "doc")
-	stepSet.Int("step", 1, "doc")
-	stepSet.String("output", "json", "doc")
-
-	buildSet := flag.NewFlagSet("test", 0)
-	buildSet.String("api.addr", s.URL, "doc")
-	buildSet.String("api.token", "superSecretToken", "doc")
-	buildSet.String("org", "github", "doc")
-	buildSet.String("repo", "octocat", "doc")
-	buildSet.Int("build", 1, "doc")
-	buildSet.String("output", "json", "doc")
-
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     serviceSet,
+			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--build", "1", "--step", "1"},
 		},
 		{
 			failure: false,
-			set:     stepSet,
-		},
-		{
-			failure: false,
-			set:     buildSet,
+			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--build", "1"},
 		},
 		{
 			failure: true,
-			set:     authSet,
-		},
-		{
-			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, view, nil),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := view(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

@@ -3,15 +3,17 @@
 package service
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/service"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/server/util"
 )
 
 // CommandView defines the command for inspecting a service.
@@ -25,13 +27,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SERVICE_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SERVICE_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the service",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SERVICE_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SERVICE_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the service",
@@ -40,7 +42,7 @@ var CommandView = &cli.Command{
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "SERVICE_BUILD"},
+			Sources: cli.EnvVars("VELA_BUILD", "SERVICE_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the service",
@@ -49,7 +51,7 @@ var CommandView = &cli.Command{
 		// Service Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_SERVICE", "SERVICE_NUMBER"},
+			Sources: cli.EnvVars("VELA_SERVICE", "SERVICE_NUMBER"),
 			Name:    internal.FlagService,
 			Aliases: []string{"s", "number", "sn"},
 			Usage:   "provide the number for the service",
@@ -58,7 +60,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SERVICE_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -82,7 +84,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a service.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -111,7 +113,7 @@ func view(c *cli.Context) error {
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
 		Build:  c.Int(internal.FlagBuild),
-		Number: c.Int(internal.FlagService),
+		Number: util.Int32FromInt64(c.Int(internal.FlagService)),
 		Output: c.String(internal.FlagOutput),
 		Color:  output.ColorOptionsFromCLIContext(c),
 	}

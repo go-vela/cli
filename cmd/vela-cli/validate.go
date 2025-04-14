@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/pipeline"
 )
@@ -16,7 +16,7 @@ var validateCmds = &cli.Command{
 	Description:            "Use this command to validate a resource for Vela.",
 	Usage:                  "Validate a resource for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for validating a pipeline
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandValidate

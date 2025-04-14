@@ -4,14 +4,14 @@ package action
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
 )
 
 // Load imports the configuration file for the CLI.
-func Load(c *cli.Context) error {
+func Load(c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

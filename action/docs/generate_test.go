@@ -5,12 +5,12 @@ package docs
 import (
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 func TestDocs_Config_Generate(t *testing.T) {
 	// setup tests
-	fakeApp := cli.NewApp()
+	fakeApp := new(cli.Command)
 
 	tests := []struct {
 		failure bool

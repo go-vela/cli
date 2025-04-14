@@ -3,9 +3,10 @@
 package config
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
@@ -22,31 +23,31 @@ var CommandUpdate = &cli.Command{
 		// API Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ADDR", "CONFIG_ADDR"},
+			Sources: cli.EnvVars("VELA_ADDR", "CONFIG_ADDR"),
 			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "update the API addr in the config file",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
+			Sources: cli.EnvVars("VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"),
 			Name:    internal.FlagAPIAccessToken,
 			Aliases: []string{"at"},
 			Usage:   "access token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"},
+			Sources: cli.EnvVars("VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"),
 			Name:    internal.FlagAPIRefreshToken,
 			Aliases: []string{"rt"},
 			Usage:   "refresh token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
+			Sources: cli.EnvVars("VELA_TOKEN", "CONFIG_TOKEN"),
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "update the API token in the config file",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION"},
+			Sources: cli.EnvVars("VELA_API_VERSION", "CONFIG_API_VERSION"),
 			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "update the API version in the config file",
@@ -55,7 +56,7 @@ var CommandUpdate = &cli.Command{
 		// Log Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"},
+			Sources: cli.EnvVars("VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL"),
 			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "update the log level in the config file",
@@ -64,7 +65,7 @@ var CommandUpdate = &cli.Command{
 		// No Git Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
+			Sources: cli.EnvVars("VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"),
 			Name:    internal.FlagNoGit,
 			Aliases: []string{"ng"},
 			Usage:   "update the status of syncing git repo and org with .git/ directory",
@@ -73,7 +74,7 @@ var CommandUpdate = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "CONFIG_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "CONFIG_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "update the output in the config file",
@@ -82,13 +83,13 @@ var CommandUpdate = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "CONFIG_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "CONFIG_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "update the org in the config file",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "CONFIG_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "CONFIG_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "update the repo in the config file",
@@ -97,13 +98,13 @@ var CommandUpdate = &cli.Command{
 		// Secret Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENGINE", "CONFIG_ENGINE"},
+			Sources: cli.EnvVars("VELA_ENGINE", "CONFIG_ENGINE"),
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "update the secret engine in the config file",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "CONFIG_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "CONFIG_TYPE"),
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "update the secret type in the config file",
@@ -112,13 +113,13 @@ var CommandUpdate = &cli.Command{
 		// Compiler Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Sources: cli.EnvVars("VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"),
 			Name:    internal.FlagCompilerGitHubToken,
 			Aliases: []string{"ct"},
 			Usage:   "github compiler token",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Sources: cli.EnvVars("VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"),
 			Name:    internal.FlagCompilerGitHubURL,
 			Aliases: []string{"cgu"},
 			Usage:   "github url, used by compiler, for pulling registry templates",
@@ -148,7 +149,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to modify the
 // config file.
-func update(c *cli.Context) error {
+func update(ctx context.Context, c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

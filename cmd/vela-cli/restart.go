@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/build"
 )
@@ -16,7 +16,7 @@ var restartCmds = &cli.Command{
 	Description:            "Use this command to restart a resource for Vela.",
 	Usage:                  "Restart a resource for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for restarting a build
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandRestart

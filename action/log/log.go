@@ -10,11 +10,11 @@ type Config struct {
 	Action  string
 	Org     string
 	Repo    string
-	Build   int
+	Build   int64
 	Page    int
 	PerPage int
-	Service int
-	Step    int
+	Service int32
+	Step    int32
 	Output  string
 	Color   output.ColorOptions
 }

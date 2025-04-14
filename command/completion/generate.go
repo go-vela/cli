@@ -3,9 +3,10 @@
 package completion
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/completion"
@@ -22,19 +23,19 @@ var CommandGenerate = &cli.Command{
 
 		// Shell Flags
 
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_BASH", "COMPLETION_BASH"},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_BASH", "COMPLETION_BASH"),
 			Name:    "bash",
 			Aliases: []string{"b"},
 			Usage:   "generate a bash auto completion script",
-			Value:   "false",
+			Value:   false,
 		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_ZSH", "COMPLETION_ZSH"},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_ZSH", "COMPLETION_ZSH"),
 			Name:    "zsh",
 			Aliases: []string{"z"},
 			Usage:   "generate a zsh auto completion script",
-			Value:   "false",
+			Value:   false,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
@@ -57,7 +58,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to produce the
 // config file.
-func generate(c *cli.Context) error {
+func generate(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

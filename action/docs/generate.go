@@ -6,13 +6,14 @@ import (
 	"fmt"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	docs "github.com/urfave/cli-docs/v3"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/internal/output"
 )
 
 // Generate produces documentation for the CLI.
-func (c *Config) Generate(a *cli.App) error {
+func (c *Config) Generate(cmd *cli.Command) error {
 	logrus.Debug("executing generate for docs configuration")
 
 	// generate the docs based off the provided configuration
@@ -21,7 +22,7 @@ func (c *Config) Generate(a *cli.App) error {
 		logrus.Tracef("creating markdown documentation")
 
 		// generate the documentation from the application configuration
-		markdown, err := a.ToMarkdown()
+		markdown, err := docs.ToMarkdown(cmd)
 		if err != nil {
 			return err
 		}
@@ -34,7 +35,7 @@ func (c *Config) Generate(a *cli.App) error {
 		logrus.Tracef("creating man pages documentation")
 
 		// generate the documentation from the application configuration
-		man, err := a.ToMan()
+		man, err := docs.ToMan(cmd)
 		if err != nil {
 			return err
 		}

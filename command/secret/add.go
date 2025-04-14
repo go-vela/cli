@@ -3,10 +3,11 @@
 package secret
 
 import (
+	"context"
 	"fmt"
 	"slices"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
@@ -27,13 +28,13 @@ var CommandAdd = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SECRET_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SECRET_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
@@ -42,65 +43,65 @@ var CommandAdd = &cli.Command{
 		// Secret Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
+			Sources: cli.EnvVars("VELA_ENGINE", "SECRET_ENGINE"),
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "SECRET_TYPE"),
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TEAM", "SECRET_TEAM"},
+			Sources: cli.EnvVars("VELA_TEAM", "SECRET_TEAM"),
 			Name:    "team",
 			Aliases: []string{"t"},
 			Usage:   "provide the team for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_NAME", "SECRET_NAME"},
+			Sources: cli.EnvVars("VELA_NAME", "SECRET_NAME"),
 			Name:    "name",
 			Aliases: []string{"n"},
 			Usage:   "provide the name of the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_VALUE", "SECRET_VALUE"},
+			Sources: cli.EnvVars("VELA_VALUE", "SECRET_VALUE"),
 			Name:    "value",
 			Aliases: []string{"v"},
 			Usage:   "provide the value for the secret",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_IMAGES", "SECRET_IMAGES"},
+			Sources: cli.EnvVars("VELA_IMAGES", "SECRET_IMAGES"),
 			Name:    "image",
 			Aliases: []string{"i"},
 			Usage:   "Provide the image(s) that can access this secret",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_EVENTS", "SECRET_EVENTS"},
+			Sources: cli.EnvVars("VELA_EVENTS", "SECRET_EVENTS"),
 			Name:    "event",
 			Aliases: []string{"events", "ev"},
 			Usage:   "provide the event(s) that can access this secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMMAND", "SECRET_COMMAND"},
+			Sources: cli.EnvVars("VELA_COMMAND", "SECRET_COMMAND"),
 			Name:    internal.FlagSecretCommands,
 			Aliases: []string{"c"},
 			Usage:   "enable a secret to be used for a step with commands (default is false for shared secrets)",
 			Value:   "true",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_SUBSTITUTION", "SECRET_SUBSTITUTION"},
+			Sources: cli.EnvVars("VELA_SUBSTITUTION", "SECRET_SUBSTITUTION"),
 			Name:    internal.FlagSecretSubstitution,
 			Aliases: []string{"s"},
 			Usage:   "enable a secret to be substituted (default is false for shared secrets)",
 			Value:   "true",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "SECRET_FILE"},
+			Sources: cli.EnvVars("VELA_FILE", "SECRET_FILE"),
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide a file to add the secret(s)",
@@ -109,7 +110,7 @@ var CommandAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SECRET_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -148,7 +149,7 @@ DOCUMENTATION:
 // and create the object used to create a secret.
 //
 
-func add(c *cli.Context) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

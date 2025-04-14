@@ -3,9 +3,10 @@
 package hook
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/hook"
@@ -26,13 +27,13 @@ var CommandGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "HOOK_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "HOOK_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the hook",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "HOOK_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "HOOK_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the hook",
@@ -41,7 +42,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "HOOK_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "HOOK_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -50,14 +51,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "HOOK_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "HOOK_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of hooks",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "HOOK_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "HOOK_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of hooks to print per page",
@@ -86,7 +87,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of hooks.
-func get(c *cli.Context) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -108,8 +109,8 @@ func get(c *cli.Context) error {
 		Action:  internal.ActionGet,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
-		Page:    c.Int(internal.FlagPage),
-		PerPage: c.Int(internal.FlagPerPage),
+		Page:    int(c.Int(internal.FlagPage)),
+		PerPage: int(c.Int(internal.FlagPerPage)),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

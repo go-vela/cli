@@ -3,11 +3,10 @@
 package secret
 
 import (
-	"flag"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
@@ -17,56 +16,36 @@ func TestSecret_Add(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// setup flags
-	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", test.TestTokenGood, "doc")
-	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token.access", test.TestTokenGood, "doc")
-	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("secret.engine", "native", "doc")
-	fullSet.String("secret.type", "repo", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.String("name", "foo", "doc")
-	fullSet.String("value", "bar", "doc")
-	fullSet.String("output", "json", "doc")
-
-	fileSet := flag.NewFlagSet("test", 0)
-	fileSet.String("api.addr", s.URL, "doc")
-	fileSet.String("api.token", "superSecretToken", "doc")
-	fileSet.String("file", "../../action/secret/testdata/repo.yml", "doc")
-	fileSet.String("output", "json", "doc")
-
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     fileSet,
+			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "super-secret"},
 		},
 		{
 			failure: false,
-			set:     fullSet,
+			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			args:    []string{"--org", "github", "--repo", "octocat", "--file", "../../action/secret/testdata/repo.yml"},
+		},
+		{
+			failure: false,
+			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "@../../action/secret/testdata/repo.yml"},
 		},
 		{
 			failure: true,
-			set:     authSet,
-		},
-		{
-			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, add, nil),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := add(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

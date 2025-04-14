@@ -9,26 +9,26 @@ import (
 	giturls "github.com/chainguard-dev/git-urls"
 	"github.com/go-git/go-git/v5"
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 // SetGitConfigContext attempts to set the org and repo
 // based on the .git/ directory, provided the user has
 // the config flag of no-git set to true.
-func SetGitConfigContext(c *cli.Context) {
+func SetGitConfigContext(cmd *cli.Command) {
 	// check to see if config and command allow for
 	// automatic setting of org and repo.
-	nogit, err := strconv.ParseBool(c.String(FlagNoGit))
+	nogit, err := strconv.ParseBool(cmd.String(FlagNoGit))
 	if err != nil {
 		logrus.Debug("Invalid bool value for flag no-git")
 		return
 	}
 
-	if !nogit && c.String(FlagOrg) == "" && c.String(FlagRepo) == "" {
+	if !nogit && cmd.String(FlagOrg) == "" && cmd.String(FlagRepo) == "" {
 		logrus.Trace("attempting to set org from .git/")
 
 		// set the org
-		err = c.Set(FlagOrg, GetGitConfigOrg("./"))
+		err = cmd.Set(FlagOrg, GetGitConfigOrg("./"))
 		if err != nil {
 			logrus.Debug("failed to set org in context")
 		}
@@ -36,7 +36,7 @@ func SetGitConfigContext(c *cli.Context) {
 		logrus.Trace("attempting to set repo from .git/")
 
 		// set the repo
-		err = c.Set(FlagRepo, GetGitConfigRepo("./"))
+		err = cmd.Set(FlagRepo, GetGitConfigRepo("./"))
 		if err != nil {
 			logrus.Debug("failed to set repo in context")
 		}

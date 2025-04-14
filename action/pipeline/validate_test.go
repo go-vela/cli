@@ -3,13 +3,12 @@
 package pipeline
 
 import (
-	"flag"
 	"net/http/httptest"
 	"os"
 	"path"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/server/compiler/native"
@@ -169,13 +168,16 @@ func TestPipeline_Config_Validate(t *testing.T) {
 
 func TestPipeline_Config_ValidateLocal(t *testing.T) {
 	// setup types
-	set := flag.NewFlagSet("test", 0)
-	set.String("clone-image", "target/vela-git:latest", "doc")
-
-	c := cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, set, nil)
+	cmd := new(cli.Command)
+	cmd.Flags = []cli.Flag{
+		&cli.StringFlag{
+			Name:  "clone-image",
+			Value: "target/vela-git:latest",
+		},
+	}
 
 	// create a vela client
-	client, err := native.FromCLIContext(c)
+	client, err := native.FromCLICommand(t.Context(), cmd)
 	if err != nil {
 		t.Errorf("unable to create client: %v", err)
 	}

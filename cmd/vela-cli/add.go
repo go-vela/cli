@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/dashboard"
 	"github.com/go-vela/cli/command/deployment"
@@ -21,7 +21,7 @@ var addCmds = &cli.Command{
 	Description:            "Use this command to add resources to Vela.",
 	Usage:                  "Add resources to Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for creating a dashboard
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/dashboard?tab=doc#CommandAdd

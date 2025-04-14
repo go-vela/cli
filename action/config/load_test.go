@@ -3,64 +3,77 @@
 package config
 
 import (
-	"flag"
 	"testing"
 
 	"github.com/spf13/afero"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 )
 
 func TestConfig_Config_Load(t *testing.T) {
 	// setup app
-	app := cli.NewApp()
-	app.Flags = []cli.Flag{
-		&cli.StringFlag{Name: "config"},
-		&cli.StringFlag{Name: "api.addr"},
-		&cli.StringFlag{Name: "api.token"},
-		&cli.StringFlag{Name: "api.token.access"},
-		&cli.StringFlag{Name: "api.token.refresh"},
-		&cli.StringFlag{Name: "api.version"},
-		&cli.StringFlag{Name: "log.level"},
-		&cli.StringFlag{Name: "no-git"},
-		&cli.StringFlag{Name: "output"},
-		&cli.StringFlag{Name: "org"},
-		&cli.StringFlag{Name: "repo"},
-		&cli.StringFlag{Name: "secret.engine"},
-		&cli.StringFlag{Name: "secret.type"},
-		&cli.StringFlag{Name: "compiler.github.driver"},
-		&cli.StringFlag{Name: "compiler.github.url"},
+	fullFlags := []cli.Flag{
+		&cli.StringFlag{
+			Name:  "api.addr",
+			Value: "https://vela-server.localhost",
+		},
+		&cli.StringFlag{
+			Name:  "api.token.access",
+			Value: test.TestTokenGood,
+		},
+		&cli.StringFlag{
+			Name:  "api.token.refresh",
+			Value: "superSecretRefreshToken",
+		},
+		&cli.StringFlag{
+			Name:  "api.version",
+			Value: "1",
+		},
+		&cli.StringFlag{
+			Name:  "log.level",
+			Value: "info",
+		},
+		&cli.StringFlag{
+			Name:  "no-git",
+			Value: "true",
+		},
+		&cli.StringFlag{
+			Name:  "output",
+			Value: "json",
+		},
+		&cli.StringFlag{
+			Name:  "org",
+			Value: "github",
+		},
+		&cli.StringFlag{
+			Name:  "repo",
+			Value: "octocat",
+		},
+		&cli.StringFlag{
+			Name:  "secret.engine",
+			Value: "native",
+		},
+		&cli.StringFlag{
+			Name:  "secret.type",
+			Value: "repo",
+		},
+		&cli.StringFlag{
+			Name:  "compiler.github.driver",
+			Value: "true",
+		},
+		&cli.StringFlag{
+			Name:  "compiler.github.url",
+			Value: "github.com",
+		},
 	}
-
-	// setup flags
-	configSet := flag.NewFlagSet("test", 0)
-	err := configSet.Parse([]string{"view", "config"})
-
-	if err != nil {
-		t.Errorf("unable to parse configset: %v", err)
-	}
-
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("api.addr", "https://vela-server.localhost", "doc")
-	fullSet.String("api.token.access", test.TestTokenGood, "doc")
-	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("api.version", "1", "doc")
-	fullSet.String("log.level", "info", "doc")
-	fullSet.String("no-git", "true", "doc")
-	fullSet.String("output", "json", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.String("secret.engine", "native", "doc")
-	fullSet.String("secret.type", "repo", "doc")
-	fullSet.String("compiler.github.driver", "true", "doc")
-	fullSet.String("compiler.github.url", "github.com", "doc")
 
 	// setup tests
 	tests := []struct {
 		failure bool
 		config  *Config
-		set     *flag.FlagSet
+		args    []string
+		flags   []cli.Flag
 	}{
 		{
 			failure: false,
@@ -68,7 +81,7 @@ func TestConfig_Config_Load(t *testing.T) {
 				Action: "load",
 				File:   "testdata/config.yml",
 			},
-			set: configSet,
+			args: []string{"test", "config"},
 		},
 		{
 			failure: false,
@@ -76,45 +89,49 @@ func TestConfig_Config_Load(t *testing.T) {
 				Action: "load",
 				File:   "testdata/config.yml",
 			},
-			set: fullSet,
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "load",
-				File:   "testdata/config.yml",
-			},
-			set: flag.NewFlagSet("test", 0),
+			args:  []string{"test", "repo"},
+			flags: fullFlags,
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		// setup context
-		ctx := cli.NewContext(app, test.set, nil)
-
 		// setup filesystem
 		appFS = afero.NewMemMapFs()
+
+		cmd := new(cli.Command)
+		cmd.Name = "test"
+		cmd.Commands = []*cli.Command{
+			{
+				Name:  "config",
+				Usage: "test config command",
+			},
+			{
+				Name:  "repo",
+				Usage: "test repo command",
+			},
+		}
+		cmd.Flags = test.flags
 
 		// create test config for generating file
 		config := &Config{
 			Action:       "generate",
 			File:         test.config.File,
-			Addr:         ctx.String("api.addr"),
-			Token:        ctx.String("api.token"),
-			AccessToken:  ctx.String("api.token.access"),
-			RefreshToken: ctx.String("api.token.refresh"),
-			Version:      ctx.String("api.version"),
-			LogLevel:     ctx.String("log.level"),
-			Engine:       ctx.String("secret.engine"),
-			Type:         ctx.String("secret.type"),
+			Addr:         cmd.String("api.addr"),
+			Token:        cmd.String("api.token"),
+			AccessToken:  cmd.String("api.token.access"),
+			RefreshToken: cmd.String("api.token.refresh"),
+			Version:      cmd.String("api.version"),
+			LogLevel:     cmd.String("log.level"),
+			Engine:       cmd.String("secret.engine"),
+			Type:         cmd.String("secret.type"),
 			GitHub: &GitHub{
-				Token: ctx.String("compiler.github.token"),
-				URL:   ctx.String("compiler.github.url"),
+				Token: cmd.String("compiler.github.token"),
+				URL:   cmd.String("compiler.github.url"),
 			},
-			Output: ctx.String("output"),
-			Org:    ctx.String("org"),
-			Repo:   ctx.String("repo"),
+			Output: cmd.String("output"),
+			Org:    cmd.String("org"),
+			Repo:   cmd.String("repo"),
 		}
 
 		// generate config file
@@ -123,7 +140,12 @@ func TestConfig_Config_Load(t *testing.T) {
 			t.Errorf("unable to generate config: %v", err)
 		}
 
-		err = test.config.Load(ctx)
+		err = cmd.Run(t.Context(), test.args)
+		if err != nil {
+			t.Errorf("unable to run command: %v", err)
+		}
+
+		err = test.config.Load(cmd)
 
 		if test.failure {
 			if err == nil {

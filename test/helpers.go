@@ -3,10 +3,14 @@
 package test
 
 import (
+	"context"
 	"fmt"
 	"time"
 
+	"slices"
+
 	jwt "github.com/golang-jwt/jwt/v5"
+	"github.com/urfave/cli/v3"
 )
 
 // expose some pre-computed test tokens.
@@ -32,4 +36,44 @@ func makeSampleToken(c jwt.Claims) string {
 	s = fmt.Sprintf("%s.abcdef", s)
 
 	return s
+}
+
+func TestCommand(serverURL string, action func(context.Context, *cli.Command) error, addFlags []cli.Flag) *cli.Command {
+	cfgFlag := &cli.StringFlag{
+		Name:  "config",
+		Value: "config.yml",
+	}
+
+	for _, f := range addFlags {
+		if slices.Contains(f.Names(), cfgFlag.Name) {
+			cfgFlag = f.(*cli.StringFlag)
+		}
+	}
+
+	cmd := &cli.Command{
+		Name:   "test",
+		Usage:  "Test command",
+		Action: action,
+		Flags: []cli.Flag{
+			cfgFlag,
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: serverURL,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.access",
+				Value: TestTokenGood,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.refresh",
+				Value: "superSecretRefreshToken",
+			},
+		},
+	}
+
+	if len(addFlags) > 0 {
+		cmd.Flags = append(cmd.Flags, addFlags...)
+	}
+
+	return cmd
 }

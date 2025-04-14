@@ -3,11 +3,10 @@
 package secret
 
 import (
-	"flag"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
@@ -17,45 +16,31 @@ func TestSecret_Remove(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// setup flags
-	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", test.TestTokenGood, "doc")
-	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token.access", test.TestTokenGood, "doc")
-	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("secret.engine", "native", "doc")
-	fullSet.String("secret.type", "repo", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.String("name", "foo", "doc")
-	fullSet.String("output", "json", "doc")
-
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     fullSet,
+			cmd:     test.TestCommand(s.URL, remove, CommandRemove.Flags),
+			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test"},
 		},
 		{
 			failure: true,
-			set:     authSet,
+			cmd:     test.TestCommand(s.URL, remove, CommandRemove.Flags),
+			args:    []string{"--org", "github"},
 		},
 		{
 			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, remove, nil),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := remove(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

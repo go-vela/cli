@@ -10,7 +10,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
@@ -29,35 +29,35 @@ var CommandExec = &cli.Command{
 		// Build Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_BRANCH", "PIPELINE_BRANCH", "VELA_BUILD_BRANCH"},
+			Sources: cli.EnvVars("VELA_BRANCH", "PIPELINE_BRANCH", "VELA_BUILD_BRANCH"),
 			Name:    "branch",
 			Aliases: []string{"b"},
 			Usage:   "provide the build branch for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMMENT", "PIPELINE_COMMENT", "VELA_BUILD_COMMENT"},
+			Sources: cli.EnvVars("VELA_COMMENT", "PIPELINE_COMMENT", "VELA_BUILD_COMMENT"),
 			Name:    "comment",
 			Aliases: []string{"c"},
 			Usage:   "provide the build comment for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_EVENT", "PIPELINE_EVENT", "VELA_BUILD_EVENT"},
+			Sources: cli.EnvVars("VELA_EVENT", "PIPELINE_EVENT", "VELA_BUILD_EVENT"),
 			Name:    "event",
 			Aliases: []string{"e"},
 			Usage:   "provide the build event for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"},
+			Sources: cli.EnvVars("VELA_TAG", "PIPELINE_TAG", "VELA_BUILD_TAG"),
 			Name:    "tag",
 			Usage:   "provide the build tag for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TARGET", "PIPELINE_TARGET", "VELA_BUILD_TARGET"},
+			Sources: cli.EnvVars("VELA_TARGET", "PIPELINE_TARGET", "VELA_BUILD_TARGET"),
 			Name:    "target",
 			Usage:   "provide the build target for the pipeline",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_FILE_CHANGESET", "FILE_CHANGESET"},
+			Sources: cli.EnvVars("VELA_FILE_CHANGESET", "FILE_CHANGESET"),
 			Name:    "file-changeset",
 			Aliases: []string{"fcs"},
 			Usage:   "provide a list of files changed for ruleset matching",
@@ -66,7 +66,7 @@ var CommandExec = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "PIPELINE_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "PIPELINE_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -76,21 +76,21 @@ var CommandExec = &cli.Command{
 		// Pipeline Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "PIPELINE_FILE"},
+			Sources: cli.EnvVars("VELA_FILE", "PIPELINE_FILE"),
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide the file name for the pipeline",
 			Value:   ".vela.yml",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_LOCAL", "PIPELINE_LOCAL"},
+			Sources: cli.EnvVars("VELA_LOCAL", "PIPELINE_LOCAL"),
 			Name:    "local",
 			Aliases: []string{"l"},
 			Usage:   "enables mounting local directory to pipeline",
 			Value:   true,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_PATH", "PIPELINE_PATH"},
+			Sources: cli.EnvVars("VELA_PATH", "PIPELINE_PATH"),
 			Name:    "path",
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
@@ -99,13 +99,13 @@ var CommandExec = &cli.Command{
 		// Runtime Flags
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_VOLUMES", "PIPELINE_VOLUMES"},
+			Sources: cli.EnvVars("VELA_VOLUMES", "PIPELINE_VOLUMES"),
 			Name:    "volume",
 			Aliases: []string{"v"},
 			Usage:   "provide list of local volumes to mount",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_PRIVILEGED_IMAGES", "PIPELINE_PRIVILEGED_IMAGES"},
+			Sources: cli.EnvVars("VELA_PRIVILEGED_IMAGES", "PIPELINE_PRIVILEGED_IMAGES"),
 			Name:    "privileged-images",
 			Aliases: []string{"pi"},
 			Usage:   "provide list of pipeline images that will run in privileged mode",
@@ -114,19 +114,19 @@ var CommandExec = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "PIPELINE_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "PIPELINE_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "PIPELINE_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "PIPELINE_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_PIPELINE_TYPE", "PIPELINE_TYPE"},
+			Sources: cli.EnvVars("VELA_PIPELINE_TYPE", "PIPELINE_TYPE"),
 			Name:    "pipeline-type",
 			Aliases: []string{"pt"},
 			Usage:   "type of pipeline for the compiler to render",
@@ -136,7 +136,7 @@ var CommandExec = &cli.Command{
 		// Step Flags
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_SKIP_STEP", "SKIP_STEP"},
+			Sources: cli.EnvVars("VELA_SKIP_STEP", "SKIP_STEP"),
 			Name:    "skip-step",
 			Aliases: []string{"sk", "skip"},
 			Usage:   "skip a step in the pipeline",
@@ -145,44 +145,44 @@ var CommandExec = &cli.Command{
 		// Compiler Template Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"},
+			Sources: cli.EnvVars("VELA_COMPILER_GITHUB_TOKEN", "COMPILER_GITHUB_TOKEN"),
 			Name:    internal.FlagCompilerGitHubToken,
 			Aliases: []string{"ct"},
 			Usage:   "github compiler token",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"},
+			Sources: cli.EnvVars("VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"),
 			Name:    internal.FlagCompilerGitHubURL,
 			Aliases: []string{"cgu"},
 			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_TEMPLATE_FILE", "PIPELINE_TEMPLATE_FILE"},
+			Sources: cli.EnvVars("VELA_TEMPLATE_FILE", "PIPELINE_TEMPLATE_FILE"),
 			Name:    "template-file",
 			Aliases: []string{"tf", "tfs", "template-files"},
 			Usage:   "enables using a local template file for expansion in the form <name>:<path>",
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_MAX_TEMPLATE_DEPTH", "MAX_TEMPLATE_DEPTH"},
+			Sources: cli.EnvVars("VELA_MAX_TEMPLATE_DEPTH", "MAX_TEMPLATE_DEPTH"),
 			Name:    "max-template-depth",
 			Usage:   "set the maximum depth for nested templates",
 			Value:   3,
 		},
-		&cli.Uint64Flag{
-			EnvVars: []string{"VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"},
+		&cli.UintFlag{
+			Sources: cli.EnvVars("VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"),
 			Name:    "compiler-starlark-exec-limit",
 			Aliases: []string{"starlark-exec-limit", "sel"},
 			Usage:   "set the starlark execution step limit for compiling starlark pipelines",
 			Value:   7500,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"},
+			Sources: cli.EnvVars("VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"),
 			Name:    "clone-image",
 			Usage:   "the clone image to use for the injected clone step",
 			Value:   "target/vela-git:v0.8.0@sha256:02de004ae9dbf184c70039cb9ce431c31d6e7580eb9e6ec64a97ebf108aa65cb",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUTS_IMAGE", "EXECUTOR_OUTPUTS_IMAGE"},
+			Sources: cli.EnvVars("VELA_OUTPUTS_IMAGE", "EXECUTOR_OUTPUTS_IMAGE"),
 			Name:    "outputs-image",
 			Usage:   "the outputs image to use for the build",
 			Value:   "library/alpine:3.21.3@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c",
@@ -190,26 +190,26 @@ var CommandExec = &cli.Command{
 
 		// Environment Flags
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_ENV_FILE", "ENV_FILE"},
+			Sources: cli.EnvVars("VELA_ENV_FILE", "ENV_FILE"),
 			Name:    "env-file",
 			Aliases: []string{"ef"},
 			Usage:   "load environment variables from a .env file",
 			Value:   false,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENV_FILE_PATH", "ENV_FILE_PATH"},
+			Sources: cli.EnvVars("VELA_ENV_FILE_PATH", "ENV_FILE_PATH"),
 			Name:    "env-file-path",
 			Aliases: []string{"efp"},
 			Usage:   "provide the path to the file for the environment",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"ONBOARD_LOCAL_ENV", "LOCAL_ENV"},
+			Sources: cli.EnvVars("ONBOARD_LOCAL_ENV", "LOCAL_ENV"),
 			Name:    "local-env",
 			Usage:   "load environment variables from local environment",
 			Value:   false,
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_ENV_VARS"},
+			Sources: cli.EnvVars("VELA_ENV_VARS"),
 			Name:    "env-vars",
 			Aliases: []string{"env"},
 			Usage:   "load a set of environment variables in the form of KEY1=VAL1,KEY2=VAL2",
@@ -256,7 +256,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to execute a pipeline.
-func exec(c *cli.Context) error {
+func exec(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -336,22 +336,22 @@ func exec(c *cli.Context) error {
 	// create a compiler client
 	//
 	// https://godoc.org/github.com/go-vela/server/compiler/native#New
-	client, err := native.FromCLIContext(c)
+	client, err := native.FromCLICommand(ctx, c)
 	if err != nil {
 		return err
 	}
 
 	// set starlark exec limit
-	client.SetStarlarkExecLimit(c.Int64("compiler-starlark-exec-limit"))
+	client.SetStarlarkExecLimit(c.Int("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {
 		client.WithLocalTemplates(p.TemplateFiles)
-		client.SetTemplateDepth(min(c.Int("max-template-depth"), 10))
+		client.SetTemplateDepth(int(min(c.Int("max-template-depth"), 10)))
 	} else {
 		// set max template depth to minimum of 5 and provided value if local templates are not provided.
 		// This prevents users from spamming SCM
-		client.SetTemplateDepth(min(c.Int("max-template-depth"), 5))
+		client.SetTemplateDepth(int(min(c.Int("max-template-depth"), 5)))
 		logrus.Debugf("no local template files provided, setting max template depth to %d", client.GetTemplateDepth())
 	}
 

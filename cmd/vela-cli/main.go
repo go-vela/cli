@@ -3,12 +3,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/login"
 	_version "github.com/go-vela/cli/command/version"
@@ -17,32 +17,21 @@ import (
 )
 
 func main() {
-	app := cli.NewApp()
-
 	// CLI Information
-
-	app.Name = "vela"
-	app.HelpName = "vela"
-	app.Usage = "CLI for interacting with Vela and managing resources"
-	app.Copyright = "Copyright 2019 Target Brands, Inc. All rights reserved."
-	app.Authors = []*cli.Author{
-		{
-			Name:  "Vela Admins",
-			Email: "vela@target.com",
-		},
+	cmd := cli.Command{
+		Name:                   "vela",
+		Version:                version.New().Semantic(),
+		Authors:                []any{"Vela Admins"},
+		Copyright:              "Copyright 2019 Target Brands, Inc. All rights reserved.",
+		Usage:                  "CLI for interacting with Vela and managing resources",
+		Before:                 load,
+		EnableShellCompletion:  true,
+		UseShortOptionHandling: true,
 	}
-
-	// CLI Metadata
-
-	app.Before = load
-	app.Compiled = time.Now()
-	app.EnableBashCompletion = true
-	app.UseShortOptionHandling = true
-	app.Version = version.New().Semantic()
 
 	// CLI Commands
 
-	app.Commands = []*cli.Command{
+	cmd.Commands = []*cli.Command{
 		login.CommandLogin,
 		_version.CommandVersion,
 		addCmds,
@@ -65,12 +54,12 @@ func main() {
 
 	// CLI Flags
 
-	app.Flags = []cli.Flag{
+	cmd.Flags = []cli.Flag{
 
 		// Config Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_CONFIG", "CONFIG_FILE"},
+			Sources: cli.EnvVars("VELA_CONFIG", "CONFIG_FILE"),
 			Name:    "config",
 			Aliases: []string{"c"},
 			Usage:   "path to Vela configuration file",
@@ -80,31 +69,31 @@ func main() {
 		// API Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ADDR", "VELA_SERVER", "CONFIG_ADDR", "SERVER_ADDR"},
+			Sources: cli.EnvVars("VELA_ADDR", "VELA_SERVER", "CONFIG_ADDR", "SERVER_ADDR"),
 			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN", "SERVER_TOKEN"},
+			Sources: cli.EnvVars("VELA_TOKEN", "CONFIG_TOKEN", "SERVER_TOKEN"),
 			Name:    internal.FlagAPIToken,
 			Aliases: []string{"t"},
 			Usage:   "token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN", "SERVER_ACCESS_TOKEN"},
+			Sources: cli.EnvVars("VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN", "SERVER_ACCESS_TOKEN"),
 			Name:    internal.FlagAPIAccessToken,
 			Aliases: []string{"at"},
 			Usage:   "access token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN", "SERVER_REFRESH_TOKEN"},
+			Sources: cli.EnvVars("VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN", "SERVER_REFRESH_TOKEN"),
 			Name:    internal.FlagAPIRefreshToken,
 			Aliases: []string{"rt"},
 			Usage:   "refresh access token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_API_VERSION", "CONFIG_API_VERSION", "API_VERSION"},
+			Sources: cli.EnvVars("VELA_API_VERSION", "CONFIG_API_VERSION", "API_VERSION"),
 			Name:    internal.FlagAPIVersion,
 			Aliases: []string{"av"},
 			Usage:   "API version for communication with the Vela server",
@@ -114,7 +103,7 @@ func main() {
 		// Log Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL", "LOG_LEVEL"},
+			Sources: cli.EnvVars("VELA_LOG_LEVEL", "CONFIG_LOG_LEVEL", "LOG_LEVEL"),
 			Name:    internal.FlagLogLevel,
 			Aliases: []string{"l"},
 			Usage:   "set the level of logging - options: (trace|debug|info|warn|error|fatal|panic)",
@@ -124,7 +113,7 @@ func main() {
 		// No Git Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"},
+			Sources: cli.EnvVars("VELA_NO_GIT", "CONFIG_NO_GIT", "NO_GIT"),
 			Name:    internal.FlagNoGit,
 			Aliases: []string{"ng"},
 			Usage:   "set the status of syncing git repo and org with .git/ directory",
@@ -134,19 +123,19 @@ func main() {
 		// Color Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COLOR"},
+			Sources: cli.EnvVars("VELA_COLOR"),
 			Name:    internal.FlagColor,
 			Usage:   "enable or disable color output",
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COLOR_FORMAT"},
+			Sources: cli.EnvVars("VELA_COLOR_FORMAT"),
 			Name:    internal.FlagColorFormat,
 			Usage:   "overrides the output color format (default: terminal256)",
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COLOR_THEME"},
+			Sources: cli.EnvVars("VELA_COLOR_THEME"),
 			Name:    internal.FlagColorTheme,
 			Usage:   "configures the output color theme (default: monokai)",
 		},
@@ -154,7 +143,7 @@ func main() {
 
 	// CLI Start
 
-	err := app.Run(os.Args)
+	err := cmd.Run(context.Background(), os.Args)
 	if err != nil {
 		logrus.Fatal(err)
 	}

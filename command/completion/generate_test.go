@@ -3,42 +3,43 @@
 package completion
 
 import (
-	"flag"
+	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/go-vela/cli/test"
+	"github.com/go-vela/server/mock/server"
+	"github.com/urfave/cli/v3"
 )
 
 func TestCompletion_Generate(t *testing.T) {
-	// setup flags
-	bashSet := flag.NewFlagSet("test", 0)
-	bashSet.Bool("bash", true, "doc")
-
-	zshSet := flag.NewFlagSet("test", 0)
-	zshSet.Bool("zsh", true, "doc")
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     bashSet,
+			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			args:    []string{"--bash"},
 		},
 		{
 			failure: false,
-			set:     zshSet,
+			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			args:    []string{"--zsh"},
 		},
 		{
 			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, generate, nil),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := generate(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

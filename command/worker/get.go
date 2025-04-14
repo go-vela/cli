@@ -3,11 +3,12 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -27,7 +28,7 @@ var CommandGet = &cli.Command{
 		// Filter Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ACTIVE", "WORKER_ACTIVE"},
+			Sources: cli.EnvVars("VELA_ACTIVE", "WORKER_ACTIVE"),
 			Name:    internal.FlagActive,
 			Aliases: []string{"a"},
 			Usage:   "return workers based on active status",
@@ -36,13 +37,13 @@ var CommandGet = &cli.Command{
 		// Time Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_CHECKED_IN_BEFORE", "CHECKED_IN_BEFORE"},
+			Sources: cli.EnvVars("VELA_CHECKED_IN_BEFORE", "CHECKED_IN_BEFORE"),
 			Name:    internal.FlagBefore,
 			Aliases: []string{"bf", "until"},
 			Usage:   "before time constraint",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_CHECKED_IN_AFTER", "CHECKED_IN_AFTER"},
+			Sources: cli.EnvVars("VELA_CHECKED_IN_AFTER", "CHECKED_IN_AFTER"),
 			Name:    internal.FlagAfter,
 			Aliases: []string{"af", "since"},
 			Usage:   "after time constraint",
@@ -51,7 +52,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "WORKER_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "WORKER_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in wide, json, spew or yaml",
@@ -79,7 +80,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of workers.
-func get(c *cli.Context) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

@@ -3,9 +3,10 @@
 package config
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
@@ -31,7 +32,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to inspect the
 // config file.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

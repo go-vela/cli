@@ -4,9 +4,10 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/repo"
@@ -26,13 +27,13 @@ var CommandRemove = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "REPO_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the repository",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
+			Sources: cli.EnvVars("VELA_REPO", "REPO_NAME"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the name for the repository",
@@ -41,7 +42,7 @@ var CommandRemove = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -66,7 +67,7 @@ DOCUMENTATION:
 // and create the object used to remove a repository.
 //
 //nolint:dupl // ignore similar code with chown, get, repair and view
-func remove(c *cli.Context) error {
+func remove(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

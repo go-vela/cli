@@ -172,6 +172,7 @@ var CommandValidate = &cli.Command{
 			Aliases:  []string{"cgu"},
 			Usage:    "github url, used by compiler, for pulling registry templates",
 			Category: "4. Compiler:",
+			Value:    "https://github.com",
 		},
 		&cli.StringFlag{
 			Sources:  cli.EnvVars("VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"),

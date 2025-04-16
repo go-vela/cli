@@ -124,6 +124,15 @@ var CommandUpdate = &cli.Command{
 			Aliases: []string{"cgu"},
 			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
+
+		// Test Flags (Hidden)
+
+		&cli.BoolFlag{
+			Hidden: true,
+			Name:   "fs.mem-map",
+			Usage:  "use memory mapped files for the config file (for testing)",
+			Value:  false,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -157,6 +166,7 @@ func update(ctx context.Context, c *cli.Command) error {
 		Action:      internal.ActionUpdate,
 		File:        c.String(internal.FlagConfig),
 		UpdateFlags: make(map[string]string),
+		UseMemMap:   c.Bool("fs.mem-map"),
 	}
 
 	// create variables from flags provided

@@ -134,6 +134,15 @@ var CommandRemove = &cli.Command{
 			Aliases: []string{"cgu"},
 			Usage:   "github url, used by compiler, for pulling registry templates",
 		},
+
+		// Test Flags (Hidden)
+
+		&cli.BoolFlag{
+			Hidden: true,
+			Name:   "fs.mem-map",
+			Usage:  "use memory mapped files for the config file (for testing)",
+			Value:  false,
+		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
@@ -162,8 +171,9 @@ func remove(ctx context.Context, c *cli.Command) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
-		Action: internal.ActionRemove,
-		File:   c.String(internal.FlagConfig),
+		Action:    internal.ActionRemove,
+		File:      c.String(internal.FlagConfig),
+		UseMemMap: c.Bool("fs.mem-map"),
 	}
 
 	// check if the API addr flag should be removed

@@ -3,6 +3,7 @@
 package config
 
 import (
+	"path/filepath"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -21,6 +22,18 @@ func (c *Config) Remove() error {
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
 	a := &afero.Afero{
 		Fs: appFS,
+	}
+
+	if c.UseMemMap {
+		a.Fs = afero.NewMemMapFs()
+
+		bytes, err := a.ReadFile(c.File)
+		if err != nil || len(bytes) == 0 {
+			err = writeTestConfig(a, c)
+			if err != nil {
+				return err
+			}
+		}
 	}
 
 	// check if remove flags are empty
@@ -178,5 +191,37 @@ func (c *Config) Remove() error {
 	// send Filesystem call to create config file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
+	return a.WriteFile(c.File, out, 0600)
+}
+
+func writeTestConfig(a *afero.Afero, c *Config) error {
+	genConf := &Config{
+		File:         c.File,
+		Addr:         c.Addr,
+		Token:        c.Token,
+		AccessToken:  c.AccessToken,
+		RefreshToken: c.RefreshToken,
+		Version:      c.Version,
+		LogLevel:     c.LogLevel,
+		NoGit:        c.NoGit,
+		Output:       c.Output,
+		Org:          c.Org,
+		Repo:         c.Repo,
+		GitHub: &GitHub{
+			Token: "",
+			URL:   "",
+		},
+	}
+
+	out, err := genBytes(genConf)
+	if err != nil {
+		return err
+	}
+
+	err = a.Fs.MkdirAll(filepath.Dir(c.File), 0777)
+	if err != nil {
+		return err
+	}
+
 	return a.WriteFile(c.File, out, 0600)
 }

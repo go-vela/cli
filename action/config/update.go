@@ -24,6 +24,18 @@ func (c *Config) Update() error {
 		Fs: appFS,
 	}
 
+	if c.UseMemMap {
+		a.Fs = afero.NewMemMapFs()
+
+		bytes, err := a.ReadFile(c.File)
+		if err != nil || len(bytes) == 0 {
+			err = writeTestConfig(a, c)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
 	logrus.Tracef("reading content from %s", c.File)
 
 	// send Filesystem call to read config file

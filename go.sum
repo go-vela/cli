@@ -149,8 +149,8 @@ github.com/go-task/slim-sprig/v3 v3.0.0 h1:sUs3vkvUymDpBKi3qH1YSqBQk9+9D/8M2mN1v
 github.com/go-task/slim-sprig/v3 v3.0.0/go.mod h1:W848ghGpv3Qj3dhTPRyJypKRiqCdHZiAzKg9hl15HA8=
 github.com/go-vela/sdk-go v0.26.3-0.20250414183522-fcaaf9b4639d h1:i+TDeky3ZaM8w09ZLcSSKEv5OF04RBnLsgOruYUxfv8=
 github.com/go-vela/sdk-go v0.26.3-0.20250414183522-fcaaf9b4639d/go.mod h1:LdKoSUviaNe0RzQtgAL/ZAG/hwI2bW0V1FeDY74UUBI=
-github.com/go-vela/server v0.26.5-0.20250411145922-d9df783d0fd3 h1:VocNbntv2Msmm3+YYRRd5LjKuoev8R1PkOnpyrjVUXI=
-github.com/go-vela/server v0.26.5-0.20250411145922-d9df783d0fd3/go.mod h1:vC/b+r1ZuwgrFtOQSjXtfemIA90ti6iNBQ+Ta2Ai9Ag=
+github.com/go-vela/server v0.26.5-0.20250416150352-6d468bf8b1c4 h1:xqgZddx0LGBWfavZ79mv1SK3zgQOHyUvkpA9GGy7SKY=
+github.com/go-vela/server v0.26.5-0.20250416150352-6d468bf8b1c4/go.mod h1:vC/b+r1ZuwgrFtOQSjXtfemIA90ti6iNBQ+Ta2Ai9Ag=
 github.com/go-vela/worker v0.26.2-0.20250409160604-96d569b1dade h1:wRWPIRRu1M225Zz/Zs9Uq7krA3VmWoLgfjHCkVmiuuE=
 github.com/go-vela/worker v0.26.2-0.20250409160604-96d569b1dade/go.mod h1:28uQKt1rEuJ4yZW3hTE0TurYnQfcyflY22w8i3Jf1mM=
 github.com/goccy/go-json v0.10.5 h1:Fq85nIqj+gXn/S5ahsiTlK3TmC85qgirsdTP/+DeaC4=

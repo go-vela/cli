@@ -18,6 +18,14 @@ var CommandView = &cli.Command{
 	Description: "Use this command to view the config file.",
 	Usage:       "View the config file used in the CLI",
 	Action:      view,
+	Flags: []cli.Flag{
+		&cli.BoolFlag{
+			Hidden: true,
+			Name:   "fs.mem-map",
+			Usage:  "use memory mapped files for the config file (for testing)",
+			Value:  false,
+		},
+	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View the config file.
@@ -37,8 +45,9 @@ func view(ctx context.Context, c *cli.Command) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
-		Action: internal.ActionView,
-		File:   c.String(internal.FlagConfig),
+		Action:    internal.ActionView,
+		File:      c.String(internal.FlagConfig),
+		UseMemMap: c.Bool("fs.mem-map"),
 	}
 
 	// validate config file configuration

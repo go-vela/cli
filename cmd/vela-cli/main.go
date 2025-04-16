@@ -18,7 +18,7 @@ import (
 
 func main() {
 	// CLI Information
-	cmd := cli.Command{
+	cmd := &cli.Command{
 		Name:                   "vela",
 		Version:                version.New().Semantic(),
 		Authors:                []any{"Vela Admins"},

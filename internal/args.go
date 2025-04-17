@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 // ProcessArgs attempts to get the command line
 // arguments, grab the first value, and set the
 // resource to that value in the context.
-func ProcessArgs(c *cli.Context, resource string, expect string) error {
+func ProcessArgs(c *cli.Command, resource string, expect string) error {
 	args := c.Args()
 
 	val := args.First()

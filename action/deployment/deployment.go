@@ -13,7 +13,7 @@ type Config struct {
 	Action      string
 	Org         string
 	Repo        string
-	Number      int
+	Number      int64
 	Description string
 	Ref         string
 	Target      string

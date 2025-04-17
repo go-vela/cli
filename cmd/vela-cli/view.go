@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/build"
 	"github.com/go-vela/cli/command/config"
@@ -30,7 +30,7 @@ var viewCmds = &cli.Command{
 	Description:            "Use this command to view a resource for Vela.",
 	Usage:                  "View details for a resource for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for viewing a build
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandView

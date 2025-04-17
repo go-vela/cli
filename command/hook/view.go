@@ -3,9 +3,10 @@
 package hook
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/hook"
@@ -25,13 +26,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "HOOK_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "HOOK_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the hook",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "HOOK_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "HOOK_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the hook",
@@ -40,7 +41,7 @@ var CommandView = &cli.Command{
 		// Hook Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_HOOK", "HOOK_NUMBER"},
+			Sources: cli.EnvVars("VELA_HOOK", "HOOK_NUMBER"),
 			Name:    "hook",
 			Aliases: []string{"number", "hn"},
 			Usage:   "provide the number for the hook",
@@ -49,7 +50,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "HOOK_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "HOOK_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -73,7 +74,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a hook.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

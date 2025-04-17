@@ -3,9 +3,10 @@
 package settings
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/settings"
@@ -36,14 +37,14 @@ var CommandUpdate = &cli.Command{
 		// Queue Flags
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_QUEUE_ADD_ROUTES", "QUEUE_ADD_ROUTES"},
+			Sources: cli.EnvVars("VELA_QUEUE_ADD_ROUTES", "QUEUE_ADD_ROUTES"),
 			Name:    QueueRouteAddKey,
 			Aliases: []string{"queue-route", "add-route", "routes", "route", "r"},
 			Usage:   "list of routes to add to the queue",
 		},
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_QUEUE_DROP_ROUTES", "QUEUE_DROP_ROUTES"},
+			Sources: cli.EnvVars("VELA_QUEUE_DROP_ROUTES", "QUEUE_DROP_ROUTES"),
 			Name:    QueueRouteDropKey,
 			Aliases: []string{"drop-route"},
 			Usage:   "list of routes to drop from the queue",
@@ -52,21 +53,21 @@ var CommandUpdate = &cli.Command{
 		// Compiler Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_COMPILER_TEMPLATE_DEPTH", "VELA_TEMPLATE_DEPTH", "TEMPLATE_DEPTH"},
+			Sources: cli.EnvVars("VELA_COMPILER_TEMPLATE_DEPTH", "VELA_TEMPLATE_DEPTH", "TEMPLATE_DEPTH"),
 			Name:    CompilerTemplateDepthKey,
 			Aliases: []string{"templates", "template-depth", "templatedepth", "td"},
 			Usage:   "max template depth for the compiler",
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMPILER_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"},
+			Sources: cli.EnvVars("VELA_COMPILER_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"),
 			Name:    CompilerCloneImageKey,
 			Aliases: []string{"clone", "clone-image", "cloneimage", "ci"},
 			Usage:   "image used to clone the repository for the compiler",
 		},
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"},
+			Sources: cli.EnvVars("VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"),
 			Name:    CompilerStarlarkExecLimitKey,
 			Aliases: []string{"starlark-exec-limit", "starklark-limit", "starlarklimit", "sel"},
 			Usage:   "max starlark execution limit for the compiler",
@@ -75,33 +76,33 @@ var CommandUpdate = &cli.Command{
 		// Misc Flags
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_REPO_ALLOWLIST_ADD_REPOS", "REPO_ALLOWLIST_ADD_REPOS"},
+			Sources: cli.EnvVars("VELA_REPO_ALLOWLIST_ADD_REPOS", "REPO_ALLOWLIST_ADD_REPOS"),
 			Name:    RepoAllowlistAddKey,
 			Aliases: []string{"repo", "repos", "ral"},
 			Usage:   "the list of repositories to add to the list of all those permitted to use Vela",
 		},
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_REPO_ALLOWLIST_DROP_REPOS", "REPO_ALLOWLIST_DROP_REPOS"},
+			Sources: cli.EnvVars("VELA_REPO_ALLOWLIST_DROP_REPOS", "REPO_ALLOWLIST_DROP_REPOS"),
 			Name:    RepoAllowlistDropKey,
 			Usage:   "the list of repositories to drop from the list of all those permitted to use Vela",
 		},
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_SCHEDULE_ALLOWLIST_ADD_REPOS", "SCHEDULE_ALLOWLIST_ADD_REPOS"},
+			Sources: cli.EnvVars("VELA_SCHEDULE_ALLOWLIST_ADD_REPOS", "SCHEDULE_ALLOWLIST_ADD_REPOS"),
 			Name:    ScheduleAllowAddlistKey,
 			Aliases: []string{"schedule", "schedules", "sal"},
 			Usage:   "the list of repositories to add to the list of all those permitted to use schedules in Vela",
 		},
 
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_SCHEDULE_ALLOWLIST_DROP_REPOS", "SCHEDULE_ALLOWLIST_DROP_REPOS"},
+			Sources: cli.EnvVars("VELA_SCHEDULE_ALLOWLIST_DROP_REPOS", "SCHEDULE_ALLOWLIST_DROP_REPOS"),
 			Name:    ScheduleAllowDroplistKey,
 			Usage:   "the list of repositories to drop from the list of all those permitted to use schedules in Vela",
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "SETTINGS_FILE"},
+			Sources: cli.EnvVars("VELA_FILE", "SETTINGS_FILE"),
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide a file to update settings",
@@ -110,7 +111,7 @@ var CommandUpdate = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SETTINGS_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SETTINGS_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -143,7 +144,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to modify settings.
-func update(c *cli.Context) error {
+func update(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -180,11 +181,11 @@ func update(c *cli.Context) error {
 	}
 
 	if c.IsSet(CompilerTemplateDepthKey) {
-		s.Compiler.TemplateDepth = vela.Int(c.Int(CompilerTemplateDepthKey))
+		s.Compiler.TemplateDepth = vela.Int(int(c.Int(CompilerTemplateDepthKey)))
 	}
 
 	if c.IsSet(CompilerStarlarkExecLimitKey) {
-		s.Compiler.StarlarkExecLimit = vela.Int64(c.Int64(CompilerStarlarkExecLimitKey))
+		s.Compiler.StarlarkExecLimit = vela.Int64(c.Int(CompilerStarlarkExecLimitKey))
 	}
 
 	// validate settings configuration

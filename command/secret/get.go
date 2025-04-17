@@ -3,9 +3,10 @@
 package secret
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
@@ -27,13 +28,13 @@ var CommandGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SECRET_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SECRET_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
@@ -42,21 +43,21 @@ var CommandGet = &cli.Command{
 		// Secret Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
+			Sources: cli.EnvVars("VELA_ENGINE", "SECRET_ENGINE"),
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "SECRET_TYPE"),
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TEAM", "SECRET_TEAM"},
+			Sources: cli.EnvVars("VELA_TEAM", "SECRET_TEAM"),
 			Name:    "team",
 			Aliases: []string{"t"},
 			Usage:   "provide the team for the secret",
@@ -65,7 +66,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SECRET_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -74,14 +75,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "SECRET_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "SECRET_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of secrets",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "SECRET_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "SECRET_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of secrets to print per page",
@@ -112,7 +113,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of secrets.
-func get(c *cli.Context) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -137,8 +138,8 @@ func get(c *cli.Context) error {
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
 		Team:    c.String("team"),
-		Page:    c.Int(internal.FlagPage),
-		PerPage: c.Int(internal.FlagPerPage),
+		Page:    int(c.Int(internal.FlagPage)),
+		PerPage: int(c.Int(internal.FlagPerPage)),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

@@ -3,9 +3,10 @@
 package user
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/user"
@@ -25,27 +26,27 @@ var CommandUpdate = &cli.Command{
 		// User Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_USER_NAME", "USER_NAME"},
+			Sources: cli.EnvVars("VELA_USER_NAME", "USER_NAME"),
 			Name:    internal.FlagName,
 			Usage:   "provide the name of the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_ADD_FAVORITES", "USER_ADD_FAVORITES"},
+			Sources: cli.EnvVars("VELA_USER_ADD_FAVORITES", "USER_ADD_FAVORITES"),
 			Name:    "add-favorites",
 			Usage:   "provide the list of repositories to add as favorites for the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_DROP_FAVORITES", "USER_DROP_FAVORITES"},
+			Sources: cli.EnvVars("VELA_USER_DROP_FAVORITES", "USER_DROP_FAVORITES"),
 			Name:    "drop-favorites",
 			Usage:   "provide the list of repositories to remove from favorites of the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_ADD_DASHBOARDS", "USER_ADD_DASHBOARDS"},
+			Sources: cli.EnvVars("VELA_USER_ADD_DASHBOARDS", "USER_ADD_DASHBOARDS"),
 			Name:    "add-dashboards",
 			Usage:   "provide the list of UUIDs for dashboards to add to the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_DROP_DASHBOARDS", "USER_DROP_DASHBOARDS"},
+			Sources: cli.EnvVars("VELA_USER_DROP_DASHBOARDS", "USER_DROP_DASHBOARDS"),
 			Name:    "drop-dashboards",
 			Usage:   "provide the list of UUIDs for dashboareds to remove from the user",
 		},
@@ -53,7 +54,7 @@ var CommandUpdate = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -78,7 +79,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to update a user.
-func update(c *cli.Context) error {
+func update(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

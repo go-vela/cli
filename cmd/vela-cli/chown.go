@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/repo"
 )
@@ -16,7 +16,7 @@ var chownCmds = &cli.Command{
 	Description:            "Use this command to change ownership of a resource for Vela.",
 	Usage:                  "Change ownership of resources for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for changing ownership of a repository
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/repo?tab=doc#CommandChown

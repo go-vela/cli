@@ -3,15 +3,17 @@
 package log
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/log"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/internal/output"
+	"github.com/go-vela/server/util"
 )
 
 // CommandView defines the command for inspecting a log.
@@ -25,13 +27,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "LOG_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "LOG_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the log",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "LOG_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "LOG_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the log",
@@ -40,7 +42,7 @@ var CommandView = &cli.Command{
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "LOG_BUILD"},
+			Sources: cli.EnvVars("VELA_BUILD", "LOG_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the log",
@@ -49,7 +51,7 @@ var CommandView = &cli.Command{
 		// Service Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_SERVICE", "LOG_SERVICE"},
+			Sources: cli.EnvVars("VELA_SERVICE", "LOG_SERVICE"),
 			Name:    internal.FlagService,
 			Usage:   "provide the service for the log",
 		},
@@ -57,7 +59,7 @@ var CommandView = &cli.Command{
 		// Step Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_STEP", "LOG_STEP"},
+			Sources: cli.EnvVars("VELA_STEP", "LOG_STEP"),
 			Name:    internal.FlagStep,
 			Usage:   "provide the step for the log",
 		},
@@ -65,7 +67,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "LOG_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "LOG_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -94,7 +96,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a log.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -117,8 +119,8 @@ func view(c *cli.Context) error {
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
 		Build:   c.Int(internal.FlagBuild),
-		Service: c.Int(internal.FlagService),
-		Step:    c.Int(internal.FlagStep),
+		Service: util.Int32FromInt64(c.Int(internal.FlagService)),
+		Step:    util.Int32FromInt64(c.Int(internal.FlagStep)),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

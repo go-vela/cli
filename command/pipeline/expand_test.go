@@ -3,11 +3,10 @@
 package pipeline
 
 import (
-	"flag"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
@@ -17,43 +16,31 @@ func TestPipeline_Expand(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// setup flags
-	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", test.TestTokenGood, "doc")
-	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token.access", test.TestTokenGood, "doc")
-	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.String("ref", "48afb5bdc41ad69bf22588491333f7cf71135163", "doc")
-	fullSet.String("output", "json", "doc")
-
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     fullSet,
+			cmd:     test.TestCommand(s.URL, expand, CommandExpand.Flags),
+			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--ref", "refs/heads/main"},
 		},
 		{
 			failure: true,
-			set:     authSet,
+			cmd:     test.TestCommand(s.URL, expand, CommandExpand.Flags),
+			args:    []string{"--org", "Org-1"},
 		},
 		{
 			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, expand, nil),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := expand(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

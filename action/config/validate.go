@@ -19,7 +19,7 @@ func (c *Config) Validate() error {
 	}
 
 	// check if config action is generate
-	if c.Action != "generate" {
+	if c.Action != "generate" && !c.UseMemMap {
 		// check if config file exists
 		_, err := os.Stat(c.File)
 		if err != nil {

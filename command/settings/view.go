@@ -3,9 +3,10 @@
 package settings
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/settings"
@@ -26,7 +27,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SETTINGS_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SETTINGS_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -46,7 +47,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

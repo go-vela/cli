@@ -3,12 +3,13 @@
 package deployment
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"strings"
 
 	"github.com/joho/godotenv"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/deployment"
@@ -29,13 +30,13 @@ var CommandAdd = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "DEPLOYMENT_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "DEPLOYMENT_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the deployment",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "DEPLOYMENT_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "DEPLOYMENT_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the deployment",
@@ -44,38 +45,38 @@ var CommandAdd = &cli.Command{
 		// Deployment Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REF", "DEPLOYMENT_REF"},
+			Sources: cli.EnvVars("VELA_REF", "DEPLOYMENT_REF"),
 			Name:    "ref",
 			Usage:   "provide the reference to deploy - this can be a branch, commit (SHA) or tag",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TARGET", "DEPLOYMENT_TARGET"},
+			Sources: cli.EnvVars("VELA_TARGET", "DEPLOYMENT_TARGET"),
 			Name:    "target",
 			Aliases: []string{"t"},
 			Usage:   "provide the name for the target deployment environment",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_DESCRIPTION", "DEPLOYMENT_DESCRIPTION"},
+			Sources: cli.EnvVars("VELA_DESCRIPTION", "DEPLOYMENT_DESCRIPTION"),
 			Name:    "description",
 			Aliases: []string{"d"},
 			Usage:   "provide the description for the deployment",
 			Value:   "Deployment request from Vela",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TASK", "DEPLOYMENT_TASK"},
+			Sources: cli.EnvVars("VELA_TASK", "DEPLOYMENT_TASK"),
 			Name:    "task",
 			Aliases: []string{"tk"},
 			Usage:   "Provide the task for the deployment",
 			Value:   "deploy:vela",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_PARAMETERS", "DEPLOYMENT_PARAMETERS"},
+			Sources: cli.EnvVars("VELA_PARAMETERS", "DEPLOYMENT_PARAMETERS"),
 			Name:    "parameter",
 			Aliases: []string{"p"},
 			Usage:   "provide the parameter(s) within `key=value` format for the deployment",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_PARAMETERS_FILE", "DEPLOYMENT_PARAMETERS_FILE"},
+			Sources: cli.EnvVars("VELA_PARAMETERS_FILE", "DEPLOYMENT_PARAMETERS_FILE"),
 			Name:    "parameters-file",
 			Aliases: []string{"pf", "parameter-file"},
 			Usage:   "provide deployment parameters via a JSON or env file",
@@ -84,7 +85,7 @@ var CommandAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "DEPLOYMENT_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -120,7 +121,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to create a
 // deployment.
-func add(c *cli.Context) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

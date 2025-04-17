@@ -3,9 +3,10 @@
 package dashboard
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/dashboard"
@@ -25,30 +26,30 @@ var CommandAdd = &cli.Command{
 		// Dashboard Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_DASHBOARD_NAME", "DASHBOARD_NAME"},
+			Sources: cli.EnvVars("VELA_DASHBOARD_NAME", "DASHBOARD_NAME"),
 			Name:    "name",
 			Usage:   "provide the name for the dashboard",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_DASHBOARD_REPOS", "DASHBOARD_REPOS"},
+			Sources: cli.EnvVars("VELA_DASHBOARD_REPOS", "DASHBOARD_REPOS"),
 			Name:    "repos",
 			Aliases: []string{"add-repos"},
 			Usage:   "provide the list of repositories (org/repo) for the dashboard",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_DASHBOARD_REPOS_BRANCH", "DASHBOARD_REPOS_BRANCH"},
+			Sources: cli.EnvVars("VELA_DASHBOARD_REPOS_BRANCH", "DASHBOARD_REPOS_BRANCH"),
 			Name:    "branches",
 			Aliases: []string{"branch"},
 			Usage:   "filter builds in all repositories by branch",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_DASHBOARD_REPOS_EVENT", "DASHBOARD_REPOS_EVENT"},
+			Sources: cli.EnvVars("VELA_DASHBOARD_REPOS_EVENT", "DASHBOARD_REPOS_EVENT"),
 			Name:    "events",
 			Aliases: []string{"event"},
 			Usage:   "filter builds in all repositories by event",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_DASHBOARD_ADMINS", "DASHBOARD_ADMINS"},
+			Sources: cli.EnvVars("VELA_DASHBOARD_ADMINS", "DASHBOARD_ADMINS"),
 			Name:    "admins",
 			Usage:   "provide the list of admins for the dashboard",
 		},
@@ -56,7 +57,7 @@ var CommandAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -81,7 +82,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to create a dashboard.
-func add(c *cli.Context) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

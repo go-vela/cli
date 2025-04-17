@@ -3,9 +3,10 @@
 package user
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/user"
@@ -25,7 +26,7 @@ var CommandView = &cli.Command{
 		// User Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_USER_NAME", "USER_NAME"},
+			Sources: cli.EnvVars("VELA_USER_NAME", "USER_NAME"),
 			Name:    internal.FlagName,
 			Aliases: []string{"n"},
 			Usage:   "provide the name of the user to view",
@@ -34,7 +35,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -58,7 +59,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a user.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

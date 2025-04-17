@@ -175,10 +175,6 @@ func generate(ctx context.Context, c *cli.Command) error {
 		UseMemMap: c.Bool("fs.mem-map"),
 	}
 
-	if conf.UseMemMap {
-
-	}
-
 	// validate config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Validate

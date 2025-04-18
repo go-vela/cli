@@ -20,7 +20,7 @@ func (c *Config) Update(client *vela.Client) error {
 		Address:    vela.String(c.Address),
 		Active:     c.Active,
 		Routes:     vela.Strings(c.Routes),
-		BuildLimit: vela.Int64(c.BuildLimit),
+		BuildLimit: vela.Int32(c.BuildLimit),
 	}
 
 	logrus.Tracef("updating worker %s", c.Hostname)

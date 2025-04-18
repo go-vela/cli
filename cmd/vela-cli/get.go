@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/build"
 	"github.com/go-vela/cli/command/dashboard"
@@ -27,7 +27,7 @@ var getCmds = &cli.Command{
 	Description:            "Use this command to get a list of resources for Vela.",
 	Usage:                  "Get a list of resources for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for getting a list of builds
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/build?tab=doc#CommandGet

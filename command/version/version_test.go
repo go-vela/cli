@@ -3,67 +3,66 @@
 package version
 
 import (
-	"flag"
+	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
+
+	"github.com/go-vela/cli/test"
+	"github.com/go-vela/server/mock/server"
 )
 
-func TestVersion_RunVersion(t *testing.T) {
-	// setup flags
-	dumpSet := flag.NewFlagSet("test", 0)
-	dumpSet.String("output", "dump", "doc")
-
-	jsonSet := flag.NewFlagSet("test", 0)
-	jsonSet.String("output", "json", "doc")
-
-	spewSet := flag.NewFlagSet("test", 0)
-	spewSet.String("output", "spew", "doc")
-
-	yamlSet := flag.NewFlagSet("test", 0)
-	yamlSet.String("output", "yaml", "doc")
+func TestVersion_Version(t *testing.T) {
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     dumpSet,
+			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			args:    []string{"--output", "spew"},
 		},
 		{
 			failure: false,
-			set:     jsonSet,
+			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			args:    []string{"--output", "dump"},
 		},
 		{
 			failure: false,
-			set:     spewSet,
+			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			args:    []string{"--output", "json"},
 		},
 		{
 			failure: false,
-			set:     yamlSet,
+			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			args:    []string{"--output", "yaml"},
 		},
 		{
 			failure: false,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			args:    []string{},
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := runVersion(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {
-				t.Errorf("runVersion should have returned err")
+				t.Errorf("version should have returned err")
 			}
 
 			continue
 		}
 
 		if err != nil {
-			t.Errorf("runVersion returned err: %v", err)
+			t.Errorf("version returned err: %v", err)
 		}
 	}
 }

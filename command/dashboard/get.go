@@ -3,9 +3,10 @@
 package dashboard
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/dashboard"
@@ -24,13 +25,13 @@ var CommandGet = &cli.Command{
 	Flags: []cli.Flag{
 		// Output Flags
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_FULL", "DASHBOARD_FULL"},
+			Sources: cli.EnvVars("VELA_FULL", "DASHBOARD_FULL"),
 			Name:    "full",
 			Usage:   "output the repo and build information for the dashboard",
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "DASHBOARD_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "DASHBOARD_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -51,7 +52,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to get user dashboards.
-func get(c *cli.Context) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

@@ -3,9 +3,10 @@
 package service
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/service"
@@ -26,13 +27,13 @@ var CommandGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SERVICE_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SERVICE_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SERVICE_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SERVICE_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
@@ -41,7 +42,7 @@ var CommandGet = &cli.Command{
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "SERVICE_BUILD"},
+			Sources: cli.EnvVars("VELA_BUILD", "SERVICE_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the service",
@@ -50,7 +51,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SERVICE_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SERVICE_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -59,14 +60,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "SERVICE_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "SERVICE_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of services",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "SERVICE_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "SERVICE_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of services to print per page",
@@ -95,7 +96,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of services.
-func get(c *cli.Context) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -118,8 +119,8 @@ func get(c *cli.Context) error {
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
 		Build:   c.Int(internal.FlagBuild),
-		Page:    c.Int(internal.FlagPage),
-		PerPage: c.Int(internal.FlagPerPage),
+		Page:    int(c.Int(internal.FlagPage)),
+		PerPage: int(c.Int(internal.FlagPerPage)),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

@@ -3,11 +3,10 @@
 package client
 
 import (
-	"flag"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
@@ -17,54 +16,92 @@ func TestClient_Parse(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// create a simple sample app
-	a := new(cli.App)
-	a.Name = "vela"
-	a.Version = "v1.0.0"
+	fullCmd := &cli.Command{
+		Name:  "test",
+		Usage: "Test command",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: s.URL,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.access",
+				Value: test.TestTokenGood,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.refresh",
+				Value: "superSecretRefreshToken",
+			},
+		},
+	}
 
-	// setup flags
-	serverSet := flag.NewFlagSet("test", 0)
-	serverSet.String("api.addr", s.URL, "doc")
+	fullTknCmd := &cli.Command{
+		Name:  "test",
+		Usage: "Test command",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: s.URL,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.access",
+				Value: "superSecretAccessToken",
+			},
+			&cli.StringFlag{
+				Name:  "api.token.refresh",
+				Value: "superSecretRefreshToken",
+			},
+		},
+	}
 
-	tokenSet := flag.NewFlagSet("test", 0)
-	tokenSet.String("api.token", "superSecretToken", "doc")
+	serverCmd := &cli.Command{
+		Name:  "test",
+		Usage: "Test command",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: s.URL,
+			},
+		},
+	}
 
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("api.addr", s.URL, "doc")
-	fullSet.String("api.token.access", test.TestTokenGood, "doc")
-	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-
-	fullSetTokenSet := flag.NewFlagSet("test", 0)
-	fullSetTokenSet.String("api.addr", s.URL, "doc")
-	fullSetTokenSet.String("api.token.access", "superSecretAccessToken", "doc")
-	fullSetTokenSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	tokenCmd := &cli.Command{
+		Name:  "test",
+		Usage: "Test command",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "api.token",
+				Value: "superSecretToken",
+			},
+		},
+	}
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
 	}{
 		{
 			failure: false,
-			set:     fullSet,
+			cmd:     fullCmd,
 		},
 		{
 			failure: false,
-			set:     fullSetTokenSet,
+			cmd:     fullTknCmd,
 		},
 		{
 			failure: true,
-			set:     serverSet,
+			cmd:     serverCmd,
 		},
 		{
 			failure: true,
-			set:     tokenSet,
+			cmd:     tokenCmd,
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		_, err := Parse(cli.NewContext(a, test.set, nil))
+		_, err := Parse(test.cmd)
 
 		if test.failure {
 			if err == nil {
@@ -84,28 +121,35 @@ func TestClient_ParseEmptyToken(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// setup flags
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("api.addr", s.URL, "doc")
+	fullCmd := &cli.Command{
+		Name:  "test",
+		Usage: "Test command",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: s.URL,
+			},
+		},
+	}
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
 	}{
 		{
 			failure: false,
-			set:     fullSet,
+			cmd:     fullCmd,
 		},
 		{
 			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     new(cli.Command),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		_, err := ParseEmptyToken(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		_, err := ParseEmptyToken(test.cmd)
 
 		if test.failure {
 			if err == nil {

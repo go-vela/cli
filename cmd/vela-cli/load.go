@@ -3,17 +3,19 @@
 package main
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
 )
 
 // load is a helper function that loads the necessary configuration for the CLI.
-func load(c *cli.Context) error {
+func load(c context.Context, cmd *cli.Command) (context.Context, error) {
 	// set log level for the CLI
-	switch c.String(internal.FlagLogLevel) {
+	switch cmd.String(internal.FlagLogLevel) {
 	case "t", "trace", "Trace", "TRACE":
 		logrus.SetLevel(logrus.TraceLevel)
 	case "d", "debug", "Debug", "DEBUG":
@@ -37,7 +39,7 @@ func load(c *cli.Context) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
 		Action: "load",
-		File:   c.String(internal.FlagConfig),
+		File:   cmd.String(internal.FlagConfig),
 	}
 
 	// validate config file configuration
@@ -48,11 +50,11 @@ func load(c *cli.Context) error {
 		// execute the load call for the config file configuration
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config.Load
-		err = conf.Load(c)
+		err = conf.Load(cmd)
 		if err != nil {
-			return err
+			return c, err
 		}
 	}
 
-	return nil
+	return c, nil
 }

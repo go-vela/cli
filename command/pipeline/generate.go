@@ -3,9 +3,10 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
@@ -22,27 +23,27 @@ var CommandGenerate = &cli.Command{
 		// Pipeline Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "PIPELINE_FILE"},
+			Sources: cli.EnvVars("VELA_FILE", "PIPELINE_FILE"),
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide the file name for the pipeline",
 			Value:   ".vela.yml",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_PATH", "PIPELINE_PATH"},
+			Sources: cli.EnvVars("VELA_PATH", "PIPELINE_PATH"),
 			Name:    "path",
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_STAGES", "PIPELINE_STAGES"},
+			Sources: cli.EnvVars("VELA_STAGES", "PIPELINE_STAGES"),
 			Name:    "stages",
 			Aliases: []string{"s"},
 			Usage:   "enable generating the pipeline with stages",
 			Value:   "false",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "PIPELINE_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "PIPELINE_TYPE"),
 			Name:    "type",
 			Aliases: []string{"t"},
 			Usage:   "provide the type of pipeline being generated",
@@ -73,7 +74,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to produce a pipeline.
-func generate(c *cli.Context) error {
+func generate(ctx context.Context, c *cli.Command) error {
 	// create the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config

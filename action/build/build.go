@@ -10,7 +10,7 @@ type Config struct {
 	Action  string
 	Org     string
 	Repo    string
-	Number  int
+	Number  int64
 	Event   string
 	Status  string
 	Branch  string

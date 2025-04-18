@@ -3,9 +3,10 @@
 package deployment
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/deployment"
@@ -25,13 +26,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "DEPLOYMENT_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "DEPLOYMENT_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the deployment",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "DEPLOYMENT_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "DEPLOYMENT_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the deployment",
@@ -40,7 +41,7 @@ var CommandView = &cli.Command{
 		// Deployment Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_DEPLOYMENT", "DEPLOYMENT_NUMBER"},
+			Sources: cli.EnvVars("VELA_DEPLOYMENT", "DEPLOYMENT_NUMBER"),
 			Name:    "deployment",
 			Aliases: []string{"d", "number", "dn"},
 			Usage:   "provide the number for the deployment",
@@ -49,7 +50,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "DEPLOYMENT_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "DEPLOYMENT_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -74,7 +75,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to inspect a
 // deployment.
-func view(c *cli.Context) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

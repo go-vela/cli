@@ -8,7 +8,7 @@ import (
 	"runtime"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/sdk-go/vela"
@@ -17,7 +17,7 @@ import (
 // Parse digests the provided urfave/cli context
 // and parses the provided configuration to
 // produce a valid Vela client.
-func Parse(c *cli.Context) (*vela.Client, error) {
+func Parse(c *cli.Command) (*vela.Client, error) {
 	logrus.Debug("parsing Vela client from provided configuration")
 
 	// capture the address from the context
@@ -44,7 +44,7 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 	// "vela; <version>; <os>; <architecture>"
 	// used in user agent string in the sdk
 	clientID := fmt.Sprintf("%s; %s; %s; %s",
-		c.App.Name, c.App.Version, runtime.GOOS, runtime.GOARCH)
+		c.Name, c.Version, runtime.GOOS, runtime.GOARCH)
 
 	// create a vela client from the provided address
 	client, err := vela.NewClient(address, clientID, nil)
@@ -70,7 +70,7 @@ func Parse(c *cli.Context) (*vela.Client, error) {
 // ParseEmptyToken digests the provided urfave/cli context
 // and parses the provided configuration to produce a
 // valid Vela client without token authentication.
-func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
+func ParseEmptyToken(c *cli.Command) (*vela.Client, error) {
 	logrus.Debug("parsing tokenless Vela client from provided configuration")
 
 	// capture the address from the context
@@ -90,5 +90,5 @@ func ParseEmptyToken(c *cli.Context) (*vela.Client, error) {
 	logrus.Tracef("creating Vela client for %s", address)
 
 	// create a vela client from the provided address
-	return vela.NewClient(address, c.App.Name, nil)
+	return vela.NewClient(address, c.Name, nil)
 }

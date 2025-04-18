@@ -4,9 +4,10 @@
 package build
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/build"
@@ -26,13 +27,13 @@ var CommandCancel = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "BUILD_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "BUILD_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
@@ -41,7 +42,7 @@ var CommandCancel = &cli.Command{
 		// Build Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "BUILD_NUMBER"},
+			Sources: cli.EnvVars("VELA_BUILD", "BUILD_NUMBER"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b", "number", "bn"},
 			Usage:   "provide the number for the build",
@@ -50,7 +51,7 @@ var CommandCancel = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "BUILD_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "BUILD_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -73,7 +74,7 @@ DOCUMENTATION:
 // and create the object used to cancel a build.
 //
 //nolint:dupl // ignore similar code with view
-func cancel(c *cli.Context) error {
+func cancel(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

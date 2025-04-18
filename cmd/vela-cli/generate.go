@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/completion"
 	"github.com/go-vela/cli/command/config"
@@ -19,7 +19,7 @@ var generateCmds = &cli.Command{
 	Description:            "Use this command to generate resources for Vela.",
 	Usage:                  "Generate resources for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for producing a shell auto completion script
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/completion?tab=doc#CommandGenerate

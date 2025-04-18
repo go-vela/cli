@@ -3,10 +3,11 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 	"net/url"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -26,14 +27,14 @@ var CommandAdd = &cli.Command{
 		// Worker Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_ADDRESS", "WORKER_ADDRESS"},
+			Sources: cli.EnvVars("VELA_WORKER_ADDRESS", "WORKER_ADDRESS"),
 			Name:    internal.FlagWorkerAddress,
 			Aliases: []string{"wa"},
 			Usage:   "provide the address of the worker as a fully qualified url (<scheme>://<host>)",
 		},
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"},
+			Sources: cli.EnvVars("VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"),
 			Name:    internal.FlagWorkerHostname,
 			Aliases: []string{"wh"},
 			Usage:   "provide the hostname of the worker (defaults to hostname of worker address)",
@@ -42,7 +43,7 @@ var CommandAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "WORKER_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "WORKER_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -63,7 +64,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to create a worker.
-func add(c *cli.Context) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

@@ -3,35 +3,40 @@
 package config
 
 import (
-	"flag"
+	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
+
+	"github.com/go-vela/cli/test"
+	"github.com/go-vela/server/mock/server"
 )
 
 func TestConfig_View(t *testing.T) {
-	// setup flags
-	set := flag.NewFlagSet("test", 0)
-	set.String("config", "../../action/config/testdata/config.yml", "doc")
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     set,
+			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			args:    []string{"--config", "config.yml", "--fs.mem-map"},
 		},
 		{
 			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			args:    []string{"--config", "", "--fs.mem-map"},
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := view(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

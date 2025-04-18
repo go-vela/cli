@@ -1,0 +1,7 @@
+version: "1"
+
+steps:
+  - name: hello
+    image: alpine
+    commands:
+      - echo "Hello, world!"

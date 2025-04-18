@@ -7,7 +7,7 @@ import (
 
 	chroma "github.com/alecthomas/chroma/v2/quick"
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/internal"
 )
@@ -20,7 +20,7 @@ type ColorOptions struct {
 }
 
 // ColorOptionsFromCLIContext creates a ColorOptions from a CLI context.
-func ColorOptionsFromCLIContext(c *cli.Context) ColorOptions {
+func ColorOptionsFromCLIContext(c *cli.Command) ColorOptions {
 	opts := ColorOptions{
 		Enabled: true,
 		Format:  "terminal256",

@@ -40,7 +40,7 @@ var CommandView = &cli.Command{
 
 		// Hook Flags
 
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_HOOK", "HOOK_NUMBER"),
 			Name:    "hook",
 			Aliases: []string{"number", "hn"},
@@ -102,7 +102,7 @@ func view(ctx context.Context, c *cli.Command) error {
 		Action: internal.ActionView,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Number: c.Int("hook"),
+		Number: c.Int64("hook"),
 		Output: c.String(internal.FlagOutput),
 		Color:  output.ColorOptionsFromCLIContext(c),
 	}

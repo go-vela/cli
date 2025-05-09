@@ -41,7 +41,7 @@ var CommandGet = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_BUILD", "STEP_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
@@ -118,9 +118,9 @@ func get(ctx context.Context, c *cli.Command) error {
 		Action:  internal.ActionGet,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
-		Build:   c.Int(internal.FlagBuild),
-		Page:    int(c.Int(internal.FlagPage)),
-		PerPage: int(c.Int(internal.FlagPerPage)),
+		Build:   c.Int64(internal.FlagBuild),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

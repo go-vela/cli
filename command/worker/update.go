@@ -13,7 +13,6 @@ import (
 	"github.com/go-vela/cli/action/worker"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-	"github.com/go-vela/server/util"
 )
 
 // CommandUpdate defines the command for modifying a worker.
@@ -38,7 +37,7 @@ var CommandUpdate = &cli.Command{
 			Aliases: []string{"wa"},
 			Usage:   "provide the address of the worker as a fully qualified url (<scheme>://<host>)",
 		},
-		&cli.IntFlag{
+		&cli.Int32Flag{
 			Sources: cli.EnvVars("VELA_WORKER_BUILD_LIMIT", "WORKER_BUILD_LIMIT"),
 			Name:    "build-limit",
 			Aliases: []string{"bl"},
@@ -101,7 +100,7 @@ func update(ctx context.Context, c *cli.Command) error {
 		Hostname:   c.String(internal.FlagWorkerHostname),
 		Address:    c.String(internal.FlagWorkerAddress),
 		Routes:     c.StringSlice("routes"),
-		BuildLimit: util.Int32FromInt64(c.Int("build-limit")),
+		BuildLimit: c.Int32("build-limit"),
 	}
 
 	// if active flag provided, parse as bool and set in config

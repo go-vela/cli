@@ -3,14 +3,12 @@
 package dashboard
 
 import (
-	"fmt"
 	"slices"
 
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/sdk-go/vela"
 	api "github.com/go-vela/server/api/types"
-	"github.com/go-vela/server/constants"
 )
 
 // Update modifies a dashboard based off the provided configuration.
@@ -108,11 +106,6 @@ func (c *Config) Update(client *vela.Client) error {
 	// update the name of the dashboard
 	if len(c.Name) > 0 {
 		dashboard.SetName(c.Name)
-	}
-
-	// verify the number of repositories for a dashboard
-	if len(dashboard.GetRepos()) > constants.DashboardRepoLimit {
-		return fmt.Errorf("maximum number of repositories for a dashboard is %d", constants.DashboardRepoLimit)
 	}
 
 	// send API call to modify a dashboard

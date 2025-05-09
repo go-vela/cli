@@ -39,7 +39,7 @@ var CommandApprove = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_BUILD", "BUILD_NUMBER"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b", "number", "bn"},
@@ -90,7 +90,7 @@ func approve(ctx context.Context, c *cli.Command) error {
 		Action: internal.ActionApprove,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Number: c.Int(internal.FlagBuild),
+		Number: c.Int64(internal.FlagBuild),
 	}
 
 	// validate build configuration

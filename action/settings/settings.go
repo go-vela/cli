@@ -2,7 +2,9 @@
 
 package settings
 
-import "github.com/go-vela/cli/internal/output"
+import (
+	"github.com/go-vela/cli/internal/output"
+)
 
 // Config represents the configuration necessary
 // to perform settings related requests with Vela.
@@ -12,6 +14,7 @@ type Config struct {
 	File   string
 	Compiler
 	Queue
+	SCM
 
 	RepoAllowlist          *[]string
 	RepoAllowlistAddRepos  []string
@@ -20,6 +23,8 @@ type Config struct {
 	ScheduleAllowlist          *[]string
 	ScheduleAllowlistAddRepos  []string
 	ScheduleAllowlistDropRepos []string
+
+	MaxDashboardRepos int32
 
 	Color output.ColorOptions
 }
@@ -38,4 +43,12 @@ type Queue struct {
 	Routes     *[]string
 	AddRoutes  []string
 	DropRoutes []string
+}
+
+// SCM represents the SCM configurations used
+// to modify the SCM settings for Vela.
+type SCM struct {
+	RepoRoleMap map[string]string
+	OrgRoleMap  map[string]string
+	TeamRoleMap map[string]string
 }

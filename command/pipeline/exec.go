@@ -168,7 +168,7 @@ var CommandExec = &cli.Command{
 			Usage:   "set the maximum depth for nested templates",
 			Value:   3,
 		},
-		&cli.UintFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"),
 			Name:    "compiler-starlark-exec-limit",
 			Aliases: []string{"starlark-exec-limit", "sel"},
@@ -342,7 +342,7 @@ func exec(ctx context.Context, c *cli.Command) error {
 	}
 
 	// set starlark exec limit
-	client.SetStarlarkExecLimit(c.Int("compiler-starlark-exec-limit"))
+	client.SetStarlarkExecLimit(c.Int64("compiler-starlark-exec-limit"))
 
 	// set when user is sourcing templates from local machine
 	if len(p.TemplateFiles) != 0 {

@@ -38,8 +38,18 @@ func (c *Config) Update(client *vela.Client) error {
 			TemplateDepth:     c.Compiler.TemplateDepth,
 			StarlarkExecLimit: c.Compiler.StarlarkExecLimit,
 		},
+		SCM: &settings.SCM{
+			RepoRoleMap: c.SCM.RepoRoleMap,
+			OrgRoleMap:  c.SCM.OrgRoleMap,
+			TeamRoleMap: c.SCM.TeamRoleMap,
+		},
 		RepoAllowlist:     vela.Strings(s.GetRepoAllowlist()),
 		ScheduleAllowlist: vela.Strings(s.GetScheduleAllowlist()),
+	}
+
+	// update max dashboard repos if set
+	if c.MaxDashboardRepos > 0 && c.MaxDashboardRepos != s.GetMaxDashboardRepos() {
+		sUpdate.SetMaxDashboardRepos(c.MaxDashboardRepos)
 	}
 
 	// drop specified routes
@@ -231,6 +241,18 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 		if f.Queue != nil {
 			if f.Queue.Routes != nil {
 				s.Queue.Routes = f.Queue.Routes
+			}
+		}
+
+		if f.SCM != nil {
+			if f.SCM.RepoRoleMap != nil {
+				s.SCM.RepoRoleMap = f.SCM.RepoRoleMap
+			}
+			if f.SCM.OrgRoleMap != nil {
+				s.SCM.OrgRoleMap = f.SCM.OrgRoleMap
+			}
+			if f.SCM.TeamRoleMap != nil {
+				s.SCM.TeamRoleMap = f.SCM.TeamRoleMap
 			}
 		}
 

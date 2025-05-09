@@ -63,14 +63,6 @@ func TestDashboard_Config_Update(t *testing.T) {
 				Output:      "json",
 			},
 		},
-		{
-			failure: true,
-			config: &Config{
-				Action:   "update",
-				ID:       "c8da1302-07d6-11ea-882f-4893bca275b8",
-				AddRepos: []string{"github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat", "github/octocat"},
-			},
-		},
 	}
 
 	// run tests

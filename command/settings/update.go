@@ -13,6 +13,7 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/util"
 )
 
 const (
@@ -21,10 +22,14 @@ const (
 	CompilerStarlarkExecLimitKey = "compiler.starlark-exec-limit"
 	QueueRouteAddKey             = "queue.add-route"
 	QueueRouteDropKey            = "queue.drop-route"
+	SCMRepoRolesMapKey           = "scm.repo.roles-map"
+	SCMOrgRolesMapKey            = "scm.org.roles-map"
+	SCMTeamRolesMapKey           = "scm.team.roles-map"
 	RepoAllowlistAddKey          = "add-repo"
 	RepoAllowlistDropKey         = "drop-repo"
 	ScheduleAllowAddlistKey      = "add-schedule"
 	ScheduleAllowDroplistKey     = "drop-schedule"
+	MaxDashboardReposKey         = "max-dashboard-repos"
 )
 
 // CommandUpdate defines the command for modifying a settings.
@@ -66,11 +71,38 @@ var CommandUpdate = &cli.Command{
 			Usage:   "image used to clone the repository for the compiler",
 		},
 
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_COMPILER_STARLARK_EXEC_LIMIT", "COMPILER_STARLARK_EXEC_LIMIT"),
 			Name:    CompilerStarlarkExecLimitKey,
 			Aliases: []string{"starlark-exec-limit", "starklark-limit", "starlarklimit", "sel"},
 			Usage:   "max starlark execution limit for the compiler",
+		},
+
+		// SCM Flags
+
+		&cli.StringMapFlag{
+			Name:    SCMRepoRolesMapKey,
+			Usage:   "map of SCM roles to Vela permissions for repositories",
+			Sources: cli.EnvVars("VELA_SCM_REPO_ROLES_MAP", "SCM_REPO_ROLES_MAP"),
+			Action: func(_ context.Context, _ *cli.Command, v map[string]string) error {
+				return util.ValidateRoleMap(v, "repo")
+			},
+		},
+		&cli.StringMapFlag{
+			Name:    SCMOrgRolesMapKey,
+			Usage:   "map of SCM roles to Vela permissions for organizations",
+			Sources: cli.EnvVars("VELA_SCM_ORG_ROLES_MAP", "SCM_ORG_ROLES_MAP"),
+			Action: func(_ context.Context, _ *cli.Command, v map[string]string) error {
+				return util.ValidateRoleMap(v, "org")
+			},
+		},
+		&cli.StringMapFlag{
+			Name:    SCMTeamRolesMapKey,
+			Usage:   "map of SCM roles to Vela permissions for teams",
+			Sources: cli.EnvVars("VELA_SCM_TEAM_ROLES_MAP", "SCM_TEAM_ROLES_MAP"),
+			Action: func(_ context.Context, _ *cli.Command, v map[string]string) error {
+				return util.ValidateRoleMap(v, "team")
+			},
 		},
 
 		// Misc Flags
@@ -99,6 +131,12 @@ var CommandUpdate = &cli.Command{
 			Sources: cli.EnvVars("VELA_SCHEDULE_ALLOWLIST_DROP_REPOS", "SCHEDULE_ALLOWLIST_DROP_REPOS"),
 			Name:    ScheduleAllowDroplistKey,
 			Usage:   "the list of repositories to drop from the list of all those permitted to use schedules in Vela",
+		},
+
+		&cli.Int32Flag{
+			Sources: cli.EnvVars("VELA_MAX_DASHBOARD_REPOS", "MAX_DASHBOARD_REPOS"),
+			Name:    MaxDashboardReposKey,
+			Usage:   "the maximum number of repositories for any dashboard",
 		},
 
 		&cli.StringFlag{
@@ -169,10 +207,12 @@ func update(ctx context.Context, c *cli.Command) error {
 			DropRoutes: c.StringSlice(QueueRouteDropKey),
 		},
 		Compiler:                   settings.Compiler{},
+		SCM:                        settings.SCM{},
 		RepoAllowlistAddRepos:      c.StringSlice(RepoAllowlistAddKey),
 		RepoAllowlistDropRepos:     c.StringSlice(RepoAllowlistDropKey),
 		ScheduleAllowlistAddRepos:  c.StringSlice(ScheduleAllowAddlistKey),
 		ScheduleAllowlistDropRepos: c.StringSlice(ScheduleAllowDroplistKey),
+		MaxDashboardRepos:          c.Int32(MaxDashboardReposKey),
 	}
 
 	// compiler
@@ -181,11 +221,24 @@ func update(ctx context.Context, c *cli.Command) error {
 	}
 
 	if c.IsSet(CompilerTemplateDepthKey) {
-		s.Compiler.TemplateDepth = vela.Int(int(c.Int(CompilerTemplateDepthKey)))
+		s.Compiler.TemplateDepth = vela.Int(c.Int(CompilerTemplateDepthKey))
 	}
 
 	if c.IsSet(CompilerStarlarkExecLimitKey) {
-		s.Compiler.StarlarkExecLimit = vela.Int64(c.Int(CompilerStarlarkExecLimitKey))
+		s.Compiler.StarlarkExecLimit = vela.Int64(c.Int64(CompilerStarlarkExecLimitKey))
+	}
+
+	// scm
+	if c.IsSet(SCMRepoRolesMapKey) {
+		s.SCM.RepoRoleMap = c.StringMap(SCMRepoRolesMapKey)
+	}
+
+	if c.IsSet(SCMOrgRolesMapKey) {
+		s.SCM.OrgRoleMap = c.StringMap(SCMOrgRolesMapKey)
+	}
+
+	if c.IsSet(SCMTeamRolesMapKey) {
+		s.SCM.TeamRoleMap = c.StringMap(SCMTeamRolesMapKey)
 	}
 
 	// validate settings configuration

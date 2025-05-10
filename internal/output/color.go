@@ -4,10 +4,12 @@ package output
 
 import (
 	"bytes"
+	"os"
 
 	chroma "github.com/alecthomas/chroma/v2/quick"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v3"
+	"golang.org/x/term"
 
 	"github.com/go-vela/cli/internal"
 )
@@ -28,6 +30,16 @@ func ColorOptionsFromCLIContext(c *cli.Command) ColorOptions {
 	}
 
 	opts.Enabled = c.Bool(internal.FlagColor)
+
+	// get file descriptor, so we can check if we have a TTY
+	fd := int(os.Stdout.Fd())
+
+	logrus.Debugf("isTerminal: %v", term.IsTerminal(fd))
+
+	// no TTY, no color
+	if !term.IsTerminal(fd) {
+		opts.Enabled = false
+	}
 
 	if c.IsSet(internal.FlagColorFormat) {
 		opts.Format = c.String(internal.FlagColorFormat)

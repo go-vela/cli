@@ -24,12 +24,12 @@ func TestWorker_Update(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--wh", "worker", "--routes", "vela,ubuntu"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, nil),
+			cmd:     test.Command(s.URL, update, nil),
 		},
 	}
 

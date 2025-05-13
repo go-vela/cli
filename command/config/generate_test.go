@@ -24,12 +24,12 @@ func TestConfig_Generate(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			cmd:     test.Command(s.URL, generate, CommandGenerate.Flags),
 			args:    []string{"--config", "testdata/config.yml", "--fs.mem-map"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			cmd:     test.Command(s.URL, generate, CommandGenerate.Flags),
 			args:    []string{"--config", "", "--fs.mem-map"},
 		},
 	}

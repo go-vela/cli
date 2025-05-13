@@ -54,7 +54,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided
 // input and create the cli docs.
-func generate(ctx context.Context, c *cli.Command) error {
+func generate(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

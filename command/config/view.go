@@ -40,7 +40,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to inspect the
 // config file.
-func view(ctx context.Context, c *cli.Command) error {
+func view(_ context.Context, c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

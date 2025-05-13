@@ -24,17 +24,17 @@ func TestSchedule_Add(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--schedule", "test", "--entry", "0 0 * * *"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, nil),
+			cmd:     test.Command(s.URL, add, nil),
 		},
 	}
 

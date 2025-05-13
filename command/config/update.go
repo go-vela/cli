@@ -158,7 +158,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to modify the
 // config file.
-func update(ctx context.Context, c *cli.Command) error {
+func update(_ context.Context, c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

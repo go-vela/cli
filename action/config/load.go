@@ -195,6 +195,7 @@ func (c *Config) Load(cmd *cli.Command) error {
 			if config.Color != nil && !*config.Color {
 				c = "false"
 			}
+
 			err = cmd.Set(internal.FlagColor, c)
 			if err != nil {
 				return err

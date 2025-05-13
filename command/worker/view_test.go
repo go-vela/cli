@@ -24,12 +24,12 @@ func TestWorker_View(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			cmd:     test.Command(s.URL, view, CommandView.Flags),
 			args:    []string{"--wh", "worker"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, view, nil),
+			cmd:     test.Command(s.URL, view, nil),
 		},
 	}
 

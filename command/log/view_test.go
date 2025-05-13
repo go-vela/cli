@@ -24,17 +24,17 @@ func TestLog_View(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			cmd:     test.Command(s.URL, view, CommandView.Flags),
 			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--build", "1", "--step", "1"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			cmd:     test.Command(s.URL, view, CommandView.Flags),
 			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--build", "1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, view, nil),
+			cmd:     test.Command(s.URL, view, nil),
 		},
 	}
 

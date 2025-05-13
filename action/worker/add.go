@@ -17,7 +17,7 @@ import (
 )
 
 // Add creates a worker based off the provided configuration.
-func (c *Config) Add(client *vela.Client) error {
+func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add for worker configuration")
 
 	// send API call to get a registration token for the given worker
@@ -39,7 +39,7 @@ func (c *Config) Add(client *vela.Client) error {
 	workerRegistrationURL = fmt.Sprintf("%s/register", workerRegistrationURL)
 
 	// create a new request for the given URL (c.Address)
-	req, err := http.NewRequestWithContext(context.Background(), "POST", workerRegistrationURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "POST", workerRegistrationURL, nil)
 	if err != nil {
 		return fmt.Errorf("unable to form request for worker registration endpoint")
 	}

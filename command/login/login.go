@@ -80,7 +80,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to authenticate
 // and login to Vela.
-func runLogin(ctx context.Context, c *cli.Command) error {
+func runLogin(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

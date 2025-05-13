@@ -112,5 +112,5 @@ func add(ctx context.Context, c *cli.Command) error {
 	// execute the add call for the worker configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config.Add
-	return w.Add(client)
+	return w.Add(ctx, client)
 }

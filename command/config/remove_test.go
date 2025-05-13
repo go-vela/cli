@@ -24,12 +24,12 @@ func TestConfig_Remove(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, remove, CommandRemove.Flags),
+			cmd:     test.Command(s.URL, remove, CommandRemove.Flags),
 			args:    []string{"--config", "config.yml", "--fs.mem-map"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, remove, CommandRemove.Flags),
+			cmd:     test.Command(s.URL, remove, CommandRemove.Flags),
 			args:    []string{"--config", "", "--fs.mem-map"},
 		},
 	}

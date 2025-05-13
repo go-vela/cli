@@ -24,12 +24,12 @@ func TestHook_Get(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--org", "Org-1", "--repo", "Repo-1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, get, nil),
+			cmd:     test.Command(s.URL, get, nil),
 		},
 	}
 

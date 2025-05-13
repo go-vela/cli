@@ -481,11 +481,13 @@ func Test_validateFile(t *testing.T) {
 					t.Error(err)
 				}
 			}
+
 			got, err := validateFile(tt.args.path)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("validateFile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
+
 			if got != tt.want {
 				t.Errorf("validateFile() got = %v, want %v", got, tt.want)
 			}

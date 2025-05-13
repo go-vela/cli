@@ -182,7 +182,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to modify settings.
-func update(ctx context.Context, c *cli.Command) error {
+func update(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -217,28 +217,28 @@ func update(ctx context.Context, c *cli.Command) error {
 
 	// compiler
 	if c.IsSet(CompilerCloneImageKey) {
-		s.Compiler.CloneImage = vela.String(c.String(CompilerCloneImageKey))
+		s.CloneImage = vela.String(c.String(CompilerCloneImageKey))
 	}
 
 	if c.IsSet(CompilerTemplateDepthKey) {
-		s.Compiler.TemplateDepth = vela.Int(c.Int(CompilerTemplateDepthKey))
+		s.TemplateDepth = vela.Int(c.Int(CompilerTemplateDepthKey))
 	}
 
 	if c.IsSet(CompilerStarlarkExecLimitKey) {
-		s.Compiler.StarlarkExecLimit = vela.Int64(c.Int64(CompilerStarlarkExecLimitKey))
+		s.StarlarkExecLimit = vela.Int64(c.Int64(CompilerStarlarkExecLimitKey))
 	}
 
 	// scm
 	if c.IsSet(SCMRepoRolesMapKey) {
-		s.SCM.RepoRoleMap = c.StringMap(SCMRepoRolesMapKey)
+		s.RepoRoleMap = c.StringMap(SCMRepoRolesMapKey)
 	}
 
 	if c.IsSet(SCMOrgRolesMapKey) {
-		s.SCM.OrgRoleMap = c.StringMap(SCMOrgRolesMapKey)
+		s.OrgRoleMap = c.StringMap(SCMOrgRolesMapKey)
 	}
 
 	if c.IsSet(SCMTeamRolesMapKey) {
-		s.SCM.TeamRoleMap = c.StringMap(SCMTeamRolesMapKey)
+		s.TeamRoleMap = c.StringMap(SCMTeamRolesMapKey)
 	}
 
 	// validate settings configuration

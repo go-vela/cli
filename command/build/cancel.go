@@ -74,7 +74,7 @@ DOCUMENTATION:
 // and create the object used to cancel a build.
 //
 //nolint:dupl // ignore similar code with view
-func cancel(ctx context.Context, c *cli.Command) error {
+func cancel(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

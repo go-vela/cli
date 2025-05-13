@@ -24,17 +24,17 @@ func TestStep_Get(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--build", "1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, get, nil),
+			cmd:     test.Command(s.URL, get, nil),
 		},
 	}
 

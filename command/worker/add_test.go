@@ -27,17 +27,17 @@ func TestWorker_Add(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--wa", w.URL, "--wh", "worker"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--wh", "worker"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, nil),
+			cmd:     test.Command(s.URL, add, nil),
 		},
 	}
 

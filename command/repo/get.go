@@ -73,8 +73,8 @@ DOCUMENTATION:
 // and create the object used to capture a list
 // of repos.
 //
-//nolint:dupl // ignore similar code with chown, remove, repair and view
-func get(ctx context.Context, c *cli.Command) error {
+//nolint:dupl // duplicate of `command/repo/remove.go:70-108`
+func get(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -94,8 +94,8 @@ func get(ctx context.Context, c *cli.Command) error {
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config
 	r := &repo.Config{
 		Action:  internal.ActionGet,
-		Page:    int(c.Int(internal.FlagPage)),
-		PerPage: int(c.Int(internal.FlagPerPage)),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

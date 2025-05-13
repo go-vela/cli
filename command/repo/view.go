@@ -67,7 +67,7 @@ DOCUMENTATION:
 // and create the object used to inspect a repository.
 //
 //nolint:dupl // ignore similar code with chown, get, remove and repair
-func view(ctx context.Context, c *cli.Command) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

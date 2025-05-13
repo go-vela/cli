@@ -25,22 +25,22 @@ func TestWorker_Get(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--before", "16000000", "--active", "true"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--before", "today"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--after", "today"},
 		},
 	}

@@ -24,27 +24,27 @@ func TestVersion_Version(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			cmd:     test.Command(s.URL, runVersion, CommandVersion.Flags),
 			args:    []string{"--output", "spew"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			cmd:     test.Command(s.URL, runVersion, CommandVersion.Flags),
 			args:    []string{"--output", "dump"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			cmd:     test.Command(s.URL, runVersion, CommandVersion.Flags),
 			args:    []string{"--output", "json"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			cmd:     test.Command(s.URL, runVersion, CommandVersion.Flags),
 			args:    []string{"--output", "yaml"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, runVersion, CommandVersion.Flags),
+			cmd:     test.Command(s.URL, runVersion, CommandVersion.Flags),
 			args:    []string{},
 		},
 	}

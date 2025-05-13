@@ -13,7 +13,6 @@ import (
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/internal/output"
-	"github.com/go-vela/server/util"
 )
 
 // CommandView defines the command for inspecting a service.
@@ -41,7 +40,7 @@ var CommandView = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_BUILD", "SERVICE_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
@@ -50,7 +49,7 @@ var CommandView = &cli.Command{
 
 		// Service Flags
 
-		&cli.IntFlag{
+		&cli.Int32Flag{
 			Sources: cli.EnvVars("VELA_SERVICE", "SERVICE_NUMBER"),
 			Name:    internal.FlagService,
 			Aliases: []string{"s", "number", "sn"},
@@ -112,8 +111,8 @@ func view(ctx context.Context, c *cli.Command) error {
 		Action: internal.ActionView,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Build:  c.Int(internal.FlagBuild),
-		Number: util.Int32FromInt64(c.Int(internal.FlagService)),
+		Build:  c.Int64(internal.FlagBuild),
+		Number: c.Int32(internal.FlagService),
 		Output: c.String(internal.FlagOutput),
 		Color:  output.ColorOptionsFromCLIContext(c),
 	}

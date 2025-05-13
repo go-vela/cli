@@ -15,7 +15,6 @@ import (
 	"github.com/go-vela/cli/internal/client"
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/server/constants"
-	"github.com/go-vela/server/util"
 )
 
 // CommandAdd defines the command for creating a repository.
@@ -65,20 +64,20 @@ var CommandAdd = &cli.Command{
 			Usage:   "access level required to view the repository",
 			Value:   constants.VisibilityPublic,
 		},
-		&cli.IntFlag{
+		&cli.Int32Flag{
 			Sources: cli.EnvVars("VELA_BUILD_LIMIT", "REPO_BUILD_LIMIT"),
 			Name:    "build.limit",
 			Usage:   "limit of concurrent builds allowed in repository",
 			Value:   constants.BuildLimitDefault,
 		},
-		&cli.IntFlag{
+		&cli.Int32Flag{
 			Sources: cli.EnvVars("VELA_TIMEOUT", "REPO_TIMEOUT"),
 			Name:    "timeout",
 			Aliases: []string{"t"},
 			Usage:   "max time allowed per build in repository",
 			Value:   constants.BuildTimeoutDefault,
 		},
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_COUNTER", "REPO_COUNTER"),
 			Name:    "counter",
 			Aliases: []string{"ct"},
@@ -185,9 +184,9 @@ func add(ctx context.Context, c *cli.Command) error {
 		Link:         c.String("link"),
 		Clone:        c.String("clone"),
 		Visibility:   c.String("visibility"),
-		BuildLimit:   util.Int32FromInt64(c.Int("build.limit")),
-		Timeout:      util.Int32FromInt64(c.Int("timeout")),
-		Counter:      c.Int("counter"),
+		BuildLimit:   c.Int32("build.limit"),
+		Timeout:      c.Int32("timeout"),
+		Counter:      c.Int64("counter"),
 		Private:      c.Bool("private"),
 		Trusted:      c.Bool("trusted"),
 		Active:       c.Bool("active"),

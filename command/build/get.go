@@ -68,13 +68,13 @@ var CommandGet = &cli.Command{
 
 		// Time Flags
 
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_BEFORE", "BUILD_BEFORE"),
 			Name:    internal.FlagBefore,
 			Aliases: []string{"bf"},
 			Usage:   "before time constraint",
 		},
-		&cli.IntFlag{
+		&cli.Int64Flag{
 			Sources: cli.EnvVars("VELA_AFTER", "BUILD_AFTER"),
 			Name:    internal.FlagAfter,
 			Aliases: []string{"af"},
@@ -153,10 +153,10 @@ func get(ctx context.Context, c *cli.Command) error {
 		Event:   c.String("event"),
 		Status:  c.String("status"),
 		Branch:  c.String("branch"),
-		Before:  c.Int(internal.FlagBefore),
-		After:   c.Int(internal.FlagAfter),
-		Page:    int(c.Int(internal.FlagPage)),
-		PerPage: int(c.Int(internal.FlagPerPage)),
+		Before:  c.Int64(internal.FlagBefore),
+		After:   c.Int64(internal.FlagAfter),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

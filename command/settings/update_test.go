@@ -27,6 +27,11 @@ func TestSettings_Update(t *testing.T) {
 			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--queue.add-route", "test"},
 		},
+		{
+			failure: true,
+			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			args:    []string{"--scm.repo.roles-map", "foo=bar"},
+		},
 	}
 
 	// run tests

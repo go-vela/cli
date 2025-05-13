@@ -4,16 +4,16 @@ go 1.24.2
 
 require (
 	github.com/Masterminds/semver/v3 v3.3.1
-	github.com/alecthomas/chroma/v2 v2.15.0
+	github.com/alecthomas/chroma/v2 v2.17.2
 	github.com/buildkite/yaml v0.0.0-20230306222819-0e4e032d4835
 	github.com/chainguard-dev/git-urls v1.0.2
 	github.com/cli/browser v1.3.0
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
 	github.com/dustin/go-humanize v1.0.1
 	github.com/gin-gonic/gin v1.10.0
-	github.com/go-git/go-git/v5 v5.14.0
+	github.com/go-git/go-git/v5 v5.16.0
 	github.com/go-vela/sdk-go v0.26.3-0.20250506205517-a78afa8baa91
-	github.com/go-vela/server v0.26.5-0.20250512164543-dcfc9a69c701
+	github.com/go-vela/server v0.26.5-0.20250512215715-c6ca9a05183a
 	github.com/go-vela/worker v0.26.2-0.20250506210446-4303e2b88fd1
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/gosuri/uitable v0.0.4
@@ -32,7 +32,7 @@ require (
 	github.com/Masterminds/goutils v1.1.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.3.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
-	github.com/ProtonMail/go-crypto v1.1.5 // indirect
+	github.com/ProtonMail/go-crypto v1.1.6 // indirect
 	github.com/PuerkitoBio/purell v1.2.1 // indirect
 	github.com/adhocore/gronx v1.19.6 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
@@ -42,7 +42,7 @@ require (
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
-	github.com/cloudflare/circl v1.6.0 // indirect
+	github.com/cloudflare/circl v1.6.1 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
 	github.com/containerd/containerd v1.7.11 // indirect
 	github.com/containerd/log v0.1.0 // indirect
@@ -51,7 +51,7 @@ require (
 	github.com/cyphar/filepath-securejoin v0.4.1 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/dlclark/regexp2 v1.11.4 // indirect
+	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/docker/docker v27.5.1+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
@@ -81,7 +81,7 @@ require (
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.6.9 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/go-github/v71 v71.0.0 // indirect
+	github.com/google/go-github/v72 v72.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect

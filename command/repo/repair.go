@@ -68,7 +68,7 @@ DOCUMENTATION:
 // of a repository.
 //
 //nolint:dupl // ignore similar code with chown, get, remove and view
-func repair(ctx context.Context, c *cli.Command) error {
+func repair(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

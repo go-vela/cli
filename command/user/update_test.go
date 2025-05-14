@@ -24,7 +24,7 @@ func TestUser_Update(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--add-favorites", "github/octocat"},
 		},
 	}

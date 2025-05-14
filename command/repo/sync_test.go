@@ -24,17 +24,17 @@ func TestRepo_Sync(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, sync, CommandSync.Flags),
+			cmd:     test.Command(s.URL, sync, CommandSync.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, sync, CommandSync.Flags),
+			cmd:     test.Command(s.URL, sync, CommandSync.Flags),
 			args:    []string{"--org", "github", "--all"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, sync, nil),
+			cmd:     test.Command(s.URL, sync, nil),
 		},
 	}
 

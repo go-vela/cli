@@ -26,17 +26,17 @@ func TestDeployment_Add(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--ref", "123abc", "--target", "dev"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "Org-1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, nil),
+			cmd:     test.Command(s.URL, add, nil),
 		},
 	}
 

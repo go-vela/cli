@@ -24,17 +24,17 @@ func TestStep_View(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			cmd:     test.Command(s.URL, view, CommandView.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--build", "1", "1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			cmd:     test.Command(s.URL, view, CommandView.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, view, nil),
+			cmd:     test.Command(s.URL, view, nil),
 		},
 	}
 

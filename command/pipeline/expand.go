@@ -75,7 +75,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to expand a pipeline.
-func expand(ctx context.Context, c *cli.Command) error {
+func expand(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

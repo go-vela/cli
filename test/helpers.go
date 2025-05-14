@@ -5,9 +5,8 @@ package test
 import (
 	"context"
 	"fmt"
-	"time"
-
 	"slices"
+	"time"
 
 	jwt "github.com/golang-jwt/jwt/v5"
 	"github.com/urfave/cli/v3"
@@ -38,7 +37,7 @@ func makeSampleToken(c jwt.Claims) string {
 	return s
 }
 
-func TestCommand(serverURL string, action func(context.Context, *cli.Command) error, addFlags []cli.Flag) *cli.Command {
+func Command(serverURL string, action func(context.Context, *cli.Command) error, addFlags []cli.Flag) *cli.Command {
 	cfgFlag := &cli.StringFlag{
 		Name:  "config",
 		Value: "config.yml",

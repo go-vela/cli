@@ -6,9 +6,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/urfave/cli/v3"
+
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
-	"github.com/urfave/cli/v3"
 )
 
 func TestCompletion_Generate(t *testing.T) {
@@ -23,17 +24,17 @@ func TestCompletion_Generate(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			cmd:     test.Command(s.URL, generate, CommandGenerate.Flags),
 			args:    []string{"--bash"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			cmd:     test.Command(s.URL, generate, CommandGenerate.Flags),
 			args:    []string{"--zsh"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, generate, nil),
+			cmd:     test.Command(s.URL, generate, nil),
 		},
 	}
 

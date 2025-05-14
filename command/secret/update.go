@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
+//nolint:dupl // duplicate of `command/secret/add.go:3-218`
 package secret
 
 import (
@@ -147,9 +148,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to modify a secret.
-//
-
-func update(ctx context.Context, c *cli.Command) error {
+func update(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

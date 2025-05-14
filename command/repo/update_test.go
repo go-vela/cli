@@ -24,17 +24,17 @@ func TestRepo_Update(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--branch", "main"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--org", "github"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, nil),
+			cmd:     test.Command(s.URL, update, nil),
 		},
 	}
 

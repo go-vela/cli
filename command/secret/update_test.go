@@ -24,22 +24,22 @@ func TestSecret_Update(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "super-secret"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--file", "../../action/secret/testdata/repo.yml"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "@../../action/secret/testdata/repo.yml"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, nil),
+			cmd:     test.Command(s.URL, update, nil),
 		},
 	}
 

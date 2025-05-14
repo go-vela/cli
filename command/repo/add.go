@@ -158,7 +158,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to create a repo.
-func add(ctx context.Context, c *cli.Command) error {
+func add(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

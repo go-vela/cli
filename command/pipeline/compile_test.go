@@ -24,17 +24,17 @@ func TestPipeline_Compile(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, compile, CommandCompile.Flags),
+			cmd:     test.Command(s.URL, compile, CommandCompile.Flags),
 			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--ref", "refs/heads/main"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, compile, CommandCompile.Flags),
+			cmd:     test.Command(s.URL, compile, CommandCompile.Flags),
 			args:    []string{"--org", "Org-1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, compile, nil),
+			cmd:     test.Command(s.URL, compile, nil),
 		},
 	}
 

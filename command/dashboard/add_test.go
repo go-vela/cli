@@ -24,17 +24,17 @@ func TestDashboard_Add(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--repos", "Org-1/Repo-1,Org-2/Repo-2", "--name", "octo-dashboard"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--repos", "Org-1/Repo-1,Org-2/Repo-2"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, nil),
+			cmd:     test.Command(s.URL, add, nil),
 		},
 	}
 

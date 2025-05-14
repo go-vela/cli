@@ -24,12 +24,12 @@ func TestBuild_Get(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--page", "1", "--per.page", "10", "--before", "1651881600", "--after", "1651449600"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, get, nil),
+			cmd:     test.Command(s.URL, get, nil),
 		},
 	}
 

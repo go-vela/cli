@@ -24,17 +24,17 @@ func TestRepo_Repair(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, repair, CommandRepair.Flags),
+			cmd:     test.Command(s.URL, repair, CommandRepair.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, repair, CommandRepair.Flags),
+			cmd:     test.Command(s.URL, repair, CommandRepair.Flags),
 			args:    []string{"--org", "github"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, repair, nil),
+			cmd:     test.Command(s.URL, repair, nil),
 		},
 	}
 

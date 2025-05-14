@@ -24,17 +24,17 @@ func TestRepo_Chown(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, chown, CommandChown.Flags),
+			cmd:     test.Command(s.URL, chown, CommandChown.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, chown, CommandChown.Flags),
+			cmd:     test.Command(s.URL, chown, CommandChown.Flags),
 			args:    []string{"--org", "github"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, chown, nil),
+			cmd:     test.Command(s.URL, chown, nil),
 		},
 	}
 

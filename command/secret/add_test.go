@@ -24,22 +24,22 @@ func TestSecret_Add(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "super-secret"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--file", "../../action/secret/testdata/repo.yml"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, add, CommandAdd.Flags),
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "@../../action/secret/testdata/repo.yml"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, add, nil),
+			cmd:     test.Command(s.URL, add, nil),
 		},
 	}
 

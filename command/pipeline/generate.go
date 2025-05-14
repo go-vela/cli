@@ -74,7 +74,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to produce a pipeline.
-func generate(ctx context.Context, c *cli.Command) error {
+func generate(_ context.Context, c *cli.Command) error {
 	// create the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config

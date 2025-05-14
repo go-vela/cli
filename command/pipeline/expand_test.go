@@ -24,17 +24,17 @@ func TestPipeline_Expand(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, expand, CommandExpand.Flags),
+			cmd:     test.Command(s.URL, expand, CommandExpand.Flags),
 			args:    []string{"--org", "Org-1", "--repo", "Repo-1", "--ref", "refs/heads/main"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, expand, CommandExpand.Flags),
+			cmd:     test.Command(s.URL, expand, CommandExpand.Flags),
 			args:    []string{"--org", "Org-1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, expand, nil),
+			cmd:     test.Command(s.URL, expand, nil),
 		},
 	}
 

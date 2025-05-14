@@ -69,6 +69,6 @@ func (f *failMarshaler) MarshalYAML() (interface{}, error) {
 	return nil, errors.New("this is a marshaler that fails when you try to marshal")
 }
 
-func (f *failMarshaler) UnmarshalYAML(unmarshal func(interface{}) error) error {
+func (f *failMarshaler) UnmarshalYAML(_ func(interface{}) error) error {
 	return errors.New("this is a marshaler that fails when you try to unmarshal")
 }

@@ -218,7 +218,7 @@ func writeTestConfig(a *afero.Afero, c *Config) error {
 		return err
 	}
 
-	err = a.Fs.MkdirAll(filepath.Dir(c.File), 0777)
+	err = a.MkdirAll(filepath.Dir(c.File), 0777)
 	if err != nil {
 		return err
 	}

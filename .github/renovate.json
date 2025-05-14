@@ -6,8 +6,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "\\.go$"
+      "managerFilePatterns": [
+        "/\\.go$/"
       ],
       "matchStrings": [
         "Value:\\s+\"(?<depName>[^\"]+):(?<currentValue>[^\"]+)@sha256:[a-f0-9]{64}\""

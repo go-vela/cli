@@ -13,7 +13,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-git/go-git/v5 v5.16.0
 	github.com/go-vela/sdk-go v0.26.3-0.20250506205517-a78afa8baa91
-	github.com/go-vela/server v0.26.5-0.20250512215715-c6ca9a05183a
+	github.com/go-vela/server v0.26.5-0.20250514141010-de013f9d8f19
 	github.com/go-vela/worker v0.26.2-0.20250506210446-4303e2b88fd1
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/gosuri/uitable v0.0.4

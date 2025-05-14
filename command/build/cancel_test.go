@@ -24,17 +24,17 @@ func TestBuild_Cancel(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, cancel, CommandCancel.Flags),
+			cmd:     test.Command(s.URL, cancel, CommandCancel.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--build", "1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, approve, CommandCancel.Flags),
+			cmd:     test.Command(s.URL, approve, CommandCancel.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "cat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, cancel, nil),
+			cmd:     test.Command(s.URL, cancel, nil),
 		},
 	}
 

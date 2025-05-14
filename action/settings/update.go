@@ -34,14 +34,14 @@ func (c *Config) Update(client *vela.Client) error {
 			Routes: vela.Strings(s.GetRoutes()),
 		},
 		Compiler: &settings.Compiler{
-			CloneImage:        c.Compiler.CloneImage,
-			TemplateDepth:     c.Compiler.TemplateDepth,
-			StarlarkExecLimit: c.Compiler.StarlarkExecLimit,
+			CloneImage:        c.CloneImage,
+			TemplateDepth:     c.TemplateDepth,
+			StarlarkExecLimit: c.StarlarkExecLimit,
 		},
 		SCM: &settings.SCM{
-			RepoRoleMap: c.SCM.RepoRoleMap,
-			OrgRoleMap:  c.SCM.OrgRoleMap,
-			TeamRoleMap: c.SCM.TeamRoleMap,
+			RepoRoleMap: c.RepoRoleMap,
+			OrgRoleMap:  c.OrgRoleMap,
+			TeamRoleMap: c.TeamRoleMap,
 		},
 		RepoAllowlist:     vela.Strings(s.GetRepoAllowlist()),
 		ScheduleAllowlist: vela.Strings(s.GetScheduleAllowlist()),
@@ -53,11 +53,11 @@ func (c *Config) Update(client *vela.Client) error {
 	}
 
 	// drop specified routes
-	if len(c.Queue.DropRoutes) > 0 {
+	if len(c.DropRoutes) > 0 {
 		newRoutes := []string{}
 
 		for _, r := range sUpdate.GetRoutes() {
-			if !slices.Contains(c.Queue.DropRoutes, r) {
+			if !slices.Contains(c.DropRoutes, r) {
 				newRoutes = append(newRoutes, r)
 			}
 		}
@@ -66,10 +66,10 @@ func (c *Config) Update(client *vela.Client) error {
 	}
 
 	// add specified routes
-	if len(c.Queue.AddRoutes) > 0 {
+	if len(c.AddRoutes) > 0 {
 		routes := sUpdate.GetRoutes()
 
-		for _, r := range c.Queue.AddRoutes {
+		for _, r := range c.AddRoutes {
 			if !slices.Contains(routes, r) {
 				routes = append(routes, r)
 			}
@@ -139,8 +139,8 @@ func (c *Config) Update(client *vela.Client) error {
 		sUpdate.ScheduleAllowlist = c.ScheduleAllowlist
 	}
 
-	if c.Queue.Routes != nil {
-		sUpdate.Queue.Routes = c.Queue.Routes
+	if c.Routes != nil {
+		sUpdate.Routes = c.Routes
 	}
 
 	logrus.Trace("updating settings")
@@ -215,44 +215,46 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 			Queue:    Queue{},
 		}
 
-		if f.Platform.RepoAllowlist != nil {
-			s.RepoAllowlist = f.Platform.RepoAllowlist
+		if f.RepoAllowlist != nil {
+			s.RepoAllowlist = f.RepoAllowlist
 		}
 
-		if f.Platform.ScheduleAllowlist != nil {
-			s.ScheduleAllowlist = f.Platform.ScheduleAllowlist
+		if f.ScheduleAllowlist != nil {
+			s.ScheduleAllowlist = f.ScheduleAllowlist
 		}
 
 		// update values if set
 		if f.Compiler != nil {
-			if f.Compiler.CloneImage != nil {
-				s.Compiler.CloneImage = vela.String(f.Compiler.GetCloneImage())
+			if f.CloneImage != nil {
+				s.CloneImage = vela.String(f.GetCloneImage())
 			}
 
-			if f.Compiler.TemplateDepth != nil {
-				s.Compiler.TemplateDepth = vela.Int(f.Compiler.GetTemplateDepth())
+			if f.TemplateDepth != nil {
+				s.TemplateDepth = vela.Int(f.GetTemplateDepth())
 			}
 
-			if f.Compiler.StarlarkExecLimit != nil {
-				s.Compiler.StarlarkExecLimit = vela.Int64(f.Compiler.GetStarlarkExecLimit())
+			if f.StarlarkExecLimit != nil {
+				s.StarlarkExecLimit = vela.Int64(f.GetStarlarkExecLimit())
 			}
 		}
 
 		if f.Queue != nil {
-			if f.Queue.Routes != nil {
-				s.Queue.Routes = f.Queue.Routes
+			if f.Routes != nil {
+				s.Routes = f.Routes
 			}
 		}
 
 		if f.SCM != nil {
-			if f.SCM.RepoRoleMap != nil {
-				s.SCM.RepoRoleMap = f.SCM.RepoRoleMap
+			if f.RepoRoleMap != nil {
+				s.RepoRoleMap = f.RepoRoleMap
 			}
-			if f.SCM.OrgRoleMap != nil {
-				s.SCM.OrgRoleMap = f.SCM.OrgRoleMap
+
+			if f.OrgRoleMap != nil {
+				s.OrgRoleMap = f.OrgRoleMap
 			}
-			if f.SCM.TeamRoleMap != nil {
-				s.SCM.TeamRoleMap = f.SCM.TeamRoleMap
+
+			if f.TeamRoleMap != nil {
+				s.TeamRoleMap = f.TeamRoleMap
 			}
 		}
 

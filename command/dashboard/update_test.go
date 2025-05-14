@@ -24,17 +24,17 @@ func TestDashboard_Update(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--add-repos", "Org-1/Repo-1,Org-2/Repo-2", "--id", "c8da1302-07d6-11ea-882f-4893bca275b8"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--add-repos", "Org-1/Repo-1,Org-2/Repo-2"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, nil),
+			cmd:     test.Command(s.URL, update, nil),
 		},
 	}
 

@@ -87,7 +87,7 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // capture a list of deployments.
-func get(ctx context.Context, c *cli.Command) error {
+func get(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -109,8 +109,8 @@ func get(ctx context.Context, c *cli.Command) error {
 		Action:  internal.ActionGet,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
-		Page:    int(c.Int(internal.FlagPage)),
-		PerPage: int(c.Int(internal.FlagPerPage)),
+		Page:    c.Int(internal.FlagPage),
+		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

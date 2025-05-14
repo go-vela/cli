@@ -24,17 +24,17 @@ func TestBuild_Approve(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, approve, CommandApprove.Flags),
+			cmd:     test.Command(s.URL, approve, CommandApprove.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--build", "1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, approve, CommandApprove.Flags),
+			cmd:     test.Command(s.URL, approve, CommandApprove.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "cat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, approve, nil),
+			cmd:     test.Command(s.URL, approve, nil),
 		},
 	}
 

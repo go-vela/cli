@@ -24,12 +24,12 @@ func TestDashboard_View(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, view, CommandView.Flags),
+			cmd:     test.Command(s.URL, view, CommandView.Flags),
 			args:    []string{"--id", "c8da1302-07d6-11ea-882f-4893bca275b8"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, view, nil),
+			cmd:     test.Command(s.URL, view, nil),
 		},
 	}
 

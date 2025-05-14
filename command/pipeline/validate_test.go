@@ -24,17 +24,17 @@ func TestPipeline_Validate(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, validate, CommandValidate.Flags),
+			cmd:     test.Command(s.URL, validate, CommandValidate.Flags),
 			args:    []string{"--file", "testdata/.vela.yml"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, validate, CommandValidate.Flags),
+			cmd:     test.Command(s.URL, validate, CommandValidate.Flags),
 			args:    []string{"--file", "empty.yml"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, validate, nil),
+			cmd:     test.Command(s.URL, validate, nil),
 		},
 	}
 

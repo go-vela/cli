@@ -76,7 +76,7 @@ DOCUMENTATION:
 // and create the object used to inspect a build.
 //
 //nolint:dupl // ignore similar code with cancel
-func view(ctx context.Context, c *cli.Command) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

@@ -24,12 +24,12 @@ func TestConfig_Update(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--config", "config.yml", "--log.level", "info", "--fs.mem-map"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, update, CommandUpdate.Flags),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
 			args:    []string{"--config", "", "--fs.mem-map"},
 		},
 	}

@@ -62,7 +62,7 @@ var CommandSync = &cli.Command{
 
 // helper function to capture the provided input
 // and create the object used to sync DB with SCM.
-func sync(ctx context.Context, c *cli.Command) error {
+func sync(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

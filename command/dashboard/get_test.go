@@ -24,7 +24,7 @@ func TestDashboard_Get(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, get, CommandGet.Flags),
+			cmd:     test.Command(s.URL, get, CommandGet.Flags),
 			args:    []string{},
 		},
 	}

@@ -24,17 +24,17 @@ func TestBuild_Restart(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, restart, CommandRestart.Flags),
+			cmd:     test.Command(s.URL, restart, CommandRestart.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--build", "1"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, approve, CommandRestart.Flags),
+			cmd:     test.Command(s.URL, approve, CommandRestart.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "cat"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, restart, nil),
+			cmd:     test.Command(s.URL, restart, nil),
 		},
 	}
 

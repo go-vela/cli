@@ -166,7 +166,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to delete one or
 // more fields from the config file.
-func remove(ctx context.Context, c *cli.Command) error {
+func remove(_ context.Context, c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config

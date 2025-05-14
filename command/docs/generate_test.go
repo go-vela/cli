@@ -24,17 +24,17 @@ func TestDocs_Generate(t *testing.T) {
 	}{
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			cmd:     test.Command(s.URL, generate, CommandGenerate.Flags),
 			args:    []string{"--markdown", "true"},
 		},
 		{
 			failure: false,
-			cmd:     test.TestCommand(s.URL, generate, CommandGenerate.Flags),
+			cmd:     test.Command(s.URL, generate, CommandGenerate.Flags),
 			args:    []string{"--man", "true"},
 		},
 		{
 			failure: true,
-			cmd:     test.TestCommand(s.URL, generate, nil),
+			cmd:     test.Command(s.URL, generate, nil),
 		},
 	}
 

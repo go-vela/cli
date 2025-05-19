@@ -6,16 +6,14 @@
   "customManagers": [
     {
       "customType": "regex",
+      "description": "Manage container images used in urfave command default values",
       "managerFilePatterns": [
         "/\\.go$/"
       ],
       "matchStrings": [
-        "Value:\\s+\"(?<depName>[^\"]+):(?<currentValue>[^\"]+)@sha256:[a-f0-9]{64}\""
+        "Value:\\s+\"(?<depName>[^:\"]+):(?<currentValue>[^@\"]+)(@(?<currentDigest>sha256:[a-f0-9]+))?\""
       ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "{{depName}}",
-      "versioningTemplate": "docker",
-      "extractVersionTemplate": "{{currentValue}}"
+      "datasourceTemplate": "docker"
     }
   ]
 }

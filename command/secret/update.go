@@ -185,12 +185,12 @@ func update(_ context.Context, c *cli.Command) error {
 	// check if allow_command and allow_substitution are provided
 	// if they are not, server will not update the fields
 	if slices.Contains(c.FlagNames(), internal.FlagSecretCommands) {
-		val := c.Bool(internal.FlagSecretCommands)
+		val := internal.StringToBool(c.String(internal.FlagSecretCommands))
 		s.AllowCommand = &val
 	}
 
 	if slices.Contains(c.FlagNames(), internal.FlagSecretSubstitution) {
-		val := c.Bool(internal.FlagSecretSubstitution)
+		val := internal.StringToBool(c.String(internal.FlagSecretSubstitution))
 		s.AllowSubstitution = &val
 	}
 

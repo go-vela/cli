@@ -114,7 +114,7 @@ func update(_ context.Context, c *cli.Command) error {
 		Action: internal.ActionUpdate,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Active: c.Bool("active"),
+		Active: internal.StringToBool(c.String("active")),
 		Name:   c.String(internal.FlagSchedule),
 		Entry:  c.String("entry"),
 		Output: c.String(internal.FlagOutput),

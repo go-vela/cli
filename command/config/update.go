@@ -230,7 +230,7 @@ func update(_ context.Context, c *cli.Command) error {
 	// check if the color flag should be modified
 	if c.IsSet(internal.FlagColor) {
 		color := "true"
-		if !c.Bool(internal.FlagColor) {
+		if !internal.StringToBool(c.String(internal.FlagColor)) {
 			color = "false"
 		}
 

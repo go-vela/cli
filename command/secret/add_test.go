@@ -30,6 +30,11 @@ func TestSecret_Add(t *testing.T) {
 		{
 			failure: false,
 			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
+			args:    []string{"--org", "github", "--repo", "octocat", "--name", "test", "--value", "super-secret", "--commands", "false", "--substitution", "false"},
+		},
+		{
+			failure: false,
+			cmd:     test.Command(s.URL, add, CommandAdd.Flags),
 			args:    []string{"--org", "github", "--repo", "octocat", "--file", "../../action/secret/testdata/repo.yml"},
 		},
 		{

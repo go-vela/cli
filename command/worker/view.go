@@ -89,7 +89,7 @@ func view(_ context.Context, c *cli.Command) error {
 	w := &worker.Config{
 		Action:            internal.ActionView,
 		Hostname:          c.String(internal.FlagWorkerHostname),
-		RegistrationToken: c.Bool(internal.FlagWorkerRegistrationToken),
+		RegistrationToken: internal.StringToBool(c.String(internal.FlagWorkerRegistrationToken)),
 		Output:            c.String(internal.FlagOutput),
 		Color:             output.ColorOptionsFromCLIContext(c),
 	}

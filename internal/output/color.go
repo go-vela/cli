@@ -27,7 +27,7 @@ func ColorOptionsFromCLIContext(c *cli.Command) ColorOptions {
 		Theme:   "monokai",
 	}
 
-	opts.Enabled = c.Bool(internal.FlagColor)
+	opts.Enabled = internal.StringToBool(c.String(internal.FlagColor))
 
 	if c.IsSet(internal.FlagColorFormat) {
 		opts.Format = c.String(internal.FlagColorFormat)

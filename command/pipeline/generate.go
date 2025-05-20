@@ -82,7 +82,7 @@ func generate(_ context.Context, c *cli.Command) error {
 		Action: internal.ActionGenerate,
 		File:   c.String("file"),
 		Path:   c.String("path"),
-		Stages: c.Bool("stages"),
+		Stages: internal.StringToBool(c.String("stages")),
 		Type:   c.String("type"),
 	}
 

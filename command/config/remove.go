@@ -34,12 +34,14 @@ var CommandRemove = &cli.Command{
 			Name:    internal.FlagAPIAccessToken,
 			Aliases: []string{"at"},
 			Usage:   "access token used for communication with the Vela server",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"),
 			Name:    internal.FlagAPIRefreshToken,
 			Aliases: []string{"rt"},
 			Usage:   "refresh token used for communication with the Vela server",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_TOKEN", "CONFIG_TOKEN"),
@@ -127,12 +129,14 @@ var CommandRemove = &cli.Command{
 			Name:    internal.FlagCompilerGitHubToken,
 			Aliases: []string{"ct"},
 			Usage:   "github compiler token",
+			Value:   "false",
 		},
 		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_COMPILER_GITHUB_URL", "COMPILER_GITHUB_URL"),
 			Name:    internal.FlagCompilerGitHubURL,
 			Aliases: []string{"cgu"},
 			Usage:   "github url, used by compiler, for pulling registry templates",
+			Value:   "false",
 		},
 
 		// Test Flags (Hidden)
@@ -177,72 +181,72 @@ func remove(_ context.Context, c *cli.Command) error {
 	}
 
 	// check if the API addr flag should be removed
-	if c.Bool(internal.FlagAPIAddress) {
+	if internal.StringToBool(c.String(internal.FlagAPIAddress)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIAddress)
 	}
 
 	// check if the API token flag should be removed
-	if c.Bool(internal.FlagAPIToken) {
+	if internal.StringToBool(c.String(internal.FlagAPIToken)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIToken)
 	}
 
 	// check if the API access token flag should be removed
-	if c.Bool(internal.FlagAPIAccessToken) {
+	if internal.StringToBool(c.String(internal.FlagAPIAccessToken)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIAccessToken)
 	}
 
 	// check if the API refresh token flag should be removed
-	if c.Bool(internal.FlagAPIRefreshToken) {
+	if internal.StringToBool(c.String(internal.FlagAPIRefreshToken)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIRefreshToken)
 	}
 
 	// check if the API version flag should be removed
-	if c.Bool(internal.FlagAPIVersion) {
+	if internal.StringToBool(c.String(internal.FlagAPIVersion)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagAPIVersion)
 	}
 
 	// check if the log level flag should be removed
-	if c.Bool(internal.FlagLogLevel) {
+	if internal.StringToBool(c.String(internal.FlagLogLevel)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagLogLevel)
 	}
 
 	// check if the no git flag should be removed
-	if c.Bool(internal.FlagNoGit) {
+	if internal.StringToBool(c.String(internal.FlagNoGit)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagNoGit)
 	}
 
 	// check if the output flag should be removed
-	if c.Bool(internal.FlagOutput) {
+	if internal.StringToBool(c.String(internal.FlagOutput)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagOutput)
 	}
 
 	// check if the org flag should be removed
-	if c.Bool(internal.FlagOrg) {
+	if internal.StringToBool(c.String(internal.FlagOrg)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagOrg)
 	}
 
 	// check if the repo flag should be removed
-	if c.Bool(internal.FlagRepo) {
+	if internal.StringToBool(c.String(internal.FlagRepo)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagRepo)
 	}
 
 	// check if the engine flag should be removed
-	if c.Bool(internal.FlagSecretEngine) {
+	if internal.StringToBool(c.String(internal.FlagSecretEngine)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagSecretEngine)
 	}
 
 	// check if the type flag should be removed
-	if c.Bool(internal.FlagSecretType) {
+	if internal.StringToBool(c.String(internal.FlagSecretType)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagSecretType)
 	}
 
 	// check if the compiler github token flag should be removed
-	if c.Bool(internal.FlagCompilerGitHubToken) {
+	if internal.StringToBool(c.String(internal.FlagCompilerGitHubToken)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagCompilerGitHubToken)
 	}
 
 	// check if the compiler github url flag should be removed
-	if c.Bool(internal.FlagCompilerGitHubURL) {
+	if internal.StringToBool(c.String(internal.FlagCompilerGitHubURL)) {
 		conf.RemoveFlags = append(conf.RemoveFlags, internal.FlagCompilerGitHubURL)
 	}
 

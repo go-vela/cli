@@ -63,13 +63,13 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update current user to add a repository to favorites.
-    $ {{.HelpName}} --add-favorites Org-1/Repo-1
+    $ {{.FullName}} --add-favorites Org-1/Repo-1
   2. Update current user to remove a repository from favorites.
-    $ {{.HelpName}} --drop-favorites Org-1/Repo-1
+    $ {{.FullName}} --drop-favorites Org-1/Repo-1
   3. Update current user to add a dashboard.
-    $ {{.HelpName}} --add-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
+    $ {{.FullName}} --add-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
   4. Update current user to remove a dashboard.
-    $ {{.HelpName}} --drop-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
+    $ {{.FullName}} --drop-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
 
 DOCUMENTATION:
 

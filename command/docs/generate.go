@@ -42,9 +42,9 @@ var CommandGenerate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Generate markdown docs for the CLI.
-    $ source <({{.HelpName}} --markdown true)
+    $ source <({{.FullName}} --markdown true)
   2. Generate man page docs for the CLI.
-    $ source <({{.HelpName}} --man true)
+    $ source <({{.FullName}} --man true)
 
 DOCUMENTATION:
 

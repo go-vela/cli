@@ -159,21 +159,21 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update settings to change the compiler clone image to target/vela-git:latest.
-    $ {{.HelpName}} --compiler.clone-image target/vela-git:latest
+    $ {{.FullName}} --compiler.clone-image target/vela-git:latest
   2. Update settings to change the compiler template depth to 2.
-    $ {{.HelpName}} --compiler.template-depth 2
+    $ {{.FullName}} --compiler.template-depth 2
   3. Update settings to change the compiler starlark exec limit to 5.
-    $ {{.HelpName}} --compiler.starlark-exec-limit 5
+    $ {{.FullName}} --compiler.starlark-exec-limit 5
   4. Update settings with additional queue routes.
-    $ {{.HelpName}} --queue.add-route large --queue.add-route small
+    $ {{.FullName}} --queue.add-route large --queue.add-route small
   5. Update settings by dropping queue routes.
-    $ {{.HelpName}} --queue.drop-route large --queue.drop-route small
+    $ {{.FullName}} --queue.drop-route large --queue.drop-route small
   6. Update settings with additional repos permitted to use Vela (patterns containing * wildcards must be wrapped in quotes on the commandline).
-    $ {{.HelpName}} --add-repo octocat/hello-world --add-repo 'octocat/*'
+    $ {{.FullName}} --add-repo octocat/hello-world --add-repo 'octocat/*'
   7. Update settings with additional repos permitted to use schedules in Vela (patterns containing * wildcards must be wrapped in quotes on the commandline).
-    $ {{.HelpName}} --add-schedule octocat/hello-world --schedule 'octocat/*'
+    $ {{.FullName}} --add-schedule octocat/hello-world --schedule 'octocat/*'
   8. Update settings from a file.
-    $ {{.HelpName}} --file settings.yml
+    $ {{.FullName}} --file settings.yml
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/settings/update/

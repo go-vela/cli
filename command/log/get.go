@@ -77,13 +77,13 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get logs for a build.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1
   2. Get logs for a build with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output yaml
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --output yaml
   3. Get logs for a build with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --output json
   4. Get logs for a build when config or environment variables are set.
-    $ {{.HelpName}} --build 1
+    $ {{.FullName}} --build 1
 
 DOCUMENTATION:
 

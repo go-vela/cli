@@ -48,9 +48,9 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View a dashboard.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8
   2. View a dashboard with repo and build information.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --full
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --full
 
 DOCUMENTATION:
 

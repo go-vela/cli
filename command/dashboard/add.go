@@ -66,13 +66,13 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a dashboard.
-    $ {{.HelpName}} --name my-dashboard
+    $ {{.FullName}} --name my-dashboard
   2. Add a dashboard with repositories.
-    $ {{.HelpName}} --name my-dashboard --repos Org-1/Repo-1,Org-2/Repo-2
+    $ {{.FullName}} --name my-dashboard --repos Org-1/Repo-1,Org-2/Repo-2
   3. Add a dashboard with repositories filtering builds by pushes to main.
-    $ {{.HelpName}} --name my-dashboard --repos Org-1/Repo-1,Org-2/Repo-2 --branch main --event push
+    $ {{.FullName}} --name my-dashboard --repos Org-1/Repo-1,Org-2/Repo-2 --branch main --event push
   4. Add a dashboard with multiple admins.
-    $ {{.HelpName}} --name my-dashboard --admins JohnDoe,JaneDoe
+    $ {{.FullName}} --name my-dashboard --admins JohnDoe,JaneDoe
 
 DOCUMENTATION:
 

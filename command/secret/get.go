@@ -92,17 +92,17 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get repository secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo
+    $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo
   2. Get organization secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg
+    $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg
   3. Get shared secret details for an organization.
-    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team '*'
+    $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team '*'
   4. Get shared secret details for a team.
-    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties
+    $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties
   5. Get repository secret details with json output.
-    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --output json
+    $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --output json
   6. Get secret details when config or environment variables are set.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.FullName}} --org MyOrg --repo MyRepo
 
 DOCUMENTATION:
 

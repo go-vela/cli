@@ -52,9 +52,9 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a worker reachable at the provided address.
-    $ {{.HelpName}} --worker.address https://myworker.example.com
+    $ {{.FullName}} --worker.address https://myworker.example.com
   2. Add a worker reachable at the provided address with specific hostname.
-    $ {{.HelpName}} --worker.hostname MyWorker --worker.address https://myworker.example.com
+    $ {{.FullName}} --worker.hostname MyWorker --worker.address https://myworker.example.com
 
 DOCUMENTATION:
 

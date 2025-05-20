@@ -50,9 +50,9 @@ var CommandSync = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 	EXAMPLES:
 	1. Sync a single repo with SCM.
-	  $ {{.HelpName}} --org MyOrg --repo MyRepo
+	  $ {{.FullName}} --org MyOrg --repo MyRepo
 	2. Sync every repo within an org
-	  $ {{.HelpName}} --org MyOrg --all
+	  $ {{.FullName}} --org MyOrg --all
   
     DOCUMENTATION:
   

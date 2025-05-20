@@ -136,17 +136,17 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
+    $ {{.FullName}} --org MyOrg --repo MyRepo --event push --event pull_request
   2. Update a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push,pull_request,tag,deployment,comment
+    $ {{.FullName}} --org MyOrg --repo MyRepo --event push,pull_request,tag,deployment,comment
   3. Update a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
+    $ {{.FullName}} --org MyOrg --repo MyRepo --timeout 90
   4. Update a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   5. Update a repository with a new build number.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 200
+    $ {{.FullName}} --org MyOrg --repo MyRepo --counter 200
   6. Update a repository with approve build setting set to fork-always.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-always
+    $ {{.FullName}} --org MyOrg --repo MyRepo --approve-build fork-always
 
 DOCUMENTATION:
 

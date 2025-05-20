@@ -60,11 +60,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View deployment details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --deployment 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --deployment 1
   2. View deployment details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --deployment 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --deployment 1 --output json
   3. View deployment details for a repository config or environment variables are set.
-    $ {{.HelpName}} --deployment 1
+    $ {{.FullName}} --deployment 1
 
 DOCUMENTATION:
 

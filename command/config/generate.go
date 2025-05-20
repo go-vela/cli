@@ -129,15 +129,15 @@ var CommandGenerate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Generate the config file with a Vela server address.
-    $ {{.HelpName}} --api.addr https://vela.example.com
+    $ {{.FullName}} --api.addr https://vela.example.com
   2. Generate the config file with Vela server token.
-    $ {{.HelpName}} --api.token fakeToken
+    $ {{.FullName}} --api.token fakeToken
   3. Generate the config file with secret engine and type.
-    $ {{.HelpName}} --secret.engine native --secret.type org
+    $ {{.FullName}} --secret.engine native --secret.type org
   4. Generate the config file with trace level logging.
-    $ {{.HelpName}} --log.level trace
+    $ {{.FullName}} --log.level trace
   5. Generate the config file when environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

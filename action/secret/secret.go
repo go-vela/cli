@@ -24,6 +24,7 @@ type Config struct {
 	Name              string
 	Value             string
 	Images            []string
+	RepoAllowlist     []string
 	AllowEvents       []string
 	AllowCommand      *bool
 	AllowSubstitution *bool

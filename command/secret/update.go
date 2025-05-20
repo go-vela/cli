@@ -82,6 +82,12 @@ var CommandUpdate = &cli.Command{
 			Usage:   "provide the image(s) that can access this secret",
 		},
 		&cli.StringSliceFlag{
+			Sources: cli.EnvVars("VELA_REPO_ALLOWLIST", "SECRET_REPO_ALLOWLIST"),
+			Name:    "repo-allowlist",
+			Aliases: []string{"ra"},
+			Usage:   "provide the repository allowlist for the secret",
+		},
+		&cli.StringSliceFlag{
 			Sources: cli.EnvVars("VELA_EVENTS", "SECRET_EVENTS"),
 			Name:    "event",
 			Aliases: []string{"events", "ev"},
@@ -127,17 +133,19 @@ EXAMPLES:
      $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
    4. Update a shared secret.
      $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
-   5. Update a repository secret with all event types enabled.
+   5. Update a shared secret to limit use to specific repositories.
+     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --repo-allowlist MyOrg/repo1,MyOrg/repo2
+   6. Update a repository secret with all event types enabled.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --event comment --event deployment --event pull_request --event push --event tag
-   6. Update a repository secret with an image whitelist.
+   7. Update a repository secret with an image whitelist.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --image alpine --image golang:* --image postgres:latest
-   7. Update a secret with value from a file.
+   8. Update a secret with value from a file.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
-   8. Update a repository secret with json output.
+   9. Update a repository secret with json output.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
-   9. Update a secret or secrets from a file.
+  10. Update a secret or secrets from a file.
      $ {{.HelpName}} --file secret.yml
-  10. Update a secret when config or environment variables are set.
+  11. Update a secret when config or environment variables are set.
      $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo --value bar
 
 DOCUMENTATION:
@@ -167,19 +175,20 @@ func update(_ context.Context, c *cli.Command) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
-		Action:      internal.ActionUpdate,
-		Engine:      c.String(internal.FlagSecretEngine),
-		Type:        c.String(internal.FlagSecretType),
-		Org:         c.String(internal.FlagOrg),
-		Repo:        c.String(internal.FlagRepo),
-		Team:        c.String("team"),
-		Name:        c.String("name"),
-		Value:       c.String("value"),
-		Images:      c.StringSlice("image"),
-		AllowEvents: c.StringSlice("event"),
-		File:        c.String("file"),
-		Output:      c.String(internal.FlagOutput),
-		Color:       output.ColorOptionsFromCLIContext(c),
+		Action:        internal.ActionUpdate,
+		Engine:        c.String(internal.FlagSecretEngine),
+		Type:          c.String(internal.FlagSecretType),
+		Org:           c.String(internal.FlagOrg),
+		Repo:          c.String(internal.FlagRepo),
+		Team:          c.String("team"),
+		Name:          c.String("name"),
+		Value:         c.String("value"),
+		Images:        c.StringSlice("image"),
+		RepoAllowlist: c.StringSlice("repo-allowlist"),
+		AllowEvents:   c.StringSlice("event"),
+		File:          c.String("file"),
+		Output:        c.String(internal.FlagOutput),
+		Color:         output.ColorOptionsFromCLIContext(c),
 	}
 
 	// check if allow_command and allow_substitution are provided

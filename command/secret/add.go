@@ -82,6 +82,12 @@ var CommandAdd = &cli.Command{
 			Usage:   "Provide the image(s) that can access this secret",
 		},
 		&cli.StringSliceFlag{
+			Sources: cli.EnvVars("VELA_REPO_ALLOWLIST", "SECRET_REPO_ALLOWLIST"),
+			Name:    "repo-allowlist",
+			Aliases: []string{"ra"},
+			Usage:   "provide the repository allowlist for the secret",
+		},
+		&cli.StringSliceFlag{
 			Sources: cli.EnvVars("VELA_EVENTS", "SECRET_EVENTS"),
 			Name:    "event",
 			Aliases: []string{"events", "ev"},
@@ -125,19 +131,21 @@ EXAMPLES:
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
    3. Add an organization secret.
      $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
-   4. Add a shared secret.
+   4. Add an organization secret and limit use to specific repositories.
+     $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar ---repo-allowlist MyOrg/repo1,MyOrg/repo2
+   5. Add a shared secret.
      $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
-   5. Add a repository secret with all event types enabled.
+   6. Add a repository secret with all event types enabled.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag
-   6. Add a repository secret with an image whitelist.
+   7. Add a repository secret with an image whitelist.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --image alpine --image golang:* --image postgres:latest
-   7. Add a secret with value from a file.
+   8. Add a secret with value from a file.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
-   8. Add a repository secret with json output.
+   9. Add a repository secret with json output.
      $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
-   9. Add a secret or secrets from a file.
+  10. Add a secret or secrets from a file.
      $ {{.HelpName}} --file secret.yml
-  10. Add a secret when config or environment variables are set.
+  11. Add a secret when config or environment variables are set.
      $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo --value bar
 
 DOCUMENTATION:
@@ -167,19 +175,20 @@ func add(_ context.Context, c *cli.Command) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
-		Action:      internal.ActionAdd,
-		Engine:      c.String(internal.FlagSecretEngine),
-		Type:        c.String(internal.FlagSecretType),
-		Org:         c.String(internal.FlagOrg),
-		Repo:        c.String(internal.FlagRepo),
-		Team:        c.String("team"),
-		Name:        c.String("name"),
-		Value:       c.String("value"),
-		Images:      c.StringSlice("image"),
-		AllowEvents: c.StringSlice("event"),
-		File:        c.String("file"),
-		Output:      c.String(internal.FlagOutput),
-		Color:       output.ColorOptionsFromCLIContext(c),
+		Action:        internal.ActionAdd,
+		Engine:        c.String(internal.FlagSecretEngine),
+		Type:          c.String(internal.FlagSecretType),
+		Org:           c.String(internal.FlagOrg),
+		Repo:          c.String(internal.FlagRepo),
+		Team:          c.String("team"),
+		Name:          c.String("name"),
+		Value:         c.String("value"),
+		Images:        c.StringSlice("image"),
+		RepoAllowlist: c.StringSlice("repo-allowlist"),
+		AllowEvents:   c.StringSlice("event"),
+		File:          c.String("file"),
+		Output:        c.String(internal.FlagOutput),
+		Color:         output.ColorOptionsFromCLIContext(c),
 	}
 
 	// check if allow_command and allow_substitution are provided

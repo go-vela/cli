@@ -11,7 +11,7 @@
         "/\\.go$/"
       ],
       "matchStrings": [
-        "Value:\\s+\"(?<depName>[^:\"]+):(?<currentValue>[^@\"]+)(@(?<currentDigest>sha256:[a-f0-9]+))?\""
+        "\"(?<depName>.*?):(?<currentValue>[^\"]*?)@(?<currentDigest>sha256:[a-f0-9]+)\",? // renovate: container"
       ],
       "datasourceTemplate": "docker"
     }

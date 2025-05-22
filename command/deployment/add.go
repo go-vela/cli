@@ -94,23 +94,23 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a deployment for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.FullName}} --org MyOrg --repo MyRepo
   2. Add a deployment for a repository with a specific target environment.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --target stage
+    $ {{.FullName}} --org MyOrg --repo MyRepo --target stage
   3. Add a deployment for a repository with a specific branch reference.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref dev
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref dev
   4. Add a deployment for a repository with a specific commit reference.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref 48afb5bdc41ad69bf22588491333f7cf71135163
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref 48afb5bdc41ad69bf22588491333f7cf71135163
   5. Add a deployment for a repository with a specific tag reference.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref refs/tags/1.0.0
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref refs/tags/1.0.0
   6. Add a deployment for a repository with a specific description.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --description 'my custom message'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --description 'my custom message'
   7. Add a deployment for a repository with two parameters.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --parameter 'key=value' --parameter 'foo=bar'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --parameter 'key=value' --parameter 'foo=bar'
   8. Add a deployment for a repository with a parameters JSON file.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --parameters-file params.json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --parameters-file params.json
   9. Add a deployment for a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

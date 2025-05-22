@@ -101,23 +101,23 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get builds for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.FullName}} --org MyOrg --repo MyRepo
   2. Get builds for a repository with the pull_request event.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event pull_request
+    $ {{.FullName}} --org MyOrg --repo MyRepo --event pull_request
   3. Get builds for a repository with the status of success.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --status success
+    $ {{.FullName}} --org MyOrg --repo MyRepo --status success
   4. Get builds for a repository with the branch of main.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --branch main
+    $ {{.FullName}} --org MyOrg --repo MyRepo --branch main
   5. Get builds for a repository with wide view output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output wide
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output wide
   6. Get builds for a repository with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output yaml
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output yaml
   7. Get builds for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output json
   8. Get builds for a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   9. Get builds for a repository that were created before 1/2/22 & after 1/1/22.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --before 1641081600 --after 1640995200
+    $ {{.FullName}} --org MyOrg --repo MyRepo --before 1641081600 --after 1640995200
 
 DOCUMENTATION:
 

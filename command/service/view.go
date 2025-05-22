@@ -69,11 +69,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View service details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --service 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --service 1
   2. View service details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --service 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --service 1 --output json
   3. View service details for a repository when config or environment variables are set.
-    $ {{.HelpName}} --build 1 --service 1
+    $ {{.FullName}} --build 1 --service 1
 
 DOCUMENTATION:
 

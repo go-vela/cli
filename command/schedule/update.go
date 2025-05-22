@@ -79,11 +79,11 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a schedule for a repository with active disabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule hourly --active false
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule hourly --active false
   2. Update a schedule for a repository with a new entry.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule nightly --entry '@nightly'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule nightly --entry '@nightly'
   3. Update a schedule for a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

@@ -60,11 +60,11 @@ var CommandRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove a schedule from a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule daily
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule daily
   2. Remove a schedule from a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule daily --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule daily --output json
   3. Remove a schedule from a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

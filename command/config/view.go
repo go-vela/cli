@@ -29,7 +29,7 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View the config file.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

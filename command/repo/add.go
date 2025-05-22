@@ -136,19 +136,19 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a repository with push and pull request enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request
+    $ {{.FullName}} --org MyOrg --repo MyRepo --event push --event pull_request
   2. Add a repository with all event types enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
+    $ {{.FullName}} --org MyOrg --repo MyRepo --event push --event pull_request --event tag --event deployment --event comment
   3. Add a repository with a longer build timeout.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --timeout 90
+    $ {{.FullName}} --org MyOrg --repo MyRepo --timeout 90
   4. Add a repository when config or environment variables are set.
-    $ {{.HelpName}} --event push --event pull_request
+    $ {{.FullName}} --event push --event pull_request
   5. Add a repository with a starting build number.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --counter 90
+    $ {{.FullName}} --org MyOrg --repo MyRepo --counter 90
   6. Add a repository with a starlark pipeline file.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --pipeline-type starlark
+    $ {{.FullName}} --org MyOrg --repo MyRepo --pipeline-type starlark
   7. Add a repository with approve build setting set to fork-no-write.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
+    $ {{.FullName}} --org MyOrg --repo MyRepo --approve-build fork-no-write
 
 DOCUMENTATION:
 

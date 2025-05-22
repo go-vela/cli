@@ -85,17 +85,17 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a dashboard to add a repository.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --add-repos Org-1/Repo-1
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --add-repos Org-1/Repo-1
   2. Update a dashboard to remove a repository.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --drop-repos Org-1/Repo-1
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --drop-repos Org-1/Repo-1
   3. Update a dashboard to add event and branch filters to specific repositories.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --target-repos Org-1/Repo-1,Org-2/Repo-2 --branches main --events push
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --target-repos Org-1/Repo-1,Org-2/Repo-2 --branches main --events push
   4. Update a dashboard to change the name.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --name MyDashboard
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --name MyDashboard
   5. Update a dashboard to add an admin.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --add-admins JohnDoe
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --add-admins JohnDoe
   6. Update a dashboard to remove an admin.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --drop-admins JohnDoe
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --drop-admins JohnDoe
 
 DOCUMENTATION:
 

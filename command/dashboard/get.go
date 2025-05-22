@@ -40,9 +40,9 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get user dashboards.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Get user dashboards with repo and build information.
-    $ {{.HelpName}} --full
+    $ {{.FullName}} --full
 
 DOCUMENTATION:
 

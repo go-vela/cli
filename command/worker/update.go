@@ -68,9 +68,9 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a worker to change its build limit to 2.
-    $ {{.HelpName}} --worker.hostname MyWorker --build-limit 2
+    $ {{.FullName}} --worker.hostname MyWorker --build-limit 2
   2. Update a worker with custom routes.
-    $ {{.HelpName}} --worker.hostname MyWorker --route large --route small
+    $ {{.FullName}} --worker.hostname MyWorker --route large --route small
 
 DOCUMENTATION:
 

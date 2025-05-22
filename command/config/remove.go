@@ -151,15 +151,15 @@ var CommandRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove the config file.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Remove the addr field from the config file.
-    $ {{.HelpName}} --api.addr true
+    $ {{.FullName}} --api.addr true
   3. Remove the token field from the config file.
-    $ {{.HelpName}} --api.token true
+    $ {{.FullName}} --api.token true
   4. Remove the secret engine and type fields from the config file.
-    $ {{.HelpName}} --secret.engine true --secret.type true
+    $ {{.FullName}} --secret.engine true --secret.type true
   5. Remove the log level field from the config file.
-    $ {{.HelpName}} --log.level true
+    $ {{.FullName}} --log.level true
 
 DOCUMENTATION:
 

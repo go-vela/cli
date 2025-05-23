@@ -45,11 +45,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of the current user.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. View details of another user (admin).
-    $ {{.HelpName}} --name Octocat
+    $ {{.FullName}} --name Octocat
   3. View details of current user with json output.
-    $ {{.HelpName}} --output json
+    $ {{.FullName}} --output json
 
 DOCUMENTATION:
 

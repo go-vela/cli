@@ -61,15 +61,15 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get a list of workers.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Get a list of workers with wide view output.
-    $ {{.HelpName}} --output wide
+    $ {{.FullName}} --output wide
   3. Get a list of workers with yaml output.
-    $ {{.HelpName}} --output yaml
+    $ {{.FullName}} --output yaml
   4. Get a list of workers with json output.
-    $ {{.HelpName}} --output json
+    $ {{.FullName}} --output json
   5. Get a list of workers when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

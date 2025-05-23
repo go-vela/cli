@@ -52,13 +52,13 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of a worker.
-    $ {{.HelpName}} --worker.hostname MyWorker
+    $ {{.FullName}} --worker.hostname MyWorker
   2. View registration token for a worker.
-    $ {{.HelpName}} --worker.hostname MyWorker --worker.registration.token true
+    $ {{.FullName}} --worker.hostname MyWorker --worker.registration.token true
   3. View details of a worker with json output.
-    $ {{.HelpName}} --worker.hostname MyWorker --output json
+    $ {{.FullName}} --worker.hostname MyWorker --output json
   4. View details of a worker when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

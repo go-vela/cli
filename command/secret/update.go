@@ -126,27 +126,27 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
    1. Update a repository secret.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar
    2. Update a repository secret and disallow usage in commands.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
    3. Update an organization secret.
-     $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
    4. Update a shared secret.
-     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
    5. Update a shared secret to limit use to specific repositories.
-     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --repo-allowlist MyOrg/repo1,MyOrg/repo2
+     $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --repo-allowlist MyOrg/repo1,MyOrg/repo2
    6. Update a repository secret with all event types enabled.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --event comment --event deployment --event pull_request --event push --event tag
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --event comment --event deployment --event pull_request --event push --event tag
    7. Update a repository secret with an image whitelist.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --image alpine --image golang:* --image postgres:latest
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --image alpine --image golang:* --image postgres:latest
    8. Update a secret with value from a file.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
    9. Update a repository secret with json output.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
   10. Update a secret or secrets from a file.
-     $ {{.HelpName}} --file secret.yml
+     $ {{.FullName}} --file secret.yml
   11. Update a secret when config or environment variables are set.
-     $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo --value bar
+     $ {{.FullName}} --org MyOrg --repo MyRepo --name foo --value bar
 
 DOCUMENTATION:
 

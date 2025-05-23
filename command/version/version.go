@@ -34,9 +34,9 @@ var CommandVersion = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Output Vela version information
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Output Vela version information with JSON output
-    $ {{.HelpName}} --output json
+    $ {{.FullName}} --output json
 
 DOCUMENTATION:
 

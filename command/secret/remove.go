@@ -81,15 +81,15 @@ var CommandRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove repository secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo
+    $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo
   2. Remove organization secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo
+    $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg --name foo
   3. Remove shared secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo
+    $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo
   4. Remove repository secret details with json output.
-    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --output json
+    $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --output json
   5. Remove secret details when config or environment variables are set.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo
+    $ {{.FullName}} --org MyOrg --repo MyRepo --name foo
 
 DOCUMENTATION:
 

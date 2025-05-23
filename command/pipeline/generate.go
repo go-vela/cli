@@ -52,19 +52,19 @@ var CommandGenerate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Generate a Vela pipeline.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Generate a Vela pipeline in a nested directory.
-    $ {{.HelpName}} --path nested/path/to/dir
+    $ {{.FullName}} --path nested/path/to/dir
   3. Generate a Vela pipeline in a specific directory.
-    $ {{.HelpName}} --path /absolute/full/path/to/dir
+    $ {{.FullName}} --path /absolute/full/path/to/dir
   4. Generate a Vela pipeline with stages.
-    $ {{.HelpName}} --stages true
+    $ {{.FullName}} --stages true
   5. Generate a go Vela pipeline.
-    $ {{.HelpName}} --secret.type go
+    $ {{.FullName}} --secret.type go
   6. Generate a java Vela pipeline.
-    $ {{.HelpName}} --secret.type java
+    $ {{.FullName}} --secret.type java
   7. Generate a node Vela pipeline.
-    $ {{.HelpName}} --secret.type node
+    $ {{.FullName}} --secret.type node
 
 DOCUMENTATION:
 

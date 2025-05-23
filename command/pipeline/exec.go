@@ -218,35 +218,35 @@ var CommandExec = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Execute a local Vela pipeline.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Execute a local Vela pipeline in a nested directory.
-    $ {{.HelpName}} --path nested/path/to/dir --file .vela.local.yml
+    $ {{.FullName}} --path nested/path/to/dir --file .vela.local.yml
   3. Execute a local Vela pipeline in a specific directory.
-    $ {{.HelpName}} --path /absolute/full/path/to/dir --file .vela.local.yml
+    $ {{.FullName}} --path /absolute/full/path/to/dir --file .vela.local.yml
   4. Execute a local Vela pipeline with ruleset information.
-    $ {{.HelpName}} --branch main --event push
+    $ {{.FullName}} --branch main --event push
   5. Execute a local Vela pipeline with a read-only local volume.
-    $ {{.HelpName}} --volume /tmp/foo.txt:/tmp/foo.txt:ro
+    $ {{.FullName}} --volume /tmp/foo.txt:/tmp/foo.txt:ro
   6. Execute a local Vela pipeline with a writeable local volume.
-    $ {{.HelpName}} --volume /tmp/bar.txt:/tmp/bar.txt:rw
+    $ {{.FullName}} --volume /tmp/bar.txt:/tmp/bar.txt:rw
   7. Execute a local Vela pipeline with type of go
-    $ {{.HelpName}} --pipeline-type go
+    $ {{.FullName}} --pipeline-type go
   8. Execute a local Vela pipeline with specific step skipped
-    $ {{.HelpName}} --skip-step echo_hello --skip-step 'echo goodbye'
+    $ {{.FullName}} --skip-step echo_hello --skip-step 'echo goodbye'
   9. Execute a local Vela pipeline with specific template step skipped
-    $ {{.HelpName}} --skip-step <template name>_echo_hello --skip-step '<template name>_echo goodbye'
+    $ {{.FullName}} --skip-step <template name>_echo_hello --skip-step '<template name>_echo goodbye'
   10. Execute a local Vela pipeline with local templates
-    $ {{.HelpName}} --template-file <template_name>:<path_to_template>
+    $ {{.FullName}} --template-file <template_name>:<path_to_template>
   11. Execute a local Vela pipeline with specific environment variables
-    $ {{.HelpName}} --env KEY1=VAL1,KEY2=VAL2
+    $ {{.FullName}} --env KEY1=VAL1,KEY2=VAL2
   12. Execute a local Vela pipeline with your existing local environment loaded into pipeline
-    $ {{.HelpName}} --local-env
+    $ {{.FullName}} --local-env
   13. Execute a local Vela pipeline with an environment file loaded in
-    $ {{.HelpName}} --env-file (uses .env by default)
+    $ {{.FullName}} --env-file (uses .env by default)
       OR
-    $ {{.HelpName}} --env-file-path <path_to_file>
+    $ {{.FullName}} --env-file-path <path_to_file>
   14. Execute a local Vela pipeline using remote templates
-    $ {{.HelpName}} --compiler.github.token <GITHUB_PAT> --compiler.github.url <GITHUB_URL>
+    $ {{.FullName}} --compiler.github.token <GITHUB_PAT> --compiler.github.url <GITHUB_URL>
 
 DOCUMENTATION:
 

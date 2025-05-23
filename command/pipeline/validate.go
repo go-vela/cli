@@ -185,23 +185,23 @@ var CommandValidate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Validate a local Vela pipeline.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Validate a local Vela pipeline in a nested directory.
-    $ {{.HelpName}} --path nested/path/to/dir
+    $ {{.FullName}} --path nested/path/to/dir
   3. Validate a local Vela pipeline in a specific directory.
-    $ {{.HelpName}} --path /absolute/full/path/to/dir
+    $ {{.FullName}} --path /absolute/full/path/to/dir
   4. Validate a remote pipeline for a repository.
-    $ {{.HelpName}} --remote --org MyOrg --repo MyRepo
+    $ {{.FullName}} --remote --org MyOrg --repo MyRepo
   5. Validate a remote pipeline for a repository with json output.
-    $ {{.HelpName}} --remote --org MyOrg --repo MyRepo --output json
+    $ {{.FullName}} --remote --org MyOrg --repo MyRepo --output json
   6. Validate a template pipeline with expanding steps (when templates are sourced from private Github instance)
-    $ {{.HelpName}} --compiler.github.token <token> --compiler.github.url <url>
+    $ {{.FullName}} --compiler.github.token <token> --compiler.github.url <url>
   7. Validate a pipeline with ruleset data
-    $ {{.HelpName}} --branch dev --event push
+    $ {{.FullName}} --branch dev --event push
   8. Validate a local template pipeline with expanding steps
-    $ {{.HelpName}} --template-file name:/path/to/file
+    $ {{.FullName}} --template-file name:/path/to/file
   9. Validate a local, nested template pipeline with custom template depth.
-    $ {{.HelpName}} --template-file name:/path/to/file name:/path/to/file --max-template-depth 2
+    $ {{.FullName}} --template-file name:/path/to/file name:/path/to/file --max-template-depth 2
 DOCUMENTATION:
 
   https://go-vela.github.io/docs/reference/cli/pipeline/validate/

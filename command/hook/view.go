@@ -60,11 +60,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View hook details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --hook 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --hook 1
   2. View hook details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --hook 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --hook 1 --output json
   3. View hook details for a repository when config or environment variables are set.
-    $ {{.HelpName}} --hook 1
+    $ {{.FullName}} --hook 1
 
 DOCUMENTATION:
 

@@ -59,11 +59,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of a pipeline for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
   2. View details of a pipeline for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
   3. View details of a pipeline for a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

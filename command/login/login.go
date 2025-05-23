@@ -69,7 +69,7 @@ var CommandLogin = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela (will launch browser).
-    $ {{.HelpName}} --api.addr https://vela.example.com
+    $ {{.FullName}} --api.addr https://vela.example.com
 
 DOCUMENTATION:
 

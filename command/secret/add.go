@@ -126,27 +126,27 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
    1. Add a repository secret.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar
    2. Add a repository secret and disallow usage in commands.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
    3. Add an organization secret.
-     $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
    4. Add an organization secret and limit use to specific repositories.
-     $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar ---repo-allowlist MyOrg/repo1,MyOrg/repo2
+     $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar ---repo-allowlist MyOrg/repo1,MyOrg/repo2
    5. Add a shared secret.
-     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
    6. Add a repository secret with all event types enabled.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --event comment --event deployment --event pull_request --event push --event tag
    7. Add a repository secret with an image whitelist.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --image alpine --image golang:* --image postgres:latest
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --image alpine --image golang:* --image postgres:latest
    8. Add a secret with value from a file.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
    9. Add a repository secret with json output.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
   10. Add a secret or secrets from a file.
-     $ {{.HelpName}} --file secret.yml
+     $ {{.FullName}} --file secret.yml
   11. Add a secret when config or environment variables are set.
-     $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo --value bar
+     $ {{.FullName}} --org MyOrg --repo MyRepo --name foo --value bar
 
 DOCUMENTATION:
 

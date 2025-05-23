@@ -79,13 +79,13 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a schedule to a repository with active not enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule hourly --entry '0 * * * *' --active false
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule hourly --entry '0 * * * *' --active false
   2. Add a schedule to a repository with a nightly entry.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule nightly --entry '0 0 * * *'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule nightly --entry '0 0 * * *'
   3. Add a schedule to a repository with a weekly entry.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule weekly --entry '@weekly'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule weekly --entry '@weekly'
   4. Add a schedule to a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 

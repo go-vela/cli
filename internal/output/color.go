@@ -4,10 +4,12 @@ package output
 
 import (
 	"bytes"
+	"os"
 
 	chroma "github.com/alecthomas/chroma/v2/quick"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v3"
+	"golang.org/x/term"
 
 	"github.com/go-vela/cli/internal"
 )
@@ -28,6 +30,11 @@ func ColorOptionsFromCLIContext(c *cli.Command) ColorOptions {
 	}
 
 	opts.Enabled = internal.StringToBool(c.String(internal.FlagColor))
+
+	// if it's not a terminal, don't use color
+	if !term.IsTerminal(int(os.Stdout.Fd())) {
+		opts.Enabled = false
+	}
 
 	if c.IsSet(internal.FlagColorFormat) {
 		opts.Format = c.String(internal.FlagColorFormat)

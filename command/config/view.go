@@ -3,9 +3,10 @@
 package config
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/config"
 	"github.com/go-vela/cli/internal"
@@ -17,10 +18,18 @@ var CommandView = &cli.Command{
 	Description: "Use this command to view the config file.",
 	Usage:       "View the config file used in the CLI",
 	Action:      view,
+	Flags: []cli.Flag{
+		&cli.BoolFlag{
+			Hidden: true,
+			Name:   "fs.mem-map",
+			Usage:  "use memory mapped files for the config file (for testing)",
+			Value:  false,
+		},
+	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View the config file.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -31,13 +40,14 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to inspect the
 // config file.
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// create the config file configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#Config
 	conf := &config.Config{
-		Action: internal.ActionView,
-		File:   c.String(internal.FlagConfig),
+		Action:    internal.ActionView,
+		File:      c.String(internal.FlagConfig),
+		UseMemMap: c.Bool("fs.mem-map"),
 	}
 
 	// validate config file configuration

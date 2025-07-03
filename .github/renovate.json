@@ -1,16 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>go-vela/renovate-config"],
-  "regexManagers": [
+  "extends": [
+    "local>go-vela/renovate-config"
+  ],
+  "customManagers": [
     {
-      "fileMatch": ["\\.go$"],
-      "matchStrings": [
-        "Value:\\s+\"(?<depName>[^\"]+):(?<currentValue>[^\"]+)@sha256:[a-f0-9]{64}\""
+      "customType": "regex",
+      "description": "Manage container images used in urfave command default values",
+      "managerFilePatterns": [
+        "/\\.go$/"
       ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "{{depName}}",
-      "versioningTemplate": "docker",
-      "extractVersionTemplate": "{{currentValue}}"
+      "matchStrings": [
+        "\"(?<depName>.*?):(?<currentValue>[^\"]*?)@(?<currentDigest>sha256:[a-f0-9]+)\",? // renovate: container"
+      ],
+      "datasourceTemplate": "docker"
     }
   ]
 }

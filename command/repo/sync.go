@@ -3,9 +3,10 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/repo"
@@ -25,13 +26,13 @@ var CommandSync = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "REPO_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
+			Sources: cli.EnvVars("VELA_REPO", "REPO_NAME"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
@@ -40,7 +41,7 @@ var CommandSync = &cli.Command{
 		// Flag to sync all repos in the org
 
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_SYNC_ALL", "SYNC_ALL"},
+			Sources: cli.EnvVars("VELA_SYNC_ALL", "SYNC_ALL"),
 			Name:    "all",
 			Aliases: []string{"a"},
 			Usage:   "flag to sync all repos in an org",
@@ -49,9 +50,9 @@ var CommandSync = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 	EXAMPLES:
 	1. Sync a single repo with SCM.
-	  $ {{.HelpName}} --org MyOrg --repo MyRepo
+	  $ {{.FullName}} --org MyOrg --repo MyRepo
 	2. Sync every repo within an org
-	  $ {{.HelpName}} --org MyOrg --all
+	  $ {{.FullName}} --org MyOrg --all
   
     DOCUMENTATION:
   
@@ -61,7 +62,7 @@ var CommandSync = &cli.Command{
 
 // helper function to capture the provided input
 // and create the object used to sync DB with SCM.
-func sync(c *cli.Context) error {
+func sync(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

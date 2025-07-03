@@ -3,9 +3,10 @@
 package step
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/step"
@@ -25,13 +26,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "STEP_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "STEP_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the step",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "STEP_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "STEP_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the step",
@@ -39,8 +40,8 @@ var CommandView = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "STEP_BUILD"},
+		&cli.Int64Flag{
+			Sources: cli.EnvVars("VELA_BUILD", "STEP_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the step",
@@ -48,8 +49,8 @@ var CommandView = &cli.Command{
 
 		// Step Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_STEP", "STEP_NUMBER"},
+		&cli.Int32Flag{
+			Sources: cli.EnvVars("VELA_STEP", "STEP_NUMBER"),
 			Name:    internal.FlagStep,
 			Aliases: []string{"s", "number", "sn"},
 			Usage:   "provide the number for the step",
@@ -58,7 +59,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "STEP_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -68,11 +69,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View step details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --step 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --step 1
   2. View step details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --step 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --step 1 --output json
   3. View step details for a repository config or environment variables are set.
-    $ {{.HelpName}} --build 1 --step 1
+    $ {{.FullName}} --build 1 --step 1
 
 DOCUMENTATION:
 
@@ -82,7 +83,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a step.
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -110,8 +111,8 @@ func view(c *cli.Context) error {
 		Action: internal.ActionView,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Build:  c.Int(internal.FlagBuild),
-		Number: c.Int(internal.FlagStep),
+		Build:  c.Int64(internal.FlagBuild),
+		Number: c.Int32(internal.FlagStep),
 		Output: c.String(internal.FlagOutput),
 		Color:  output.ColorOptionsFromCLIContext(c),
 	}

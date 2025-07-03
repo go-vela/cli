@@ -3,45 +3,40 @@
 package config
 
 import (
-	"flag"
+	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
+
+	"github.com/go-vela/cli/test"
+	"github.com/go-vela/server/mock/server"
 )
 
 func TestConfig_Update(t *testing.T) {
-	// setup flags
-	set := flag.NewFlagSet("test", 0)
-	set.String("config", "../../action/config/testdata/generate.yml", "doc")
-	set.String("api.addr", "https://vela-server.localhost", "doc")
-	set.String("api.token", "superSecretToken", "doc")
-	set.String("api.version", "1", "doc")
-	set.String("log.level", "info", "doc")
-	set.String("no-git", "true", "doc")
-	set.String("output", "json", "doc")
-	set.String("org", "github", "doc")
-	set.String("repo", "octocat", "doc")
-	set.String("secret.engine", "native", "doc")
-	set.String("secret.type", "repo", "doc")
+	// setup test server
+	s := httptest.NewServer(server.FakeHandler())
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
+		args    []string
 	}{
 		{
 			failure: false,
-			set:     set,
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
+			args:    []string{"--config", "config.yml", "--log.level", "info", "--fs.mem-map"},
 		},
 		{
 			failure: true,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     test.Command(s.URL, update, CommandUpdate.Flags),
+			args:    []string{"--config", "", "--fs.mem-map"},
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := update(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), append([]string{"test"}, test.args...))
 
 		if test.failure {
 			if err == nil {

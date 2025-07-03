@@ -3,9 +3,10 @@
 package docs
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/docs"
@@ -23,27 +24,27 @@ var CommandGenerate = &cli.Command{
 
 		// Shell Flags
 
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_MARKDOWN", "DOCS_MARKDOWN"},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_MARKDOWN", "DOCS_MARKDOWN"),
 			Name:    "markdown",
 			Aliases: []string{"m"},
 			Usage:   "generate markdown docs",
-			Value:   "false",
+			Value:   false,
 		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_MAN", "DOCS_MAN"},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_MAN", "DOCS_MAN"),
 			Name:    "man",
 			Aliases: []string{"mn"},
 			Usage:   "generate man page docs",
-			Value:   "false",
+			Value:   false,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Generate markdown docs for the CLI.
-    $ source <({{.HelpName}} --markdown true)
+    $ source <({{.FullName}} --markdown true)
   2. Generate man page docs for the CLI.
-    $ source <({{.HelpName}} --man true)
+    $ source <({{.FullName}} --man true)
 
 DOCUMENTATION:
 
@@ -53,7 +54,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided
 // input and create the cli docs.
-func generate(c *cli.Context) error {
+func generate(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -80,5 +81,5 @@ func generate(c *cli.Context) error {
 	// execute the generate call for the docs configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/docs?tab=doc#Config.Generate
-	return d.Generate(c.App)
+	return d.Generate(c)
 }

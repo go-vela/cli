@@ -3,9 +3,10 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
@@ -26,13 +27,13 @@ var CommandGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "PIPELINE_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "PIPELINE_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "PIPELINE_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "PIPELINE_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
@@ -41,7 +42,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "PIPELINE_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "PIPELINE_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -50,14 +51,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "PIPELINE_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "PIPELINE_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of pipelines",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "PIPELINE_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "PIPELINE_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of pipelines to print per page",
@@ -67,15 +68,15 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get pipelines for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.FullName}} --org MyOrg --repo MyRepo
   2. Get pipelines for a repository with wide view output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output wide
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output wide
   3. Get pipelines for a repository with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output yaml
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output yaml
   4. Get pipelines for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output json
   5. Get pipelines for a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -86,7 +87,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of pipelines.
-func get(c *cli.Context) error {
+func get(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

@@ -4,9 +4,10 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/pipeline"
@@ -26,13 +27,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "REPO_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
+			Sources: cli.EnvVars("VELA_REPO", "REPO_NAME"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the pipeline",
@@ -41,7 +42,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -50,7 +51,7 @@ var CommandView = &cli.Command{
 		// Pipeline Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REF", "PIPELINE_REF"},
+			Sources: cli.EnvVars("VELA_REF", "PIPELINE_REF"),
 			Name:    "ref",
 			Usage:   "provide the repository reference for the pipeline",
 		},
@@ -58,11 +59,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of a pipeline for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
   2. View details of a pipeline for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
+    $ {{.FullName}} --org MyOrg --repo MyRepo --ref MyCommitSHA
   3. View details of a pipeline for a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -72,7 +73,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a pipeline.
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

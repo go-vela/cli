@@ -3,9 +3,10 @@
 package version
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/internal"
@@ -24,7 +25,7 @@ var CommandVersion = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "STEP_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "STEP_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -33,9 +34,9 @@ var CommandVersion = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Output Vela version information
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Output Vela version information with JSON output
-    $ {{.HelpName}} --output json
+    $ {{.FullName}} --output json
 
 DOCUMENTATION:
 
@@ -46,7 +47,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to output version
 // information.
-func runVersion(c *cli.Context) error {
+func runVersion(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

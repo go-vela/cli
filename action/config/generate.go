@@ -19,9 +19,41 @@ var appFS = afero.NewOsFs()
 func (c *Config) Generate() error {
 	logrus.Debug("executing generate for config file configuration")
 
-	// create the config file content
+	out, err := genBytes(c)
+	if err != nil {
+		return err
+	}
+
+	// use custom filesystem which enables us to test
 	//
-	// https://pkg.go.dev/github.com/go-vela/cli/action/config?tab=doc#ConfigFile
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
+	a := &afero.Afero{
+		Fs: appFS,
+	}
+
+	if c.UseMemMap {
+		a.Fs = afero.NewMemMapFs()
+	}
+
+	logrus.Tracef("creating directory structure to %s", c.File)
+
+	// send Filesystem call to create directory path for config file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#OsFs.MkdirAll
+	err = a.MkdirAll(filepath.Dir(c.File), 0777)
+	if err != nil {
+		return err
+	}
+
+	logrus.Tracef("writing file content to %s", c.File)
+
+	// send Filesystem call to create config file
+	//
+	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
+	return a.WriteFile(c.File, out, 0600)
+}
+
+func genBytes(c *Config) ([]byte, error) {
 	config := &ConfigFile{
 		API: &API{
 			Address:      c.Addr,
@@ -52,37 +84,10 @@ func (c *Config) Generate() error {
 		NoGit:       c.NoGit,
 	}
 
-	logrus.Trace("creating file content for config file")
-
-	// create output for config file
-	//
-	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Marshal
 	out, err := yaml.Marshal(config)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	// use custom filesystem which enables us to test
-	//
-	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero
-	a := &afero.Afero{
-		Fs: appFS,
-	}
-
-	logrus.Tracef("creating directory structure to %s", c.File)
-
-	// send Filesystem call to create directory path for config file
-	//
-	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#OsFs.MkdirAll
-	err = a.Fs.MkdirAll(filepath.Dir(c.File), 0777)
-	if err != nil {
-		return err
-	}
-
-	logrus.Tracef("writing file content to %s", c.File)
-
-	// send Filesystem call to create config file
-	//
-	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#Afero.WriteFile
-	return a.WriteFile(c.File, out, 0600)
+	return out, nil
 }

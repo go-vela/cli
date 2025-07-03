@@ -25,4 +25,5 @@ type Config struct {
 	RemoveFlags  []string
 	Output       string
 	Color        output.ColorOptions
+	UseMemMap    bool
 }

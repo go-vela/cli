@@ -14,7 +14,7 @@ type Config struct {
 	Hostname          string
 	Active            *bool
 	Routes            []string
-	BuildLimit        int64
+	BuildLimit        int32
 	RegistrationToken bool
 	Output            string
 	Color             output.ColorOptions

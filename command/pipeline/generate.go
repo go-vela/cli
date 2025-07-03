@@ -3,9 +3,10 @@
 package pipeline
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action/pipeline"
 	"github.com/go-vela/cli/internal"
@@ -22,27 +23,27 @@ var CommandGenerate = &cli.Command{
 		// Pipeline Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "PIPELINE_FILE"},
+			Sources: cli.EnvVars("VELA_FILE", "PIPELINE_FILE"),
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide the file name for the pipeline",
 			Value:   ".vela.yml",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_PATH", "PIPELINE_PATH"},
+			Sources: cli.EnvVars("VELA_PATH", "PIPELINE_PATH"),
 			Name:    "path",
 			Aliases: []string{"p"},
 			Usage:   "provide the path to the file for the pipeline",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_STAGES", "PIPELINE_STAGES"},
+			Sources: cli.EnvVars("VELA_STAGES", "PIPELINE_STAGES"),
 			Name:    "stages",
 			Aliases: []string{"s"},
 			Usage:   "enable generating the pipeline with stages",
 			Value:   "false",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "PIPELINE_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "PIPELINE_TYPE"),
 			Name:    "type",
 			Aliases: []string{"t"},
 			Usage:   "provide the type of pipeline being generated",
@@ -51,19 +52,19 @@ var CommandGenerate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Generate a Vela pipeline.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Generate a Vela pipeline in a nested directory.
-    $ {{.HelpName}} --path nested/path/to/dir
+    $ {{.FullName}} --path nested/path/to/dir
   3. Generate a Vela pipeline in a specific directory.
-    $ {{.HelpName}} --path /absolute/full/path/to/dir
+    $ {{.FullName}} --path /absolute/full/path/to/dir
   4. Generate a Vela pipeline with stages.
-    $ {{.HelpName}} --stages true
+    $ {{.FullName}} --stages true
   5. Generate a go Vela pipeline.
-    $ {{.HelpName}} --secret.type go
+    $ {{.FullName}} --secret.type go
   6. Generate a java Vela pipeline.
-    $ {{.HelpName}} --secret.type java
+    $ {{.FullName}} --secret.type java
   7. Generate a node Vela pipeline.
-    $ {{.HelpName}} --secret.type node
+    $ {{.FullName}} --secret.type node
 
 DOCUMENTATION:
 
@@ -73,7 +74,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to produce a pipeline.
-func generate(c *cli.Context) error {
+func generate(_ context.Context, c *cli.Command) error {
 	// create the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config
@@ -81,7 +82,7 @@ func generate(c *cli.Context) error {
 		Action: internal.ActionGenerate,
 		File:   c.String("file"),
 		Path:   c.String("path"),
-		Stages: c.Bool("stages"),
+		Stages: internal.StringToBool(c.String("stages")),
 		Type:   c.String("type"),
 	}
 

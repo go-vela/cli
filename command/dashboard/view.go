@@ -3,9 +3,10 @@
 package dashboard
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/dashboard"
@@ -25,7 +26,7 @@ var CommandView = &cli.Command{
 		// Dashboard Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_DASHBOARD_ID", "DASHBOARD_ID"},
+			Sources: cli.EnvVars("VELA_DASHBOARD_ID", "DASHBOARD_ID"),
 			Name:    "id",
 			Usage:   "provide the uuid for the dashboard",
 		},
@@ -33,12 +34,12 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_FULL", "DASHBOARD_FULL"},
+			Sources: cli.EnvVars("VELA_FULL", "DASHBOARD_FULL"),
 			Name:    "full",
 			Usage:   "output the repo and build information for the dashboard",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -47,9 +48,9 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View a dashboard.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8
   2. View a dashboard with repo and build information.
-    $ {{.HelpName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --full
+    $ {{.FullName}} --id c8da1302-07d6-11ea-882f-4893bca275b8 --full
 
 DOCUMENTATION:
 
@@ -59,7 +60,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to view a dashboard.
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

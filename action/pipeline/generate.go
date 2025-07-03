@@ -65,7 +65,7 @@ func (c *Config) Generate() error {
 	// send Filesystem call to create directory path for pipeline file
 	//
 	// https://pkg.go.dev/github.com/spf13/afero?tab=doc#OsFs.MkdirAll
-	err = a.Fs.MkdirAll(filepath.Dir(path), 0777)
+	err = a.MkdirAll(filepath.Dir(path), 0777)
 	if err != nil {
 		return err
 	}

@@ -3,9 +3,10 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -25,13 +26,13 @@ var CommandView = &cli.Command{
 		// Worker Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"},
+			Sources: cli.EnvVars("VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"),
 			Name:    internal.FlagWorkerHostname,
 			Aliases: []string{"wh"},
 			Usage:   "provide the hostname of the worker",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_REGISTRATION_TOKEN", "WORKER_REGISTRATION_TOKEN"},
+			Sources: cli.EnvVars("VELA_WORKER_REGISTRATION_TOKEN", "WORKER_REGISTRATION_TOKEN"),
 			Name:    internal.FlagWorkerRegistrationToken,
 			Aliases: []string{"wr"},
 			Usage:   "toggle to show the registration token for the worker",
@@ -41,7 +42,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "WORKER_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "WORKER_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -51,13 +52,13 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View details of a worker.
-    $ {{.HelpName}} --worker.hostname MyWorker
+    $ {{.FullName}} --worker.hostname MyWorker
   2. View registration token for a worker.
-    $ {{.HelpName}} --worker.hostname MyWorker --worker.registration.token true
+    $ {{.FullName}} --worker.hostname MyWorker --worker.registration.token true
   3. View details of a worker with json output.
-    $ {{.HelpName}} --worker.hostname MyWorker --output json
+    $ {{.FullName}} --worker.hostname MyWorker --output json
   4. View details of a worker when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -67,9 +68,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a worker.
-//
-
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -90,7 +89,7 @@ func view(c *cli.Context) error {
 	w := &worker.Config{
 		Action:            internal.ActionView,
 		Hostname:          c.String(internal.FlagWorkerHostname),
-		RegistrationToken: c.Bool(internal.FlagWorkerRegistrationToken),
+		RegistrationToken: internal.StringToBool(c.String(internal.FlagWorkerRegistrationToken)),
 		Output:            c.String(internal.FlagOutput),
 		Color:             output.ColorOptionsFromCLIContext(c),
 	}

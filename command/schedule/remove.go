@@ -4,9 +4,10 @@
 package schedule
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/schedule"
@@ -26,13 +27,13 @@ var CommandRemove = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SCHEDULE_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SCHEDULE_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the schedule",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SCHEDULE_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SCHEDULE_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the schedule",
@@ -41,7 +42,7 @@ var CommandRemove = &cli.Command{
 		// Schedule Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_SCHEDULE", "SCHEDULE_NAME"},
+			Sources: cli.EnvVars("VELA_SCHEDULE", "SCHEDULE_NAME"),
 			Name:    internal.FlagSchedule,
 			Aliases: []string{"s"},
 			Usage:   "provide the name for the schedule",
@@ -50,7 +51,7 @@ var CommandRemove = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SCHEDULE_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SCHEDULE_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -59,11 +60,11 @@ var CommandRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove a schedule from a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule daily
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule daily
   2. Remove a schedule from a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule daily --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule daily --output json
   3. Remove a schedule from a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -72,7 +73,7 @@ DOCUMENTATION:
 }
 
 // helper function to capture the provided input and create the object used to remove a repository.
-func remove(c *cli.Context) error {
+func remove(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

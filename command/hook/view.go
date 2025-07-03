@@ -3,9 +3,10 @@
 package hook
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/hook"
@@ -25,13 +26,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "HOOK_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "HOOK_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the hook",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "HOOK_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "HOOK_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the hook",
@@ -39,8 +40,8 @@ var CommandView = &cli.Command{
 
 		// Hook Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_HOOK", "HOOK_NUMBER"},
+		&cli.Int64Flag{
+			Sources: cli.EnvVars("VELA_HOOK", "HOOK_NUMBER"),
 			Name:    "hook",
 			Aliases: []string{"number", "hn"},
 			Usage:   "provide the number for the hook",
@@ -49,7 +50,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "HOOK_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "HOOK_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -59,11 +60,11 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View hook details for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --hook 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --hook 1
   2. View hook details for a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --hook 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --hook 1 --output json
   3. View hook details for a repository when config or environment variables are set.
-    $ {{.HelpName}} --hook 1
+    $ {{.FullName}} --hook 1
 
 DOCUMENTATION:
 
@@ -73,7 +74,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a hook.
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -101,7 +102,7 @@ func view(c *cli.Context) error {
 		Action: internal.ActionView,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Number: c.Int("hook"),
+		Number: c.Int64("hook"),
 		Output: c.String(internal.FlagOutput),
 		Color:  output.ColorOptionsFromCLIContext(c),
 	}

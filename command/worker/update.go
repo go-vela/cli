@@ -3,10 +3,11 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/worker"
@@ -25,31 +26,31 @@ var CommandUpdate = &cli.Command{
 		// Worker Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_ACTIVE", "WORKER_ACTIVE"},
+			Sources: cli.EnvVars("VELA_WORKER_ACTIVE", "WORKER_ACTIVE"),
 			Name:    internal.FlagActive,
 			Aliases: []string{"a"},
 			Usage:   "current status of the worker",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_ADDRESS", "WORKER_ADDRESS"},
+			Sources: cli.EnvVars("VELA_WORKER_ADDRESS", "WORKER_ADDRESS"),
 			Name:    internal.FlagWorkerAddress,
 			Aliases: []string{"wa"},
 			Usage:   "provide the address of the worker as a fully qualified url (<scheme>://<host>)",
 		},
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_WORKER_BUILD_LIMIT", "WORKER_BUILD_LIMIT"},
+		&cli.Int32Flag{
+			Sources: cli.EnvVars("VELA_WORKER_BUILD_LIMIT", "WORKER_BUILD_LIMIT"),
 			Name:    "build-limit",
 			Aliases: []string{"bl"},
 			Usage:   "build limit for the worker",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"},
+			Sources: cli.EnvVars("VELA_WORKER_HOSTNAME", "WORKER_HOSTNAME"),
 			Name:    internal.FlagWorkerHostname,
 			Aliases: []string{"wh"},
 			Usage:   "provide the hostname of the worker",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_WORKER_ROUTES", "WORKER_ROUTES"},
+			Sources: cli.EnvVars("VELA_WORKER_ROUTES", "WORKER_ROUTES"),
 			Name:    "routes",
 			Aliases: []string{"r"},
 			Usage:   "route assignment for the worker",
@@ -58,7 +59,7 @@ var CommandUpdate = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "WORKER_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "WORKER_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -67,9 +68,9 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update a worker to change its build limit to 2.
-    $ {{.HelpName}} --worker.hostname MyWorker --build-limit 2
+    $ {{.FullName}} --worker.hostname MyWorker --build-limit 2
   2. Update a worker with custom routes.
-    $ {{.HelpName}} --worker.hostname MyWorker --route large --route small
+    $ {{.FullName}} --worker.hostname MyWorker --route large --route small
 
 DOCUMENTATION:
 
@@ -79,7 +80,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to modify a worker.
-func update(c *cli.Context) error {
+func update(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -99,7 +100,7 @@ func update(c *cli.Context) error {
 		Hostname:   c.String(internal.FlagWorkerHostname),
 		Address:    c.String(internal.FlagWorkerAddress),
 		Routes:     c.StringSlice("routes"),
-		BuildLimit: c.Int64("build-limit"),
+		BuildLimit: c.Int32("build-limit"),
 	}
 
 	// if active flag provided, parse as bool and set in config

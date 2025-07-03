@@ -3,11 +3,12 @@
 package login
 
 import (
+	"context"
 	"fmt"
 	"os"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/config"
@@ -28,7 +29,7 @@ var CommandLogin = &cli.Command{
 		// API Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ADDR", "LOGIN_ADDR"},
+			Sources: cli.EnvVars("VELA_ADDR", "LOGIN_ADDR"),
 			Name:    internal.FlagAPIAddress,
 			Aliases: []string{"a"},
 			Usage:   "Vela server address as a fully qualified url (<scheme>://<host>)",
@@ -37,19 +38,19 @@ var CommandLogin = &cli.Command{
 		// User Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"},
+			Sources: cli.EnvVars("VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN"),
 			Name:    internal.FlagAPIAccessToken,
 			Aliases: []string{"at"},
 			Usage:   "access token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"},
+			Sources: cli.EnvVars("VELA_REFRESH_TOKEN", "CONFIG_REFRESH_TOKEN"),
 			Name:    internal.FlagAPIRefreshToken,
 			Aliases: []string{"rt"},
 			Usage:   "refresh token used for communication with the Vela server",
 		},
 		&cli.BoolFlag{
-			EnvVars: []string{"VELA_YES_ALL", "CONFIG_YES_ALL"},
+			Sources: cli.EnvVars("VELA_YES_ALL", "CONFIG_YES_ALL"),
 			Name:    "yes-all",
 			Aliases: []string{"y"},
 			Usage:   "auto-confirm all prompts",
@@ -59,7 +60,7 @@ var CommandLogin = &cli.Command{
 		// the following flag is only present to help clear
 		// existing legacy tokens
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TOKEN", "CONFIG_TOKEN"},
+			Sources: cli.EnvVars("VELA_TOKEN", "CONFIG_TOKEN"),
 			Name:    internal.FlagAPIToken,
 			Usage:   "hidden flag to clear existing token",
 			Hidden:  true,
@@ -68,7 +69,7 @@ var CommandLogin = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Login to Vela (will launch browser).
-    $ {{.HelpName}} --api.addr https://vela.example.com
+    $ {{.FullName}} --api.addr https://vela.example.com
 
 DOCUMENTATION:
 
@@ -79,7 +80,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to authenticate
 // and login to Vela.
-func runLogin(c *cli.Context) error {
+func runLogin(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

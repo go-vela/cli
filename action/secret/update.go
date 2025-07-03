@@ -52,6 +52,7 @@ func (c *Config) Update(client *vela.Client) error {
 		Name:              &c.Name,
 		Value:             &c.Value,
 		Images:            &c.Images,
+		RepoAllowlist:     &c.RepoAllowlist,
 		AllowCommand:      c.AllowCommand,
 		AllowSubstitution: c.AllowSubstitution,
 	}

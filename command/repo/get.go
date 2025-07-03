@@ -3,9 +3,10 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/repo"
@@ -26,7 +27,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew, wide or yaml",
@@ -35,14 +36,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "REPO_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "REPO_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of repositories",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "REPO_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "REPO_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of repositories to print per page",
@@ -52,15 +53,15 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get a list of repositories.
-    $ {{.HelpName}}
+    $ {{.FullName}}
   2. Get a list of repositories with wide view output.
-    $ {{.HelpName}} --output wide
+    $ {{.FullName}} --output wide
   3. Get a list of repositories with yaml output.
-    $ {{.HelpName}} --output yaml
+    $ {{.FullName}} --output yaml
   4. Get a list of repositories with json output.
-    $ {{.HelpName}} --output json
+    $ {{.FullName}} --output json
   5. Get a list of repositories when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -72,8 +73,8 @@ DOCUMENTATION:
 // and create the object used to capture a list
 // of repos.
 //
-//nolint:dupl // ignore similar code with chown, remove, repair and view
-func get(c *cli.Context) error {
+//nolint:dupl // duplicate of `command/repo/remove.go:70-108`
+func get(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

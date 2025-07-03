@@ -3,11 +3,10 @@
 package action
 
 import (
-	"flag"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/test"
 	"github.com/go-vela/server/mock/server"
@@ -17,51 +16,117 @@ func TestAction_Load(t *testing.T) {
 	// setup test server
 	s := httptest.NewServer(server.FakeHandler())
 
-	// setup flags
-	authSet := flag.NewFlagSet("test", 0)
-	authSet.String("config", "config/testdata/empty.yml", "doc")
-	authSet.String("api.addr", s.URL, "doc")
-	authSet.String("api.token.access", test.TestTokenGood, "doc")
-	authSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
+	authCmd := &cli.Command{
+		Name: "auth",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "config",
+				Value: "config/testdata/empty.yml",
+			},
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: s.URL,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.access",
+				Value: test.TestTokenGood,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.refresh",
+				Value: "superSecretRefreshToken",
+			},
+		},
+	}
 
-	fullSet := flag.NewFlagSet("test", 0)
-	fullSet.String("config", "config/testdata/empty.yml", "doc")
-	fullSet.String("api.addr", "https://vela-server.localhost", "doc")
-	fullSet.String("api.token.access", test.TestTokenGood, "doc")
-	fullSet.String("api.token.refresh", "superSecretRefreshToken", "doc")
-	fullSet.String("api.version", "1", "doc")
-	fullSet.String("log.level", "info", "doc")
-	fullSet.String("no-git", "true", "doc")
-	fullSet.String("output", "json", "doc")
-	fullSet.String("org", "github", "doc")
-	fullSet.String("repo", "octocat", "doc")
-	fullSet.String("secret.engine", "native", "doc")
-	fullSet.String("secret.type", "repo", "doc")
-	fullSet.String("compiler.github.driver", "true", "doc")
-	fullSet.String("compiler.github.url", "github.com", "doc")
+	fullCmd := &cli.Command{
+		Name: "full",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "config",
+				Value: "config/testdata/empty.yml",
+			},
+			&cli.StringFlag{
+				Name:  "api.addr",
+				Value: "https://vela-server.localhost",
+			},
+			&cli.StringFlag{
+				Name:  "api.token.access",
+				Value: test.TestTokenGood,
+			},
+			&cli.StringFlag{
+				Name:  "api.token.refresh",
+				Value: "superSecretRefreshToken",
+			},
+			&cli.StringFlag{
+				Name:  "api.version",
+				Value: "1",
+			},
+			&cli.StringFlag{
+				Name:  "log.level",
+				Value: "info",
+			},
+			&cli.StringFlag{
+				Name:  "no-git",
+				Value: "true",
+			},
+			&cli.StringFlag{
+				Name:  "output",
+				Value: "json",
+			},
+			&cli.StringFlag{
+				Name:  "org",
+				Value: "github",
+			},
+			&cli.StringFlag{
+				Name:  "repo",
+				Value: "octocat",
+			},
+			&cli.StringFlag{
+				Name:  "secret.engine",
+				Value: "native",
+			},
+			&cli.StringFlag{
+				Name:  "secret.type",
+				Value: "repo",
+			},
+			&cli.StringFlag{
+				Name:  "compiler.github.driver",
+				Value: "true",
+			},
+			&cli.StringFlag{
+				Name:  "compiler.github.url",
+				Value: "github.com",
+			},
+		},
+	}
 
 	// setup tests
 	tests := []struct {
 		failure bool
-		set     *flag.FlagSet
+		cmd     *cli.Command
 	}{
 		{
 			failure: false,
-			set:     fullSet,
+			cmd:     fullCmd,
 		},
 		{
 			failure: false,
-			set:     authSet,
+			cmd:     authCmd,
 		},
 		{
 			failure: false,
-			set:     flag.NewFlagSet("test", 0),
+			cmd:     new(cli.Command),
 		},
 	}
 
 	// run tests
 	for _, test := range tests {
-		err := Load(cli.NewContext(&cli.App{Name: "vela", Version: "v0.0.0"}, test.set, nil))
+		err := test.cmd.Run(t.Context(), []string{test.cmd.Name})
+		if err != nil {
+			t.Errorf("Run returned err: %v", err)
+		}
+
+		err = Load(test.cmd)
 
 		if test.failure {
 			if err == nil {

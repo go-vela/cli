@@ -3,9 +3,10 @@
 package log
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/log"
@@ -26,13 +27,13 @@ var CommandGet = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "LOG_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "LOG_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the log",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "LOG_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "LOG_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the log",
@@ -40,8 +41,8 @@ var CommandGet = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "LOG_BUILD"},
+		&cli.Int64Flag{
+			Sources: cli.EnvVars("VELA_BUILD", "LOG_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the log",
@@ -50,14 +51,14 @@ var CommandGet = &cli.Command{
 		// Pagination Flags
 
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PAGE", "BUILD_PAGE"},
+			Sources: cli.EnvVars("VELA_PAGE", "BUILD_PAGE"),
 			Name:    internal.FlagPage,
 			Aliases: []string{"p"},
 			Usage:   "print a specific page of logs",
 			Value:   1,
 		},
 		&cli.IntFlag{
-			EnvVars: []string{"VELA_PER_PAGE", "BUILD_PER_PAGE"},
+			Sources: cli.EnvVars("VELA_PER_PAGE", "BUILD_PER_PAGE"),
 			Name:    internal.FlagPerPage,
 			Aliases: []string{"pp"},
 			Usage:   "number of logs to print per page",
@@ -67,7 +68,7 @@ var CommandGet = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "LOG_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "LOG_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -76,13 +77,13 @@ var CommandGet = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Get logs for a build.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1
   2. Get logs for a build with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output yaml
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --output yaml
   3. Get logs for a build with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --output json
   4. Get logs for a build when config or environment variables are set.
-    $ {{.HelpName}} --build 1
+    $ {{.FullName}} --build 1
 
 DOCUMENTATION:
 
@@ -93,7 +94,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of build logs.
-func get(c *cli.Context) error {
+func get(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -115,7 +116,7 @@ func get(c *cli.Context) error {
 		Action:  internal.ActionGet,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
-		Build:   c.Int(internal.FlagBuild),
+		Build:   c.Int64(internal.FlagBuild),
 		Page:    c.Int(internal.FlagPage),
 		PerPage: c.Int(internal.FlagPerPage),
 		Output:  c.String(internal.FlagOutput),

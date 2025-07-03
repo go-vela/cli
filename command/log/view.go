@@ -3,9 +3,10 @@
 package log
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/log"
@@ -25,13 +26,13 @@ var CommandView = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "LOG_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "LOG_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the log",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "LOG_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "LOG_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the log",
@@ -39,8 +40,8 @@ var CommandView = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "LOG_BUILD"},
+		&cli.Int64Flag{
+			Sources: cli.EnvVars("VELA_BUILD", "LOG_BUILD"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b"},
 			Usage:   "provide the build for the log",
@@ -48,16 +49,16 @@ var CommandView = &cli.Command{
 
 		// Service Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_SERVICE", "LOG_SERVICE"},
+		&cli.Int32Flag{
+			Sources: cli.EnvVars("VELA_SERVICE", "LOG_SERVICE"),
 			Name:    internal.FlagService,
 			Usage:   "provide the service for the log",
 		},
 
 		// Step Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_STEP", "LOG_STEP"},
+		&cli.Int32Flag{
+			Sources: cli.EnvVars("VELA_STEP", "LOG_STEP"),
 			Name:    internal.FlagStep,
 			Usage:   "provide the step for the log",
 		},
@@ -65,7 +66,7 @@ var CommandView = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "LOG_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "LOG_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -74,17 +75,17 @@ var CommandView = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. View logs for a build.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1
   2. View logs for a service.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --service 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --service 1
   3. View logs for a step.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --step 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --step 1
   4. View logs for a build with yaml output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output yaml
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --output yaml
   5. View logs for a build with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1 --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1 --output json
   6. View logs for a build when config or environment variables are set.
-    $ {{.HelpName}} --build 1
+    $ {{.FullName}} --build 1
 
 DOCUMENTATION:
 
@@ -94,7 +95,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a log.
-func view(c *cli.Context) error {
+func view(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -116,9 +117,9 @@ func view(c *cli.Context) error {
 		Action:  internal.ActionView,
 		Org:     c.String(internal.FlagOrg),
 		Repo:    c.String(internal.FlagRepo),
-		Build:   c.Int(internal.FlagBuild),
-		Service: c.Int(internal.FlagService),
-		Step:    c.Int(internal.FlagStep),
+		Build:   c.Int64(internal.FlagBuild),
+		Service: c.Int32(internal.FlagService),
+		Step:    c.Int32(internal.FlagStep),
 		Output:  c.String(internal.FlagOutput),
 		Color:   output.ColorOptionsFromCLIContext(c),
 	}

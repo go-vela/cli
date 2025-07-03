@@ -4,9 +4,10 @@
 package secret
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
@@ -27,13 +28,13 @@ var CommandRemove = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SECRET_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SECRET_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
@@ -42,27 +43,27 @@ var CommandRemove = &cli.Command{
 		// Secret Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
+			Sources: cli.EnvVars("VELA_ENGINE", "SECRET_ENGINE"),
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "SECRET_TYPE"),
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TEAM", "SECRET_TEAM"},
+			Sources: cli.EnvVars("VELA_TEAM", "SECRET_TEAM"),
 			Name:    "team",
 			Aliases: []string{"t"},
 			Usage:   "provide the team for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_NAME", "SECRET_NAME"},
+			Sources: cli.EnvVars("VELA_NAME", "SECRET_NAME"),
 			Name:    "name",
 			Aliases: []string{"n"},
 			Usage:   "provide the name of the secret",
@@ -71,7 +72,7 @@ var CommandRemove = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SECRET_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -80,15 +81,15 @@ var CommandRemove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Remove repository secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo
+    $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo
   2. Remove organization secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo
+    $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg --name foo
   3. Remove shared secret details.
-    $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo
+    $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo
   4. Remove repository secret details with json output.
-    $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --output json
+    $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --output json
   5. Remove secret details when config or environment variables are set.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo
+    $ {{.FullName}} --org MyOrg --repo MyRepo --name foo
 
 DOCUMENTATION:
 
@@ -98,7 +99,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to remove a secret.
-func remove(c *cli.Context) error {
+func remove(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

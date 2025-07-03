@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/pipeline"
 )
@@ -15,7 +15,7 @@ var compileCmds = &cli.Command{
 	Description:            "Use this command to compile a resource for Vela.",
 	Usage:                  "Compile a resource for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for compiling a pipeline
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/pipeline?tab=doc#CommandCompile

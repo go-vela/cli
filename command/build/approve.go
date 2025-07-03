@@ -3,9 +3,10 @@
 package build
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/build"
@@ -24,13 +25,13 @@ var CommandApprove = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "BUILD_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "BUILD_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the build",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "BUILD_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "BUILD_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the build",
@@ -38,8 +39,8 @@ var CommandApprove = &cli.Command{
 
 		// Build Flags
 
-		&cli.IntFlag{
-			EnvVars: []string{"VELA_BUILD", "BUILD_NUMBER"},
+		&cli.Int64Flag{
+			Sources: cli.EnvVars("VELA_BUILD", "BUILD_NUMBER"),
 			Name:    internal.FlagBuild,
 			Aliases: []string{"b", "number", "bn"},
 			Usage:   "provide the number for the build",
@@ -48,9 +49,9 @@ var CommandApprove = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Approve existing build for a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --build 1
+    $ {{.FullName}} --org MyOrg --repo MyRepo --build 1
   2. Approve existing build for a repository when config or environment variables are set.
-    $ {{.HelpName}} --build 1
+    $ {{.FullName}} --build 1
 
 DOCUMENTATION:
 
@@ -61,7 +62,7 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // approve a build.
-func approve(c *cli.Context) error {
+func approve(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -89,7 +90,7 @@ func approve(c *cli.Context) error {
 		Action: internal.ActionApprove,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Number: c.Int(internal.FlagBuild),
+		Number: c.Int64(internal.FlagBuild),
 	}
 
 	// validate build configuration

@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/command/config"
 	"github.com/go-vela/cli/command/repo"
@@ -19,7 +19,7 @@ var removeCmds = &cli.Command{
 	Description:            "Use this command to remove a resource for Vela.",
 	Usage:                  "Remove a resource for Vela via subcommands",
 	UseShortOptionHandling: true,
-	Subcommands: []*cli.Command{
+	Commands: []*cli.Command{
 		// add the sub command for remove a config file
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/config?tab=doc#CommandRemove

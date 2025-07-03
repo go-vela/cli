@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
+//nolint:dupl // duplicate of `command/secret/add.go:3-218`
 package secret
 
 import (
+	"context"
 	"fmt"
 	"slices"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/secret"
@@ -27,13 +29,13 @@ var CommandUpdate = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SECRET_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SECRET_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SECRET_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SECRET_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the secret",
@@ -42,65 +44,71 @@ var CommandUpdate = &cli.Command{
 		// Secret Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENGINE", "SECRET_ENGINE"},
+			Sources: cli.EnvVars("VELA_ENGINE", "SECRET_ENGINE"),
 			Name:    internal.FlagSecretEngine,
 			Aliases: []string{"e"},
 			Usage:   "provide the engine that stores the secret",
 			Value:   constants.DriverNative,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TYPE", "SECRET_TYPE"},
+			Sources: cli.EnvVars("VELA_TYPE", "SECRET_TYPE"),
 			Name:    internal.FlagSecretType,
 			Aliases: []string{"ty"},
 			Usage:   "provide the type of secret being stored",
 			Value:   constants.SecretRepo,
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_TEAM", "SECRET_TEAM"},
+			Sources: cli.EnvVars("VELA_TEAM", "SECRET_TEAM"),
 			Name:    "team",
 			Aliases: []string{"t"},
 			Usage:   "provide the team for the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_NAME", "SECRET_NAME"},
+			Sources: cli.EnvVars("VELA_NAME", "SECRET_NAME"),
 			Name:    "name",
 			Aliases: []string{"n"},
 			Usage:   "provide the name of the secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_VALUE", "SECRET_VALUE"},
+			Sources: cli.EnvVars("VELA_VALUE", "SECRET_VALUE"),
 			Name:    "value",
 			Aliases: []string{"v"},
 			Usage:   "provide the value for the secret",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_IMAGES", "SECRET_IMAGES"},
+			Sources: cli.EnvVars("VELA_IMAGES", "SECRET_IMAGES"),
 			Name:    "image",
 			Aliases: []string{"i"},
 			Usage:   "provide the image(s) that can access this secret",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_EVENTS", "SECRET_EVENTS"},
+			Sources: cli.EnvVars("VELA_REPO_ALLOWLIST", "SECRET_REPO_ALLOWLIST"),
+			Name:    "repo-allowlist",
+			Aliases: []string{"ra"},
+			Usage:   "provide the repository allowlist for the secret",
+		},
+		&cli.StringSliceFlag{
+			Sources: cli.EnvVars("VELA_EVENTS", "SECRET_EVENTS"),
 			Name:    "event",
 			Aliases: []string{"events", "ev"},
 			Usage:   "provide the event(s) that can access this secret",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_COMMAND", "SECRET_COMMAND"},
+			Sources: cli.EnvVars("VELA_COMMAND", "SECRET_COMMAND"),
 			Name:    internal.FlagSecretCommands,
 			Aliases: []string{"c"},
 			Usage:   "enable a secret to be used for a step with commands",
 			Value:   "true",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_SUBSTITUTION", "SECRET_SUBSTITUTION"},
+			Sources: cli.EnvVars("VELA_SUBSTITUTION", "SECRET_SUBSTITUTION"),
 			Name:    internal.FlagSecretSubstitution,
 			Aliases: []string{"s"},
 			Usage:   "enable a secret to be substituted",
 			Value:   "true",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_FILE", "SECRET_FILE"},
+			Sources: cli.EnvVars("VELA_FILE", "SECRET_FILE"),
 			Name:    "file",
 			Aliases: []string{"f"},
 			Usage:   "provide a file to update the secret(s)",
@@ -109,7 +117,7 @@ var CommandUpdate = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SECRET_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SECRET_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "Print the output in default, yaml or json format",
@@ -118,25 +126,27 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
    1. Update a repository secret.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar
    2. Update a repository secret and disallow usage in commands.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --commands false
    3. Update an organization secret.
-     $ {{.HelpName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type org --org MyOrg --name foo --value bar
    4. Update a shared secret.
-     $ {{.HelpName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
-   5. Update a repository secret with all event types enabled.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --event comment --event deployment --event pull_request --event push --event tag
-   6. Update a repository secret with an image whitelist.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --image alpine --image golang:* --image postgres:latest
-   7. Update a secret with value from a file.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
-   8. Update a repository secret with json output.
-     $ {{.HelpName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
-   9. Update a secret or secrets from a file.
-     $ {{.HelpName}} --file secret.yml
-  10. Update a secret when config or environment variables are set.
-     $ {{.HelpName}} --org MyOrg --repo MyRepo --name foo --value bar
+     $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --value bar
+   5. Update a shared secret to limit use to specific repositories.
+     $ {{.FullName}} --secret.engine native --secret.type shared --org MyOrg --team octokitties --name foo --repo-allowlist MyOrg/repo1,MyOrg/repo2
+   6. Update a repository secret with all event types enabled.
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --event comment --event deployment --event pull_request --event push --event tag
+   7. Update a repository secret with an image whitelist.
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --image alpine --image golang:* --image postgres:latest
+   8. Update a secret with value from a file.
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value @secret.txt
+   9. Update a repository secret with json output.
+     $ {{.FullName}} --secret.engine native --secret.type repo --org MyOrg --repo MyRepo --name foo --value bar --output json
+  10. Update a secret or secrets from a file.
+     $ {{.FullName}} --file secret.yml
+  11. Update a secret when config or environment variables are set.
+     $ {{.FullName}} --org MyOrg --repo MyRepo --name foo --value bar
 
 DOCUMENTATION:
 
@@ -146,9 +156,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to modify a secret.
-//
-
-func update(c *cli.Context) error {
+func update(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -167,30 +175,31 @@ func update(c *cli.Context) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
-		Action:      internal.ActionUpdate,
-		Engine:      c.String(internal.FlagSecretEngine),
-		Type:        c.String(internal.FlagSecretType),
-		Org:         c.String(internal.FlagOrg),
-		Repo:        c.String(internal.FlagRepo),
-		Team:        c.String("team"),
-		Name:        c.String("name"),
-		Value:       c.String("value"),
-		Images:      c.StringSlice("image"),
-		AllowEvents: c.StringSlice("event"),
-		File:        c.String("file"),
-		Output:      c.String(internal.FlagOutput),
-		Color:       output.ColorOptionsFromCLIContext(c),
+		Action:        internal.ActionUpdate,
+		Engine:        c.String(internal.FlagSecretEngine),
+		Type:          c.String(internal.FlagSecretType),
+		Org:           c.String(internal.FlagOrg),
+		Repo:          c.String(internal.FlagRepo),
+		Team:          c.String("team"),
+		Name:          c.String("name"),
+		Value:         c.String("value"),
+		Images:        c.StringSlice("image"),
+		RepoAllowlist: c.StringSlice("repo-allowlist"),
+		AllowEvents:   c.StringSlice("event"),
+		File:          c.String("file"),
+		Output:        c.String(internal.FlagOutput),
+		Color:         output.ColorOptionsFromCLIContext(c),
 	}
 
 	// check if allow_command and allow_substitution are provided
 	// if they are not, server will not update the fields
 	if slices.Contains(c.FlagNames(), internal.FlagSecretCommands) {
-		val := c.Bool(internal.FlagSecretCommands)
+		val := internal.StringToBool(c.String(internal.FlagSecretCommands))
 		s.AllowCommand = &val
 	}
 
 	if slices.Contains(c.FlagNames(), internal.FlagSecretSubstitution) {
-		val := c.Bool(internal.FlagSecretSubstitution)
+		val := internal.StringToBool(c.String(internal.FlagSecretSubstitution))
 		s.AllowSubstitution = &val
 	}
 

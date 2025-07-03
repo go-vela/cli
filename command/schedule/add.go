@@ -4,9 +4,10 @@
 package schedule
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/schedule"
@@ -26,13 +27,13 @@ var CommandAdd = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "SCHEDULE_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "SCHEDULE_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the schedule",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "SCHEDULE_REPO"},
+			Sources: cli.EnvVars("VELA_REPO", "SCHEDULE_REPO"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the repository for the schedule",
@@ -41,26 +42,26 @@ var CommandAdd = &cli.Command{
 		// Schedule Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_SCHEDULE", "SCHEDULE_NAME"},
+			Sources: cli.EnvVars("VELA_SCHEDULE", "SCHEDULE_NAME"),
 			Name:    internal.FlagSchedule,
 			Aliases: []string{"s"},
 			Usage:   "provide the name for the schedule",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ACTIVE", "SCHEDULE_ACTIVE"},
+			Sources: cli.EnvVars("VELA_ACTIVE", "SCHEDULE_ACTIVE"),
 			Name:    "active",
 			Aliases: []string{"a"},
 			Usage:   "provided the status for the schedule",
 			Value:   "true",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ENTRY", "SCHEDULE_ENTRY"},
+			Sources: cli.EnvVars("VELA_ENTRY", "SCHEDULE_ENTRY"),
 			Name:    "entry",
 			Aliases: []string{"e"},
 			Usage:   "provide the entry for the schedule",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_BRANCH", "SCHEDULE_BRANCH"},
+			Sources: cli.EnvVars("VELA_BRANCH", "SCHEDULE_BRANCH"),
 			Name:    "branch",
 			Aliases: []string{"b"},
 			Usage:   "provide the branch for the schedule",
@@ -69,7 +70,7 @@ var CommandAdd = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "SCHEDULE_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "SCHEDULE_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -78,13 +79,13 @@ var CommandAdd = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Add a schedule to a repository with active not enabled.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule hourly --entry '0 * * * *' --active false
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule hourly --entry '0 * * * *' --active false
   2. Add a schedule to a repository with a nightly entry.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule nightly --entry '0 0 * * *'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule nightly --entry '0 0 * * *'
   3. Add a schedule to a repository with a weekly entry.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --schedule weekly --entry '@weekly'
+    $ {{.FullName}} --org MyOrg --repo MyRepo --schedule weekly --entry '@weekly'
   4. Add a schedule to a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -93,7 +94,7 @@ DOCUMENTATION:
 }
 
 // helper function to capture the provided input and create the object used to create a schedule.
-func add(c *cli.Context) error {
+func add(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -115,7 +116,7 @@ func add(c *cli.Context) error {
 		Action: internal.ActionAdd,
 		Org:    c.String(internal.FlagOrg),
 		Repo:   c.String(internal.FlagRepo),
-		Active: c.Bool("active"),
+		Active: internal.StringToBool(c.String("active")),
 		Name:   c.String(internal.FlagSchedule),
 		Entry:  c.String("entry"),
 		Output: c.String(internal.FlagOutput),

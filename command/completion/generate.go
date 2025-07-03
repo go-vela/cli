@@ -3,9 +3,10 @@
 package completion
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/completion"
@@ -22,27 +23,27 @@ var CommandGenerate = &cli.Command{
 
 		// Shell Flags
 
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_BASH", "COMPLETION_BASH"},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_BASH", "COMPLETION_BASH"),
 			Name:    "bash",
 			Aliases: []string{"b"},
 			Usage:   "generate a bash auto completion script",
-			Value:   "false",
+			Value:   false,
 		},
-		&cli.StringFlag{
-			EnvVars: []string{"VELA_ZSH", "COMPLETION_ZSH"},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_ZSH", "COMPLETION_ZSH"),
 			Name:    "zsh",
 			Aliases: []string{"z"},
 			Usage:   "generate a zsh auto completion script",
-			Value:   "false",
+			Value:   false,
 		},
 	},
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Enable auto completion for the current bash session.
-    $ source <({{.HelpName}} --bash true)
+    $ source <({{.FullName}} --bash true)
   2. Enable auto completion for the current zsh session.
-    $ source <({{.HelpName}} --zsh true)
+    $ source <({{.FullName}} --zsh true)
   3. Enable auto completion for bash permanently.
     visit https://go-vela.github.io/docs/reference/cli/completion/generate/#bash
   4. Enable auto completion for zsh permanently.
@@ -57,7 +58,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to produce the
 // config file.
-func generate(c *cli.Context) error {
+func generate(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

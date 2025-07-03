@@ -4,9 +4,10 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/repo"
@@ -26,13 +27,13 @@ var CommandChown = &cli.Command{
 		// Repo Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_ORG", "REPO_ORG"},
+			Sources: cli.EnvVars("VELA_ORG", "REPO_ORG"),
 			Name:    internal.FlagOrg,
 			Aliases: []string{"o"},
 			Usage:   "provide the organization for the repository",
 		},
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_REPO", "REPO_NAME"},
+			Sources: cli.EnvVars("VELA_REPO", "REPO_NAME"),
 			Name:    internal.FlagRepo,
 			Aliases: []string{"r"},
 			Usage:   "provide the name for the repository",
@@ -41,7 +42,7 @@ var CommandChown = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -50,11 +51,11 @@ var CommandChown = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Change ownership of a repository.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo
+    $ {{.FullName}} --org MyOrg --repo MyRepo
   2. Change ownership of a repository with json output.
-    $ {{.HelpName}} --org MyOrg --repo MyRepo --output json
+    $ {{.FullName}} --org MyOrg --repo MyRepo --output json
   3. Change ownership of a repository when config or environment variables are set.
-    $ {{.HelpName}}
+    $ {{.FullName}}
 
 DOCUMENTATION:
 
@@ -67,7 +68,7 @@ DOCUMENTATION:
 // of a repository.
 //
 //nolint:dupl // ignore similar code with get, remove, repair and view
-func chown(c *cli.Context) error {
+func chown(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

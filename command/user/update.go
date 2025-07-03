@@ -3,9 +3,10 @@
 package user
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
 	"github.com/go-vela/cli/action/user"
@@ -25,27 +26,27 @@ var CommandUpdate = &cli.Command{
 		// User Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_USER_NAME", "USER_NAME"},
+			Sources: cli.EnvVars("VELA_USER_NAME", "USER_NAME"),
 			Name:    internal.FlagName,
 			Usage:   "provide the name of the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_ADD_FAVORITES", "USER_ADD_FAVORITES"},
+			Sources: cli.EnvVars("VELA_USER_ADD_FAVORITES", "USER_ADD_FAVORITES"),
 			Name:    "add-favorites",
 			Usage:   "provide the list of repositories to add as favorites for the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_DROP_FAVORITES", "USER_DROP_FAVORITES"},
+			Sources: cli.EnvVars("VELA_USER_DROP_FAVORITES", "USER_DROP_FAVORITES"),
 			Name:    "drop-favorites",
 			Usage:   "provide the list of repositories to remove from favorites of the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_ADD_DASHBOARDS", "USER_ADD_DASHBOARDS"},
+			Sources: cli.EnvVars("VELA_USER_ADD_DASHBOARDS", "USER_ADD_DASHBOARDS"),
 			Name:    "add-dashboards",
 			Usage:   "provide the list of UUIDs for dashboards to add to the user",
 		},
 		&cli.StringSliceFlag{
-			EnvVars: []string{"VELA_USER_DROP_DASHBOARDS", "USER_DROP_DASHBOARDS"},
+			Sources: cli.EnvVars("VELA_USER_DROP_DASHBOARDS", "USER_DROP_DASHBOARDS"),
 			Name:    "drop-dashboards",
 			Usage:   "provide the list of UUIDs for dashboareds to remove from the user",
 		},
@@ -53,7 +54,7 @@ var CommandUpdate = &cli.Command{
 		// Output Flags
 
 		&cli.StringFlag{
-			EnvVars: []string{"VELA_OUTPUT", "REPO_OUTPUT"},
+			Sources: cli.EnvVars("VELA_OUTPUT", "REPO_OUTPUT"),
 			Name:    internal.FlagOutput,
 			Aliases: []string{"op"},
 			Usage:   "format the output in json, spew or yaml",
@@ -62,13 +63,13 @@ var CommandUpdate = &cli.Command{
 	CustomHelpTemplate: fmt.Sprintf(`%s
 EXAMPLES:
   1. Update current user to add a repository to favorites.
-    $ {{.HelpName}} --add-favorites Org-1/Repo-1
+    $ {{.FullName}} --add-favorites Org-1/Repo-1
   2. Update current user to remove a repository from favorites.
-    $ {{.HelpName}} --drop-favorites Org-1/Repo-1
+    $ {{.FullName}} --drop-favorites Org-1/Repo-1
   3. Update current user to add a dashboard.
-    $ {{.HelpName}} --add-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
+    $ {{.FullName}} --add-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
   4. Update current user to remove a dashboard.
-    $ {{.HelpName}} --drop-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
+    $ {{.FullName}} --drop-dashboards c8da1302-07d6-11ea-882f-4893bca275b8
 
 DOCUMENTATION:
 
@@ -78,7 +79,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to update a user.
-func update(c *cli.Context) error {
+func update(_ context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {

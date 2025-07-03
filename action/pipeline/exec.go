@@ -130,6 +130,9 @@ func (c *Config) Exec(client compiler.Engine) error {
 		}
 	}
 
+	// find all secrets that were not provided
+	missingSecrets := collectMissingSecrets(_pipeline)
+
 	// create current directory path for local mount
 	mount := fmt.Sprintf("%s:%s:rw", base, constants.WorkspaceDefault)
 
@@ -199,6 +202,9 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}()
 
 	defer func() {
+		// print any secrets not set to the user
+		reportMissingSecrets(missingSecrets)
+
 		// destroy the build with the executor
 		err = _executor.DestroyBuild(context.Background())
 		if err != nil {
@@ -242,6 +248,96 @@ func (c *Config) Exec(client compiler.Engine) error {
 	}
 
 	return nil
+}
+
+// reportMissingSecrets informs the user of any secrets not set.
+func reportMissingSecrets(s map[string]string) {
+	if len(s) > 0 {
+		logrus.Warn("the following secrets were not set, use --help to learn how to set them:")
+
+		for step, secret := range s {
+			logrus.Warnf("secret %#q not set for step %#q", secret, step)
+		}
+	}
+}
+
+// collectMissingSecrets searches a given pipeline for used secrets
+// and returns a map of secrets not set in the current environment.
+// The map key is is the step, stage+step, or secret name formatted
+// to match the local exec log output.
+func collectMissingSecrets(p *pipeline.Build) map[string]string {
+	if p == nil {
+		return make(map[string]string)
+	}
+
+	secrets := map[string]string{}
+
+	for _, stage := range p.Stages {
+		for _, step := range stage.Steps {
+			for _, secret := range step.Secrets {
+				stepName := formatStepIdentifier(stage.Name, step.Name, false)
+				secrets[stepName] = secret.Target
+			}
+		}
+	}
+
+	for _, step := range p.Steps {
+		for _, secret := range step.Secrets {
+			stepName := formatStepIdentifier("", step.Name, false)
+			secrets[stepName] = secret.Target
+		}
+	}
+
+	for _, s := range p.Secrets {
+		if !s.Origin.Empty() {
+			for _, secret := range s.Origin.Secrets {
+				stepName := formatStepIdentifier("", s.Origin.Name, true)
+				secrets[stepName] = secret.Target
+			}
+		}
+	}
+
+	for step, secret := range secrets {
+		// if the secret was supplied, remove it from the map
+		// we only care about unset secrets
+		val, exists := os.LookupEnv(secret)
+		if exists {
+			delete(secrets, step)
+
+			if val == "" {
+				logrus.Debugf("secret %#q for step %#q is provided but empty", secret, step)
+			}
+		}
+	}
+
+	return secrets
+}
+
+// formatStepIdentifier formats a step name to be consistent with what
+// the worker logs to make it easier to associate a missing secret
+// with a step.
+func formatStepIdentifier(stageName, stepName string, isSecret bool) string {
+	const (
+		secretPrefix = "[secret: %s]" //nolint:gosec // false positive
+		stagePrefix  = "[stage: %s]"
+		stepPrefix   = "[step: %s]"
+	)
+
+	output := strings.Builder{}
+
+	if stageName != "" {
+		output.WriteString(fmt.Sprintf(stagePrefix, stageName))
+	}
+
+	if stepName != "" {
+		if isSecret {
+			output.WriteString(fmt.Sprintf(secretPrefix, stepName))
+		} else {
+			output.WriteString(fmt.Sprintf(stepPrefix, stepName))
+		}
+	}
+
+	return output.String()
 }
 
 // skipSteps filters out steps to be removed from the pipeline.

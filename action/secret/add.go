@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/sirupsen/logrus"
-	yaml "gopkg.in/yaml.v3"
+	yaml "go.yaml.in/yaml/v3"
 
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
@@ -128,8 +128,6 @@ func (c *Config) AddFromFile(client *vela.Client) error {
 	}
 
 	// create a new decoder from the secret file contents
-	//
-	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#NewDecoder
 	input := yaml.NewDecoder(bytes.NewReader(contents))
 
 	// create object to store secret file configuration
@@ -138,8 +136,6 @@ func (c *Config) AddFromFile(client *vela.Client) error {
 	f := new(ConfigFile)
 
 	// iterate through all secret file configurations
-	//
-	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Decoder.Decode
 	for input.Decode(f) == nil {
 		// iterate through all secrets from the file configuration
 		for _, s := range f.Secrets {

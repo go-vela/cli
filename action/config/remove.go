@@ -8,7 +8,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/afero"
-	yaml "gopkg.in/yaml.v3"
+	yaml "go.yaml.in/yaml/v3"
 
 	"github.com/go-vela/cli/internal"
 )
@@ -62,8 +62,6 @@ func (c *Config) Remove() error {
 	config := new(ConfigFile)
 
 	// update the config object with the current content
-	//
-	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Unmarshal
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
 		return err
@@ -179,8 +177,6 @@ func (c *Config) Remove() error {
 	logrus.Trace("creating file content for config file")
 
 	// create output for config file
-	//
-	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Marshal
 	out, err := yaml.Marshal(config)
 	if err != nil {
 		return err

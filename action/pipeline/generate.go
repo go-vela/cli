@@ -6,9 +6,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/buildkite/yaml"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/afero"
+	"go.yaml.in/yaml/v3"
 )
 
 // create filesystem based on the operating system
@@ -31,8 +31,6 @@ func (c *Config) Generate() error {
 	logrus.Trace("creating file content from pipeline")
 
 	// create output for pipeline file
-	//
-	// https://pkg.go.dev/github.com/buildkite/yaml?tab=doc#Marshal
 	out, err := yaml.Marshal(pipeline)
 	if err != nil {
 		return err

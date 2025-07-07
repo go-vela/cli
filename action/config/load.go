@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/afero"
 	"github.com/urfave/cli/v3"
-	yaml "gopkg.in/yaml.v3"
+	yaml "go.yaml.in/yaml/v3"
 
 	"github.com/go-vela/cli/internal"
 )
@@ -50,8 +50,6 @@ func (c *Config) Load(cmd *cli.Command) error {
 	config := new(ConfigFile)
 
 	// update the config object with the current content
-	//
-	// https://pkg.go.dev/gopkg.in/yaml.v3?tab=doc#Unmarshal
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
 		return err

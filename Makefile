@@ -96,7 +96,7 @@ test:
 #
 # Usage: `make test-cover`
 .PHONY: test-cover
-test-cover:
+test-cover: test
 	@echo
 	@echo "### Opening test coverage report"
 	@go tool cover -html=coverage.out

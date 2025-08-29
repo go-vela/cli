@@ -72,6 +72,7 @@ func Test_localServer_ServeHTTP(t *testing.T) {
 
 		req2, _ := http.NewRequestWithContext(context.Background(), "GET", "http://127.0.0.1:12345/hello?code=ABC-123&state=xy%2Fz", nil)
 		s.ServeHTTP(w2, req2)
+
 		serveChan <- struct{}{}
 	}()
 

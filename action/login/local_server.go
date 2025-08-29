@@ -5,6 +5,7 @@
 package login
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net"
@@ -25,8 +26,10 @@ type localServer struct {
 }
 
 // bindLocalServer initializes a LocalServer that will listen on a randomly available TCP port.
-func bindLocalServer() (*localServer, error) {
-	listener, err := net.Listen("tcp4", "127.0.0.1:0")
+func bindLocalServer(ctx context.Context) (*localServer, error) {
+	netListenCfg := new(net.ListenConfig)
+
+	listener, err := netListenCfg.Listen(ctx, "tcp4", "127.0.0.1:0")
 	if err != nil {
 		return nil, err
 	}

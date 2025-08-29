@@ -80,7 +80,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to authenticate
 // and login to Vela.
-func runLogin(_ context.Context, c *cli.Command) error {
+func runLogin(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -116,7 +116,7 @@ func runLogin(_ context.Context, c *cli.Command) error {
 	// execute the login call for the login configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/login?tab=doc#Config.Login
-	err = l.Login(client)
+	err = l.Login(ctx, client)
 	if err != nil {
 		return err
 	}

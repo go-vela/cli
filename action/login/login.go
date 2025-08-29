@@ -3,6 +3,7 @@
 package login
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -25,11 +26,11 @@ type Config struct {
 }
 
 // Login authenticates and logs in to Vela via the API based off the provided configuration.
-func (c *Config) Login(client *vela.Client) error {
+func (c *Config) Login(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing login for login configuration")
 
 	// start the local server
-	err := c.StartServer()
+	err := c.StartServer(ctx)
 	if err != nil {
 		return err
 	}
@@ -123,11 +124,11 @@ func (c *Config) Tokens(client *vela.Client, addr string) error {
 
 // StartServer starts a local server as part of the
 // auth flow. It will handle the callback.
-func (c *Config) StartServer() error {
+func (c *Config) StartServer(ctx context.Context) error {
 	logrus.Debug("starting local server")
 
 	// set up the local server to capture the redirect from auth
-	server, err := bindLocalServer()
+	server, err := bindLocalServer(ctx)
 	if err != nil {
 		return err
 	}

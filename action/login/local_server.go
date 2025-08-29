@@ -26,10 +26,10 @@ type localServer struct {
 }
 
 // bindLocalServer initializes a LocalServer that will listen on a randomly available TCP port.
-func bindLocalServer() (*localServer, error) {
+func bindLocalServer(ctx context.Context) (*localServer, error) {
 	netListenCfg := new(net.ListenConfig)
 
-	listener, err := netListenCfg.Listen(context.Background(), "tcp4", "127.0.0.1:0")
+	listener, err := netListenCfg.Listen(ctx, "tcp4", "127.0.0.1:0")
 	if err != nil {
 		return nil, err
 	}

@@ -192,8 +192,6 @@ EXAMPLES:
     $ {{.FullName}} --path /absolute/full/path/to/dir
   4. Validate a remote pipeline for a repository.
     $ {{.FullName}} --remote --org MyOrg --repo MyRepo
-  5. Validate a remote pipeline for a repository with json output.
-    $ {{.FullName}} --remote --org MyOrg --repo MyRepo --output json
   6. Validate a template pipeline with expanding steps (when templates are sourced from private Github instance)
     $ {{.FullName}} --compiler.github.token <token> --compiler.github.url <url>
   7. Validate a pipeline with ruleset data

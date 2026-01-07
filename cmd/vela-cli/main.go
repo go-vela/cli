@@ -137,7 +137,7 @@ func main() {
 		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_COLOR_THEME"),
 			Name:    internal.FlagColorTheme,
-			Usage:   "configures the output color theme (default: monokai)",
+			Usage:   "configures the output color theme (default: monokai or monokailight) - use 'vela view themes' to see available themes",
 		},
 	}
 

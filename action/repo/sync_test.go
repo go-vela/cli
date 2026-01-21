@@ -45,7 +45,7 @@ func TestRepo_Config_Sync(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Sync(client)
+		err := test.config.Sync(t.Context(), client)
 
 		if test.failure {
 			if err == nil {
@@ -94,7 +94,7 @@ func TestRepo_Config_SyncAll(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.SyncAll(client)
+		err := test.config.SyncAll(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

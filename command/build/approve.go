@@ -62,7 +62,7 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // approve a build.
-func approve(_ context.Context, c *cli.Command) error {
+func approve(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -104,5 +104,5 @@ func approve(_ context.Context, c *cli.Command) error {
 	// execute the Approve call for the build configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Approve
-	return b.Approve(client)
+	return b.Approve(ctx, client)
 }

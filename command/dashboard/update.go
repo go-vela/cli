@@ -105,7 +105,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to update a dashboard.
-func update(_ context.Context, c *cli.Command) error {
+func update(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -143,5 +143,5 @@ func update(_ context.Context, c *cli.Command) error {
 	}
 
 	// execute the update call for the dashboard configuration
-	return d.Update(client)
+	return d.Update(ctx, client)
 }

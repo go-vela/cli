@@ -5,6 +5,7 @@ package secret
 
 import (
 	"bytes"
+	"context"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,7 +20,7 @@ import (
 )
 
 // Add creates a secret based on the provided configuration.
-func (c *Config) Add(client *vela.Client) error {
+func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add for secret configuration")
 
 	// check if the secret type is org
@@ -74,7 +75,7 @@ func (c *Config) Add(client *vela.Client) error {
 	// send API call to add a secret
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.Add
-	secret, _, err := client.Secret.Add(c.Engine, c.Type, c.Org, name, s)
+	secret, _, err := client.Secret.Add(ctx, c.Engine, c.Type, c.Org, name, s)
 	if err != nil {
 		return err
 	}
@@ -110,7 +111,7 @@ func (c *Config) Add(client *vela.Client) error {
 }
 
 // AddFromFile creates a secret from a file based on the provided configuration.
-func (c *Config) AddFromFile(client *vela.Client) error {
+func (c *Config) AddFromFile(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add from file for secret configuration")
 
 	// capture absolute path to secret file
@@ -169,7 +170,7 @@ func (c *Config) AddFromFile(client *vela.Client) error {
 			// execute the add call for the secret configuration
 			//
 			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Add
-			err = s.Add(client)
+			err = s.Add(ctx, client)
 			if err != nil {
 				return err
 			}

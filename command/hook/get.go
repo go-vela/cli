@@ -87,7 +87,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to capture a list
 // of hooks.
-func get(_ context.Context, c *cli.Command) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -126,5 +126,5 @@ func get(_ context.Context, c *cli.Command) error {
 	// execute the get call for the hook configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/hook?tab=doc#Config.Get
-	return h.Get(client)
+	return h.Get(ctx, client)
 }

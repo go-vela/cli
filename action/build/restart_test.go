@@ -89,7 +89,7 @@ func TestBuild_Config_Restart(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Restart(client)
+		err := test.config.Restart(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

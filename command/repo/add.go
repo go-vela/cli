@@ -158,7 +158,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to create a repo.
-func add(_ context.Context, c *cli.Command) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -208,5 +208,5 @@ func add(_ context.Context, c *cli.Command) error {
 	// execute the add call for the repo configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Add
-	return r.Add(client)
+	return r.Add(ctx, client)
 }

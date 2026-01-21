@@ -4,6 +4,8 @@
 package schedule
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -12,7 +14,7 @@ import (
 )
 
 // Add creates a schedule based off the provided configuration.
-func (c *Config) Add(client *vela.Client) error {
+func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add for schedule configuration")
 
 	// create the schedule object
@@ -28,7 +30,7 @@ func (c *Config) Add(client *vela.Client) error {
 	// send API call to add a schedule
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ScheduleService.Add
-	schedule, _, err := client.Schedule.Add(c.Org, c.Repo, s)
+	schedule, _, err := client.Schedule.Add(ctx, c.Org, c.Repo, s)
 	if err != nil {
 		return err
 	}

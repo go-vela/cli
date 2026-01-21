@@ -4,6 +4,8 @@
 package build
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,7 +13,7 @@ import (
 )
 
 // Restart restarts a build based off the provided configuration.
-func (c *Config) Restart(client *vela.Client) error {
+func (c *Config) Restart(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing restart for build configuration")
 
 	logrus.Tracef("restarting build %s/%s/%d", c.Org, c.Repo, c.Number)
@@ -19,7 +21,7 @@ func (c *Config) Restart(client *vela.Client) error {
 	// send API call to restart a build
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Restart
-	build, _, err := client.Build.Restart(c.Org, c.Repo, c.Number)
+	build, _, err := client.Build.Restart(ctx, c.Org, c.Repo, c.Number)
 	if err != nil {
 		return err
 	}

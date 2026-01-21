@@ -75,7 +75,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to inspect a
 // deployment.
-func view(_ context.Context, c *cli.Command) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -119,5 +119,5 @@ func view(_ context.Context, c *cli.Command) error {
 	// execute the view call for the deployment configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.View
-	return d.View(client)
+	return d.View(ctx, client)
 }

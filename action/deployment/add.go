@@ -3,6 +3,8 @@
 package deployment
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,7 +13,7 @@ import (
 )
 
 // Add creates a deployment based off the provided configuration.
-func (c *Config) Add(client *vela.Client) error {
+func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add for deployment configuration")
 
 	// create the deployment object
@@ -28,7 +30,7 @@ func (c *Config) Add(client *vela.Client) error {
 	// send API call to add a deployment
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#DeploymentService.Add
-	deployment, _, err := client.Deployment.Add(c.Org, c.Repo, d)
+	deployment, _, err := client.Deployment.Add(ctx, c.Org, c.Repo, d)
 	if err != nil {
 		return err
 	}

@@ -83,7 +83,7 @@ func TestRepo_Config_Repair(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Repair(client)
+		err := test.config.Repair(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

@@ -74,7 +74,7 @@ DOCUMENTATION:
 // and create the object used to cancel a build.
 //
 //nolint:dupl // ignore similar code with view
-func cancel(_ context.Context, c *cli.Command) error {
+func cancel(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -118,5 +118,5 @@ func cancel(_ context.Context, c *cli.Command) error {
 	// execute the cancel call for the build configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Cancel
-	return b.Cancel(client)
+	return b.Cancel(ctx, client)
 }

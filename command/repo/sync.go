@@ -62,7 +62,7 @@ var CommandSync = &cli.Command{
 
 // helper function to capture the provided input
 // and create the object used to sync DB with SCM.
-func sync(_ context.Context, c *cli.Command) error {
+func sync(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -96,7 +96,7 @@ func sync(_ context.Context, c *cli.Command) error {
 		// execute the get call for the repo configuration
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.SyncAll
-		return r.SyncAll(client)
+		return r.SyncAll(ctx, client)
 	}
 
 	// create the repo configuration
@@ -119,5 +119,5 @@ func sync(_ context.Context, c *cli.Command) error {
 	// execute the get call for the repo configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Sync
-	return r.Sync(client)
+	return r.Sync(ctx, client)
 }

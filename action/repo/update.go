@@ -4,6 +4,7 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -14,7 +15,7 @@ import (
 )
 
 // Update modifies a repository based off the provided configuration.
-func (c *Config) Update(client *vela.Client) error {
+func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update for repo configuration")
 
 	// create the repository object
@@ -52,7 +53,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// send API call to modify a repository
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.Update
-	repo, _, err := client.Repo.Update(c.Org, c.Name, r)
+	repo, _, err := client.Repo.Update(ctx, c.Org, c.Name, r)
 	if err != nil {
 		return err
 	}

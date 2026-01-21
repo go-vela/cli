@@ -112,7 +112,7 @@ func TestSchedule_Config_Update(t *testing.T) {
 	// run tests
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			err = test.config.Update(client)
+			err = test.config.Update(t.Context(), client)
 
 			if test.failure {
 				if err == nil {

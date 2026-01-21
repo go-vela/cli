@@ -16,7 +16,7 @@ import (
 	api "github.com/go-vela/server/api/types"
 	"github.com/go-vela/server/compiler"
 	"github.com/go-vela/server/compiler/types/pipeline"
-	"github.com/go-vela/server/compiler/types/yaml/yaml"
+	"github.com/go-vela/server/compiler/types/yaml"
 	"github.com/go-vela/server/constants"
 )
 
@@ -196,7 +196,7 @@ func (c *Config) ValidateLocal(client compiler.Engine) error {
 }
 
 // ValidateRemote validates a remote pipeline based off the provided configuration.
-func (c *Config) ValidateRemote(client *vela.Client) error {
+func (c *Config) ValidateRemote(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing validate for remote pipeline configuration")
 
 	logrus.Tracef("validating pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
@@ -219,7 +219,7 @@ func (c *Config) ValidateRemote(client *vela.Client) error {
 	// send API call to validate a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Validate
-	pipeline, _, err := client.Pipeline.Validate(c.Org, c.Repo, c.Ref, opts)
+	pipeline, _, err := client.Pipeline.Validate(ctx, c.Org, c.Repo, c.Ref, opts)
 	if err != nil {
 		return err
 	}

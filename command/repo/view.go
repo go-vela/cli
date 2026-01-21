@@ -67,7 +67,7 @@ DOCUMENTATION:
 // and create the object used to inspect a repository.
 //
 //nolint:dupl // ignore similar code with chown, get, remove and repair
-func view(_ context.Context, c *cli.Command) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -104,5 +104,5 @@ func view(_ context.Context, c *cli.Command) error {
 	// execute the view call for the repo configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.View
-	return r.View(client)
+	return r.View(ctx, client)
 }

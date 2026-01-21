@@ -95,7 +95,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a log.
-func view(_ context.Context, c *cli.Command) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -137,7 +137,7 @@ func view(_ context.Context, c *cli.Command) error {
 		// execute the view service call for the log configuration
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.ViewService
-		return l.ViewService(client)
+		return l.ViewService(ctx, client)
 	}
 
 	// check if log step is provided
@@ -145,11 +145,11 @@ func view(_ context.Context, c *cli.Command) error {
 		// execute the view step call for the log configuration
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.ViewStep
-		return l.ViewStep(client)
+		return l.ViewStep(ctx, client)
 	}
 
 	// execute the get call for the log configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/log?tab=doc#Config.Get
-	return l.Get(client)
+	return l.Get(ctx, client)
 }

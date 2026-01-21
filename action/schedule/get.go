@@ -3,6 +3,8 @@
 package schedule
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Get captures a list of schedules based off the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for schedule configuration")
 
 	// set the pagination options for list of schedules
@@ -26,7 +28,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of schedules
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ScheduleService.GetAll
-	schedules, _, err := client.Schedule.GetAll(c.Org, c.Repo, opts)
+	schedules, _, err := client.Schedule.GetAll(ctx, c.Org, c.Repo, opts)
 	if err != nil {
 		return err
 	}

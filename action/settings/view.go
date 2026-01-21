@@ -3,6 +3,7 @@
 package settings
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -12,12 +13,12 @@ import (
 )
 
 // View inspects settings based off the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for settings configuration")
 
 	logrus.Trace("inspecting settings")
 
-	response, _, err := client.Admin.Settings.Get()
+	response, _, err := client.Admin.Settings.Get(ctx)
 	if err != nil {
 		return fmt.Errorf("unable to retrieve settings: %w", err)
 	}

@@ -67,7 +67,7 @@ DOCUMENTATION:
 // and create the object used to remove a repository.
 //
 //nolint:dupl // ignore similar code with chown, get, repair and view
-func remove(_ context.Context, c *cli.Command) error {
+func remove(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -104,5 +104,5 @@ func remove(_ context.Context, c *cli.Command) error {
 	// execute the remove call for the repo configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Remove
-	return r.Remove(client)
+	return r.Remove(ctx, client)
 }

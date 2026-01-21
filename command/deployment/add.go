@@ -121,7 +121,7 @@ DOCUMENTATION:
 // helper function to capture the provided input
 // and create the object used to create a
 // deployment.
-func add(_ context.Context, c *cli.Command) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -183,7 +183,7 @@ func add(_ context.Context, c *cli.Command) error {
 	// execute the add call for the deployment configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/deployment?tab=doc#Config.Add
-	return d.Add(client)
+	return d.Add(ctx, client)
 }
 
 // parseKeyValue converts the slice of key=value into a map.

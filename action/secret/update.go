@@ -5,6 +5,7 @@ package secret
 
 import (
 	"bytes"
+	"context"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,7 +20,7 @@ import (
 )
 
 // Update modifies a secret based on the provided configuration.
-func (c *Config) Update(client *vela.Client) error {
+func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update for secret configuration")
 
 	// check if the secret type is org
@@ -72,7 +73,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// send API call to update a secret
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.Update
-	secret, _, err := client.Secret.Update(c.Engine, c.Type, c.Org, name, s)
+	secret, _, err := client.Secret.Update(ctx, c.Engine, c.Type, c.Org, name, s)
 	if err != nil {
 		return err
 	}
@@ -108,7 +109,7 @@ func (c *Config) Update(client *vela.Client) error {
 }
 
 // UpdateFromFile updates a secret from a file based on the provided configuration.
-func (c *Config) UpdateFromFile(client *vela.Client) error {
+func (c *Config) UpdateFromFile(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update from file for secret configuration")
 
 	// capture absolute path to secret file
@@ -167,7 +168,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 			// execute the update call for the secret configuration
 			//
 			// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Update
-			err = s.Update(client)
+			err = s.Update(ctx, client)
 			if err != nil {
 				return err
 			}

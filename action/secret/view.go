@@ -3,6 +3,7 @@
 package secret
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"strings"
@@ -13,12 +14,12 @@ import (
 	"github.com/go-vela/cli/internal/output"
 	"github.com/go-vela/sdk-go/vela"
 	api "github.com/go-vela/server/api/types"
-	pyaml "github.com/go-vela/server/compiler/types/yaml/yaml"
+	pyaml "github.com/go-vela/server/compiler/types/yaml"
 	"github.com/go-vela/server/constants"
 )
 
 // View inspects a secret based on the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for secret configuration")
 
 	// check if the secret type is org
@@ -41,7 +42,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a secret
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.Get
-	secret, _, err := client.Secret.Get(c.Engine, c.Type, c.Org, name, c.Name)
+	secret, _, err := client.Secret.Get(ctx, c.Engine, c.Type, c.Org, name, c.Name)
 	if err != nil {
 		return err
 	}

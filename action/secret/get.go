@@ -3,6 +3,7 @@
 package secret
 
 import (
+	"context"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -13,7 +14,7 @@ import (
 )
 
 // Get captures a list of secrets based on the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for secret configuration")
 
 	// check if the secret type is org
@@ -44,7 +45,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of secrets
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.GetAll
-	secrets, _, err := client.Secret.GetAll(c.Engine, c.Type, c.Org, name, opts)
+	secrets, _, err := client.Secret.GetAll(ctx, c.Engine, c.Type, c.Org, name, opts)
 	if err != nil {
 		return err
 	}

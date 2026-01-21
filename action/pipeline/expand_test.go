@@ -89,7 +89,7 @@ func TestPipeline_Config_Expand(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Expand(client)
+		err := test.config.Expand(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

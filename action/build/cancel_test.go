@@ -89,7 +89,7 @@ func TestBuild_Config_Cancel(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Cancel(client)
+		err := test.config.Cancel(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

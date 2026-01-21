@@ -3,6 +3,8 @@
 package log
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -12,7 +14,7 @@ import (
 // ViewService inspects a service log based on the provided configuration.
 //
 //nolint:dupl // ignore similar code among actions
-func (c *Config) ViewService(client *vela.Client) error {
+func (c *Config) ViewService(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view service for log configuration")
 
 	logrus.Tracef("capturing logs for service %s/%s/%d", c.Org, c.Repo, c.Service)
@@ -20,7 +22,7 @@ func (c *Config) ViewService(client *vela.Client) error {
 	// send API call to capture a service log
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#LogService.GetService
-	log, _, err := client.Log.GetService(c.Org, c.Repo, c.Build, c.Service)
+	log, _, err := client.Log.GetService(ctx, c.Org, c.Repo, c.Build, c.Service)
 	if err != nil {
 		return err
 	}
@@ -58,7 +60,7 @@ func (c *Config) ViewService(client *vela.Client) error {
 // ViewStep inspects a service log based on the provided configuration.
 //
 //nolint:dupl // ignore similar code among actions
-func (c *Config) ViewStep(client *vela.Client) error {
+func (c *Config) ViewStep(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view step for log configuration")
 
 	logrus.Tracef("capturing logs for step %s/%s/%d", c.Org, c.Repo, c.Step)
@@ -66,7 +68,7 @@ func (c *Config) ViewStep(client *vela.Client) error {
 	// send API call to capture a step log
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#LogService.GetStep
-	log, _, err := client.Log.GetStep(c.Org, c.Repo, c.Build, c.Step)
+	log, _, err := client.Log.GetStep(ctx, c.Org, c.Repo, c.Build, c.Step)
 	if err != nil {
 		return err
 	}

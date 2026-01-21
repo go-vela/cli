@@ -94,7 +94,7 @@ DOCUMENTATION:
 }
 
 // helper function to capture the provided input and create the object used to create a schedule.
-func add(_ context.Context, c *cli.Command) error {
+func add(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -135,5 +135,5 @@ func add(_ context.Context, c *cli.Command) error {
 	// execute the add call for the schedule configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/schedule?tab=doc#Config.Add
-	return s.Add(client)
+	return s.Add(ctx, client)
 }

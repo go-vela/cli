@@ -4,6 +4,8 @@
 package repo
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,13 +13,13 @@ import (
 )
 
 // Repair recreates a repository webhook based off the provided configuration.
-func (c *Config) Repair(client *vela.Client) error {
+func (c *Config) Repair(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing repair for repo configuration")
 
 	logrus.Tracef("repairing repo %s/%s", c.Org, c.Name)
 
 	// send API call to repair a repository
-	msg, _, err := client.Repo.Repair(c.Org, c.Name)
+	msg, _, err := client.Repo.Repair(ctx, c.Org, c.Name)
 	if err != nil {
 		return err
 	}

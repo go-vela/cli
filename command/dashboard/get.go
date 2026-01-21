@@ -52,7 +52,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to get user dashboards.
-func get(_ context.Context, c *cli.Command) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -82,5 +82,5 @@ func get(_ context.Context, c *cli.Command) error {
 	}
 
 	// execute the get call for the dashboard configuration
-	return d.Get(client)
+	return d.Get(ctx, client)
 }

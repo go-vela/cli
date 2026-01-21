@@ -4,6 +4,8 @@
 package build
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,7 +13,7 @@ import (
 )
 
 // View inspects a build based off the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for build configuration")
 
 	logrus.Tracef("inspecting build %s/%s/%d", c.Org, c.Repo, c.Number)
@@ -19,7 +21,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a build
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Get
-	build, _, err := client.Build.Get(c.Org, c.Repo, c.Number)
+	build, _, err := client.Build.Get(ctx, c.Org, c.Repo, c.Number)
 	if err != nil {
 		return err
 	}

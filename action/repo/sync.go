@@ -2,6 +2,8 @@
 package repo
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -9,13 +11,13 @@ import (
 )
 
 // Sync synchronizes a single repository in the Vela Database with the SCM.
-func (c *Config) Sync(client *vela.Client) error {
+func (c *Config) Sync(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing SCM sync for repo")
 
 	logrus.Tracef("syncing repo %s/%s", c.Org, c.Name)
 
 	// send API call to sync repository
-	msg, _, err := client.SCM.Sync(c.Org, c.Name)
+	msg, _, err := client.SCM.Sync(ctx, c.Org, c.Name)
 	if err != nil {
 		return err
 	}
@@ -24,13 +26,13 @@ func (c *Config) Sync(client *vela.Client) error {
 }
 
 // SyncAll synchronizes all org repositories in the Vela Database with the SCM.
-func (c *Config) SyncAll(client *vela.Client) error {
+func (c *Config) SyncAll(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing SCM sync for org repos")
 
 	logrus.Tracef("syncing repos for org: %s...", c.Org)
 
 	// send API call to sync org repos
-	msg, _, err := client.SCM.SyncAll(c.Org)
+	msg, _, err := client.SCM.SyncAll(ctx, c.Org)
 	if err != nil {
 		return err
 	}

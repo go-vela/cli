@@ -74,7 +74,7 @@ DOCUMENTATION:
 // of repos.
 //
 //nolint:dupl // duplicate of `command/repo/remove.go:70-108`
-func get(_ context.Context, c *cli.Command) error {
+func get(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -111,5 +111,5 @@ func get(_ context.Context, c *cli.Command) error {
 	// execute the get call for the repo configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Get
-	return r.Get(client)
+	return r.Get(ctx, client)
 }

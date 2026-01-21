@@ -3,6 +3,8 @@
 package step
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Get captures a list of steps based on the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for step configuration")
 
 	// set the pagination options for list of steps
@@ -26,7 +28,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of steps
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#StepService.GetAll
-	steps, _, err := client.Step.GetAll(c.Org, c.Repo, c.Build, opts)
+	steps, _, err := client.Step.GetAll(ctx, c.Org, c.Repo, c.Build, opts)
 	if err != nil {
 		return err
 	}

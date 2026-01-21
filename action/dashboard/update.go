@@ -3,6 +3,7 @@
 package dashboard
 
 import (
+	"context"
 	"slices"
 
 	"github.com/sirupsen/logrus"
@@ -12,10 +13,10 @@ import (
 )
 
 // Update modifies a dashboard based off the provided configuration.
-func (c *Config) Update(client *vela.Client) error {
+func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update for dashboard configuration")
 
-	dashCard, _, err := client.Dashboard.Get(c.ID)
+	dashCard, _, err := client.Dashboard.Get(ctx, c.ID)
 	if err != nil {
 		return err
 	}
@@ -109,7 +110,7 @@ func (c *Config) Update(client *vela.Client) error {
 	}
 
 	// send API call to modify a dashboard
-	dashboard, _, err = client.Dashboard.Update(dashboard)
+	dashboard, _, err = client.Dashboard.Update(ctx, dashboard)
 	if err != nil {
 		return err
 	}

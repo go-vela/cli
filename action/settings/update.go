@@ -4,6 +4,7 @@ package settings
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"os"
 	"path/filepath"
@@ -19,11 +20,11 @@ import (
 )
 
 // Update modifies settings based off the provided configuration.
-func (c *Config) Update(client *vela.Client) error {
+func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update for settings configuration")
 
 	// send API call to retrieve current settings
-	s, _, err := client.Admin.Settings.Get()
+	s, _, err := client.Admin.Settings.Get(ctx)
 	if err != nil {
 		return err
 	}
@@ -146,7 +147,7 @@ func (c *Config) Update(client *vela.Client) error {
 	logrus.Trace("updating settings")
 
 	// send API call to modify settings
-	sUpdated, _, err := client.Admin.Settings.Update(sUpdate)
+	sUpdated, _, err := client.Admin.Settings.Update(ctx, sUpdate)
 	if err != nil {
 		return err
 	}
@@ -182,7 +183,7 @@ func (c *Config) Update(client *vela.Client) error {
 }
 
 // UpdateFromFile updates from a file based on the provided configuration.
-func (c *Config) UpdateFromFile(client *vela.Client) error {
+func (c *Config) UpdateFromFile(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update from file for platform settings configuration")
 
 	// capture absolute path to file
@@ -263,7 +264,7 @@ func (c *Config) UpdateFromFile(client *vela.Client) error {
 			return err
 		}
 
-		err = s.Update(client)
+		err = s.Update(ctx, client)
 		if err != nil {
 			return err
 		}

@@ -262,7 +262,7 @@ func validate(ctx context.Context, c *cli.Command) error {
 		// execute the validate remote call for the pipeline configuration
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.ValidateRemote
-		return p.ValidateRemote(client)
+		return p.ValidateRemote(ctx, client)
 	}
 
 	// create a compiler client

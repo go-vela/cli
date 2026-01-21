@@ -3,6 +3,8 @@
 package dashboard
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,11 +12,11 @@ import (
 )
 
 // View inspects a dashboard based off the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for dashboard configuration")
 
 	// send API call to capture a dashboard
-	dashCard, _, err := client.Dashboard.Get(c.ID)
+	dashCard, _, err := client.Dashboard.Get(ctx, c.ID)
 	if err != nil {
 		return err
 	}

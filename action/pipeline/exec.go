@@ -116,6 +116,8 @@ func (c *Config) Exec(client compiler.Engine) error {
 		return err
 	}
 
+	_pipeline.Prepare(b.GetRepo().GetOrg(), b.GetRepo().GetName(), b.GetNumber(), true)
+
 	// create a slice for steps to be removed
 	stepsToRemove := c.SkipSteps
 

@@ -94,7 +94,7 @@ func TestLog_Config_ViewService(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.ViewService(client)
+		err := test.config.ViewService(t.Context(), client)
 
 		if test.failure {
 			if err == nil {
@@ -194,7 +194,7 @@ func TestService_Config_ViewStep(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.ViewStep(client)
+		err := test.config.ViewStep(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

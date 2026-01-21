@@ -3,6 +3,8 @@
 package repo
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Get captures a list of repositories based off the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for repo configuration")
 
 	// set the pagination options for list of repositories
@@ -26,7 +28,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of repositories
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.GetAll
-	repos, _, err := client.Repo.GetAll(opts)
+	repos, _, err := client.Repo.GetAll(ctx, opts)
 	if err != nil {
 		return err
 	}

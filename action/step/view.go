@@ -3,6 +3,8 @@
 package step
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // View inspects a step based on the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for step configuration")
 
 	logrus.Tracef("inspecting step %s/%s/%d/%d", c.Org, c.Repo, c.Build, c.Number)
@@ -18,7 +20,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a step
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#StepService.Get
-	step, _, err := client.Step.Get(c.Org, c.Repo, c.Build, c.Number)
+	step, _, err := client.Step.Get(ctx, c.Org, c.Repo, c.Build, c.Number)
 	if err != nil {
 		return err
 	}

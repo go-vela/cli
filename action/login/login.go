@@ -57,7 +57,7 @@ func (c *Config) Login(ctx context.Context, client *vela.Client) error {
 	}
 
 	// capture the tokens
-	err = c.Tokens(client, c.Address)
+	err = c.Tokens(ctx, client, c.Address)
 	if err != nil {
 		return err
 	}
@@ -68,7 +68,7 @@ func (c *Config) Login(ctx context.Context, client *vela.Client) error {
 // Tokens will wait for the callback and make a request
 // to exchange the the callback payload for an
 // access token.
-func (c *Config) Tokens(client *vela.Client, addr string) error {
+func (c *Config) Tokens(ctx context.Context, client *vela.Client, addr string) error {
 	logrus.Debug("waiting for tokens")
 
 	// waiting for local server to receive the redirect
@@ -88,7 +88,7 @@ func (c *Config) Tokens(client *vela.Client, addr string) error {
 	// send API call to exchange tokens to Vela
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#AuthenticationService.ExchangeTokens
-	at, rt, resp, err := client.Authentication.ExchangeTokens(opt)
+	at, rt, resp, err := client.Authentication.ExchangeTokens(ctx, opt)
 	if err != nil {
 		// log the response object for troubleshooting purposes
 		logrus.Debug(resp)

@@ -3,6 +3,7 @@
 package build
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -12,7 +13,7 @@ import (
 )
 
 // Approve approves a build based off the provided configuration.
-func (c *Config) Approve(client *vela.Client) error {
+func (c *Config) Approve(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing approve for build configuration")
 
 	logrus.Tracef("approving build %s/%s/%d", c.Org, c.Repo, c.Number)
@@ -20,7 +21,7 @@ func (c *Config) Approve(client *vela.Client) error {
 	// send API call to approve a build
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.Approve
-	_, err := client.Build.Approve(c.Org, c.Repo, c.Number)
+	_, err := client.Build.Approve(ctx, c.Org, c.Repo, c.Number)
 	if err != nil {
 		return err
 	}

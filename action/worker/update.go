@@ -3,6 +3,8 @@
 package worker
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,7 +13,7 @@ import (
 )
 
 // Update modifies a worker based off the provided configuration.
-func (c *Config) Update(client *vela.Client) error {
+func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update for worker configuration")
 
 	// create the worker object
@@ -28,7 +30,7 @@ func (c *Config) Update(client *vela.Client) error {
 	// send API call to modify a worker
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#WorkerService.Update
-	worker, _, err := client.Worker.Update(c.Hostname, w)
+	worker, _, err := client.Worker.Update(ctx, c.Hostname, w)
 	if err != nil {
 		return err
 	}

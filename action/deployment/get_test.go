@@ -95,7 +95,7 @@ func TestDeployment_Config_Get(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Get(client)
+		err := test.config.Get(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

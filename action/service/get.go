@@ -3,6 +3,8 @@
 package service
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Get captures a list of services based on the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for service configuration")
 
 	// set the pagination options for list of services
@@ -26,7 +28,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of services
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SvcService.GetAll
-	services, _, err := client.Svc.GetAll(c.Org, c.Repo, c.Build, opts)
+	services, _, err := client.Svc.GetAll(ctx, c.Org, c.Repo, c.Build, opts)
 	if err != nil {
 		return err
 	}

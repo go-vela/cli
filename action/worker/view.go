@@ -3,6 +3,7 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -14,7 +15,7 @@ import (
 // View inspects a worker based off the provided configuration.
 // Based on the configuration, it will either return details of
 // a worker or view the registration token for the given worker.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for worker configuration")
 
 	logrus.Tracef("inspecting worker with hostname %s", c.Hostname)
@@ -26,12 +27,12 @@ func (c *Config) View(client *vela.Client) error {
 
 	// handle RegistrationToken flag
 	if c.RegistrationToken {
-		response, _, err = client.Admin.Worker.RegisterToken(c.Hostname)
+		response, _, err = client.Admin.Worker.RegisterToken(ctx, c.Hostname)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve registration token for worker %q: %w", c.Hostname, err)
 		}
 	} else {
-		response, _, err = client.Worker.Get(c.Hostname)
+		response, _, err = client.Worker.Get(ctx, c.Hostname)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve information for worker %q: %w", c.Hostname, err)
 		}

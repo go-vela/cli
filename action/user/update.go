@@ -3,6 +3,7 @@
 package user
 
 import (
+	"context"
 	"fmt"
 	"slices"
 	"strings"
@@ -14,7 +15,7 @@ import (
 )
 
 // Update modifies a dashboard based off the provided configuration.
-func (c *Config) Update(client *vela.Client) error {
+func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing update for dashboard configuration")
 
 	var (
@@ -23,9 +24,9 @@ func (c *Config) Update(client *vela.Client) error {
 	)
 
 	if len(c.Name) > 0 {
-		user, _, err = client.User.Get(c.Name)
+		user, _, err = client.User.Get(ctx, c.Name)
 	} else {
-		user, _, err = client.User.GetCurrent()
+		user, _, err = client.User.GetCurrent(ctx)
 	}
 
 	if err != nil {
@@ -50,7 +51,7 @@ func (c *Config) Update(client *vela.Client) error {
 		dashboards := user.GetDashboards()
 
 		for _, d := range c.AddDashboards {
-			_, _, err := client.Dashboard.Get(d)
+			_, _, err := client.Dashboard.Get(ctx, d)
 			if err != nil {
 				return fmt.Errorf("unable to get dashboard %s: %w", d, err)
 			}
@@ -85,7 +86,7 @@ func (c *Config) Update(client *vela.Client) error {
 				return fmt.Errorf("invalid format for repository: %s (valid format: <org>/<repo>)", f)
 			}
 
-			_, _, err := client.Repo.Get(splitRepo[0], splitRepo[1])
+			_, _, err := client.Repo.Get(ctx, splitRepo[0], splitRepo[1])
 			if err != nil {
 				return fmt.Errorf("unable to get repo %s: %w", f, err)
 			}
@@ -98,9 +99,9 @@ func (c *Config) Update(client *vela.Client) error {
 
 	// send API call to modify the user
 	if len(c.Name) > 0 {
-		user, _, err = client.User.Update(c.Name, user)
+		user, _, err = client.User.Update(ctx, c.Name, user)
 	} else {
-		user, _, err = client.User.UpdateCurrent(user)
+		user, _, err = client.User.UpdateCurrent(ctx, user)
 	}
 
 	if err != nil {

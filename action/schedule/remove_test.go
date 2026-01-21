@@ -97,7 +97,7 @@ func TestSchedule_Config_Remove(t *testing.T) {
 	// run tests
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			err = test.config.Remove(client)
+			err = test.config.Remove(t.Context(), client)
 
 			if test.failure {
 				if err == nil {

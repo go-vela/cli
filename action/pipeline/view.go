@@ -3,6 +3,8 @@
 package pipeline
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // View inspects a pipeline based off the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for pipeline configuration")
 
 	logrus.Tracef("inspecting pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
@@ -18,7 +20,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Get
-	pipeline, _, err := client.Pipeline.Get(c.Org, c.Repo, c.Ref)
+	pipeline, _, err := client.Pipeline.Get(ctx, c.Org, c.Repo, c.Ref)
 	if err != nil {
 		return err
 	}

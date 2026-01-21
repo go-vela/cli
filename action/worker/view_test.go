@@ -95,7 +95,7 @@ func TestWorker_Config_View(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.View(client)
+		err := test.config.View(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

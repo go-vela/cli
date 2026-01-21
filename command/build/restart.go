@@ -73,7 +73,7 @@ DOCUMENTATION:
 // helper function to capture the provided
 // input and create the object used to
 // restart a build.
-func restart(_ context.Context, c *cli.Command) error {
+func restart(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -117,5 +117,5 @@ func restart(_ context.Context, c *cli.Command) error {
 	// execute the restart call for the build configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/build?tab=doc#Config.Restart
-	return b.Restart(client)
+	return b.Restart(ctx, client)
 }

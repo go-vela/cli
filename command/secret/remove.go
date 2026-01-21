@@ -99,7 +99,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to remove a secret.
-func remove(_ context.Context, c *cli.Command) error {
+func remove(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -140,5 +140,5 @@ func remove(_ context.Context, c *cli.Command) error {
 	// execute the remove call for the secret configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config.Remove
-	return s.Remove(client)
+	return s.Remove(ctx, client)
 }

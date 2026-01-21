@@ -103,7 +103,7 @@ func TestSchedule_Config_Get(t *testing.T) {
 	// run tests
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			err = test.config.Get(client)
+			err = test.config.Get(t.Context(), client)
 
 			if test.failure {
 				if err == nil {

@@ -5,7 +5,7 @@ package pipeline
 import (
 	"github.com/sirupsen/logrus"
 
-	"github.com/go-vela/server/compiler/types/yaml/yaml"
+	"github.com/go-vela/server/compiler/types/yaml"
 )
 
 func steps(pipelineType string) *yaml.Build {

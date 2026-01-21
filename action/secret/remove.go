@@ -3,6 +3,7 @@
 package secret
 
 import (
+	"context"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -13,7 +14,7 @@ import (
 )
 
 // Remove deletes a secret based on the provided configuration.
-func (c *Config) Remove(client *vela.Client) error {
+func (c *Config) Remove(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing remove for secret configuration")
 
 	// check if the secret type is org
@@ -36,7 +37,7 @@ func (c *Config) Remove(client *vela.Client) error {
 	// send API call to remove a secret
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SecretService.Remove
-	msg, _, err := client.Secret.Remove(c.Engine, c.Type, c.Org, name, c.Name)
+	msg, _, err := client.Secret.Remove(ctx, c.Engine, c.Type, c.Org, name, c.Name)
 	if err != nil {
 		return err
 	}

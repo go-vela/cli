@@ -68,7 +68,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a worker.
-func view(_ context.Context, c *cli.Command) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -105,5 +105,5 @@ func view(_ context.Context, c *cli.Command) error {
 	// execute the view call for the worker configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/worker?tab=doc#Config.View
-	return w.View(client)
+	return w.View(ctx, client)
 }

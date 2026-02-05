@@ -151,7 +151,7 @@ func TestRepo_Config_Update(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Update(client)
+		err := test.config.Update(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

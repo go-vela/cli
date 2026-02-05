@@ -3,6 +3,8 @@
 package build
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Get captures a list of builds based off the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for build configuration")
 
 	// set the pagination options for list of builds
@@ -33,7 +35,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of builds
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildService.GetAll
-	builds, _, err := client.Build.GetAll(c.Org, c.Repo, opts)
+	builds, _, err := client.Build.GetAll(ctx, c.Org, c.Repo, opts)
 	if err != nil {
 		return err
 	}

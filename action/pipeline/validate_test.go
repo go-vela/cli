@@ -428,7 +428,7 @@ func TestPipeline_Config_ValidateRemote(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.ValidateRemote(client)
+		err := test.config.ValidateRemote(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

@@ -3,6 +3,8 @@
 package pipeline
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Get captures a list of pipelines based on the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for pipeline configuration")
 
 	// set the pagination options for list of pipelines
@@ -26,7 +28,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of pipelines
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.GetAll
-	pipelines, _, err := client.Pipeline.GetAll(c.Org, c.Repo, opts)
+	pipelines, _, err := client.Pipeline.GetAll(ctx, c.Org, c.Repo, opts)
 	if err != nil {
 		return err
 	}

@@ -83,7 +83,7 @@ func TestRepo_Config_Chown(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Chown(client)
+		err := test.config.Chown(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

@@ -3,6 +3,8 @@
 package schedule
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // View inspects a schedule based off the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for schedule configuration")
 
 	logrus.Tracef("inspecting schedule %s/%s/%s", c.Org, c.Repo, c.Name)
@@ -18,7 +20,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a schedule
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ScheduleService.Get
-	schedule, _, err := client.Schedule.Get(c.Org, c.Repo, c.Name)
+	schedule, _, err := client.Schedule.Get(ctx, c.Org, c.Repo, c.Name)
 	if err != nil {
 		return err
 	}

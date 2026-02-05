@@ -48,7 +48,7 @@ func TestDashboard_Config_Add(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Add(client)
+		err := test.config.Add(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

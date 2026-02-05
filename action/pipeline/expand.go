@@ -4,6 +4,8 @@
 package pipeline
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,7 +13,7 @@ import (
 )
 
 // Expand expands a pipeline based off the provided configuration.
-func (c *Config) Expand(client *vela.Client) error {
+func (c *Config) Expand(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing expand for pipeline configuration")
 
 	logrus.Tracef("expanding pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
@@ -26,7 +28,7 @@ func (c *Config) Expand(client *vela.Client) error {
 	// send API call to expand a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Expand
-	pipeline, _, err := client.Pipeline.Expand(c.Org, c.Repo, c.Ref, opts)
+	pipeline, _, err := client.Pipeline.Expand(ctx, c.Org, c.Repo, c.Ref, opts)
 	if err != nil {
 		return err
 	}

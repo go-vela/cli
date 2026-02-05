@@ -4,6 +4,7 @@
 package repo
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -14,7 +15,7 @@ import (
 )
 
 // Add creates a repository based off the provided configuration.
-func (c *Config) Add(client *vela.Client) error {
+func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add for repo configuration")
 
 	// create the repository object
@@ -52,7 +53,7 @@ func (c *Config) Add(client *vela.Client) error {
 	// send API call to add a repository
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.Add
-	repo, _, err := client.Repo.Add(r)
+	repo, _, err := client.Repo.Add(ctx, r)
 	if err != nil {
 		return err
 	}

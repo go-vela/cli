@@ -3,6 +3,7 @@
 package worker
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -12,7 +13,7 @@ import (
 )
 
 // Get captures a list of workers based off the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for worker configuration")
 
 	logrus.Tracef("capturing workers")
@@ -32,7 +33,7 @@ func (c *Config) Get(client *vela.Client) error {
 	// send API call to capture a list of workers
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#WorkerService.GetAll
-	workers, _, err := client.Worker.GetAll(filters)
+	workers, _, err := client.Worker.GetAll(ctx, filters)
 	if err != nil {
 		return err
 	}

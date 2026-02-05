@@ -3,6 +3,8 @@
 package schedule
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // Remove deletes a schedule based off the provided configuration.
-func (c *Config) Remove(client *vela.Client) error {
+func (c *Config) Remove(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing remove for schedule configuration")
 
 	logrus.Tracef("removing schedule %s/%s/%s", c.Org, c.Repo, c.Name)
@@ -18,7 +20,7 @@ func (c *Config) Remove(client *vela.Client) error {
 	// send API call to remove a schedule
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#ScheduleService.Remove
-	msg, _, err := client.Schedule.Remove(c.Org, c.Repo, c.Name)
+	msg, _, err := client.Schedule.Remove(ctx, c.Org, c.Repo, c.Name)
 	if err != nil {
 		return err
 	}

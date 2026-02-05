@@ -52,7 +52,7 @@ func TestSettings_Config_Update(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Update(client)
+		err := test.config.Update(t.Context(), client)
 
 		if test.failure {
 			if err == nil {
@@ -127,7 +127,7 @@ func TestSettings_Config_UpdateFromFile(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.UpdateFromFile(client)
+		err := test.config.UpdateFromFile(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

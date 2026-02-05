@@ -23,7 +23,7 @@ func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	// send API call to get a registration token for the given worker
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela#AdminWorkerService.RegisterToken
-	registerToken, _, err := client.Admin.Worker.RegisterToken(c.Hostname)
+	registerToken, _, err := client.Admin.Worker.RegisterToken(ctx, c.Hostname)
 	if err != nil || registerToken == nil {
 		return fmt.Errorf("unable to retrieve registration token: %w", err)
 	}

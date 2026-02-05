@@ -132,7 +132,7 @@ func TestSecret_Config_Add(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Add(client)
+		err := test.config.Add(t.Context(), client)
 
 		if test.failure {
 			if err == nil {
@@ -231,7 +231,7 @@ func TestSecret_Config_AddFromFile(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.AddFromFile(client)
+		err := test.config.AddFromFile(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

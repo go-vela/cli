@@ -73,7 +73,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to inspect a pipeline.
-func view(_ context.Context, c *cli.Command) error {
+func view(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -111,5 +111,5 @@ func view(_ context.Context, c *cli.Command) error {
 	// execute the view file call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.View
-	return p.View(client)
+	return p.View(ctx, client)
 }

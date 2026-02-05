@@ -3,6 +3,8 @@
 package service
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // View inspects a service based on the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for service configuration")
 
 	logrus.Tracef("inspecting service %s/%s/%d/%d", c.Org, c.Repo, c.Build, c.Number)
@@ -18,7 +20,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a service
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#SvcService.Get
-	service, _, err := client.Svc.Get(c.Org, c.Repo, c.Build, c.Number)
+	service, _, err := client.Svc.Get(ctx, c.Org, c.Repo, c.Build, c.Number)
 	if err != nil {
 		return err
 	}

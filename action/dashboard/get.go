@@ -3,6 +3,8 @@
 package dashboard
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -10,11 +12,11 @@ import (
 )
 
 // Get captures a list of dashboards based off the provided configuration.
-func (c *Config) Get(client *vela.Client) error {
+func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing get for dashboard configuration")
 
 	// send API call to capture a list of dashboards
-	dashCards, _, err := client.Dashboard.GetAllUser()
+	dashCards, _, err := client.Dashboard.GetAllUser(ctx)
 	if err != nil {
 		return err
 	}

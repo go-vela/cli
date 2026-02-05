@@ -4,6 +4,8 @@
 package pipeline
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -11,7 +13,7 @@ import (
 )
 
 // Compile compiles a pipeline based off the provided configuration.
-func (c *Config) Compile(client *vela.Client) error {
+func (c *Config) Compile(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing compile for pipeline configuration")
 
 	logrus.Tracef("compiling pipeline %s/%s@%s", c.Org, c.Repo, c.Ref)
@@ -26,7 +28,7 @@ func (c *Config) Compile(client *vela.Client) error {
 	// send API call to compile a pipeline
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#PipelineService.Compile
-	pipeline, _, err := client.Pipeline.Compile(c.Org, c.Repo, c.Ref, opts)
+	pipeline, _, err := client.Pipeline.Compile(ctx, c.Org, c.Repo, c.Ref, opts)
 	if err != nil {
 		return err
 	}

@@ -75,7 +75,7 @@ DOCUMENTATION:
 
 // helper function to capture the provided input
 // and create the object used to expand a pipeline.
-func expand(_ context.Context, c *cli.Command) error {
+func expand(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -113,5 +113,5 @@ func expand(_ context.Context, c *cli.Command) error {
 	// execute the expand call for the pipeline configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/pipeline?tab=doc#Config.Expand
-	return p.Expand(client)
+	return p.Expand(ctx, client)
 }

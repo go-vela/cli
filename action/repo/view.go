@@ -3,6 +3,8 @@
 package repo
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/cli/internal/output"
@@ -10,7 +12,7 @@ import (
 )
 
 // View inspects a repository based off the provided configuration.
-func (c *Config) View(client *vela.Client) error {
+func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing view for repo configuration")
 
 	logrus.Tracef("inspecting repo %s/%s", c.Org, c.Name)
@@ -18,7 +20,7 @@ func (c *Config) View(client *vela.Client) error {
 	// send API call to capture a repository
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#RepoService.Get
-	repo, _, err := client.Repo.Get(c.Org, c.Name)
+	repo, _, err := client.Repo.Get(ctx, c.Org, c.Name)
 	if err != nil {
 		return err
 	}

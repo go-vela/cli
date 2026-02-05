@@ -47,7 +47,7 @@ func TestBuild_Config_Approve(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := test.config.Approve(client)
+		err := test.config.Approve(t.Context(), client)
 
 		if test.failure {
 			if err == nil {

@@ -3,6 +3,8 @@
 package dashboard
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-vela/sdk-go/vela"
@@ -10,7 +12,7 @@ import (
 )
 
 // Add creates a dashboard based off the provided configuration.
-func (c *Config) Add(client *vela.Client) error {
+func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	logrus.Debug("executing add for dashboard configuration")
 
 	dashRepos := []*api.DashboardRepo{}
@@ -50,7 +52,7 @@ func (c *Config) Add(client *vela.Client) error {
 	logrus.Tracef("adding dashboard %s", c.Name)
 
 	// send API call to add a dashboard
-	dashboard, _, err := client.Dashboard.Add(d)
+	dashboard, _, err := client.Dashboard.Add(ctx, d)
 	if err != nil {
 		return err
 	}

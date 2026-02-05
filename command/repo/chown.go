@@ -68,7 +68,7 @@ DOCUMENTATION:
 // of a repository.
 //
 //nolint:dupl // ignore similar code with get, remove, repair and view
-func chown(_ context.Context, c *cli.Command) error {
+func chown(ctx context.Context, c *cli.Command) error {
 	// load variables from the config file
 	err := action.Load(c)
 	if err != nil {
@@ -105,5 +105,5 @@ func chown(_ context.Context, c *cli.Command) error {
 	// execute the chown call for the repo configuration
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/repo?tab=doc#Config.Chown
-	return r.Chown(client)
+	return r.Chown(ctx, client)
 }

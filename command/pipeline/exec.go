@@ -22,8 +22,8 @@ import (
 // CommandExec defines the command for executing a pipeline.
 var CommandExec = &cli.Command{
 	Name:        "pipeline",
-	Description: "Use this command to execute a pipeline.",
-	Usage:       "Execute the provided pipeline",
+	Description: "Use this command to execute a pipeline. This command runs the pipeline locally on the machine where it is executed — it does not trigger a run on the remote Vela platform.",
+	Usage:       "Execute the provided pipeline locally",
 	Action:      exec,
 	Flags: []cli.Flag{
 		// Build Flags

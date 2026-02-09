@@ -75,13 +75,22 @@ func genBytes(c *Config) ([]byte, error) {
 				URL:   c.GitHub.URL,
 			},
 		},
-		Org:         c.Org,
-		Repo:        c.Repo,
-		Output:      c.Output,
-		Color:       &c.Color.Enabled,
-		ColorFormat: c.Color.Format,
-		ColorTheme:  c.Color.Theme,
-		NoGit:       c.NoGit,
+		Org:    c.Org,
+		Repo:   c.Repo,
+		Output: c.Output,
+		Color:  &c.Color.Enabled,
+		NoGit:  c.NoGit,
+	}
+
+	// only save if theme was user specified; this prevents saving default "monokai"
+	// during login, which would bypass auto-detection for light terminal backgrounds.
+	if c.Color.UserSpecified {
+		config.ColorTheme = c.Color.Theme
+	}
+
+	// only save if not default
+	if c.Color.Format != "" && c.Color.Format != "terminal256" {
+		config.ColorFormat = c.Color.Format
 	}
 
 	out, err := yaml.Marshal(config)

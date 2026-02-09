@@ -18,6 +18,7 @@ import (
 	"github.com/go-vela/cli/command/service"
 	"github.com/go-vela/cli/command/settings"
 	"github.com/go-vela/cli/command/step"
+	"github.com/go-vela/cli/command/themes"
 	"github.com/go-vela/cli/command/user"
 	"github.com/go-vela/cli/command/worker"
 )
@@ -95,6 +96,11 @@ var viewCmds = &cli.Command{
 		//
 		// https://pkg.go.dev/github.com/go-vela/cli/command/step?tab=doc#CommandView
 		step.CommandView,
+
+		// add the sub command for viewing available themes
+		//
+		// https://pkg.go.dev/github.com/go-vela/cli/command/themes?tab=doc#CommandView
+		themes.CommandView,
 
 		// add the sub command for viewing a user
 		//

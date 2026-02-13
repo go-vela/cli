@@ -4,7 +4,7 @@ go 1.24.4
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0
-	github.com/alecthomas/chroma/v2 v2.19.0
+	github.com/alecthomas/chroma/v2 v2.23.1
 	github.com/chainguard-dev/git-urls v1.0.2
 	github.com/cli/browser v1.3.0
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
@@ -12,19 +12,19 @@ require (
 	github.com/gin-gonic/gin v1.11.0
 	github.com/go-git/go-git/v5 v5.16.2
 	github.com/go-vela/sdk-go v0.27.2-0.20251230154052-e1dae5f07d93
-	github.com/go-vela/server v0.27.3-0.20260107161845-56fd3db7dbff
-	github.com/go-vela/worker v0.27.4-0.20260121151236-120915fe35a9
-	github.com/golang-jwt/jwt/v5 v5.3.0
+	github.com/go-vela/server v0.27.5
+	github.com/go-vela/worker f816a538228e
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/manifoldco/promptui v0.9.0
 	github.com/muesli/termenv v0.16.0
-	github.com/sirupsen/logrus v1.9.3
-	github.com/spf13/afero v1.14.0
-	github.com/urfave/cli-docs/v3 v3.0.0-alpha6
-	github.com/urfave/cli/v3 v3.5.0
+	github.com/sirupsen/logrus v1.9.4
+	github.com/spf13/afero v1.15.0
+	github.com/urfave/cli-docs/v3 v3.1.0
+	github.com/urfave/cli/v3 v3.6.2
 	go.yaml.in/yaml/v3 v3.0.4
-	golang.org/x/term v0.34.0
+	golang.org/x/term v0.40.0
 )
 
 require (

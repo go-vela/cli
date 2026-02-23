@@ -81,6 +81,11 @@ func main() {
 			Usage:   "token used for communication with the Vela server",
 		},
 		&cli.StringFlag{
+			Sources: cli.EnvVars("VELA_GIT_TOKEN"),
+			Name:    internal.FlagVelaGitToken,
+			Usage:   "installation token used in Vela builds",
+		},
+		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_ACCESS_TOKEN", "CONFIG_ACCESS_TOKEN", "SERVER_ACCESS_TOKEN"),
 			Name:    internal.FlagAPIAccessToken,
 			Aliases: []string{"at"},

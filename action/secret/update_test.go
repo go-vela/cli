@@ -258,6 +258,7 @@ func TestSecret_Config_Update_NoImageOrRepoAllowlist(t *testing.T) {
 		if r.Method != http.MethodPut {
 			t.Errorf("expected PUT request, got %s", r.Method)
 			w.WriteHeader(http.StatusMethodNotAllowed)
+
 			return
 		}
 
@@ -265,14 +266,17 @@ func TestSecret_Config_Update_NoImageOrRepoAllowlist(t *testing.T) {
 		if err != nil {
 			t.Errorf("unable to read request body: %v", err)
 			w.WriteHeader(http.StatusBadRequest)
+
 			return
 		}
 
 		payload := map[string]json.RawMessage{}
+
 		err = json.Unmarshal(body, &payload)
 		if err != nil {
 			t.Errorf("unable to decode request: %v", err)
 			w.WriteHeader(http.StatusBadRequest)
+
 			return
 		}
 

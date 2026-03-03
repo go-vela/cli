@@ -11,7 +11,7 @@ func TestOutput_JSON(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		input   interface{}
+		input   any
 	}{
 		{
 			failure: false,
@@ -23,11 +23,11 @@ func TestOutput_JSON(t *testing.T) {
 		},
 		{ // slice
 			failure: false,
-			input:   []interface{}{1, 2, 3},
+			input:   []any{1, 2, 3},
 		},
 		{ // slice complex
 			failure: false,
-			input:   []interface{}{struct{ Foo string }{Foo: "bar"}},
+			input:   []any{struct{ Foo string }{Foo: "bar"}},
 		},
 		{ // complex
 			failure: false,

@@ -10,7 +10,7 @@ func TestOutput_RawJSON(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		input   interface{}
+		input   any
 	}{
 		{
 			failure: false,

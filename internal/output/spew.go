@@ -12,7 +12,7 @@ import (
 // Spew outputs the provided input to stdout
 // using github.com/davecgh/go-spew/spew to
 // verbosely print the input.
-func Spew(_input interface{}) error {
+func Spew(_input any) error {
 	logrus.Debugf("creating output with %s driver", DriverSpew)
 
 	// validate the input provided

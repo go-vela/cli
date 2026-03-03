@@ -30,7 +30,7 @@ func (c *Config) View(ctx context.Context, client *vela.Client) error {
 	return err
 }
 
-func outputDashboard(dashboard interface{}, c *Config) error {
+func outputDashboard(dashboard any, c *Config) error {
 	// handle the output based off the provided configuration
 	switch c.Output {
 	case output.DriverDump:

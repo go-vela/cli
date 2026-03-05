@@ -175,20 +175,30 @@ func update(ctx context.Context, c *cli.Command) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/cli/action/secret?tab=doc#Config
 	s := &secret.Config{
-		Action:        internal.ActionUpdate,
-		Engine:        c.String(internal.FlagSecretEngine),
-		Type:          c.String(internal.FlagSecretType),
-		Org:           c.String(internal.FlagOrg),
-		Repo:          c.String(internal.FlagRepo),
-		Team:          c.String("team"),
-		Name:          c.String("name"),
-		Value:         c.String("value"),
-		Images:        c.StringSlice("image"),
-		RepoAllowlist: c.StringSlice("repo-allowlist"),
-		AllowEvents:   c.StringSlice("event"),
-		File:          c.String("file"),
-		Output:        c.String(internal.FlagOutput),
-		Color:         output.ColorOptionsFromCLIContext(c),
+		Action:      internal.ActionUpdate,
+		Engine:      c.String(internal.FlagSecretEngine),
+		Type:        c.String(internal.FlagSecretType),
+		Org:         c.String(internal.FlagOrg),
+		Repo:        c.String(internal.FlagRepo),
+		Team:        c.String("team"),
+		Name:        c.String("name"),
+		Value:       c.String("value"),
+		AllowEvents: c.StringSlice("event"),
+		File:        c.String("file"),
+		Output:      c.String(internal.FlagOutput),
+		Color:       output.ColorOptionsFromCLIContext(c),
+	}
+
+	// check if images are provided
+	if slices.Contains(c.FlagNames(), "image") {
+		s.Images = c.StringSlice("image")
+		s.ImagesSet = true
+	}
+
+	// check if repo allowlist is provided
+	if slices.Contains(c.FlagNames(), "repo-allowlist") {
+		s.RepoAllowlist = c.StringSlice("repo-allowlist")
+		s.RepoAllowlistSet = true
 	}
 
 	// check if allow_command and allow_substitution are provided

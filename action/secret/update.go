@@ -52,10 +52,18 @@ func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 		Team:              &c.Team,
 		Name:              &c.Name,
 		Value:             &c.Value,
-		Images:            &c.Images,
-		RepoAllowlist:     &c.RepoAllowlist,
 		AllowCommand:      c.AllowCommand,
 		AllowSubstitution: c.AllowSubstitution,
+	}
+
+	// set images if explicitly provided
+	if c.ImagesSet {
+		s.SetImages(c.Images)
+	}
+
+	// set repo allowlist if explicitly provided
+	if c.RepoAllowlistSet {
+		s.SetRepoAllowlist(c.RepoAllowlist)
 	}
 
 	// populate events if provided
@@ -151,9 +159,12 @@ func (c *Config) UpdateFromFile(ctx context.Context, client *vela.Client) error 
 				Name:              s.GetName(),
 				Value:             s.GetValue(),
 				Images:            s.GetImages(),
+				ImagesSet:         s.Images != nil,
 				AllowEvents:       s.GetAllowEvents().List(),
 				AllowCommand:      s.AllowCommand,
 				AllowSubstitution: s.AllowSubstitution,
+				RepoAllowlist:     s.GetRepoAllowlist(),
+				RepoAllowlistSet:  s.RepoAllowlist != nil,
 				Output:            c.Output,
 			}
 

@@ -17,6 +17,10 @@ const (
 	// flag when setting the API token.
 	FlagAPIToken = "api.token"
 
+	// FlagVelaGitToken defines the key for the
+	// flag when setting the Vela Git token.
+	FlagVelaGitToken = "vela.git.token"
+
 	// FlagAPIAccessToken defines the key for
 	// the flag when setting the API access token.
 	FlagAPIAccessToken = "api.token.access"

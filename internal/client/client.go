@@ -26,6 +26,9 @@ func Parse(c *cli.Command) (*vela.Client, error) {
 	// capture the token from the context
 	token := c.String(internal.FlagAPIToken)
 
+	// capture the Vela Git Token from the context
+	velaGitToken := c.String(internal.FlagVelaGitToken)
+
 	// capture the access token from the context
 	accessToken := c.String(internal.FlagAPIAccessToken)
 
@@ -33,7 +36,7 @@ func Parse(c *cli.Command) (*vela.Client, error) {
 	refreshToken := c.String(internal.FlagAPIRefreshToken)
 
 	// validate the provided configuration
-	err := validate(address, token, accessToken, refreshToken)
+	err := validate(address, token, velaGitToken, accessToken, refreshToken)
 	if err != nil {
 		return nil, err
 	}
@@ -54,12 +57,16 @@ func Parse(c *cli.Command) (*vela.Client, error) {
 
 	logrus.Trace("setting token for Vela client")
 
+	if len(velaGitToken) > 0 {
+		client.Authentication.SetTokenAuth(velaGitToken)
+	}
+
 	// pass the tokens to the client instance
 	if len(accessToken) > 0 && len(refreshToken) > 0 {
 		client.Authentication.SetAccessAndRefreshAuth(accessToken, refreshToken)
 	}
 
-	// pass the token to the client instance, overrides previous method
+	// pass the token to the client instance, overrides previous methods
 	if len(token) > 0 {
 		client.Authentication.SetPersonalAccessTokenAuth(token)
 	}

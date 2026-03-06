@@ -11,7 +11,7 @@ import (
 
 // validate is a helper function to
 // verify the input provided.
-func validate(driver string, _input interface{}) error {
+func validate(driver string, _input any) error {
 	logrus.Debugf("validating output with %s driver", driver)
 
 	// check if the input provided is nil

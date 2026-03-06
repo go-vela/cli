@@ -13,7 +13,7 @@ import (
 // JSON parses the provided input and
 // renders the parsed input in pretty
 // JSON before outputting it to stdout.
-func JSON(_input interface{}, colorOpts ColorOptions) error {
+func JSON(_input any, colorOpts ColorOptions) error {
 	logrus.Debugf("creating output with %s driver", DriverJSON)
 
 	// validate the input provided

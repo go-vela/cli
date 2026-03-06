@@ -37,7 +37,7 @@ import (
 //     the hexdump -C command which includes
 //     offsets, byte values in hex, and ASCII
 //     output
-func Dump(_input interface{}) error {
+func Dump(_input any) error {
 	logrus.Debugf("creating output with %s driver", DriverDump)
 
 	// validate the input provided

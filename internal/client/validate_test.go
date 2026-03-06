@@ -18,6 +18,7 @@ func TestClient_validate(t *testing.T) {
 		failure      bool
 		address      string
 		token        string
+		velaGitToken string
 		accessToken  string
 		refreshToken string
 	}{
@@ -25,6 +26,7 @@ func TestClient_validate(t *testing.T) {
 			failure:      false,
 			address:      s.URL,
 			token:        "superSecretToken",
+			velaGitToken: "",
 			accessToken:  "",
 			refreshToken: "",
 		},
@@ -32,6 +34,7 @@ func TestClient_validate(t *testing.T) {
 			failure:      true,
 			address:      "",
 			token:        "",
+			velaGitToken: "",
 			accessToken:  "superSecretAccessToken",
 			refreshToken: "superSecretRefreshToken",
 		},
@@ -39,6 +42,7 @@ func TestClient_validate(t *testing.T) {
 			failure:      true,
 			address:      "",
 			token:        "superSecretToken",
+			velaGitToken: "",
 			accessToken:  "",
 			refreshToken: "",
 		},
@@ -46,6 +50,7 @@ func TestClient_validate(t *testing.T) {
 			failure:      true,
 			address:      s.URL,
 			token:        "",
+			velaGitToken: "",
 			accessToken:  "",
 			refreshToken: "",
 		},
@@ -53,7 +58,7 @@ func TestClient_validate(t *testing.T) {
 
 	// run tests
 	for _, test := range tests {
-		err := validate(test.address, test.token, test.accessToken, test.refreshToken)
+		err := validate(test.address, test.token, test.velaGitToken, test.accessToken, test.refreshToken)
 
 		if test.failure {
 			if err == nil {

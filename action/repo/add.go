@@ -22,22 +22,22 @@ func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/server/api/types?tab=doc#Repo
 	r := &api.Repo{
-		Org:              vela.String(c.Org),
-		Name:             vela.String(c.Name),
-		FullName:         vela.String(fmt.Sprintf("%s/%s", c.Org, c.Name)),
-		Link:             vela.String(c.Link),
-		Clone:            vela.String(c.Clone),
-		Branch:           vela.String(c.Branch),
-		BuildLimit:       vela.Int32(c.BuildLimit),
-		Timeout:          vela.Int32(c.Timeout),
-		Counter:          vela.Int64(c.Counter),
-		Visibility:       vela.String(c.Visibility),
-		Private:          vela.Bool(c.Private),
-		Trusted:          vela.Bool(c.Trusted),
-		Active:           vela.Bool(c.Active),
-		PipelineType:     vela.String(c.PipelineType),
-		ApproveBuild:     vela.String(c.ApproveBuild),
-		MergeQueueEvents: vela.Strings(c.MergeQueueEvents),
+		Org:              new(c.Org),
+		Name:             new(c.Name),
+		FullName:         new(fmt.Sprintf("%s/%s", c.Org, c.Name)),
+		Link:             new(c.Link),
+		Clone:            new(c.Clone),
+		Branch:           new(c.Branch),
+		BuildLimit:       new(c.BuildLimit),
+		Timeout:          new(c.Timeout),
+		Counter:          new(c.Counter),
+		Visibility:       new(c.Visibility),
+		Private:          new(c.Private),
+		Trusted:          new(c.Trusted),
+		Active:           new(c.Active),
+		PipelineType:     new(c.PipelineType),
+		ApproveBuild:     new(c.ApproveBuild),
+		MergeQueueEvents: new(c.MergeQueueEvents),
 	}
 
 	logrus.Tracef("adding repo %s/%s", c.Org, c.Name)

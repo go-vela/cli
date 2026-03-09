@@ -4,8 +4,6 @@ package settings
 
 import (
 	"testing"
-
-	"github.com/go-vela/sdk-go/vela"
 )
 
 func TestSettings_Config_Validate(t *testing.T) {
@@ -19,7 +17,7 @@ func TestSettings_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				Compiler: Compiler{
-					CloneImage: vela.String("test"),
+					CloneImage: new("test"),
 				},
 				Output: "",
 			},
@@ -29,7 +27,7 @@ func TestSettings_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				Compiler: Compiler{
-					TemplateDepth: vela.Int(1),
+					TemplateDepth: new(1),
 				},
 				Output: "",
 			},
@@ -39,7 +37,7 @@ func TestSettings_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				Compiler: Compiler{
-					StarlarkExecLimit: vela.Int64(1),
+					StarlarkExecLimit: new(int64(1)),
 				},
 				Output: "",
 			},
@@ -59,7 +57,7 @@ func TestSettings_Config_Validate(t *testing.T) {
 			config: &Config{
 				Action: "update",
 				Queue: Queue{
-					Routes: vela.Strings([]string{"test"}),
+					Routes: new([]string{"test"}),
 				},
 				Output: "",
 			},

@@ -44,7 +44,7 @@ func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 
 	// create the dashboard object
 	d := &api.Dashboard{
-		Name:   vela.String(c.Name),
+		Name:   new(c.Name),
 		Repos:  &dashRepos,
 		Admins: &dashAdmins,
 	}

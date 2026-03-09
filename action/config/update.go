@@ -10,7 +10,6 @@ import (
 	yaml "go.yaml.in/yaml/v3"
 
 	"github.com/go-vela/cli/internal"
-	"github.com/go-vela/sdk-go/vela"
 )
 
 // Update modifies one or more fields from the config file based off the provided configuration.
@@ -149,9 +148,9 @@ func (c *Config) Update() error {
 		if strings.EqualFold(key, internal.FlagColor) {
 			// set the color field to value provided
 			if value == "true" {
-				config.Color = vela.Bool(true)
+				config.Color = new(true)
 			} else {
-				config.Color = vela.Bool(false)
+				config.Color = new(false)
 			}
 		}
 

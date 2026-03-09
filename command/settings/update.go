@@ -12,7 +12,6 @@ import (
 	"github.com/go-vela/cli/action/settings"
 	"github.com/go-vela/cli/internal"
 	"github.com/go-vela/cli/internal/client"
-	"github.com/go-vela/sdk-go/vela"
 	"github.com/go-vela/server/util"
 )
 
@@ -217,15 +216,15 @@ func update(ctx context.Context, c *cli.Command) error {
 
 	// compiler
 	if c.IsSet(CompilerCloneImageKey) {
-		s.CloneImage = vela.String(c.String(CompilerCloneImageKey))
+		s.CloneImage = new(c.String(CompilerCloneImageKey))
 	}
 
 	if c.IsSet(CompilerTemplateDepthKey) {
-		s.TemplateDepth = vela.Int(c.Int(CompilerTemplateDepthKey))
+		s.TemplateDepth = new(c.Int(CompilerTemplateDepthKey))
 	}
 
 	if c.IsSet(CompilerStarlarkExecLimitKey) {
-		s.StarlarkExecLimit = vela.Int64(c.Int64(CompilerStarlarkExecLimitKey))
+		s.StarlarkExecLimit = new(c.Int64(CompilerStarlarkExecLimitKey))
 	}
 
 	// scm

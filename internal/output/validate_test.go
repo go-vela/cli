@@ -11,7 +11,7 @@ func TestOutput_validate(t *testing.T) {
 	tests := []struct {
 		failure bool
 		driver  string
-		input   interface{}
+		input   any
 	}{
 		{
 			failure: false,
@@ -26,12 +26,12 @@ func TestOutput_validate(t *testing.T) {
 		{ // slice
 			failure: false,
 			driver:  DriverStdout,
-			input:   []interface{}{1, 2, 3},
+			input:   []any{1, 2, 3},
 		},
 		{ // slice complex
 			failure: false,
 			driver:  DriverStdout,
-			input:   []interface{}{struct{ Foo string }{Foo: "bar"}},
+			input:   []any{struct{ Foo string }{Foo: "bar"}},
 		},
 		{ // complex
 			failure: false,

@@ -13,7 +13,7 @@ import (
 // RawJSON parses the provided input and
 // renders the parsed input in raw JSON
 // before outputting it to stdout.
-func RawJSON(_input interface{}) error {
+func RawJSON(_input any) error {
 	logrus.Debugf("creating output with %s driver", DriverRawJSON)
 
 	// validate the input provided

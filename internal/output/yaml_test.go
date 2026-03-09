@@ -11,7 +11,7 @@ func TestOutput_YAML(t *testing.T) {
 	// setup tests
 	tests := []struct {
 		failure bool
-		input   interface{}
+		input   any
 	}{
 		{
 			failure: false,
@@ -23,11 +23,11 @@ func TestOutput_YAML(t *testing.T) {
 		},
 		{ // slice
 			failure: false,
-			input:   []interface{}{1, 2, 3},
+			input:   []any{1, 2, 3},
 		},
 		{ // slice complex
 			failure: false,
-			input:   []interface{}{struct{ Foo string }{Foo: "bar"}},
+			input:   []any{struct{ Foo string }{Foo: "bar"}},
 		},
 		{ // complex
 			failure: false,
@@ -65,10 +65,10 @@ func TestOutput_YAML(t *testing.T) {
 	}
 }
 
-func (f *failMarshaler) MarshalYAML() (interface{}, error) {
+func (f *failMarshaler) MarshalYAML() (any, error) {
 	return nil, errors.New("this is a marshaler that fails when you try to marshal")
 }
 
-func (f *failMarshaler) UnmarshalYAML(_ func(interface{}) error) error {
+func (f *failMarshaler) UnmarshalYAML(_ func(any) error) error {
 	return errors.New("this is a marshaler that fails when you try to unmarshal")
 }

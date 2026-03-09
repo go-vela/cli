@@ -10,7 +10,7 @@ import (
 )
 
 // Stdout outputs the provided input to stdout.
-func Stdout(_input interface{}) error {
+func Stdout(_input any) error {
 	logrus.Debugf("creating output with %s driver", DriverStdout)
 
 	// validate the input provided

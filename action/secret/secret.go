@@ -44,9 +44,9 @@ func (c *Config) setValue() error {
 
 	// check if the '@' character was provided signaling
 	// we should capture the value from a file
-	if strings.HasPrefix(c.Value, "@") {
+	if after, ok := strings.CutPrefix(c.Value, "@"); ok {
 		// capture the original path to the file by trimming the '@' character
-		path := strings.TrimPrefix(c.Value, "@")
+		path := after
 
 		logrus.Tracef("reading contents from %s", path)
 

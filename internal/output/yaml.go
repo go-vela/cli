@@ -13,7 +13,7 @@ import (
 // YAML parses the provided input and
 // renders the parsed input in YAML
 // before outputting it to stdout.
-func YAML(_input interface{}, colorOpts ColorOptions) error {
+func YAML(_input any, colorOpts ColorOptions) error {
 	logrus.Debugf("creating output with %s driver", DriverYAML)
 
 	// validate the input provided

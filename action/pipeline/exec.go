@@ -328,14 +328,14 @@ func formatStepIdentifier(stageName, stepName string, isSecret bool) string {
 	output := strings.Builder{}
 
 	if stageName != "" {
-		output.WriteString(fmt.Sprintf(stagePrefix, stageName))
+		fmt.Fprintf(&output, stagePrefix, stageName)
 	}
 
 	if stepName != "" {
 		if isSecret {
-			output.WriteString(fmt.Sprintf(secretPrefix, stepName))
+			fmt.Fprintf(&output, secretPrefix, stepName)
 		} else {
-			output.WriteString(fmt.Sprintf(stepPrefix, stepName))
+			fmt.Fprintf(&output, stepPrefix, stepName)
 		}
 	}
 

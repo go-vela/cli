@@ -42,9 +42,9 @@ func TestSettings_Config_Update(t *testing.T) {
 				Action: "update",
 				Output: "",
 				Compiler: Compiler{
-					CloneImage:        vela.String("test"),
-					TemplateDepth:     vela.Int(1),
-					StarlarkExecLimit: vela.Int64(1),
+					CloneImage:        new("test"),
+					TemplateDepth:     new(1),
+					StarlarkExecLimit: new(int64(1)),
 				},
 			},
 		},

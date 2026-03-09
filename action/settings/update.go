@@ -32,7 +32,7 @@ func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 	// create the settings object
 	sUpdate := &settings.Platform{
 		Queue: &settings.Queue{
-			Routes: vela.Strings(s.GetRoutes()),
+			Routes: new(s.GetRoutes()),
 		},
 		Compiler: &settings.Compiler{
 			CloneImage:        c.CloneImage,
@@ -44,8 +44,8 @@ func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 			OrgRoleMap:  c.OrgRoleMap,
 			TeamRoleMap: c.TeamRoleMap,
 		},
-		RepoAllowlist:     vela.Strings(s.GetRepoAllowlist()),
-		ScheduleAllowlist: vela.Strings(s.GetScheduleAllowlist()),
+		RepoAllowlist:     new(s.GetRepoAllowlist()),
+		ScheduleAllowlist: new(s.GetScheduleAllowlist()),
 	}
 
 	// update max dashboard repos if set
@@ -227,15 +227,15 @@ func (c *Config) UpdateFromFile(ctx context.Context, client *vela.Client) error 
 		// update values if set
 		if f.Compiler != nil {
 			if f.CloneImage != nil {
-				s.CloneImage = vela.String(f.GetCloneImage())
+				s.CloneImage = new(f.GetCloneImage())
 			}
 
 			if f.TemplateDepth != nil {
-				s.TemplateDepth = vela.Int(f.GetTemplateDepth())
+				s.TemplateDepth = new(f.GetTemplateDepth())
 			}
 
 			if f.StarlarkExecLimit != nil {
-				s.StarlarkExecLimit = vela.Int64(f.GetStarlarkExecLimit())
+				s.StarlarkExecLimit = new(f.GetStarlarkExecLimit())
 			}
 		}
 

@@ -19,10 +19,10 @@ func (c *Config) Add(ctx context.Context, client *vela.Client) error {
 
 	// create the schedule object
 	s := &api.Schedule{
-		Active: vela.Bool(c.Active),
-		Name:   vela.String(c.Name),
-		Entry:  vela.String(c.Entry),
-		Branch: vela.String(c.Branch),
+		Active: new(c.Active),
+		Name:   new(c.Name),
+		Entry:  new(c.Entry),
+		Branch: new(c.Branch),
 	}
 
 	logrus.Tracef("adding schedule %s/%s/%s", c.Org, c.Repo, c.Name)

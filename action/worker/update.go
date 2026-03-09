@@ -18,11 +18,11 @@ func (c *Config) Update(ctx context.Context, client *vela.Client) error {
 
 	// create the worker object
 	w := &api.Worker{
-		Hostname:   vela.String(c.Hostname),
-		Address:    vela.String(c.Address),
+		Hostname:   new(c.Hostname),
+		Address:    new(c.Address),
 		Active:     c.Active,
-		Routes:     vela.Strings(c.Routes),
-		BuildLimit: vela.Int32(c.BuildLimit),
+		Routes:     new(c.Routes),
+		BuildLimit: new(c.BuildLimit),
 	}
 
 	logrus.Tracef("updating worker %s", c.Hostname)

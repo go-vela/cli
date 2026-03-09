@@ -4,6 +4,7 @@ package output
 
 import (
 	"bytes"
+	"math"
 	"os"
 
 	chroma "github.com/alecthomas/chroma/v2/quick"
@@ -78,7 +79,11 @@ func shouldEnableColor(c *cli.Command) bool {
 	}
 
 	// 5. If not a terminal, don't use color by default
-	if !term.IsTerminal(int(os.Stdout.Fd())) {
+	fd := os.Stdout.Fd()
+
+	// maxInt is the largest value that fits in an int for the current arch.
+	maxInt := uintptr(math.MaxInt)
+	if fd > maxInt || !term.IsTerminal(int(fd)) {
 		logrus.Debug("no TTY, colors will be suppressed")
 
 		return false

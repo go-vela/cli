@@ -2,7 +2,7 @@ version: "1"
 
 templates:
   - name: sample
-    source: github.com/go-vela/vela-artifactory/.vela/template.yml
+    source: github.com/go-vela/cli/action/pipeline/testdata/templates/template.yml
     type: github
 
 stages:

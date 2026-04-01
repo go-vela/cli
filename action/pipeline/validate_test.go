@@ -184,6 +184,13 @@ func TestPipeline_Config_ValidateLocal(t *testing.T) {
 
 	client.SetTemplateDepth(1)
 
+	// to alleviate rate limiting, a metadata-only scoped token can be used to pass to the compiler client
+	testToken := os.Getenv("VELA_VALIDATE_TOKEN")
+
+	if testToken != "" {
+		client.WithPrivateGitHub(t.Context(), "https://github.com", testToken)
+	}
+
 	// setup tests
 	tests := []struct {
 		name    string

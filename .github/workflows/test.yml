@@ -17,6 +17,7 @@ jobs:
     # for codecov report upload
     permissions:
       id-token: write
+      contents: read
 
     steps:
       - name: clone
@@ -30,6 +31,8 @@ jobs:
           check-latest: true
 
       - name: test
+        env:
+          VELA_VALIDATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           make test
 

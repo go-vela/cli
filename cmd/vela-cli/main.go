@@ -97,6 +97,13 @@ func main() {
 			Aliases: []string{"rt"},
 			Usage:   "refresh access token used for communication with the Vela server",
 		},
+		&cli.BoolFlag{
+			Sources: cli.EnvVars("VELA_PERFORM_REFRESH_TOKEN", "CONFIG_PERFORM_REFRESH_TOKEN", "SERVER_PERFORM_REFRESH_TOKEN"),
+			Name:    internal.FlagAPIPerformTokenRefresh,
+			Aliases: []string{"prt"},
+			Usage:   "whether the cli should attempt to refresh the credentials",
+			Value:   true,
+		},
 		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_API_VERSION", "CONFIG_API_VERSION", "API_VERSION"),
 			Name:    internal.FlagAPIVersion,

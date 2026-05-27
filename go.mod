@@ -1,5 +1,7 @@
 module github.com/go-vela/cli
 
+replace github.com/go-vela/sdk-go => github.com/go-vela/sdk-go v0.28.1-0.20260526194207-83df9236b666
+
 go 1.26.1
 
 require (

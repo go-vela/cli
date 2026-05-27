@@ -35,6 +35,9 @@ func Parse(c *cli.Command) (*vela.Client, error) {
 	// capture the refresh token from the context
 	refreshToken := c.String(internal.FlagAPIRefreshToken)
 
+	// capture the perform token refresh from the context
+	performTokenRefresh := c.Bool(internal.FlagAPIPerformTokenRefresh)
+
 	// validate the provided configuration
 	err := validate(address, token, velaGitToken, accessToken, refreshToken)
 	if err != nil {
@@ -65,6 +68,8 @@ func Parse(c *cli.Command) (*vela.Client, error) {
 	if len(accessToken) > 0 && len(refreshToken) > 0 {
 		client.Authentication.SetAccessAndRefreshAuth(accessToken, refreshToken)
 	}
+
+	client.Authentication.SetPerformTokenRefresh(performTokenRefresh)
 
 	// pass the token to the client instance, overrides previous methods
 	if len(token) > 0 {

@@ -31,6 +31,8 @@ const (
 	//nolint:gosec // false negative - not a real token
 	FlagAPIRefreshToken = "api.token.refresh"
 
+	FlagAPIPerformTokenRefresh = "api.token.perform-refresh"
+
 	// FlagAPIVersion defines the key for the
 	// flag when setting the API version.
 	FlagAPIVersion = "api.version"

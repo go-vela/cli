@@ -178,7 +178,7 @@ var CommandValidate = &cli.Command{
 			Sources:  cli.EnvVars("VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"),
 			Name:     "clone-image",
 			Usage:    "the clone image to use for the injected clone step",
-			Value:    "docker.io/target/vela-git-slim:v0.14.0@sha256:592b6f0607912380ed61c79dcfca8145509a7d0f49b0839d9132095f5797668c", // renovate: container
+			Value:    "docker.io/target/vela-git-slim:v0.15.0@sha256:9b772d5952b62eee12ef20d782c0b2a1d89d5f8abf13ee232c3591eb04cf799b", // renovate: container
 			Category: "4. Compiler:",
 		},
 	},

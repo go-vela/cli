@@ -179,13 +179,13 @@ var CommandExec = &cli.Command{
 			Sources: cli.EnvVars("VELA_CLONE_IMAGE", "COMPILER_CLONE_IMAGE"),
 			Name:    "clone-image",
 			Usage:   "the clone image to use for the injected clone step",
-			Value:   "docker.io/target/vela-git-slim:v0.14.0@sha256:592b6f0607912380ed61c79dcfca8145509a7d0f49b0839d9132095f5797668c", // renovate: container
+			Value:   "docker.io/target/vela-git-slim:v0.15.0@sha256:9b772d5952b62eee12ef20d782c0b2a1d89d5f8abf13ee232c3591eb04cf799b", // renovate: container
 		},
 		&cli.StringFlag{
 			Sources: cli.EnvVars("VELA_OUTPUTS_IMAGE", "EXECUTOR_OUTPUTS_IMAGE"),
 			Name:    "outputs-image",
 			Usage:   "the outputs image to use for the build",
-			Value:   "docker.io/library/alpine:3.24.1@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b", // renovate: container
+			Value:   "docker.io/library/alpine:3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6", // renovate: container
 		},
 
 		// Environment Flags

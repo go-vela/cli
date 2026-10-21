@@ -15,10 +15,32 @@ func TestSettings_Config_Validate(t *testing.T) {
 		{
 			failure: false,
 			config: &Config{
+				Action:     "update",
+				CloneImage: new("test"),
+				Output:     "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:        "update",
+				TemplateDepth: new(1),
+				Output:        "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
+				Action:            "update",
+				StarlarkExecLimit: new(int64(1)),
+				Output:            "",
+			},
+		},
+		{
+			failure: false,
+			config: &Config{
 				Action: "update",
-				Compiler: Compiler{
-					CloneImage: new("test"),
-				},
+				Routes: &[]string{"test"},
 				Output: "",
 			},
 		},
@@ -26,39 +48,7 @@ func TestSettings_Config_Validate(t *testing.T) {
 			failure: false,
 			config: &Config{
 				Action: "update",
-				Compiler: Compiler{
-					TemplateDepth: new(1),
-				},
-				Output: "",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "update",
-				Compiler: Compiler{
-					StarlarkExecLimit: new(int64(1)),
-				},
-				Output: "",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "update",
-				Queue: Queue{
-					Routes: &[]string{"test"},
-				},
-				Output: "",
-			},
-		},
-		{
-			failure: false,
-			config: &Config{
-				Action: "update",
-				Queue: Queue{
-					Routes: new([]string{"test"}),
-				},
+				Routes: new([]string{"test"}),
 				Output: "",
 			},
 		},

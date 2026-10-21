@@ -36,6 +36,39 @@ func makeSampleToken(c jwt.Claims) string {
 	return s
 }
 
+func appendUniqueFlags(cmd *cli.Command, flags ...cli.Flag) {
+	seen := make(map[string]struct{}, len(cmd.Flags))
+	for _, existing := range cmd.Flags {
+		for _, name := range existing.Names() {
+			seen[name] = struct{}{}
+		}
+	}
+
+	for _, f := range flags {
+		if f == nil {
+			continue
+		}
+
+		duplicate := false
+
+		for _, name := range f.Names() {
+			if _, ok := seen[name]; ok {
+				duplicate = true
+				break
+			}
+		}
+
+		if duplicate {
+			continue
+		}
+
+		cmd.Flags = append(cmd.Flags, f)
+		for _, name := range f.Names() {
+			seen[name] = struct{}{}
+		}
+	}
+}
+
 func Command(serverURL string, action func(context.Context, *cli.Command) error, addFlags []cli.Flag) *cli.Command {
 	cfgFlag := &cli.StringFlag{
 		Name:  "config",
@@ -69,9 +102,7 @@ func Command(serverURL string, action func(context.Context, *cli.Command) error,
 		},
 	}
 
-	if len(addFlags) > 0 {
-		cmd.Flags = append(cmd.Flags, addFlags...)
-	}
+	appendUniqueFlags(cmd, addFlags...)
 
 	return cmd
 }

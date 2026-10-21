@@ -19,15 +19,13 @@ func (c *Config) Get(ctx context.Context, client *vela.Client) error {
 	//
 	// https://pkg.go.dev/github.com/go-vela/sdk-go/vela?tab=doc#BuildListOptions
 	opts := &vela.BuildListOptions{
-		Branch: c.Branch,
-		Event:  c.Event,
-		Status: c.Status,
-		Before: c.Before,
-		After:  c.After,
-		ListOptions: vela.ListOptions{
-			Page:    c.Page,
-			PerPage: c.PerPage,
-		},
+		Branch:  c.Branch,
+		Event:   c.Event,
+		Status:  c.Status,
+		Before:  c.Before,
+		After:   c.After,
+		Page:    c.Page,
+		PerPage: c.PerPage,
 	}
 
 	logrus.Tracef("capturing builds for repo %s/%s", c.Org, c.Repo)

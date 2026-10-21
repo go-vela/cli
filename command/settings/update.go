@@ -198,13 +198,11 @@ func update(ctx context.Context, c *cli.Command) error {
 
 	// create the settings configuration
 	s := &settings.Config{
-		Action: internal.ActionUpdate,
-		Output: c.String(internal.FlagOutput),
-		File:   c.String("file"),
-		Queue: settings.Queue{
-			AddRoutes:  c.StringSlice(QueueRouteAddKey),
-			DropRoutes: c.StringSlice(QueueRouteDropKey),
-		},
+		Action:                     internal.ActionUpdate,
+		Output:                     c.String(internal.FlagOutput),
+		File:                       c.String("file"),
+		AddRoutes:                  c.StringSlice(QueueRouteAddKey),
+		DropRoutes:                 c.StringSlice(QueueRouteDropKey),
 		Compiler:                   settings.Compiler{},
 		SCM:                        settings.SCM{},
 		RepoAllowlistAddRepos:      c.StringSlice(RepoAllowlistAddKey),

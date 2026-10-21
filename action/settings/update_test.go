@@ -31,21 +31,17 @@ func TestSettings_Config_Update(t *testing.T) {
 				Action: "update",
 				Output: "",
 
-				Queue: Queue{
-					Routes: &[]string{"test"},
-				},
+				Routes: &[]string{"test"},
 			},
 		},
 		{
 			failure: false,
 			config: &Config{
-				Action: "update",
-				Output: "",
-				Compiler: Compiler{
-					CloneImage:        new("test"),
-					TemplateDepth:     new(1),
-					StarlarkExecLimit: new(int64(1)),
-				},
+				Action:            "update",
+				Output:            "",
+				CloneImage:        new("test"),
+				TemplateDepth:     new(1),
+				StarlarkExecLimit: new(int64(1)),
 			},
 		},
 	}

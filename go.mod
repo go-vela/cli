@@ -1,6 +1,6 @@
 module github.com/go-vela/cli
 
-go 1.27.2
+go 1.27.3
 
 require (
 	github.com/Masterminds/semver/v3 v3.5.0
@@ -11,9 +11,9 @@ require (
 	github.com/dustin/go-humanize v1.1.0
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-git/go-git/v5 v5.19.3
-	github.com/go-vela/sdk-go v0.28.2
-	github.com/go-vela/server v0.28.9
-	github.com/go-vela/worker v0.28.3
+	github.com/go-vela/sdk-go v0.28.3
+	github.com/go-vela/server v0.28.10
+	github.com/go-vela/worker v0.28.4
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
@@ -180,7 +180,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.47.0 // indirect
 	go.opentelemetry.io/otel/trace v1.47.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.11.0 // indirect
-	go.starlark.net v0.0.0-20261016124120-4811d7e34ea3 // indirect
+	go.starlark.net v0.0.0-20261021141710-4f4267fb140d // indirect
 	go.uber.org/atomic v1.12.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	golang.org/x/arch v0.31.0 // indirect

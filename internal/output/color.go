@@ -7,7 +7,7 @@ import (
 	"math"
 	"os"
 
-	chroma "github.com/alecthomas/chroma/v2/quick"
+	chroma "github.com/alecthomas/chroma/v3/quick"
 	"github.com/muesli/termenv"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v3"

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/alecthomas/chroma/v2/styles"
+	"github.com/alecthomas/chroma/v3/styles"
 	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/cli/action"
